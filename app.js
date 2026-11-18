@@ -1,11 +1,19 @@
 /*
- * Lógica da loja de addons (JavaScript puro).
+ * Lógica da loja de addons (site 2.0, JavaScript puro).
  *
- *   1. Utilidades (DOM, escape de HTML, formatos)
+ *   1. Utilidades (DOM, escape de HTML, formatos, destaque da busca)
  *   2. Tema claro/escuro
- *   3. Carregar o catálogo
- *   4. Filtros: busca (sem acentos), categoria, ordenação, link compartilhável
- *   5. Cartões
+ *   3. Grupos e níveis (o que cada grupo significa)
+ *   4. Carregar o catálogo e preparar o índice de busca
+ *   5. Filtros: grupo, nível, ordem, busca e link compartilhável
+ *   6. Lista: grupos, linhas, "mostrar mais" e detalhes sob demanda
+ *
+ * Pensado para catálogos grandes:
+ *   • o texto de busca de cada addon é normalizado UMA vez, ao carregar;
+ *   • cada grupo mostra LOTE linhas e oferece "mostrar mais";
+ *   • os detalhes de um addon só são montados quando a linha é aberta;
+ *   • um único ouvinte de clique atende a lista inteira (delegação);
+ *   • o CSS usa content-visibility, então linhas fora da tela não são desenhadas.
  *
  * Todo texto vindo do catálogo é escapado antes de ir para a página.
  */
@@ -15,6 +23,7 @@
   // ============================================================ 1. UTILIDADES
   const $ = (s, r) => (r || document).querySelector(s);
   const icone = (nome) => `<svg class="ic" aria-hidden="true"><use href="#i-${nome}"/></svg>`;
+  const LOTE = 25;
 
   function esc(texto) {
     return String(texto ?? "").replace(/[&<>"']/g, (c) =>
@@ -26,12 +35,15 @@
     return String(texto || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   }
 
+  /** A amostra vem em Markdown; no site basta o texto: tira **, `, # e marcadores de lista. */
+  const semMarkdown = (t) => String(t ?? "").replace(/\*\*|`|^#+\s*/gm, "").replace(/(^|\s)- /g, "$1");
+
+  const milhar = (n) => Number(n).toLocaleString("pt-BR");
   function tamanho(bytes) {
     return bytes < 1024 ? `${bytes} B` : bytes < 1048576
-      ? `${(bytes / 1024).toFixed(1).replace(".", ",")} KB`
+      ? `${(bytes / 1024).toFixed(0)} KB`
       : `${(bytes / 1048576).toFixed(1).replace(".", ",")} MB`;
   }
-
   function data(iso) {
     const [a, m, d] = String(iso).split("-");
     return d ? `${d}/${m}/${a}` : iso;
@@ -69,232 +81,315 @@
   }
 
   // ============================================================ 2. TEMA
-  function preferido() {
-    try { return localStorage.getItem("loja.tema"); } catch (e) { return null; }
-  }
   function aplicarTema(tema) {
     document.documentElement.dataset.tema = tema;
     $("#btn-tema").innerHTML = icone(tema === "escuro" ? "sol" : "lua");
   }
-  const escuro = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches;
-  aplicarTema(preferido() || (escuro ? "escuro" : "claro"));
+  let temaSalvo = null;
+  try { temaSalvo = localStorage.getItem("loja.tema"); } catch (e) { /* modo privado */ }
+  aplicarTema(temaSalvo || (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "escuro" : "claro"));
   $("#btn-tema").addEventListener("click", () => {
     const novo = document.documentElement.dataset.tema === "escuro" ? "claro" : "escuro";
     aplicarTema(novo);
     try { localStorage.setItem("loja.tema", novo); } catch (e) { /* ignora */ }
   });
 
-  // ============================================================ 3. CATÁLOGO
-  const estado = { addons: [], categoria: "Todas" };
+  // ============================================================ 3. GRUPOS E NÍVEIS
+  // A ordem aqui é a ordem na página. "grupo" e "nivel" vêm do catálogo
+  // (ferramentas/gerar_catalogo.py, função grupo_e_nivel).
+  const GRUPOS = {
+    essenciais: {
+      nome: "Essenciais",
+      texto: "Os alicerces da conversa. Sem eles, o Aprendiz só compara palavras; com eles, " +
+        "reconhece o tipo de pergunta, conduz o diálogo e procura pelo sentido. Instale primeiro, nesta ordem.",
+    },
+    idiomas: {
+      nome: "Idiomas e variantes",
+      texto: "Como se fala em cada país lusófono: gírias, expressões, grafias e a norma da língua. " +
+        "Ative as variantes que você usa; elas respondem a \"o que significa…\" e \"como se diz…\".",
+    },
+    conhecimento: {
+      nome: "Conhecimento",
+      texto: "Assuntos prontos para perguntar. Os avançados costumam depender de um básico, " +
+        "indicado nos detalhes de cada addon.",
+    },
+    aparencia: {
+      nome: "Aparência",
+      texto: "Cores e mensagens de boas-vindas. Mudam só o visual, nunca as respostas.",
+    },
+  };
+  const NIVEIS = { todos: "Todos", basico: "Básico", avancado: "Avançado" };
+  const NOME_NIVEL = { base: "essencial", basico: "básico", avancado: "avançado" };
+  const NOMES_BUSCA = { bm25: "Rápido · BM25", tfidf: "Didático · TF-IDF", fuzzy: "Tolerante · Fuzzy", hibrido: "Equilibrado · Híbrido" };
+  const NOMES_RESPOSTA = { direta: "Fiel · Direta", extrativa: "Resumo · Extrativa" };
+
+  // ============================================================ 4. CATÁLOGO
+  const estado = { addons: [], porId: {}, grupo: "todos", nivel: "todos", visiveis: {} };
 
   async function carregar() {
+    let catalogo;
     try {
       const r = await fetch("catalogo.json", { cache: "no-cache" });
       if (!r.ok) throw new Error("HTTP " + r.status);
-      const catalogo = await r.json();
-      estado.addons = catalogo.addons || [];
-      if (catalogo.gerado_em) {
-        $("#gerado-em").textContent = "Catálogo atualizado em " + new Date(catalogo.gerado_em).toLocaleDateString("pt-BR");
-      }
+      catalogo = await r.json();
     } catch (erro) {
-      $("#resumo").textContent = "Não foi possível carregar o catálogo de addons.";
+      $("#numeros").textContent = "Não foi possível carregar o catálogo de addons.";
       return;
     }
+    estado.addons = (catalogo.addons || []).map((a) => ({
+      ...a,
+      grupo: GRUPOS[a.grupo] ? a.grupo : "conhecimento",
+      // Índice de busca: montado uma vez só.
+      _busca: normalizar([a.id, a.nome, a.descricao, a.categoria, ...(a.etiquetas || []),
+        ...(a.amostra || []).map((x) => `${x.pergunta || ""} ${x.conteudo}`), ...(a.palavras || []),
+        ...(a.traducoes || [])].join(" ")),
+    }));
+    estado.addons.forEach((a) => { estado.porId[a.id] = a; });
+    const essenciais = estado.addons.filter((a) => a.grupo === "essenciais").length;
+    $("#numeros").textContent = `${estado.addons.length} addons oficiais · ${essenciais} essenciais` +
+      (catalogo.gerado_em ? ` · atualizado em ${new Date(catalogo.gerado_em).toLocaleDateString("pt-BR")}` : "");
+    if (catalogo.gerado_em) $("#gerado-em").textContent = "Catálogo gerado em " + new Date(catalogo.gerado_em).toLocaleString("pt-BR");
     lerEndereco();
-    montarCategorias();
     renderizar();
   }
 
-  // ============================================================ 4. FILTROS
-  /** ?busca=linux&categoria=Tecnologia → permite compartilhar uma busca. */
+  // ============================================================ 5. FILTROS
+  /** ?busca=sql&grupo=conhecimento&nivel=avancado&ordem=recentes → busca compartilhável. */
   function lerEndereco() {
     const p = new URLSearchParams(location.search);
     $("#busca").value = p.get("busca") || "";
-    estado.categoria = p.get("categoria") || "Todas";
+    estado.grupo = GRUPOS[p.get("grupo")] ? p.get("grupo") : "todos";
+    estado.nivel = NIVEIS[p.get("nivel")] ? p.get("nivel") : "todos";
     if (["nome", "recentes", "tamanho"].includes(p.get("ordem"))) $("#ordem").value = p.get("ordem");
   }
 
   function gravarEndereco() {
     const p = new URLSearchParams();
-    if ($("#busca").value.trim()) p.set("busca", $("#busca").value.trim());
-    if (estado.categoria !== "Todas") p.set("categoria", estado.categoria);
+    const busca = $("#busca").value.trim();
+    if (busca) p.set("busca", busca);
+    if (estado.grupo !== "todos") p.set("grupo", estado.grupo);
+    if (estado.nivel !== "todos") p.set("nivel", estado.nivel);
     if ($("#ordem").value !== "nome") p.set("ordem", $("#ordem").value);
     const q = p.toString();
     history.replaceState(null, "", q ? "?" + q : location.pathname);
   }
 
-  function montarCategorias() {
-    const contagem = {};
-    estado.addons.forEach((a) => { contagem[a.categoria] = (contagem[a.categoria] || 0) + 1; });
-    const nomes = ["Todas", ...Object.keys(contagem).sort((a, b) => a.localeCompare(b, "pt-BR"))];
-    if (!nomes.includes(estado.categoria)) estado.categoria = "Todas";
-    $("#categorias").innerHTML = nomes.map((c) => `
-      <button class="chip ${c === estado.categoria ? "ativo" : ""}" data-categoria="${esc(c)}">
-        ${esc(c)}<small>${c === "Todas" ? estado.addons.length : contagem[c]}</small></button>`).join("");
-    $("#categorias").querySelectorAll(".chip").forEach((b) => b.addEventListener("click", () => {
-      estado.categoria = b.dataset.categoria;
-      montarCategorias();
-      renderizar();
-    }));
+  function montarFiltros(contagem) {
+    const itens = [["todos", "Todos", estado.addons.length],
+      ...Object.entries(GRUPOS).map(([id, g]) => [id, g.nome, contagem[id] || 0])];
+    $("#grupos").innerHTML = itens.map(([id, nome, n]) =>
+      `<button data-grupo="${id}" class="${id === estado.grupo ? "ativo" : ""}" ${n ? "" : "disabled"}>
+        ${esc(nome)}<small>${n}</small></button>`).join("");
+    const comNivel = estado.grupo === "todos" || estado.grupo === "conhecimento";
+    $("#filtro-nivel").hidden = !comNivel;
+    $("#niveis").innerHTML = Object.entries(NIVEIS).map(([id, nome]) =>
+      `<button data-nivel="${id}" class="${id === estado.nivel ? "ativo" : ""}">${nome}</button>`).join("");
   }
 
   function filtrar() {
     const termos = normalizar($("#busca").value).split(/\s+/).filter(Boolean);
-    let lista = estado.addons.filter((a) => {
-      if (estado.categoria !== "Todas" && a.categoria !== estado.categoria) return false;
-      if (!termos.length) return true;
-      const texto = normalizar([a.id, a.nome, a.descricao, a.autor, a.categoria, ...(a.etiquetas || []),
-        ...(a.amostra || []).map((x) => `${x.pergunta || ""} ${x.conteudo}`), ...(a.palavras || []),
-        ...(a.traducoes || [])].join(" "));
-      return termos.every((t) => texto.includes(t));  // todos os termos precisam aparecer
-    });
+    const contagem = {};
+    let lista = estado.addons.filter((a) => termos.every((t) => a._busca.includes(t)));
+    lista.forEach((a) => { contagem[a.grupo] = (contagem[a.grupo] || 0) + 1; });
+    lista = lista.filter((a) =>
+      (estado.grupo === "todos" || a.grupo === estado.grupo) &&
+      (estado.nivel === "todos" || a.grupo !== "conhecimento" || a.nivel === estado.nivel));
     const ordem = $("#ordem").value;
-    lista = [...lista].sort((a, b) =>
+    lista.sort((a, b) =>
       ordem === "recentes" ? String(b.atualizado_em).localeCompare(String(a.atualizado_em))
         : ordem === "tamanho" ? b.conhecimentos - a.conhecimentos
           : a.nome.localeCompare(b.nome, "pt-BR"));
-    return { lista, termos };
+    return { lista, termos, contagem };
   }
 
-  // ============================================================ 5. CARTÕES
-  const CLASSIFICACOES = {
-    memoria: "Memória", linguagem: "Linguagem", parametros: "Parâmetros",
-    personalizacao: "Personalização", compreensao: "Compreensão", vetores: "Vetores",
-    norma: "Norma da língua",
-    algoritmo: "Algoritmo", aplicacao: "Aplicação",
-  };
-  const milhar = (n) => Number(n).toLocaleString("pt-BR");
-
-  /** Selos de origem e classificação. A loja só tem addons oficiais (o catálogo recusa os demais). */
-  function selos(a) {
-    const origem = `<span class="selo oficial" title="Publicado pela ${esc(a.editor || "Jano Projects")}">${icone("escudo")}Oficial Jano</span>`;
-    const tipos = (a.classificacao || []).map((t) =>
-      `<span class="selo classe">${esc(CLASSIFICACOES[t] || t)}</span>`).join("");
-    return origem + tipos;
+  /** Essenciais na ordem de instalação: quem é dependência vem antes (ordenação topológica). */
+  function ordemDeInstalacao(lista) {
+    const ids = new Set(lista.map((a) => a.id));
+    const feitos = new Set(), saida = [];
+    const visitar = (a) => {
+      if (feitos.has(a.id)) return;
+      feitos.add(a.id);
+      (a.dependencias || []).forEach((d) => { if (ids.has(d.id)) visitar(estado.porId[d.id]); });
+      saida.push(a);
+    };
+    lista.forEach(visitar);
+    return saida;
   }
 
-  const NOMES_BUSCA = { bm25: "BM25", tfidf: "TF-IDF", fuzzy: "Fuzzy", hibrido: "Híbrido" };
-  const NOMES_RESPOSTA = { direta: "Direta", extrativa: "Extrativa" };
-
-  /** Algoritmos recomendados pelo autor (e o acerto no teste com o próprio conteúdo). */
-  function recomendacao(a) {
-    const r = a.recomendado;
-    if (!r) return "";
-    const acerto = typeof r.acerto === "number" ? ` · acerto ${Math.round(r.acerto * 100)}% no teste` : "";
-    return `<div class="recomendado" title="Configure assim no Aprendiz para o melhor resultado">${icone("check")}
-      Recomendado: busca <b>${esc(NOMES_BUSCA[r.busca] || r.busca)}</b> · resposta <b>${esc(NOMES_RESPOSTA[r.resposta] || r.resposta)}</b>${acerto}</div>`;
-  }
-
-  /** "Amostra" quando há conhecimentos para mostrar; senão, só "Detalhes" (hash, dependências). */
-  const rotuloVer = (a) => ((a.amostra || []).length ? "Amostra" : "Detalhes");
-
-  /** Cor de um addon de tema (só #RRGGBB, já validada pelo catálogo e aqui de novo). */
-  function corDoTema(a) {
+  // ============================================================ 6. LISTA
+  function etiquetaNivel(a) {
     const cor = (a.ajustes || []).find((x) => x.chave === "personalizacao.cor");
-    return cor && /^#[0-9a-f]{6}$/i.test(cor.valor) ? cor.valor : "";
-  }
-
-  /** Prévia de personalização: amostra da cor e o texto de boas-vindas. */
-  function ajustes(a) {
-    const itens = (a.ajustes || []).map((x) => {
-      if (x.chave === "personalizacao.cor" && /^#[0-9a-f]{6}$/i.test(x.valor)) {
-        return `<span class="ajuste"><i class="amostra-cor" style="background:${x.valor}"></i>Cor ${esc(x.valor)}</span>`;
-      }
-      if (x.chave === "personalizacao.boas_vindas") return `<span class="ajuste">Boas-vindas: “${esc(x.valor)}”</span>`;
-      if (x.chave === "personalizacao.nome") return `<span class="ajuste">Nome: ${esc(x.valor)}</span>`;
-      return `<span class="ajuste">${esc(x.chave)} = ${esc(String(x.valor))}</span>`;
-    });
-    return itens.length ? `<div class="ajustes">${itens.join("")}</div>` : "";
-  }
-
-  function cartao(a, termos) {
-    const el = document.createElement("article");
-    el.className = "cartao";
-    el.innerHTML = `
-      <div class="cabecalho">
-        <span class="icone-addon"${corDoTema(a) ? ` style="--cor-tema:${corDoTema(a)}"` : ""}>${icone("addon")}</span>
-        <div>
-          <h3>${destacar(a.nome, termos)}<span class="versao">v${esc(a.versao)}</span></h3>
-          <div class="meta">${esc([a.autor && "por " + a.autor, a.categoria].filter(Boolean).join(" · "))}</div>
-        </div>
-      </div>
-      <div class="selos">${selos(a)}</div>
-      ${recomendacao(a)}
-      <p class="descricao">${destacar(a.descricao, termos)}</p>
-      ${ajustes(a)}
-      <div class="etiquetas">${(a.etiquetas || []).map((t) =>
-        `<button class="etiqueta" data-etiqueta="${esc(t)}">#${destacar(t, termos)}</button>`).join("")}</div>
-      <div class="numeros">
-        ${a.verbetes ? `<span><b>${a.verbetes}</b> verbetes</span>` : ""}
-        ${(a.traducoes || []).length ? `<span><b>${a.traducoes.length}</b> traduções</span>` : ""}
-        ${a.conhecimentos - (a.verbetes || 0) ? `<span><b>${a.conhecimentos - (a.verbetes || 0)}</b> conhecimentos</span>` : ""}
-        ${a.termos_linguagem ? `<span><b>${a.termos_linguagem}</b> termos de linguagem</span>` : ""}
-        ${a.configuracoes ? `<span><b>${a.configuracoes}</b> ${a.configuracoes === 1 ? "configuração" : "configurações"}</span>` : ""}
-        ${a.compreensao && a.compreensao.regras ? `<span><b>${milhar(a.compreensao.regras)}</b> regras de compreensão</span>` : ""}
-        ${a.compreensao && a.compreensao.lemas ? `<span><b>${milhar(a.compreensao.lemas)}</b> palavras no léxico</span>` : ""}
-        ${a.compreensao && a.compreensao.vetores ? `<span>vetores de <b>${milhar(a.compreensao.vetores)}</b> palavras</span>` : ""}
-        ${a.norma && a.norma.formas ? `<span>vocabulário de <b>${milhar(a.norma.formas)}</b> formas</span>` : ""}
-        ${a.norma && a.norma.regras ? `<span><b>${milhar(a.norma.regras)}</b> regras de gramática</span>` : ""}
-        ${a.norma && a.norma.ortografia ? `<span>ortografia: <b>${a.norma.ortografia === "1990" ? "Acordo de 1990" : a.norma.ortografia === "1945" ? "anterior ao Acordo" : "as duas"}</b></span>` : ""}
-        ${a.versao_minima_app ? `<span>requer Aprendiz <b>${esc(a.versao_minima_app)}</b>+</span>` : ""}
-        <span>${tamanho(a.tamanho)}</span>
-        <span>atualizado em ${esc(data(a.atualizado_em))}</span>
-      </div>
-      <div class="acoes">
-        <a class="botao botao-primario" href="${esc(a.arquivo)}" download>${icone("baixar")} Baixar</a>
-        <button class="botao ver">${icone("olho")} ${rotuloVer(a)}</button>
-      </div>
-      <div class="detalhes" hidden>
-        <div class="amostra">${(a.amostra || []).map((x) => `
-          <div>${x.pergunta ? `<b>${destacar(x.pergunta, termos)}</b>` : ""}<span>${destacar(x.conteudo, termos)}</span></div>`).join("")}
-        </div>
-        <div class="meta">${esc(a.licenca ? "Licença: " + a.licenca : "")}</div>
-        ${(a.dependencias || []).length ? `<div class="meta">Complementa: ${a.dependencias.map((d) =>
-          esc(`${d.nome} v${d.versao}`)).join(", ")}</div>` : ""}
-        <div class="hash" title="Impressão digital do arquivo: confira se o arquivo baixado é exatamente este">
-          ${icone("escudo")} SHA-256 <code>${esc(a.sha256)}</code>
-          <button aria-label="Copiar SHA-256">${icone("copiar")}</button>
-        </div>
-      </div>`;
-
-    el.querySelector(".ver").addEventListener("click", (ev) => {
-      const det = el.querySelector(".detalhes");
-      det.hidden = !det.hidden;
-      ev.currentTarget.innerHTML = `${icone(det.hidden ? "olho" : "x")} ${det.hidden ? rotuloVer(a) : "Fechar"}`;
-    });
-    el.querySelector(".hash button").addEventListener("click", async () => {
-      try { await navigator.clipboard.writeText(a.sha256); avisar("SHA-256 copiado."); }
-      catch (e) { avisar("Não foi possível copiar."); }
-    });
-    el.querySelectorAll(".etiqueta").forEach((b) => b.addEventListener("click", () => {
-      $("#busca").value = b.dataset.etiqueta;
-      renderizar();
-      $("#busca").scrollIntoView({ block: "center" });
-    }));
-    return el;
-  }
-
-  function renderizar() {
-    const { lista, termos } = filtrar();
-    const grade = $("#grade");
-    grade.innerHTML = "";
-    lista.forEach((a) => grade.appendChild(cartao(a, termos)));
-    if (!lista.length) {
-      grade.innerHTML = `<div class="vazio">${icone("busca")}<p>Nenhum addon encontrado.
-        Tente outra palavra ou escolha "Todas" nas categorias.</p></div>`;
+    if (cor && /^#[0-9a-f]{6}$/i.test(cor.valor)) {
+      return `<span class="etiq cor"><i style="background:${cor.valor}"></i>${esc(cor.valor)}</span>`;
     }
+    if (a.grupo === "idiomas") return `<span class="etiq">${esc(a.regiao || "idioma")}</span>`;
+    return `<span class="etiq ${esc(a.nivel)}">${esc(NOME_NIVEL[a.nivel] || a.nivel)}</span>`;
+  }
+
+  function linha(a, termos, posicao) {
+    return `<article class="addon" data-id="${esc(a.id)}">
+      <div class="linha">
+        <button class="abrir" aria-expanded="false">
+          <span class="titulo">${posicao ? `<span class="mono">${posicao}.</span>` : ""}
+            <strong>${destacar(a.nome, termos)}</strong>
+            <span class="id">${esc(a.id)} · v${esc(a.versao)}</span></span>
+          <p class="desc">${destacar(a.descricao, termos)}</p>
+        </button>
+        ${etiquetaNivel(a)}
+        <span class="lado"><span class="tam">${tamanho(a.tamanho)}</span>
+          <a class="baixar" href="${esc(a.arquivo)}" download>${icone("baixar")} Baixar</a></span>
+      </div>
+    </article>`;
+  }
+
+  /** O que o addon traz, em números (só o que existe). */
+  function numeros(a) {
+    const c = a.compreensao || {}, n = a.norma || {};
+    const proprios = a.conhecimentos - (a.verbetes || 0);
+    return [
+      proprios && ["Conhecimentos", milhar(proprios)],
+      a.verbetes && ["Verbetes", milhar(a.verbetes)],
+      (a.traducoes || []).length && ["Traduções", milhar(a.traducoes.length)],
+      a.termos_linguagem && ["Termos de linguagem", milhar(a.termos_linguagem)],
+      c.regras && ["Regras de compreensão", milhar(c.regras)],
+      c.lemas && ["Palavras no léxico", milhar(c.lemas)],
+      c.vetores && ["Vetores de palavras", milhar(c.vetores)],
+      n.formas && ["Formas no vocabulário", milhar(n.formas)],
+      n.regras && ["Regras de gramática", milhar(n.regras)],
+      a.configuracoes && ["Configurações", a.configuracoes],
+    ].filter(Boolean);
+  }
+
+  function detalhes(a, termos) {
+    const r = a.recomendado;
+    const ficha = [
+      ...numeros(a),
+      r && ["Busca recomendada", NOMES_BUSCA[r.busca] || r.busca],
+      r && ["Resposta recomendada", NOMES_RESPOSTA[r.resposta] || r.resposta],
+      r && typeof r.acerto === "number" && ["Acerto no teste", Math.round(r.acerto * 100) + "%"],
+      a.versao_minima_app && ["Requer Aprendiz", a.versao_minima_app + "+"],
+      a.licenca && ["Licença", a.licenca],
+      ["Atualizado em", data(a.atualizado_em)],
+    ].filter(Boolean);
+    const deps = (a.dependencias || []).map((d) => esc(`${d.nome} (v${d.versao}+)`)).join(", ");
+    const amostra = (a.amostra || []).map((x) =>
+      `<div>${x.pergunta ? `<b>${destacar(x.pergunta, termos)}</b>` : ""}${destacar(semMarkdown(x.conteudo), termos)}</div>`).join("");
+    return `<div class="detalhes">
+      <div>
+        ${amostra ? `<h3>Amostra</h3><div class="amostra">${amostra}</div>` : ""}
+        ${deps ? `<h3>Depende de</h3><p>${deps}</p>` : ""}
+        ${(a.etiquetas || []).length ? `<h3>Etiquetas</h3><div class="etiquetas">${a.etiquetas.map((t) =>
+          `<button data-etiqueta="${esc(t)}">#${destacar(t, termos)}</button>`).join("")}</div>` : ""}
+      </div>
+      <div>
+        <h3>Ficha</h3>
+        <dl class="ficha">${ficha.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
+        <div class="hash" title="Impressão digital do arquivo: confira se o arquivo baixado é exatamente este">
+          ${icone("escudo")} <code>sha256 ${esc(a.sha256)}</code>
+          <button data-copiar="${esc(a.sha256)}" aria-label="Copiar SHA-256">${icone("copiar")}</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function secao(id, itens, termos) {
+    const g = GRUPOS[id];
+    const limite = estado.visiveis[id] || LOTE;
+    let corpo = "";
+    if (id === "essenciais") {
+      itens = ordemDeInstalacao(itens);
+      corpo += itens.map((a, i) => linha(a, termos, i + 1)).join("");
+    } else if (id === "conhecimento" && estado.nivel === "todos") {
+      const visiveis = itens.slice(0, limite);
+      ["basico", "avancado"].forEach((nivel) => {
+        const parte = visiveis.filter((a) => a.nivel === nivel);
+        if (parte.length) corpo += `<h3 class="subgrupo">${NIVEIS[nivel]}</h3>` + parte.map((a) => linha(a, termos)).join("");
+      });
+    } else {
+      corpo += itens.slice(0, limite).map((a) => linha(a, termos)).join("");
+    }
+    if (id !== "essenciais" && itens.length > limite) {
+      corpo += `<button class="mais" data-mais="${id}">Mostrar mais ${Math.min(LOTE, itens.length - limite)} de ${itens.length - limite}</button>`;
+    }
+    return `<section class="grupo" id="g-${id}">
+      <header><h2>${esc(g.nome)}</h2><small>${itens.length}</small></header>
+      <p>${esc(g.texto)}</p>${corpo}</section>`;
+  }
+
+  let ultimaBusca = { termos: [] };
+  function renderizar() {
+    const { lista, termos, contagem } = filtrar();
+    ultimaBusca = { termos };
+    montarFiltros(contagem);
+    const html = Object.keys(GRUPOS)
+      .map((id) => [id, lista.filter((a) => a.grupo === id)])
+      .filter(([, itens]) => itens.length)
+      .map(([id, itens]) => secao(id, itens, termos)).join("");
+    $("#lista").innerHTML = html || `<p class="vazio">Nenhum addon encontrado. Tente outra palavra ou escolha "Todos" nos grupos.</p>`;
     const total = estado.addons.length;
-    $("#resumo").textContent = lista.length === total
-      ? `${total} addon${total === 1 ? "" : "s"} disponíve${total === 1 ? "l" : "is"}`
-      : `${lista.length} de ${total} addons`;
-    $("#limpar-busca").hidden = !$("#busca").value;
+    $("#resumo").textContent = lista.length === total ? `${total} addons` : `${lista.length} de ${total}`;
     gravarEndereco();
   }
 
+  // Um ouvinte só para a lista inteira (delegação de eventos).
+  $("#lista").addEventListener("click", async (ev) => {
+    const abrir = ev.target.closest(".abrir");
+    if (abrir) {
+      const art = abrir.closest(".addon");
+      const aberto = art.classList.toggle("aberto");
+      abrir.setAttribute("aria-expanded", String(aberto));
+      let det = $(".detalhes", art);
+      if (aberto && !det) art.insertAdjacentHTML("beforeend", detalhes(estado.porId[art.dataset.id], ultimaBusca.termos));
+      else if (det) det.hidden = !aberto;
+      return;
+    }
+    const mais = ev.target.closest("[data-mais]");
+    if (mais) {
+      estado.visiveis[mais.dataset.mais] = (estado.visiveis[mais.dataset.mais] || LOTE) + LOTE;
+      renderizar();
+      return;
+    }
+    const etiqueta = ev.target.closest("[data-etiqueta]");
+    if (etiqueta) {
+      $("#busca").value = etiqueta.dataset.etiqueta;
+      renderizar();
+      $("#catalogo").scrollIntoView({ block: "start" });
+      return;
+    }
+    const copiar = ev.target.closest("[data-copiar]");
+    if (copiar) {
+      try { await navigator.clipboard.writeText(copiar.dataset.copiar); avisar("SHA-256 copiado."); }
+      catch (e) { avisar("Não foi possível copiar."); }
+    }
+  });
+
+  $("#grupos").addEventListener("click", (ev) => {
+    const b = ev.target.closest("[data-grupo]");
+    if (!b) return;
+    estado.grupo = b.dataset.grupo;
+    if (estado.grupo !== "todos" && estado.grupo !== "conhecimento") estado.nivel = "todos";
+    renderizar();
+  });
+  $("#niveis").addEventListener("click", (ev) => {
+    const b = ev.target.closest("[data-nivel]");
+    if (!b) return;
+    estado.nivel = b.dataset.nivel;
+    renderizar();
+  });
   let espera;
-  $("#busca").addEventListener("input", () => { clearTimeout(espera); espera = setTimeout(renderizar, 120); });
-  $("#limpar-busca").addEventListener("click", () => { $("#busca").value = ""; renderizar(); $("#busca").focus(); });
+  $("#busca").addEventListener("input", () => {
+    clearTimeout(espera);
+    estado.visiveis = {};
+    espera = setTimeout(renderizar, 150);
+  });
   $("#ordem").addEventListener("change", renderizar);
+  // "/" leva à busca, como em buscadores e repositórios de pacotes.
+  document.addEventListener("keydown", (ev) => {
+    if (ev.key === "/" && !/input|textarea|select/i.test(document.activeElement.tagName)) {
+      ev.preventDefault();
+      $("#busca").focus();
+    }
+  });
 
   carregar();
 })();

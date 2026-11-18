@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-18T16:14:24+00:00",
+  "gerado_em": "2026-11-18T20:23:59+00:00",
   "total": 40,
   "addons": [
     {
@@ -12,6 +12,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "avancado",
       "etiquetas": [
         "aprendiz",
         "ambiente",
@@ -91,6 +93,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "avancado",
       "etiquetas": [
         "aprendiz",
         "arquitetura",
@@ -169,6 +173,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "avancado",
       "etiquetas": [
         "aprendiz",
         "código",
@@ -248,6 +254,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "avancado",
       "etiquetas": [
         "aprendiz",
         "algoritmos",
@@ -327,6 +335,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "avancado",
       "etiquetas": [
         "aprendiz",
         "do zero",
@@ -405,6 +415,8 @@
       "licenca": "CC0-1.0",
       "site": null,
       "categoria": "Tecnologia",
+      "grupo": "conhecimento",
+      "nivel": "basico",
       "etiquetas": [
         "windows",
         "atalhos",
@@ -476,6 +488,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Personalização",
+      "grupo": "aparencia",
+      "nivel": "basico",
       "etiquetas": [
         "boas-vindas",
         "lusofonia",
@@ -562,6 +576,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "basico",
       "etiquetas": [
         "c",
         "linguagem c",
@@ -640,6 +656,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "avancado",
       "etiquetas": [
         "c",
         "ponteiros",
@@ -718,6 +736,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "avancado",
       "etiquetas": [
         "c",
         "avançado",
@@ -797,6 +817,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "basico",
       "etiquetas": [
         "c++",
         "cpp",
@@ -875,6 +897,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "avancado",
       "etiquetas": [
         "c++",
         "cpp",
@@ -954,6 +978,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "avancado",
       "etiquetas": [
         "c++",
         "cpp",
@@ -1033,6 +1059,8 @@
       "licenca": "CC0-1.0",
       "site": null,
       "categoria": "Tecnologia",
+      "grupo": "conhecimento",
+      "nivel": "basico",
       "etiquetas": [
         "linux",
         "terminal",
@@ -1098,12 +1126,14 @@
     {
       "id": "compreensao-portugues",
       "nome": "Compreensão do português",
-      "versao": "1.3.0",
+      "versao": "1.4.0",
       "autor": "Jano Projects",
-      "descricao": "A raiz da conversa do Aprendiz: entende o tipo de pergunta (o que é, como fazer, onde fica…), expressões (\"dar um jeito\", \"pequeno-almoço\"), formas irregulares (\"fui\", \"fiz\" → ser, fazer), responde sobre si mesmo e as próprias limitações e, quando não sabe algo, indica o addon da loja oficial que sabe. Mais pesado: traz um léxico com mais de 300 mil palavras. Lemas derivados de lemmatization-lists, de Michal Měchura (ODbL).",
+      "descricao": "A raiz da conversa do Aprendiz: entende o tipo de pergunta (o que é, como fazer, onde fica…), junta tudo o que você ensinou sobre um assunto (\"o que você sabe sobre o carro?\"), entende expressões e formas irregulares (\"fui\", \"fiz\" → ser, fazer), responde sobre si mesmo e, quando não sabe algo, indica o addon da loja que sabe. Traz um léxico com mais de 300 mil palavras. Lemas derivados de lemmatization-lists, de Michal Měchura (ODbL).",
       "licenca": "ODbL-1.0",
       "site": "https://github.com/michmech/lemmatization-lists",
       "categoria": "Compreensão",
+      "grupo": "essenciais",
+      "nivel": "base",
       "etiquetas": [
         "compreensão",
         "português",
@@ -1119,8 +1149,8 @@
         "linguagem",
         "compreensao"
       ],
-      "versao_minima_app": "0.7.0",
-      "criado_com": "0.9.0",
+      "versao_minima_app": "1.0.0",
+      "criado_com": "1.0.0",
       "dependencias": [],
       "recomendado": null,
       "conhecimentos": 0,
@@ -1132,15 +1162,15 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": {
-        "regras": 180,
+        "regras": 181,
         "catalogo": 37,
         "lemas": 317331,
         "vetores": 0
       },
       "norma": null,
       "arquivo": "addons/compreensao-portugues.aprendiz",
-      "tamanho": 856858,
-      "sha256": "6705b9e2eeec6a4650eff3036b1ac93d8a1e49a633cef8cafd9607f4bd950a41",
+      "tamanho": 857014,
+      "sha256": "ef817b30d48bb7384209e386c04012004b071e5c1afd8e1bb7eec7bc9db2bbf3",
       "atualizado_em": "2026-11-18",
       "amostra": []
     },
@@ -1153,6 +1183,8 @@
       "licenca": "CC0-1.0",
       "site": null,
       "categoria": "Utilidades",
+      "grupo": "conhecimento",
+      "nivel": "basico",
       "etiquetas": [
         "cozinha",
         "medidas",
@@ -1224,6 +1256,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Compreensão",
+      "grupo": "essenciais",
+      "nivel": "base",
       "etiquetas": [
         "diálogo",
         "conversa",
@@ -1278,6 +1312,8 @@
       "licenca": "CC-BY-4.0 AND LGPL-2.1",
       "site": null,
       "categoria": "Idiomas e gírias",
+      "grupo": "idiomas",
+      "nivel": "basico",
       "etiquetas": [
         "guiné-bissau",
         "norma",
@@ -1465,6 +1501,8 @@
       "licenca": "CC-BY-4.0 AND LGPL-2.1",
       "site": null,
       "categoria": "Idiomas e gírias",
+      "grupo": "idiomas",
+      "nivel": "basico",
       "etiquetas": [
         "angola",
         "norma",
@@ -1675,6 +1713,8 @@
       "licenca": "CC-BY-4.0 AND LGPL-2.1",
       "site": null,
       "categoria": "Idiomas e gírias",
+      "grupo": "idiomas",
+      "nivel": "basico",
       "etiquetas": [
         "cabo verde",
         "norma",
@@ -1858,6 +1898,8 @@
       "licenca": "CC-BY-4.0 AND LGPL-2.1",
       "site": null,
       "categoria": "Idiomas e gírias",
+      "grupo": "idiomas",
+      "nivel": "basico",
       "etiquetas": [
         "moçambique",
         "norma",
@@ -2037,6 +2079,8 @@
       "licenca": "CC-BY-4.0 AND LGPL-2.1",
       "site": null,
       "categoria": "Idiomas e gírias",
+      "grupo": "idiomas",
+      "nivel": "basico",
       "etiquetas": [
         "portugal",
         "norma",
@@ -2263,6 +2307,8 @@
       "licenca": "CC-BY-4.0 AND LGPL-2.1",
       "site": null,
       "categoria": "Idiomas e gírias",
+      "grupo": "idiomas",
+      "nivel": "basico",
       "etiquetas": [
         "são tomé e príncipe",
         "norma",
@@ -2397,6 +2443,8 @@
       "licenca": "CC-BY-4.0 AND LGPL-2.1",
       "site": null,
       "categoria": "Idiomas e gírias",
+      "grupo": "idiomas",
+      "nivel": "basico",
       "etiquetas": [
         "timor-leste",
         "norma",
@@ -2618,6 +2666,8 @@
       "licenca": "CC-BY-4.0 AND LGPL-3.0-or-later",
       "site": null,
       "categoria": "Idiomas e gírias",
+      "grupo": "idiomas",
+      "nivel": "basico",
       "etiquetas": [
         "brasil",
         "norma",
@@ -2912,6 +2962,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "basico",
       "etiquetas": [
         "programação",
         "lógica",
@@ -2984,6 +3036,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "basico",
       "etiquetas": [
         "programação",
         "nomenclatura",
@@ -3063,6 +3117,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "basico",
       "etiquetas": [
         "programação",
         "estruturas de dados",
@@ -3141,6 +3197,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "basico",
       "etiquetas": [
         "programação",
         "banco de dados",
@@ -3220,6 +3278,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "basico",
       "etiquetas": [
         "python",
         "iniciante",
@@ -3296,6 +3356,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "avancado",
       "etiquetas": [
         "python",
         "avançado",
@@ -3375,6 +3437,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "basico",
       "etiquetas": [
         "sql",
         "sqlite",
@@ -3453,6 +3517,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "avancado",
       "etiquetas": [
         "sql",
         "avançado",
@@ -3532,6 +3598,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
+      "grupo": "conhecimento",
+      "nivel": "avancado",
       "etiquetas": [
         "sql",
         "teoria",
@@ -3611,6 +3679,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Personalização",
+      "grupo": "aparencia",
+      "nivel": "basico",
       "etiquetas": [
         "tema",
         "cor",
@@ -3656,6 +3726,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Personalização",
+      "grupo": "aparencia",
+      "nivel": "basico",
       "etiquetas": [
         "tema",
         "cor",
@@ -3701,6 +3773,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Personalização",
+      "grupo": "aparencia",
+      "nivel": "basico",
       "etiquetas": [
         "tema",
         "cor",
@@ -3746,6 +3820,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Personalização",
+      "grupo": "aparencia",
+      "nivel": "basico",
       "etiquetas": [
         "tema",
         "cor",
@@ -3791,6 +3867,8 @@
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Personalização",
+      "grupo": "aparencia",
+      "nivel": "basico",
       "etiquetas": [
         "tema",
         "cor",
@@ -3836,6 +3914,8 @@
       "licenca": "CC-BY-SA-4.0",
       "site": "https://spacy.io/models/pt",
       "categoria": "Compreensão",
+      "grupo": "essenciais",
+      "nivel": "base",
       "etiquetas": [
         "compreensão",
         "português",

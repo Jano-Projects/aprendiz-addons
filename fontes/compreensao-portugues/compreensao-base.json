@@ -139,14 +139,29 @@
     {"tipo": "pedido", "gatilhos": [
       "me mostre", "me mostra", "mostre", "mostra", "quero", "eu quero", "queria", "gostaria de",
       "preciso", "preciso de", "eu preciso", "podes", "pode me", "me ajude", "me ajuda", "lista",
-      "liste", "me da", "me de"]}
+      "liste", "me da", "me de", "me diz", "me diga", "me fala", "me fale", "me conta", "me conte",
+      "sabe me dizer", "quero saber", "queria saber", "gostaria de saber", "me lembra", "me lembre",
+      "lembra", "quero fazer", "vou fazer", "to querendo", "estou querendo"]},
+    {"tipo": "panorama", "gatilhos": [
+      "o que voce sabe sobre", "o que voce sabe de", "o que sabes sobre", "o que voce tem sobre",
+      "o que tem sobre", "o que ha sobre", "tem alguma coisa sobre", "tem algo sobre",
+      "tem alguma informacao sobre", "quais informacoes sobre", "quais as informacoes sobre",
+      "informacoes sobre", "tudo sobre", "tudo o que voce sabe sobre", "me fala sobre", "me fale sobre",
+      "fala sobre", "me conta sobre", "me conte sobre", "me fala tudo sobre",
+      "me lembra o que tenho que fazer com", "lembra o que tenho que fazer com",
+      "me lembra o que preciso fazer com", "o que tenho que fazer com", "o que eu tenho que fazer com",
+      "o que preciso fazer com", "o que eu preciso fazer com", "o que ficou combinado sobre",
+      "o que eu anotei sobre", "o que anotei sobre", "minhas anotacoes sobre",
+      "o que eu te ensinei sobre", "o que te ensinei sobre", "o que voce lembra sobre",
+      "o que voce lembra de"]}
   ],
 
   "autoconhecimento": [
     {"id": "quem-sou", "funcao": "versao", "perguntas": [
       "quem e voce", "quem es tu", "quem es", "o que e voce", "o que es tu", "quem e o aprendiz",
       "o que e o aprendiz", "se apresente", "apresente se", "qual o seu nome", "qual e o seu nome",
-      "qual o teu nome", "como voce se chama", "como te chamas", "como e o seu nome"]},
+      "qual o teu nome", "como voce se chama", "como te chamas", "como e o seu nome",
+      "voce tem nome", "qual seu nome", "qual e o seu nome mesmo", "como te chamam"]},
     {"id": "versao", "funcao": "versao", "perguntas": [
       "qual a sua versao", "qual e a sua versao", "qual a tua versao", "qual versao voce e",
       "que versao e essa", "que versao voce e", "versao do aprendiz", "qual a versao do aprendiz",

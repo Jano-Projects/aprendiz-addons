@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <!--
-  Loja de addons do Aprendiz.
+  Loja de addons do Aprendiz (site 2.0).
   Site estático (HTML, CSS e JS puros), publicado no GitHub Pages.
   Lê o catalogo.json, gerado por ferramentas/gerar_catalogo.py.
   Nada é carregado de terceiros: sem fontes, scripts ou rastreadores externos.
+
+  Organização da página:
+    topo         → marca, navegação, tema
+    apresentação → o que é a loja, em uma frase, e os números do catálogo
+    catálogo     → barra lateral (grupos, nível, ordem) + busca + lista por grupo
+    instalar     → passo a passo e garantias
+    criar        → como criar um addon próprio
 -->
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Addons do Aprendiz</title>
-  <meta name="description" content="Pacotes de conhecimento prontos para o Aprendiz, o assistente pessoal local e offline.">
+  <meta name="description" content="Catálogo oficial de addons do Aprendiz, o assistente pessoal local e offline: compreensão do português, idiomas, conhecimento e aparência.">
   <link rel="icon" href="icone.svg" type="image/svg+xml">
   <link rel="stylesheet" href="estilo.css">
 </head>
@@ -32,89 +39,90 @@
     </defs>
   </svg>
 
+
+  <a class="pular" href="#lista">Pular para o catálogo</a>
+
   <header class="topo">
-    <div class="conteudo topo-linha">
-      <a class="marca" href="./">
-        <img src="icone.svg" alt="" width="32" height="32">
-        <span>Aprendiz <b>Addons</b></span>
-      </a>
-      <nav class="menu">
-        <a href="#instalar">Como instalar</a>
-        <a href="#criar">Criar um addon</a>
+    <div class="largura topo-linha">
+      <a class="marca" href="./"><img src="icone.svg" alt="" width="26" height="26"> Aprendiz <span>/ addons</span></a>
+      <nav class="menu" aria-label="Seções">
+        <a href="#catalogo">Catálogo</a>
+        <a href="#instalar">Instalar</a>
+        <a href="#criar">Criar</a>
         <button class="botao-icone" id="btn-tema" aria-label="Alternar tema" title="Alternar tema"></button>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="conteudo">
-        <h1>Ensine o seu Aprendiz em segundos</h1>
-        <p>Addons oficiais da Jano Projects: pacotes prontos de conhecimento, linguagem, compreensão e personalização. Baixe, importe no app e ative quando quiser.
-          Tudo continua offline, no seu computador.</p>
-        <div class="busca">
-          <svg class="ic"><use href="#i-busca"/></svg>
-          <input id="busca" type="search" placeholder="Buscar addons: linux, cozinha, atalhos…" aria-label="Buscar addons" autocomplete="off">
-          <button class="limpar" id="limpar-busca" aria-label="Limpar busca" hidden><svg class="ic"><use href="#i-x"/></svg></button>
+    <section class="largura apresentacao">
+      <h1>Catálogo de addons</h1>
+      <p>Pacotes oficiais que ensinam o Aprendiz a entender o português, a falar como cada região e a responder sobre assuntos novos. Você baixa um arquivo <code>.aprendiz</code>, importa no app e tudo continua no seu computador, sem internet.</p>
+      <p class="numeros-catalogo" id="numeros">Carregando o catálogo…</p>
+    </section>
+
+    <section class="largura catalogo" id="catalogo">
+      <aside class="filtros" aria-label="Filtros">
+        <h2 class="rotulo">Grupos</h2>
+        <nav id="grupos" class="lista-grupos"></nav>
+        <div id="filtro-nivel" hidden>
+          <h2 class="rotulo">Nível</h2>
+          <div class="segmentado" role="group" aria-label="Nível" id="niveis"></div>
         </div>
+        <h2 class="rotulo"><label for="ordem">Ordenar</label></h2>
+        <select id="ordem">
+          <option value="nome">Nome</option>
+          <option value="recentes">Mais recentes</option>
+          <option value="tamanho">Mais conteúdo</option>
+        </select>
+      </aside>
+
+      <div class="coluna">
+        <div class="barra-busca">
+          <label class="busca">
+            <svg class="ic"><use href="#i-busca"/></svg>
+            <input id="busca" type="search" placeholder="Buscar por nome, assunto ou palavra (ex.: kota, sql, atalhos)" aria-label="Buscar addons" autocomplete="off">
+            <kbd title="Atalho para buscar">/</kbd>
+          </label>
+          <span class="resumo" id="resumo" aria-live="polite"></span>
+        </div>
+        <div id="lista"></div>
       </div>
     </section>
 
-    <section class="conteudo">
-      <div class="barra">
-        <div class="categorias" id="categorias" role="group" aria-label="Categorias"></div>
-        <label class="ordem">Ordenar
-          <select id="ordem">
-            <option value="nome">Nome</option>
-            <option value="recentes">Mais recentes</option>
-            <option value="tamanho">Mais conteúdo</option>
-          </select>
-        </label>
-      </div>
-      <p class="resumo" id="resumo" aria-live="polite">Carregando…</p>
-      <div class="grade" id="grade"></div>
-    </section>
-
-    <section class="conteudo secao" id="instalar">
-      <h2>Como instalar um addon</h2>
+    <section class="largura secao" id="instalar">
+      <h2>Instalar um addon</h2>
       <ol class="passos">
-        <li><b>Baixe</b> o arquivo <code>.aprendiz</code> do addon que quiser.</li>
+        <li><b>Baixe</b> o arquivo <code>.aprendiz</code>. Comece pelos <b>essenciais</b>, na ordem indicada.</li>
         <li>No Aprendiz, abra <b>Addons</b> no menu lateral e clique em <b>Importar addon</b>.</li>
-        <li>Escolha o arquivo baixado, confira o resumo (origem, o que ele traz, dependências) e clique em <b>Instalar</b>.</li>
-        <li>Se quiser, marque <b>Usar como padrão</b> para ativar a busca e a resposta recomendadas para o addon. Addons com a mesma recomendação formam um <b>grupo</b>, que pode ser ativado de uma vez.</li>
+        <li>Confira o resumo (origem, o que ele traz, dependências) e clique em <b>Instalar</b>.</li>
+        <li>Se quiser, marque <b>Usar como padrão</b> para ativar a busca e a resposta recomendadas.</li>
       </ol>
-      <div class="avisos">
-        <div><svg class="ic"><use href="#i-check"/></svg> Desativar um addon só o esconde das respostas; nada é apagado.</div>
-        <div><svg class="ic"><use href="#i-check"/></svg> O que você ensina ao Aprendiz sempre tem prioridade sobre os addons.</div>
-        <div><svg class="ic"><use href="#i-escudo"/></svg> Addons contêm só dados (texto), nunca programas. O app valida cada arquivo ao importar.</div>
-        <div><svg class="ic"><use href="#i-check"/></svg> Os addons desta loja usam o formato 2: precisam do Aprendiz 0.4 ou mais novo (dicionários: 0.4.1; recomendação e grupos a partir da 0.5; perguntas como "como se diz dinheiro em Angola?" a partir da 0.6).</div>
-      </div>
+      <ul class="garantias">
+        <li>Addons contêm só dados (texto), nunca programas. O app valida cada arquivo ao importar.</li>
+        <li>O que você ensina sempre vence os addons, inclusive sinônimos e abreviações.</li>
+        <li>Se dois addons explicam o mesmo termo de jeitos diferentes, o Aprendiz 1.0 pergunta a você em vez de escolher sozinho.</li>
+        <li>Desativar um addon só o esconde das respostas; nada é apagado.</li>
+      </ul>
     </section>
 
-    <section class="conteudo secao" id="criar">
+    <section class="largura secao" id="criar">
       <h2>Criar um addon</h2>
-      <p>Esta loja distribui só os <b>addons oficiais</b> da Jano Projects. Mas qualquer pessoa pode
-        criar addons para uso próprio ou para compartilhar diretamente, como arquivo, a partir de um
-        simples texto com perguntas e respostas. O próprio app também exporta o que você ensinou:</p>
+      <p>Esta loja distribui só os addons oficiais da Jano Projects. Qualquer pessoa pode criar addons para uso próprio ou compartilhar o arquivo diretamente, a partir de um texto simples de perguntas e respostas. O próprio app também exporta o que você ensinou.</p>
       <pre><code>P: como abrir o explorador de arquivos no windows
 R: Win+E.
-
 P: quantos ml tem uma xícara de chá
 R: Uma xícara de chá tem cerca de 240 ml.</code></pre>
-      <p>O guia completo, com o formato, a ferramenta que gera o <code>.aprendiz</code> e as dicas de
-        escrita, está na documentação do projeto:</p>
-      <a class="botao" href="https://github.com/Jano-Projects/aprendiz-dev/blob/main/docs/addons.md" target="_blank" rel="noopener">
-        <svg class="ic"><use href="#i-codigo"/></svg> Guia de criação de addons</a>
+      <p><a href="https://github.com/Jano-Projects/aprendiz-dev/blob/main/docs/addons.md" target="_blank" rel="noopener">Guia completo de criação de addons</a>: formato, ferramenta que gera o <code>.aprendiz</code> e como conferir conflitos com outros addons.</p>
     </section>
   </main>
 
   <footer class="rodape">
-    <div class="conteudo">
-      <span>Aprendiz: assistente pessoal local, offline e de código aberto.</span>
+    <div class="largura">
+      <span>Aprendiz: assistente pessoal local, offline e de código aberto · <a href="https://github.com/Jano-Projects/aprendiz-dev" target="_blank" rel="noopener">código</a></span>
       <span id="gerado-em"></span>
     </div>
   </footer>
-
   <script src="app.js"></script>
 </body>
 </html>

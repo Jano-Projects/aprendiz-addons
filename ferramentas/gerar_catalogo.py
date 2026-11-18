@@ -100,6 +100,38 @@ def amostra(conhecimentos: list[dict]) -> list[dict]:
     return itens
 
 
+# Grupos da loja (site 2.0). A ordem aqui é a ordem em que aparecem no site.
+# "essenciais" são os alicerces da conversa: sem eles o Aprendiz só casa
+# palavras; com eles, entende o tipo de pergunta, o diálogo e o sentido.
+GRUPOS = ("essenciais", "idiomas", "conhecimento", "aparencia")
+NIVEIS = ("base", "basico", "avancado")
+_AVANCADO = re.compile(r"avancad|intermediari|teoria|^aprendiz-")
+
+
+def grupo_e_nivel(m: dict, classificacao: list[str]) -> tuple[str, str]:
+    """
+    Grupo e nível do addon na loja. O manifesto pode declarar "grupo" e "nivel";
+    sem isso, são deduzidos da classificação e do id:
+
+        compreensao/vetores  → essenciais · base
+        norma                → idiomas · basico
+        personalizacao       → aparencia · basico
+        o resto              → conhecimento · basico, ou avancado se o id indicar
+                               (avancado, intermediario, teoria, trilha aprendiz-*)
+    """
+    grupo, nivel = m.get("grupo"), m.get("nivel")
+    if grupo not in GRUPOS:
+        grupo = ("essenciais" if {"compreensao", "vetores"} & set(classificacao)
+                 else "idiomas" if "norma" in classificacao
+                 else "aparencia" if "personalizacao" in classificacao
+                 else "conhecimento")
+    if nivel not in NIVEIS:
+        nivel = ("base" if grupo == "essenciais"
+                 else "avancado" if grupo == "conhecimento" and _AVANCADO.search(m["id"])
+                 else "basico")
+    return grupo, nivel
+
+
 def ler_addon(arquivo: Path) -> dict:
     dados = arquivo.read_bytes()
     try:
@@ -210,6 +242,8 @@ def ler_addon(arquivo: Path) -> dict:
         "licenca": (m.get("licenca") or "").strip() or None,
         "site": m.get("site") or None,
         "categoria": (m.get("categoria") or "Outros").strip(),
+        "grupo": grupo_e_nivel(m, classificacao)[0],
+        "nivel": grupo_e_nivel(m, classificacao)[1],
         "etiquetas": [str(e).strip() for e in etiquetas if str(e).strip()][:MAX_ETIQUETAS],
         "formato": m["formato"],
         "origem": origem,

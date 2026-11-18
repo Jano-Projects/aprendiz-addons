@@ -21,6 +21,29 @@ A cada push na branch `main`, o GitHub Actions ([publicar.yml](.github/workflows
 confere os addons, gera o catálogo e publica o site no GitHub Pages. **Se algum addon for
 inválido, o site não é atualizado**, então um arquivo quebrado nunca chega a quem baixa.
 
+## Grupos e níveis
+
+O site organiza o catálogo em quatro **grupos**, nesta ordem:
+
+| Grupo | O que reúne | Nível |
+|---|---|---|
+| **Essenciais** | Compreensão, diálogo e vetores do português: os alicerces da conversa. Sem eles o Aprendiz só compara palavras. O site mostra a **ordem de instalação** (dependências primeiro). | `base` |
+| **Idiomas e variantes** | Gírias, expressões, grafias e a norma de cada país lusófono | `basico` |
+| **Conhecimento** | Assuntos para perguntar, separados em **Básico** e **Avançado** | `basico` ou `avancado` |
+| **Aparência** | Temas de cor e boas-vindas; não mudam as respostas | `basico` |
+
+O grupo e o nível vão para o `catalogo.json` (campos `grupo` e `nivel`). O manifesto pode
+declará-los (`"grupo": "conhecimento"`, `"nivel": "avancado"`); sem isso, o gerador deduz
+(função `grupo_e_nivel` em `ferramentas/gerar_catalogo.py`):
+
+- classificação `compreensao` ou `vetores` → Essenciais;
+- classificação `norma` → Idiomas;
+- classificação `personalizacao` → Aparência;
+- o resto → Conhecimento, **avançado** se o id tiver `avancado`, `intermediario`, `teoria` ou
+  começar com `aprendiz-` (a trilha "Aprendiz por dentro"); senão, básico.
+
+A `categoria` continua no catálogo e na busca, mas não organiza mais a página.
+
 ## Publicar um addon
 
 1. Crie o addon com a ferramenta do Aprendiz (veja o
@@ -29,12 +52,17 @@ inválido, o site não é atualizado**, então um arquivo quebrado nunca chega a
    python ferramentas/criar_addon.py fontes/meu-addon -o addons/meu-addon.aprendiz
    ```
 2. O arquivo precisa se chamar **`<id>.aprendiz`**, com o mesmo `id` do manifesto.
-3. Opcional, só para a loja: no `manifesto.json`, inclua `"categoria"` e `"etiquetas"`. O app
-   ignora esses campos.
+3. Opcional, só para a loja: no `manifesto.json`, inclua `"categoria"`, `"etiquetas"` e, se a
+   dedução automática não servir, `"grupo"` e `"nivel"` (veja [Grupos e níveis](#grupos-e-níveis)).
+   O app ignora esses campos.
    ```json
    "categoria": "Tecnologia",
-   "etiquetas": ["linux", "terminal"]
+   "etiquetas": ["linux", "terminal"],
+   "nivel": "avancado"
    ```
+   Antes de publicar um addon com `linguagem.json`, confira se ele não briga com os outros
+   (com o código do Aprendiz 1.0 ao lado):
+   `python ../aprendiz-dev/ferramentas/conferir_addons.py addons/*.aprendiz`.
 4. Todo addon desta loja leva `"origem": "oficial"` e `"editor": "Jano Projects"` no manifesto.
    O gerador do catálogo recusa qualquer outro.
 5. Faça o commit e o push. Em cerca de 1 minuto, o addon aparece no site.
@@ -98,6 +126,14 @@ python ../aprendiz/ferramentas/criar_addon.py fontes/compreensao-portugues -o ad
 (aumente a `versao` no manifesto). O `lemas.tsv` e o `vetores.bin` só mudam quando as fontes
 de dados mudam: veja `ferramentas/dados_compreensao.py`.
 
+A **Compreensão do português 1.4.0** exige o Aprendiz **1.0**: ela traz o tipo de pergunta
+`panorama` ("o que você sabe sobre o carro?", "tem algo sobre…", "me lembra o que tenho que
+fazer com…"), que junta numa lista tudo o que a base sabe sobre o assunto. Também ganhou
+gatilhos de pedido ("me fala", "quero saber", "me lembra", "quero fazer") e mais jeitos de
+perguntar o nome do Aprendiz ("você tem nome?", "como te chamam?"). Os gatilhos ficam em
+`fontes/compreensao-portugues/compreensao-base.json`; o comportamento está em
+"Juntar e reinterpretar", em `docs/compreensao.md` do aprendiz-dev.
+
 **Diálogo** (Aprendiz 0.9+): `dialogo-portugues` traz só a seção `dialogo` de um
 `compreensao.json` (cumprimentos, palavras de conversa, continuações e atos de fala: pedir
 ajuda, desabafar, pedir opinião, "não entendi", "sim"...). É escrito à mão em
@@ -156,14 +192,28 @@ aprendiz-addons/
 ├── ferramentas/dados_compreensao.py     # gera lemas.tsv e vetores.bin (precisa de spaCy)
 ├── ferramentas/dados_normas.py          # gera norma.json e vocabulario.tsv dos países (precisa de spylls)
 ├── fontes/normas/                       # fontes das normas: regras, equivalências, erros comuns…
-├── index.html                       # a página
-├── estilo.css                       # visual (claro/escuro, responsivo)
-├── app.js                           # busca sem acentos, categorias, ordenação, cartões
+├── index.html                       # a página (topo, catálogo, instalar, criar)
+├── estilo.css                       # visual de catálogo com as cores do app; claro/escuro
+├── app.js                           # grupos, níveis, busca sem acentos, lista leve e detalhes sob demanda
 ├── icone.svg                        # ícone
 └── catalogo.json                    # gerado automaticamente; não edite à mão
 ```
 
 O site não carrega nada de terceiros: sem fontes externas, scripts de análise ou rastreadores.
+
+### Desempenho com muitos addons
+
+O site foi pensado para catálogos grandes (testado com 3.000 addons: cerca de 1 s para
+carregar e desenhar):
+
+- o texto de busca de cada addon é preparado uma vez só, ao carregar;
+- cada grupo mostra 25 linhas e oferece **Mostrar mais**;
+- os detalhes (amostra, ficha, SHA-256) só são montados quando a linha é aberta;
+- um único ouvinte de clique atende a lista inteira;
+- o CSS usa `content-visibility`, então o navegador não desenha linhas fora da tela.
+
+Endereços compartilháveis: `?busca=sql&grupo=conhecimento&nivel=avancado&ordem=recentes`.
+A tecla <kbd>/</kbd> leva à busca.
 
 ## Configuração (uma única vez)
 
