@@ -60,6 +60,19 @@ jeito diferente de perguntar a mesma coisa. Veja `fontes/atalhos-windows/`.
 **Temas** são só um `personalizacao.json` com `{"personalizacao.cor": "#RRGGBB"}`; veja
 `fontes/tema-oceano/`.
 
+**Compreensão** (Aprendiz 0.7+): os addons `compreensao-portugues` e `vetores-portugues`
+ensinam o app a interpretar as perguntas e a indicar o addon certo quando ele não sabe algo.
+Eles levam uma cópia resumida desta loja (o catálogo), então, **sempre que um addon for criado
+ou mudar**, gere de novo a compreensão:
+
+```bash
+python ferramentas/catalogo_compreensao.py      # compreensao-base.json + catálogo → compreensao.json
+python ../aprendiz/ferramentas/criar_addon.py fontes/compreensao-portugues -o addons/compreensao-portugues.aprendiz
+```
+
+(aumente a `versao` no manifesto). O `lemas.tsv` e o `vetores.bin` só mudam quando as fontes
+de dados mudam: veja `ferramentas/dados_compreensao.py`.
+
 Para **atualizar** um addon, aumente a `versao` no manifesto, gere o arquivo de novo e envie.
 Quem importar a versão nova no app tem o addon substituído, mantendo a escolha de ativo ou
 desativado.
@@ -81,6 +94,8 @@ aprendiz-addons/
 ├── addons/                          # os arquivos .aprendiz que o site oferece para baixar
 ├── fontes/                          # o texto-fonte de cada addon (perguntas.txt, manifesto…)
 ├── ferramentas/gerar_catalogo.py    # gera o catalogo.json (só biblioteca padrão do Python)
+├── ferramentas/catalogo_compreensao.py  # catálogo da loja dentro do addon de compreensão
+├── ferramentas/dados_compreensao.py     # gera lemas.tsv e vetores.bin (precisa de spaCy)
 ├── index.html                       # a página
 ├── estilo.css                       # visual (claro/escuro, responsivo)
 ├── app.js                           # busca sem acentos, categorias, ordenação, cartões
@@ -97,5 +112,10 @@ No GitHub: **Settings → Pages → Build and deployment → Source: GitHub Acti
 ## Licenças
 
 - Código do site: [MIT](LICENSE).
-- Cada addon tem a própria licença, indicada no manifesto e mostrada no site. Os addons deste
-  repositório usam CC0 (domínio público).
+- Cada addon tem a própria licença, indicada no manifesto e mostrada no site (CC BY 4.0 ou
+  CC0, na maioria).
+- **Compreensão do português**: ODbL 1.0. Os lemas derivam de
+  [lemmatization-lists](https://github.com/michmech/lemmatization-lists), de Michal Měchura
+  (ODbL 1.0).
+- **Vetores de palavras do português**: CC BY-SA 4.0. Os vetores derivam do pacote
+  `pt_core_news_md` do [spaCy](https://spacy.io/models/pt), da Explosion.

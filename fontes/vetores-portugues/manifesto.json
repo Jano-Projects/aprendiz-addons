@@ -1,0 +1,15 @@
+{
+  "id": "vetores-portugues",
+  "nome": "Vetores de palavras do português",
+  "versao": "1.0.0",
+  "descricao": "Complemento da Compreensão do português: vetores que aproximam o SENTIDO de cerca de 114 mil palavras. Quando a pergunta usa uma palavra que não está na base (\"automóvel\"), o Aprendiz tenta as de sentido parecido (\"carro\") e recomenda addons com mais precisão. É o addon mais pesado da loja e usa mais processamento. Vetores derivados do pacote pt_core_news_md do spaCy (Explosion).",
+  "categoria": "Compreensão",
+  "etiquetas": ["compreensão", "português", "vetores", "semântica", "sentido"],
+  "autor": "Jano Projects",
+  "licenca": "CC-BY-SA-4.0",
+  "site": "https://spacy.io/models/pt",
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {"versao_minima": "0.7.0"},
+  "dependencias": [{"id": "compreensao-portugues", "versao": "1.0.0", "nome": "Compreensão do português"}]
+}

@@ -46,6 +46,8 @@ CLASSIFICACOES = {
     "linguagem": "linguagem.json",
     "parametros": "parametros.json",
     "personalizacao": "personalizacao.json",
+    "compreensao": "compreensao.json",      # Aprendiz 0.7+
+    "vetores": "vetores.bin",               # Aprendiz 0.7+
     "algoritmo": None,
     "aplicacao": None,
 }
@@ -112,6 +114,21 @@ def ler_addon(arquivo: Path) -> dict:
         linguagem = ler_json(zip_, "linguagem.json", obrigatorio=False) or {}
         parametros = {} if v1 else ler_json(zip_, "parametros.json", obrigatorio=False) or {}
         personalizacao = {} if v1 else ler_json(zip_, "personalizacao.json", obrigatorio=False) or {}
+        # Compreensão (0.7+): o app valida tudo a fundo; aqui só o necessário para o site.
+        compreensao = {} if v1 else ler_json(zip_, "compreensao.json", obrigatorio=False) or {}
+        nomes = set(zip_.namelist())
+        tem_vetores = "vetores.bin" in nomes
+        lemas = 0
+        if "lemas.tsv" in nomes:
+            with zip_.open("lemas.tsv") as f:
+                lemas = sum(1 for linha in f if linha.strip() and not linha.startswith(b"#"))
+        vetores = 0
+        if tem_vetores:
+            with zip_.open("vetores.bin") as f:
+                cabecalho = f.read(22)
+            if len(cabecalho) < 22 or cabecalho[:8] != b"APRVET1\0":
+                raise Invalido("vetores.bin não é um arquivo de vetores do Aprendiz")
+            vetores = int.from_bytes(cabecalho[14:18], "little")  # quantidade de palavras
 
     if not isinstance(m.get("id"), str) or not PADRAO_ID.match(m["id"]):
         raise Invalido("id inválido (use letras minúsculas, números e hífen)")
@@ -125,8 +142,11 @@ def ler_addon(arquivo: Path) -> dict:
     if any(not isinstance(k, dict) or not str(k.get("conteudo", "")).strip() for k in conhecimentos):
         raise Invalido("há conhecimento sem 'conteudo'")
 
+    if not isinstance(compreensao, dict):
+        raise Invalido("compreensao.json inválido")
     presentes = [t for t, tem in (("memoria", conhecimentos), ("linguagem", linguagem),
-                                  ("parametros", parametros), ("personalizacao", personalizacao)) if tem]
+                                  ("parametros", parametros), ("personalizacao", personalizacao),
+                                  ("compreensao", compreensao), ("vetores", tem_vetores)) if tem]
     if not presentes:
         raise Invalido("addon vazio")
     if v1:
@@ -201,6 +221,13 @@ def ler_addon(arquivo: Path) -> dict:
         "ajustes": [{"chave": str(k), "valor": v} for k, v in {**parametros, **personalizacao}.items()
                     if isinstance(v, (str, int, float)) and not isinstance(v, bool)][:20],
         "configuracoes": len(parametros) + len(personalizacao),
+        # Compreensão (0.7+): tamanhos para o site mostrar
+        "compreensao": {
+            "regras": sum(len(v) for v in compreensao.values() if isinstance(v, (dict, list))),
+            "catalogo": len(compreensao.get("catalogo") or []),
+            "lemas": lemas,
+            "vetores": vetores,
+        } if (compreensao or tem_vetores) else None,
         "arquivo": f"addons/{arquivo.name}",
         "tamanho": len(dados),
         "sha256": hashlib.sha256(dados).hexdigest(),

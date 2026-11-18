@@ -1,0 +1,40 @@
+{
+  "abreviacoes": {
+    "pfv": "por favor",
+    "pfvr": "por favor",
+    "pf": "por favor",
+    "qq": "qualquer",
+    "qlq": "qualquer",
+    "qqr": "qualquer",
+    "tmb": "tambem",
+    "sdds": "saudades",
+    "aki": "aqui",
+    "aq": "aqui",
+    "kd": "cade",
+    "cmo": "como",
+    "to": "estou",
+    "tou": "estou",
+    "ta": "esta",
+    "tava": "estava",
+    "net": "internet",
+    "app": "aplicativo",
+    "wpp": "whatsapp",
+    "zap": "whatsapp",
+    "tlm": "telemovel",
+    "msm": "mesmo",
+    "agr": "agora",
+    "bjs": "beijos",
+    "abs": "abracos"
+  },
+  "intencoes": {
+    "saudacao": ["como vai", "como vai voce", "como vais", "como estas", "como esta", "como e que estas",
+                 "como e que vai", "tudo bom contigo", "tudo bem contigo", "boas", "ola boas", "bom dia aprendiz",
+                 "boa tarde aprendiz", "boa noite aprendiz", "oi aprendiz", "ola aprendiz", "e ai aprendiz",
+                 "tudo joia", "tudo certo", "como tens passado", "como anda", "como andas", "fala aprendiz"],
+    "despedida": ["ate ja", "ate logo aprendiz", "fica bem", "xau", "tchau aprendiz", "adeus aprendiz",
+                  "ate breve", "boa noite e ate amanha", "vou dormir", "ja vou"],
+    "agradecimento": ["obrigadao", "muito obrigada", "agradecido", "agradecida", "brigadao", "valeu demais",
+                      "obrigado aprendiz", "obrigada aprendiz", "muito agradecido", "obrigado mesmo",
+                      "obrigada pela ajuda", "valeu aprendiz"]
+  }
+}

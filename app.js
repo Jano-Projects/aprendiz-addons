@@ -143,7 +143,7 @@
     let lista = estado.addons.filter((a) => {
       if (estado.categoria !== "Todas" && a.categoria !== estado.categoria) return false;
       if (!termos.length) return true;
-      const texto = normalizar([a.nome, a.descricao, a.autor, a.categoria, ...(a.etiquetas || []),
+      const texto = normalizar([a.id, a.nome, a.descricao, a.autor, a.categoria, ...(a.etiquetas || []),
         ...(a.amostra || []).map((x) => `${x.pergunta || ""} ${x.conteudo}`), ...(a.palavras || []),
         ...(a.traducoes || [])].join(" "));
       return termos.every((t) => texto.includes(t));  // todos os termos precisam aparecer
@@ -159,8 +159,10 @@
   // ============================================================ 5. CARTÕES
   const CLASSIFICACOES = {
     memoria: "Memória", linguagem: "Linguagem", parametros: "Parâmetros",
-    personalizacao: "Personalização", algoritmo: "Algoritmo", aplicacao: "Aplicação",
+    personalizacao: "Personalização", compreensao: "Compreensão", vetores: "Vetores",
+    algoritmo: "Algoritmo", aplicacao: "Aplicação",
   };
+  const milhar = (n) => Number(n).toLocaleString("pt-BR");
 
   /** Selos de origem e classificação. A loja só tem addons oficiais (o catálogo recusa os demais). */
   function selos(a) {
@@ -227,6 +229,9 @@
         ${a.conhecimentos - (a.verbetes || 0) ? `<span><b>${a.conhecimentos - (a.verbetes || 0)}</b> conhecimentos</span>` : ""}
         ${a.termos_linguagem ? `<span><b>${a.termos_linguagem}</b> termos de linguagem</span>` : ""}
         ${a.configuracoes ? `<span><b>${a.configuracoes}</b> ${a.configuracoes === 1 ? "configuração" : "configurações"}</span>` : ""}
+        ${a.compreensao && a.compreensao.regras ? `<span><b>${milhar(a.compreensao.regras)}</b> regras de compreensão</span>` : ""}
+        ${a.compreensao && a.compreensao.lemas ? `<span><b>${milhar(a.compreensao.lemas)}</b> palavras no léxico</span>` : ""}
+        ${a.compreensao && a.compreensao.vetores ? `<span>vetores de <b>${milhar(a.compreensao.vetores)}</b> palavras</span>` : ""}
         ${a.versao_minima_app ? `<span>requer Aprendiz <b>${esc(a.versao_minima_app)}</b>+</span>` : ""}
         <span>${tamanho(a.tamanho)}</span>
         <span>atualizado em ${esc(data(a.atualizado_em))}</span>

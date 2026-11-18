@@ -1,7 +1,7 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-18T11:05:25+00:00",
-  "total": 17,
+  "gerado_em": "2026-11-18T12:14:11+00:00",
+  "total": 19,
   "addons": [
     {
       "id": "atalhos-windows",
@@ -41,6 +41,7 @@
       "termos_linguagem": 7,
       "ajustes": [],
       "configuracoes": 0,
+      "compreensao": null,
       "arquivo": "addons/atalhos-windows.aprendiz",
       "tamanho": 2880,
       "sha256": "8377b69ee740482575e6fad3eff2f5d03aa94b7bf1012b4c979b0569ddb1da2b",
@@ -150,6 +151,7 @@
         }
       ],
       "configuracoes": 1,
+      "compreensao": null,
       "arquivo": "addons/boas-vindas-lusofonia.aprendiz",
       "tamanho": 899,
       "sha256": "7e3aa4decf771ec197564d08af65d07eac870c8f9406b270006382a8dc498e0a",
@@ -194,6 +196,7 @@
       "termos_linguagem": 9,
       "ajustes": [],
       "configuracoes": 0,
+      "compreensao": null,
       "arquivo": "addons/atalhos-terminal-linux.aprendiz",
       "tamanho": 3114,
       "sha256": "5e84dbe7f19bd53888f14fcfb34c835a5cca43e07ebed5318fbbfb5d031e0b72",
@@ -224,6 +227,54 @@
           "conteudo": "`cp origem destino`. Para copiar uma pasta inteira: `cp -r pasta destino`."
         }
       ]
+    },
+    {
+      "id": "compreensao-portugues",
+      "nome": "Compreensão do português",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "A raiz da conversa do Aprendiz: entende o tipo de pergunta (o que é, como fazer, onde fica…), expressões (\"dar um jeito\", \"pequeno-almoço\"), formas irregulares (\"fui\", \"fiz\" → ser, fazer), responde sobre si mesmo e as próprias limitações e, quando não sabe algo, indica o addon da loja oficial que sabe. Mais pesado: traz um léxico com mais de 300 mil palavras. Lemas derivados de lemmatization-lists, de Michal Měchura (ODbL).",
+      "licenca": "ODbL-1.0",
+      "site": "https://github.com/michmech/lemmatization-lists",
+      "categoria": "Compreensão",
+      "etiquetas": [
+        "compreensão",
+        "português",
+        "lemas",
+        "interpretação",
+        "autoconhecimento",
+        "recomendação"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "linguagem",
+        "compreensao"
+      ],
+      "versao_minima_app": "0.7.0",
+      "criado_com": "0.7.0",
+      "dependencias": [],
+      "recomendado": null,
+      "conhecimentos": 0,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 28,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": {
+        "regras": 160,
+        "catalogo": 17,
+        "lemas": 317331,
+        "vetores": 0
+      },
+      "arquivo": "addons/compreensao-portugues.aprendiz",
+      "tamanho": 844579,
+      "sha256": "e4115ea58c559f704fd72a219a4701b6da4b4154409b85c26766f05bf9266b7c",
+      "atualizado_em": "2026-11-18",
+      "amostra": []
     },
     {
       "id": "conversoes-medidas",
@@ -263,6 +314,7 @@
       "termos_linguagem": 5,
       "ajustes": [],
       "configuracoes": 0,
+      "compreensao": null,
       "arquivo": "addons/conversoes-medidas.aprendiz",
       "tamanho": 2776,
       "sha256": "3760a347bcbf490d9459a1b029d2a16cc5529f59ee18fcac1ed2bc7f2c1ec549",
@@ -411,6 +463,7 @@
       "termos_linguagem": 17,
       "ajustes": [],
       "configuracoes": 0,
+      "compreensao": null,
       "arquivo": "addons/expressoes-guine-bissau.aprendiz",
       "tamanho": 2320,
       "sha256": "ceaf007fede25a57ab654c9aec72e62bd4ea57ab6fc4c0755a8b44db7b5acb01",
@@ -555,6 +608,7 @@
       "termos_linguagem": 17,
       "ajustes": [],
       "configuracoes": 0,
+      "compreensao": null,
       "arquivo": "addons/expressoes-cabo-verde.aprendiz",
       "tamanho": 2453,
       "sha256": "e3d7e0dfabbd7d8455f096f51f90ed61b4604c231e36cd834426c00cb5c698e6",
@@ -665,6 +719,7 @@
       "termos_linguagem": 15,
       "ajustes": [],
       "configuracoes": 0,
+      "compreensao": null,
       "arquivo": "addons/expressoes-sao-tome-e-principe.aprendiz",
       "tamanho": 2165,
       "sha256": "78369c375825ee664da24a9e61d6ce33ec50d3828ae04dd19756fc69611f80fd",
@@ -829,6 +884,7 @@
       "termos_linguagem": 17,
       "ajustes": [],
       "configuracoes": 0,
+      "compreensao": null,
       "arquivo": "addons/expressoes-timor-leste.aprendiz",
       "tamanho": 2285,
       "sha256": "2413ef950faca49fa7b0fd820859a242fce16d67243716babb7fbd92aadd6adf",
@@ -999,6 +1055,7 @@
       "termos_linguagem": 17,
       "ajustes": [],
       "configuracoes": 0,
+      "compreensao": null,
       "arquivo": "addons/girias-angola.aprendiz",
       "tamanho": 2656,
       "sha256": "72faa3cd2407f65f34349ee9c4ac65a751a9c04fc30ba132b0cfcd0dfa6025b8",
@@ -1202,6 +1259,7 @@
       "termos_linguagem": 21,
       "ajustes": [],
       "configuracoes": 0,
+      "compreensao": null,
       "arquivo": "addons/girias-brasil.aprendiz",
       "tamanho": 4016,
       "sha256": "c38bd04f25c764ffa90138633cd5bdef0716e65d4c2db87f64ca44a3b054f891",
@@ -1386,6 +1444,7 @@
       "termos_linguagem": 18,
       "ajustes": [],
       "configuracoes": 0,
+      "compreensao": null,
       "arquivo": "addons/girias-portugal.aprendiz",
       "tamanho": 3099,
       "sha256": "60b3a8932c1fe59e277668da8e9111b30dc910f9aa65999c3e23963ab9505cbc",
@@ -1524,6 +1583,7 @@
       "termos_linguagem": 16,
       "ajustes": [],
       "configuracoes": 0,
+      "compreensao": null,
       "arquivo": "addons/girias-mocambique.aprendiz",
       "tamanho": 2412,
       "sha256": "32883d82d43b3a391b14ca4960354c59f227a01b59599126d634566b6c6c5b2d",
@@ -1592,6 +1652,7 @@
         }
       ],
       "configuracoes": 1,
+      "compreensao": null,
       "arquivo": "addons/tema-floresta.aprendiz",
       "tamanho": 588,
       "sha256": "019c01889193afc7f505c97d94aa5ae1997613a91b2636de98944ba72b47fd24",
@@ -1635,6 +1696,7 @@
         }
       ],
       "configuracoes": 1,
+      "compreensao": null,
       "arquivo": "addons/tema-grafite.aprendiz",
       "tamanho": 604,
       "sha256": "2eda6b70602b39bd856793f1a18035bfcc22d3f8cc2b3cd610f8889a0dcbaf61",
@@ -1678,6 +1740,7 @@
         }
       ],
       "configuracoes": 1,
+      "compreensao": null,
       "arquivo": "addons/tema-ipe.aprendiz",
       "tamanho": 590,
       "sha256": "1154c252d57b4fa1cd3c02b8f4a941bf85084d6cf5200231c20164a1191a44d4",
@@ -1721,6 +1784,7 @@
         }
       ],
       "configuracoes": 1,
+      "compreensao": null,
       "arquivo": "addons/tema-oceano.aprendiz",
       "tamanho": 599,
       "sha256": "64b0fc02d0ed79f7f2b3c01154ed5b72db068081a0fafa1c801f098c77dcca89",
@@ -1764,9 +1828,62 @@
         }
       ],
       "configuracoes": 1,
+      "compreensao": null,
       "arquivo": "addons/tema-por-do-sol.aprendiz",
       "tamanho": 601,
       "sha256": "86154fc5fca5d8302348294373de2dca0cd709d68fd061b53c8b872d5aabcb65",
+      "atualizado_em": "2026-11-18",
+      "amostra": []
+    },
+    {
+      "id": "vetores-portugues",
+      "nome": "Vetores de palavras do português",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "Complemento da Compreensão do português: vetores que aproximam o SENTIDO de cerca de 114 mil palavras. Quando a pergunta usa uma palavra que não está na base (\"automóvel\"), o Aprendiz tenta as de sentido parecido (\"carro\") e recomenda addons com mais precisão. É o addon mais pesado da loja e usa mais processamento. Vetores derivados do pacote pt_core_news_md do spaCy (Explosion).",
+      "licenca": "CC-BY-SA-4.0",
+      "site": "https://spacy.io/models/pt",
+      "categoria": "Compreensão",
+      "etiquetas": [
+        "compreensão",
+        "português",
+        "vetores",
+        "semântica",
+        "sentido"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "vetores"
+      ],
+      "versao_minima_app": "0.7.0",
+      "criado_com": "0.7.0",
+      "dependencias": [
+        {
+          "id": "compreensao-portugues",
+          "versao": "1.0.0",
+          "nome": "Compreensão do português"
+        }
+      ],
+      "recomendado": null,
+      "conhecimentos": 0,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 0,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": {
+        "regras": 0,
+        "catalogo": 0,
+        "lemas": 0,
+        "vetores": 114091
+      },
+      "arquivo": "addons/vetores-portugues.aprendiz",
+      "tamanho": 1711006,
+      "sha256": "ad2e62bb8e5876d9feab5a0e6311f2f5c09b64c54636445d43b3d7cf36f3aa12",
       "atualizado_em": "2026-11-18",
       "amostra": []
     }
