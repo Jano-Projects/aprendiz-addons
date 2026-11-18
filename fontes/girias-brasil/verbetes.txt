@@ -1,0 +1,90 @@
+# Dicionário: cada bloco V:/R: vira um verbete.
+# Responde à palavra sozinha ou a "o que significa <palavra>";
+# numa frase com outras palavras, o verbete é ignorado.
+
+V: mano
+R: **mano** (Brasil): amigo, parceiro; forma de chamar alguém. Para mulheres, "mana". Ex.: «E aí, mano, beleza?»
+
+V: trampo
+R: **trampo** (Brasil): trabalho, emprego. Ex.: «Tô indo pro trampo.»
+
+V: grana
+R: **grana** (Brasil): dinheiro. Ex.: «Tô sem grana este mês.»
+
+V: busão
+R: **busão** (Brasil): ônibus. Ex.: «Vou de busão.»
+
+V: rolê
+R: **rolê** (Brasil): passeio, saída, programa com os amigos. Ex.: «Bora dar um rolê?»
+
+V: de boa
+R: **de boa** (Brasil): tranquilo, sem problema; também estar sem fazer nada. Ex.: «Tô de boa hoje.»
+
+V: treta
+R: **treta** (Brasil): briga, confusão, problema. Ex.: «Deu treta na reunião.»
+
+V: parça
+R: **parça** (Brasil): parceiro, amigo próximo. Ex.: «Esse aí é meu parça.»
+
+V: zoar
+R: **zoar** (Brasil): brincar, tirar sarro de alguém; também bagunçar. Ex.: «Para de me zoar!»
+
+V: bagulho
+R: **bagulho** (Brasil): coisa, objeto qualquer (bem informal). Ex.: «Passa esse bagulho aí.»
+
+V: sextou
+R: **sextou** (Brasil): comemoração da chegada da sexta-feira e do fim de semana.
+
+V: firmeza
+R: **firmeza** (Brasil): tudo certo, combinado; também usado como cumprimento. Ex.: «Firmeza, a gente se vê amanhã.»
+
+V: mó
+R: **mó** (Brasil): redução de "maior"; quer dizer "muito". Ex.: «Foi mó legal.»
+
+V: top
+R: **top** (Brasil): ótimo, excelente. Ex.: «O show foi top.»
+
+V: cringe
+R: **cringe** (Brasil): vergonha alheia; algo constrangedor ou fora de moda.
+
+V: crush
+R: **crush** (Brasil): pessoa por quem alguém tem uma paixão ou interesse amoroso.
+
+V: sinistro
+R: **sinistro** (Brasil): impressionante, muito bom; em outro contexto, assustador. Ex.: «Esse jogo é sinistro!»
+
+V: tmj
+R: **tmj** (Brasil): "tamo junto": estamos juntos, conte comigo; muito usado para agradecer.
+
+V: pdp
+R: **pdp** (Brasil): "pode deixar": combinado, eu cuido disso.
+
+V: sqn
+R: **sqn** (Brasil): "só que não": indica ironia, o contrário do que foi dito.
+
+V: uai
+R: **uai** (Brasil, Minas Gerais): interjeição de surpresa ou de algo óbvio. Ex.: «Uai, já chegou?»
+
+V: bah
+R: **bah** (Brasil, Rio Grande do Sul): interjeição de espanto, admiração ou ênfase. Ex.: «Bah, que frio!»
+
+V: tchê
+R: **tchê** (Brasil, Rio Grande do Sul): forma de chamar alguém, como "cara" ou "amigo".
+
+V: oxente
+R: **oxente** (Brasil, Nordeste): interjeição de surpresa ou estranhamento. Forma curta: "oxe".
+
+V: oxe
+R: **oxe** (Brasil, Nordeste): forma curta de "oxente": surpresa ou estranhamento.
+
+V: arretado
+R: **arretado** (Brasil, Nordeste): muito bom, excelente; conforme o contexto, também zangado, irritado.
+
+V: massa
+R: **massa** (Brasil, Nordeste e outras regiões): legal, muito bom. Ex.: «Que massa!»
+
+V: mermão
+R: **mermão** (Brasil, Rio de Janeiro): "meu irmão"; forma de chamar alguém.
+
+V: véi
+R: **véi** (Brasil, Centro-Oeste): "velho", "cara"; forma de chamar alguém, muito usada em Brasília. Ex.: «Véi, que calor!»

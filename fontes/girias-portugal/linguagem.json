@@ -1,0 +1,32 @@
+{
+  "stopwords": [
+    "significa",
+    "significam",
+    "significado",
+    "significados",
+    "significar",
+    "quer",
+    "dizer",
+    "giria",
+    "girias",
+    "expressao",
+    "expressoes"
+  ],
+  "intencoes": {
+    "saudacao": [
+      "entao pa tudo bem",
+      "ola tudo fixe",
+      "boas",
+      "entao tudo bem contigo"
+    ],
+    "agradecimento": [
+      "obrigadinho",
+      "muito obrigadinho"
+    ],
+    "despedida": [
+      "adeusinho",
+      "ate ja",
+      "xau"
+    ]
+  }
+}

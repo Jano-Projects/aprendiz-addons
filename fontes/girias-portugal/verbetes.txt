@@ -1,0 +1,75 @@
+# Dicionário: cada bloco V:/R: vira um verbete.
+# Responde à palavra sozinha ou a "o que significa <palavra>";
+# numa frase com outras palavras, o verbete é ignorado.
+
+V: bué
+R: **bué** (Portugal): muito, bastante. Também muito usado em Angola. Ex.: «Gostei bué do filme.»
+
+V: fixe
+R: **fixe** (Portugal): legal, bacana. Ex.: «Que fixe!»
+
+V: giro
+R: **giro** (Portugal): bonito, engraçado, interessante. Ex.: «Que vestido giro.»
+
+V: porreiro
+R: **porreiro** (Portugal): ótimo, bacana; pessoa gente boa.
+
+V: gajo
+R: **gajo** (Portugal): cara, sujeito (informal). Feminino: "gaja".
+
+V: miúdo
+R: **miúdo** (Portugal): criança, garoto. "Os miúdos" são as crianças.
+
+V: pá
+R: **pá** (Portugal): interjeição muito usada na fala, como "cara" ou "pô". Ex.: «Então, pá, tudo bem?»
+
+V: bacano
+R: **bacano** (Portugal): pessoa fixe, amigo; também "legal".
+
+V: ya
+R: **ya** (Portugal): sim (informal).
+
+V: tasca
+R: **tasca** (Portugal): restaurante ou bar simples e popular.
+
+V: bica
+R: **bica** (Portugal, Lisboa): café expresso.
+
+V: fino
+R: **fino** (Portugal, Norte): copo de cerveja de pressão, o chope.
+
+V: imperial
+R: **imperial** (Portugal, Lisboa e Sul): copo de cerveja de pressão, o chope.
+
+V: pequeno-almoço
+R: **pequeno-almoço** (Portugal): café da manhã.
+
+V: autocarro
+R: **autocarro** (Portugal): ônibus.
+
+V: comboio
+R: **comboio** (Portugal): trem.
+
+V: telemóvel
+R: **telemóvel** (Portugal): telefone celular.
+
+V: casa de banho
+R: **casa de banho** (Portugal): banheiro.
+
+V: sumo
+R: **sumo** (Portugal): suco.
+
+V: rebuçado
+R: **rebuçado** (Portugal): bala (doce).
+
+V: chumbar
+R: **chumbar** (Portugal): reprovar, numa prova ou no ano escolar. Ex.: «Chumbei a Matemática.»
+
+V: desenrascar
+R: **desenrascar** (Portugal): dar um jeito, improvisar uma solução. O "desenrascanço" é a arte de improvisar.
+
+V: estar-se nas tintas
+R: **estar-se nas tintas** (Portugal): não se importar, não ligar. Ex.: «Ele está-se nas tintas para isso.»
+
+V: chavalo
+R: **chavalo** (Portugal, Norte): rapaz, garoto.

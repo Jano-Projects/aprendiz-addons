@@ -1,0 +1,21 @@
+{
+  "id": "girias-angola",
+  "nome": "Gírias de Angola",
+  "versao": "1.0.0",
+  "descricao": "Palavras do português de Angola, muitas vindas do quimbundo: kota, kamba, kumbu, maka, bazar, mambo…",
+  "categoria": "Idiomas e gírias",
+  "etiquetas": [
+    "angola",
+    "gírias",
+    "dicionário",
+    "lusofonia",
+    "quimbundo"
+  ],
+  "autor": "Jano Projects",
+  "licenca": "CC-BY-4.0",
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.4.1"
+  }
+}

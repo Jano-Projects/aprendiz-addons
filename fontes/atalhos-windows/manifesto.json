@@ -1,0 +1,20 @@
+{
+  "id": "atalhos-windows",
+  "nome": "Atalhos de teclado do Windows",
+  "versao": "1.1.0",
+  "autor": "Jano Projects",
+  "descricao": "Atalhos do Windows 10 e 11 para janelas, capturas de tela, área de transferência e produtividade.",
+  "licenca": "CC0-1.0",
+  "categoria": "Tecnologia",
+  "etiquetas": [
+    "windows",
+    "atalhos",
+    "teclado",
+    "produtividade"
+  ],
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.4.0"
+  }
+}

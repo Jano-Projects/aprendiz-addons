@@ -1,0 +1,20 @@
+{
+  "id": "girias-brasil",
+  "nome": "Gírias do Brasil",
+  "versao": "1.0.0",
+  "descricao": "Dicionário de gírias e expressões brasileiras, de norte a sul. Pergunte \"o que significa rolê?\" ou digite só a palavra.",
+  "categoria": "Idiomas e gírias",
+  "etiquetas": [
+    "brasil",
+    "gírias",
+    "dicionário",
+    "lusofonia"
+  ],
+  "autor": "Jano Projects",
+  "licenca": "CC-BY-4.0",
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.4.1"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "tema-floresta",
+  "nome": "Tema Floresta",
+  "versao": "1.0.0",
+  "descricao": "Verde de mata fechada. Muda a cor de destaque da interface. Funciona nos temas claro e escuro.",
+  "categoria": "Personalização",
+  "etiquetas": [
+    "tema",
+    "cor",
+    "personalização"
+  ],
+  "app": {
+    "versao_minima": "0.4.0"
+  },
+  "autor": "Jano Projects",
+  "licenca": "CC-BY-4.0",
+  "origem": "oficial",
+  "editor": "Jano Projects"
+}

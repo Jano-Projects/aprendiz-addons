@@ -1,0 +1,39 @@
+# Dicionário: cada bloco V:/R: vira um verbete.
+# Responde à palavra sozinha ou a "o que significa <palavra>";
+# numa frase com outras palavras, o verbete é ignorado.
+
+V: leve-leve
+R: **leve-leve** (São Tomé e Príncipe): fazer as coisas com calma e prudência, cada coisa a seu tempo; lema e modo de vida das ilhas, usado até como cumprimento.
+
+V: forro
+R: **forro** (São Tomé e Príncipe): a principal língua crioula da ilha de São Tomé, também chamada santome.
+
+V: angolar
+R: **angolar** (São Tomé e Príncipe): língua crioula dos angolares, comunidade do sul da ilha de São Tomé.
+
+V: lung'ie
+R: **lung'ie** (São Tomé e Príncipe): língua crioula da ilha do Príncipe.
+
+V: calulu
+R: **calulu** (São Tomé e Príncipe): prato típico: peixe ou carne cozidos com legumes e ervas, servido com angu ou arroz.
+
+V: fruta-pão
+R: **fruta-pão** (São Tomé e Príncipe): fruta grande e rica em amido, comida cozida ou assada.
+
+V: roça
+R: **roça** (São Tomé e Príncipe): antiga grande propriedade agrícola, de cacau e café, do tempo colonial.
+
+V: tchiloli
+R: **tchiloli** (São Tomé e Príncipe): teatro popular tradicional, representado ao ar livre, a partir de uma antiga tragédia europeia.
+
+V: danço-congo
+R: **danço-congo** (São Tomé e Príncipe): manifestação de dança dramática, com máscaras, música e personagens.
+
+V: socopé
+R: **socopé** (São Tomé e Príncipe): gênero de música e dança tradicional.
+
+V: puíta
+R: **puíta** (São Tomé e Príncipe): dança e ritmo tradicional, tocado com tambores.
+
+V: ússua
+R: **ússua** (São Tomé e Príncipe): dança tradicional de pares, de raízes europeias adaptadas às ilhas.

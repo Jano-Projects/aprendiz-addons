@@ -1,0 +1,25 @@
+{
+  "stopwords": [
+    "significa",
+    "significam",
+    "significado",
+    "significados",
+    "significar",
+    "quer",
+    "dizer",
+    "giria",
+    "girias",
+    "expressao",
+    "expressoes"
+  ],
+  "intencoes": {
+    "saudacao": [
+      "bondia",
+      "botarde",
+      "di'ak ka lae"
+    ],
+    "agradecimento": [
+      "obrigadu barak"
+    ]
+  }
+}

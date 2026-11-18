@@ -1,0 +1,45 @@
+# Dicionário: cada bloco V:/R: vira um verbete.
+# Responde à palavra sozinha ou a "o que significa <palavra>";
+# numa frase com outras palavras, o verbete é ignorado.
+
+V: kriol
+R: **kriol** (Guiné-Bissau): o crioulo guineense, língua de comunicação entre as várias etnias do país.
+
+V: tabanka
+R: **tabanka** (Guiné-Bissau): aldeia, povoado.
+
+V: djumbai
+R: **djumbai** (Guiné-Bissau): convívio, encontro para conversar e festejar em grupo.
+
+V: mandjuandadi
+R: **mandjuandadi** (Guiné-Bissau): associação de pessoas da mesma geração, sobretudo mulheres, que se reúnem para cantar, festejar e se apoiar.
+
+V: gumbé
+R: **gumbé** (Guiné-Bissau): gênero musical tradicional guineense, nascido em Bissau.
+
+V: mantenha
+R: **mantenha** (Guiné-Bissau): saudação, cumprimentos.
+
+V: kuma ku bu sta
+R: **kuma ku bu sta** (Guiné-Bissau): "Como estás?" em kriol.
+
+V: obrigadu
+R: **obrigadu** (Guiné-Bissau): obrigado.
+
+V: mancarra
+R: **mancarra** (Guiné-Bissau): amendoim.
+
+V: bianda
+R: **bianda** (Guiné-Bissau): comida; em especial, arroz cozido.
+
+V: djintis
+R: **djintis** (Guiné-Bissau): gente, pessoas.
+
+V: mindjer
+R: **mindjer** (Guiné-Bissau): mulher.
+
+V: omi
+R: **omi** (Guiné-Bissau): homem.
+
+V: garandi
+R: **garandi** (Guiné-Bissau): grande; pessoa mais velha, de respeito.

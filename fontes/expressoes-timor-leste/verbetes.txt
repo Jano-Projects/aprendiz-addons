@@ -1,0 +1,39 @@
+# Dicionário: cada bloco V:/R: vira um verbete.
+# Responde à palavra sozinha ou a "o que significa <palavra>";
+# numa frase com outras palavras, o verbete é ignorado.
+
+V: tétum
+R: **tétum** (Timor-Leste): língua nacional e oficial de Timor-Leste, ao lado do português; tem muitas palavras de origem portuguesa.
+
+V: obrigadu barak
+R: **obrigadu barak** (Timor-Leste): muito obrigado.
+
+V: barak
+R: **barak** (Timor-Leste): muito.
+
+V: maun
+R: **maun** (Timor-Leste): irmão mais velho; forma respeitosa de chamar um homem.
+
+V: mana
+R: **mana** (Timor-Leste): irmã mais velha; forma respeitosa de chamar uma mulher.
+
+V: malae
+R: **malae** (Timor-Leste): estrangeiro.
+
+V: lulik
+R: **lulik** (Timor-Leste): sagrado. A *uma lulik* é a casa sagrada, onde se guardam os objetos sagrados da aldeia ou da família.
+
+V: tais
+R: **tais** (Timor-Leste): tecido tradicional tecido à mão, usado em roupas e cerimônias.
+
+V: di'ak
+R: **di'ak** (Timor-Leste): bem, bom. "Di'ak ka lae?" = "Tudo bem?"
+
+V: bondia
+R: **bondia** (Timor-Leste): bom dia.
+
+V: botarde
+R: **botarde** (Timor-Leste): boa tarde.
+
+V: lafaek
+R: **lafaek** (Timor-Leste): crocodilo; símbolo de Timor, ligado à lenda de origem da ilha.

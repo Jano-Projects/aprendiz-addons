@@ -1,0 +1,20 @@
+{
+  "id": "atalhos-terminal-linux",
+  "nome": "Comandos do terminal Linux",
+  "versao": "1.1.0",
+  "autor": "Jano Projects",
+  "descricao": "Os comandos de terminal mais usados no dia a dia: arquivos, pastas, busca, disco, processos e atualização do sistema.",
+  "licenca": "CC0-1.0",
+  "categoria": "Tecnologia",
+  "etiquetas": [
+    "linux",
+    "terminal",
+    "comandos",
+    "bash"
+  ],
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.4.0"
+  }
+}

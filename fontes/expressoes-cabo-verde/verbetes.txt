@@ -1,0 +1,48 @@
+# Dicionário: cada bloco V:/R: vira um verbete.
+# Responde à palavra sozinha ou a "o que significa <palavra>";
+# numa frase com outras palavras, o verbete é ignorado.
+
+V: morabeza
+R: **morabeza** (Cabo Verde): hospitalidade, gentileza e acolhimento típicos do povo cabo-verdiano.
+
+V: sodade
+R: **sodade** (Cabo Verde): saudade; sentimento de nostalgia e melancolia, tema central da morna.
+
+V: morna
+R: **morna** (Cabo Verde): gênero musical tradicional, lento e melancólico, muitas vezes comparado ao fado.
+
+V: funaná
+R: **funaná** (Cabo Verde): gênero musical e dança animada, tocado com gaita (acordeão) e ferrinho.
+
+V: batuku
+R: **batuku** (Cabo Verde): gênero musical e dança tradicional da ilha de Santiago, com canto e percussão.
+
+V: cretcheu
+R: **cretcheu** (Cabo Verde): amor, pessoa amada, querido ou querida.
+
+V: mantenha
+R: **mantenha** (Cabo Verde): saudação, cumprimentos. "Manda mantenhas" = manda lembranças.
+
+V: sabi
+R: **sabi** (Cabo Verde): bom, gostoso, agradável. "Sta sabi" = está bom.
+
+V: tud dret
+R: **tud dret** (Cabo Verde): tudo bem, tudo certo.
+
+V: modi ki bu sta
+R: **modi ki bu sta** (Cabo Verde): "Como estás?" em crioulo.
+
+V: nha
+R: **nha** (Cabo Verde): meu, minha. Ex.: «Nha terra (minha terra).»
+
+V: mininu
+R: **mininu** (Cabo Verde): criança, menino.
+
+V: fidju
+R: **fidju** (Cabo Verde): filho.
+
+V: cachupa
+R: **cachupa** (Cabo Verde): prato nacional: milho cozido com feijão, legumes e carne ou peixe.
+
+V: grogue
+R: **grogue** (Cabo Verde): aguardente de cana-de-açúcar típica das ilhas.

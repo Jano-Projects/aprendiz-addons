@@ -1,0 +1,58 @@
+{
+  "id": "boas-vindas-lusofonia",
+  "nome": "Boas-vindas da lusofonia",
+  "versao": "1.0.0",
+  "descricao": "Muda a mensagem de boas-vindas para convidar a perguntar gírias de todos os países de língua portuguesa. Complementa os dicionários da lusofonia.",
+  "categoria": "Personalização",
+  "etiquetas": [
+    "boas-vindas",
+    "lusofonia",
+    "personalização"
+  ],
+  "dependencias": [
+    {
+      "id": "girias-brasil",
+      "versao": "1.0.0",
+      "nome": "Gírias do Brasil"
+    },
+    {
+      "id": "girias-portugal",
+      "versao": "1.0.0",
+      "nome": "Gírias e expressões de Portugal"
+    },
+    {
+      "id": "girias-angola",
+      "versao": "1.0.0",
+      "nome": "Gírias de Angola"
+    },
+    {
+      "id": "girias-mocambique",
+      "versao": "1.0.0",
+      "nome": "Gírias e palavras de Moçambique"
+    },
+    {
+      "id": "expressoes-cabo-verde",
+      "versao": "1.0.0",
+      "nome": "Expressões de Cabo Verde"
+    },
+    {
+      "id": "expressoes-guine-bissau",
+      "versao": "1.0.0",
+      "nome": "Expressões da Guiné-Bissau"
+    },
+    {
+      "id": "expressoes-sao-tome-e-principe",
+      "versao": "1.0.0",
+      "nome": "Expressões de São Tomé e Príncipe"
+    },
+    {
+      "id": "expressoes-timor-leste",
+      "versao": "1.0.0",
+      "nome": "Expressões de Timor-Leste"
+    }
+  ],
+  "autor": "Jano Projects",
+  "licenca": "CC-BY-4.0",
+  "origem": "oficial",
+  "editor": "Jano Projects"
+}

@@ -1,0 +1,40 @@
+{
+  "stopwords": [
+    "significa",
+    "significam",
+    "significado",
+    "significados",
+    "significar",
+    "quer",
+    "dizer",
+    "giria",
+    "girias",
+    "expressao",
+    "expressoes"
+  ],
+  "intencoes": {
+    "saudacao": [
+      "e ai mano",
+      "fala mano",
+      "salve mano",
+      "e ai beleza",
+      "fala ai"
+    ],
+    "agradecimento": [
+      "valeu mano",
+      "tamo junto",
+      "valeu parca",
+      "obrigadao"
+    ],
+    "despedida": [
+      "falou mano",
+      "fui nessa",
+      "ate mais mano"
+    ]
+  },
+  "abreviacoes": {
+    "tmj": "tamo junto",
+    "pdp": "pode deixar",
+    "sqn": "so que nao"
+  }
+}

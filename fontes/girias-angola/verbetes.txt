@@ -1,0 +1,69 @@
+# Dicionário: cada bloco V:/R: vira um verbete.
+# Responde à palavra sozinha ou a "o que significa <palavra>";
+# numa frase com outras palavras, o verbete é ignorado.
+
+V: bué
+R: **bué** (Angola): muito, bastante. Também muito usado em Portugal. Ex.: «Tem bué de gente na festa.»
+
+V: kota
+R: **kota** (Angola): pessoa mais velha; tratamento de respeito.
+
+V: kamba
+R: **kamba** (Angola): amigo, companheiro.
+
+V: kumbu
+R: **kumbu** (Angola): dinheiro.
+
+V: maka
+R: **maka** (Angola): problema, confusão. "Não tem maka" = não tem problema.
+
+V: bazar
+R: **bazar** (Angola): ir embora, sair. Também se ouve em Portugal. Ex.: «Vou bazar.»
+
+V: garina
+R: **garina** (Angola): moça, garota.
+
+V: mambo
+R: **mambo** (Angola): coisa, assunto, situação. Ex.: «Que mambo é esse?»
+
+V: cubico
+R: **cubico** (Angola): casa, lar.
+
+V: candengue
+R: **candengue** (Angola): criança, miúdo.
+
+V: muadiê
+R: **muadiê** (Angola): homem, senhor; também "cara", "o tipo".
+
+V: bumbar
+R: **bumbar** (Angola): trabalhar.
+
+V: anduta
+R: **anduta** (Angola): fácil. "Está anduta" = está fácil.
+
+V: dioba
+R: **dioba** (Angola): fome.
+
+V: gasosa
+R: **gasosa** (Angola): refrigerante; na gíria, também suborno, "propina".
+
+V: jinguba
+R: **jinguba** (Angola): amendoim.
+
+V: chuinga
+R: **chuinga** (Angola): chiclete.
+
+V: machimbombo
+R: **machimbombo** (Angola): ônibus. Também usado em Moçambique.
+
+V: candongueiro
+R: **candongueiro** (Angola): táxi coletivo; van de passageiros.
+
+V: musseque
+R: **musseque** (Angola): bairro popular da periferia, de casas simples, sobretudo em Luanda.
+
+V: cacimbo
+R: **cacimbo** (Angola): estação seca e mais fresca do ano, com neblina.
+
+V: xé
+R: **xé** (Angola): interjeição para chamar a atenção, como "ei!".

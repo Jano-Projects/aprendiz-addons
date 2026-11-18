@@ -1,0 +1,64 @@
+# Comandos do terminal Linux (bash). Formato: P: pergunta / R: resposta.
+
+P: como listar os arquivos de uma pasta no terminal linux
+R: `ls` lista os arquivos. `ls -la` mostra também os ocultos, com detalhes (permissões, tamanho, data).
+
+P: como entrar em uma pasta no terminal linux
+R: `cd nome-da-pasta`. Para voltar uma pasta: `cd ..`. Para ir à pasta pessoal: `cd ~`.
+
+P: como saber em qual pasta eu estou no terminal linux
+R: `pwd` mostra o caminho da pasta atual.
+
+P: como criar uma pasta no terminal linux
+R: `mkdir nome`. Para criar várias pastas encadeadas de uma vez: `mkdir -p a/b/c`.
+
+P: como copiar um arquivo no terminal linux
+R: `cp origem destino`. Para copiar uma pasta inteira: `cp -r pasta destino`.
+
+P: como mover ou renomear um arquivo no terminal linux
+R: `mv origem destino`. O mesmo comando serve para mover e para renomear.
+
+P: como apagar um arquivo no terminal linux
+R: `rm arquivo`. Para apagar uma pasta e tudo dentro dela: `rm -r pasta`. Cuidado: não vai para a lixeira.
+
+P: como ver o conteúdo de um arquivo de texto no terminal linux
+R: `cat arquivo` mostra tudo de uma vez. Para arquivos longos, `less arquivo` permite rolar; aperte `q` para sair.
+
+P: como procurar um texto dentro de arquivos no terminal linux
+R: `grep -r "texto" pasta` procura o texto em todos os arquivos da pasta. Use `-i` para ignorar maiúsculas.
+
+P: como procurar um arquivo pelo nome no terminal linux
+R: `find . -name "*.txt"` procura, a partir da pasta atual, arquivos terminados em .txt.
+
+P: como ver o espaço livre no disco no terminal linux
+R: `df -h` mostra o espaço de cada disco. Para o tamanho de uma pasta: `du -sh pasta`.
+
+P: como ver o uso de memória no terminal linux
+R: `free -h` mostra a memória total, usada e livre.
+
+P: como ver os programas em execução no terminal linux
+R: `top` mostra os processos em tempo real (aperte `q` para sair). Para encerrar um processo: `kill número-do-processo`.
+
+P: como dar permissão de execução a um arquivo no terminal linux
+R: `chmod +x arquivo`. Depois ele pode ser executado com `./arquivo`.
+
+P: como atualizar o sistema no Debian ou Ubuntu
+R: `sudo apt update && sudo apt upgrade`.
+
+P: como atualizar o sistema no Fedora
+R: `sudo dnf upgrade`.
+
+P: como descompactar um arquivo zip no terminal linux
+R: `unzip arquivo.zip`. Para arquivos .tar.gz: `tar -xzf arquivo.tar.gz`.
+
+P: como ver o endereço IP do computador no terminal linux
+R: `ip address` (ou só `ip a`) mostra os endereços de cada placa de rede.
+
+P: como cancelar um comando que está rodando no terminal linux
+R: Aperte Ctrl+C.
+
+P: como limpar a tela do terminal linux
+R: `clear`, ou o atalho Ctrl+L.
+
+P: como buscar um comando que eu já digitei no terminal linux
+R: Aperte Ctrl+R e comece a digitar parte do comando. `history` mostra a lista completa.

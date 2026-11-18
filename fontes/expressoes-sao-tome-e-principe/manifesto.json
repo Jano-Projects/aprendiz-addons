@@ -1,0 +1,20 @@
+{
+  "id": "expressoes-sao-tome-e-principe",
+  "nome": "Expressões de São Tomé e Príncipe",
+  "versao": "1.0.0",
+  "descricao": "O jeito leve-leve das ilhas: expressões, línguas, pratos e manifestações culturais santomenses.",
+  "categoria": "Idiomas e gírias",
+  "etiquetas": [
+    "são tomé e príncipe",
+    "crioulo",
+    "dicionário",
+    "lusofonia"
+  ],
+  "autor": "Jano Projects",
+  "licenca": "CC-BY-4.0",
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.4.1"
+  }
+}

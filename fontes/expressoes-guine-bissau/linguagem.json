@@ -1,0 +1,23 @@
+{
+  "stopwords": [
+    "significa",
+    "significam",
+    "significado",
+    "significados",
+    "significar",
+    "quer",
+    "dizer",
+    "giria",
+    "girias",
+    "expressao",
+    "expressoes"
+  ],
+  "intencoes": {
+    "saudacao": [
+      "kuma ku bu sta"
+    ],
+    "agradecimento": [
+      "obrigadu"
+    ]
+  }
+}

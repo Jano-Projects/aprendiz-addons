@@ -1,0 +1,51 @@
+# Dicionário: cada bloco V:/R: vira um verbete.
+# Responde à palavra sozinha ou a "o que significa <palavra>";
+# numa frase com outras palavras, o verbete é ignorado.
+
+V: maningue
+R: **maningue** (Moçambique): muito, bastante. "Maningue nice" = muito bom. Ex.: «Está maningue quente.»
+
+V: chapa
+R: **chapa** (Moçambique): transporte coletivo de passageiros, geralmente uma van ou minibus.
+
+V: machimbombo
+R: **machimbombo** (Moçambique): ônibus. Também usado em Angola.
+
+V: txopela
+R: **txopela** (Moçambique): triciclo motorizado usado como táxi.
+
+V: mola
+R: **mola** (Moçambique): dinheiro (gíria).
+
+V: mufana
+R: **mufana** (Moçambique): rapaz, garoto.
+
+V: mamana
+R: **mamana** (Moçambique): senhora, mulher adulta; tratamento respeitoso.
+
+V: madala
+R: **madala** (Moçambique): homem mais velho; tratamento respeitoso.
+
+V: dumba-nengue
+R: **dumba-nengue** (Moçambique): mercado informal. Literalmente, "confie nas pernas".
+
+V: khanimambo
+R: **khanimambo** (Moçambique): "obrigado" em changana, muito ouvido no sul do país.
+
+V: capulana
+R: **capulana** (Moçambique): tecido estampado usado como saia, pano de cabeça ou para carregar bebês.
+
+V: xima
+R: **xima** (Moçambique): massa espessa de farinha de milho, prato básico do dia a dia.
+
+V: matapa
+R: **matapa** (Moçambique): prato de folhas de mandioca piladas, cozidas com amendoim e coco.
+
+V: refresco
+R: **refresco** (Moçambique): refrigerante.
+
+V: marrabenta
+R: **marrabenta** (Moçambique): gênero musical e dança do sul de Moçambique.
+
+V: timbila
+R: **timbila** (Moçambique): xilofone tradicional do povo chope; também a música e a dança tocadas com ele.

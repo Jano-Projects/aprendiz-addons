@@ -1,0 +1,25 @@
+{
+  "stopwords": [
+    "significa",
+    "significam",
+    "significado",
+    "significados",
+    "significar",
+    "quer",
+    "dizer",
+    "giria",
+    "girias",
+    "expressao",
+    "expressoes"
+  ],
+  "intencoes": {
+    "saudacao": [
+      "xe kamba",
+      "como e kamba",
+      "e ai kota"
+    ],
+    "agradecimento": [
+      "obrigado kamba"
+    ]
+  }
+}

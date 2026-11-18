@@ -1,0 +1,46 @@
+# Atalhos de teclado do Windows 10 e 11. "Win" é a tecla com o logotipo do Windows.
+
+P: como abrir o explorador de arquivos no windows
+R: Win+E.
+
+P: como mostrar a área de trabalho no windows
+R: Win+D. Aperte de novo para voltar às janelas.
+
+P: como bloquear o computador no windows
+R: Win+L.
+
+P: como tirar um print de uma parte da tela no windows
+R: Win+Shift+S abre a Ferramenta de Captura para escolher a área. A imagem vai para a área de transferência.
+
+P: como ver o histórico da área de transferência no windows
+R: Win+V. Na primeira vez, o Windows pede para ativar o recurso.
+
+P: como alternar entre janelas no windows
+R: Alt+Tab. Win+Tab abre a Visão de Tarefas, com todas as janelas e áreas de trabalho.
+
+P: como abrir o gerenciador de tarefas no windows
+R: Ctrl+Shift+Esc abre direto o Gerenciador de Tarefas.
+
+P: como abrir as configurações do windows
+R: Win+I.
+
+P: como abrir a janela executar no windows
+R: Win+R.
+
+P: como encaixar uma janela na metade da tela no windows
+R: Win+seta para a esquerda ou para a direita. Win+seta para cima maximiza.
+
+P: como criar uma nova área de trabalho virtual no windows
+R: Win+Ctrl+D. Para alternar entre elas: Win+Ctrl+seta para a esquerda ou para a direita.
+
+P: como inserir emojis no windows
+R: Win+. (tecla Windows e ponto) abre o painel de emojis.
+
+P: como renomear um arquivo rapidamente no windows
+R: Selecione o arquivo e aperte F2.
+
+P: como desfazer a última ação no windows
+R: Ctrl+Z. Para refazer: Ctrl+Y.
+
+P: como reabrir uma aba fechada do navegador no windows
+R: Ctrl+Shift+T (funciona no Chrome, no Edge e no Firefox).

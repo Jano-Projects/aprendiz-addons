@@ -1,0 +1,13 @@
+{
+  "sinonimos": {
+    "diretorio": "pasta",
+    "diretorios": "pastas",
+    "deletar": "apagar",
+    "excluir": "apagar",
+    "remover": "apagar",
+    "console": "terminal",
+    "pc": "computador",
+    "micro": "computador",
+    "notebook": "computador"
+  }
+}

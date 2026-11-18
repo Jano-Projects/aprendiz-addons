@@ -1,0 +1,20 @@
+{
+  "id": "girias-portugal",
+  "nome": "Gírias e expressões de Portugal",
+  "versao": "1.0.0",
+  "descricao": "Gírias e palavras do dia a dia de Portugal que confundem quem fala o português do Brasil: bué, fixe, autocarro, pequeno-almoço…",
+  "categoria": "Idiomas e gírias",
+  "etiquetas": [
+    "portugal",
+    "gírias",
+    "dicionário",
+    "lusofonia"
+  ],
+  "autor": "Jano Projects",
+  "licenca": "CC-BY-4.0",
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.4.1"
+  }
+}

@@ -1,0 +1,60 @@
+# =============================================================================
+# Publica a loja no GitHub Pages a cada push na branch main.
+#
+#   1. confere todos os addons e gera o catalogo.json;
+#   2. monta o site só com o que deve ser público (sem fontes/ e ferramentas/);
+#   3. publica no GitHub Pages.
+#
+# Se algum addon for inválido, o passo 1 falha e o site NÃO é atualizado.
+#
+# Configuração única no GitHub: Settings → Pages → Source: "GitHub Actions".
+# =============================================================================
+name: Publicar loja
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  montar:
+    name: Conferir addons e montar o site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # histórico completo: datas de atualização dos addons
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Conferir addons e gerar o catálogo
+        run: python ferramentas/gerar_catalogo.py
+      - name: Montar a pasta do site
+        run: |
+          mkdir -p _site
+          cp index.html estilo.css app.js icone.svg catalogo.json _site/
+          cp -r addons _site/
+          touch _site/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  publicar:
+    name: Publicar no GitHub Pages
+    needs: montar
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.publicacao.outputs.page_url }}
+    steps:
+      - id: publicacao
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--
+  Loja de addons do Aprendiz.
+  Site estático (HTML, CSS e JS puros), publicado no GitHub Pages.
+  Lê o catalogo.json, gerado por ferramentas/gerar_catalogo.py.
+  Nada é carregado de terceiros: sem fontes, scripts ou rastreadores externos.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Addons do Aprendiz</title>
+  <meta name="description" content="Pacotes de conhecimento prontos para o Aprendiz, o assistente pessoal local e offline.">
+  <link rel="icon" href="icone.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <!-- ========================= ÍCONES (SVG) ========================= -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <defs>
+      <symbol id="i-addon" viewBox="0 0 24 24"><path d="M19.4 13a2 2 0 1 0 0-4H18V6a1 1 0 0 0-1-1h-3V3.6a2 2 0 1 0-4 0V5H7a1 1 0 0 0-1 1v3h1.4a2 2 0 1 1 0 4H6v4a1 1 0 0 0 1 1h3v-1.4a2 2 0 1 1 4 0V18h3a1 1 0 0 0 1-1v-4z"/></symbol>
+      <symbol id="i-busca" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+      <symbol id="i-baixar" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+      <symbol id="i-olho" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+      <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+      <symbol id="i-copiar" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+      <symbol id="i-sol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+      <symbol id="i-lua" viewBox="0 0 24 24"><path d="M20.5 13.5A8.5 8.5 0 1 1 10.5 3.5a6.5 6.5 0 0 0 10 10z"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-codigo" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="topo">
+    <div class="conteudo topo-linha">
+      <a class="marca" href="./">
+        <img src="icone.svg" alt="" width="32" height="32">
+        <span>Aprendiz <b>Addons</b></span>
+      </a>
+      <nav class="menu">
+        <a href="#instalar">Como instalar</a>
+        <a href="#criar">Criar um addon</a>
+        <button class="botao-icone" id="btn-tema" aria-label="Alternar tema" title="Alternar tema"></button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="conteudo">
+        <h1>Ensine o seu Aprendiz em segundos</h1>
+        <p>Addons oficiais da Jano Projects: pacotes prontos de conhecimento, linguagem e personalização. Baixe, importe no app e ative quando quiser.
+          Tudo continua offline, no seu computador.</p>
+        <div class="busca">
+          <svg class="ic"><use href="#i-busca"/></svg>
+          <input id="busca" type="search" placeholder="Buscar addons: linux, cozinha, atalhos…" aria-label="Buscar addons" autocomplete="off">
+          <button class="limpar" id="limpar-busca" aria-label="Limpar busca" hidden><svg class="ic"><use href="#i-x"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="conteudo">
+      <div class="barra">
+        <div class="categorias" id="categorias" role="group" aria-label="Categorias"></div>
+        <label class="ordem">Ordenar
+          <select id="ordem">
+            <option value="nome">Nome</option>
+            <option value="recentes">Mais recentes</option>
+            <option value="tamanho">Mais conteúdo</option>
+          </select>
+        </label>
+      </div>
+      <p class="resumo" id="resumo" aria-live="polite">Carregando…</p>
+      <div class="grade" id="grade"></div>
+    </section>
+
+    <section class="conteudo secao" id="instalar">
+      <h2>Como instalar um addon</h2>
+      <ol class="passos">
+        <li><b>Baixe</b> o arquivo <code>.aprendiz</code> do addon que quiser.</li>
+        <li>No Aprendiz, abra <b>Addons</b> no menu lateral e clique em <b>Importar addon</b>.</li>
+        <li>Escolha o arquivo baixado, confira o resumo (origem, o que ele traz, dependências) e clique em <b>Instalar</b>.</li>
+        <li>Se quiser, marque <b>Usar como padrão</b> para ativar a busca e a resposta recomendadas para o addon. Addons com a mesma recomendação formam um <b>grupo</b>, que pode ser ativado de uma vez.</li>
+      </ol>
+      <div class="avisos">
+        <div><svg class="ic"><use href="#i-check"/></svg> Desativar um addon só o esconde das respostas; nada é apagado.</div>
+        <div><svg class="ic"><use href="#i-check"/></svg> O que você ensina ao Aprendiz sempre tem prioridade sobre os addons.</div>
+        <div><svg class="ic"><use href="#i-escudo"/></svg> Addons contêm só dados (texto), nunca programas. O app valida cada arquivo ao importar.</div>
+        <div><svg class="ic"><use href="#i-check"/></svg> Os addons desta loja usam o formato 2: precisam do Aprendiz 0.4 ou mais novo (dicionários: 0.4.1; recomendação e grupos aparecem a partir da 0.5).</div>
+      </div>
+    </section>
+
+    <section class="conteudo secao" id="criar">
+      <h2>Criar um addon</h2>
+      <p>Esta loja distribui só os <b>addons oficiais</b> da Jano Projects. Mas qualquer pessoa pode
+        criar addons para uso próprio ou para compartilhar diretamente, como arquivo, a partir de um
+        simples texto com perguntas e respostas. O próprio app também exporta o que você ensinou:</p>
+      <pre><code>P: como abrir o explorador de arquivos no windows
+R: Win+E.
+
+P: quantos ml tem uma xícara de chá
+R: Uma xícara de chá tem cerca de 240 ml.</code></pre>
+      <p>O guia completo, com o formato, a ferramenta que gera o <code>.aprendiz</code> e as dicas de
+        escrita, está na documentação do projeto:</p>
+      <a class="botao" href="https://github.com/Jano-Projects/aprendiz-dev/blob/main/docs/addons.md" target="_blank" rel="noopener">
+        <svg class="ic"><use href="#i-codigo"/></svg> Guia de criação de addons</a>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="conteudo">
+      <span>Aprendiz: assistente pessoal local, offline e de código aberto.</span>
+      <span id="gerado-em"></span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

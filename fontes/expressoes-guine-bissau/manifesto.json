@@ -1,0 +1,21 @@
+{
+  "id": "expressoes-guine-bissau",
+  "nome": "Expressões da Guiné-Bissau",
+  "versao": "1.0.0",
+  "descricao": "Palavras do crioulo guineense (kriol) e da cultura da Guiné-Bissau: tabanka, djumbai, mantenha, mancarra, gumbé…",
+  "categoria": "Idiomas e gírias",
+  "etiquetas": [
+    "guiné-bissau",
+    "kriol",
+    "crioulo",
+    "dicionário",
+    "lusofonia"
+  ],
+  "autor": "Jano Projects",
+  "licenca": "CC-BY-4.0",
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.4.1"
+  }
+}
