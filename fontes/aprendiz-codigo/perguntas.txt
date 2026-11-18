@@ -1,0 +1,736 @@
+# Aprendiz por dentro 3 · O código explicado
+# Módulo por módulo, com trechos do código real (versão 0.8) e os comandos de Python e
+# JavaScript que cada um usa. Abra o arquivo citado ao lado e acompanhe.
+
+P: como o aprendiz descobre onde guardar os dados
+P: explica a função pasta_dados do config.py
+R: Em `aprendiz/config.py`:
+```python
+def pasta_dados() -> Path:
+    personalizada = os.environ.get("APRENDIZ_DADOS")
+    if personalizada:
+        pasta = Path(personalizada)
+    elif sys.platform.startswith("win"):
+        pasta = Path(os.environ.get("APPDATA", Path.home())) / NOME_APP
+    elif sys.platform == "darwin":
+        pasta = Path.home() / "Library" / "Application Support" / NOME_APP
+    else:
+        base = os.environ.get("XDG_DATA_HOME", Path.home() / ".local" / "share")
+        pasta = Path(base) / "aprendiz"
+    pasta.mkdir(parents=True, exist_ok=True)
+    return pasta
+```
+O que cada comando faz:
+- `os.environ.get("X", padrao)`: lê uma **variável de ambiente**, com valor padrão se não existir. É o que permite `APRENDIZ_DADOS=/tmp/teste` para estudar sem tocar na memória real;
+- `sys.platform`: o sistema: `"win32"`, `"darwin"` (macOS) ou `"linux"`;
+- `Path.home()`: a pasta do usuário; o operador `/` junta caminhos do jeito certo em cada sistema;
+- `mkdir(parents=True, exist_ok=True)`: cria a pasta e as de cima, sem erro se já existir;
+- `-> Path`: anotação de tipo do retorno.
+
+P: como o aprendiz escolhe a porta do servidor
+P: explica a função escolher_porta
+R: Em `aprendiz/desktop.py`:
+```python
+def escolher_porta(preferida: int) -> int:
+    for porta in (preferida, 0):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            if not sys.platform.startswith("win"):
+                s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            try:
+                s.bind(("127.0.0.1", porta))
+                return s.getsockname()[1]
+            except OSError:
+                continue
+    raise RuntimeError("Nenhuma porta livre encontrada.")
+```
+- `socket.socket(AF_INET, SOCK_STREAM)`: cria um socket TCP (IPv4);
+- `bind(("127.0.0.1", porta))`: tenta "ocupar" a porta só no próprio computador; se outro programa já a usa, lança `OSError`;
+- a porta **0** pede ao sistema "qualquer porta livre", e `getsockname()[1]` diz qual veio;
+- o `with` fecha o socket no fim: ele só serviu para testar;
+- `SO_REUSEADDR` (fora do Windows) evita que conexões recém-fechadas façam a porta parecer ocupada;
+- `for ... in (preferida, 0)` + `continue` + `raise` no fim: tenta a preferida, depois qualquer uma, e só então desiste.
+
+P: como o aprendiz sobe o servidor numa thread
+P: explica a função iniciar_servidor
+R: Em `aprendiz/desktop.py`:
+```python
+def iniciar_servidor(porta: int):
+    app = criar_app()
+    cfg = uvicorn.Config(app, host="127.0.0.1", port=porta,
+                         log_level="warning", access_log=False)
+    servidor = uvicorn.Server(cfg)
+    threading.Thread(target=servidor.run, daemon=True).start()
+
+    limite = time.time() + 20
+    while not servidor.started:
+        if time.time() > limite:
+            raise RuntimeError("O servidor demorou demais para iniciar.")
+        time.sleep(0.05)
+    return servidor, app
+```
+- `uvicorn.Server(cfg).run`: o servidor HTTP que executa a aplicação FastAPI;
+- `threading.Thread(target=..., daemon=True).start()`: roda o servidor em **paralelo**, liberando a thread principal para abrir a janela. `daemon=True` faz a thread morrer junto com o programa;
+- o `while not servidor.started` espera o servidor ficar pronto, conferindo a cada 50 ms, com um limite de 20 s;
+- devolve uma **tupla** `(servidor, app)`; quem chama desempacota: `servidor, app = iniciar_servidor(porta)`. No fim, `servidor.should_exit = True` pede ao Uvicorn que pare.
+
+P: como o aprendiz sabe que a janela foi fechada
+P: como funciona o sinal de vida do aprendiz
+R: Três pedaços trabalham juntos:
+**1. A página** (`web/app.js`) avisa que está viva a cada 10 s:
+```javascript
+function enviarSinal() {
+  fetch("/api/sinal", { method: "POST" }).catch(() => {});
+}
+setInterval(enviarSinal, 10000);
+```
+**2. A API** (`api/servidor.py`) anota a hora do último sinal:
+```python
+@app.post("/api/sinal", include_in_schema=False)
+def sinal():
+    app.state.ultimo_sinal = time.monotonic()
+    return {"ok": True}
+```
+**3. O desktop** (`esperar_interface`) confere a cada segundo; passou de 90 s sem sinal, encerra. Se o relógio pular mais de 10 s de uma volta para outra, o computador provavelmente hibernou, e esse tempo não conta.
+`time.monotonic()` é um relógio que **nunca anda para trás** (ao contrário do relógio do sistema, que pode ser ajustado): o certo para medir intervalos. `app.state` é o lugar do FastAPI para guardar dados da aplicação.
+
+P: como funciona a função criar_app
+P: explica o criar_app do servidor
+R: Em `aprendiz/api/servidor.py`:
+```python
+def criar_app(caminho_banco: str | Path | None = None) -> FastAPI:
+    banco = Banco(caminho_banco or config.caminho_banco())
+    assistente = Assistente(banco)
+    app = FastAPI(title="Aprendiz", version=config.VERSAO)
+    app.state.banco = banco
+    app.state.assistente = assistente
+    app.mount("/static", StaticFiles(directory=config.PASTA_WEB), name="static")
+
+    @app.get("/", include_in_schema=False)
+    def pagina_inicial():
+        return FileResponse(config.PASTA_WEB / "index.html")
+
+    @app.post("/api/chat")
+    def chat(pedido: PedidoChat):
+        try:
+            return assistente.responder(pedido.mensagem, pedido.conversa_id,
+                                        pedido.busca, pedido.resposta)
+        except ValueError as erro:
+            raise HTTPException(400, str(erro)) from erro
+    ...
+    return app
+```
+Ideias importantes:
+- é uma **fábrica** (*factory*): uma função que monta e devolve a aplicação. Receber o caminho do banco permite que cada teste crie uma app com um banco descartável;
+- as rotas são **funções internas** (closures) que "enxergam" `banco` e `assistente` da função de fora;
+- `@app.post("/api/chat")` registra a função como a rota; o parâmetro `pedido: PedidoChat` diz ao FastAPI para validar o JSON do corpo com esse modelo;
+- o dicionário devolvido vira JSON sozinho;
+- `HTTPException(400, ...)` vira uma resposta de erro HTTP; `raise ... from erro` preserva a causa original no traceback;
+- `app.mount("/static", StaticFiles(...))` serve os arquivos da pasta `web/`.
+
+P: o que são os modelos pydantic do servidor
+P: explica a classe pedidochat
+R: Cada rota que recebe JSON tem um modelo **Pydantic**:
+```python
+class PedidoChat(BaseModel):
+    mensagem: str = Field(min_length=1, max_length=5000)
+    conversa_id: str | None = None
+    busca: str | None = None     # sem valor → o padrão das Configurações
+    resposta: str | None = None
+```
+- herdar de `BaseModel` transforma as **anotações de tipo** em regras de validação;
+- `Field(min_length=1, max_length=5000)`: limites de tamanho;
+- `str | None = None`: o campo é opcional.
+Se a interface mandar `{"mensagem": ""}`, o FastAPI responde **422** explicando o campo errado, e a função `chat` nem chega a rodar. Isso tira da lógica do app todo o trabalho de conferir o formato do pedido.
+
+P: como funciona a classe banco por dentro
+P: explica o __init__ do banco
+R: Em `aprendiz/memoria/banco.py`:
+```python
+class Banco:
+    def __init__(self, caminho: str | Path):
+        self.caminho = str(caminho)
+        self._con = sqlite3.connect(self.caminho, check_same_thread=False)
+        self._con.row_factory = sqlite3.Row
+        self._con.execute("PRAGMA foreign_keys = ON")
+        self._con.execute("PRAGMA journal_mode = WAL")
+        self._trava = threading.RLock()
+        self.versao_conhecimento = 0
+        self.versao_linguagem = 0
+        with self._trava:
+            self._con.executescript(ESQUEMA)
+            self._con.commit()
+            self._migrar()
+        if self.obter_meta("semeado") is None:
+            self.semear()
+```
+- `check_same_thread=False`: o servidor web usa várias threads, e por padrão o `sqlite3` só aceita a thread que abriu a conexão;
+- por isso, **todo** acesso passa por `with self._trava:`. O `RLock` (trava reentrante) deixa a mesma thread travar de novo sem se bloquear, útil quando um método do banco chama outro;
+- `row_factory = sqlite3.Row`: linhas acessíveis pelo nome (`linha["id"]`);
+- `PRAGMA foreign_keys = ON`: o SQLite só respeita chaves estrangeiras com isso ligado;
+- `journal_mode = WAL`: leituras não bloqueiam escritas;
+- `executescript(ESQUEMA)`: roda todos os `CREATE TABLE IF NOT EXISTS` de uma vez;
+- `_migrar()` atualiza bancos antigos; `semear()` grava a linguagem inicial na primeira vez;
+- o `_` no começo de `_con` e `_trava` avisa: "uso interno, não mexa de fora".
+
+P: como funcionam as migrações do banco do aprendiz
+P: explica o _migrar
+R: `CREATE TABLE IF NOT EXISTS` não acrescenta colunas novas a uma tabela que já existe. Então, a cada mudança de estrutura, `Banco._migrar()` ganha um passo **idempotente** (rodar de novo não estraga nada):
+```python
+colunas = {linha["name"] for linha in c.execute("PRAGMA table_info(conhecimentos)")}
+if "addon_id" not in colunas:               # versão 0.1 → 0.2 (addons)
+    c.execute("ALTER TABLE conhecimentos ADD COLUMN addon_id TEXT")
+...
+c.execute("INSERT OR REPLACE INTO meta VALUES ('versao_esquema', '8')")
+```
+- `PRAGMA table_info(tabela)` lista as colunas; a **compreensão de conjunto** `{... for ...}` junta os nomes;
+- só acrescenta a coluna se ela faltar;
+- para mudar um `CHECK` (que o SQLite não altera), `_ampliar_check` renomeia a tabela, recria pelo esquema novo, copia os dados **pelos nomes das colunas** e apaga a antiga;
+- a versão da estrutura fica gravada em `meta.versao_esquema`.
+Assim, quem atualiza o app de qualquer versão antiga continua com a memória intacta.
+
+P: como o banco salva um conhecimento
+P: explica salvar_conhecimento e o índice fts5
+R: ```python
+def salvar_conhecimento(self, conteudo, tipo="nota", pergunta=None, origem="manual",
+                        texto_busca="", id=None, addon_id=None):
+    id = id or novo_id()
+    momento = agora()
+    with self._trava:
+        existente = self._con.execute(
+            "SELECT criado_em FROM conhecimentos WHERE id = ?", (id,)).fetchone()
+        criado = existente["criado_em"] if existente else momento
+        self._con.execute(
+            "INSERT OR REPLACE INTO conhecimentos (id, tipo, pergunta, conteudo, origem, "
+            "texto_busca, criado_em, atualizado_em, addon_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (id, tipo, pergunta, conteudo, origem, texto_busca, criado, momento, addon_id))
+        self._con.execute("DELETE FROM conhecimentos_fts WHERE id = ?", (id,))
+        self._con.execute("INSERT INTO conhecimentos_fts (id, texto) VALUES (?, ?)",
+                          (id, texto_busca))
+        self._con.commit()
+    self.versao_conhecimento += 1
+    return self.obter_conhecimento(id)
+```
+- `id or novo_id()`: se não veio id, gera um UUID (`uuid.uuid4().hex`);
+- `INSERT OR REPLACE`: cria, ou substitui se o id já existir (editar = salvar de novo), preservando a data de criação;
+- os `?` são **parâmetros**: os valores nunca viram parte do SQL (sem *SQL injection*);
+- o índice **FTS5** é mantido à mão: apaga a linha antiga e insere a nova;
+- `versao_conhecimento += 1` avisa os caches (TF-IDF, Fuzzy, vocabulário) que a base mudou.
+
+P: como o banco faz a busca bm25
+P: explica a função buscar_fts
+R: ```python
+def buscar_fts(self, consulta: str, limite: int = 10) -> list[dict[str, Any]]:
+    return self._consultar(
+        "SELECT f.id, bm25(conhecimentos_fts) AS score FROM conhecimentos_fts f "
+        "JOIN conhecimentos c ON c.id = f.id "
+        "LEFT JOIN addons a ON a.id = c.addon_id "
+        "WHERE conhecimentos_fts MATCH ? AND (c.addon_id IS NULL OR a.ativo = 1) "
+        "ORDER BY score LIMIT ?",
+        (consulta, limite))
+```
+- `MATCH ?` usa o índice FTS5 com a expressão montada pelo algoritmo (`"horari" OR "farmac"`);
+- `bm25(conhecimentos_fts)` é a função do próprio SQLite que calcula a nota BM25, em C. Ela devolve números **negativos** (menor = mais relevante), por isso `ORDER BY score` crescente;
+- o `LEFT JOIN addons` + `(c.addon_id IS NULL OR a.ativo = 1)` filtra, dentro do SQL, os conhecimentos de addons **desativados**, para eles nunca "empurrarem" resultados válidos para fora do limite;
+- `_consultar` é o método auxiliar que trava, executa e transforma cada linha em dicionário: `[dict(l) for l in cursor.fetchall()]`.
+
+P: como funciona o normalizar do aprendiz
+P: explica o código do normalizador
+R: Em `aprendiz/linguagem/normalizador.py`:
+```python
+_NAO_ALFANUMERICO = re.compile(r"[^a-z0-9]+")
+
+def remover_acentos(texto: str) -> str:
+    decomposto = unicodedata.normalize("NFKD", texto)
+    return "".join(c for c in decomposto if not unicodedata.combining(c))
+
+def normalizar(texto: str) -> str:
+    texto = remover_acentos(texto.lower())
+    texto = _PREFIXO_HIFEN.sub(r"\1", texto)      # "wi-fi" → "wifi"
+    texto = _MAIS_MAIS.sub(r"\1pp", texto)        # "c++" → "cpp"
+    texto = _SUSTENIDO.sub(r"\1sharp", texto)     # "c#" → "csharp"
+    return _NAO_ALFANUMERICO.sub(" ", texto).strip()
+```
+- `unicodedata.normalize("NFKD", ...)` separa "ç" em "c" + cedilha; o `join` com o gerador descarta os caracteres "combinantes" (os acentos);
+- `re.compile` prepara a regex uma vez só, no carregamento do módulo; `.sub(" ", texto)` troca tudo que não é letra ou número por espaço;
+- `\1` na troca é "o que o grupo 1 capturou";
+- `.strip()` tira os espaços das pontas.
+Depois, `Linguagem.processar()` faz o resto: tokens, abreviações, correção de digitação, expressões, sinônimos, lemas, stopwords e radicais, guardando cada etapa num `TextoProcessado` (uma `@dataclass`), que o painel "Por que respondi isso?" mostra.
+
+P: como funciona a correção de digitação no código
+P: explica o _corrigir do normalizador
+R: ```python
+def _corrigir(self, tokens, registro):
+    if not self.vocabulario:
+        return tokens
+    saida = []
+    for t in tokens:
+        if (len(t) >= self.TAMANHO_MINIMO_CORRECAO      # 4 letras ou mais
+                and not t.isdigit()
+                and t not in self.vocabulario           # já é conhecida? não corrige
+                and t not in self.stopwords
+                and t not in self.sinonimos
+                and not self.lexico.conhece(t)):        # palavra que existe no português
+            achado = process.extractOne(
+                t, self.vocabulario, scorer=fuzz.ratio,
+                score_cutoff=self.SIMILARIDADE_MINIMA_CORRECAO)   # 80 de 100
+            if achado:
+                registro[t] = achado[0]
+                t = achado[0]
+        saida.append(t)
+    return saida
+```
+- `process.extractOne` (RapidFuzz) compara a palavra com **todo** o vocabulário e devolve a mais parecida, se passar do corte; o núcleo é em C++, por isso é rápido;
+- o **vocabulário** são as palavras que aparecem na base de conhecimento: o corretor só sugere o que o assistente conhece;
+- `registro[t] = ...` anota a troca, que aparece no painel de explicação;
+- a condição longa é quebrada em várias linhas dentro de parênteses, uma regra por linha.
+
+P: como funciona o radical no código do stemmer
+P: explica a função radical
+R: Em `aprendiz/linguagem/stemmer.py`:
+```python
+Regra = tuple[str, int, str]          # (sufixo, tamanho mínimo do radical, troca)
+PLURAL: list[Regra] = [("oes", 3, "ao"), ("ais", 1, "al"), ..., ("s", 2, "")]
+
+@lru_cache(maxsize=50_000)
+def radical(palavra: str) -> str:
+    if len(palavra) <= 3 or palavra.isdigit():
+        return palavra
+    if palavra.endswith("s"):
+        palavra, _ = _aplicar(palavra, PLURAL)
+    if palavra.endswith("a"):
+        palavra, _ = _aplicar(palavra, FEMININO)
+    palavra, _ = _aplicar(palavra, GRAU)
+    palavra, mudou = _aplicar(palavra, SUBSTANTIVO)
+    if not mudou:
+        palavra, mudou = _aplicar(palavra, VERBO)
+    if not mudou and palavra.endswith(VOGAIS_FINAIS) and len(palavra) > 3:
+        palavra = palavra[:-1]
+    return palavra
+```
+- `Regra = tuple[str, int, str]` cria um **apelido de tipo**;
+- as regras são **dados** (listas de tuplas), e uma função genérica `_aplicar` percorre a lista e aplica a primeira que servir, devolvendo `(palavra, mudou)`;
+- `palavra, _ = ...`: o `_` descarta o valor que não interessa;
+- `@lru_cache(maxsize=50_000)`: guarda os resultados; como as mesmas palavras aparecem o tempo todo, cada uma é calculada uma vez;
+- `palavra[:-1]` corta a última letra; `50_000` é só 50000 com separador de leitura.
+
+P: como funciona o naive bayes no código
+P: explica o código do classificador de intenções
+R: Em `aprendiz/linguagem/intencoes.py`, o treino conta palavras por intenção e guarda **logaritmos**:
+```python
+contagem_intencao: Counter[str] = Counter()
+contagem_palavras: dict[str, Counter[str]] = defaultdict(Counter)
+for intencao, termos in exemplos:
+    contagem_intencao[intencao] += 1
+    contagem_palavras[intencao].update(termos)
+    self.vocabulario.update(termos)
+total = sum(contagem_intencao.values())
+v = len(self.vocabulario) or 1
+self.log_prior = {i: math.log(n / total) for i, n in contagem_intencao.items()}
+for intencao, contagem in contagem_palavras.items():
+    denominador = sum(contagem.values()) + v
+    self.log_verossimilhanca[intencao] = {
+        p: math.log((n + 1) / denominador) for p, n in contagem.items()}   # Laplace: +1
+```
+E a classificação soma os logs e converte com **softmax**:
+```python
+pontuacoes[intencao] = prior + sum(tabela.get(t, padrao) for t in conhecidos)
+maior = max(pontuacoes.values())
+exps = {i: math.exp(p - maior) for i, p in pontuacoes.items()}
+```
+- `Counter` conta; `defaultdict(Counter)` cria um contador novo na primeira vez que uma intenção aparece;
+- `.update(lista)` soma as ocorrências de uma vez;
+- compreensões de dicionário `{k: v for ...}` montam as tabelas;
+- subtrair o `maior` antes do `exp` evita estouro numérico (os valores ficam ≤ 0).
+A matemática completa está no addon **Como os algoritmos pensam**.
+
+P: como funciona o registro de algoritmos no código
+P: explica o decorador registrar
+R: Em `aprendiz/algoritmos/base.py`:
+```python
+BUSCAS: dict[str, AlgoritmoBusca] = {}
+RESPOSTAS: dict[str, AlgoritmoResposta] = {}
+
+def registrar(cls):
+    instancia = cls()
+    if isinstance(instancia, AlgoritmoBusca):
+        BUSCAS[instancia.nome] = instancia
+    elif isinstance(instancia, AlgoritmoResposta):
+        RESPOSTAS[instancia.nome] = instancia
+    else:
+        raise TypeError(f"{cls.__name__} não é um algoritmo de busca nem de resposta")
+    return cls
+```
+E em cada algoritmo:
+```python
+@registrar
+class BuscaBM25(AlgoritmoBusca):
+    nome = "bm25"
+    ...
+```
+- um **decorador de classe** recebe a classe e devolve a classe (aqui, a mesma), aproveitando para fazer algo: criar uma instância e guardá-la no dicionário pelo `nome`;
+- isso acontece no **import** do módulo; por isso `algoritmos/busca/__init__.py` importa `bm25, tfidf, fuzzy, hibrido`, e a ordem dos imports é a ordem no seletor;
+- `isinstance` confere de que tipo é; `cls.__name__` é o nome da classe;
+- o pipeline escolhe pelo nome: `BUSCAS[busca].buscar(...)`. É o **padrão Strategy** com um **registro** (*registry*).
+
+P: o que são as classes candidato e contextobusca
+P: explica as dataclasses do base.py
+R: ```python
+@dataclass
+class ContextoBusca:
+    banco: Any
+    linguagem: Linguagem
+    cache: dict[str, Any] = field(default_factory=dict)
+    limiares: dict[str, float] = field(default_factory=dict)
+
+    def limiar(self, nome: str) -> float:
+        return self.limiares.get(nome, BUSCAS[nome].limiar)
+
+@dataclass
+class Candidato:
+    conhecimento: dict[str, Any]
+    pontuacao: float      # valor bruto do algoritmo (ordena)
+    confianca: float      # 0 a 1, comparada com o limiar
+    detalhes: dict[str, Any] = field(default_factory=dict)
+
+    @property
+    def id(self) -> str:
+        return self.conhecimento["id"]
+```
+- `@dataclass` gera o `__init__`, o `__repr__` e o `__eq__` a partir dos campos anotados;
+- `field(default_factory=dict)`: cada objeto ganha um dicionário **novo** (um `= {}` direto seria compartilhado por todos);
+- `ContextoBusca` é o "pacote" que os algoritmos recebem: banco, linguagem, um espaço de cache e os limiares em vigor. Assim os algoritmos não precisam importar o assistente;
+- `ctx.limiar(nome)` usa o limiar das Configurações ou, se não houver, o padrão da classe;
+- `@property` faz `candidato.id` funcionar como atributo, calculado na hora.
+
+P: explica o código da busca bm25 do aprendiz
+P: como o bm25.py monta a busca
+R: ```python
+def buscar(self, consulta, ctx, limite=5):
+    termos = list(dict.fromkeys(consulta.radicais))    # únicos, mantendo a ordem
+    if not termos:
+        return []
+    expressao = " OR ".join(f'"{t}"' for t in termos)
+    linhas = ctx.banco.buscar_fts(expressao, limite * 3)
+    candidatos = []
+    for linha in linhas:
+        doc = ctx.banco.obter_conhecimento(linha["id"])
+        if not doc:
+            continue
+        cob = cobertura(termos, set(doc["texto_busca"].split()))
+        candidatos.append(Candidato(conhecimento=doc,
+                                    pontuacao=round(-linha["score"], 4),
+                                    confianca=round(cob, 4),
+                                    detalhes={"bm25": round(-linha["score"], 4),
+                                              "cobertura": round(cob, 4)}))
+    candidatos.sort(key=lambda c: (c.confianca, c.pontuacao), reverse=True)
+    return candidatos[:limite]
+```
+- `dict.fromkeys(lista)` é um truque para tirar repetidos **mantendo a ordem** (um `set` perderia a ordem);
+- `" OR ".join(...)` monta `"horari" OR "farmac"`, a sintaxe do FTS5; as aspas tratam cada radical como literal;
+- pede `limite * 3` ao banco porque depois reordena pela cobertura;
+- `-linha["score"]` inverte o sinal do BM25 do SQLite (que é negativo);
+- ordena por uma **tupla** `(confiança, pontuação)`: primeiro a cobertura, e o BM25 desempata.
+
+P: explica o código da busca tf-idf do aprendiz
+R: Em `aprendiz/algoritmos/busca/tfidf.py`, o índice é montado uma vez e guardado em `ctx.cache`:
+```python
+def _indice(self, ctx):
+    cache = ctx.cache.get(self.nome)
+    if cache and cache["versao"] == ctx.banco.versao_conhecimento:
+        return cache
+    ... # monta: documentos, IDF de cada termo e o vetor normalizado de cada documento
+```
+E a busca calcula o **cosseno** entre a pergunta e cada documento:
+```python
+idf = indice["idf"]
+tf = Counter(consulta.radicais)
+vetor_q = _normalizar_vetor({t: c * idf[t] for t, c in tf.items() if t in idf})
+for doc, vetor_d in zip(indice["docs"], indice["vetores"]):
+    similaridade = sum(peso * vetor_d.get(t, 0.0) for t, peso in vetor_q.items())
+```
+- os vetores são **dicionários esparsos** (`termo → peso`): só guardam os termos que existem, em vez de listas enormes cheias de zeros;
+- `Counter(lista)` conta cada termo da pergunta (o TF);
+- `zip` percorre documentos e vetores lado a lado;
+- como os dois vetores já estão normalizados (comprimento 1), o cosseno é só a soma dos produtos dos termos em comum;
+- `vetor_d.get(t, 0.0)`: termo ausente no documento vale zero.
+
+P: explica o código da busca híbrida do aprendiz
+R: ```python
+K_RRF = 60
+COMPONENTES = ("bm25", "tfidf", "fuzzy")
+
+for nome in COMPONENTES:
+    algoritmo = BUSCAS[nome]
+    for posicao, cand in enumerate(algoritmo.buscar(consulta, ctx, limite * 2), start=1):
+        rrf[cand.id] = rrf.get(cand.id, 0.0) + 1 / (K_RRF + posicao)
+        docs[cand.id] = cand.conhecimento
+        relativa[cand.id] = max(relativa.get(cand.id, 0.0),
+                                cand.confianca / ctx.limiar(nome))
+...
+confianca = min(1.0, 0.5 * relativa[id])
+```
+- reaproveita os outros algoritmos pelo registro (`BUSCAS[nome]`), sem duplicar código;
+- `enumerate(..., start=1)` dá a posição de cada candidato (1º, 2º…);
+- `rrf.get(id, 0.0) + ...`: acumula a nota do mesmo documento vindo de listas diferentes;
+- a confiança relativa guarda o **melhor** "confiança ÷ limiar" entre os três: se algum algoritmo está confiante, o híbrido aceita (0,5 × 1 = 0,5 = o limiar do híbrido).
+
+P: explica o pipeline no código do assistente
+P: explica o método _pipeline
+R: `Assistente._pipeline(mensagem, busca, resposta, etapas)` devolve `(texto, tipo, fontes)` e é uma sequência de etapas, cada uma podendo **encerrar cedo** com `return`:
+```python
+consulta = self.linguagem.processar(mensagem)
+etapas.marcar("Normalização", consulta.como_dict())
+
+ensino = self._ensino_explicito(mensagem)
+if ensino:
+    ...
+    return texto, "ensino", [self._fonte(c)]
+
+# revisão, dicionário, intenções, compreensão...
+
+candidatos, aceitos, limiar = self.buscar(consulta, busca)
+etapas.marcar(f"Busca · {algoritmo_busca.titulo}", {...})
+if not aceitos:
+    ...
+    return texto, "desconhecido", []
+
+gerada = RESPOSTAS[resposta].responder(consulta, aceitos, self.contexto)
+etapas.marcar(f"Resposta · {algoritmo_resposta.titulo}", gerada.detalhes)
+return nota_sentido + gerada.texto, "conhecimento", fontes
+```
+- o padrão "testa e retorna cedo" (*early return*) evita `if` aninhados profundos;
+- cada etapa chama `etapas.marcar(nome, dados)`, que mede o tempo desde a etapa anterior com `time.perf_counter()` e guarda os dados;
+- o `tipo` devolvido (`ensino`, `social`, `conhecimento`, `desconhecido`, `limite`…) diz à interface como mostrar a resposta;
+- `responder()` empacota tudo: grava a mensagem, monta o `meta` com a explicação e devolve o dicionário para a API.
+
+P: explica a classe etapas do assistente
+P: como o aprendiz mede o tempo de cada etapa
+R: ```python
+class Etapas:
+    def __init__(self) -> None:
+        self.lista: list[dict[str, Any]] = []
+        self.meta: dict[str, Any] = {}
+        self._inicio_total = time.perf_counter()
+        self._inicio = self._inicio_total
+
+    def marcar(self, nome: str, dados: dict[str, Any]) -> None:
+        agora = time.perf_counter()
+        self.lista.append({"nome": nome, "ms": round((agora - self._inicio) * 1000, 2),
+                           "dados": dados})
+        self._inicio = agora
+
+    @property
+    def total_ms(self) -> float:
+        return round((time.perf_counter() - self._inicio_total) * 1000, 2)
+```
+- `time.perf_counter()`: o relógio de maior precisão disponível, feito para medir durações curtas;
+- cada `marcar` mede o tempo **desde a marcação anterior** e reinicia o cronômetro;
+- `@property total_ms` é calculado na hora em que é lido.
+A `lista` vai inteira para `meta.explicacao.etapas`, e o painel "Por que respondi isso?" mostra cada etapa com os seus milissegundos.
+
+P: explica as expressões regulares de ensino do aprendiz
+P: como o aprendiz entende aprenda que
+R: No topo de `core/assistente.py`:
+```python
+_VERBOS_ENSINO = r"(?:aprenda|aprende|memorize|memoriza|lembre(?:-se)?|anote|guarde|grave|registre)"
+
+PADRAO_PAR = re.compile(r"^\s*pergunta\s*:\s*(?P<p>.+?)\s*resposta\s*:\s*(?P<r>.+)$",
+                        re.I | re.S)
+```
+Lendo o `PADRAO_PAR` pedaço a pedaço:
+- `^\s*pergunta\s*:\s*`: começa com "pergunta:", aceitando espaços em volta;
+- `(?P<p>.+?)`: um **grupo com nome** `p`, com `+?` **preguiçoso** (pega o mínimo possível, para não engolir o "resposta:");
+- `resposta\s*:\s*(?P<r>.+)$`: o resto, até o fim, é a resposta;
+- `re.I` (`re.IGNORECASE`): maiúsculas ou minúsculas; `re.S` (`re.DOTALL`): o `.` também pega quebras de linha;
+- `(?:...)` é um grupo **sem captura** (só agrupa as alternativas com `|`).
+No uso: `m = PADRAO_PAR.match(mensagem)` e depois `m["p"]`, `m["r"]`. As outras duas (`PADRAO_FATO`, "aprenda que X é Y", e `PADRAO_NOTA`, "anote: …") usam a mesma lista de verbos.
+
+P: explica o código de leitura segura dos addons
+P: explica a função ler_pacote
+R: Em `aprendiz/addons.py`:
+```python
+def ler_pacote(dados: bytes) -> Pacote:
+    if len(dados) > MAX_ARQUIVO:
+        raise ErroAddon("O arquivo é grande demais (limite de 50 MB).")
+    try:
+        zip_ = zipfile.ZipFile(io.BytesIO(dados))
+    except zipfile.BadZipFile:
+        raise ErroAddon("Este arquivo não é um addon do Aprendiz (.aprendiz).") from None
+    with zip_:
+        if sum(i.file_size for i in zip_.infolist()) > MAX_DESCOMPACTADO:
+            raise ErroAddon("O conteúdo do addon é grande demais.")
+        bruto = _ler_json(zip_, "manifesto.json", True)
+        manifesto = validar_manifesto(bruto)
+        ...
+        hash=hashlib.sha256(dados).hexdigest(),
+```
+- `io.BytesIO(dados)` transforma os bytes num "arquivo em memória": o ZIP é lido **sem ir para o disco**;
+- só nomes conhecidos são lidos (`_ler_json(zip_, "manifesto.json", ...)`); qualquer outro arquivo, inclusive com `../../`, é ignorado;
+- a soma dos tamanhos descompactados é conferida antes (contra *zip bombs*);
+- `ErroAddon` herda de `ValueError` e carrega uma **mensagem amigável**, que a interface mostra; `from None` esconde a exceção técnica original;
+- cada parte é validada por uma função própria, e no fim a classificação declarada precisa bater com o conteúdo.
+
+P: explica o código das configurações com closures
+P: o que é a função _numero do configuracoes.py
+R: Em `aprendiz/configuracoes.py`, os validadores são **fábricas de funções** (closures):
+```python
+def _numero(minimo: float, maximo: float) -> Callable[[Any], float]:
+    def validar(valor: Any) -> float:
+        if isinstance(valor, bool) or not isinstance(valor, (int, float)):
+            raise ValueError("precisa ser um número")
+        if not minimo <= valor <= maximo:
+            raise ValueError(f"precisa estar entre {minimo} e {maximo}")
+        return round(float(valor), 3)
+    return validar
+
+@dataclass(frozen=True)
+class Definicao:
+    chave: str
+    tipo: str
+    titulo: str
+    descricao: str
+    padrao: Any
+    validar: Callable[[Any], Any]
+    extras: dict = field(default_factory=dict)
+```
+- `_numero(0.05, 1.0)` **devolve uma função** que "lembra" o mínimo e o máximo: isso é uma closure;
+- `isinstance(valor, bool)` vem antes porque em Python `True` também é um `int` (vale 1);
+- `minimo <= valor <= maximo`: comparação encadeada;
+- `@dataclass(frozen=True)`: a definição não pode ser alterada depois de criada;
+- `Callable[[Any], float]`: o tipo "função que recebe qualquer coisa e devolve float";
+- o dicionário `DEFINICOES = {d.chave: d for d in [...]}` é a **lista fechada**.
+
+P: explica o código do app.js do aprendiz
+P: como o javascript chama a api do aprendiz
+R: O `web/app.js` inteiro fica dentro de uma função que se executa sozinha (IIFE), para não poluir o escopo global:
+```javascript
+(function () {
+  "use strict";
+  const $ = (seletor, raiz) => (raiz || document).querySelector(seletor);
+
+  async function api(caminho, opcoes) {
+    opcoes = opcoes || {};
+    const resposta = await fetch(caminho, {
+      method: opcoes.metodo || "GET",
+      headers: opcoes.corpo ? { "Content-Type": "application/json" } : {},
+      body: opcoes.corpo ? JSON.stringify(opcoes.corpo) : undefined,
+    });
+    const dados = await resposta.json().catch(() => ({}));
+    if (!resposta.ok) {
+      const detalhe = typeof dados.detail === "string" ? dados.detail : "Erro " + resposta.status;
+      throw new Error(detalhe);
+    }
+    return dados;
+  }
+  ...
+  iniciar();
+})();
+```
+- `"use strict"`: modo estrito (erros silenciosos viram erros de verdade);
+- `$` é um atalho para `document.querySelector`;
+- `fetch` faz a requisição HTTP; `await` espera a resposta sem travar a página (a função é `async`);
+- `JSON.stringify` transforma o objeto em texto JSON; `resposta.json()` faz o caminho inverso;
+- se o servidor respondeu erro, a mensagem do FastAPI (`detail`) vira um `Error`, que quem chamou trata com `try/catch` e mostra na tela.
+
+P: explica a função enviar do app.js
+R: ```javascript
+async function enviar(texto) {
+  texto = (texto || "").trim();
+  if (!texto || estado.enviando) return;
+  estado.enviando = true;
+  adicionarUsuario(texto);
+  const digitando = adicionarDigitando();
+  try {
+    const r = await api("/api/chat", {
+      metodo: "POST",
+      corpo: {
+        mensagem: texto,
+        conversa_id: estado.conversaId,
+        busca: $("#sel-busca").value,
+        resposta: $("#sel-resposta").value,
+      },
+    });
+    digitando.remove();
+    estado.conversaId = r.conversa_id;
+    adicionarAssistente(r.mensagem, true);
+    carregarConversas();
+  } catch (erro) {
+    digitando.remove();
+    adicionarAssistente({ texto: erro.message, meta: { tipo: "erro" } }, false);
+  } finally {
+    estado.enviando = false;
+    atualizarBotaoEnviar();
+  }
+}
+```
+- `estado.enviando` impede mandar duas mensagens ao mesmo tempo (duplo clique);
+- mostra a mensagem do usuário e os "três pontinhos" **antes** da resposta chegar;
+- manda os algoritmos escolhidos nos seletores do topo;
+- guarda o `conversa_id` devolvido: a próxima mensagem vai para a mesma conversa;
+- `finally` roda com ou sem erro, liberando o envio de novo.
+
+P: explica o código do markdown.js
+P: como o aprendiz evita xss
+R: ```javascript
+function escapar(texto) {
+  return texto
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function emLinha(texto) {          // o texto já chega escapado
+  return texto
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+}
+```
+A regra de ouro: **escapar primeiro, formatar depois**. Se alguém ensinar `<script>alert(1)</script>` (ou um addon trouxer isso), o `<` vira `&lt;` e aparece como texto na tela, nunca executa. Só depois o renderizador transforma as marcações seguras (negrito, itálico, código, listas) em HTML que ele mesmo escreve.
+O texto é primeiro dividido pelas cercas de três crases: as partes ímpares são blocos de código (`<pre><code>`), escapadas e sem formatação. As expressões regulares com `/g` trocam **todas** as ocorrências; `$1` é o grupo capturado.
+
+P: como funciona o tema claro e escuro do aprendiz
+P: explica as variáveis css do aprendiz
+R: No `web/estilo.css`, as cores são **variáveis CSS** no `:root`:
+```css
+:root {
+  --fundo: #ffffff;
+  --texto: #1d1f2c;
+  --primaria: #4f46e5;
+  ...
+}
+```
+e o tema escuro redefine as mesmas variáveis quando o `<html>` tem o atributo `data-tema="escuro"`. Todo o resto do CSS usa `var(--primaria)`, `var(--fundo)`…, então trocar o tema é só trocar o atributo.
+No `app.js`, a função `aplicarTema` decide o tema efetivo ("sistema" segue a preferência do sistema operacional via `matchMedia("(prefers-color-scheme: dark)")`) e faz `document.documentElement.dataset.tema = efetivo`.
+A **cor de destaque** das Configurações (`personalizacao.cor`) funciona igual: a função `aplicarPersonalizacao` muda a variável `--primaria` com `document.documentElement.style.setProperty(...)` e calcula os tons derivados (hover, fundo suave) com o `color-mix()` do CSS. Todos os botões mudam juntos.
+
+P: comandos python mais usados no código do aprendiz
+P: glossário de python do aprendiz
+R: Recursos de Python que aparecem o tempo todo no código, e onde:
+- `from __future__ import annotations`: no topo de todos os módulos; deixa usar `list[str]` e `X | None` nas anotações;
+- `@dataclass` e `field(default_factory=...)`: `Candidato`, `TextoProcessado`, `Definicao`;
+- `ABC` e `@abstractmethod`: os contratos dos algoritmos;
+- `@lru_cache`: `radical()`; `@property`: `Candidato.id`, `Etapas.total_ms`;
+- `with`: travas (`with self._trava`), arquivos, ZIPs;
+- compreensões: `{l["name"] for l in ...}`, `[t for t in tokens if ...]`;
+- `dict.fromkeys(lista)`: tirar repetidos mantendo a ordem;
+- `sorted(..., key=lambda c: (c.confianca, c.pontuacao), reverse=True)`: ordenar por vários critérios;
+- `enumerate(..., start=1)`, `zip(...)`: posições e listas em paralelo;
+- `dict.get(chave, padrao)` e `setdefault`: dicionários sem `KeyError`;
+- `raise ErroX(...) from erro`: exceções com causa;
+- `re.compile`, grupos com nome `(?P<nome>...)`: regex;
+- `sqlite3`, `zipfile`, `hashlib`, `json`, `pathlib`, `threading`, `socket`, `argparse`, `unicodedata`, `math`, `collections`: biblioteca padrão;
+- `fastapi`, `pydantic`, `uvicorn`, `rapidfuzz`: as dependências externas.
+
+P: como ler um arquivo do aprendiz que eu nunca vi
+P: técnica para entender código desconhecido
+R: Um roteiro que funciona para qualquer arquivo do projeto (e de qualquer projeto):
+1. **leia a docstring do topo**: todo arquivo do Aprendiz começa explicando o que faz;
+2. **liste as definições**: no VS Code, o painel **Estrutura (Outline)**, ou `grep -n "def \|class " arquivo.py`;
+3. **ache quem chama**: Shift+F12 no nome da função, ou `grep -rn "nome_da_funcao" aprendiz/`;
+4. **leia o teste**: em `tests/` quase toda função tem um teste que mostra como usá-la e o que ela devolve;
+5. **rode com um breakpoint** e olhe as variáveis com dados reais;
+6. **mude algo pequeno** (uma mensagem, um limiar), rode os testes e veja o que quebra;
+7. **explique em voz alta** ou escreva no caderno o que entendeu, em uma frase por função.
+Faça isso com `core/assistente.py` primeiro. Depois o próximo addon da trilha, **Como os algoritmos pensam**, explica a teoria por trás de cada algoritmo.

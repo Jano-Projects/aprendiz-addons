@@ -1,0 +1,462 @@
+# C++ 3 · Avançado
+# Movimento, templates avançados, concepts, concorrência, ranges, tipos-soma, ferramentas e o C++ moderno.
+
+P: o que é semântica de movimento em c++
+P: o que é move semantics
+P: o que faz std::move
+P: move semantics
+P: std move
+P: mover em c++
+R: **Mover** é transferir os recursos de um objeto para outro em vez de copiá-los. Mover um `std::vector` de um milhão de itens só troca três ponteiros; copiar duplicaria um milhão de itens.
+```cpp
+std::vector<int> a(1'000'000, 7);
+std::vector<int> b = std::move(a);   // b "rouba" a memória de a
+// a agora está num estado válido, porém não especificado (na prática, vazio)
+```
+`std::move` **não move nada**: é só um cast que diz "pode tratar este objeto como descartável". Quem move de fato é o **construtor de movimento** (ou a atribuição de movimento) do tipo.
+Usos típicos: passar para frente um valor que você não vai mais usar (`dados_.push_back(std::move(item))`), devolver objetos grandes, guardar parâmetros recebidos por valor (`: nome_(std::move(nome))`). Não use um objeto depois de movê-lo, a não ser para reatribuí-lo.
+
+P: o que é lvalue e rvalue
+P: o que é referência rvalue
+P: o que é a referência com dois e comerciais em c++
+R: - **lvalue:** algo com nome e endereço, que continua existindo (`x`, `v[0]`).
+- **rvalue:** um valor temporário, prestes a sumir (`x + 1`, `std::string("oi")`, o retorno de uma função por valor).
+A **referência rvalue** (`T&&`) só se liga a temporários, e é assim que o compilador escolhe a versão "pode roubar" de uma função:
+```cpp
+class Buffer {
+public:
+    Buffer(const Buffer &o);              // cópia: o original continua
+    Buffer(Buffer &&o) noexcept           // movimento: o original vai ser descartado
+        : dados_(o.dados_), tam_(o.tam_) {
+        o.dados_ = nullptr;
+        o.tam_ = 0;
+    }
+private:
+    int *dados_;
+    std::size_t tam_;
+};
+```
+Marque construtores de movimento como `noexcept`: o `std::vector` só usa movimento ao realocar se tiver essa garantia; senão, copia.
+
+P: o que é perfect forwarding
+P: o que é std::forward
+P: o que é referência universal
+R: Num template, `T&&` com `T` deduzido é uma **referência de encaminhamento** (universal): aceita lvalues e rvalues. `std::forward<T>` repassa o argumento **mantendo** o que ele era:
+```cpp
+template <typename T, typename... Args>
+std::unique_ptr<T> criar(Args &&...args) {
+    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+}
+```
+Se quem chamou passou um temporário, o construtor de `T` recebe um temporário (e pode mover); se passou uma variável, recebe uma referência (e copia). É assim que `make_unique` e `emplace_back` funcionam.
+
+P: o que é rvo
+P: o que é copy elision
+P: posso retornar vector por valor em c++
+R: Sim, devolva por valor sem medo. O compilador constrói o resultado **direto no lugar de destino**, sem cópia nem movimento (**RVO**, *return value optimization*). Desde o C++17 isso é **garantido** quando se devolve um temporário:
+```cpp
+std::vector<int> gerar(int n) {
+    std::vector<int> v;
+    for (int i = 0; i < n; ++i) v.push_back(i);
+    return v;          // NRVO; no pior caso, um movimento barato
+}
+auto dados = gerar(1'000'000);
+```
+Não escreva `return std::move(v);`: isso **atrapalha** a otimização.
+
+P: o que é constexpr e consteval
+P: como calcular em tempo de compilação em c++
+R: - `constexpr`: pode ser calculado ao compilar **se** os argumentos forem constantes; senão roda normalmente.
+- `consteval` (C++20): **obrigatoriamente** ao compilar.
+- `constinit` (C++20): a variável é inicializada ao compilar (sem custo na partida do programa).
+```cpp
+constexpr unsigned long long fatorial(int n) {
+    unsigned long long r = 1;
+    for (int i = 2; i <= n; ++i) r *= i;
+    return r;
+}
+static_assert(fatorial(10) == 3'628'800);   // conferido pelo compilador
+
+consteval int versao() { return 3; }
+```
+`if constexpr (condição)` escolhe um ramo ao compilar e descarta o outro, essencial em templates. Tabelas, validações e cálculos fixos saem do tempo de execução.
+
+P: o que é variadic template
+P: o que é fold expression
+R: **Template variádico** aceita qualquer número de parâmetros de tipos diferentes (`typename... Args`). A **fold expression** (C++17) aplica um operador a todos:
+```cpp
+template <typename... Ts>
+auto somar(Ts... xs) {
+    return (xs + ... + 0);            // xs1 + xs2 + ... + 0
+}
+somar(1, 2, 3.5);                     // 6.5
+
+template <typename... Ts>
+void imprimir(const Ts &...xs) {
+    ((std::cout << xs << ' '), ...);  // vírgula como operador
+    std::cout << '\n';
+}
+imprimir("idade", 30, 1.75);
+```
+`sizeof...(Ts)` diz quantos parâmetros vieram. É assim que `std::tuple`, `std::make_unique` e `std::format` funcionam.
+
+P: o que são concepts em c++
+P: o que é requires em c++20
+P: o que é sfinae
+P: concepts
+P: concepts c++20
+R: **Concepts** (C++20) dizem o que um tipo precisa ter para ser aceito por um template. Os erros ficam curtos e claros, em vez de páginas de mensagens:
+```cpp
+#include <concepts>
+
+template <typename T>
+concept Numerico = std::integral<T> || std::floating_point<T>;
+
+template <Numerico T>
+T media(const std::vector<T> &v) {
+    T soma{};
+    for (T x : v) soma += x;
+    return soma / static_cast<T>(v.size());
+}
+
+template <typename T>
+concept TemTamanho = requires(T t) {
+    { t.size() } -> std::convertible_to<std::size_t>;
+};
+```
+Antes do C++20 isso era feito com **SFINAE** ("falha de substituição não é erro"), com `std::enable_if`: funcionava, mas era ilegível. Em código novo, use concepts.
+
+P: o que é type traits
+P: o que é decltype
+R: **Type traits** (`<type_traits>`) perguntam e transformam tipos ao compilar:
+```cpp
+std::is_integral_v<int>                 // true
+std::is_same_v<int, long>               // false
+std::remove_reference_t<int&>           // int
+std::decay_t<const int&>                // int
+```
+`decltype(expr)` dá o **tipo** de uma expressão sem avaliá-la:
+```cpp
+int x = 0;
+decltype(x) y = 5;                       // int
+auto soma(auto a, auto b) -> decltype(a + b) { return a + b; }
+```
+Junto com `if constexpr`, permitem um template se comportar diferente para cada tipo:
+```cpp
+template <typename T>
+std::string descrever(const T &v) {
+    if constexpr (std::is_arithmetic_v<T>) return std::to_string(v);
+    else return std::string(v);
+}
+```
+
+P: como usar threads em c++
+P: o que é std::thread e std::jthread
+P: threads em c++
+P: thread em c++
+P: concorrência em c++
+R: ```cpp
+#include <iostream>
+#include <thread>
+#include <vector>
+
+int main() {
+    std::vector<std::jthread> threads;            // C++20
+    for (int i = 0; i < 4; ++i) {
+        threads.emplace_back([i] {
+            std::cout << "thread " << i << '\n';  // a ordem varia a cada execução
+        });
+    }
+}   // cada jthread espera a sua tarefa terminar (join) ao ser destruída
+```
+- `std::thread` exige `join()` ou `detach()` antes de ser destruída; senão o programa aborta;
+- `std::jthread` (C++20) faz o `join` sozinho (RAII) e aceita pedido de parada (`stop_token`);
+- `std::thread::hardware_concurrency()` diz quantos núcleos a máquina tem.
+No Linux, compile com `-pthread`. Threads compartilham memória: tudo que duas threads acessam, e pelo menos uma altera, precisa de sincronização.
+
+P: o que é mutex em c++
+P: o que é condição de corrida
+P: como usar lock_guard
+P: o que é deadlock
+R: **Condição de corrida:** duas threads mexem no mesmo dado ao mesmo tempo e o resultado depende de quem chega primeiro. **Mutex** garante que só uma thread por vez entre num trecho:
+```cpp
+#include <mutex>
+
+std::mutex m;
+long contador = 0;
+
+void incrementar() {
+    for (int i = 0; i < 100'000; ++i) {
+        std::scoped_lock trava(m);   // trava aqui; destrava no fim do escopo (RAII)
+        ++contador;
+    }
+}
+```
+Nunca use `m.lock()`/`m.unlock()` à mão: uma exceção no meio deixaria travado para sempre.
+**Deadlock:** a thread A segura o mutex 1 e espera o 2; a B segura o 2 e espera o 1; ninguém anda. Evite travando sempre na **mesma ordem**, ou travando vários de uma vez com `std::scoped_lock trava(m1, m2);`, que evita o impasse.
+
+P: o que é atomic em c++
+P: quando usar std::atomic
+R: `std::atomic<T>` faz operações simples (incrementar, ler, trocar) de forma **indivisível**, sem mutex:
+```cpp
+#include <atomic>
+std::atomic<long> contador{0};
+contador++;                      // seguro entre threads
+contador.fetch_add(5);
+bool parar = flag.load();
+```
+Use para contadores, flags e estatísticas. Para manter **várias** variáveis consistentes juntas (um saldo e um histórico), use mutex. Existem ordens de memória mais fracas (`memory_order_relaxed`…) para quem precisa do último grão de desempenho; o padrão (`seq_cst`) é o mais seguro.
+
+P: o que é condition variable
+P: como fazer produtor consumidor em c++
+R: `std::condition_variable` deixa uma thread **dormir** até outra avisar que algo mudou, sem gastar processador:
+```cpp
+#include <condition_variable>
+#include <mutex>
+#include <queue>
+
+std::queue<int> fila;
+std::mutex m;
+std::condition_variable cv;
+
+void produtor() {
+    for (int i = 0; i < 10; ++i) {
+        { std::scoped_lock t(m); fila.push(i); }
+        cv.notify_one();
+    }
+}
+
+void consumidor() {
+    for (int recebidos = 0; recebidos < 10; ++recebidos) {
+        std::unique_lock t(m);
+        cv.wait(t, [] { return !fila.empty(); });   // dorme até ter item
+        int item = fila.front();
+        fila.pop();
+        t.unlock();
+        std::cout << "processou " << item << '\n';
+    }
+}
+```
+Sempre use a versão do `wait` **com condição**: a thread pode acordar sem motivo (*spurious wakeup*).
+
+P: o que é std::async e future
+P: como rodar tarefa em paralelo em c++
+R: `std::async` roda uma função em outra thread e devolve um `std::future` com o resultado, que você pega quando precisar:
+```cpp
+#include <future>
+#include <numeric>
+
+std::vector<long> v(10'000'000, 1);
+auto meio = v.begin() + v.size() / 2;
+auto parte1 = std::async(std::launch::async, [&] {
+    return std::accumulate(v.begin(), meio, 0L);
+});
+long parte2 = std::accumulate(meio, v.end(), 0L);
+long total = parte1.get() + parte2;   // get() espera, se ainda não terminou
+```
+Exceções lançadas na tarefa reaparecem no `get()`. Outra opção são os algoritmos paralelos do C++17: `std::sort(std::execution::par, v.begin(), v.end());`.
+
+P: o que são ranges em c++20
+P: o que é views em c++
+R: **Ranges** (C++20) deixam encadear operações sobre sequências com `|`, de forma **preguiçosa** (nada é calculado nem copiado até ser usado):
+```cpp
+#include <ranges>
+#include <vector>
+
+std::vector<int> v = {1, 2, 3, 4, 5, 6, 7, 8};
+auto pares_ao_quadrado = v
+    | std::views::filter([](int x) { return x % 2 == 0; })
+    | std::views::transform([](int x) { return x * x; })
+    | std::views::take(3);
+
+for (int x : pares_ao_quadrado) std::cout << x << ' ';   // 4 16 36
+
+for (int i : std::views::iota(1, 6)) std::cout << i;      // 12345
+std::ranges::sort(v);                                      // sem begin/end
+```
+O C++23 trouxe `std::ranges::to<std::vector>()` para materializar o resultado, `views::enumerate`, `views::zip` e `views::chunk`.
+
+P: o que é std::variant
+P: o que é std::visit
+P: como fazer tipo soma em c++
+R: `std::variant<A, B, C>` guarda **um** valor de um dos tipos listados, com segurança (é a "union marcada" do C, feita do jeito certo):
+```cpp
+#include <variant>
+
+using Valor = std::variant<int, double, std::string>;
+
+Valor v = 3.14;
+v = std::string("oi");
+std::holds_alternative<std::string>(v);   // true
+
+std::visit([](const auto &x) { std::cout << x << '\n'; }, v);
+```
+Para tratar cada tipo de um jeito, o truque do "overloaded":
+```cpp
+template <class... Fs> struct overloaded : Fs... { using Fs::operator()...; };
+
+std::visit(overloaded{
+    [](int i)                { std::cout << "int " << i; },
+    [](double d)             { std::cout << "double " << d; },
+    [](const std::string &s) { std::cout << "texto " << s; },
+}, v);
+```
+É uma alternativa ao polimorfismo com `virtual` quando o conjunto de tipos é fechado.
+
+P: o que é std::format
+P: o que é std::print
+R: `std::format` (C++20) formata textos com a sintaxe do Python, com segurança de tipos:
+```cpp
+#include <format>
+std::string s = std::format("{} tem {} anos e {:.2f} m", "Ana", 30, 1.754);
+std::format("{:>8}|{:<8}|{:^8}", "dir", "esq", "meio");   // alinhamento
+std::format("{:08.3f}", 3.14159);                          // 0003.142
+std::format("{:x} {:b}", 255, 5);                           // ff 101
+```
+O C++23 trouxe `std::print` e `std::println` (`<print>`), que escrevem direto na tela, mais rápidos que `std::cout` e com UTF-8 correto no Windows:
+```cpp
+#include <print>
+std::println("Olá, {}!", nome);
+```
+
+P: o que é std::span e string_view
+R: Os dois são **visões** que não possuem os dados (não copiam nada):
+- `std::string_view` (C++17): qualquer texto (`std::string`, literal, pedaço de buffer);
+- `std::span<T>` (C++20): qualquer sequência contígua (`vector`, `array`, vetor C), com o tamanho junto.
+```cpp
+#include <span>
+double media(std::span<const double> valores) {
+    double s = 0;
+    for (double x : valores) s += x;
+    return valores.empty() ? 0 : s / valores.size();
+}
+std::vector<double> v = {1, 2, 3};
+double c[] = {4, 5};
+media(v);
+media(c);
+```
+Substituem o par "ponteiro + tamanho" do C. Cuidado: a visão não mantém os dados vivos; não guarde um `string_view` de uma `std::string` temporária.
+
+P: o que é udl user defined literal
+P: o que é chrono em c++
+R: `<chrono>` trata tempo com **tipos**, sem confundir segundos com milissegundos:
+```cpp
+#include <chrono>
+#include <thread>
+using namespace std::chrono_literals;   // habilita 100ms, 2s, 1h…
+
+auto inicio = std::chrono::steady_clock::now();
+std::this_thread::sleep_for(150ms);
+auto fim = std::chrono::steady_clock::now();
+auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(fim - inicio);
+std::cout << ms.count() << " ms\n";
+```
+Os sufixos `150ms` e `2s` são **literais definidos pelo usuário**; dá para criar os seus (`operator""_km`). Use `steady_clock` para medir duração (nunca anda para trás) e `system_clock` para datas. O C++20 trouxe calendário e fusos horários.
+
+P: o que são módulos em c++20
+P: o que é import std
+R: **Módulos** (C++20) substituem o `#include`: em vez de colar o texto do cabeçalho em cada arquivo, o compilador processa o módulo **uma vez** e os outros importam o resultado. Compila mais rápido e macros não vazam de um arquivo para outro.
+```cpp
+// matematica.cppm
+export module matematica;
+export int quadrado(int x) { return x * x; }
+
+// main.cpp
+import matematica;
+import std;                 // C++23: a biblioteca padrão inteira
+int main() { std::println("{}", quadrado(7)); }
+```
+O suporte já existe no MSVC, no Clang e no GCC (14 ou mais novo) e no CMake 3.28 ou mais novo, mas ainda exige configuração. Em projetos novos vale experimentar; em projetos existentes, cabeçalhos continuam sendo o normal.
+
+P: como otimizar código c++
+P: como deixar c++ mais rápido
+R: Primeiro **meça**, depois otimize o que o perfilador apontar:
+- compile em modo release: `-O2` ou `-O3`, e `-march=native` se o programa rodar só na sua máquina;
+- **memória contígua** é rainha: `vector` > `list`; o cache do processador faz mais diferença que o Big-O em listas pequenas;
+- `reserve()` quando souber o tamanho; evite cópias (passe `const &`, mova, use `string_view`/`span`);
+- `emplace_back` constrói no lugar;
+- `unordered_map` com `reserve`, ou um vetor ordenado com busca binária para dados que mudam pouco;
+- evite alocações dentro de laços quentes;
+- perfiladores: `perf` (Linux), Valgrind/Callgrind, o perfilador do Visual Studio, e o Compiler Explorer (godbolt.org) para ver o Assembly gerado.
+
+P: como testar código c++
+P: o que é googletest
+P: o que é catch2
+R: As bibliotecas de teste mais usadas:
+- **GoogleTest** (com GoogleMock);
+- **Catch2** e **doctest** (leves; testes escritos como frases).
+Exemplo com Catch2:
+```cpp
+#include <catch2/catch_test_macros.hpp>
+
+TEST_CASE("pilha empilha e desempilha") {
+    Pilha<int> p;
+    p.empilhar(1);
+    p.empilhar(2);
+    REQUIRE(p.desempilhar() == 2);
+    REQUIRE_FALSE(p.vazia());
+}
+```
+Integre ao CMake (`enable_testing()` + `add_test`) e rode com `ctest`. Combine com os sanitizers (`-fsanitize=address,undefined,thread`) para pegar erros de memória e de concorrência durante os testes.
+
+P: ferramentas para c++ moderno
+P: o que é clang-tidy e clang-format
+P: como gerenciar dependências em c++
+R: O kit de quem trabalha com C++ hoje:
+- **clang-format:** formata o código automaticamente num estilo combinado (`.clang-format`);
+- **clang-tidy:** analisador estático que aponta bugs e sugere C++ moderno (troque `NULL` por `nullptr`, use `auto`, `override`…);
+- **sanitizers:** address, undefined, thread e memory;
+- **gerenciadores de pacotes:** **vcpkg** (Microsoft) e **Conan**, que baixam e compilam bibliotecas e se integram ao CMake;
+- **CMake + Ninja** para compilar;
+- **ccache** para reaproveitar compilações;
+- **Compiler Explorer** (godbolt.org) para testar trechos em vários compiladores.
+
+P: o que mudou no c++11 c++14 c++17 c++20 e c++23
+P: quais as versões do c++
+P: c++ moderno
+P: versões do c++
+R: Os marcos do C++ moderno:
+- **C++11** (a revolução): `auto`, for de intervalo, lambdas, movimento e `&&`, `unique_ptr`/`shared_ptr`, `nullptr`, `constexpr`, threads, `unordered_map`, `override`/`final`, inicialização com `{}`.
+- **C++14:** `make_unique`, lambdas genéricas (`auto` nos parâmetros), separador de dígitos `1'000'000`.
+- **C++17:** `std::optional`, `variant`, `string_view`, `filesystem`, `if constexpr`, *structured bindings* (`auto [a, b] = par;`), algoritmos paralelos, `inline` em variáveis.
+- **C++20:** concepts, ranges, coroutines, módulos, `std::format`, `std::span`, `<=>`, `jthread`, `consteval`.
+- **C++23:** `std::print`/`println`, `std::expected`, `import std`, mais views (`zip`, `enumerate`), `std::mdspan`, *deducing this*.
+- **C++26** está em finalização, com reflexão em tempo de compilação e contratos.
+Comece projetos novos em C++20 (`-std=c++20`).
+
+P: o que é std::expected
+P: como tratar erro sem exceção em c++
+R: `std::expected<T, E>` (C++23) guarda **ou** o resultado **ou** o erro, deixando explícito na assinatura que a função pode falhar, sem exceções:
+```cpp
+#include <expected>
+#include <string>
+
+std::expected<int, std::string> ler_idade(const std::string &texto) {
+    try {
+        int n = std::stoi(texto);
+        if (n < 0) return std::unexpected("idade negativa");
+        return n;
+    } catch (...) {
+        return std::unexpected("não é um número");
+    }
+}
+
+if (auto r = ler_idade("abc"); r) {
+    std::cout << *r << '\n';
+} else {
+    std::cout << "Erro: " << r.error() << '\n';
+}
+```
+É o estilo do Rust (`Result`) e combina com `and_then`/`transform`. Útil em código onde exceções são proibidas (jogos, embarcados) ou onde o erro é esperado (validar entrada).
+
+P: projetos avançados em c++
+P: o que construir para dominar c++
+R: Projetos que exercitam o C++ moderno:
+1. um **motor de busca** de textos em memória: índice invertido com `unordered_map`, BM25 e ranking com `std::partial_sort` (compare com o do Aprendiz);
+2. um **pool de threads** com fila de tarefas, `condition_variable` e `std::future`;
+3. um **interpretador** de uma linguagem pequena com `std::variant` para os valores;
+4. um **servidor HTTP** com Boost.Asio ou o `cpp-httplib`;
+5. um **jogo 2D** com SFML ou raylib;
+6. um **contêiner próprio** (um `small_vector`) compatível com os algoritmos da STL, com testes e sanitizers;
+7. expor uma função C++ ao Python com **pybind11** e medir o ganho.
+Leitura: *A Tour of C++* (Stroustrup), *Effective Modern C++* (Scott Meyers) e o cppreference.com como referência diária.

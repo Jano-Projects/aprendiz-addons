@@ -1,0 +1,293 @@
+# Programação 4 · Bancos de dados (conceitos)
+# A base para a trilha de SQL: como os dados são modelados, sem depender de um banco específico.
+
+P: o que é banco de dados
+P: para que serve um banco de dados
+R: **Banco de dados** é uma coleção organizada de dados, guardada de forma que seja fácil **consultar, inserir, alterar e apagar**, com segurança, mesmo com muitos usuários ao mesmo tempo.
+Por que não guardar tudo em arquivos de texto? Porque o banco resolve sozinho:
+- buscas rápidas em milhões de registros (índices);
+- várias pessoas alterando ao mesmo tempo sem bagunçar (transações);
+- regras de consistência (não existe pedido de cliente inexistente);
+- recuperação depois de uma queda de energia.
+O Aprendiz guarda a memória num banco **SQLite**, um único arquivo `.db`.
+
+P: o que é sgbd
+P: o que é sistema gerenciador de banco de dados
+P: quais os bancos de dados mais usados
+R: **SGBD** (Sistema Gerenciador de Banco de Dados) é o programa que cuida do banco: guarda, consulta, controla acesso e concorrência.
+Os mais usados:
+- **SQLite:** um arquivo, sem servidor, embutido no programa. Celulares, navegadores, o Aprendiz.
+- **PostgreSQL:** servidor livre, muito completo; o favorito de muitos projetos novos.
+- **MySQL / MariaDB:** servidores livres muito populares na web.
+- **Oracle Database:** comercial, comum em grandes empresas (com o Oracle APEX para telas).
+- **SQL Server:** da Microsoft, comum em empresas que usam Windows.
+- **MongoDB, Redis:** bancos NoSQL.
+
+P: o que é banco de dados relacional
+P: o que é modelo relacional
+R: No **banco relacional**, os dados ficam em **tabelas** (relações) com linhas e colunas, e as tabelas se ligam por **chaves**. A ideia é de Edgar F. Codd (IBM, 1970).
+Exemplo, uma loja:
+- `clientes` (id, nome, cidade)
+- `pedidos` (id, cliente_id, data, total)
+O `cliente_id` de cada pedido aponta para um `id` em `clientes`. Assim o nome do cliente fica num lugar só, e não repetido em cada pedido.
+A linguagem para conversar com bancos relacionais é o **SQL**.
+
+P: o que é tabela linha e coluna
+P: o que é registro e campo
+R: - **Tabela:** um conjunto de dados sobre uma coisa (clientes, produtos).
+- **Coluna** (campo, atributo): uma característica, com um tipo (nome: texto; preço: número).
+- **Linha** (registro, tupla): uma ocorrência (o cliente Ana, de Recife).
+Pense numa planilha, mas com regras: cada coluna tem um tipo fixo e cada linha é identificada por uma chave.
+
+P: o que é chave primária
+P: o que é primary key
+P: chave primária
+P: pk
+R: **Chave primária** (PK) é a coluna (ou conjunto de colunas) que identifica **cada linha de forma única**. Não pode repetir nem ficar vazia.
+Tipos:
+- **natural:** um dado do mundo real que já é único (CPF, ISBN);
+- **substituta (surrogate):** um número sem significado gerado pelo banco (`id` 1, 2, 3…). É o mais comum: dados reais podem mudar ou ter exceções.
+```sql
+CREATE TABLE clientes (
+    id   INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL
+);
+```
+
+P: o que é chave estrangeira
+P: o que é foreign key
+P: o que é integridade referencial
+P: chave estrangeira
+P: fk
+R: **Chave estrangeira** (FK) é uma coluna que aponta para a chave primária de outra tabela, criando o **relacionamento**.
+```sql
+CREATE TABLE pedidos (
+    id         INTEGER PRIMARY KEY,
+    cliente_id INTEGER NOT NULL REFERENCES clientes(id)
+);
+```
+**Integridade referencial** é a garantia de que toda FK aponta para algo que existe: o banco recusa um pedido para o cliente 99 se ele não existir, e decide o que fazer quando um cliente é apagado (`ON DELETE CASCADE` apaga os pedidos junto; `RESTRICT` impede).
+No SQLite, ative com `PRAGMA foreign_keys = ON;`. O Aprendiz faz isso ao abrir o banco.
+
+P: o que é chave candidata
+P: o que é chave composta
+P: o que é chave única
+R: - **Chave candidata:** qualquer coluna (ou conjunto) que poderia ser a chave primária, por ser única. Ex.: `id`, `cpf` e `email` numa tabela de pessoas.
+- **Chave composta:** chave formada por mais de uma coluna. Ex.: em `itens_pedido`, o par (`pedido_id`, `produto_id`).
+- **Chave única (UNIQUE):** uma restrição que impede repetição numa coluna que não é a primária. Ex.: `email TEXT UNIQUE`.
+
+P: o que é relacionamento um para um
+P: o que é relacionamento um para muitos
+P: o que é relacionamento muitos para muitos
+P: o que é cardinalidade
+R: **Cardinalidade** diz quantos de um lado se ligam a quantos do outro:
+- **1:1 (um para um):** uma pessoa tem um passaporte. Guarda-se a FK em qualquer lado, com `UNIQUE`.
+- **1:N (um para muitos):** um cliente tem muitos pedidos; cada pedido é de um cliente. A FK fica no lado "muitos" (`pedidos.cliente_id`).
+- **N:N (muitos para muitos):** um aluno faz muitas disciplinas e cada disciplina tem muitos alunos. Precisa de uma **tabela associativa** no meio.
+
+P: como fazer relacionamento muitos para muitos
+P: o que é tabela associativa
+P: o que é tabela intermediária
+R: Um N:N vira **duas relações 1:N** com uma tabela no meio, cuja chave é a combinação das duas FKs:
+```sql
+CREATE TABLE alunos      (id INTEGER PRIMARY KEY, nome TEXT);
+CREATE TABLE disciplinas (id INTEGER PRIMARY KEY, nome TEXT);
+CREATE TABLE matriculas (
+    aluno_id      INTEGER REFERENCES alunos(id),
+    disciplina_id INTEGER REFERENCES disciplinas(id),
+    nota          REAL,
+    PRIMARY KEY (aluno_id, disciplina_id)
+);
+```
+A tabela do meio ainda pode guardar dados **da relação** (a nota do aluno naquela disciplina, a data da matrícula).
+
+P: o que é modelo entidade relacionamento
+P: o que é der
+P: o que é diagrama er
+P: como modelar um banco de dados
+P: modelagem de dados
+P: como modelar um banco
+R: O **modelo entidade-relacionamento** (ER) desenha o banco antes de criá-lo:
+- **entidades** (retângulos): coisas sobre as quais guardamos dados: Cliente, Pedido, Produto;
+- **atributos** (elipses ou listas): as características;
+- **relacionamentos** (losangos ou linhas): como se ligam, com a cardinalidade.
+Passos para modelar:
+1. liste os **substantivos** do problema → candidatos a entidades;
+2. para cada entidade, os atributos e a chave;
+3. os **verbos** → relacionamentos ("cliente **faz** pedido");
+4. defina as cardinalidades;
+5. transforme N:N em tabelas associativas;
+6. normalize.
+Ferramentas: dbdiagram.io, draw.io, MySQL Workbench, pgModeler.
+
+P: o que é modelo conceitual lógico e físico
+R: Três níveis de modelagem:
+- **Conceitual:** as ideias do negócio, sem tecnologia (o diagrama ER). Serve para conversar com quem conhece o negócio.
+- **Lógico:** as tabelas, colunas, chaves e relacionamentos, ainda sem um banco específico.
+- **Físico:** o script SQL para um banco real (SQLite, PostgreSQL), com tipos exatos, índices e restrições.
+
+P: o que é normalização de banco de dados
+P: para que serve normalizar
+P: o que é redundância de dados
+P: o que é normalização
+P: normalização
+R: **Normalização** é organizar as tabelas para **evitar dados repetidos** e as anomalias que eles causam:
+- **atualização:** o endereço do cliente aparece em 50 pedidos; mudou, e você esqueceu de atualizar 3;
+- **inserção:** não dá para cadastrar um produto que ainda não foi vendido, porque o produto só existe dentro da tabela de vendas;
+- **exclusão:** apagar o último pedido de um cliente apaga também os dados do cliente.
+A regra de bolso: **cada fato num lugar só**. As formas normais (1FN, 2FN, 3FN) formalizam isso; a trilha "SQL 3 · Teoria e prática" mostra cada uma em detalhe.
+
+P: o que é primeira forma normal
+P: o que é segunda forma normal
+P: o que é terceira forma normal
+P: resumo das formas normais
+P: formas normais
+P: 1fn 2fn 3fn
+R: Resumo das três principais:
+- **1FN:** cada célula tem **um valor só** (nada de "telefones: 9999, 8888" numa coluna) e não há grupos repetidos (telefone1, telefone2, telefone3). Valores múltiplos vão para outra tabela.
+- **2FN:** está na 1FN e cada coluna depende da chave **inteira**, não de parte dela. Só importa com chave composta: em `itens_pedido(pedido_id, produto_id, nome_produto)`, o nome depende só do produto e deve ir para `produtos`.
+- **3FN:** está na 2FN e nenhuma coluna depende de **outra coluna que não seja chave**. Em `clientes(id, cep, cidade)`, a cidade depende do CEP.
+Frase para lembrar: cada coluna depende "da chave, da chave inteira e de nada além da chave".
+
+P: o que é desnormalização
+P: quando desnormalizar
+R: **Desnormalizar** é repetir dados de propósito para deixar a **leitura** mais rápida, aceitando mais trabalho para manter tudo consistente.
+Exemplos: guardar o `total` no pedido em vez de somar os itens toda vez; tabelas de relatório (data warehouse) com tudo junto.
+Regra: normalize primeiro; desnormalize só onde medir que a leitura é o gargalo, e documente quem atualiza a cópia.
+
+P: o que é índice em banco de dados
+P: para que serve um índice
+P: índice deixa o banco mais rápido
+R: **Índice** é uma estrutura extra (quase sempre uma **árvore B**) que deixa a busca por uma coluna rápida, como o índice remissivo de um livro.
+- sem índice, `WHERE email = 'ana@x.com'` lê a tabela **inteira** (*full scan*);
+- com índice, vai direto em O(log n).
+O custo: ocupa espaço e deixa **INSERT, UPDATE e DELETE** um pouco mais lentos, porque o índice também precisa ser atualizado.
+Crie índices nas colunas usadas em `WHERE`, `JOIN` e `ORDER BY` com frequência. A chave primária já tem índice.
+
+P: o que é transação em banco de dados
+P: o que é commit e rollback
+P: transação
+P: transações
+R: **Transação** é um grupo de operações que acontece **inteiro ou nada**.
+Exemplo: transferir R$ 100 da conta A para B são duas operações (tirar de A, pôr em B). Se a energia cair no meio, não pode sumir dinheiro.
+```sql
+BEGIN;
+UPDATE contas SET saldo = saldo - 100 WHERE id = 'A';
+UPDATE contas SET saldo = saldo + 100 WHERE id = 'B';
+COMMIT;      -- confirma tudo
+-- ou ROLLBACK; para desfazer tudo
+```
+O Aprendiz instala um addon dentro de uma transação: ou o addon entra inteiro, ou nada muda.
+
+P: o que é acid
+P: o que significa acid em banco de dados
+R: **ACID** são as quatro garantias de uma transação:
+- **Atomicidade:** tudo ou nada.
+- **Consistência:** a transação leva o banco de um estado válido a outro válido (respeitando chaves e restrições).
+- **Isolamento:** transações ao mesmo tempo não enxergam o "meio" umas das outras.
+- **Durabilidade:** depois do COMMIT, o dado sobrevive a uma queda de energia (fica gravado em disco).
+SQLite, PostgreSQL, MySQL (InnoDB), Oracle e SQL Server são ACID.
+
+P: o que é nosql
+P: diferença entre sql e nosql
+P: quando usar nosql
+R: **NoSQL** ("não só SQL") são bancos que não usam o modelo de tabelas relacionais:
+- **documentos** (MongoDB): cada registro é um JSON flexível;
+- **chave-valor** (Redis): um dicionário gigante e rapidíssimo, ótimo para cache;
+- **colunares** (Cassandra): grandes volumes distribuídos;
+- **grafos** (Neo4j): relações como redes sociais.
+**Quando usar relacional:** dados com estrutura clara e relações, regras de consistência, relatórios (a maioria dos sistemas).
+**Quando NoSQL ajuda:** estrutura muito variável, volumes enormes distribuídos, cache, grafos.
+Um bom padrão é começar relacional; o PostgreSQL ainda guarda JSON quando precisa de flexibilidade.
+
+P: o que é crud
+R: **CRUD** são as quatro operações básicas sobre dados, e o equivalente em SQL e HTTP:
+- **C**reate (criar): `INSERT` · `POST`
+- **R**ead (ler): `SELECT` · `GET`
+- **U**pdate (alterar): `UPDATE` · `PUT`/`PATCH`
+- **D**elete (apagar): `DELETE` · `DELETE`
+Quase toda tela de cadastro é um CRUD. No Aprendiz, a tela "Base de conhecimento" é o CRUD dos conhecimentos.
+
+P: o que é sql
+P: para que serve sql
+P: sql é linguagem de programação
+R: **SQL** (*Structured Query Language*) é a linguagem padrão para bancos relacionais. É **declarativa**: você diz **o que** quer, e o banco decide **como** buscar.
+```sql
+SELECT nome, cidade
+FROM clientes
+WHERE cidade = 'Recife'
+ORDER BY nome;
+```
+Ela se divide em grupos:
+- **DDL** (definição): `CREATE`, `ALTER`, `DROP`;
+- **DML** (manipulação): `INSERT`, `UPDATE`, `DELETE`;
+- **DQL** (consulta): `SELECT`;
+- **DCL** (permissões): `GRANT`, `REVOKE`;
+- **TCL** (transações): `BEGIN`, `COMMIT`, `ROLLBACK`.
+A trilha de SQL (básico, avançado e teoria e prática) ensina tudo isso com exemplos que rodam no SQLite.
+
+P: o que é sqlite
+P: por que o aprendiz usa sqlite
+R: **SQLite** é um banco de dados inteiro numa biblioteca pequena, que guarda tudo num **único arquivo**. Não tem servidor para instalar ou configurar.
+- vem junto com o Python (`import sqlite3`);
+- é ACID, rápido e confiável; é o banco mais instalado do mundo (todo celular tem);
+- limites: uma escrita por vez e não é feito para muitos computadores acessando pela rede.
+Por isso é perfeito para o Aprendiz: um app local, offline, de um dono só, em que a memória inteira é um arquivo que dá para copiar para outro computador.
+
+P: o que é view em banco de dados
+P: o que é visão
+R: **View** (visão) é uma consulta salva com nome, que se usa como se fosse uma tabela:
+```sql
+CREATE VIEW clientes_recife AS
+SELECT id, nome FROM clientes WHERE cidade = 'Recife';
+
+SELECT * FROM clientes_recife;
+```
+Servem para simplificar consultas complicadas, padronizar relatórios e esconder colunas (mostrar a tabela sem o salário, por exemplo). Normalmente não guardam dados; a consulta roda a cada uso.
+
+P: o que é stored procedure
+P: o que é trigger
+P: o que é gatilho em banco de dados
+R: - **Stored procedure:** um programa guardado **dentro** do banco (PL/SQL no Oracle, PL/pgSQL no PostgreSQL, T-SQL no SQL Server), chamado pelo nome. O SQLite não tem.
+- **Trigger (gatilho):** código que o banco executa **sozinho** quando algo acontece numa tabela (antes ou depois de um INSERT, UPDATE ou DELETE). Ex.: gravar um histórico toda vez que um preço muda.
+Use com moderação: regra de negócio escondida no banco é difícil de achar e de testar.
+
+P: o que é backup de banco de dados
+P: como fazer backup do banco
+R: **Backup** é uma cópia para recuperar os dados se algo der errado (disco queimado, exclusão sem querer, ataque).
+- **SQLite:** o banco é um arquivo, mas não copie o arquivo com o programa gravando; use `sqlite3 banco.db ".backup copia.db"` ou a API de backup do Python.
+- **PostgreSQL:** `pg_dump`; **MySQL:** `mysqldump`.
+Regras: automatize; guarde em outro lugar (outro disco, a nuvem); e **teste a restauração**: backup que nunca foi restaurado é só uma esperança.
+No Aprendiz, a migração entre dispositivos é exatamente isso: levar o arquivo do banco (ou um addon exportado) para outra máquina.
+
+P: o que é sql injection
+P: como evitar sql injection
+P: injeção de sql
+R: **SQL injection** é quando um texto digitado pelo usuário vira parte do comando SQL. Exemplo vulnerável:
+```python
+sql = "SELECT * FROM usuarios WHERE nome = '" + nome + "'"
+```
+Se a pessoa digitar `' OR '1'='1`, a consulta devolve todos os usuários; com algo pior, apaga tabelas.
+A solução é **nunca montar SQL juntando textos**: use **parâmetros**, e o banco trata o valor como dado, nunca como comando:
+```python
+cursor.execute("SELECT * FROM usuarios WHERE nome = ?", (nome,))
+```
+No Aprendiz, todo valor que vem de fora (o que você digita, o conteúdo de um addon) entra nas consultas com `?`; só nomes fixos do próprio código, como o nome de uma tabela, são montados no texto.
+
+P: o que é orm
+P: o que é sqlalchemy
+R: **ORM** (Mapeamento Objeto-Relacional) é uma biblioteca que deixa você usar o banco como objetos da linguagem, sem escrever SQL:
+```python
+cliente = Cliente(nome="Ana")
+sessao.add(cliente)
+sessao.commit()
+```
+Exemplos: SQLAlchemy e o ORM do Django (Python), Hibernate (Java), Entity Framework (C#).
+Vantagens: menos código repetitivo e trocar de banco fica mais fácil. Desvantagens: esconde o SQL e pode gerar consultas lentas sem você perceber.
+O Aprendiz usa o `sqlite3` direto, com SQL escrito à mão, para que quem estuda veja exatamente o que acontece.
+
+P: o que é data warehouse
+P: o que é oltp e olap
+R: - **OLTP** (processamento de transações): o banco do dia a dia do sistema, com muitas operações pequenas (registrar uma venda). Normalizado.
+- **OLAP** (processamento analítico): consultas grandes para relatórios e decisões (vendas por região nos últimos 5 anos).
+- **Data warehouse:** um banco separado, alimentado a partir dos sistemas OLTP (processo de **ETL**: extrair, transformar, carregar), organizado para análise, muitas vezes desnormalizado (modelo estrela, com fatos e dimensões).

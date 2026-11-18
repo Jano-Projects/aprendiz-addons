@@ -1,0 +1,33 @@
+{
+  "id": "c-basico",
+  "nome": "C 1 · Básico",
+  "versao": "1.0.0",
+  "autor": "Jano Projects",
+  "descricao": "Linguagem C do zero: instalar o compilador (gcc), primeiro programa, main, printf e scanf, tipos, operadores, if, switch, laços, funções, vetores e strings básicas.",
+  "licenca": "CC-BY-4.0",
+  "categoria": "Programação",
+  "etiquetas": [
+    "c",
+    "linguagem c",
+    "gcc",
+    "iniciante",
+    "trilha c"
+  ],
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.6.0"
+  },
+  "dependencias": [
+    {
+      "id": "prog-logica",
+      "versao": "1.0.0",
+      "nome": "Programação 1 · Lógica e algoritmos"
+    }
+  ],
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.98
+  }
+}

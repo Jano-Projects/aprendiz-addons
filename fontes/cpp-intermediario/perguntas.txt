@@ -1,0 +1,452 @@
+# C++ 2 · Intermediário
+# Orientação a objetos, gerenciamento de recursos, templates, STL, lambdas e exceções.
+
+P: como fazer herança em c++
+P: o que é herança em c++
+P: o que é classe base e derivada
+P: herança em c++
+P: herança c++
+R: Uma classe **derivada** herda membros de uma classe **base** e pode acrescentar ou especializar:
+```cpp
+class Animal {
+public:
+    explicit Animal(std::string nome) : nome_(std::move(nome)) {}
+    const std::string &nome() const { return nome_; }
+protected:                 // visível para as derivadas, não para fora
+    std::string nome_;
+};
+
+class Cachorro : public Animal {
+public:
+    using Animal::Animal;  // reaproveita o construtor da base
+    void latir() const { std::cout << nome_ << ": au au\n"; }
+};
+```
+- `public` na herança: o que é público na base continua público (o caso normal);
+- o construtor da base roda **antes** do da derivada; os destrutores, na ordem inversa;
+- prefira **composição** (ter um membro do outro tipo) quando não for uma relação "é um".
+
+P: o que é virtual em c++
+P: o que é polimorfismo em c++
+P: o que é override em c++
+P: o que é virtual no c++
+P: polimorfismo em c++
+P: virtual em c++
+R: Com `virtual`, a chamada vai para a versão da **classe real do objeto**, mesmo através de um ponteiro ou referência para a base. Isso é **polimorfismo**:
+```cpp
+#include <iostream>
+#include <memory>
+#include <vector>
+
+class Forma {
+public:
+    virtual ~Forma() = default;              // destrutor virtual: obrigatório aqui
+    virtual double area() const = 0;         // virtual pura: classe abstrata
+};
+
+class Quadrado : public Forma {
+public:
+    explicit Quadrado(double l) : l_(l) {}
+    double area() const override { return l_ * l_; }
+private:
+    double l_;
+};
+
+class Circulo : public Forma {
+public:
+    explicit Circulo(double r) : r_(r) {}
+    double area() const override { return 3.14159 * r_ * r_; }
+private:
+    double r_;
+};
+
+int main() {
+    std::vector<std::unique_ptr<Forma>> formas;
+    formas.push_back(std::make_unique<Quadrado>(2));
+    formas.push_back(std::make_unique<Circulo>(1));
+    for (const auto &f : formas) std::cout << f->area() << '\n';
+}
+```
+`override` pede ao compilador que confira que você está mesmo sobrescrevendo algo (pega erros de digitação na assinatura). Use sempre.
+
+P: por que o destrutor deve ser virtual
+P: o que é destrutor virtual
+R: Se você apagar um objeto derivado **através de um ponteiro para a base**, e o destrutor da base **não** for virtual, só o destrutor da base roda: os recursos da derivada vazam (e tecnicamente é comportamento indefinido).
+```cpp
+class Base {
+public:
+    virtual ~Base() = default;   // regra: classe com algum virtual → destrutor virtual
+};
+```
+Se a classe não foi feita para ser herdada, marque-a `final` e não precisa de virtual.
+
+P: o que é classe abstrata em c++
+P: o que é função virtual pura
+P: como fazer interface em c++
+R: Uma **função virtual pura** (`= 0`) não tem implementação na base; as derivadas são obrigadas a implementar. Uma classe com pelo menos uma é **abstrata**: não dá para criar objetos dela.
+C++ não tem a palavra `interface`; uma interface é uma classe só com virtuais puras e destrutor virtual:
+```cpp
+class Busca {
+public:
+    virtual ~Busca() = default;
+    virtual std::vector<int> buscar(const std::string &consulta) = 0;
+};
+```
+É o mesmo desenho dos algoritmos do Aprendiz em Python (`AlgoritmoBusca`): o assistente conhece só a interface, e cada algoritmo implementa do seu jeito.
+
+P: o que é destrutor em c++
+P: o que é raii
+P: o que significa resource acquisition is initialization
+R: O **destrutor** (`~NomeDaClasse()`) roda automaticamente quando o objeto deixa de existir: no fim do escopo, num `delete` ou quando o contêiner que o guarda é destruído.
+**RAII** é a ideia mais importante do C++: amarrar um **recurso** (memória, arquivo, trava, conexão) à vida de um **objeto**. O construtor adquire, o destrutor libera. Assim o recurso é liberado **sempre**, até se uma exceção for lançada no meio:
+```cpp
+class Arquivo {
+public:
+    explicit Arquivo(const char *nome) : f_(std::fopen(nome, "r")) {
+        if (!f_) throw std::runtime_error("não abriu");
+    }
+    ~Arquivo() { std::fclose(f_); }
+    Arquivo(const Arquivo &) = delete;             // não copiável
+    Arquivo &operator=(const Arquivo &) = delete;
+private:
+    std::FILE *f_;
+};
+```
+`std::vector`, `std::string`, `std::fstream`, `std::unique_ptr` e `std::lock_guard` são todos RAII. É por isso que C++ moderno quase não precisa de `delete` nem de `close`.
+
+P: o que é regra dos três
+P: o que é regra dos cinco
+P: o que é regra do zero
+R: Se uma classe gerencia um recurso à mão, ela precisa definir como **copiar** e **destruir** corretamente:
+- **Regra dos três:** se precisar de um destes, precisa dos três: destrutor, construtor de cópia e atribuição de cópia.
+- **Regra dos cinco** (C++11): mais o construtor de movimento e a atribuição de movimento.
+- **Regra do zero** (a melhor): não gerencie recursos à mão. Use membros que já sabem se cuidar (`std::string`, `std::vector`, `std::unique_ptr`), e o compilador gera os cinco corretamente sozinho.
+```cpp
+class Pessoa {          // regra do zero: nada a escrever
+    std::string nome;
+    std::vector<std::string> telefones;
+};
+```
+
+P: o que é construtor de cópia em c++
+P: o que é cópia rasa e cópia profunda
+R: O **construtor de cópia** cria um objeto a partir de outro do mesmo tipo (`Tipo b = a;` ou passar por valor). O gerado pelo compilador copia membro a membro.
+- **Cópia rasa:** copia o **ponteiro**; os dois objetos apontam para a mesma memória. Quando os dois destrutores rodarem, a memória é liberada duas vezes.
+- **Cópia profunda:** copia o **conteúdo** apontado; cada objeto tem o seu.
+Com `std::vector` e `std::string` como membros, a cópia já é profunda e correta. Para proibir cópias (um arquivo, uma conexão), use `= delete` no construtor de cópia e na atribuição.
+
+P: o que é ponteiro inteligente em c++
+P: o que é unique_ptr
+P: o que é shared_ptr
+P: o que é weak_ptr
+P: o que é unique ptr
+P: unique_ptr
+P: shared_ptr
+P: smart pointer
+R: **Ponteiros inteligentes** (`<memory>`) liberam a memória sozinhos:
+- **`std::unique_ptr<T>`:** dono **único**. Não pode ser copiado, só **movido**. Custo zero em relação ao ponteiro cru. É o padrão.
+- **`std::shared_ptr<T>`:** dono **compartilhado**, com contador de referências; a memória é liberada quando o último dono some. Tem custo (contador atômico).
+- **`std::weak_ptr<T>`:** observa um `shared_ptr` sem ser dono; quebra ciclos (pai ↔ filho).
+```cpp
+auto p = std::make_unique<Conta>("Ana", 100.0);
+p->depositar(10);
+auto q = std::move(p);                 // agora q é o dono; p ficou vazio
+
+auto s1 = std::make_shared<Conta>("Bia", 50.0);
+auto s2 = s1;                          // dois donos; contador = 2
+```
+Use sempre `make_unique`/`make_shared`, nunca `new` direto. Para só **usar** um objeto sem ser dono, passe uma referência ou um ponteiro cru.
+
+P: o que é template em c++
+P: como fazer função genérica em c++
+P: como criar classe template
+P: template
+P: templates em c++
+P: genéricos em c++
+R: **Templates** escrevem código para **qualquer tipo**; o compilador gera uma versão para cada tipo usado:
+```cpp
+template <typename T>
+T maior(T a, T b) {
+    return a > b ? a : b;
+}
+
+maior(3, 7);         // T = int
+maior(2.5, 1.0);     // T = double
+
+template <typename T>
+class Pilha {
+public:
+    void empilhar(T v) { dados_.push_back(std::move(v)); }
+    T desempilhar() { T v = std::move(dados_.back()); dados_.pop_back(); return v; }
+    bool vazia() const { return dados_.empty(); }
+private:
+    std::vector<T> dados_;
+};
+
+Pilha<std::string> p;
+```
+Toda a STL é feita de templates (`std::vector<int>`). O código de um template precisa estar **no cabeçalho**, porque o compilador precisa vê-lo para gerar cada versão.
+
+P: o que é stl
+P: o que tem na biblioteca padrão do c++
+P: quais os contêineres do c++
+P: stl
+P: biblioteca padrão c++
+R: A **STL** (biblioteca padrão de templates) tem três peças que se encaixam:
+- **contêineres:** guardam dados;
+- **iteradores:** percorrem os contêineres de um jeito uniforme;
+- **algoritmos:** funções que trabalham sobre iteradores (`sort`, `find`, `count`…).
+Os contêineres principais:
+- `vector`: vetor dinâmico (o padrão);
+- `array`: tamanho fixo;
+- `deque`: insere e remove nas duas pontas;
+- `list`: lista duplamente ligada;
+- `map` / `set`: ordenados (árvore rubro-negra), O(log n);
+- `unordered_map` / `unordered_set`: tabela hash, O(1) em média;
+- adaptadores: `stack`, `queue`, `priority_queue`.
+
+P: como usar map em c++
+P: dicionário em c++
+P: diferença entre map e unordered_map
+P: como usar map no c++
+P: map em c++
+P: unordered_map
+R: `std::map` guarda pares **chave → valor**:
+```cpp
+#include <map>
+#include <unordered_map>
+
+std::map<std::string, int> estoque;
+estoque["maçã"] = 10;                 // cria ou altera
+estoque["pera"] += 3;                 // [] cria com 0 se não existir
+if (auto it = estoque.find("uva"); it != estoque.end()) {
+    std::cout << it->second << '\n';
+}
+estoque.contains("maçã");             // C++20
+for (const auto &[fruta, qtd] : estoque) {   // em ordem de chave
+    std::cout << fruta << ": " << qtd << '\n';
+}
+```
+- `map`: árvore, chaves **em ordem**, O(log n);
+- `unordered_map`: hash, **sem ordem**, O(1) em média. Em geral, mais rápido.
+Atenção: `estoque["x"]` numa consulta **cria** a chave. Para só consultar, use `find`, `contains` ou `at` (que lança exceção se não existir).
+
+P: como usar set em c++
+P: como remover duplicados em c++
+R: `std::set` guarda valores **únicos e ordenados**; `std::unordered_set`, únicos sem ordem:
+```cpp
+#include <set>
+std::set<int> s = {3, 1, 3, 2};   // {1, 2, 3}
+s.insert(5);
+s.count(2);                        // 1 (existe)
+s.erase(1);
+```
+Remover duplicados de um vector mantendo-o vector:
+```cpp
+std::sort(v.begin(), v.end());
+v.erase(std::unique(v.begin(), v.end()), v.end());
+```
+`std::unique` só junta os repetidos **vizinhos**, por isso o `sort` antes.
+
+P: o que é iterador em c++
+P: o que é begin e end
+R: **Iterador** é um objeto que aponta para um elemento de um contêiner e sabe ir para o próximo, funcionando como um ponteiro generalizado:
+```cpp
+std::vector<int> v = {1, 2, 3};
+for (auto it = v.begin(); it != v.end(); ++it) {
+    std::cout << *it << ' ';
+}
+```
+- `begin()` aponta para o primeiro; `end()` aponta para **depois** do último (nunca desreferencie o `end`);
+- é por isso que os algoritmos recebem pares `(início, fim)`.
+**Invalidação:** alterar o contêiner pode invalidar iteradores. Num `vector`, `push_back` pode realocar tudo; apagar invalida os seguintes. Para apagar durante um laço, use o retorno do `erase`, ou `std::erase_if(v, condicao)` (C++20).
+
+P: quais os algoritmos da stl
+P: como usar find count e accumulate em c++
+P: o que tem em algorithm
+R: Os mais usados (`<algorithm>` e `<numeric>`):
+```cpp
+std::vector<int> v = {4, 1, 7, 3, 7};
+
+std::sort(v.begin(), v.end());
+auto it = std::find(v.begin(), v.end(), 7);                 // primeiro 7
+int quantos = std::count(v.begin(), v.end(), 7);            // 2
+int soma = std::accumulate(v.begin(), v.end(), 0);          // 22
+auto [mn, mx] = std::minmax_element(v.begin(), v.end());
+bool algum = std::any_of(v.begin(), v.end(), [](int x) { return x > 5; });
+std::reverse(v.begin(), v.end());
+std::transform(v.begin(), v.end(), v.begin(), [](int x) { return x * 2; });
+std::erase_if(v, [](int x) { return x % 2 != 0; });         // C++20
+```
+Prefira algoritmos a laços escritos à mão: o nome diz a intenção e eles são testados e otimizados. No C++20, as versões `std::ranges::` aceitam o contêiner direto: `std::ranges::sort(v);`.
+
+P: o que é lambda em c++
+P: como usar função anônima em c++
+P: o que é captura em lambda
+P: o que é lambda no c++
+P: lambda em c++
+R: **Lambda** é uma função sem nome, escrita onde é usada:
+```cpp
+auto quadrado = [](int x) { return x * x; };
+quadrado(4);   // 16
+```
+Os `[]` dizem o que a lambda **captura** do escopo em volta:
+- `[]`: nada;
+- `[x]`: copia `x`;
+- `[&x]`: usa `x` por referência;
+- `[=]` / `[&]`: tudo por cópia / tudo por referência;
+- `[this]`: os membros do objeto.
+```cpp
+int limite = 10;
+auto grandes = std::count_if(v.begin(), v.end(),
+                             [limite](int x) { return x > limite; });
+```
+Cuidado com `[&]` em lambdas guardadas para depois: se a variável já tiver morrido, a referência fica pendurada.
+
+P: o que é std::function
+R: `std::function<Retorno(Parametros)>` (de `<functional>`) guarda **qualquer coisa chamável** com aquela assinatura: função, lambda (com captura) ou objeto com `operator()`:
+```cpp
+#include <functional>
+#include <map>
+
+std::map<std::string, std::function<double(double, double)>> ops = {
+    {"+", [](double a, double b) { return a + b; }},
+    {"*", [](double a, double b) { return a * b; }},
+};
+ops["*"](3, 4);   // 12
+```
+Tem um pequeno custo (pode alocar memória). Em funções que recebem uma lambda e a chamam na hora, um parâmetro template (ou `auto`) é mais rápido.
+
+P: como tratar exceções em c++
+P: como usar try catch em c++
+P: como lançar exceção em c++
+P: como tratar exceção em c++
+P: exceção em c++
+P: try catch c++
+R: ```cpp
+#include <stdexcept>
+
+double dividir(double a, double b) {
+    if (b == 0) throw std::invalid_argument("divisão por zero");
+    return a / b;
+}
+
+try {
+    dividir(1, 0);
+} catch (const std::invalid_argument &e) {
+    std::cerr << "Erro: " << e.what() << '\n';
+} catch (const std::exception &e) {      // qualquer exceção padrão
+    std::cerr << "Outro erro: " << e.what() << '\n';
+}
+```
+- capture **por referência const**;
+- do mais específico para o mais genérico;
+- exceções padrão: `std::runtime_error`, `std::invalid_argument`, `std::out_of_range`, `std::bad_alloc`;
+- graças ao **RAII**, tudo que foi construído é destruído corretamente quando a exceção passa.
+Use exceções para situações **excepcionais**, não para o fluxo normal. Funções que nunca lançam podem ser marcadas `noexcept`.
+
+P: o que é sobrecarga de operadores em c++
+P: como sobrecarregar operador em c++
+R: Dá para definir o que `+`, `==`, `<<` etc. fazem com seus tipos:
+```cpp
+struct Vetor2 {
+    double x, y;
+    Vetor2 operator+(const Vetor2 &o) const { return {x + o.x, y + o.y}; }
+    bool operator==(const Vetor2 &) const = default;   // C++20
+};
+
+std::ostream &operator<<(std::ostream &os, const Vetor2 &v) {
+    return os << '(' << v.x << ", " << v.y << ')';
+}
+
+Vetor2 a{1, 2}, b{3, 4};
+std::cout << a + b << '\n';   // (4, 6)
+```
+No C++20, `auto operator<=>(const T &) const = default;` gera `<`, `<=`, `>`, `>=` de uma vez. Regra: só sobrecarregue quando o significado for óbvio (somar vetores, sim; `+` para "salvar no banco", não).
+
+P: o que é membro static em c++
+P: o que é método estático
+R: Membro `static` pertence à **classe**, não a cada objeto: há uma cópia só, compartilhada.
+```cpp
+class Pedido {
+public:
+    Pedido() : id_(++contador_) {}
+    static int total() { return contador_; }   // não tem this
+private:
+    inline static int contador_ = 0;           // C++17: inicializa aqui mesmo
+    int id_;
+};
+
+Pedido a, b;
+Pedido::total();   // 2
+```
+Um método `static` é chamado pela classe (`Pedido::total()`) e só acessa membros static.
+
+P: o que é friend em c++
+R: `friend` dá a uma função ou classe de fora acesso aos membros `private`. O uso mais comum é o `operator<<` para imprimir:
+```cpp
+class Ponto {
+    double x_, y_;
+public:
+    Ponto(double x, double y) : x_(x), y_(y) {}
+    friend std::ostream &operator<<(std::ostream &os, const Ponto &p) {
+        return os << p.x_ << ',' << p.y_;
+    }
+};
+```
+Use com moderação: cada `friend` abre uma exceção no encapsulamento.
+
+P: como usar optional em c++
+P: o que é std::optional
+R: `std::optional<T>` (C++17) representa um valor que **pode não existir**, sem precisar de valores mágicos (−1, "") nem ponteiros nulos:
+```cpp
+#include <optional>
+
+std::optional<int> buscar_idade(const std::string &nome) {
+    if (nome == "Ana") return 30;
+    return std::nullopt;            // "não achei"
+}
+
+if (auto idade = buscar_idade("Bia")) {
+    std::cout << *idade << '\n';
+} else {
+    std::cout << "não encontrado\n";
+}
+buscar_idade("Bia").value_or(0);    // 0
+```
+O tipo de retorno já documenta que a busca pode falhar.
+
+P: como organizar um projeto c++
+P: o que é cmake
+P: como usar cmake
+P: cmake
+R: Para projetos com vários arquivos, o padrão é o **CMake**: você descreve o projeto e ele gera os arquivos de compilação de cada sistema (Makefile, Ninja, Visual Studio).
+`CMakeLists.txt`:
+```cmake
+cmake_minimum_required(VERSION 3.20)
+project(Agenda LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_executable(agenda src/main.cpp src/contato.cpp)
+target_include_directories(agenda PRIVATE include)
+target_compile_options(agenda PRIVATE -Wall -Wextra)
+```
+Compilar:
+```bash
+cmake -S . -B build
+cmake --build build
+./build/agenda
+```
+Estrutura comum: `include/` (cabeçalhos), `src/` (fontes), `tests/`, `build/` (gerado, fora do Git). O VS Code com a extensão CMake Tools e o CLion entendem o CMakeLists direto.
+
+P: exercícios de c++ intermediário
+R: Projetos para fixar:
+1. hierarquia `Forma` → `Quadrado`, `Circulo`, `Triangulo`, num `vector<unique_ptr<Forma>>`, ordenada por área;
+2. contador de palavras de um arquivo com `unordered_map`, mostrando as 10 mais frequentes;
+3. uma classe template `Fila<T>` com testes para `int` e `std::string`;
+4. agenda de contatos com `std::map`, busca com `std::optional` e gravação em arquivo;
+5. uma classe RAII `Cronometro` que mede e imprime o tempo do escopo onde foi criada (`<chrono>`);
+6. calculadora que mapeia operadores para lambdas num `std::map<std::string, std::function<...>>`.
+Organize ao menos um deles com CMake e pastas `include/` e `src/`.

@@ -52,6 +52,8 @@ def normalizar(texto: str) -> str:
     texto = unicodedata.normalize("NFKD", texto.lower())
     texto = "".join(c for c in texto if not unicodedata.combining(c))
     texto = re.sub(r"\b([a-z]{1,2})-(?=[a-z])", r"\1", texto)
+    texto = re.sub(r"\b([a-z]+)\+\+", r"\1pp", texto)   # "c++" → "cpp" (como o app, 0.8.1+)
+    texto = re.sub(r"\b([cf])#", r"\1sharp", texto)       # "c#" → "csharp"
     return re.sub(r"[^a-z0-9]+", " ", texto).strip()
 
 
@@ -62,8 +64,12 @@ def palavras_de_blocos(caminho: Path) -> list[str]:
     de gírias ser indicado para qualquer pergunta sobre dinheiro.
     """
     saida = []
+    em_codigo = False   # linhas dentro de um bloco ``` da resposta não são perguntas
     for linha in caminho.read_text(encoding="utf-8").splitlines():
-        if linha[:2].upper() in ("P:", "V:"):
+        if linha.count("```") % 2 == 1:
+            em_codigo = not em_codigo
+            continue
+        if not em_codigo and linha[:2].upper() in ("P:", "V:"):
             saida += normalizar(linha[2:]).split()
     return saida
 

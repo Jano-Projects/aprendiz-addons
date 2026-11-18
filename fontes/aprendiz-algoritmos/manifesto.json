@@ -1,0 +1,34 @@
+{
+  "id": "aprendiz-algoritmos",
+  "nome": "Aprendiz por dentro 4 · Como os algoritmos pensam",
+  "versao": "1.0.0",
+  "autor": "Jano Projects",
+  "descricao": "Como o Aprendiz entende e responde: normalização, radicais, intenções com Naive Bayes, BM25, TF-IDF, Fuzzy, Híbrido, resposta Direta e Extrativa, prioridade do dono, dicionários, compreensão, vetores, revisão de texto e recomendação.",
+  "licenca": "CC-BY-4.0",
+  "categoria": "Programação",
+  "etiquetas": [
+    "aprendiz",
+    "algoritmos",
+    "bm25",
+    "tf-idf",
+    "naive bayes",
+    "trilha aprendiz por dentro"
+  ],
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.6.0"
+  },
+  "dependencias": [
+    {
+      "id": "aprendiz-codigo",
+      "versao": "1.0.0",
+      "nome": "Aprendiz por dentro 3 · O código explicado"
+    }
+  ],
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.99
+  }
+}

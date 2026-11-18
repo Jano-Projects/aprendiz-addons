@@ -1,0 +1,34 @@
+{
+  "id": "prog-vocabulario",
+  "nome": "Programação 2 · Vocabulário e boas práticas",
+  "versao": "1.0.0",
+  "autor": "Jano Projects",
+  "descricao": "Os nomes que todo programador usa: camelCase e snake_case, compilador, IDE, biblioteca, framework, API, Git, commit, branch, testes, paradigmas, DRY, KISS, SOLID e como escolher bons nomes.",
+  "licenca": "CC-BY-4.0",
+  "categoria": "Programação",
+  "etiquetas": [
+    "programação",
+    "nomenclatura",
+    "git",
+    "boas práticas",
+    "iniciante",
+    "trilha programação"
+  ],
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.6.0"
+  },
+  "dependencias": [
+    {
+      "id": "prog-logica",
+      "versao": "1.0.0",
+      "nome": "Programação 1 · Lógica e algoritmos"
+    }
+  ],
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.99
+  }
+}

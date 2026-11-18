@@ -1,0 +1,469 @@
+# SQL 1 · Básico
+# Todos os exemplos rodam no SQLite e usam o mesmo banco de uma loja (veja "banco de exemplo da loja").
+
+P: como começar a aprender sql
+P: como praticar sql
+P: como instalar o sqlite
+P: onde rodar comandos sql
+P: como instalar sqlite
+P: sqlite3
+R: O jeito mais simples é o **SQLite**: um banco inteiro num arquivo, sem servidor.
+- **Ubuntu/Debian:** `sudo apt install sqlite3` · **Fedora:** `sudo dnf install sqlite`;
+- **Windows:** baixe o "sqlite-tools" em sqlite.org/download.html, extraia e rode `sqlite3.exe`;
+- com interface gráfica: **DB Browser for SQLite** (sqlitebrowser.org), gratuito nos três sistemas;
+- sem instalar nada: o Python já traz o SQLite (`import sqlite3`).
+No terminal: `sqlite3 loja.db` abre (ou cria) o banco. Comandos úteis do próprio sqlite3 (começam com ponto): `.tables` lista as tabelas, `.schema clientes` mostra a estrutura, `.mode table` deixa os resultados em tabela, `.quit` sai.
+Depois, rode o script do **banco de exemplo da loja** e acompanhe os exemplos desta trilha.
+
+P: banco de exemplo da loja
+P: script do banco de exemplo
+P: tabelas de exemplo para praticar sql
+R: O banco usado em todos os exemplos de SQL (cole no `sqlite3 loja.db`):
+```sql
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE clientes (
+    id     INTEGER PRIMARY KEY,
+    nome   TEXT NOT NULL,
+    cidade TEXT,
+    uf     TEXT,
+    criado_em TEXT DEFAULT (date('now'))
+);
+CREATE TABLE produtos (
+    id        INTEGER PRIMARY KEY,
+    nome      TEXT NOT NULL,
+    categoria TEXT NOT NULL,
+    preco     REAL NOT NULL CHECK (preco >= 0)
+);
+CREATE TABLE pedidos (
+    id         INTEGER PRIMARY KEY,
+    cliente_id INTEGER NOT NULL REFERENCES clientes(id),
+    data       TEXT NOT NULL,
+    status     TEXT NOT NULL DEFAULT 'aberto'
+);
+CREATE TABLE itens_pedido (
+    pedido_id  INTEGER REFERENCES pedidos(id) ON DELETE CASCADE,
+    produto_id INTEGER REFERENCES produtos(id),
+    quantidade INTEGER NOT NULL CHECK (quantidade > 0),
+    preco_unit REAL NOT NULL,
+    PRIMARY KEY (pedido_id, produto_id)
+);
+
+INSERT INTO clientes (id, nome, cidade, uf) VALUES
+ (1, 'Ana Souza', 'Recife', 'PE'), (2, 'Bruno Lima', 'São Paulo', 'SP'),
+ (3, 'Carla Dias', 'Recife', 'PE'), (4, 'Diego Melo', 'Curitiba', 'PR'),
+ (5, 'Elisa Rocha', NULL, NULL);
+INSERT INTO produtos VALUES
+ (1, 'Teclado', 'Informática', 120.0), (2, 'Mouse', 'Informática', 60.0),
+ (3, 'Monitor', 'Informática', 900.0), (4, 'Cadeira', 'Móveis', 750.0),
+ (5, 'Mesa', 'Móveis', 1100.0), (6, 'Caneca', 'Cozinha', 35.0),
+ (7, 'Fone de ouvido', 'Informática', 199.0);
+INSERT INTO pedidos VALUES
+ (1, 1, '2026-01-10', 'entregue'), (2, 2, '2026-01-15', 'entregue'),
+ (3, 1, '2026-02-03', 'entregue'), (4, 3, '2026-02-20', 'cancelado'),
+ (5, 4, '2026-03-05', 'aberto');
+INSERT INTO itens_pedido VALUES
+ (1, 1, 1, 120.0), (1, 2, 2, 55.0), (2, 3, 2, 900.0), (2, 6, 4, 35.0),
+ (3, 4, 1, 700.0), (4, 5, 1, 1100.0), (5, 2, 1, 60.0), (5, 6, 2, 35.0);
+```
+Quatro tabelas: clientes fazem pedidos, e cada pedido tem itens de produtos. A Elisa não tem pedidos nem cidade, e o fone de ouvido nunca foi vendido: isso ajuda a mostrar `NULL` e `LEFT JOIN`.
+
+P: como criar uma tabela em sql
+P: como usar create table
+P: comando create table
+P: create table
+P: criar tabela
+R: ```sql
+CREATE TABLE contatos (
+    id       INTEGER PRIMARY KEY,
+    nome     TEXT NOT NULL,
+    email    TEXT UNIQUE,
+    idade    INTEGER CHECK (idade >= 0),
+    ativo    INTEGER NOT NULL DEFAULT 1
+);
+```
+Cada coluna tem nome, tipo e **restrições**:
+- `PRIMARY KEY`: identifica cada linha; no SQLite, `INTEGER PRIMARY KEY` é numerado sozinho;
+- `NOT NULL`: obrigatória;
+- `UNIQUE`: não repete;
+- `CHECK (...)`: uma regra que todo valor precisa cumprir;
+- `DEFAULT`: valor usado quando não informado;
+- `REFERENCES outra(id)`: chave estrangeira.
+`CREATE TABLE IF NOT EXISTS contatos (...)` não dá erro se ela já existir.
+
+P: quais os tipos de dados no sql
+P: tipos de dados do sqlite
+P: qual tipo usar para dinheiro em sql
+R: O SQLite tem cinco classes de armazenamento: `INTEGER`, `REAL`, `TEXT`, `BLOB` (bytes) e `NULL`, e é flexível com os tipos (uma coluna INTEGER aceita texto, a não ser em tabelas `STRICT`).
+Outros bancos são rígidos e têm mais tipos:
+- inteiros: `SMALLINT`, `INTEGER`, `BIGINT`;
+- exatos: `NUMERIC(10,2)` / `DECIMAL(10,2)`: **use para dinheiro**;
+- reais: `REAL`, `DOUBLE PRECISION` (aproximados; nunca para dinheiro);
+- texto: `VARCHAR(n)`, `TEXT`, `CHAR(n)`;
+- datas: `DATE`, `TIME`, `TIMESTAMP` (o SQLite guarda datas como texto ISO `'2026-01-10'`);
+- `BOOLEAN` (no SQLite, 0 e 1).
+No SQLite, para dinheiro, guarde **centavos em INTEGER** (`12050` = R$ 120,50).
+
+P: como inserir dados em uma tabela
+P: como usar insert into
+P: como inserir várias linhas de uma vez em sql
+P: insert
+P: insert em sql
+R: ```sql
+-- informando as colunas (recomendado)
+INSERT INTO clientes (nome, cidade, uf) VALUES ('Fábio Nunes', 'Natal', 'RN');
+
+-- várias linhas de uma vez
+INSERT INTO produtos (nome, categoria, preco) VALUES
+    ('Webcam', 'Informática', 250.0),
+    ('Luminária', 'Móveis', 180.0);
+
+-- a partir de uma consulta
+INSERT INTO clientes (nome, cidade)
+SELECT 'Cópia de ' || nome, cidade FROM clientes WHERE id = 1;
+```
+Sempre liste as colunas: se a tabela ganhar uma coluna nova, o comando continua funcionando. Textos vão entre **aspas simples**; para uma aspa dentro do texto, dobre-a: `'D''Ávila'`.
+
+P: como consultar dados em sql
+P: como usar select
+P: como selecionar colunas de uma tabela
+P: select
+P: select em sql
+P: como fazer um select
+R: ```sql
+SELECT * FROM clientes;                 -- todas as colunas
+SELECT nome, cidade FROM clientes;      -- só algumas
+SELECT nome AS cliente, uf AS estado    -- AS dá apelidos
+FROM clientes;
+SELECT nome, preco, preco * 0.9 AS com_desconto FROM produtos;   -- colunas calculadas
+SELECT DISTINCT cidade FROM clientes;   -- sem repetir
+```
+`SELECT *` é ótimo para explorar, mas no código prefira listar as colunas: fica claro o que se usa e não traz dados à toa. SQL não diferencia maiúsculas nas palavras-chave; a convenção é escrevê-las em MAIÚSCULAS.
+
+P: como filtrar resultados em sql
+P: como usar where
+P: operadores do where
+P: where
+P: where em sql
+R: `WHERE` filtra as linhas:
+```sql
+SELECT * FROM produtos WHERE preco > 100;
+SELECT * FROM produtos WHERE categoria = 'Móveis' AND preco < 1000;
+SELECT * FROM clientes WHERE uf = 'PE' OR uf = 'SP';
+SELECT * FROM produtos WHERE preco BETWEEN 50 AND 200;     -- inclui os limites
+SELECT * FROM clientes WHERE uf IN ('PE', 'PR');
+SELECT * FROM clientes WHERE uf NOT IN ('SP');
+```
+Comparações: `=`, `<>` (ou `!=`), `<`, `>`, `<=`, `>=`. Use parênteses ao misturar `AND` e `OR`: o `AND` é avaliado antes.
+
+P: como usar like em sql
+P: como buscar parte de um texto em sql
+P: o que é % e _ no like
+R: `LIKE` compara com um **padrão**:
+- `%`: qualquer sequência de caracteres (inclusive nenhum);
+- `_`: exatamente um caractere.
+```sql
+SELECT * FROM clientes WHERE nome LIKE 'A%';      -- começa com A
+SELECT * FROM clientes WHERE nome LIKE '%Lima';   -- termina com Lima
+SELECT * FROM produtos WHERE nome LIKE '%ca%';    -- contém "ca"
+SELECT * FROM clientes WHERE uf LIKE 'P_';        -- PE, PR…
+```
+No SQLite, `LIKE` ignora maiúsculas/minúsculas só nas letras sem acento ('a' = 'A', mas 'é' ≠ 'É'). Um `LIKE '%texto'` não aproveita índice; para busca de texto de verdade, o SQLite tem o FTS5.
+
+P: o que é null em sql
+P: como verificar se é nulo em sql
+P: por que = null não funciona
+R: `NULL` significa **desconhecido / sem valor**. Não é zero nem texto vazio.
+Qualquer comparação com NULL dá NULL (nem verdadeiro, nem falso), então **`= NULL` nunca encontra nada**. Use:
+```sql
+SELECT * FROM clientes WHERE cidade IS NULL;
+SELECT * FROM clientes WHERE cidade IS NOT NULL;
+SELECT nome, COALESCE(cidade, 'não informada') AS cidade FROM clientes;
+```
+`COALESCE(a, b, …)` devolve o primeiro valor não nulo. Contas com NULL dão NULL (`5 + NULL` é NULL), e as funções de agregação (`SUM`, `AVG`) ignoram os NULL.
+
+P: como ordenar resultados em sql
+P: como usar order by
+P: ordem decrescente em sql
+P: como ordenar resultado de consulta
+P: order by
+R: ```sql
+SELECT nome, preco FROM produtos ORDER BY preco;           -- crescente (ASC)
+SELECT nome, preco FROM produtos ORDER BY preco DESC;      -- decrescente
+SELECT nome, cidade FROM clientes ORDER BY cidade, nome;   -- por cidade, depois nome
+SELECT nome, preco FROM produtos ORDER BY categoria ASC, preco DESC;
+```
+Sem `ORDER BY`, a ordem do resultado **não é garantida**, mesmo que pareça sempre igual. No SQLite os NULL vêm primeiro na ordem crescente; dá para escolher com `NULLS LAST`.
+
+P: como limitar resultados em sql
+P: como usar limit e offset
+P: como fazer paginação em sql
+R: ```sql
+SELECT nome, preco FROM produtos ORDER BY preco DESC LIMIT 3;          -- os 3 mais caros
+SELECT nome FROM produtos ORDER BY id LIMIT 2 OFFSET 2;                -- página 2, de 2 em 2
+```
+Cada banco escreve de um jeito:
+- SQLite, PostgreSQL, MySQL: `LIMIT n OFFSET m`;
+- SQL Server: `SELECT TOP 3 ...` ou `OFFSET m ROWS FETCH NEXT n ROWS ONLY`;
+- Oracle (12c ou mais novo) e o padrão SQL: `FETCH FIRST 3 ROWS ONLY`.
+Use sempre com `ORDER BY`, senão "os 3 primeiros" são quaisquer 3. Para páginas muito fundas, `OFFSET` fica lento; a alternativa é continuar de onde parou (`WHERE id > último_id_visto`).
+
+P: como atualizar dados em sql
+P: como usar update
+P: como alterar um registro
+P: update
+P: update em sql
+R: ```sql
+UPDATE produtos SET preco = 130.0 WHERE id = 1;
+UPDATE produtos SET preco = preco * 1.10 WHERE categoria = 'Móveis';   -- +10%
+UPDATE clientes SET cidade = 'Olinda', uf = 'PE' WHERE id = 3;
+```
+**Cuidado:** sem `WHERE`, o `UPDATE` altera **todas** as linhas. Um hábito seguro:
+1. escreva primeiro o `SELECT` com o mesmo `WHERE` e confira as linhas;
+2. troque o `SELECT` pelo `UPDATE`;
+3. em produção, faça dentro de uma transação (`BEGIN; ... ; COMMIT;`), e se algo sair errado, `ROLLBACK;`.
+
+P: como apagar dados em sql
+P: como usar delete
+P: diferença entre delete drop e truncate
+P: delete
+P: delete em sql
+R: ```sql
+DELETE FROM pedidos WHERE status = 'cancelado';
+```
+Sem `WHERE`, apaga **todas** as linhas. Confira com um `SELECT` antes, como no `UPDATE`.
+As três formas de "apagar":
+- `DELETE FROM t WHERE ...`: apaga **linhas**; a tabela continua; pode ser desfeito numa transação;
+- `TRUNCATE TABLE t`: esvazia a tabela inteira de uma vez, rápido (não existe no SQLite: lá se usa `DELETE FROM t`);
+- `DROP TABLE t`: apaga a **tabela inteira**, estrutura e dados.
+Com `ON DELETE CASCADE` na chave estrangeira (como em `itens_pedido`), apagar um pedido apaga os itens dele junto.
+
+P: como alterar a estrutura de uma tabela
+P: como usar alter table
+P: como adicionar uma coluna em uma tabela
+R: ```sql
+ALTER TABLE clientes ADD COLUMN telefone TEXT;
+ALTER TABLE clientes RENAME COLUMN telefone TO celular;
+ALTER TABLE clientes DROP COLUMN celular;          -- SQLite 3.35 ou mais novo
+ALTER TABLE contatos RENAME TO agenda;
+DROP TABLE IF EXISTS agenda;
+```
+O SQLite tem um `ALTER TABLE` limitado: para mudar o tipo de uma coluna ou uma restrição, o caminho é criar uma tabela nova, copiar os dados e trocar. É o que o Aprendiz faz numa das migrações do banco dele (`aprendiz/memoria/banco.py`).
+
+P: quais são as funções de agregação em sql
+P: como usar count sum avg min max
+P: como contar linhas em sql
+R: Elas resumem várias linhas num valor:
+```sql
+SELECT COUNT(*) FROM clientes;                  -- 5 linhas
+SELECT COUNT(cidade) FROM clientes;             -- 4 (não conta NULL)
+SELECT COUNT(DISTINCT cidade) FROM clientes;    -- 3 cidades diferentes
+SELECT SUM(preco), AVG(preco), MIN(preco), MAX(preco) FROM produtos;
+SELECT ROUND(AVG(preco), 2) AS media FROM produtos WHERE categoria = 'Móveis';
+```
+`COUNT(*)` conta linhas; `COUNT(coluna)` conta os valores **não nulos** daquela coluna.
+
+P: como usar group by
+P: como agrupar resultados em sql
+P: como contar por categoria em sql
+P: group by
+P: agrupar em sql
+R: `GROUP BY` junta as linhas com o mesmo valor e aplica a agregação **em cada grupo**:
+```sql
+SELECT categoria, COUNT(*) AS qtd, AVG(preco) AS preco_medio
+FROM produtos
+GROUP BY categoria;
+```
+Resultado (categoria · qtd · preco_medio):
+- Cozinha · 1 · 35.0
+- Informática · 4 · 319.75
+- Móveis · 2 · 925.0
+Regra: toda coluna no `SELECT` que **não** está numa agregação precisa estar no `GROUP BY`. (O SQLite tolera, mas devolve um valor qualquer do grupo; PostgreSQL e outros dão erro.)
+
+P: como usar having
+P: diferença entre where e having
+P: qual a diferença entre where e having
+P: having
+R: - `WHERE` filtra **linhas**, antes de agrupar;
+- `HAVING` filtra **grupos**, depois de agrupar (por isso pode usar `COUNT`, `SUM`…).
+```sql
+-- cidades com mais de um cliente
+SELECT cidade, COUNT(*) AS qtd
+FROM clientes
+WHERE cidade IS NOT NULL
+GROUP BY cidade
+HAVING COUNT(*) > 1;
+```
+A ordem em que o banco **executa** as partes: `FROM` → `WHERE` → `GROUP BY` → `HAVING` → `SELECT` → `ORDER BY` → `LIMIT`. É por isso que um apelido criado no `SELECT` não pode ser usado no `WHERE`.
+
+P: o que é join em sql
+P: como juntar duas tabelas em sql
+P: como usar inner join
+P: o que é um join
+P: join
+P: inner join
+P: como juntar tabelas
+P: como relacionar duas tabelas numa consulta
+R: `JOIN` combina linhas de tabelas relacionadas. O `INNER JOIN` traz só as combinações que **casam** nos dois lados:
+```sql
+SELECT p.id AS pedido, p.data, c.nome AS cliente
+FROM pedidos AS p
+JOIN clientes AS c ON c.id = p.cliente_id
+ORDER BY p.data;
+```
+- `p` e `c` são **apelidos** das tabelas: deixam a consulta curta e clara;
+- `ON` diz como as linhas se ligam (a FK com a PK);
+- `JOIN` sozinho é o mesmo que `INNER JOIN`.
+Juntando três tabelas, o total de cada pedido:
+```sql
+SELECT p.id, c.nome, SUM(i.quantidade * i.preco_unit) AS total
+FROM pedidos p
+JOIN clientes c     ON c.id = p.cliente_id
+JOIN itens_pedido i ON i.pedido_id = p.id
+GROUP BY p.id, c.nome;
+```
+
+P: o que é left join
+P: diferença entre inner join e left join
+P: como listar clientes sem pedidos
+P: como funciona o left join
+P: left join
+R: - `INNER JOIN`: só as linhas que têm par nos dois lados.
+- `LEFT JOIN`: **todas** as linhas da tabela da esquerda; quando não há par, as colunas da direita vêm `NULL`.
+```sql
+SELECT c.nome, COUNT(p.id) AS pedidos
+FROM clientes c
+LEFT JOIN pedidos p ON p.cliente_id = c.id
+GROUP BY c.id, c.nome;
+```
+A Elisa aparece com 0 pedidos; com `INNER JOIN`, ela sumiria.
+Para listar **só** quem não tem pedidos:
+```sql
+SELECT c.nome
+FROM clientes c
+LEFT JOIN pedidos p ON p.cliente_id = c.id
+WHERE p.id IS NULL;
+```
+Note o `COUNT(p.id)` e não `COUNT(*)`: o `*` contaria a linha com NULL como 1.
+
+P: quais os tipos de join
+P: o que é right join full outer join e cross join
+R: - **INNER JOIN:** só o que casa nos dois lados.
+- **LEFT JOIN:** tudo da esquerda + o que casar da direita.
+- **RIGHT JOIN:** tudo da direita + o que casar da esquerda (o mesmo que um LEFT com as tabelas trocadas).
+- **FULL OUTER JOIN:** tudo dos dois lados, com NULL onde não há par.
+- **CROSS JOIN:** todas as combinações possíveis (produto cartesiano): 5 clientes × 7 produtos = 35 linhas.
+- **self join:** uma tabela com ela mesma (funcionário e seu chefe na mesma tabela).
+O SQLite tem RIGHT e FULL desde a versão 3.39. A falha mais comum em JOIN é esquecer o `ON` ou errar a condição, o que multiplica linhas sem querer.
+
+P: o que são funções de texto em sql
+P: como juntar textos em sql
+P: como deixar texto maiúsculo em sql
+R: No SQLite (outros bancos têm nomes parecidos):
+```sql
+SELECT UPPER(nome), LOWER(nome), LENGTH(nome) FROM clientes;
+SELECT nome || ' (' || uf || ')' AS rotulo FROM clientes;   -- || concatena
+SELECT SUBSTR(nome, 1, 3) FROM clientes;                    -- 3 primeiras letras
+SELECT TRIM('  oi  '), REPLACE(nome, 'a', 'A') FROM clientes;
+SELECT INSTR(nome, ' ') FROM clientes;                      -- posição do espaço
+```
+Em MySQL e SQL Server, use `CONCAT(a, b)`; PostgreSQL e Oracle aceitam `||`.
+
+P: como trabalhar com datas em sql
+P: funções de data no sqlite
+P: como filtrar por mês em sql
+R: O SQLite guarda datas como texto ISO (`'2026-01-10'`), que ordena e compara certo:
+```sql
+SELECT date('now');                              -- hoje
+SELECT date('now', '-7 days');                   -- uma semana atrás
+SELECT date('2026-01-31', '+1 month');           -- soma meses
+SELECT strftime('%Y-%m', data) AS mes, COUNT(*)  -- pedidos por mês
+FROM pedidos GROUP BY mes;
+SELECT * FROM pedidos WHERE data BETWEEN '2026-02-01' AND '2026-02-28';
+SELECT julianday('2026-03-05') - julianday('2026-01-10');   -- dias entre datas
+```
+Outros bancos têm tipos de data de verdade e funções como `EXTRACT(MONTH FROM data)` (PostgreSQL), `DATEADD` (SQL Server) e `ADD_MONTHS` (Oracle).
+
+P: como usar case when em sql
+P: if dentro de select
+R: `CASE` é o "se" do SQL, dentro de uma consulta:
+```sql
+SELECT nome, preco,
+       CASE
+           WHEN preco < 100  THEN 'barato'
+           WHEN preco < 1000 THEN 'médio'
+           ELSE 'caro'
+       END AS faixa
+FROM produtos;
+```
+Também serve para contar condições numa linha só:
+```sql
+SELECT COUNT(*) AS total,
+       SUM(CASE WHEN status = 'entregue' THEN 1 ELSE 0 END) AS entregues
+FROM pedidos;
+```
+
+P: como importar csv no sqlite
+P: como exportar resultado para csv
+R: No `sqlite3`:
+```
+.mode csv
+.import --csv --skip 1 clientes.csv clientes
+.headers on
+.output relatorio.csv
+SELECT * FROM clientes;
+.output stdout
+```
+- `.import` carrega o CSV numa tabela (`--skip 1` pula a linha de cabeçalho se a tabela já existir);
+- `.output arquivo` manda os resultados para o arquivo; `.output stdout` volta para a tela.
+O DB Browser for SQLite faz o mesmo pelo menu Arquivo → Importar/Exportar.
+
+P: como usar sql no python
+P: como usar sqlite3 no python
+P: como conectar no banco pelo python
+P: sqlite3 no python
+P: python com banco de dados
+R: O Python já traz o módulo `sqlite3`:
+```python
+import sqlite3
+
+con = sqlite3.connect("loja.db")
+con.row_factory = sqlite3.Row          # linhas acessíveis pelo nome da coluna
+
+with con:                              # transação: commit no fim, rollback se der erro
+    con.execute("INSERT INTO clientes (nome, cidade) VALUES (?, ?)",
+                ("Gil Prado", "Manaus"))
+
+for linha in con.execute("SELECT nome, cidade FROM clientes WHERE uf = ?", ("PE",)):
+    print(linha["nome"], linha["cidade"])
+
+con.close()
+```
+Os `?` são **parâmetros**: o valor nunca vira parte do comando, o que impede *SQL injection*. Nunca monte o SQL juntando textos com o que o usuário digitou. É exatamente assim que o Aprendiz conversa com o banco dele.
+
+P: boas práticas de sql
+P: como escrever sql legível
+R: Hábitos que ajudam:
+- palavras-chave em MAIÚSCULAS e uma cláusula por linha (`SELECT`, `FROM`, `WHERE`…);
+- apelidos curtos e claros nas tabelas (`p` para pedidos, `c` para clientes);
+- liste as colunas em vez de `SELECT *` no código;
+- nomes de tabelas e colunas em `snake_case`, sem acento e sem espaço;
+- sempre `ORDER BY` quando a ordem importa;
+- confira com `SELECT` antes de `UPDATE`/`DELETE`, e use transações;
+- parâmetros (`?`) para valores vindos de fora;
+- comentários com `--` explicando regras de negócio.
+
+P: exercícios de sql básico
+P: exercícios de sql para iniciantes
+R: Usando o banco de exemplo da loja:
+1. liste os produtos da categoria Informática do mais caro ao mais barato;
+2. mostre os clientes de Recife;
+3. quantos produtos existem em cada categoria?
+4. qual o preço médio dos produtos de Móveis?
+5. liste os pedidos com o nome do cliente e a data;
+6. mostre o valor total de cada pedido;
+7. liste todos os clientes e quantos pedidos cada um fez, incluindo quem não fez nenhum;
+8. aumente em 5% o preço dos produtos de Cozinha;
+9. quais clientes não informaram a cidade?
+10. quais produtos nunca foram vendidos?
+As respostas estão no addon "SQL 3 · Teoria e prática" (pergunte "resposta do exercício 6 de sql básico").

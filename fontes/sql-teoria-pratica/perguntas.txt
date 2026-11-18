@@ -1,0 +1,450 @@
+# SQL 3 · Teoria e prática
+# A teoria por trás do SQL e as respostas comentadas dos exercícios das trilhas SQL 1 e SQL 2.
+# As respostas usam o banco de exemplo da loja (addon "SQL 1 · Básico").
+
+P: o que é o modelo relacional de codd
+P: teoria do modelo relacional
+P: o que é uma relação na teoria de banco de dados
+R: Em 1970, Edgar F. Codd (IBM) propôs tratar os dados como **relações** matemáticas. Os termos formais e seus equivalentes práticos:
+- **relação** = tabela;
+- **tupla** = linha;
+- **atributo** = coluna;
+- **domínio** = o conjunto de valores permitidos de um atributo (o tipo, mais as restrições);
+- **grau** = número de atributos; **cardinalidade** = número de tuplas.
+Na teoria, uma relação é um **conjunto**: não tem linhas repetidas nem ordem. O SQL relaxa isso (permite duplicados, por isso existe o `DISTINCT`, e a ordem vem do `ORDER BY`). A grande ideia de Codd foi a **independência de dados**: o programa diz *o que* quer, e o banco decide *como* guardar e buscar.
+
+P: o que é álgebra relacional
+P: quais as operações da álgebra relacional
+P: o que é seleção projeção e junção
+P: álgebra relacional
+R: **Álgebra relacional** é o conjunto de operações sobre relações que está por trás de todo SQL:
+- **seleção σ** (filtrar linhas) → `WHERE`;
+- **projeção π** (escolher colunas) → a lista do `SELECT`;
+- **produto cartesiano ×** → `CROSS JOIN`;
+- **junção ⋈** (produto + seleção pela condição) → `JOIN ... ON`;
+- **união ∪, interseção ∩, diferença −** → `UNION`, `INTERSECT`, `EXCEPT`;
+- **renomeação ρ** → `AS`;
+- **divisão ÷** ("quem se relaciona com **todos**") → não tem palavra própria em SQL; faz-se com `NOT EXISTS` duplo ou `GROUP BY ... HAVING COUNT`.
+Exemplo: "nome dos clientes de PE" = π nome (σ uf='PE' (clientes)) = `SELECT nome FROM clientes WHERE uf = 'PE'`.
+O otimizador do banco reescreve sua consulta usando as propriedades dessa álgebra (por exemplo, filtrar **antes** de juntar), por isso consultas escritas de jeitos diferentes podem ter o mesmo plano.
+
+P: o que é divisão relacional
+P: como achar quem comprou todos os produtos em sql
+R: A **divisão** responde perguntas com "todos": quais clientes compraram **todos** os produtos de Móveis?
+Jeito 1, com contagem:
+```sql
+SELECT p.cliente_id
+FROM pedidos p
+JOIN itens_pedido i ON i.pedido_id = p.id
+JOIN produtos pr    ON pr.id = i.produto_id
+WHERE pr.categoria = 'Móveis'
+GROUP BY p.cliente_id
+HAVING COUNT(DISTINCT pr.id) = (SELECT COUNT(*) FROM produtos WHERE categoria = 'Móveis');
+```
+Jeito 2, com `NOT EXISTS` duplo ("não existe produto de Móveis que ele não tenha comprado"):
+```sql
+SELECT c.id, c.nome FROM clientes c
+WHERE NOT EXISTS (
+    SELECT 1 FROM produtos pr
+    WHERE pr.categoria = 'Móveis'
+      AND NOT EXISTS (
+          SELECT 1 FROM pedidos p JOIN itens_pedido i ON i.pedido_id = p.id
+          WHERE p.cliente_id = c.id AND i.produto_id = pr.id
+      )
+);
+```
+No banco de exemplo, ninguém comprou os dois móveis (Cadeira e Mesa), então o resultado é vazio. Insira um item de Mesa no pedido 3 da Ana e rode de novo.
+
+P: o que é dependência funcional
+P: o que significa a determina b em banco de dados
+R: Há uma **dependência funcional** A → B quando o valor de A **determina** o valor de B: duas linhas com o mesmo A têm sempre o mesmo B.
+Exemplos:
+- `cpf → nome` (o mesmo CPF é sempre da mesma pessoa);
+- `cep → cidade`;
+- `(pedido_id, produto_id) → quantidade`.
+Uma **chave** é exatamente um conjunto de atributos que determina **todos** os outros. As formas normais são regras sobre quais dependências podem existir numa tabela: dependências "fora do lugar" significam dados repetidos e anomalias.
+
+P: o que é anomalia de atualização inserção e exclusão
+P: por que dados repetidos são um problema
+R: Imagine uma tabela única `vendas(pedido, data, cliente, cidade_cliente, produto, preco_produto, quantidade)`. Ela sofre de três **anomalias**:
+- **atualização:** o preço do Teclado aparece em cada venda. Mudou o preço do cadastro? Precisa alterar muitas linhas, e esquecer uma deixa o banco contraditório;
+- **inserção:** não dá para cadastrar um produto novo que ainda não foi vendido (não há "venda" para ele);
+- **exclusão:** apagar a única venda de um cliente apaga também o cadastro dele (nome e cidade).
+A solução é **decompor** em tabelas menores (`clientes`, `produtos`, `pedidos`, `itens_pedido`) em que cada fato aparece uma vez só. É o que as formas normais guiam.
+
+P: o que é 1fn em detalhes
+P: exemplo de primeira forma normal
+P: primeira forma normal na prática
+P: 1fn
+R: **1FN:** todo atributo é **atômico** (um valor só) e não há grupos repetidos.
+Fora da 1FN:
+```
+clientes(id, nome, telefones)            telefones = '9999-1111, 9888-2222'
+clientes(id, nome, tel1, tel2, tel3)     grupo repetido
+```
+Problemas: não dá para buscar por um telefone com `=`, nem garantir o formato, e um quarto telefone não cabe.
+Na 1FN:
+```sql
+CREATE TABLE telefones (
+    cliente_id INTEGER REFERENCES clientes(id),
+    numero     TEXT,
+    PRIMARY KEY (cliente_id, numero)
+);
+```
+"Atômico" depende do uso: uma data é atômica para a maioria dos sistemas, mesmo tendo dia, mês e ano.
+
+P: o que é 2fn em detalhes
+P: exemplo de segunda forma normal
+P: o que é dependência parcial
+P: segunda forma normal
+P: 2fn
+R: **2FN:** está na 1FN e **nenhum atributo depende só de parte de uma chave composta** (sem dependência parcial).
+Fora da 2FN, com chave (`pedido_id`, `produto_id`):
+```
+itens_pedido(pedido_id, produto_id, quantidade, nome_produto, categoria)
+```
+`nome_produto` e `categoria` dependem só de `produto_id`, não da chave inteira. Resultado: o nome do produto se repete em cada item vendido.
+Na 2FN: tire o que depende só de `produto_id` para a tabela `produtos`, e deixe em `itens_pedido` só o que depende do par (`quantidade`, `preco_unit`).
+Tabelas com chave de uma coluna só já estão automaticamente na 2FN (se estiverem na 1FN).
+
+P: o que é 3fn em detalhes
+P: exemplo de terceira forma normal
+P: o que é dependência transitiva
+P: explica a terceira forma normal
+P: terceira forma normal
+P: 3fn
+R: **3FN:** está na 2FN e **nenhum atributo não-chave depende de outro atributo não-chave** (sem dependência transitiva: chave → A → B).
+Fora da 3FN:
+```
+clientes(id, nome, cep, cidade, uf)
+```
+`id → cep` e `cep → cidade, uf`. A cidade depende da chave só **através** do CEP. Se a cidade de um CEP mudar de nome, é preciso atualizar todos os clientes daquele CEP.
+Na 3FN: `ceps(cep, cidade, uf)` e `clientes(id, nome, cep)`.
+Na prática, muitos sistemas mantêm cidade e UF no cliente por simplicidade (desnormalização consciente). Saber a regra ajuda a decidir quando quebrá-la.
+
+P: o que é forma normal de boyce codd
+P: o que é bcnf
+P: o que é 4fn e 5fn
+R: **BCNF** (Forma Normal de Boyce-Codd) é uma 3FN mais rigorosa: **todo determinante é uma chave candidata**. Só difere da 3FN em casos com várias chaves candidatas sobrepostas.
+Exemplo: `aulas(aluno, disciplina, professor)`, em que cada professor dá uma só disciplina (`professor → disciplina`) e a chave é (aluno, disciplina). Está na 3FN, mas `professor` determina `disciplina` sem ser chave. Em BCNF: `professores(professor, disciplina)` e `matriculas(aluno, professor)`.
+- **4FN:** sem dependências multivaloradas independentes na mesma tabela (os idiomas e os hobbies de uma pessoa não devem ficar na mesma tabela, gerando todas as combinações).
+- **5FN:** a tabela não pode ser decomposta em menores sem perder informação.
+Na prática, chegar à 3FN/BCNF resolve quase todos os casos reais.
+
+P: o que é decomposição sem perda
+R: Ao dividir uma tabela em duas para normalizar, a **junção** das duas precisa devolver exatamente a original: nem menos linhas, nem linhas a mais ("espúrias").
+A decomposição de R em R1 e R2 é **sem perda** quando os atributos em comum formam uma **chave** de R1 ou de R2.
+Exemplo: `clientes(id, nome, cep, cidade)` → `clientes(id, nome, cep)` + `ceps(cep, cidade)`. Em comum: `cep`, que é chave de `ceps`. A junção pelo CEP reconstrói tudo. Dividir por `cidade` (em comum) não seria sem perda: duas cidades com o mesmo nome em estados diferentes gerariam combinações falsas.
+
+P: o que são os níveis de isolamento de transação
+P: o que é read committed e serializable
+P: o que é leitura suja leitura não repetível e fantasma
+P: níveis de isolamento
+P: isolamento de transação
+R: Quando transações rodam ao mesmo tempo, três **anomalias** podem aparecer:
+- **leitura suja:** ler um dado alterado por outra transação que ainda não deu COMMIT (e que pode ser desfeito);
+- **leitura não repetível:** ler a mesma linha duas vezes e ver valores diferentes, porque outra transação alterou no meio;
+- **fantasma:** repetir uma consulta e aparecerem linhas novas que outra transação inseriu.
+Os **níveis de isolamento** do padrão SQL, do mais fraco ao mais forte:
+- **READ UNCOMMITTED:** permite as três;
+- **READ COMMITTED:** evita leitura suja (padrão do PostgreSQL, Oracle e SQL Server);
+- **REPEATABLE READ:** evita também a não repetível (padrão do MySQL/InnoDB);
+- **SERIALIZABLE:** o resultado é como se as transações rodassem uma de cada vez.
+Mais isolamento = mais segurança e menos concorrência. O SQLite, com uma escrita por vez, se comporta como serializable.
+
+P: o que é mvcc
+P: como o banco lida com acessos simultâneos
+P: o que é lock em banco de dados
+R: Há duas estratégias para várias transações ao mesmo tempo:
+- **travas (locks):** quem vai alterar uma linha a trava; os outros esperam. Simples, mas leituras e escritas se bloqueiam.
+- **MVCC** (controle de concorrência multiversão): cada alteração cria uma **nova versão** da linha; cada transação enxerga um "retrato" consistente do momento em que começou. **Leitores não bloqueiam escritores e vice-versa.** É o que fazem PostgreSQL, Oracle e MySQL (InnoDB).
+O SQLite no modo **WAL** (o Aprendiz liga com `PRAGMA journal_mode = WAL`) faz algo parecido: as leituras continuam enquanto alguém escreve. O risco das travas é o **deadlock** (duas transações esperando uma pela outra); o banco detecta e cancela uma delas.
+
+P: como funciona o log de transações
+P: o que é write ahead log
+P: como o banco garante a durabilidade
+R: Para garantir a **durabilidade** (o D do ACID) sem gravar cada página da tabela no disco a cada COMMIT, os bancos usam um **log**:
+1. a alteração é escrita primeiro, em sequência, num arquivo de log (**WAL**, *write-ahead log*), e o log é forçado ao disco (`fsync`);
+2. só então o COMMIT é confirmado;
+3. as páginas das tabelas são atualizadas depois, com calma (**checkpoint**).
+Se a energia cair, ao reabrir o banco **refaz** o que estava no log e confirmado, e **descarta** o que não foi confirmado. Escrever em sequência no log é muito mais rápido que pular pelo disco atualizando páginas.
+No SQLite em modo WAL, você vê o arquivo `banco.db-wal` ao lado do banco.
+
+P: como funciona o índice b-tree por dentro
+P: por que o índice deixa a busca rápida
+R: Um índice **B+tree** guarda as chaves ordenadas numa árvore larga e baixa:
+- cada **nó** ocupa uma página do disco (4 KB no SQLite) e guarda centenas de chaves;
+- os **nós internos** só guiam a busca ("chaves menores que 500, vá para a esquerda");
+- as **folhas** têm as chaves e o endereço da linha (ou a própria linha), e são ligadas em sequência.
+Com 300 chaves por nó, 3 níveis já indexam 300³ = 27 milhões de linhas: achar uma é ler 3 ou 4 páginas, em vez de milhões.
+Como as folhas estão ligadas em ordem, o índice também acelera **faixas** (`BETWEEN`, `>`), `ORDER BY` e `MIN`/`MAX`. Ao inserir, um nó cheio se divide em dois e a árvore se mantém equilibrada sozinha.
+No SQLite, a própria tabela é uma B-tree ordenada pelo `rowid`, por isso buscar pela `INTEGER PRIMARY KEY` é tão rápido.
+
+P: como o otimizador de consultas funciona
+P: o que é plano de execução por dentro
+R: Quando você manda uma consulta, o banco:
+1. **analisa** o texto e confere tabelas e colunas;
+2. **reescreve** usando a álgebra relacional (empurra filtros para antes das junções, transforma subconsultas em junções);
+3. **gera planos** alternativos: em que ordem juntar as tabelas, com que algoritmo (laços aninhados, hash join, merge join), usando qual índice;
+4. **estima o custo** de cada plano com **estatísticas** (quantas linhas tem cada tabela, quantos valores distintos tem cada coluna);
+5. **executa** o mais barato.
+Por isso estatísticas desatualizadas levam a planos ruins (rode `ANALYZE` depois de grandes cargas), e por isso vale olhar o plano em vez de adivinhar.
+
+P: quais os algoritmos de join
+P: o que é nested loop hash join e merge join
+R: O banco tem três jeitos principais de juntar duas tabelas:
+- **laços aninhados (nested loop):** para cada linha de A, procura as de B. Ótimo quando A é pequena e B tem **índice** na coluna da junção. É o que o SQLite usa.
+- **hash join:** monta uma tabela hash com a menor tabela e percorre a maior consultando a hash. Ótimo para tabelas grandes sem índice, com `=`.
+- **merge join:** com as duas já ordenadas pela coluna da junção, percorre as duas em paralelo, como intercalar duas listas. Ótimo quando já existem índices ordenados.
+O otimizador escolhe sozinho; você influencia criando os índices certos e mantendo as estatísticas em dia.
+
+P: o que é teorema cap
+P: o que é consistência eventual
+R: Em bancos **distribuídos** (vários servidores), o **teorema CAP** diz que, quando a rede entre eles falha (**P**artição), é preciso escolher entre:
+- **C**onsistência: todos veem o mesmo dado; para isso, alguns pedidos esperam ou falham;
+- **A** (disponibilidade): todos respondem sempre, mesmo que com dados um pouco desatualizados.
+**Consistência eventual** é a escolha pela disponibilidade: as cópias podem divergir por um tempo, mas convergem depois (o contador de curtidas que demora a bater em todo lugar).
+Um banco relacional num servidor só (ou o SQLite do Aprendiz) não sofre esse dilema: é consistente por natureza.
+
+P: como modelar um banco de dados na prática
+P: exemplo de modelagem de banco de dados passo a passo
+R: Exemplo: um sistema de **biblioteca**.
+1. **Requisitos:** "leitores pegam livros emprestados; um livro tem vários exemplares; um livro pode ter vários autores".
+2. **Entidades:** Leitor, Livro, Exemplar, Autor, Empréstimo.
+3. **Relacionamentos:** Livro 1:N Exemplar; Livro N:N Autor; Leitor 1:N Empréstimo; Exemplar 1:N Empréstimo.
+4. **Tabelas:**
+```sql
+CREATE TABLE leitores (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, email TEXT UNIQUE);
+CREATE TABLE livros   (id INTEGER PRIMARY KEY, titulo TEXT NOT NULL, isbn TEXT UNIQUE, ano INTEGER);
+CREATE TABLE autores  (id INTEGER PRIMARY KEY, nome TEXT NOT NULL);
+CREATE TABLE livro_autor (
+    livro_id INTEGER REFERENCES livros(id),
+    autor_id INTEGER REFERENCES autores(id),
+    PRIMARY KEY (livro_id, autor_id)
+);
+CREATE TABLE exemplares (id INTEGER PRIMARY KEY, livro_id INTEGER NOT NULL REFERENCES livros(id));
+CREATE TABLE emprestimos (
+    id          INTEGER PRIMARY KEY,
+    exemplar_id INTEGER NOT NULL REFERENCES exemplares(id),
+    leitor_id   INTEGER NOT NULL REFERENCES leitores(id),
+    retirado_em TEXT NOT NULL,
+    devolvido_em TEXT,
+    CHECK (devolvido_em IS NULL OR devolvido_em >= retirado_em)
+);
+CREATE INDEX idx_emp_leitor ON emprestimos (leitor_id);
+```
+5. **Conferir as formas normais** e as consultas mais importantes ("quais exemplares estão emprestados?" → `WHERE devolvido_em IS NULL`).
+
+P: resposta do exercício 1 de sql básico
+P: resposta exercício 2 de sql básico
+P: resposta exercício 3 de sql básico
+P: resposta do exercício 2 de sql básico
+P: resposta do exercício 3 de sql básico
+R: Exercícios 1 a 3 de SQL básico:
+```sql
+-- 1. produtos de Informática, do mais caro ao mais barato
+SELECT nome, preco FROM produtos
+WHERE categoria = 'Informática'
+ORDER BY preco DESC;
+-- Monitor 900 · Fone de ouvido 199 · Teclado 120 · Mouse 60
+
+-- 2. clientes de Recife
+SELECT nome FROM clientes WHERE cidade = 'Recife';
+-- Ana Souza · Carla Dias
+
+-- 3. quantos produtos em cada categoria
+SELECT categoria, COUNT(*) AS qtd FROM produtos GROUP BY categoria;
+-- Cozinha 1 · Informática 4 · Móveis 2
+```
+
+P: resposta do exercício 4 de sql básico
+P: resposta exercício 5 de sql básico
+P: resposta exercício 6 de sql básico
+P: resposta do exercício 5 de sql básico
+P: resposta do exercício 6 de sql básico
+R: Exercícios 4 a 6 de SQL básico:
+```sql
+-- 4. preço médio dos móveis
+SELECT ROUND(AVG(preco), 2) AS media FROM produtos WHERE categoria = 'Móveis';
+-- 925.0
+
+-- 5. pedidos com o nome do cliente e a data
+SELECT p.id, c.nome, p.data
+FROM pedidos p JOIN clientes c ON c.id = p.cliente_id
+ORDER BY p.data;
+
+-- 6. valor total de cada pedido
+SELECT pedido_id, SUM(quantidade * preco_unit) AS total
+FROM itens_pedido
+GROUP BY pedido_id;
+-- 1: 230 · 2: 1940 · 3: 700 · 4: 1100 · 5: 130
+```
+No 6, o total sai da soma dos itens (`quantidade × preço unitário`), e não da tabela de produtos: o preço do produto pode ter mudado depois da venda. Por isso o `preco_unit` fica guardado no item.
+
+P: resposta do exercício 7 de sql básico
+P: resposta exercício 8 de sql básico
+P: resposta do exercício 8 de sql básico
+R: Exercícios 7 e 8 de SQL básico:
+```sql
+-- 7. todos os clientes e quantos pedidos cada um fez
+SELECT c.nome, COUNT(p.id) AS pedidos
+FROM clientes c
+LEFT JOIN pedidos p ON p.cliente_id = c.id
+GROUP BY c.id, c.nome
+ORDER BY c.nome;
+-- Ana 2 · Bruno 1 · Carla 1 · Diego 1 · Elisa 0
+
+-- 8. +5% nos produtos de Cozinha (confira antes com o SELECT)
+SELECT id, nome, preco, preco * 1.05 AS novo FROM produtos WHERE categoria = 'Cozinha';
+UPDATE produtos SET preco = ROUND(preco * 1.05, 2) WHERE categoria = 'Cozinha';
+```
+No 7, o `LEFT JOIN` mantém a Elisa, e o `COUNT(p.id)` dá 0 para ela (o `COUNT(*)` daria 1, contando a linha com NULL).
+
+P: resposta do exercício 9 de sql básico
+P: resposta exercício 10 de sql básico
+P: resposta do exercício 10 de sql básico
+R: Exercícios 9 e 10 de SQL básico:
+```sql
+-- 9. clientes sem cidade informada
+SELECT nome FROM clientes WHERE cidade IS NULL;
+-- Elisa Rocha   (com "= NULL" não viria nada)
+
+-- 10. produtos nunca vendidos
+SELECT pr.nome
+FROM produtos pr
+LEFT JOIN itens_pedido i ON i.produto_id = pr.id
+WHERE i.produto_id IS NULL;
+-- Fone de ouvido
+```
+O 10 também pode ser feito com `NOT EXISTS` ou com `EXCEPT` (trilha avançada).
+
+P: resposta do exercício 1 de sql avançado
+P: resposta exercício 2 de sql avançado
+P: resposta do exercício 2 de sql avançado
+R: Exercícios 1 e 2 de SQL avançado:
+```sql
+-- 1. o produto mais caro de cada categoria
+WITH ordenados AS (
+    SELECT nome, categoria, preco,
+           ROW_NUMBER() OVER (PARTITION BY categoria ORDER BY preco DESC) AS rn
+    FROM produtos
+)
+SELECT nome, categoria, preco FROM ordenados WHERE rn = 1;
+-- Caneca (Cozinha) · Monitor (Informática) · Mesa (Móveis)
+
+-- 2. total gasto por cliente em pedidos entregues
+WITH totais AS (
+    SELECT pedido_id, SUM(quantidade * preco_unit) AS total
+    FROM itens_pedido GROUP BY pedido_id
+)
+SELECT c.nome, SUM(t.total) AS gasto
+FROM pedidos p
+JOIN totais t   ON t.pedido_id = p.id
+JOIN clientes c ON c.id = p.cliente_id
+WHERE p.status = 'entregue'
+GROUP BY c.id, c.nome
+ORDER BY gasto DESC;
+-- Bruno Lima 1940 · Ana Souza 930
+```
+No 1, com empate de preço o `ROW_NUMBER` escolhe um só; use `RANK() ... = 1` para trazer todos os empatados.
+
+P: resposta do exercício 3 de sql avançado
+P: resposta exercício 4 de sql avançado
+P: resposta do exercício 4 de sql avançado
+R: Exercícios 3 e 4 de SQL avançado:
+```sql
+-- 3. ranking de preço dentro da categoria
+SELECT nome, categoria, preco,
+       RANK() OVER (PARTITION BY categoria ORDER BY preco DESC) AS posicao
+FROM produtos;
+-- Informática: Monitor 1 · Fone 2 · Teclado 3 · Mouse 4
+
+-- 4. faturamento por mês e acumulado (sem os cancelados)
+WITH mensal AS (
+    SELECT strftime('%Y-%m', p.data) AS mes,
+           SUM(i.quantidade * i.preco_unit) AS faturamento
+    FROM pedidos p JOIN itens_pedido i ON i.pedido_id = p.id
+    WHERE p.status <> 'cancelado'
+    GROUP BY mes
+)
+SELECT mes, faturamento,
+       SUM(faturamento) OVER (ORDER BY mes) AS acumulado
+FROM mensal;
+-- 2026-01: 2170 (2170) · 2026-02: 700 (2870) · 2026-03: 130 (3000)
+```
+
+P: resposta do exercício 5 de sql avançado
+P: resposta exercício 6 de sql avançado
+P: resposta exercício 7 de sql avançado
+P: resposta do exercício 6 de sql avançado
+P: resposta do exercício 7 de sql avançado
+R: Exercícios 5 a 7 de SQL avançado:
+```sql
+-- 5. clientes que nunca compraram, de dois jeitos
+SELECT nome FROM clientes c
+WHERE NOT EXISTS (SELECT 1 FROM pedidos p WHERE p.cliente_id = c.id);
+
+SELECT nome FROM clientes WHERE id IN (
+    SELECT id FROM clientes EXCEPT SELECT cliente_id FROM pedidos
+);
+-- Elisa Rocha
+
+-- 6. quantidade vendida de cada produto, incluindo os nunca vendidos
+SELECT pr.nome, COALESCE(SUM(i.quantidade), 0) AS vendidos
+FROM produtos pr
+LEFT JOIN itens_pedido i ON i.produto_id = pr.id
+GROUP BY pr.id, pr.nome
+ORDER BY vendidos DESC;
+-- Caneca 6 · Mouse 3 · Monitor 2 · … · Fone de ouvido 0
+
+-- 7. ticket médio por estado (sem cancelados)
+WITH totais AS (
+    SELECT pedido_id, SUM(quantidade * preco_unit) AS total
+    FROM itens_pedido GROUP BY pedido_id
+)
+SELECT c.uf, ROUND(AVG(t.total), 2) AS ticket_medio
+FROM pedidos p
+JOIN totais t   ON t.pedido_id = p.id
+JOIN clientes c ON c.id = p.cliente_id
+WHERE p.status <> 'cancelado'
+GROUP BY c.uf
+ORDER BY ticket_medio DESC;
+-- SP 1940 · PE 465 · PR 130
+```
+
+P: resposta do exercício 8 de sql avançado
+P: resposta exercício 9 de sql avançado
+P: resposta do exercício 9 de sql avançado
+R: Exercícios 8 e 9 de SQL avançado:
+```sql
+-- 8. trigger que impede quantidade acima de 100
+CREATE TRIGGER trg_limite_quantidade
+BEFORE INSERT ON itens_pedido
+WHEN NEW.quantidade > 100
+BEGIN
+    SELECT RAISE(ABORT, 'quantidade acima do limite de 100');
+END;
+
+INSERT INTO itens_pedido VALUES (5, 1, 500, 120.0);   -- erro: quantidade acima do limite
+
+-- 9. índice para pedidos abertos ordenados por data
+EXPLAIN QUERY PLAN
+SELECT * FROM pedidos WHERE status = 'aberto' ORDER BY data;   -- SCAN pedidos + USE TEMP B-TREE
+
+CREATE INDEX idx_pedidos_status_data ON pedidos (status, data);
+
+EXPLAIN QUERY PLAN
+SELECT * FROM pedidos WHERE status = 'aberto' ORDER BY data;   -- SEARCH ... USING INDEX
+```
+No 9, o índice composto (`status`, `data`) resolve o filtro **e** a ordenação: dentro de cada status, as datas já estão em ordem no índice, e o "TEMP B-TREE" (ordenação extra) some do plano. Para um UPDATE também ser barrado, crie um segundo trigger `BEFORE UPDATE`.
+
+P: desafio de sql
+P: exercícios difíceis de sql
+R: Desafios para quem terminou as trilhas (banco de exemplo da loja):
+1. para cada cliente, o produto que ele mais comprou (em quantidade);
+2. os pares de produtos que aparecem juntos no mesmo pedido, e quantas vezes ("quem compra X também compra Y");
+3. o intervalo médio, em dias, entre pedidos consecutivos do mesmo cliente (`LAG` + `julianday`);
+4. a curva ABC: os produtos que somam 80% do faturamento (soma acumulada ÷ total);
+5. normalize uma tabela de vendas "planilhona" (pedido, data, cliente, cidade, produto, preço, qtd) até a 3FN e escreva o `INSERT ... SELECT` que migra os dados;
+6. modele um sistema de reservas de voo (passageiros, voos, assentos, reservas) e garanta com restrições que um assento não seja reservado duas vezes no mesmo voo.
+Dica para o 2: um self join de `itens_pedido` com ela mesma, com `a.produto_id < b.produto_id` para não contar o par duas vezes.
