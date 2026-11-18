@@ -1,21 +1,25 @@
 {
   "id": "expressoes-timor-leste",
-  "nome": "Expressões de Timor-Leste",
-  "versao": "2.0.0",
-  "descricao": "Palavras do tétum, língua oficial de Timor-Leste ao lado do português: obrigadu barak, maun, mana, malae, uma, hahan… Pergunte também \"como se diz casa em tétum?\".",
+  "nome": "Português de Timor-Leste",
+  "versao": "3.0.0",
+  "descricao": "Norma de Timor-Leste: vocabulário de mais de 400 mil formas (Acordo Ortográfico de 1990), revisão de texto com regras de gramática, palavras e frases em tétum e respostas sobre as línguas timorenses. Escreva \"revise: o seu texto\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
     "timor-leste",
+    "norma",
+    "gramática",
+    "ortografia",
+    "revisão de texto",
     "tétum",
     "dicionário",
     "lusofonia"
   ],
   "autor": "Jano Projects",
-  "licenca": "CC-BY-4.0",
+  "licenca": "CC-BY-4.0 AND LGPL-2.1",
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.4.1"
+    "versao_minima": "0.8.0"
   },
   "regiao": {
     "nome": "Timor-Leste",
@@ -25,11 +29,29 @@
       "timor leste",
       "timorense",
       "timorenses",
-      "tetum",
-      "tetun",
       "dili",
       "maubere",
       "maubeses"
+    ],
+    "variedades": [
+      {
+        "id": "tetum",
+        "nome": "tétum",
+        "artigo": "o",
+        "termos": [
+          "tetum",
+          "tetun",
+          "tetum praca",
+          "tetun dili",
+          "lingua tetum"
+        ],
+        "descricao": "Língua oficial de Timor-Leste, ao lado do português; o tétum-praça é a variedade de Díli."
+      }
     ]
+  },
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.96
   }
 }

@@ -9,31 +9,37 @@ R: **morabeza** (Cabo Verde): hospitalidade, gentileza e acolhimento típicos do
 
 V: sodade
 V: sodadi
+L: kabuverdianu
 T: saudade
 R: **sodade** (Cabo Verde): saudade; sentimento de nostalgia e melancolia, tema central da morna.
 
 V: cretcheu
 V: kretxeu
 V: cretxeu
+L: kabuverdianu
 T: amor, querido, querida
 R: **cretcheu** (Cabo Verde): amor, pessoa amada, querido ou querida.
 
 V: mantenha
+L: kabuverdianu
 T: lembranças, cumprimentos
 R: **mantenha** (Cabo Verde): saudação, cumprimentos. "Manda mantenhas" = manda lembranças.
 
 V: sabi
+L: kabuverdianu
 T: bom, gostoso
 R: **sabi** (Cabo Verde): bom, gostoso, agradável. "Sta sabi" = está bom.
 
 V: txeu
 V: tcheu
 V: cheu
+L: kabuverdianu
 T: muito, bastante
 R: **txeu** (Cabo Verde): muito, bastante. Ex.: «Txeu obrigadu.»
 
 V: tud dret
 V: tudu dretu
+L: kabuverdianu
 T: tudo bem
 R: **tud dret** (Cabo Verde): tudo bem, tudo certo.
 
@@ -42,65 +48,80 @@ T: bem, direito
 R: **dretu** (Cabo Verde): direito, bem.
 
 V: modi ki bu sta
+L: kabuverdianu
 T: como vai, tudo bem
 R: **modi ki bu sta** (Cabo Verde): "Como estás?"
 
 V: kuzé
 V: kuze
+L: kabuverdianu
 T: o quê
 R: **kuzé** (Cabo Verde): "o quê?" Ex.: «Kuzé ki bu fla?»
 
 V: undi
+L: kabuverdianu
 T: onde
 R: **undi** (Cabo Verde): onde.
 
 V: fla
+L: kabuverdianu
 T: dizer, falar
 R: **fla** (Cabo Verde): dizer, falar.
 
 V: odja
+L: kabuverdianu
 T: ver, olhar
 R: **odja** (Cabo Verde): ver, olhar.
 
 V: nha
+L: kabuverdianu
 T: meu, minha
 R: **nha** (Cabo Verde): meu, minha. Ex.: «Nha terra (minha terra).»
 
 V: mininu
+L: kabuverdianu
 T: criança, menino
 R: **mininu** (Cabo Verde): criança, menino.
 
 V: fidju
+L: kabuverdianu
 T: filho
 R: **fidju** (Cabo Verde): filho.
 
 V: mudjer
+L: kabuverdianu
 T: mulher
 R: **mudjer** (Cabo Verde): mulher.
 
 V: omi
+L: kabuverdianu
 T: homem
 R: **omi** (Cabo Verde): homem.
 
 V: kaza
 V: kasa
+L: kabuverdianu
 T: casa
 R: **kaza** (Cabo Verde): casa.
 
 V: agu
+L: kabuverdianu
 T: água
 R: **agu** (Cabo Verde): água.
 
 V: txuba
 V: tchuba
+L: kabuverdianu
 T: chuva
 R: **txuba** (Cabo Verde): chuva.
 
 V: kumida
+L: kabuverdianu
 T: comida
 R: **kumida** (Cabo Verde): comida.
 
 V: obrigadu
+L: kabuverdianu
 T: obrigado
 R: **obrigadu** (Cabo Verde): obrigado.
 
@@ -145,3 +166,66 @@ R: **funaná** (Cabo Verde): gênero musical e dança animada, tocado com gaita 
 V: batuku
 V: batuque
 R: **batuku** (Cabo Verde): gênero musical e dança tradicional da ilha de Santiago, com canto e percussão.
+
+# ---- 3.0: crioulo cabo-verdiano (kabuverdianu), grafia ALUPEC ------------------
+V: bon dia
+L: kabuverdianu
+T: bom dia
+R: **bon dia** (kabuverdianu): bom dia.
+
+V: bo tarde
+V: boa tardi
+L: kabuverdianu
+T: boa tarde
+R: **bo tarde** (kabuverdianu): boa tarde.
+
+V: dja
+L: kabuverdianu
+T: já
+R: **dja** (kabuverdianu): já. Ex.: «N dja kume» — já comi.
+
+V: ka
+L: kabuverdianu
+T: não
+R: **ka** (kabuverdianu): partícula de negação, antes do verbo. Ex.: «N ka sabe» — não sei.
+
+V: sin
+L: kabuverdianu
+T: sim
+R: **sin** (kabuverdianu): sim.
+
+V: bai
+L: kabuverdianu
+T: ir
+R: **bai** (kabuverdianu): ir. Ex.: «N sta bai kasa» — estou a ir para casa.
+
+V: ben
+L: kabuverdianu
+T: vir
+R: **ben** (kabuverdianu): vir. Ex.: «Ben li!» — vem cá!
+
+V: kume
+L: kabuverdianu
+T: comer
+R: **kume** (kabuverdianu): comer.
+
+V: trabadju
+L: kabuverdianu
+T: trabalho
+R: **trabadju** (kabuverdianu): trabalho.
+
+V: djunta-mon
+V: djunta mon
+L: kabuverdianu
+T: ajuda mútua, entreajuda
+R: **djunta-mon** (kabuverdianu): "juntar as mãos": ajuda mútua da comunidade, como na construção de uma casa ou na colheita.
+
+V: kola san jon
+L: kabuverdianu
+T: festa de são joão
+R: **kola san jon** (Cabo Verde): festa popular de São João, com tambores e dança, sobretudo em Santo Antão e São Vicente.
+
+V: nha terra
+L: kabuverdianu
+T: minha terra
+R: **nha terra** (kabuverdianu): minha terra, a terra natal.

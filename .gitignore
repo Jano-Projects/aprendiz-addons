@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
 _site/
+.cache-normas/
+fontes/*/norma.json
+fontes/*/vocabulario.tsv

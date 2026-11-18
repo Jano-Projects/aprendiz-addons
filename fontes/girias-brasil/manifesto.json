@@ -1,22 +1,26 @@
 {
   "id": "girias-brasil",
-  "nome": "Gírias do Brasil",
-  "versao": "2.0.0",
-  "descricao": "Dicionário de gírias e expressões brasileiras, de norte a sul. Pergunte \"o que significa rolê?\", \"como se diz mandioca no Nordeste?\" ou digite só a palavra.",
+  "nome": "Português do Brasil",
+  "versao": "3.0.0",
+  "descricao": "Norma do Brasil: vocabulário de quase 3 milhões de formas (Acordo Ortográfico de 1990), revisão de texto com regras de gramática, gírias e falares regionais (Nordeste, Norte, Sul, Minas, Rio, São Paulo, Centro-Oeste) e respostas sobre gramática. Escreva \"revise: seu texto\" ou \"o certo é exceção ou excessão?\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
     "brasil",
+    "norma",
+    "gramática",
+    "ortografia",
+    "revisão de texto",
     "gírias",
+    "regionalismos",
     "dicionário",
-    "lusofonia",
-    "regionalismos"
+    "lusofonia"
   ],
   "autor": "Jano Projects",
-  "licenca": "CC-BY-4.0",
+  "licenca": "CC-BY-4.0 AND LGPL-3.0-or-later",
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.4.1"
+    "versao_minima": "0.8.0"
   },
   "regiao": {
     "nome": "Brasil",
@@ -29,32 +33,151 @@
       "brasileiros",
       "brasileiras",
       "br",
-      "nordeste",
-      "nordestino",
-      "nordestinos",
-      "minas",
-      "minas gerais",
-      "mineiro",
-      "mineiros",
-      "rio",
-      "rio de janeiro",
-      "carioca",
-      "cariocas",
-      "sao paulo",
-      "paulista",
-      "paulistano",
-      "rio grande do sul",
-      "gaucho",
-      "gauchos",
-      "sul",
-      "para",
-      "paraense",
-      "brasilia",
-      "pernambuco",
-      "pernambucano",
-      "bahia",
-      "baiano",
       "baianos"
+    ],
+    "variedades": [
+      {
+        "id": "nordeste",
+        "nome": "Nordeste",
+        "artigo": "o",
+        "termos": [
+          "nordeste",
+          "nordestino",
+          "nordestina",
+          "nordestinos",
+          "bahia",
+          "baiano",
+          "baiana",
+          "pernambuco",
+          "pernambucano",
+          "recife",
+          "ceara",
+          "cearense",
+          "fortaleza",
+          "paraiba",
+          "paraibano",
+          "maranhao",
+          "piaui",
+          "alagoas",
+          "sergipe",
+          "rio grande do norte",
+          "potiguar",
+          "sertao",
+          "sertanejo"
+        ],
+        "descricao": "Falares dos nove estados do Nordeste."
+      },
+      {
+        "id": "norte",
+        "nome": "Norte",
+        "artigo": "o",
+        "termos": [
+          "norte",
+          "nortista",
+          "amazonia",
+          "amazonas",
+          "amazonense",
+          "manaus",
+          "para",
+          "paraense",
+          "belem",
+          "acre",
+          "roraima",
+          "amapa",
+          "rondonia",
+          "tocantins"
+        ],
+        "descricao": "Falares da Amazônia e do Norte, com muitas palavras de origem tupi."
+      },
+      {
+        "id": "sul",
+        "nome": "Sul",
+        "artigo": "o",
+        "termos": [
+          "sul",
+          "sulista",
+          "gaucho",
+          "gaucha",
+          "gauchos",
+          "rio grande do sul",
+          "porto alegre",
+          "santa catarina",
+          "catarinense",
+          "parana",
+          "paranaense",
+          "curitiba",
+          "curitibano"
+        ],
+        "descricao": "Falares do Rio Grande do Sul, de Santa Catarina e do Paraná."
+      },
+      {
+        "id": "minas",
+        "nome": "Minas Gerais",
+        "artigo": "",
+        "termos": [
+          "minas",
+          "minas gerais",
+          "mineiro",
+          "mineira",
+          "mineiros",
+          "mineires",
+          "belo horizonte"
+        ],
+        "descricao": "O falar mineiro."
+      },
+      {
+        "id": "rio",
+        "nome": "Rio de Janeiro",
+        "artigo": "o",
+        "termos": [
+          "rio",
+          "rio de janeiro",
+          "carioca",
+          "cariocas",
+          "fluminense",
+          "carioques"
+        ],
+        "descricao": "O falar carioca."
+      },
+      {
+        "id": "sao-paulo",
+        "nome": "São Paulo",
+        "artigo": "",
+        "termos": [
+          "sao paulo",
+          "paulista",
+          "paulistano",
+          "paulistana",
+          "paulistanos",
+          "sampa"
+        ],
+        "descricao": "O falar paulista e paulistano."
+      },
+      {
+        "id": "centro-oeste",
+        "nome": "Centro-Oeste",
+        "artigo": "o",
+        "termos": [
+          "centro oeste",
+          "brasilia",
+          "brasiliense",
+          "candango",
+          "goias",
+          "goiano",
+          "goiania",
+          "mato grosso",
+          "matogrossense",
+          "cuiaba",
+          "cuiabano",
+          "mato grosso do sul"
+        ],
+        "descricao": "Falares de Brasília, Goiás e Mato Grosso."
+      }
     ]
+  },
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.94
   }
 }

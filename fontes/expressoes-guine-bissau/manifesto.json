@@ -1,22 +1,26 @@
 {
   "id": "expressoes-guine-bissau",
-  "nome": "Expressões da Guiné-Bissau",
-  "versao": "2.0.0",
-  "descricao": "Palavras do crioulo guineense (kriol) e da cultura da Guiné-Bissau: tabanka, djumbai, bajuda, mancarra, gumbé… Pergunte também \"como se fala aldeia em kriol?\".",
+  "nome": "Português da Guiné-Bissau",
+  "versao": "3.0.0",
+  "descricao": "Norma da Guiné-Bissau: vocabulário de mais de 400 mil formas que aceita as grafias de antes e de depois do Acordo de 1990 (ratificado, mas ainda não aplicado no país), revisão de texto com regras de gramática, palavras e frases do kriol e respostas sobre as línguas guineenses. Escreva \"revise: o seu texto\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
     "guiné-bissau",
+    "norma",
+    "gramática",
+    "ortografia",
+    "revisão de texto",
     "kriol",
     "crioulo",
     "dicionário",
     "lusofonia"
   ],
   "autor": "Jano Projects",
-  "licenca": "CC-BY-4.0",
+  "licenca": "CC-BY-4.0 AND LGPL-2.1",
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.4.1"
+    "versao_minima": "0.8.0"
   },
   "regiao": {
     "nome": "Guiné-Bissau",
@@ -26,13 +30,30 @@
       "guine bissau",
       "guinea",
       "guinea bissau",
-      "guineense",
       "guineenses",
       "bissau",
       "bissau guineense",
-      "kriol",
-      "crioulo guineense",
-      "gb"
+      "gb",
+      "guineense"
+    ],
+    "variedades": [
+      {
+        "id": "kriol",
+        "nome": "kriol",
+        "artigo": "o",
+        "termos": [
+          "kriol",
+          "kriolu",
+          "crioulo",
+          "crioulo guineense"
+        ],
+        "descricao": "Crioulo da Guiné-Bissau, a língua franca do país."
+      }
     ]
+  },
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.96
   }
 }

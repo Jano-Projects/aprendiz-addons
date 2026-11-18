@@ -1,22 +1,26 @@
 {
   "id": "expressoes-cabo-verde",
-  "nome": "Expressões de Cabo Verde",
-  "versao": "2.0.0",
-  "descricao": "Palavras do crioulo cabo-verdiano e da cultura das ilhas: morabeza, sodade, cretcheu, txeu, cachupa… Pergunte também \"como se diz muito em crioulo cabo-verdiano?\".",
+  "nome": "Português de Cabo Verde",
+  "versao": "3.0.0",
+  "descricao": "Norma de Cabo Verde: vocabulário de mais de 400 mil formas (Acordo Ortográfico de 1990, obrigatório no país desde 2015), revisão de texto com regras de gramática, palavras e frases do crioulo cabo-verdiano (kabuverdianu) e respostas sobre as línguas de Cabo Verde. Escreva \"revise: o seu texto\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
     "cabo verde",
+    "norma",
+    "gramática",
+    "ortografia",
+    "revisão de texto",
+    "kabuverdianu",
     "crioulo",
-    "kriolu",
     "dicionário",
     "lusofonia"
   ],
   "autor": "Jano Projects",
-  "licenca": "CC-BY-4.0",
+  "licenca": "CC-BY-4.0 AND LGPL-2.1",
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.4.1"
+    "versao_minima": "0.8.0"
   },
   "regiao": {
     "nome": "Cabo Verde",
@@ -27,13 +31,54 @@
       "cabo verdiano",
       "cabo verdiana",
       "cabo verdianos",
-      "caboverdiano",
-      "caboverdianos",
-      "kriolu",
-      "kabuverdianu",
-      "crioulo cabo verdiano",
-      "praia",
-      "mindelo"
+      "caboverdianos"
+    ],
+    "variedades": [
+      {
+        "id": "kabuverdianu",
+        "nome": "crioulo cabo-verdiano",
+        "artigo": "o",
+        "termos": [
+          "kabuverdianu",
+          "kriolu",
+          "crioulo",
+          "crioulo cabo verdiano",
+          "caboverdiano"
+        ],
+        "descricao": "Língua materna de quase todos os cabo-verdianos."
+      },
+      {
+        "id": "sotavento",
+        "nome": "Sotavento",
+        "artigo": "o",
+        "termos": [
+          "sotavento",
+          "santiago",
+          "badiu",
+          "badius",
+          "praia"
+        ],
+        "descricao": "Variedades do crioulo das ilhas de Sotavento (Santiago, Fogo, Brava, Maio)."
+      },
+      {
+        "id": "barlavento",
+        "nome": "Barlavento",
+        "artigo": "o",
+        "termos": [
+          "barlavento",
+          "sao vicente",
+          "mindelo",
+          "sampadjudu",
+          "sampadjudo",
+          "santo antao"
+        ],
+        "descricao": "Variedades do crioulo das ilhas de Barlavento (São Vicente, Santo Antão, São Nicolau, Sal, Boa Vista)."
+      }
     ]
+  },
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.98
   }
 }

@@ -73,6 +73,24 @@ python ../aprendiz/ferramentas/criar_addon.py fontes/compreensao-portugues -o ad
 (aumente a `versao` no manifesto). O `lemas.tsv` e o `vetores.bin` só mudam quando as fontes
 de dados mudam: veja `ferramentas/dados_compreensao.py`.
 
+**Normas da língua** (Aprendiz 0.8+): os oito addons de português de cada país (Brasil,
+Portugal, Angola, Moçambique, Cabo Verde, Guiné-Bissau, São Tomé e Príncipe e Timor-Leste)
+trazem, além dos verbetes, um `norma.json` (grafias, erros comuns, equivalências entre
+variantes, verbos e regras de gramática) e um `vocabulario.tsv` com todas as formas da
+norma. Esses dois arquivos são **gerados** e não ficam no git; o que se edita está em
+`fontes/normas/`. Para gerar de novo (precisa do pacote `spylls` e de internet para baixar os
+dicionários do LibreOffice na primeira vez):
+
+```bash
+pip install spylls
+python ferramentas/dados_normas.py --app ../aprendiz
+python ../aprendiz/ferramentas/criar_addon.py fontes/girias-brasil -o addons/girias-brasil.aprendiz
+```
+
+Os verbetes podem ter uma **variedade** (linha `L:`, declarada em `regiao.variedades` no
+manifesto): uma região do país ou uma língua que convive com o português. Veja
+`fontes/girias-brasil/`.
+
 Para **atualizar** um addon, aumente a `versao` no manifesto, gere o arquivo de novo e envie.
 Quem importar a versão nova no app tem o addon substituído, mantendo a escolha de ativo ou
 desativado.
@@ -96,6 +114,8 @@ aprendiz-addons/
 ├── ferramentas/gerar_catalogo.py    # gera o catalogo.json (só biblioteca padrão do Python)
 ├── ferramentas/catalogo_compreensao.py  # catálogo da loja dentro do addon de compreensão
 ├── ferramentas/dados_compreensao.py     # gera lemas.tsv e vetores.bin (precisa de spaCy)
+├── ferramentas/dados_normas.py          # gera norma.json e vocabulario.tsv dos países (precisa de spylls)
+├── fontes/normas/                       # fontes das normas: regras, equivalências, erros comuns…
 ├── index.html                       # a página
 ├── estilo.css                       # visual (claro/escuro, responsivo)
 ├── app.js                           # busca sem acentos, categorias, ordenação, cartões
@@ -119,3 +139,10 @@ No GitHub: **Settings → Pages → Build and deployment → Source: GitHub Acti
   (ODbL 1.0).
 - **Vetores de palavras do português**: CC BY-SA 4.0. Os vetores derivam do pacote
   `pt_core_news_md` do [spaCy](https://spacy.io/models/pt), da Explosion.
+- **Addons de português de cada país** (3.0): os verbetes, as regras e as respostas são
+  CC BY 4.0. Os vocabulários derivam de dicionários livres do LibreOffice e mantêm a licença
+  deles: o do Brasil, do [VERO](https://pt-br.libreoffice.org/projetos/projeto-vero-verificador-ortografico/)
+  (Raimundo Santos Moura e colaboradores, LGPL-3.0 / MPL); os de Portugal, dos países
+  africanos e de Timor-Leste, do [Projeto Natura](https://natura.di.uminho.pt/) da
+  Universidade do Minho (José João Almeida, Rui Vilela e Alberto Simões; GPL-2.0 /
+  LGPL-2.1 / MPL-1.1).

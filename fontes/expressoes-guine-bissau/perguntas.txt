@@ -1,0 +1,26 @@
+# As línguas e a norma da Guiné-Bissau.
+
+P: qual a ortografia da guine bissau
+P: a guine bissau segue o acordo ortografico
+R: A Guiné-Bissau **ratificou** o Acordo Ortográfico de 1990 em 2009, mas ele **nunca chegou a ser aplicado** na prática: no país convivem a grafia anterior (acção, óptimo, director) e a do Acordo (ação, ótimo, diretor). Por isso, esta norma do Aprendiz aceita as duas e aponta só grafias de outras variantes (como as brasileiras).
+
+P: quais as linguas da guine bissau
+P: que lingua se fala na guine bissau
+R: O **português** é a língua oficial (do ensino, da administração e da imprensa), mas é falado por uma minoria da população. A língua de comunicação entre os vários povos é o **kriol** (crioulo guineense), de base lexical portuguesa. Há ainda as línguas étnicas, como o balanta, o fula, o mandinga, o manjaco, o papel e o bijagó.
+
+P: o que e o kriol
+R: O **kriol** é o crioulo da Guiné-Bissau, nascido do contacto entre o português e línguas africanas da região a partir do século XVI. É a língua comum do país e a língua materna de muitos guineenses, sobretudo em Bissau. Grande parte do vocabulário vem do português, com gramática própria: "**N** sta bon" (estou bem), "**N ka** sibi" (não sei), "**bu**" (tu).
+
+P: frases basicas em kriol
+P: como dizer como estas em kriol
+R: Algumas frases em kriol:
+- **Kuma ku bu sta?** — Como estás?
+- **N sta bon.** — Estou bem.
+- **Bon dia.** — Bom dia.
+- **Obrigadu.** — Obrigado.
+- **N ka sibi.** — Não sei.
+- **N misti iagu.** — Quero água.
+- **Mantenha!** — Saudações! (cumprimentos a alguém)
+
+P: qual a moeda da guine bissau
+R: A moeda da Guiné-Bissau é o **CFA da África Ocidental** (código XOF), partilhado com outros países da região.

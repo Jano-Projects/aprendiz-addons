@@ -48,6 +48,7 @@ CLASSIFICACOES = {
     "personalizacao": "personalizacao.json",
     "compreensao": "compreensao.json",      # Aprendiz 0.7+
     "vetores": "vetores.bin",               # Aprendiz 0.7+
+    "norma": "norma.json",                  # Aprendiz 0.8+
     "algoritmo": None,
     "aplicacao": None,
 }
@@ -118,6 +119,16 @@ def ler_addon(arquivo: Path) -> dict:
         compreensao = {} if v1 else ler_json(zip_, "compreensao.json", obrigatorio=False) or {}
         nomes = set(zip_.namelist())
         tem_vetores = "vetores.bin" in nomes
+        # Norma (0.8+): o app valida tudo; aqui, só o resumo para o site.
+        norma = {} if v1 else ler_json(zip_, "norma.json", obrigatorio=False) or {}
+        if not isinstance(norma, dict):
+            raise Invalido("norma.json inválido")
+        formas = 0
+        if "vocabulario.tsv" in nomes:
+            if not norma:
+                raise Invalido("vocabulario.tsv sem norma.json")
+            with zip_.open("vocabulario.tsv") as f:
+                formas = sum(1 for linha in f if linha.strip() and not linha.startswith(b"#"))
         lemas = 0
         if "lemas.tsv" in nomes:
             with zip_.open("lemas.tsv") as f:
@@ -146,7 +157,8 @@ def ler_addon(arquivo: Path) -> dict:
         raise Invalido("compreensao.json inválido")
     presentes = [t for t, tem in (("memoria", conhecimentos), ("linguagem", linguagem),
                                   ("parametros", parametros), ("personalizacao", personalizacao),
-                                  ("compreensao", compreensao), ("vetores", tem_vetores)) if tem]
+                                  ("compreensao", compreensao), ("vetores", tem_vetores),
+                                  ("norma", norma)) if tem]
     if not presentes:
         raise Invalido("addon vazio")
     if v1:
@@ -228,6 +240,16 @@ def ler_addon(arquivo: Path) -> dict:
             "lemas": lemas,
             "vetores": vetores,
         } if (compreensao or tem_vetores) else None,
+        # Norma da língua (0.8+): id, ortografia e tamanhos, para o site mostrar
+        "norma": {
+            "id": str((norma.get("norma") or {}).get("id") or ""),
+            "nome": str((norma.get("norma") or {}).get("nome") or ""),
+            "ortografia": str((norma.get("norma") or {}).get("ortografia") or ""),
+            "formas": formas,
+            "regras": len(norma.get("regras") or []),
+            "grafias": len(norma.get("grafias") or {}),
+            "equivalencias": len(norma.get("equivalencias") or []),
+        } if norma else None,
         "arquivo": f"addons/{arquivo.name}",
         "tamanho": len(dados),
         "sha256": hashlib.sha256(dados).hexdigest(),

@@ -1,0 +1,204 @@
+{
+  "girias-brasil": {
+    "id": "pt-BR",
+    "nome": "Português do Brasil",
+    "pais": "Brasil",
+    "ortografia": "1990",
+    "vocabulario": "br",
+    "vocabulario_extra": [
+      "vocabulario-comum.tsv",
+      "vocabulario-brasil.tsv"
+    ],
+    "regras": [
+      "regras-comuns.json",
+      "regras-brasil.json"
+    ],
+    "erros_comuns": [
+      "erros-comuns.tsv"
+    ],
+    "grafias": [
+      "grafias-brasil.tsv"
+    ],
+    "fontes": [
+      "Vocabulário derivado do VERO (Verificador Ortográfico do LibreOffice), de Raimundo Santos Moura e colaboradores, sob LGPL-3.0/MPL; segue o Acordo Ortográfico de 1990.",
+      "Grafias europeias e anteriores ao Acordo, regras de gramática, equivalências e erros comuns: Jano Projects (CC BY 4.0)."
+    ]
+  },
+  "girias-portugal": {
+    "id": "pt-PT",
+    "nome": "Português de Portugal",
+    "pais": "Portugal",
+    "ortografia": "1990",
+    "vocabulario": "pt",
+    "vocabulario_extra": [
+      "vocabulario-comum.tsv",
+      "vocabulario-portugal.tsv"
+    ],
+    "regras": [
+      "regras-comuns.json",
+      "regras-europeias.json"
+    ],
+    "erros_comuns": [
+      "erros-comuns.tsv"
+    ],
+    "grafias": [
+      "grafias-europa.tsv"
+    ],
+    "fontes": [
+      "Vocabulário derivado do dicionário do Projeto Natura (Universidade do Minho) — José João Almeida, Rui Vilela e Alberto Simões —, sob GPL-2.0/LGPL-2.1/MPL-1.1; segue o Acordo Ortográfico de 1990 e anota a grafia anterior.",
+      "Grafias brasileiras, regras de gramática, equivalências e erros comuns: Jano Projects (CC BY 4.0)."
+    ]
+  },
+  "girias-angola": {
+    "id": "pt-AO",
+    "nome": "Português de Angola",
+    "pais": "Angola",
+    "ortografia": "1945",
+    "vocabulario": "pt-1945",
+    "vocabulario_extra": [
+      "vocabulario-comum.tsv",
+      "vocabulario-angola.tsv"
+    ],
+    "regras": [
+      "regras-comuns.json",
+      "regras-europeias.json",
+      "regras-africa.json"
+    ],
+    "erros_comuns": [
+      "erros-comuns.tsv"
+    ],
+    "grafias": [
+      "grafias-europa-1945.tsv"
+    ],
+    "fontes": [
+      "Vocabulário derivado do dicionário do Projeto Natura (Universidade do Minho), sob GPL-2.0/LGPL-2.1/MPL-1.1, convertido para a grafia anterior ao Acordo Ortográfico de 1990 (que Angola não ratificou) a partir das anotações do próprio Natura.",
+      "Regras de gramática, equivalências, palavras angolanas e erros comuns: Jano Projects (CC BY 4.0)."
+    ]
+  },
+  "girias-mocambique": {
+    "id": "pt-MZ",
+    "nome": "Português de Moçambique",
+    "pais": "Moçambique",
+    "ortografia": "1945",
+    "vocabulario": "pt-1945",
+    "vocabulario_extra": [
+      "vocabulario-comum.tsv",
+      "vocabulario-mocambique.tsv"
+    ],
+    "regras": [
+      "regras-comuns.json",
+      "regras-europeias.json",
+      "regras-africa.json"
+    ],
+    "erros_comuns": [
+      "erros-comuns.tsv"
+    ],
+    "grafias": [
+      "grafias-europa-1945.tsv"
+    ],
+    "fontes": [
+      "Vocabulário derivado do dicionário do Projeto Natura (Universidade do Minho), sob GPL-2.0/LGPL-2.1/MPL-1.1, convertido para a grafia anterior ao Acordo Ortográfico de 1990 (que Moçambique não ratificou) a partir das anotações do próprio Natura.",
+      "Regras de gramática, equivalências, palavras moçambicanas e erros comuns: Jano Projects (CC BY 4.0)."
+    ]
+  },
+  "expressoes-cabo-verde": {
+    "id": "pt-CV",
+    "nome": "Português de Cabo Verde",
+    "pais": "Cabo Verde",
+    "ortografia": "1990",
+    "vocabulario": "pt",
+    "vocabulario_extra": [
+      "vocabulario-comum.tsv",
+      "vocabulario-cabo-verde.tsv"
+    ],
+    "regras": [
+      "regras-comuns.json",
+      "regras-europeias.json"
+    ],
+    "erros_comuns": [
+      "erros-comuns.tsv"
+    ],
+    "grafias": [
+      "grafias-europa.tsv"
+    ],
+    "fontes": [
+      "Vocabulário derivado do dicionário do Projeto Natura (Universidade do Minho), sob GPL-2.0/LGPL-2.1/MPL-1.1; segue o Acordo Ortográfico de 1990, obrigatório em Cabo Verde desde outubro de 2015.",
+      "Regras de gramática, equivalências, palavras cabo-verdianas e erros comuns: Jano Projects (CC BY 4.0)."
+    ]
+  },
+  "expressoes-guine-bissau": {
+    "id": "pt-GW",
+    "nome": "Português da Guiné-Bissau",
+    "pais": "Guiné-Bissau",
+    "ortografia": "ambas",
+    "vocabulario": "pt-ambas",
+    "vocabulario_extra": [
+      "vocabulario-comum.tsv",
+      "vocabulario-guine-bissau.tsv"
+    ],
+    "regras": [
+      "regras-comuns.json",
+      "regras-europeias.json"
+    ],
+    "erros_comuns": [
+      "erros-comuns.tsv"
+    ],
+    "grafias": [
+      "grafias-europa.tsv"
+    ],
+    "fontes": [
+      "Vocabulário derivado do dicionário do Projeto Natura (Universidade do Minho), sob GPL-2.0/LGPL-2.1/MPL-1.1, com as grafias de antes e de depois do Acordo Ortográfico de 1990 (ratificado pela Guiné-Bissau em 2009, mas ainda não aplicado na prática).",
+      "Regras de gramática, equivalências, palavras guineenses e erros comuns: Jano Projects (CC BY 4.0)."
+    ]
+  },
+  "expressoes-sao-tome-e-principe": {
+    "id": "pt-ST",
+    "nome": "Português de São Tomé e Príncipe",
+    "pais": "São Tomé e Príncipe",
+    "ortografia": "1990",
+    "vocabulario": "pt",
+    "vocabulario_extra": [
+      "vocabulario-comum.tsv",
+      "vocabulario-sao-tome.tsv"
+    ],
+    "regras": [
+      "regras-comuns.json",
+      "regras-europeias.json"
+    ],
+    "erros_comuns": [
+      "erros-comuns.tsv"
+    ],
+    "grafias": [
+      "grafias-europa.tsv"
+    ],
+    "fontes": [
+      "Vocabulário derivado do dicionário do Projeto Natura (Universidade do Minho), sob GPL-2.0/LGPL-2.1/MPL-1.1; segue o Acordo Ortográfico de 1990, em vigor em São Tomé e Príncipe.",
+      "Regras de gramática, equivalências, palavras são-tomenses e erros comuns: Jano Projects (CC BY 4.0)."
+    ]
+  },
+  "expressoes-timor-leste": {
+    "id": "pt-TL",
+    "nome": "Português de Timor-Leste",
+    "pais": "Timor-Leste",
+    "ortografia": "1990",
+    "vocabulario": "pt",
+    "vocabulario_extra": [
+      "vocabulario-comum.tsv",
+      "vocabulario-timor-leste.tsv"
+    ],
+    "regras": [
+      "regras-comuns.json",
+      "regras-europeias.json"
+    ],
+    "erros_comuns": [
+      "erros-comuns.tsv"
+    ],
+    "grafias": [
+      "grafias-europa.tsv"
+    ],
+    "fontes": [
+      "Vocabulário derivado do dicionário do Projeto Natura (Universidade do Minho), sob GPL-2.0/LGPL-2.1/MPL-1.1; segue o Acordo Ortográfico de 1990, adotado por Timor-Leste.",
+      "Regras de gramática, equivalências, palavras timorenses e erros comuns: Jano Projects (CC BY 4.0)."
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+# O português de Moçambique.
+
+P: qual a ortografia de mocambique
+P: mocambique segue o acordo ortografico
+P: mocambique ratificou o acordo ortografico
+R: Moçambique assinou o Acordo Ortográfico de 1990 e elaborou o seu Vocabulário Ortográfico Nacional, integrado no Vocabulário Ortográfico Comum (VOC) do IILP, mas o Acordo **não foi ratificado pelo parlamento** (em 2026, Moçambique e Angola eram os únicos países da CPLP nessa situação). No uso corrente segue-se a **grafia anterior ao Acordo**: **acção**, **óptimo**, **director**, **projecto**. Esta norma do Aprendiz segue essa grafia.
+
+P: quais as linguas de mocambique
+P: linguas nacionais de mocambique
+R: O **português** é a língua oficial; nas cidades, é cada vez mais língua materna, mas para muitos moçambicanos é segunda língua. Convive com mais de vinte línguas bantu, como o **emakhuwa** (macua, a mais falada, no Norte), o **xichangana** (changana, no Sul), o cisena, o elomwe, o echuwabo, o cindau e o xironga, além do suaíli no extremo Norte.
+
+P: caracteristicas do portugues de mocambique
+P: diferencas entre o portugues de mocambique e o de portugal
+R: O português de Moçambique segue a norma europeia na escrita formal, com marcas próprias, muitas do contacto com as línguas bantu:
+- **vocabulário** local: maningue, machimbombo, chapa, mola, machamba, xima, mata-bicho;
+- a preposição **"em"** com verbos de movimento: "vou na escola" (a norma usa "vou à escola");
+- **"lhe"** como complemento direto: "encontrei-lhe" (a norma usa "encontrei-o");
+- concordância nominal e verbal por vezes simplificada na fala;
+- regência própria de alguns verbos.
+
+P: vou na escola ou vou a escola em mocambique
+R: Com o verbo "ir" indicando destino, a norma pede **a** (ou **para**): "vou **à** escola", "fui **ao** mercado". "Vou na escola" é frequente na fala moçambicana, mas em texto formal prefira "à".
+
+P: encontrei-lhe ou encontrei-o
+R: Na norma-padrão, com verbos que pedem complemento direto (ver, conhecer, encontrar, ajudar), usa-se **o** ou **a**: "encontrei-**o**". **Lhe** fica para o complemento indireto: "dei-**lhe** o livro". "Encontrei-lhe" é comum na fala de Moçambique e de Angola.
+
+P: qual a moeda de mocambique
+R: A moeda de Moçambique é o **metical** (MZN); no plural, **meticais**.

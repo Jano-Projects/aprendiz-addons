@@ -160,6 +160,7 @@
   const CLASSIFICACOES = {
     memoria: "Memória", linguagem: "Linguagem", parametros: "Parâmetros",
     personalizacao: "Personalização", compreensao: "Compreensão", vetores: "Vetores",
+    norma: "Norma da língua",
     algoritmo: "Algoritmo", aplicacao: "Aplicação",
   };
   const milhar = (n) => Number(n).toLocaleString("pt-BR");
@@ -232,6 +233,9 @@
         ${a.compreensao && a.compreensao.regras ? `<span><b>${milhar(a.compreensao.regras)}</b> regras de compreensão</span>` : ""}
         ${a.compreensao && a.compreensao.lemas ? `<span><b>${milhar(a.compreensao.lemas)}</b> palavras no léxico</span>` : ""}
         ${a.compreensao && a.compreensao.vetores ? `<span>vetores de <b>${milhar(a.compreensao.vetores)}</b> palavras</span>` : ""}
+        ${a.norma && a.norma.formas ? `<span>vocabulário de <b>${milhar(a.norma.formas)}</b> formas</span>` : ""}
+        ${a.norma && a.norma.regras ? `<span><b>${milhar(a.norma.regras)}</b> regras de gramática</span>` : ""}
+        ${a.norma && a.norma.ortografia ? `<span>ortografia: <b>${a.norma.ortografia === "1990" ? "Acordo de 1990" : a.norma.ortografia === "1945" ? "anterior ao Acordo" : "as duas"}</b></span>` : ""}
         ${a.versao_minima_app ? `<span>requer Aprendiz <b>${esc(a.versao_minima_app)}</b>+</span>` : ""}
         <span>${tamanho(a.tamanho)}</span>
         <span>atualizado em ${esc(data(a.atualizado_em))}</span>

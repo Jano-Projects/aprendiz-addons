@@ -1,0 +1,36 @@
+# O português de Angola.
+
+P: qual a ortografia de angola
+P: angola segue o acordo ortografico
+P: acao ou accao em angola
+P: angola ratificou o acordo ortografico
+R: Angola assinou o Acordo Ortográfico de 1990, mas **não o ratificou** (em 2026, Angola e Moçambique eram os únicos países da CPLP nessa situação). Por isso, em Angola continua em uso a **ortografia anterior ao Acordo**, a mesma que Portugal usava antes de 2009: **acção**, **óptimo**, **director**, **projecto**, **facto**. Esta norma do Aprendiz segue essa grafia e aponta as formas do Acordo como "grafia não adotada em Angola".
+
+P: porque angola nao ratificou o acordo
+R: Angola tem levantado reservas sobre o Acordo: entre elas, a falta de regras para as letras **k, w e y**, muito usadas em nomes e palavras de origem angolana (Kwanza, Kuito, Ndalatando), e a falta de clareza dos instrumentos de aplicação nas escolas.
+
+P: quais as linguas de angola
+P: linguas nacionais de angola
+R: O **português** é a língua oficial e, hoje, a língua materna de boa parte dos angolanos, sobretudo nas cidades. Convive com as **línguas nacionais**, quase todas bantu: umbundo (Planalto Central), quimbundo (Luanda, Malanje), quicongo (Norte), cokwe (Leste), kwanyama e nganguela (Sul), entre outras.
+
+P: caracteristicas do portugues de angola
+P: diferencas entre o portugues de angola e o de portugal
+R: O português de Angola segue a norma europeia na escrita formal, mas tem marcas próprias, muitas vindas do contacto com as línguas bantu:
+- **vocabulário** do quimbundo e do umbundo: kota, kamba, kumbu, maka, cassule, mata-bicho;
+- **"lhe"** como complemento direto: "vi-lhe ontem" (a norma usa "vi-o");
+- a preposição **"em"** com verbos de movimento: "vou na escola" (a norma usa "vou à escola");
+- tratamento de **respeito** aos mais velhos: "mais-velho", "kota", "tio", "tia";
+- concordância nominal e verbal por vezes simplificada na fala.
+
+P: vi-lhe ou vi-o
+P: lhe como objeto direto
+R: Em Angola é comum dizer "**vi-lhe**", "**conheço-lhe**", "**ajudei-lhe**". Na norma-padrão, com verbos que pedem complemento direto (ver, conhecer, encontrar, ajudar, convidar), usa-se **o** ou **a**: "vi-o", "conheço-a", "ajudei-o". **Lhe** fica para o complemento indireto: "dei-**lhe** o livro", "disse-**lhe** a verdade".
+
+P: vou na escola ou vou a escola
+R: Com o verbo "ir" indicando destino, a norma pede **a** (ou **para**): "vou **à** escola", "fui **ao** mercado". "Vou na escola" é muito usado na fala angolana (e brasileira), mas em texto formal prefira "à".
+
+P: estou a fazer ou estou fazendo em angola
+R: Em Angola, como em Portugal, a forma da norma é **estar a + infinitivo**: "estou **a trabalhar**". O gerúndio ("estou trabalhando") é a forma do Brasil.
+
+P: qual a moeda de angola
+R: A moeda de Angola é o **kwanza** (AOA).

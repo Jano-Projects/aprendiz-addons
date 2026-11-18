@@ -1,0 +1,376 @@
+[
+ {
+  "id": "estar-gerundio",
+  "nivel": "variante",
+  "titulo": "Estar + gerúndio",
+  "padrao": [
+   {
+    "palavras": [
+     "estou",
+     "estás",
+     "está",
+     "estamos",
+     "estão",
+     "estava",
+     "estavas",
+     "estávamos",
+     "estavam",
+     "estive",
+     "esteve",
+     "estivemos",
+     "estiveram",
+     "estarei",
+     "estará",
+     "estaremos",
+     "estarão",
+     "estaria",
+     "estariam",
+     "esteja",
+     "estejam",
+     "estar",
+     "fiquei",
+     "ficou",
+     "ficámos",
+     "ficamos",
+     "ficaram",
+     "fico",
+     "fica",
+     "ficam",
+     "ando",
+     "andas",
+     "anda",
+     "andamos",
+     "andam",
+     "andava",
+     "andavam",
+     "continuo",
+     "continua",
+     "continuam",
+     "continuou",
+     "continuaram",
+     "continuava",
+     "continuavam"
+    ]
+   },
+   {
+    "classe": "gerundio"
+   }
+  ],
+  "sugestao": "{1} a {2:infinitivo}",
+  "mensagem": "Na norma europeia (a de Portugal e a de referência na África e em Timor-Leste), usa-se «estar a» + infinitivo: «estou a fazer». O gerúndio («estou fazendo») é do Brasil — e também se ouve no Alentejo, no Algarve e nos Açores.",
+  "exemplo": {
+   "errado": "Estou fazendo o jantar.",
+   "certo": "Estou a fazer o jantar."
+  }
+ },
+ {
+  "id": "proclise-inicio",
+  "nivel": "norma",
+  "titulo": "Pronome no começo da frase",
+  "padrao": [
+   {
+    "classe": "inicio"
+   },
+   {
+    "palavras": [
+     "me",
+     "te",
+     "lhe",
+     "lhes"
+    ]
+   },
+   {
+    "nao": [
+     {
+      "classe": "pronome_reto"
+     },
+     {
+      "palavras": [
+       "o",
+       "a",
+       "os",
+       "as",
+       "um",
+       "uma",
+       "de",
+       "que",
+       "não",
+       "já",
+       "e"
+      ]
+     }
+    ]
+   }
+  ],
+  "sugestao": "{3:capital}-{2:minuscula}",
+  "mensagem": "Na norma europeia, a frase não começa por pronome átono: o pronome vai depois do verbo, ligado por hífen («Dá-me», «Diz-lhe»).",
+  "exemplo": {
+   "errado": "Me dá o livro.",
+   "certo": "Dá-me o livro."
+  }
+ },
+ {
+  "id": "proclise-sem-atrator",
+  "nivel": "variante",
+  "titulo": "Colocação do pronome (ênclise)",
+  "padrao": [
+   {
+    "classe": "inicio"
+   },
+   {
+    "palavras": [
+     "eu",
+     "tu",
+     "ele",
+     "ela",
+     "nós",
+     "vós",
+     "eles",
+     "elas",
+     "você",
+     "vocês"
+    ]
+   },
+   {
+    "palavras": [
+     "me",
+     "te",
+     "se",
+     "lhe",
+     "lhes",
+     "vos"
+    ]
+   },
+   {
+    "nao": [
+     {
+      "classe": "pronome_reto"
+     },
+     {
+      "palavras": [
+       "o",
+       "a",
+       "os",
+       "as",
+       "um",
+       "uma",
+       "de",
+       "que",
+       "não",
+       "já",
+       "e",
+       "mesmo",
+       "mesma",
+       "só"
+      ]
+     }
+    ]
+   }
+  ],
+  "sugestao": "{2} {4}-{3}",
+  "marcar": [
+   3,
+   4
+  ],
+  "mensagem": "Sem uma palavra que «puxe» o pronome (como «não», «que», «já»), a norma europeia põe o pronome depois do verbo: «Ele disse-me», «Eu lembro-me». A próclise («Ele me disse») é a colocação do Brasil.",
+  "exemplo": {
+   "errado": "Ele me disse a verdade.",
+   "certo": "Ele disse-me a verdade."
+  }
+ },
+ {
+  "id": "ir-no-eu",
+  "nivel": "norma",
+  "titulo": "Ir a / ir em",
+  "padrao": [
+   {
+    "palavras": [
+     "vou",
+     "vais",
+     "vai",
+     "vamos",
+     "vão",
+     "ia",
+     "iam",
+     "íamos",
+     "ir",
+     "irei",
+     "iremos",
+     "irá",
+     "irão",
+     "indo"
+    ]
+   },
+   {
+    "palavras": [
+     "no",
+     "na",
+     "nos",
+     "nas"
+    ]
+   },
+   {
+    "nao": [
+     {
+      "palavras": [
+       "autocarro",
+       "avião",
+       "barco",
+       "bicha",
+       "bicicleta",
+       "boa",
+       "candongueiro",
+       "cantiga",
+       "carro",
+       "chapa",
+       "chuva",
+       "comboio",
+       "conversa",
+       "direcção",
+       "direção",
+       "esperança",
+       "fila",
+       "frente",
+       "fé",
+       "hora",
+       "machimbombo",
+       "manhã",
+       "mesma",
+       "mesmo",
+       "metro",
+       "moda",
+       "mota",
+       "moto",
+       "noite",
+       "ocasião",
+       "onda",
+       "quarta",
+       "quinta",
+       "segunda",
+       "semana",
+       "sexta",
+       "tarde",
+       "terça",
+       "trem",
+       "txopela",
+       "táxi",
+       "verdade",
+       "vez",
+       "volta",
+       "época",
+       "ônibus"
+      ]
+     },
+     {
+      "classe": "infinitivo"
+     }
+    ]
+   }
+  ],
+  "sugestao": "{1} {2:troca} {3}",
+  "troca": {
+   "no": "ao",
+   "na": "à",
+   "nos": "aos",
+   "nas": "às"
+  },
+  "marcar": [
+   1,
+   2
+  ],
+  "mensagem": "Com o verbo «ir» indicando destino, a norma pede «a» (ou «para»): «vou ao mercado», «fui à escola».",
+  "exemplo": {
+   "errado": "Vou na escola.",
+   "certo": "Vou à escola."
+  }
+ },
+ {
+  "id": "chegar-em-eu",
+  "nivel": "norma",
+  "titulo": "Chegar a",
+  "padrao": [
+   {
+    "formas_de": [
+     "chegar"
+    ]
+   },
+   {
+    "palavras": [
+     "no",
+     "na",
+     "nos",
+     "nas",
+     "em"
+    ]
+   },
+   {
+    "nao": [
+     {
+      "palavras": [
+       "hora",
+       "frente",
+       "mesma",
+       "vez",
+       "época",
+       "semana",
+       "manhã",
+       "tarde",
+       "noite",
+       "primeiro",
+       "segundo",
+       "terceiro",
+       "último",
+       "dois",
+       "três",
+       "pouco",
+       "breve",
+       "cima",
+       "tempo"
+      ]
+     },
+     {
+      "classe": "numero"
+     }
+    ]
+   }
+  ],
+  "sugestao": "{1} {2:troca} {3}",
+  "troca": {
+   "no": "ao",
+   "na": "à",
+   "nos": "aos",
+   "nas": "às",
+   "em": "a"
+  },
+  "marcar": [
+   1,
+   2
+  ],
+  "mensagem": "Na norma europeia, «chegar» indicando destino pede «a»: «cheguei a casa», «chegou ao trabalho».",
+  "exemplo": {
+   "errado": "Cheguei no trabalho.",
+   "certo": "Cheguei ao trabalho."
+  }
+ },
+ {
+  "id": "voce-dica",
+  "nivel": "dica",
+  "titulo": "Você na norma europeia",
+  "padrao": [
+   {
+    "classe": "inicio"
+   },
+   {
+    "palavras": [
+     "você"
+    ],
+    "na_pergunta": true
+   }
+  ],
+  "mensagem": "Em Portugal, «você» numa pergunta direta pode soar pouco cortês. Costuma-se usar o verbo sem pronome («Quer um café?») ou «o senhor / a senhora».",
+  "exemplo": {
+   "errado": "Você quer um café?",
+   "certo": "Quer um café? / O senhor quer um café?"
+  }
+ }
+]

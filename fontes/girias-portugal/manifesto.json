@@ -1,21 +1,26 @@
 {
   "id": "girias-portugal",
-  "nome": "Gírias e expressões de Portugal",
-  "versao": "2.0.0",
-  "descricao": "Gírias e palavras do dia a dia de Portugal que confundem quem fala o português do Brasil: bué, fixe, autocarro, pequeno-almoço… Pergunte também \"como se diz ônibus em Portugal?\".",
+  "nome": "Português de Portugal",
+  "versao": "3.0.0",
+  "descricao": "Norma europeia de Portugal: vocabulário de mais de 400 mil formas (Acordo Ortográfico de 1990, com a grafia anterior apontada), revisão de texto com regras de gramática, gírias e falares regionais (Norte, Lisboa, Alentejo, Algarve, Açores, Madeira) e respostas sobre gramática. Escreva \"revise: o seu texto\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
     "portugal",
+    "norma",
+    "gramática",
+    "ortografia",
+    "revisão de texto",
     "gírias",
+    "regionalismos",
     "dicionário",
     "lusofonia"
   ],
   "autor": "Jano Projects",
-  "licenca": "CC-BY-4.0",
+  "licenca": "CC-BY-4.0 AND LGPL-2.1",
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.4.1"
+    "versao_minima": "0.8.0"
   },
   "regiao": {
     "nome": "Portugal",
@@ -29,12 +34,96 @@
       "portuguesas",
       "tuga",
       "tugas",
-      "lisboa",
-      "lisboeta",
       "lisboetas",
-      "porto",
-      "tripeiro",
       "pt"
+    ],
+    "variedades": [
+      {
+        "id": "norte",
+        "nome": "Norte",
+        "artigo": "o",
+        "termos": [
+          "norte",
+          "porto",
+          "portuense",
+          "tripeiro",
+          "tripeiros",
+          "minho",
+          "minhoto",
+          "braga",
+          "tras os montes",
+          "transmontano"
+        ],
+        "descricao": "Falares do Porto, do Minho e de Trás-os-Montes."
+      },
+      {
+        "id": "lisboa",
+        "nome": "Lisboa",
+        "artigo": "",
+        "termos": [
+          "lisboa",
+          "lisboeta",
+          "alfacinha",
+          "alfacinhas"
+        ],
+        "descricao": "O falar de Lisboa."
+      },
+      {
+        "id": "alentejo",
+        "nome": "Alentejo",
+        "artigo": "o",
+        "termos": [
+          "alentejo",
+          "alentejano",
+          "alentejana",
+          "alentejanos"
+        ],
+        "descricao": "Falares do Alentejo."
+      },
+      {
+        "id": "algarve",
+        "nome": "Algarve",
+        "artigo": "o",
+        "termos": [
+          "algarve",
+          "algarvio",
+          "algarvia",
+          "algarvios"
+        ],
+        "descricao": "Falares do Algarve."
+      },
+      {
+        "id": "acores",
+        "nome": "Açores",
+        "artigo": "os",
+        "termos": [
+          "acores",
+          "acoriano",
+          "acoriana",
+          "acorianos",
+          "sao miguel",
+          "micaelense",
+          "terceira"
+        ],
+        "descricao": "Falares do arquipélago dos Açores."
+      },
+      {
+        "id": "madeira",
+        "nome": "Madeira",
+        "artigo": "a",
+        "termos": [
+          "madeira",
+          "madeirense",
+          "madeirenses",
+          "funchal"
+        ],
+        "descricao": "Falares do arquipélago da Madeira."
+      }
     ]
+  },
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.98
   }
 }

@@ -22,28 +22,34 @@ V: tongas
 R: **tongas** (São Tomé e Príncipe): descendentes dos trabalhadores contratados trazidos para as roças.
 
 V: tela non
+L: forro
 T: nossa terra
 R: **tela non** (São Tomé e Príncipe): "nossa terra" em forro: São Tomé e Príncipe.
 
 V: ngê
 V: nge
+L: forro
 T: pessoa, gente
 R: **ngê** (São Tomé e Príncipe): pessoa, gente.
 
 V: mina
+L: forro
 T: filho, criança
 R: **mina** (São Tomé e Príncipe): filho, criança.
 
 V: sum
+L: forro
 T: senhor
 R: **sum** (São Tomé e Príncipe): senhor (tratamento).
 
 V: san
+L: forro
 T: senhora
 R: **san** (São Tomé e Príncipe): senhora (tratamento).
 
 V: ôbô
 V: obo
+L: forro
 T: floresta, mata
 R: **ôbô** (São Tomé e Príncipe): floresta, mata cerrada do interior das ilhas.
 
@@ -69,6 +75,7 @@ V: vinho de palma
 R: **vinho de palma** (São Tomé e Príncipe): bebida tirada da seiva da palmeira.
 
 V: djambi
+L: forro
 R: **djambi** (São Tomé e Príncipe): ritual tradicional de cura, com música e dança.
 
 V: tchiloli
@@ -93,3 +100,27 @@ R: **bulawê** (São Tomé e Príncipe): dança e música tradicional animada.
 V: ússua
 V: ussua
 R: **ússua** (São Tomé e Príncipe): dança tradicional de pares, de raízes europeias adaptadas às ilhas.
+
+# ---- 3.0 ---------------------------------------------------------------------
+V: dêsu ka paga
+V: desu ka paga
+L: forro
+T: obrigado, obrigada
+R: **dêsu ka paga** (forro): "Deus pague", forma tradicional de agradecer.
+
+V: gravana
+T: estação seca
+R: **gravana** (São Tomé e Príncipe): a estação seca, mais fresca, de junho a setembro. A pequena estação seca de dezembro e janeiro é o **gravanito**.
+
+V: gravanito
+T: pequena estação seca
+R: **gravanito** (São Tomé e Príncipe): pequena estação seca de dezembro e janeiro.
+
+V: banana-pão
+V: banana pão
+R: **banana-pão** (São Tomé e Príncipe): banana grande que se come cozida, assada ou frita, como acompanhamento.
+
+V: dobra
+V: dobras
+T: dinheiro são-tomense
+R: **dobra** (São Tomé e Príncipe): a moeda do país.

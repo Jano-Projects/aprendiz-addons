@@ -1,22 +1,26 @@
 {
   "id": "girias-angola",
-  "nome": "Gírias de Angola",
-  "versao": "2.0.0",
-  "descricao": "Palavras do português de Angola, muitas vindas do quimbundo: kota, kamba, kumbu, maka, bazar, mambo… Pergunte também \"como se diz dinheiro em Angola?\".",
+  "nome": "Português de Angola",
+  "versao": "3.0.0",
+  "descricao": "Norma de Angola: vocabulário de mais de 400 mil formas na grafia em uso no país (anterior ao Acordo de 1990, que Angola não ratificou), revisão de texto com regras de gramática, palavras angolanas (muitas do quimbundo e do umbundo) e respostas sobre o português de Angola. Escreva \"revise: o seu texto\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
     "angola",
+    "norma",
+    "gramática",
+    "ortografia",
+    "revisão de texto",
     "gírias",
+    "quimbundo",
     "dicionário",
-    "lusofonia",
-    "quimbundo"
+    "lusofonia"
   ],
   "autor": "Jano Projects",
-  "licenca": "CC-BY-4.0",
+  "licenca": "CC-BY-4.0 AND LGPL-2.1",
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.4.1"
+    "versao_minima": "0.8.0"
   },
   "regiao": {
     "nome": "Angola",
@@ -27,14 +31,48 @@
       "angolana",
       "angolanos",
       "angolanas",
-      "luanda",
-      "luandense",
-      "caluanda",
-      "caluandas",
       "mwangole",
-      "quimbundo",
-      "kimbundu",
       "angoles"
+    ],
+    "variedades": [
+      {
+        "id": "luanda",
+        "nome": "Luanda",
+        "artigo": "",
+        "termos": [
+          "luanda",
+          "luandense",
+          "caluanda",
+          "caluandas"
+        ],
+        "descricao": "O calão urbano de Luanda."
+      },
+      {
+        "id": "quimbundo",
+        "nome": "quimbundo",
+        "artigo": "o",
+        "termos": [
+          "quimbundo",
+          "kimbundu",
+          "kimbundo"
+        ],
+        "descricao": "Língua nacional do Norte de Angola (Luanda, Malanje, Cuanza Norte), que deu muitas palavras ao português angolano."
+      },
+      {
+        "id": "umbundo",
+        "nome": "umbundo",
+        "artigo": "o",
+        "termos": [
+          "umbundo",
+          "umbundu"
+        ],
+        "descricao": "Língua nacional do Planalto Central (Huambo, Bié, Benguela), a mais falada de Angola depois do português."
+      }
     ]
+  },
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 1.0
   }
 }

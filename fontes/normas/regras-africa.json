@@ -1,0 +1,101 @@
+[
+ {
+  "id": "lhe-objeto-direto",
+  "nivel": "norma",
+  "titulo": "«Lhe» como complemento direto",
+  "padrao": [
+   {
+    "palavras": [
+     "vi-lhe",
+     "viu-lhe",
+     "vimos-lhe",
+     "viram-lhe",
+     "vejo-lhe",
+     "vê-lhe",
+     "conheço-lhe",
+     "conhece-lhe",
+     "conhecemos-lhe",
+     "conhecem-lhe",
+     "conheci-lhe",
+     "conheceu-lhe",
+     "encontrei-lhe",
+     "encontrou-lhe",
+     "encontramos-lhe",
+     "encontraram-lhe",
+     "ajudei-lhe",
+     "ajudou-lhe",
+     "ajuda-lhe",
+     "ajudo-lhe",
+     "convidei-lhe",
+     "convidou-lhe",
+     "visitei-lhe",
+     "visitou-lhe",
+     "abracei-lhe",
+     "abraçou-lhe",
+     "amo-lhe",
+     "ama-lhe"
+    ]
+   }
+  ],
+  "mensagem": "Em Angola e em Moçambique é comum usar «lhe» com verbos como ver, conhecer, encontrar e ajudar («vi-lhe ontem»). A norma-padrão usa aí «o» ou «a» («vi-o», «vi-a»); «lhe» fica para o complemento indireto («dei-lhe o livro»).",
+  "exemplo": {
+   "errado": "Vi-lhe ontem no mercado.",
+   "certo": "Vi-o ontem no mercado."
+  }
+ },
+ {
+  "id": "lhe-objeto-direto-proclise",
+  "nivel": "norma",
+  "titulo": "«Lhe» como complemento direto",
+  "padrao": [
+   {
+    "palavras": [
+     "não",
+     "já",
+     "que",
+     "nunca",
+     "também"
+    ]
+   },
+   {
+    "palavras": [
+     "lhe"
+    ]
+   },
+   {
+    "palavras": [
+     "vi",
+     "viu",
+     "vimos",
+     "viram",
+     "vejo",
+     "conheço",
+     "conhece",
+     "conheci",
+     "conheceu",
+     "encontrei",
+     "encontrou",
+     "ajudei",
+     "ajudou",
+     "convidei",
+     "convidou",
+     "visitei",
+     "visitou",
+     "abracei",
+     "abraçou",
+     "amo",
+     "ama"
+    ]
+   }
+  ],
+  "marcar": [
+   2,
+   3
+  ],
+  "mensagem": "Com verbos como ver, conhecer, encontrar e ajudar, a norma-padrão usa «o» ou «a» («não o vi»), e não «lhe» — uso comum em Angola e Moçambique.",
+  "exemplo": {
+   "errado": "Ainda não lhe vi hoje.",
+   "certo": "Ainda não o vi hoje."
+  }
+ }
+]

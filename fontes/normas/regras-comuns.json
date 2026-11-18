@@ -1,0 +1,2175 @@
+[
+ {
+  "_comentario": "Fazer indicando tempo decorrido é impessoal (singular).",
+  "id": "fazer-tempo-inicio",
+  "nivel": "erro",
+  "titulo": "Fazer indicando tempo",
+  "padrao": [
+   {
+    "classe": "inicio"
+   },
+   {
+    "palavras": [
+     "fazem",
+     "faziam",
+     "fizeram",
+     "farão",
+     "fariam"
+    ]
+   },
+   {
+    "classe": "numero"
+   },
+   {
+    "palavras": [
+     "anos",
+     "meses",
+     "semanas",
+     "dias",
+     "horas",
+     "minutos",
+     "séculos",
+     "décadas"
+    ]
+   }
+  ],
+  "sugestao": "{2:troca} {3} {4}",
+  "troca": {
+   "fazem": "faz",
+   "faziam": "fazia",
+   "fizeram": "fez",
+   "farão": "fará",
+   "fariam": "faria"
+  },
+  "mensagem": "Indicando tempo decorrido, o verbo «fazer» é impessoal: fica no singular.",
+  "exemplo": {
+   "errado": "Fazem dois anos que não o vejo.",
+   "certo": "Faz dois anos que não o vejo."
+  }
+ },
+ {
+  "id": "fazer-tempo-ja",
+  "nivel": "erro",
+  "titulo": "Fazer indicando tempo",
+  "padrao": [
+   {
+    "palavras": [
+     "já",
+     "hoje",
+     "agora",
+     "amanhã",
+     "que",
+     "quando"
+    ]
+   },
+   {
+    "palavras": [
+     "fazem",
+     "faziam",
+     "fizeram",
+     "farão",
+     "fariam"
+    ]
+   },
+   {
+    "classe": "numero"
+   },
+   {
+    "palavras": [
+     "anos",
+     "meses",
+     "semanas",
+     "dias",
+     "horas",
+     "minutos",
+     "séculos",
+     "décadas"
+    ]
+   }
+  ],
+  "sugestao": "{1} {2:troca} {3} {4}",
+  "troca": {
+   "fazem": "faz",
+   "faziam": "fazia",
+   "fizeram": "fez",
+   "farão": "fará",
+   "fariam": "faria"
+  },
+  "marcar": [
+   2,
+   4
+  ],
+  "mensagem": "Indicando tempo decorrido, o verbo «fazer» é impessoal: fica no singular.",
+  "exemplo": {
+   "errado": "Já fazem três meses.",
+   "certo": "Já faz três meses."
+  }
+ },
+ {
+  "_comentario": "Haver = existir é impessoal. Não vale para haver auxiliar (haviam chegado) nem para haver de.",
+  "id": "haver-existir",
+  "nivel": "erro",
+  "titulo": "Haver no sentido de existir",
+  "padrao": [
+   {
+    "palavras": [
+     "haviam",
+     "houveram",
+     "haverão",
+     "haveriam",
+     "houverem",
+     "hajam",
+     "houvessem"
+    ]
+   },
+   {
+    "nao": [
+     {
+      "classe": "participio"
+     },
+     {
+      "classe": "pronome_obliquo"
+     },
+     {
+      "palavras": [
+       "de",
+       "já",
+       "ainda",
+       "também",
+       "sempre",
+       "nunca",
+       "todos",
+       "todas",
+       "realmente",
+       "finalmente",
+       "por",
+       "bem",
+       "mal",
+       "sido"
+      ]
+     }
+    ]
+   }
+  ],
+  "sugestao": "{1:troca} {2}",
+  "troca": {
+   "haviam": "havia",
+   "houveram": "houve",
+   "haverão": "haverá",
+   "haveriam": "haveria",
+   "houverem": "houver",
+   "hajam": "haja",
+   "houvessem": "houvesse"
+  },
+  "marcar": [
+   1,
+   1
+  ],
+  "mensagem": "No sentido de «existir» ou «acontecer», o verbo «haver» é impessoal: fica sempre no singular.",
+  "exemplo": {
+   "errado": "Haviam muitas pessoas na sala.",
+   "certo": "Havia muitas pessoas na sala."
+  }
+ },
+ {
+  "id": "auxiliar-com-haver",
+  "nivel": "erro",
+  "titulo": "Auxiliar com haver impessoal",
+  "padrao": [
+   {
+    "palavras": [
+     "podem",
+     "podiam",
+     "poderão",
+     "poderiam",
+     "devem",
+     "deviam",
+     "deverão",
+     "deveriam",
+     "costumam",
+     "costumavam",
+     "vão",
+     "iam",
+     "começam",
+     "começaram"
+    ]
+   },
+   {
+    "palavras": [
+     "haver"
+    ]
+   },
+   {
+    "nao": [
+     {
+      "classe": "participio"
+     },
+     {
+      "palavras": [
+       "de",
+       "sido"
+      ]
+     }
+    ]
+   }
+  ],
+  "sugestao": "{1:troca} {2} {3}",
+  "troca": {
+   "podem": "pode",
+   "podiam": "podia",
+   "poderão": "poderá",
+   "poderiam": "poderia",
+   "devem": "deve",
+   "deviam": "devia",
+   "deverão": "deverá",
+   "deveriam": "deveria",
+   "costumam": "costuma",
+   "costumavam": "costumava",
+   "vão": "vai",
+   "iam": "ia",
+   "começam": "começa",
+   "começaram": "começou"
+  },
+  "marcar": [
+   1,
+   2
+  ],
+  "mensagem": "Com «haver» impessoal, o verbo auxiliar também fica no singular.",
+  "exemplo": {
+   "errado": "Podem haver problemas.",
+   "certo": "Pode haver problemas."
+  }
+ },
+ {
+  "id": "existir-concordancia",
+  "nivel": "erro",
+  "titulo": "Concordância de existir",
+  "padrao": [
+   {
+    "palavras": [
+     "existe",
+     "existia",
+     "existiu",
+     "existirá",
+     "existiria"
+    ]
+   },
+   {
+    "palavras": [
+     "vários",
+     "várias",
+     "muitos",
+     "muitas",
+     "alguns",
+     "algumas",
+     "poucos",
+     "poucas",
+     "inúmeros",
+     "inúmeras",
+     "diversos",
+     "diversas",
+     "dois",
+     "duas",
+     "três",
+     "quatro",
+     "cinco",
+     "seis",
+     "sete",
+     "oito",
+     "nove",
+     "dez"
+    ]
+   }
+  ],
+  "sugestao": "{1:troca} {2}",
+  "troca": {
+   "existe": "existem",
+   "existia": "existiam",
+   "existiu": "existiram",
+   "existirá": "existirão",
+   "existiria": "existiriam"
+  },
+  "marcar": [
+   1,
+   1
+  ],
+  "mensagem": "Ao contrário de «haver», o verbo «existir» concorda com o sujeito: se ele está no plural, o verbo também fica.",
+  "exemplo": {
+   "errado": "Existe várias maneiras.",
+   "certo": "Existem várias maneiras."
+  }
+ },
+ {
+  "id": "faltar-concordancia",
+  "nivel": "erro",
+  "titulo": "Concordância de faltar",
+  "padrao": [
+   {
+    "classe": "inicio"
+   },
+   {
+    "palavras": [
+     "falta",
+     "faltava",
+     "faltou",
+     "sobra",
+     "sobrava",
+     "sobrou",
+     "resta",
+     "restava",
+     "restou"
+    ]
+   },
+   {
+    "palavras": [
+     "dois",
+     "duas",
+     "três",
+     "quatro",
+     "cinco",
+     "seis",
+     "sete",
+     "oito",
+     "nove",
+     "dez",
+     "vinte",
+     "trinta",
+     "muitos",
+     "muitas",
+     "vários",
+     "várias",
+     "poucos",
+     "poucas",
+     "alguns",
+     "algumas"
+    ]
+   }
+  ],
+  "sugestao": "{2:troca} {3}",
+  "troca": {
+   "falta": "faltam",
+   "faltava": "faltavam",
+   "faltou": "faltaram",
+   "sobra": "sobram",
+   "sobrava": "sobravam",
+   "sobrou": "sobraram",
+   "resta": "restam",
+   "restava": "restavam",
+   "restou": "restaram"
+  },
+  "marcar": [
+   2,
+   2
+  ],
+  "mensagem": "«Faltar», «sobrar» e «restar» concordam com o sujeito, que costuma vir depois deles.",
+  "exemplo": {
+   "errado": "Falta dois dias para as férias.",
+   "certo": "Faltam dois dias para as férias."
+  }
+ },
+ {
+  "id": "a-gente-concordancia",
+  "nivel": "norma",
+  "titulo": "Concordância com «a gente»",
+  "padrao": [
+   {
+    "palavras": [
+     "a"
+    ]
+   },
+   {
+    "palavras": [
+     "gente"
+    ]
+   },
+   {
+    "palavras": [
+     "vamos",
+     "fomos",
+     "somos",
+     "estamos",
+     "temos",
+     "podemos",
+     "queremos",
+     "sabemos",
+     "fizemos",
+     "fazemos",
+     "íamos",
+     "estávamos",
+     "tínhamos",
+     "éramos",
+     "dissemos",
+     "dizemos",
+     "tivemos",
+     "estivemos",
+     "pudemos",
+     "quisemos",
+     "soubemos",
+     "vemos",
+     "precisamos",
+     "gostamos",
+     "achamos"
+    ]
+   }
+  ],
+  "sugestao": "{1} {2} {3:troca}",
+  "troca": {
+   "vamos": "vai",
+   "fomos": "foi",
+   "somos": "é",
+   "estamos": "está",
+   "temos": "tem",
+   "podemos": "pode",
+   "queremos": "quer",
+   "sabemos": "sabe",
+   "fizemos": "fez",
+   "fazemos": "faz",
+   "íamos": "ia",
+   "estávamos": "estava",
+   "tínhamos": "tinha",
+   "éramos": "era",
+   "dissemos": "disse",
+   "dizemos": "diz",
+   "tivemos": "teve",
+   "estivemos": "esteve",
+   "pudemos": "pôde",
+   "quisemos": "quis",
+   "soubemos": "soube",
+   "vemos": "vê",
+   "precisamos": "precisa",
+   "gostamos": "gosta",
+   "achamos": "acha"
+  },
+  "marcar": [
+   3,
+   3
+  ],
+  "mensagem": "«A gente» leva o verbo na 3.ª pessoa do singular (como «ele»). Para usar «vamos», «fomos»…, troque por «nós».",
+  "exemplo": {
+   "errado": "A gente vamos sair.",
+   "certo": "A gente vai sair. / Nós vamos sair."
+  }
+ },
+ {
+  "id": "nos-concordancia",
+  "nivel": "norma",
+  "titulo": "Concordância com «nós»",
+  "padrao": [
+   {
+    "palavras": [
+     "nós"
+    ]
+   },
+   {
+    "palavras": [
+     "vai",
+     "foi",
+     "é",
+     "está",
+     "tá",
+     "tem",
+     "fez",
+     "faz",
+     "pode",
+     "quer",
+     "sabe",
+     "ia",
+     "estava",
+     "tinha",
+     "era",
+     "disse",
+     "precisa",
+     "gosta",
+     "acha",
+     "fica",
+     "ficou",
+     "chegou",
+     "saiu"
+    ]
+   }
+  ],
+  "sugestao": "{1} {2:troca}",
+  "troca": {
+   "vai": "vamos",
+   "foi": "fomos",
+   "é": "somos",
+   "está": "estamos",
+   "tá": "estamos",
+   "tem": "temos",
+   "fez": "fizemos",
+   "faz": "fazemos",
+   "pode": "podemos",
+   "quer": "queremos",
+   "sabe": "sabemos",
+   "ia": "íamos",
+   "estava": "estávamos",
+   "tinha": "tínhamos",
+   "era": "éramos",
+   "disse": "dissemos",
+   "precisa": "precisamos",
+   "gosta": "gostamos",
+   "acha": "achamos",
+   "fica": "ficamos",
+   "ficou": "ficamos",
+   "chegou": "chegamos",
+   "saiu": "saímos"
+  },
+  "marcar": [
+   2,
+   2
+  ],
+  "mensagem": "Com «nós», o verbo vai para a 1.ª pessoa do plural.",
+  "exemplo": {
+   "errado": "Nós vai amanhã.",
+   "certo": "Nós vamos amanhã."
+  }
+ },
+ {
+  "id": "tu-concordancia",
+  "nivel": "norma",
+  "titulo": "Concordância com «tu»",
+  "padrao": [
+   {
+    "palavras": [
+     "tu"
+    ]
+   },
+   {
+    "palavras": [
+     "vai",
+     "foi",
+     "fez",
+     "tem",
+     "quer",
+     "pode",
+     "sabe",
+     "é",
+     "está",
+     "viu",
+     "disse",
+     "fica",
+     "chega",
+     "gosta",
+     "acha",
+     "precisa",
+     "faz",
+     "vem",
+     "vê",
+     "deve",
+     "era",
+     "estava",
+     "tinha",
+     "ia",
+     "falou",
+     "ficou",
+     "chegou",
+     "gostou",
+     "achou",
+     "comeu",
+     "saiu",
+     "voltou",
+     "trouxe",
+     "quis",
+     "pôde"
+    ]
+   }
+  ],
+  "sugestao": "{1} {2:troca}",
+  "troca": {
+   "vai": "vais",
+   "foi": "foste",
+   "fez": "fizeste",
+   "tem": "tens",
+   "quer": "queres",
+   "pode": "podes",
+   "sabe": "sabes",
+   "é": "és",
+   "está": "estás",
+   "viu": "viste",
+   "disse": "disseste",
+   "fica": "ficas",
+   "chega": "chegas",
+   "gosta": "gostas",
+   "acha": "achas",
+   "precisa": "precisas",
+   "faz": "fazes",
+   "vem": "vens",
+   "vê": "vês",
+   "deve": "deves",
+   "era": "eras",
+   "estava": "estavas",
+   "tinha": "tinhas",
+   "ia": "ias",
+   "falou": "falaste",
+   "ficou": "ficaste",
+   "chegou": "chegaste",
+   "gostou": "gostaste",
+   "achou": "achaste",
+   "comeu": "comeste",
+   "saiu": "saíste",
+   "voltou": "voltaste",
+   "trouxe": "trouxeste",
+   "quis": "quiseste",
+   "pôde": "pudeste"
+  },
+  "marcar": [
+   2,
+   2
+  ],
+  "mensagem": "Na norma-padrão, «tu» leva o verbo na 2.ª pessoa do singular. Com o verbo na 3.ª pessoa, use «você».",
+  "exemplo": {
+   "errado": "Tu vai à festa?",
+   "certo": "Tu vais à festa? / Você vai à festa?"
+  }
+ },
+ {
+  "id": "tem-tem",
+  "nivel": "erro",
+  "titulo": "Tem / têm",
+  "padrao": [
+   {
+    "palavras": [
+     "eles",
+     "elas",
+     "vocês"
+    ]
+   },
+   {
+    "palavras": [
+     "tem",
+     "vem",
+     "contem",
+     "mantem",
+     "obtem",
+     "detem"
+    ]
+   }
+  ],
+  "sugestao": "{1} {2:troca}",
+  "troca": {
+   "tem": "têm",
+   "vem": "vêm",
+   "contem": "contêm",
+   "mantem": "mantêm",
+   "obtem": "obtêm",
+   "detem": "detêm"
+  },
+  "marcar": [
+   2,
+   2
+  ],
+  "mensagem": "No plural, «ter» e «vir» levam acento circunflexo: eles têm, eles vêm (e os derivados: mantêm, contêm, obtêm).",
+  "exemplo": {
+   "errado": "Eles tem razão.",
+   "certo": "Eles têm razão."
+  }
+ },
+ {
+  "id": "tem-singular",
+  "nivel": "erro",
+  "titulo": "Tem / têm",
+  "padrao": [
+   {
+    "palavras": [
+     "ele",
+     "ela",
+     "você"
+    ]
+   },
+   {
+    "palavras": [
+     "têm",
+     "vêm"
+    ]
+   }
+  ],
+  "sugestao": "{1} {2:troca}",
+  "troca": {
+   "têm": "tem",
+   "vêm": "vem"
+  },
+  "marcar": [
+   2,
+   2
+  ],
+  "mensagem": "No singular, «tem» e «vem» não têm acento; o circunflexo marca o plural (eles têm, eles vêm).",
+  "exemplo": {
+   "errado": "Ela têm dois filhos.",
+   "certo": "Ela tem dois filhos."
+  }
+ },
+ {
+  "id": "para-mim-infinitivo",
+  "nivel": "dica",
+  "titulo": "Para mim / para eu",
+  "padrao": [
+   {
+    "palavras": [
+     "para",
+     "pra"
+    ]
+   },
+   {
+    "palavras": [
+     "mim"
+    ]
+   },
+   {
+    "classe": "infinitivo"
+   }
+  ],
+  "sugestao": "{1} eu {3}",
+  "mensagem": "Se «mim» for quem faz a ação do verbo, use «eu»: «para eu fazer». Mas se «para mim» completar outra palavra («é difícil para mim entender»), está certo.",
+  "exemplo": {
+   "errado": "Ele trouxe o livro para mim ler.",
+   "certo": "Ele trouxe o livro para eu ler."
+  }
+ },
+ {
+  "id": "entre-eu",
+  "nivel": "erro",
+  "titulo": "Entre mim e você",
+  "padrao": [
+   {
+    "palavras": [
+     "entre"
+    ]
+   },
+   {
+    "palavras": [
+     "eu"
+    ]
+   },
+   {
+    "palavras": [
+     "e"
+    ]
+   }
+  ],
+  "sugestao": "{1} mim {3}",
+  "mensagem": "Depois de preposição, usa-se o pronome oblíquo: «entre mim e você», «entre mim e ela».",
+  "exemplo": {
+   "errado": "Isso fica entre eu e você.",
+   "certo": "Isso fica entre mim e você."
+  }
+ },
+ {
+  "id": "entre-voce-e-eu",
+  "nivel": "erro",
+  "titulo": "Entre você e mim",
+  "padrao": [
+   {
+    "palavras": [
+     "entre"
+    ]
+   },
+   {
+    "palavras": [
+     "você",
+     "ele",
+     "ela",
+     "vocês",
+     "eles",
+     "elas",
+     "tu"
+    ]
+   },
+   {
+    "palavras": [
+     "e"
+    ]
+   },
+   {
+    "palavras": [
+     "eu"
+    ]
+   }
+  ],
+  "sugestao": "{1} {2:troca} {3} mim",
+  "troca": {
+   "tu": "ti"
+  },
+  "mensagem": "Depois de preposição, usa-se o pronome oblíquo: «entre você e mim», «entre ti e mim».",
+  "exemplo": {
+   "errado": "Entre ele e eu não há segredos.",
+   "certo": "Entre ele e mim não há segredos."
+  }
+ },
+ {
+  "id": "se-eu-ver",
+  "nivel": "erro",
+  "titulo": "Futuro do subjuntivo",
+  "padrao": [
+   {
+    "palavras": [
+     "se",
+     "quando",
+     "enquanto"
+    ]
+   },
+   {
+    "palavras": [
+     "eu",
+     "ele",
+     "ela",
+     "você"
+    ]
+   },
+   {
+    "palavras": [
+     "ver",
+     "fazer",
+     "dizer",
+     "trazer",
+     "ter",
+     "poder",
+     "querer",
+     "saber",
+     "pôr",
+     "estar",
+     "manter",
+     "propor",
+     "compor",
+     "repor",
+     "supor",
+     "conter",
+     "obter",
+     "deter",
+     "caber",
+     "intervir",
+     "prever",
+     "rever"
+    ]
+   }
+  ],
+  "sugestao": "{1} {2} {3:troca}",
+  "troca": {
+   "ver": "vir",
+   "fazer": "fizer",
+   "dizer": "disser",
+   "trazer": "trouxer",
+   "ter": "tiver",
+   "poder": "puder",
+   "querer": "quiser",
+   "saber": "souber",
+   "pôr": "puser",
+   "estar": "estiver",
+   "manter": "mantiver",
+   "propor": "propuser",
+   "compor": "compuser",
+   "repor": "repuser",
+   "supor": "supuser",
+   "conter": "contiver",
+   "obter": "obtiver",
+   "deter": "detiver",
+   "caber": "couber",
+   "intervir": "intervier",
+   "prever": "previr",
+   "rever": "revir"
+  },
+  "marcar": [
+   3,
+   3
+  ],
+  "mensagem": "Depois de «se», «quando» ou «enquanto» falando do futuro, o verbo vai para o futuro do subjuntivo (conjuntivo): se eu vir, quando ele fizer, se você puder.",
+  "exemplo": {
+   "errado": "Quando eu ver o resultado, aviso.",
+   "certo": "Quando eu vir o resultado, aviso."
+  }
+ },
+ {
+  "id": "se-nos-vermos",
+  "nivel": "erro",
+  "titulo": "Futuro do subjuntivo",
+  "padrao": [
+   {
+    "palavras": [
+     "se",
+     "quando",
+     "enquanto"
+    ]
+   },
+   {
+    "palavras": [
+     "nós",
+     "eles",
+     "elas",
+     "vocês"
+    ]
+   },
+   {
+    "palavras": [
+     "vermos",
+     "verem",
+     "fazermos",
+     "fazerem",
+     "dizermos",
+     "dizerem",
+     "termos",
+     "terem",
+     "podermos",
+     "poderem",
+     "querermos",
+     "quererem",
+     "sabermos",
+     "saberem",
+     "estarmos",
+     "estarem",
+     "trazermos",
+     "trazerem"
+    ]
+   }
+  ],
+  "sugestao": "{1} {2} {3:troca}",
+  "troca": {
+   "vermos": "virmos",
+   "verem": "virem",
+   "fazermos": "fizermos",
+   "fazerem": "fizerem",
+   "dizermos": "dissermos",
+   "dizerem": "disserem",
+   "termos": "tivermos",
+   "terem": "tiverem",
+   "podermos": "pudermos",
+   "poderem": "puderem",
+   "querermos": "quisermos",
+   "quererem": "quiserem",
+   "sabermos": "soubermos",
+   "saberem": "souberem",
+   "estarmos": "estivermos",
+   "estarem": "estiverem",
+   "trazermos": "trouxermos",
+   "trazerem": "trouxerem"
+  },
+  "marcar": [
+   3,
+   3
+  ],
+  "mensagem": "Depois de «se», «quando» ou «enquanto» falando do futuro, o verbo vai para o futuro do subjuntivo (conjuntivo): se nós virmos, quando eles fizerem.",
+  "exemplo": {
+   "errado": "Se vocês verem o João, avisem.",
+   "certo": "Se vocês virem o João, avisem."
+  }
+ },
+ {
+  "id": "mais-bom-fim",
+  "nivel": "erro",
+  "titulo": "Mais bom / melhor",
+  "padrao": [
+   {
+    "palavras": [
+     "mais"
+    ]
+   },
+   {
+    "palavras": [
+     "bom",
+     "boa",
+     "bons",
+     "boas",
+     "mau",
+     "má",
+     "maus",
+     "más"
+    ]
+   },
+   {
+    "classe": "fim"
+   }
+  ],
+  "sugestao": "{2:troca}",
+  "troca": {
+   "bom": "melhor",
+   "boa": "melhor",
+   "bons": "melhores",
+   "boas": "melhores",
+   "mau": "pior",
+   "má": "pior",
+   "maus": "piores",
+   "más": "piores"
+  },
+  "mensagem": "O comparativo de «bom» é «melhor», e o de «mau» é «pior». (\"Mais bom\" só se usa comparando duas qualidades: «é mais bom do que inteligente».)",
+  "exemplo": {
+   "errado": "Este é mais bom.",
+   "certo": "Este é melhor."
+  }
+ },
+ {
+  "id": "mais-bom",
+  "nivel": "erro",
+  "titulo": "Mais bom / melhor",
+  "padrao": [
+   {
+    "palavras": [
+     "mais"
+    ]
+   },
+   {
+    "palavras": [
+     "bom",
+     "boa",
+     "bons",
+     "boas",
+     "mau",
+     "má",
+     "maus",
+     "más"
+    ]
+   },
+   {
+    "nao": {
+     "palavras": [
+      "do",
+      "da",
+      "dos",
+      "das",
+      "que",
+      "e",
+      "ou"
+     ]
+    }
+   }
+  ],
+  "sugestao": "{2:troca} {3}",
+  "troca": {
+   "bom": "melhor",
+   "boa": "melhor",
+   "bons": "melhores",
+   "boas": "melhores",
+   "mau": "pior",
+   "má": "pior",
+   "maus": "piores",
+   "más": "piores"
+  },
+  "marcar": [
+   1,
+   2
+  ],
+  "mensagem": "O comparativo de «bom» é «melhor», e o de «mau» é «pior». (\"Mais bom\" só se usa comparando duas qualidades: «é mais bom do que inteligente».)",
+  "exemplo": {
+   "errado": "Este é mais bom.",
+   "certo": "Este é melhor."
+  }
+ },
+ {
+  "id": "mais-grande",
+  "nivel": "erro",
+  "titulo": "Mais grande / maior",
+  "padrao": [
+   {
+    "palavras": [
+     "mais"
+    ]
+   },
+   {
+    "palavras": [
+     "grande",
+     "grandes"
+    ]
+   },
+   {
+    "nao": {
+     "palavras": [
+      "do",
+      "que"
+     ]
+    }
+   }
+  ],
+  "sugestao": "{2:troca} {3}",
+  "troca": {
+   "grande": "maior",
+   "grandes": "maiores"
+  },
+  "marcar": [
+   1,
+   2
+  ],
+  "mensagem": "O comparativo de «grande» é «maior».",
+  "exemplo": {
+   "errado": "A casa é mais grande.",
+   "certo": "A casa é maior."
+  }
+ },
+ {
+  "id": "meio-adverbio",
+  "nivel": "erro",
+  "titulo": "Meio (advérbio) não varia",
+  "padrao": [
+   {
+    "palavras": [
+     "meia",
+     "meias"
+    ]
+   },
+   {
+    "palavras": [
+     "cansada",
+     "cansadas",
+     "triste",
+     "tristes",
+     "preocupada",
+     "preocupadas",
+     "chateada",
+     "chateadas",
+     "nervosa",
+     "nervosas",
+     "confusa",
+     "confusas",
+     "assustada",
+     "assustadas",
+     "perdida",
+     "perdidas",
+     "tonta",
+     "tontas",
+     "louca",
+     "loucas",
+     "estranha",
+     "estranhas",
+     "aberta",
+     "abertas",
+     "fechada",
+     "fechadas",
+     "molhada",
+     "molhadas",
+     "suja",
+     "sujas",
+     "atrasada",
+     "atrasadas",
+     "doente",
+     "doentes",
+     "zangada",
+     "zangadas",
+     "irritada",
+     "irritadas",
+     "desconfiada",
+     "desconfiadas",
+     "difícil",
+     "difíceis",
+     "complicada",
+     "complicadas"
+    ]
+   }
+  ],
+  "sugestao": "meio {2}",
+  "mensagem": "No sentido de «um pouco», «meio» é advérbio e não muda: «meio cansada», «meio abertas».",
+  "exemplo": {
+   "errado": "Ela está meia cansada.",
+   "certo": "Ela está meio cansada."
+  }
+ },
+ {
+  "id": "crase-partir",
+  "nivel": "erro",
+  "titulo": "Crase antes de palavra masculina ou verbo",
+  "padrao": [
+   {
+    "palavras": [
+     "à"
+    ]
+   },
+   {
+    "palavras": [
+     "partir",
+     "pé",
+     "cavalo",
+     "prazo",
+     "vapor",
+     "lápis",
+     "caneta",
+     "ele",
+     "eles",
+     "você",
+     "vocês",
+     "mim",
+     "ti",
+     "si",
+     "nós",
+     "vós",
+     "este",
+     "esse",
+     "isto",
+     "isso",
+     "ninguém",
+     "todos",
+     "cada",
+     "qualquer",
+     "nenhum",
+     "nenhuma",
+     "alguém",
+     "tudo"
+    ]
+   }
+  ],
+  "sugestao": "a {2}",
+  "mensagem": "A crase (à) junta a preposição «a» com o artigo «a». Antes de palavra masculina, de verbo ou de pronomes como «ele», «você», «isso», não há artigo «a», então não há crase.",
+  "exemplo": {
+   "errado": "A partir de hoje… / Vou à pé.",
+   "certo": "A partir de hoje… / Vou a pé."
+  }
+ },
+ {
+  "id": "crase-infinitivo",
+  "nivel": "erro",
+  "titulo": "Crase antes de verbo",
+  "padrao": [
+   {
+    "palavras": [
+     "à"
+    ]
+   },
+   {
+    "classe": "infinitivo"
+   }
+  ],
+  "sugestao": "a {2}",
+  "mensagem": "Não há crase antes de verbo: «começou a chover», «estou a estudar».",
+  "exemplo": {
+   "errado": "Começou à chover.",
+   "certo": "Começou a chover."
+  }
+ },
+ {
+  "id": "a-medida-que",
+  "nivel": "erro",
+  "titulo": "À medida que",
+  "padrao": [
+   {
+    "palavras": [
+     "a"
+    ]
+   },
+   {
+    "palavras": [
+     "medida"
+    ]
+   },
+   {
+    "palavras": [
+     "que",
+     "em"
+    ]
+   }
+  ],
+  "sugestao": "à {2} {3}",
+  "mensagem": "As locuções «à medida que» e «à medida em que» levam crase.",
+  "exemplo": {
+   "errado": "A medida que o tempo passa…",
+   "certo": "À medida que o tempo passa…"
+  }
+ },
+ {
+  "id": "a-meu-ver",
+  "nivel": "norma",
+  "titulo": "A meu ver",
+  "padrao": [
+   {
+    "palavras": [
+     "ao"
+    ]
+   },
+   {
+    "palavras": [
+     "meu",
+     "nosso",
+     "seu"
+    ]
+   },
+   {
+    "palavras": [
+     "ver"
+    ]
+   }
+  ],
+  "sugestao": "a {2} {3}",
+  "mensagem": "A expressão consagrada é «a meu ver» (sem o artigo).",
+  "exemplo": {
+   "errado": "Ao meu ver, está certo.",
+   "certo": "A meu ver, está certo."
+  }
+ },
+ {
+  "id": "daqui-ha",
+  "nivel": "erro",
+  "titulo": "Há (passado) e a (futuro)",
+  "padrao": [
+   {
+    "palavras": [
+     "daqui",
+     "dali",
+     "daí"
+    ]
+   },
+   {
+    "palavras": [
+     "há"
+    ]
+   },
+   {
+    "classe": "numero"
+   }
+  ],
+  "sugestao": "{1} a {3}",
+  "mensagem": "Para tempo futuro usa-se «a» («daqui a dois dias»); «há» é para tempo passado («há dois dias»).",
+  "exemplo": {
+   "errado": "Volto daqui há dois dias.",
+   "certo": "Volto daqui a dois dias."
+  }
+ },
+ {
+  "id": "a-tempo-atras",
+  "nivel": "erro",
+  "titulo": "Há (passado) e a (futuro)",
+  "padrao": [
+   {
+    "palavras": [
+     "a"
+    ]
+   },
+   {
+    "classe": "numero"
+   },
+   {
+    "palavras": [
+     "anos",
+     "meses",
+     "semanas",
+     "dias",
+     "horas",
+     "minutos",
+     "séculos",
+     "décadas"
+    ]
+   },
+   {
+    "palavras": [
+     "atrás"
+    ]
+   }
+  ],
+  "sugestao": "há {2} {3}",
+  "mensagem": "Tempo passado usa «há» (do verbo haver), e «há» já indica passado: não precisa de «atrás».",
+  "exemplo": {
+   "errado": "Eu o vi a dois anos atrás.",
+   "certo": "Eu o vi há dois anos."
+  }
+ },
+ {
+  "id": "ha-tempo-atras",
+  "nivel": "estilo",
+  "titulo": "Redundância: há… atrás",
+  "padrao": [
+   {
+    "palavras": [
+     "há"
+    ]
+   },
+   {
+    "classe": "numero"
+   },
+   {
+    "palavras": [
+     "anos",
+     "meses",
+     "semanas",
+     "dias",
+     "horas",
+     "minutos",
+     "séculos",
+     "décadas",
+     "tempos"
+    ]
+   },
+   {
+    "palavras": [
+     "atrás"
+    ]
+   }
+  ],
+  "sugestao": "{1} {2} {3}",
+  "mensagem": "«Há» já indica tempo passado; «atrás» repete a ideia.",
+  "exemplo": {
+   "errado": "Há dez anos atrás…",
+   "certo": "Há dez anos…"
+  }
+ },
+ {
+  "id": "agente-a-gente-inicio",
+  "nivel": "erro",
+  "titulo": "Agente / a gente",
+  "padrao": [
+   {
+    "classe": "inicio"
+   },
+   {
+    "palavras": [
+     "agente"
+    ]
+   },
+   {
+    "palavras": [
+     "vai",
+     "foi",
+     "é",
+     "está",
+     "tem",
+     "pode",
+     "quer",
+     "sabe",
+     "fez",
+     "faz",
+     "ia",
+     "estava",
+     "tinha",
+     "era",
+     "precisa",
+     "gosta",
+     "fica",
+     "acha",
+     "vê",
+     "viu",
+     "se",
+     "não",
+     "já",
+     "também",
+     "sempre",
+     "nunca"
+    ]
+   }
+  ],
+  "sugestao": "A gente {3}",
+  "marcar": [
+   2,
+   2
+  ],
+  "mensagem": "«Agente» (junto) é quem age («agente de polícia»). No sentido de «nós», escreve-se separado: «a gente».",
+  "exemplo": {
+   "errado": "Agente vai sair.",
+   "certo": "A gente vai sair."
+  }
+ },
+ {
+  "id": "agente-a-gente",
+  "nivel": "erro",
+  "titulo": "Agente / a gente",
+  "padrao": [
+   {
+    "palavras": [
+     "que",
+     "e",
+     "mas",
+     "porque",
+     "quando",
+     "se",
+     "onde",
+     "então",
+     "aí"
+    ]
+   },
+   {
+    "palavras": [
+     "agente"
+    ]
+   },
+   {
+    "palavras": [
+     "vai",
+     "foi",
+     "é",
+     "está",
+     "tem",
+     "pode",
+     "quer",
+     "sabe",
+     "fez",
+     "faz",
+     "ia",
+     "estava",
+     "tinha",
+     "era",
+     "precisa",
+     "gosta",
+     "fica",
+     "acha",
+     "vê",
+     "viu",
+     "não",
+     "já",
+     "também",
+     "sempre",
+     "nunca"
+    ]
+   }
+  ],
+  "sugestao": "{1} a gente {3}",
+  "marcar": [
+   2,
+   2
+  ],
+  "mensagem": "«Agente» (junto) é quem age («agente de polícia»). No sentido de «nós», escreve-se separado: «a gente».",
+  "exemplo": {
+   "errado": "Disse que agente vai.",
+   "certo": "Disse que a gente vai."
+  }
+ },
+ {
+  "id": "mau-mal",
+  "nivel": "erro",
+  "titulo": "Mal / mau",
+  "padrao": [
+   {
+    "palavras": [
+     "um",
+     "o",
+     "que",
+     "muito",
+     "tão",
+     "de",
+     "com",
+     "bom",
+     "ou"
+    ]
+   },
+   {
+    "palavras": [
+     "mal"
+    ]
+   },
+   {
+    "palavras": [
+     "humor",
+     "caráter",
+     "carácter",
+     "gosto",
+     "exemplo",
+     "negócio",
+     "hálito",
+     "cheiro",
+     "jeito",
+     "aluno",
+     "motorista",
+     "profissional",
+     "sinal",
+     "momento",
+     "agouro",
+     "olhado",
+     "tempo",
+     "pagador",
+     "perdedor"
+    ]
+   }
+  ],
+  "sugestao": "{1} mau {3}",
+  "marcar": [
+   2,
+   2
+  ],
+  "mensagem": "«Mau» é o contrário de «bom» (adjetivo, acompanha substantivo: «mau humor»); «mal» é o contrário de «bem».",
+  "exemplo": {
+   "errado": "Estou de mal humor.",
+   "certo": "Estou de mau humor."
+  }
+ },
+ {
+  "id": "mau-educado",
+  "nivel": "erro",
+  "titulo": "Mal / mau",
+  "padrao": [
+   {
+    "palavras": [
+     "mau",
+     "mal"
+    ]
+   },
+   {
+    "palavras": [
+     "educado",
+     "educada",
+     "educados",
+     "educadas",
+     "humorado",
+     "humorada",
+     "humorados",
+     "humoradas",
+     "agradecido",
+     "agradecida",
+     "intencionado",
+     "intencionada",
+     "intencionados",
+     "intencionadas",
+     "assombrado",
+     "assombrada",
+     "estar"
+    ]
+   }
+  ],
+  "sugestao": "mal-{2}",
+  "mensagem": "Antes de vogal e de «h», «mal» liga-se por hífen: «mal-educado», «mal-humorado», «mal-estar». E é «mal» (contrário de «bem»), não «mau».",
+  "exemplo": {
+   "errado": "Que menino mau educado.",
+   "certo": "Que menino mal-educado."
+  }
+ },
+ {
+  "id": "prefiro-mais",
+  "nivel": "norma",
+  "titulo": "Preferir mais",
+  "padrao": [
+   {
+    "palavras": [
+     "prefiro",
+     "prefere",
+     "preferes",
+     "preferimos",
+     "preferem",
+     "preferia",
+     "preferiam",
+     "preferi",
+     "preferiu",
+     "preferiram"
+    ]
+   },
+   {
+    "palavras": [
+     "mais"
+    ]
+   }
+  ],
+  "sugestao": "{1}",
+  "mensagem": "«Preferir» já indica escolha: dispensa «mais». E a construção da norma é «preferir uma coisa a outra» (não «do que»).",
+  "exemplo": {
+   "errado": "Prefiro mais café do que chá.",
+   "certo": "Prefiro café a chá."
+  }
+ },
+ {
+  "id": "assistir-espetaculo",
+  "nivel": "norma",
+  "titulo": "Assistir a (ver)",
+  "padrao": [
+   {
+    "palavras": [
+     "assistir",
+     "assisti",
+     "assistiu",
+     "assistimos",
+     "assistiram",
+     "assisto",
+     "assiste",
+     "assistem",
+     "assistia",
+     "assistiam",
+     "assistindo",
+     "assistirei",
+     "assistiremos",
+     "assista"
+    ]
+   },
+   {
+    "palavras": [
+     "o",
+     "a",
+     "os",
+     "as"
+    ]
+   },
+   {
+    "palavras": [
+     "filme",
+     "filmes",
+     "jogo",
+     "jogos",
+     "aula",
+     "aulas",
+     "show",
+     "shows",
+     "novela",
+     "novelas",
+     "programa",
+     "programas",
+     "série",
+     "séries",
+     "espetáculo",
+     "espetáculos",
+     "espectáculo",
+     "concerto",
+     "concertos",
+     "partida",
+     "partidas",
+     "final",
+     "vídeo",
+     "vídeos",
+     "palestra",
+     "palestras",
+     "missa",
+     "televisão",
+     "tv",
+     "peça",
+     "cerimônia",
+     "cerimónia",
+     "corrida",
+     "apresentação",
+     "debate",
+     "desfile",
+     "telejornal",
+     "noticiário",
+     "episódio",
+     "episódios",
+     "jornal"
+    ]
+   }
+  ],
+  "sugestao": "{1} {2:troca} {3}",
+  "troca": {
+   "o": "ao",
+   "a": "à",
+   "os": "aos",
+   "as": "às"
+  },
+  "marcar": [
+   1,
+   2
+  ],
+  "mensagem": "No sentido de «ver, presenciar», a norma pede «assistir a»: «assistir ao filme», «assistir à aula». («Assistir o doente», no sentido de ajudar, está certo.)",
+  "exemplo": {
+   "errado": "Assisti o jogo ontem.",
+   "certo": "Assisti ao jogo ontem."
+  }
+ },
+ {
+  "id": "nao-encliticos",
+  "nivel": "erro",
+  "titulo": "Pronome depois de palavra atrativa",
+  "padrao": [
+   {
+    "palavras": [
+     "não",
+     "nunca",
+     "jamais",
+     "ninguém",
+     "nada",
+     "nenhum",
+     "nenhuma",
+     "também",
+     "só",
+     "sempre",
+     "ainda",
+     "talvez",
+     "quem",
+     "que",
+     "onde",
+     "quando",
+     "como",
+     "alguém",
+     "tudo",
+     "todos",
+     "já"
+    ]
+   },
+   {
+    "classe": "verbo_com_pronome"
+   }
+  ],
+  "sugestao": "{1} {2:proclise}",
+  "marcar": [
+   2,
+   2
+  ],
+  "mensagem": "Depois de palavras como «não», «nunca», «que», «quem», «também», «já», o pronome vem antes do verbo (próclise): «não me disse», «que te deu».",
+  "exemplo": {
+   "errado": "Ele não disse-me nada.",
+   "certo": "Ele não me disse nada."
+  }
+ },
+ {
+  "id": "subir-para-cima",
+  "nivel": "estilo",
+  "titulo": "Redundância",
+  "padrao": [
+   {
+    "formas_de": [
+     "subir"
+    ]
+   },
+   {
+    "palavras": [
+     "para",
+     "pra"
+    ]
+   },
+   {
+    "palavras": [
+     "cima"
+    ]
+   }
+  ],
+  "sugestao": "{1}",
+  "mensagem": "«Subir» já indica ir para cima.",
+  "exemplo": {
+   "errado": "Subiu para cima.",
+   "certo": "Subiu."
+  }
+ },
+ {
+  "id": "descer-para-baixo",
+  "nivel": "estilo",
+  "titulo": "Redundância",
+  "padrao": [
+   {
+    "formas_de": [
+     "descer"
+    ]
+   },
+   {
+    "palavras": [
+     "para",
+     "pra"
+    ]
+   },
+   {
+    "palavras": [
+     "baixo"
+    ]
+   }
+  ],
+  "sugestao": "{1}",
+  "mensagem": "«Descer» já indica ir para baixo.",
+  "exemplo": {
+   "errado": "Desceu para baixo.",
+   "certo": "Desceu."
+  }
+ },
+ {
+  "id": "entrar-para-dentro",
+  "nivel": "estilo",
+  "titulo": "Redundância",
+  "padrao": [
+   {
+    "formas_de": [
+     "entrar"
+    ]
+   },
+   {
+    "palavras": [
+     "para",
+     "pra"
+    ]
+   },
+   {
+    "palavras": [
+     "dentro"
+    ]
+   }
+  ],
+  "sugestao": "{1}",
+  "mensagem": "«Entrar» já indica ir para dentro.",
+  "exemplo": {
+   "errado": "Entra para dentro.",
+   "certo": "Entra."
+  }
+ },
+ {
+  "id": "sair-para-fora",
+  "nivel": "estilo",
+  "titulo": "Redundância",
+  "padrao": [
+   {
+    "formas_de": [
+     "sair"
+    ]
+   },
+   {
+    "palavras": [
+     "para",
+     "pra"
+    ]
+   },
+   {
+    "palavras": [
+     "fora"
+    ]
+   }
+  ],
+  "sugestao": "{1}",
+  "mensagem": "«Sair» já indica ir para fora.",
+  "exemplo": {
+   "errado": "Saiu para fora.",
+   "certo": "Saiu."
+  }
+ },
+ {
+  "id": "repetir-de-novo",
+  "nivel": "estilo",
+  "titulo": "Redundância",
+  "padrao": [
+   {
+    "formas_de": [
+     "repetir"
+    ]
+   },
+   {
+    "palavras": [
+     "de"
+    ]
+   },
+   {
+    "palavras": [
+     "novo"
+    ]
+   }
+  ],
+  "sugestao": "{1}",
+  "mensagem": "«Repetir» já é fazer de novo.",
+  "exemplo": {
+   "errado": "Repita de novo.",
+   "certo": "Repita."
+  }
+ },
+ {
+  "id": "elo-de-ligacao",
+  "nivel": "estilo",
+  "titulo": "Redundância",
+  "padrao": [
+   {
+    "palavras": [
+     "elo",
+     "elos"
+    ]
+   },
+   {
+    "palavras": [
+     "de"
+    ]
+   },
+   {
+    "palavras": [
+     "ligação"
+    ]
+   }
+  ],
+  "sugestao": "{1}",
+  "mensagem": "«Elo» já é aquilo que liga.",
+  "exemplo": {
+   "errado": "Ele é o elo de ligação.",
+   "certo": "Ele é o elo."
+  }
+ },
+ {
+  "id": "encarar-de-frente",
+  "nivel": "estilo",
+  "titulo": "Redundância",
+  "padrao": [
+   {
+    "formas_de": [
+     "encarar"
+    ]
+   },
+   {
+    "palavras": [
+     "de"
+    ]
+   },
+   {
+    "palavras": [
+     "frente"
+    ]
+   }
+  ],
+  "sugestao": "{1}",
+  "mensagem": "«Encarar» já é olhar de frente.",
+  "exemplo": {
+   "errado": "Encarou o problema de frente.",
+   "certo": "Encarou o problema."
+  }
+ },
+ {
+  "id": "surpresa-inesperada",
+  "nivel": "estilo",
+  "titulo": "Redundância",
+  "padrao": [
+   {
+    "palavras": [
+     "surpresa",
+     "surpresas"
+    ]
+   },
+   {
+    "palavras": [
+     "inesperada",
+     "inesperadas"
+    ]
+   }
+  ],
+  "sugestao": "{1}",
+  "mensagem": "Toda surpresa é inesperada.",
+  "exemplo": {
+   "errado": "Foi uma surpresa inesperada.",
+   "certo": "Foi uma surpresa."
+  }
+ },
+ {
+  "id": "conviver-junto",
+  "nivel": "estilo",
+  "titulo": "Redundância",
+  "padrao": [
+   {
+    "formas_de": [
+     "conviver"
+    ]
+   },
+   {
+    "palavras": [
+     "junto",
+     "juntos",
+     "juntas"
+    ]
+   }
+  ],
+  "sugestao": "{1}",
+  "mensagem": "«Conviver» já é viver junto.",
+  "exemplo": {
+   "errado": "Eles convivem juntos.",
+   "certo": "Eles convivem."
+  }
+ },
+ {
+  "id": "ao-inves-de",
+  "nivel": "dica",
+  "titulo": "Ao invés de / em vez de",
+  "padrao": [
+   {
+    "palavras": [
+     "ao"
+    ]
+   },
+   {
+    "palavras": [
+     "invés"
+    ]
+   },
+   {
+    "palavras": [
+     "de",
+     "do",
+     "da",
+     "dos",
+     "das"
+    ]
+   }
+  ],
+  "sugestao": "em vez {3}",
+  "mensagem": "«Ao invés de» quer dizer «ao contrário de» (subir ao invés de descer). Para «no lugar de», prefira «em vez de».",
+  "exemplo": {
+   "errado": "Comprei pera ao invés de maçã.",
+   "certo": "Comprei pera em vez de maçã."
+  }
+ },
+ {
+  "id": "onde-aonde",
+  "nivel": "dica",
+  "titulo": "Onde / aonde",
+  "padrao": [
+   {
+    "palavras": [
+     "onde"
+    ]
+   },
+   {
+    "palavras": [
+     "vai",
+     "vais",
+     "vão",
+     "vamos",
+     "vou",
+     "foste",
+     "fomos",
+     "iremos",
+     "irá",
+     "irão",
+     "ia",
+     "iam",
+     "ias",
+     "chegou",
+     "chegaram",
+     "chegamos",
+     "levou",
+     "levaram"
+    ]
+   }
+  ],
+  "sugestao": "aonde {2}",
+  "mensagem": "Com verbos de movimento (ir, chegar, levar), a norma pede «aonde» (= a que lugar): «aonde vais?». «Onde» é para lugar fixo («onde moras?»).",
+  "exemplo": {
+   "errado": "Onde você vai?",
+   "certo": "Aonde você vai?"
+  }
+ },
+ {
+  "id": "vende-se-plural",
+  "nivel": "norma",
+  "titulo": "Concordância com «se» apassivador",
+  "padrao": [
+   {
+    "palavras": [
+     "vende-se",
+     "aluga-se",
+     "compra-se",
+     "conserta-se",
+     "arrenda-se",
+     "faz-se"
+    ]
+   },
+   {
+    "palavras": [
+     "casas",
+     "apartamentos",
+     "quartos",
+     "salas",
+     "carros",
+     "motos",
+     "imóveis",
+     "terrenos",
+     "lotes",
+     "roupas",
+     "livros",
+     "móveis",
+     "peças",
+     "bicicletas",
+     "vagas",
+     "lojas",
+     "vestidos",
+     "sapatos",
+     "filhotes",
+     "computadores",
+     "celulares",
+     "telemóveis",
+     "os",
+     "as",
+     "dois",
+     "duas",
+     "três",
+     "vários",
+     "várias"
+    ]
+   }
+  ],
+  "sugestao": "{1:troca} {2}",
+  "troca": {
+   "vende-se": "vendem-se",
+   "aluga-se": "alugam-se",
+   "compra-se": "compram-se",
+   "conserta-se": "consertam-se",
+   "arrenda-se": "arrendam-se",
+   "faz-se": "fazem-se"
+  },
+  "marcar": [
+   1,
+   1
+  ],
+  "mensagem": "Com o «se» apassivador, o verbo concorda com o que é vendido, alugado…: «vendem-se casas» (= casas são vendidas). Com preposição («precisa-se de»), o verbo não muda.",
+  "exemplo": {
+   "errado": "Vende-se casas.",
+   "certo": "Vendem-se casas."
+  }
+ }
+]

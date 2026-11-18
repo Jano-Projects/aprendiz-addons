@@ -44,6 +44,7 @@ T: ir embora, sair
 R: **bazar** (Angola): ir embora, sair. Também se ouve em Portugal. Ex.: «Vou bazar.»
 
 V: garina
+L: luanda
 T: moça, garota
 R: **garina** (Angola): moça, garota.
 
@@ -52,6 +53,7 @@ T: coisa, assunto
 R: **mambo** (Angola): coisa, assunto, situação. Ex.: «Que mambo é esse?»
 
 V: cubico
+L: luanda
 T: casa, lar
 R: **cubico** (Angola): casa, lar.
 
@@ -66,6 +68,7 @@ R: **ndengue** (Angola): criança, jovem.
 V: muadiê
 V: muadie
 V: mwadie
+L: luanda
 T: homem, senhor, cara
 R: **muadiê** (Angola): homem, senhor; também "cara", "o tipo".
 
@@ -147,6 +150,7 @@ T: inverno, estação seca
 R: **cacimbo** (Angola): estação seca e mais fresca do ano, com neblina.
 
 V: caluanda
+L: luanda
 T: luandense
 R: **caluanda** (Angola): natural de Luanda; o que é de Luanda.
 
@@ -166,4 +170,57 @@ R: **kuduro** (Angola): gênero musical e dança eletrônica de ritmo acelerado,
 
 V: xé
 V: xe
+L: luanda
 R: **xé** (Angola): interjeição para chamar a atenção, como "ei!".
+
+# ---- 3.0 ---------------------------------------------------------------------
+V: mata-bicho
+V: matabicho
+T: pequeno-almoço, café da manhã
+R: **mata-bicho** (Angola e Moçambique): a primeira refeição do dia, o pequeno-almoço.
+
+V: geleira
+T: frigorífico, geladeira
+R: **geleira** (Angola e Moçambique): frigorífico, geladeira.
+
+V: cassule
+V: caçula
+L: quimbundo
+T: filho mais novo, caçula
+R: **cassule** (Angola, do quimbundo): o filho mais novo. A mesma origem deu "caçula" no Brasil.
+
+V: mangonha
+L: quimbundo
+T: preguiça, moleza
+R: **mangonha** (Angola, do quimbundo): preguiça, moleza. Quem tem mangonha é "mangonheiro".
+
+V: muxima
+L: quimbundo
+T: coração
+R: **muxima** (quimbundo): coração. Também é o nome de uma vila no Bengo e de uma canção tradicional muito conhecida.
+
+V: kalunga
+V: calunga
+L: quimbundo
+T: mar, morte
+R: **kalunga** (quimbundo): o mar; também o mundo dos mortos, a morte.
+
+V: kissângua
+V: quissângua
+T: bebida de milho
+R: **kissângua** (Angola): bebida tradicional de milho fermentado, levemente ácida.
+
+V: bessangana
+L: luanda
+T: senhora tradicional
+R: **bessangana** (Luanda): senhora luandense vestida à moda tradicional, com pano e lenço; símbolo da cultura de Luanda.
+
+V: tuga
+T: português, portugueses
+R: **tuga** (Angola e outros países lusófonos): português (pessoa de Portugal), informal.
+
+V: kwanza
+V: kwanzas
+V: cuanza
+T: dinheiro angolano
+R: **kwanza** (Angola): a moeda do país; também o maior rio angolano (Cuanza).

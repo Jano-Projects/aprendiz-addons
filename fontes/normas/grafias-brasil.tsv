@@ -1,0 +1,34 @@
+# Grafias europeias que o vocabulário-base aceita, mas que não são as do Brasil.
+# Colunas: grafia de outra norma <TAB> grafia brasileira <TAB> tipo
+# (tipo: variante, acento ou consoante; o gerador já acha sozinho os pares
+# que só existem de um lado, como receção/recepção e económico/econômico.)
+facto	fato	consoante
+factos	fatos	consoante
+contacto	contato	consoante
+contactos	contatos	consoante
+contactar	contatar	consoante
+aspeto	aspecto	consoante
+aspetos	aspectos	consoante
+perspetiva	perspectiva	consoante
+perspetivas	perspectivas	consoante
+bebé	bebê	acento
+bebés	bebês	acento
+ténis	tênis	acento
+génio	gênio	acento
+génios	gênios	acento
+anónimo	anônimo	acento
+anónima	anônima	acento
+cómodo	cômodo	acento
+prémio	prêmio	acento
+prémios	prêmios	acento
+polémica	polêmica	acento
+polémico	polêmico	acento
+académico	acadêmico	acento
+académica	acadêmica	acento
+quilómetro	quilômetro	acento
+quilómetros	quilômetros	acento
+húmido	úmido	variante
+húmida	úmida	variante
+húmidos	úmidos	variante
+húmidas	úmidas	variante
+humidade	umidade	variante

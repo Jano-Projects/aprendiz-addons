@@ -141,72 +141,90 @@ V: sqn
 R: **sqn** (Brasil): "só que não": indica ironia, o contrário do que foi dito.
 
 V: uai
+L: minas
 R: **uai** (Brasil, Minas Gerais): interjeição de surpresa ou de algo óbvio. Ex.: «Uai, já chegou?»
 
 V: trem
+L: minas
 T: coisa
 R: **trem** (Brasil, Minas Gerais): coisa, qualquer objeto ou situação. Ex.: «Pega aquele trem ali pra mim.»
 
 V: sô
+L: minas
 R: **sô** (Brasil, Minas Gerais): "senhor", "moço"; forma de chamar alguém. Ex.: «Ô, sô, vem cá!»
 
 V: bah
+L: sul
 R: **bah** (Brasil, Rio Grande do Sul): interjeição de espanto, admiração ou ênfase. Ex.: «Bah, que frio!»
 
 V: tchê
 V: tche
+L: sul
 R: **tchê** (Brasil, Rio Grande do Sul): forma de chamar alguém, como "cara" ou "amigo".
 
 V: guri
+L: sul
 T: menino, garoto
 R: **guri** (Brasil, Sul): menino, garoto. Feminino: "guria".
 
 V: piá
+L: sul
 T: menino, garoto
 R: **piá** (Brasil, Paraná e Santa Catarina): menino, garoto.
 
 V: bergamota
+L: sul
 T: tangerina, mexerica
 R: **bergamota** (Brasil, Sul): tangerina, mexerica.
 
 V: cacetinho
+L: sul
 T: pão francês
 R: **cacetinho** (Brasil, Rio Grande do Sul): pão francês.
 
 V: sinaleira
+L: sul
 T: semáforo, sinal de trânsito
 R: **sinaleira** (Brasil, Rio Grande do Sul): semáforo, sinal de trânsito.
 
 V: chimarrão
+L: sul
 T: mate
 R: **chimarrão** (Brasil, Rio Grande do Sul): bebida quente de erva-mate, tomada na cuia.
 
 V: oxente
+L: nordeste
 R: **oxente** (Brasil, Nordeste): interjeição de surpresa ou estranhamento. Forma curta: "oxe".
 
 V: oxe
 R: **oxe** (Brasil, Nordeste): forma curta de "oxente": surpresa ou estranhamento.
 
 V: arretado
+L: nordeste
 T: ótimo, zangado
 R: **arretado** (Brasil, Nordeste): muito bom, excelente; conforme o contexto, também zangado, irritado.
 
 V: massa
+L: nordeste
 T: legal, ótimo
 R: **massa** (Brasil, Nordeste e outras regiões): legal, muito bom. Ex.: «Que massa!»
 
 V: visse
+L: nordeste
 R: **visse** (Brasil, Pernambuco): "viu?", usado no fim da frase para confirmar. Ex.: «Tô indo, visse?»
 
 V: cabra
+L: nordeste
 T: sujeito, homem
 R: **cabra** (Brasil, Nordeste): sujeito, homem. "Cabra da peste" é alguém valente.
 
 V: macaxeira
+L: nordeste
 T: mandioca, aipim
 R: **macaxeira** (Brasil, Nordeste): mandioca, aipim.
 
 V: jerimum
+L: nordeste
 T: abóbora
 R: **jerimum** (Brasil, Nordeste): abóbora.
 
@@ -219,33 +237,218 @@ T: tangerina, bergamota
 R: **mexerica** (Brasil, Sudeste): tangerina, bergamota.
 
 V: mermão
+L: rio
 T: meu irmão
 R: **mermão** (Brasil, Rio de Janeiro): "meu irmão"; forma de chamar alguém.
 
 V: maneiro
+L: rio
 T: legal, bacana
 R: **maneiro** (Brasil, Rio de Janeiro): legal, bacana. Ex.: «Teu tênis é maneiro.»
 
 V: caô
 V: cao
+L: rio
 T: mentira
 R: **caô** (Brasil, Rio de Janeiro): mentira, conversa fiada. Ex.: «Isso é caô!»
 
 V: bolado
+L: rio
 T: chateado, preocupado
 R: **bolado** (Brasil, Rio de Janeiro): chateado, preocupado ou irritado. Ex.: «Fiquei bolado com aquilo.»
 
 V: coé
 V: coe
+L: rio
 R: **coé** (Brasil, Rio de Janeiro): "qual é?"; cumprimento, como "e aí?". Ex.: «Coé, mermão!»
 
 V: véi
 V: vei
+L: centro-oeste
 R: **véi** (Brasil, Centro-Oeste): "velho", "cara"; forma de chamar alguém, muito usada em Brasília. Ex.: «Véi, que calor!»
 
 V: égua
+L: norte
 R: **égua** (Brasil, Pará): interjeição de espanto, surpresa ou admiração. Ex.: «Égua, que chuva!»
 
 V: pai d'égua
+L: norte
 T: ótimo, excelente
 R: **pai d'égua** (Brasil, Pará): muito bom, excelente.
+
+# ---- 3.0: falares regionais ------------------------------------------------
+V: mainha
+L: nordeste
+T: mãe, mamãe
+R: **mainha** (Nordeste, sobretudo Bahia): mãe, mamãe. O pai é "painho".
+
+V: painho
+L: nordeste
+T: pai, papai
+R: **painho** (Nordeste, sobretudo Bahia): pai, papai.
+
+V: avexado
+V: avexada
+L: nordeste
+T: apressado, com pressa, aflito
+R: **avexado** (Nordeste): apressado, aflito. Ex.: «Não fique avexado, dá tempo.»
+
+V: aperreado
+V: aperreada
+L: nordeste
+T: aflito, preocupado, em apuros
+R: **aperreado** (Nordeste): aflito, em apuros, aborrecido.
+
+V: abestado
+V: abestada
+L: nordeste
+T: bobo, tolo
+R: **abestado** (Nordeste, sobretudo Ceará): bobo, tolo.
+
+V: pirangueiro
+V: pirangueira
+L: nordeste
+T: pão-duro, sovina
+R: **pirangueiro** (Nordeste): pão-duro, sovina; também quem faz as coisas de qualquer jeito.
+
+V: eita
+L: nordeste
+R: **eita** (Nordeste, e hoje em todo o Brasil): interjeição de espanto. Ex.: «Eita, que calor!»
+
+V: mungunzá
+L: nordeste
+T: canjica
+R: **mungunzá** (Nordeste): doce de milho branco cozido com leite e coco — a "canjica" do Sudeste.
+
+V: curumim
+L: norte
+T: menino, criança
+R: **curumim** (Norte, do tupi): menino, criança. A menina é "cunhantã".
+
+V: cunhantã
+V: cunhatã
+L: norte
+T: menina, moça
+R: **cunhantã** (Norte, do tupi): menina, moça.
+
+V: carapanã
+L: norte
+T: pernilongo, mosquito
+R: **carapanã** (Norte, do tupi): mosquito, pernilongo.
+
+V: leseira
+L: norte
+T: bobeira, preguiça
+R: **leseira** (Norte, sobretudo Pará e Amazonas): bobeira, moleza, falta de juízo. Ex.: «Deixa de leseira!»
+
+V: igarapé
+L: norte
+T: riacho
+R: **igarapé** (Norte, do tupi): riacho, braço estreito de rio na floresta.
+
+V: tacacá
+L: norte
+R: **tacacá** (Norte, sobretudo Pará): caldo quente de tucupi com goma de mandioca, jambu e camarão, servido em cuia.
+
+V: guria
+L: sul
+T: menina, garota
+R: **guria** (Sul): menina, moça. O menino é "guri".
+
+V: tri
+L: sul
+T: muito, muito legal
+R: **tri** (Rio Grande do Sul): muito; muito bom. Ex.: «O show foi tri legal.»
+
+V: capaz
+L: sul
+T: de jeito nenhum, imagina
+R: **capaz!** (Rio Grande do Sul): usado sozinho, quer dizer "de jeito nenhum!" ou "imagina!". Ex.: «— Vais pagar? — Capaz!»
+
+V: cusco
+L: sul
+T: cachorro, vira-lata
+R: **cusco** (Sul): cachorro pequeno, vira-lata.
+
+V: pandorga
+L: sul
+T: pipa, papagaio
+R: **pandorga** (Sul): pipa (o brinquedo de papel que voa).
+
+V: pila
+V: pilas
+L: sul
+T: dinheiro, real
+R: **pila** (Rio Grande do Sul): dinheiro; um real. Ex.: «Custou dez pila.»
+
+V: lagartear
+L: sul
+T: tomar sol
+R: **lagartear** (Sul): ficar ao sol para se aquecer, como um lagarto.
+
+V: negrinho
+L: sul
+T: brigadeiro
+R: **negrinho** (Rio Grande do Sul): o doce que no resto do Brasil se chama "brigadeiro".
+
+V: xis
+L: sul
+T: sanduíche, x-burguer
+R: **xis** (Rio Grande do Sul): sanduíche grande, prensado na chapa.
+
+V: nó
+L: minas
+R: **nó!** (Minas Gerais): interjeição de espanto, vem de "Nossa (Senhora)!". Ex.: «Nó, que trem bão!»
+
+V: quitanda
+L: minas
+T: biscoitos caseiros, quitutes
+R: **quitanda** (Minas Gerais): bolos, biscoitos e pães caseiros servidos com café. (Em outras regiões, é a loja de frutas e verduras.)
+
+V: mané
+L: rio
+T: bobo, otário
+R: **mané** (Rio de Janeiro, e hoje em todo o Brasil): bobo, otário.
+
+V: caraca
+L: rio
+R: **caraca!** (Rio de Janeiro): interjeição de espanto. Ex.: «Caraca, que golaço!»
+
+V: vacilão
+V: vacilona
+L: rio
+T: quem falha, quem pisa na bola
+R: **vacilão** (Rio de Janeiro): quem vacila, não cumpre o combinado ou faz besteira.
+
+V: meu
+L: sao-paulo
+R: **meu** (São Paulo): usado como vocativo, para chamar alguém. Ex.: «Meu, você não vai acreditar!»
+
+V: farol
+L: sao-paulo
+T: semáforo, sinal
+R: **farol** (São Paulo): semáforo, sinal de trânsito. No Rio Grande do Sul é "sinaleira".
+
+V: bolacha
+L: sao-paulo
+T: biscoito
+R: **bolacha** (São Paulo e Sul): biscoito. No Rio de Janeiro, diz-se "biscoito".
+
+V: da hora
+L: sao-paulo
+T: legal, muito bom
+R: **da hora** (São Paulo): muito bom, legal. Ex.: «A festa foi da hora.»
+
+V: baú
+L: centro-oeste
+T: ônibus
+R: **baú** (Brasília): ônibus.
+
+V: tesourinha
+L: centro-oeste
+T: retorno, trevo
+R: **tesourinha** (Brasília): o retorno viário em forma de trevo que liga as vias do Plano Piloto.
+
+V: pequi
+L: centro-oeste
+R: **pequi** (Centro-Oeste e cerrado): fruto amarelo de cheiro forte, muito usado no arroz com pequi de Goiás. Cuidado com os espinhos do caroço!

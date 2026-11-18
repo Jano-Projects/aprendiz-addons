@@ -1,0 +1,393 @@
+[
+ {
+  "id": "estar-a-infinitivo",
+  "nivel": "variante",
+  "titulo": "Estar a + infinitivo",
+  "padrao": [
+   {
+    "palavras": [
+     "estou",
+     "estás",
+     "está",
+     "estamos",
+     "estão",
+     "estava",
+     "estavas",
+     "estávamos",
+     "estavam",
+     "estive",
+     "esteve",
+     "estivemos",
+     "estiveram",
+     "estarei",
+     "estará",
+     "estaremos",
+     "estarão",
+     "estaria",
+     "estariam",
+     "esteja",
+     "estejam",
+     "estar",
+     "tá",
+     "tô",
+     "fiquei",
+     "ficou",
+     "ficamos",
+     "ficaram",
+     "fico",
+     "fica",
+     "ficam"
+    ]
+   },
+   {
+    "palavras": [
+     "a"
+    ]
+   },
+   {
+    "classe": "infinitivo"
+   }
+  ],
+  "sugestao": "{1} {3:gerundio}",
+  "mensagem": "«Estar a + infinitivo» é a construção de Portugal e da África. No Brasil, usa-se o gerúndio: «estou fazendo».",
+  "exemplo": {
+   "errado": "Estou a trabalhar.",
+   "certo": "Estou trabalhando."
+  }
+ },
+ {
+  "id": "porque-pergunta",
+  "nivel": "norma",
+  "titulo": "Por que (pergunta)",
+  "padrao": [
+   {
+    "classe": "inicio"
+   },
+   {
+    "palavras": [
+     "porque"
+    ],
+    "na_pergunta": true
+   }
+  ],
+  "sugestao": "Por que",
+  "mensagem": "No Brasil, a pergunta começa com «por que» (separado e sem acento): «Por que você não veio?». «Porque» (junto) é a resposta. (Em Portugal, «porque» na pergunta é aceito.)",
+  "exemplo": {
+   "errado": "Porque você não veio?",
+   "certo": "Por que você não veio?"
+  }
+ },
+ {
+  "id": "por-que-fim",
+  "nivel": "norma",
+  "titulo": "Por quê (fim da pergunta)",
+  "padrao": [
+   {
+    "palavras": [
+     "por"
+    ],
+    "na_pergunta": true
+   },
+   {
+    "palavras": [
+     "que"
+    ]
+   },
+   {
+    "classe": "fim"
+   }
+  ],
+  "sugestao": "{1} quê",
+  "mensagem": "No fim da frase, «que» leva acento: «Você não veio por quê?».",
+  "exemplo": {
+   "errado": "Você saiu por que?",
+   "certo": "Você saiu por quê?"
+  }
+ },
+ {
+  "id": "proclise-inicio-br",
+  "nivel": "norma",
+  "titulo": "Pronome no começo da frase",
+  "padrao": [
+   {
+    "classe": "inicio"
+   },
+   {
+    "palavras": [
+     "me",
+     "te",
+     "lhe",
+     "lhes"
+    ]
+   },
+   {
+    "nao": [
+     {
+      "classe": "pronome_reto"
+     },
+     {
+      "palavras": [
+       "o",
+       "a",
+       "os",
+       "as",
+       "um",
+       "uma",
+       "de",
+       "que",
+       "não",
+       "já",
+       "e"
+      ]
+     }
+    ]
+   }
+  ],
+  "sugestao": "{3:capital}-{2:minuscula}",
+  "mensagem": "Pela norma-padrão, a frase não começa com pronome oblíquo átono («me», «te», «lhe»). Na fala e na escrita informal do Brasil isso é muito comum; num texto formal, prefira «Empresta-me» ou reorganize a frase.",
+  "exemplo": {
+   "errado": "Me empresta o livro.",
+   "certo": "Empresta-me o livro."
+  }
+ },
+ {
+  "id": "gerundismo",
+  "nivel": "estilo",
+  "titulo": "Gerundismo",
+  "padrao": [
+   {
+    "palavras": [
+     "vou",
+     "vamos",
+     "vai",
+     "vão",
+     "irei",
+     "iremos",
+     "irá",
+     "irão"
+    ]
+   },
+   {
+    "palavras": [
+     "estar"
+    ]
+   },
+   {
+    "classe": "gerundio"
+   }
+  ],
+  "sugestao": "{1} {3:infinitivo}",
+  "mensagem": "«Vou estar enviando» (o gerundismo) é considerado vício de linguagem: prefira «vou enviar» ou «enviarei».",
+  "exemplo": {
+   "errado": "Vou estar enviando o documento.",
+   "certo": "Vou enviar o documento."
+  }
+ },
+ {
+  "id": "mais-pequeno-br",
+  "nivel": "variante",
+  "titulo": "Mais pequeno / menor",
+  "padrao": [
+   {
+    "palavras": [
+     "mais"
+    ]
+   },
+   {
+    "palavras": [
+     "pequeno",
+     "pequena",
+     "pequenos",
+     "pequenas"
+    ]
+   },
+   {
+    "nao": {
+     "palavras": [
+      "do",
+      "da",
+      "dos",
+      "das",
+      "que"
+     ]
+    },
+    "opcional": true
+   }
+  ],
+  "sugestao": "{2:troca} {3}",
+  "troca": {
+   "pequeno": "menor",
+   "pequena": "menor",
+   "pequenos": "menores",
+   "pequenas": "menores"
+  },
+  "marcar": [
+   1,
+   2
+  ],
+  "mensagem": "«Mais pequeno» é comum em Portugal; no Brasil, o comparativo usado é «menor».",
+  "exemplo": {
+   "errado": "O quarto é mais pequeno.",
+   "certo": "O quarto é menor."
+  }
+ },
+ {
+  "id": "ir-no-br",
+  "nivel": "norma",
+  "titulo": "Ir a / ir em",
+  "padrao": [
+   {
+    "palavras": [
+     "vou",
+     "vais",
+     "vai",
+     "vamos",
+     "vão",
+     "ia",
+     "iam",
+     "íamos",
+     "ir",
+     "irei",
+     "iremos",
+     "irá",
+     "irão",
+     "indo"
+    ]
+   },
+   {
+    "palavras": [
+     "no",
+     "na",
+     "nos",
+     "nas"
+    ]
+   },
+   {
+    "nao": [
+     {
+      "palavras": [
+       "autocarro",
+       "avião",
+       "barco",
+       "base",
+       "bicicleta",
+       "boa",
+       "candongueiro",
+       "carro",
+       "chapa",
+       "chuva",
+       "cola",
+       "comboio",
+       "contramão",
+       "conversa",
+       "direção",
+       "esperança",
+       "fila",
+       "frente",
+       "fé",
+       "hora",
+       "machimbombo",
+       "manhã",
+       "marra",
+       "mesma",
+       "mesmo",
+       "metro",
+       "moda",
+       "mota",
+       "moto",
+       "noite",
+       "ocasião",
+       "onda",
+       "quarta",
+       "quinta",
+       "raça",
+       "segunda",
+       "semana",
+       "sexta",
+       "tarde",
+       "terça",
+       "trem",
+       "txopela",
+       "táxi",
+       "verdade",
+       "vez",
+       "volta",
+       "época",
+       "ônibus"
+      ]
+     },
+     {
+      "classe": "infinitivo"
+     }
+    ]
+   }
+  ],
+  "sugestao": "{1} {2:troca} {3}",
+  "troca": {
+   "no": "ao",
+   "na": "à",
+   "nos": "aos",
+   "nas": "às"
+  },
+  "marcar": [
+   1,
+   2
+  ],
+  "mensagem": "Com o verbo «ir» indicando destino, a norma-padrão pede «a» (ou «para»): «vou ao mercado», «fui à escola». «Ir no / na» é comum na fala brasileira.",
+  "exemplo": {
+   "errado": "Vou no mercado.",
+   "certo": "Vou ao mercado."
+  }
+ },
+ {
+  "id": "chegar-em-br",
+  "nivel": "dica",
+  "titulo": "Chegar a / chegar em",
+  "padrao": [
+   {
+    "formas_de": [
+     "chegar"
+    ]
+   },
+   {
+    "palavras": [
+     "no",
+     "na",
+     "nos",
+     "nas"
+    ]
+   },
+   {
+    "nao": {
+     "palavras": [
+      "hora",
+      "frente",
+      "mesma",
+      "vez",
+      "época",
+      "semana",
+      "manhã",
+      "tarde",
+      "noite"
+     ]
+    }
+   }
+  ],
+  "sugestao": "{1} {2:troca} {3}",
+  "troca": {
+   "no": "ao",
+   "na": "à",
+   "nos": "aos",
+   "nas": "às"
+  },
+  "marcar": [
+   1,
+   2
+  ],
+  "mensagem": "A norma-padrão prefere «chegar a» («chegou ao trabalho»); «chegar em» é muito usado no Brasil.",
+  "exemplo": {
+   "errado": "Cheguei no trabalho.",
+   "certo": "Cheguei ao trabalho."
+  }
+ }
+]

@@ -1,22 +1,26 @@
 {
   "id": "girias-mocambique",
-  "nome": "Gírias e palavras de Moçambique",
-  "versao": "2.0.0",
-  "descricao": "Expressões do português de Moçambique e palavras do dia a dia: maningue, chapa, txopela, machamba, capulana, khanimambo… Pergunte também \"como se diz obrigado em changana?\".",
+  "nome": "Português de Moçambique",
+  "versao": "3.0.0",
+  "descricao": "Norma de Moçambique: vocabulário de mais de 400 mil formas na grafia em uso no país (anterior ao Acordo de 1990, que Moçambique não ratificou), revisão de texto com regras de gramática, palavras moçambicanas (do changana, do ronga, do macua…) e respostas sobre o português de Moçambique. Escreva \"revise: o seu texto\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
     "moçambique",
+    "norma",
+    "gramática",
+    "ortografia",
+    "revisão de texto",
     "gírias",
+    "changana",
     "dicionário",
-    "lusofonia",
-    "changana"
+    "lusofonia"
   ],
   "autor": "Jano Projects",
-  "licenca": "CC-BY-4.0",
+  "licenca": "CC-BY-4.0 AND LGPL-2.1",
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.4.1"
+    "versao_minima": "0.8.0"
   },
   "regiao": {
     "nome": "Moçambique",
@@ -27,11 +31,50 @@
       "mocambicana",
       "mocambicanos",
       "mocambicanas",
-      "maputo",
-      "changana",
-      "xichangana",
-      "ronga",
       "moz"
+    ],
+    "variedades": [
+      {
+        "id": "maputo",
+        "nome": "Maputo",
+        "artigo": "",
+        "termos": [
+          "maputo",
+          "maputense",
+          "laurentino"
+        ],
+        "descricao": "O falar urbano de Maputo."
+      },
+      {
+        "id": "changana",
+        "nome": "changana",
+        "artigo": "o",
+        "termos": [
+          "changana",
+          "xichangana",
+          "ronga",
+          "xironga",
+          "tsonga"
+        ],
+        "descricao": "Changana e ronga, línguas bantu do Sul de Moçambique."
+      },
+      {
+        "id": "macua",
+        "nome": "macua",
+        "artigo": "o",
+        "termos": [
+          "macua",
+          "emakhuwa",
+          "makhuwa",
+          "macuas"
+        ],
+        "descricao": "Emakhuwa (macua), a língua bantu mais falada de Moçambique, no Norte."
+      }
     ]
+  },
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 1.0
   }
 }

@@ -1,0 +1,97 @@
+# Palavras que mudam entre o português do Brasil e o europeu (Portugal e, na
+# escrita, os países africanos e Timor-Leste).
+#
+# Colunas, separadas por TAB:
+#   brasil   europeu   classe   nota   tipo   local
+#
+#   brasil/europeu: alternativas separadas por "|"; a primeira é a principal.
+#   classe: s = substantivo ou adjetivo (gera o plural), x = invariável,
+#           e = expressão de várias palavras.
+#   nota:   explicação curta (opcional).
+#   tipo:   vazio = palavra de outra variante (sugere a troca), nos dois sentidos;
+#           so-br = só aponta a palavra europeia num texto brasileiro (a brasileira
+#                   é comum, com outro sentido, nos textos europeus);
+#           so-eu = só aponta a palavra brasileira num texto europeu/africano;
+#           dica-br / dica-eu = falso amigo: vira só uma dica, sem troca automática.
+#   local:  equivalentes próprios de um país, no lugar da coluna europeu
+#           (ex.: pt-AO=machimbombo|autocarro).
+#
+# Só entram palavras que mudam de forma clara. Palavras usadas dos dois lados
+# (fila, apartamento, supermercado…) ficam de fora.
+ônibus	autocarro	s			pt-AO=machimbombo|autocarro;pt-MZ=machimbombo|autocarro
+ponto de ônibus	paragem de autocarro|paragem	e			pt-AO=paragem de machimbombo|paragem;pt-MZ=paragem de machimbombo|paragem
+o celular	o telemóvel	e
+um celular	um telemóvel	e
+meu celular	meu telemóvel	e
+teu celular	teu telemóvel	e
+seu celular	seu telemóvel	e
+no celular	no telemóvel	e
+do celular	do telemóvel	e
+pelo celular	pelo telemóvel	e
+pro celular	para o telemóvel	e
+os celulares	os telemóveis	e
+celular	telemóvel	s		so-br
+trem	comboio	s	Em Portugal, «trem» é palavra antiga para carruagem.	so-eu
+bonde	elétrico	s		so-eu
+metrô	metro	s		so-eu
+geladeira	frigorífico	s		so-eu	pt-AO=geleira|frigorífico;pt-MZ=geleira|frigorífico
+banheiro	casa de banho	s	Em Portugal, «banheiro» é o nadador-salvador.
+café da manhã	pequeno-almoço	e			pt-AO=mata-bicho|pequeno-almoço;pt-MZ=mata-bicho|pequeno-almoço
+sorvete	gelado	s		so-eu
+sorveteria	gelataria	s
+suco	sumo	s		so-eu	pt-TL=-
+xícara	chávena	s
+cardápio	ementa	s		so-eu
+açougue	talho	s
+açougueiro	talhante	s
+gramado	relvado	s
+goleiro	guarda-redes	x
+gol	golo	s		so-eu
+torcedor	adepto	s		so-eu
+caminhão	camião	s
+caminhonete	carrinha	s
+garçom	empregado de mesa	s
+aeromoça	hospedeira de bordo	s
+mouse	rato	s	Nome do aparelho do computador.	so-eu
+planilha	folha de cálculo	s
+usuário	utilizador	s
+registro	registo	s
+apostila	sebenta	s
+calcinha	cuecas	s		so-eu
+pedestre	peão	s		so-eu
+faixa de pedestres	passadeira	e		so-eu
+carteira de motorista	carta de condução	e
+carteira de habilitação	carta de condução	e
+encanador	canalizador	s
+vaso sanitário	sanita	e
+descarga do banheiro	autoclismo	e
+grampeador	agrafador	s
+acostamento	berma	s
+pedágio	portagem	s
+carona	boleia	s
+porta-malas	bagageira	x
+creme de leite	natas	e
+moletom	camisola	s		so-eu
+xerox	fotocópia	s		so-eu
+presunto	fiambre	s	Em Portugal, «presunto» é o presunto curado (o «presunto cru» brasileiro).	so-br
+meias	peúgas	x	No sentido de meias curtas, de homem.	so-br
+tênis	sapatilhas	x	No sentido de calçado.	so-br
+vitrine	montra	s		so-br
+carpete	alcatifa	s		so-br
+persiana	estore	s		so-br
+térreo	rés do chão	s		so-br
+concreto	betão	s	No sentido de material de construção.	so-br
+bala	rebuçado	s	No sentido de doce.	so-br
+chiclete	pastilha elástica	s		so-br
+grampo	agrafo	s	No sentido de grampo de papel.	so-br
+fita adesiva	fita-cola	e		so-br
+lixeira	caixote do lixo	e		so-br
+estepe	pneu sobresselente	e		so-br
+# Falsos amigos: a palavra existe dos dois lados, com outro sentido. Só entram
+# as que são raras na norma em que viram dica (senão, a dica seria ruído).
+moça|garota	rapariga	x	No Brasil, «rapariga» é ofensivo em muitas regiões.	dica-br
+garoto|menino	puto	x	No Brasil, «puto» é palavrão (ou quer dizer «zangado»).	dica-br
+fila	bicha	x	No Brasil, «bicha» é termo ofensivo; a fileira de pessoas é «fila».	dica-br
+faixa de pedestres	passadeira	x	No Brasil, «passadeira» é a mulher que passa roupa.	dica-br
+suéter|blusa de frio	camisola	x	No Brasil, «camisola» é roupa de dormir.	dica-br
+fato	facto	x	Em Portugal, «fato» é a roupa (o terno brasileiro); o acontecimento é «facto».	dica-eu

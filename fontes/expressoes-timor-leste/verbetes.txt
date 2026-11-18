@@ -9,174 +9,305 @@ V: tetun
 R: **tétum** (Timor-Leste): língua nacional e oficial de Timor-Leste, ao lado do português; tem muitas palavras de origem portuguesa.
 
 V: bondia
+L: tetum
 T: bom dia
 R: **bondia** (Timor-Leste): bom dia.
 
 V: botarde
+L: tetum
 T: boa tarde
 R: **botarde** (Timor-Leste): boa tarde.
 
 V: bonoite
+L: tetum
 T: boa noite
 R: **bonoite** (Timor-Leste): boa noite.
 
 V: di'ak
 V: diak
+L: tetum
 T: bem, bom
 R: **di'ak** (Timor-Leste): bem, bom. "Di'ak ka lae?" = "Tudo bem?"
 
 V: obrigadu
+L: tetum
 T: obrigado
 R: **obrigadu** (Timor-Leste): obrigado.
 
 V: obrigadu barak
+L: tetum
 T: muito obrigado
 R: **obrigadu barak** (Timor-Leste): muito obrigado.
 
 V: barak
+L: tetum
 T: muito
 R: **barak** (Timor-Leste): muito.
 
 V: saida
+L: tetum
 T: o quê
 R: **saida** (Timor-Leste): "o quê?" Ex.: «Ita-nia naran saida? (Qual é o seu nome?)»
 
 V: naran
+L: tetum
 T: nome
 R: **naran** (Timor-Leste): nome.
 
 V: maun
+L: tetum
 T: irmão
 R: **maun** (Timor-Leste): irmão mais velho; forma respeitosa de chamar um homem.
 
 V: mana
+L: tetum
 T: irmã
 R: **mana** (Timor-Leste): irmã mais velha; forma respeitosa de chamar uma mulher.
 
 V: maluk
+L: tetum
 T: amigo, companheiro
 R: **maluk** (Timor-Leste): amigo, companheiro.
 
 V: inan
+L: tetum
 T: mãe
 R: **inan** (Timor-Leste): mãe.
 
 V: aman
+L: tetum
 T: pai
 R: **aman** (Timor-Leste): pai.
 
 V: labarik
+L: tetum
 T: criança
 R: **labarik** (Timor-Leste): criança.
 
 V: feto
+L: tetum
 T: mulher
 R: **feto** (Timor-Leste): mulher.
 
 V: mane
+L: tetum
 T: homem
 R: **mane** (Timor-Leste): homem.
 
 V: katuas
+L: tetum
 T: idoso, ancião
 R: **katuas** (Timor-Leste): homem idoso, ancião.
 
 V: malae
+L: tetum
 T: estrangeiro
 R: **malae** (Timor-Leste): estrangeiro.
 
 V: timor-oan
 V: timor oan
+L: tetum
 T: timorense
 R: **timor-oan** (Timor-Leste): timorense, pessoa de Timor.
 
 V: rai
+L: tetum
 T: terra, país
 R: **rai** (Timor-Leste): terra, país.
 
 V: lulik
+L: tetum
 T: sagrado
 R: **lulik** (Timor-Leste): sagrado. A *uma lulik* é a casa sagrada, onde se guardam os objetos sagrados da aldeia ou da família.
 
 V: tais
+L: tetum
 R: **tais** (Timor-Leste): tecido tradicional tecido à mão, usado em roupas e cerimônias.
 
 V: be
+L: tetum
 T: água
 R: **be** (Timor-Leste): água.
 
 V: hahan
+L: tetum
 T: comida
 R: **hahan** (Timor-Leste): comida.
 
 V: etu
+L: tetum
 T: arroz cozido
 R: **etu** (Timor-Leste): arroz cozido.
 
 V: foos
+L: tetum
 T: arroz
 R: **foos** (Timor-Leste): arroz cru, em grão.
 
 V: ikan
+L: tetum
 T: peixe
 R: **ikan** (Timor-Leste): peixe.
 
 V: manu
+L: tetum
 T: galinha, frango
 R: **manu** (Timor-Leste): galinha, frango.
 
 V: fahi
+L: tetum
 T: porco
 R: **fahi** (Timor-Leste): porco.
 
 V: karau
+L: tetum
 T: búfalo
 R: **karau** (Timor-Leste): búfalo.
 
 V: lafaek
+L: tetum
 T: crocodilo
 R: **lafaek** (Timor-Leste): crocodilo; símbolo de Timor, ligado à lenda de origem da ilha.
 
 V: osan
+L: tetum
 T: dinheiro
 R: **osan** (Timor-Leste): dinheiro.
 
 V: servisu
+L: tetum
 T: trabalho
 R: **servisu** (Timor-Leste): trabalho.
 
 V: ohin
+L: tetum
 T: hoje
 R: **ohin** (Timor-Leste): hoje.
 
 V: aban
+L: tetum
 T: amanhã
 R: **aban** (Timor-Leste): amanhã.
 
 V: horiseik
+L: tetum
 T: ontem
 R: **horiseik** (Timor-Leste): ontem.
 
 V: loron
+L: tetum
 T: dia, sol
 R: **loron** (Timor-Leste): dia; também o sol.
 
 V: kalan
+L: tetum
 T: noite
 R: **kalan** (Timor-Leste): noite.
 
 V: han
+L: tetum
 T: comer
 R: **han** (Timor-Leste): comer.
 
 V: hemu
+L: tetum
 T: beber
 R: **hemu** (Timor-Leste): beber.
 
 V: toba
+L: tetum
 T: dormir
 R: **toba** (Timor-Leste): dormir.
 
 V: furak
+L: tetum
 T: bonito, gostoso
 R: **furak** (Timor-Leste): bonito, gostoso.
+
+# ---- 3.0: tétum ----------------------------------------------------------------
+V: hau
+L: tetum
+T: eu
+R: **hau** (tétum): eu. Ex.: «Hau naran Maria» — o meu nome é Maria.
+
+V: ita
+L: tetum
+T: você, o senhor, nós
+R: **ita** (tétum): você (tratamento respeitoso); também "nós" incluindo quem ouve. Formal: "ita boot".
+
+V: nia
+L: tetum
+T: ele, ela
+R: **nia** (tétum): ele, ela.
+
+V: uma
+L: tetum
+T: casa
+R: **uma** (tétum): casa. A casa sagrada tradicional é a "uma lulik".
+
+V: ba
+L: tetum
+T: ir, para
+R: **ba** (tétum): ir; também "para". Ex.: «Hau ba eskola» — vou à escola.
+
+V: mai
+L: tetum
+T: vir
+R: **mai** (tétum): vir. Ex.: «Mai ne'e!» — vem cá!
+
+V: hakarak
+L: tetum
+T: querer
+R: **hakarak** (tétum): querer.
+
+V: hatene
+L: tetum
+T: saber
+R: **hatene** (tétum): saber. «Hau la hatene» — não sei.
+
+V: koalia
+L: tetum
+T: falar
+R: **koalia** (tétum): falar. «Ita koalia portugés?» — fala português?
+
+V: lae
+L: tetum
+T: não
+R: **lae** (tétum): não (resposta). A negação antes do verbo é "la": «hau la hatene».
+
+V: loos
+L: tetum
+T: sim, verdade, certo
+R: **loos** (tétum): certo, verdade; usado para dizer "sim".
+
+V: ki'ik
+V: kiik
+L: tetum
+T: pequeno
+R: **ki'ik** (tétum): pequeno.
+
+V: boot
+L: tetum
+T: grande
+R: **boot** (tétum): grande; também usado em tratamentos de respeito ("ita boot").
+
+V: liurai
+L: tetum
+T: rei, chefe tradicional
+R: **liurai** (Timor-Leste): chefe tradicional, rei de um reino antigo.
+
+V: suku
+V: suco
+L: tetum
+T: suco, aldeia
+R: **suku** (Timor-Leste): divisão administrativa abaixo do posto administrativo, chefiada pelo "xefe suku" (chefe de suco).
+
+V: batar
+L: tetum
+T: milho
+R: **batar** (tétum): milho.
+
+V: ai-farina
+L: tetum
+T: mandioca
+R: **ai-farina** (tétum): mandioca.

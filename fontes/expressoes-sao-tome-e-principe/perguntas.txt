@@ -1,0 +1,19 @@
+# As línguas e a norma de São Tomé e Príncipe.
+
+P: qual a ortografia de sao tome e principe
+P: sao tome segue o acordo ortografico
+R: São Tomé e Príncipe ratificou o Acordo Ortográfico de 1990, que está **em vigor** no país, com a entrada no sistema educativo a decorrer. A grafia segue a norma europeia do Acordo: **ação**, **ótimo**, **diretor**, **facto**.
+
+P: quais as linguas de sao tome e principe
+P: que lingua se fala em sao tome
+R: O **português** é a única língua oficial e, hoje, a língua materna da maioria dos são-tomenses: no censo de 2012, 98,4% da população falava português. Convive com três crioulos nascidos nas ilhas — o **forro** ou santome (36,2% dos falantes), o **angolar** (6,6%) e o **lung'ie**, da ilha do Príncipe (1%) — e com o crioulo de Cabo Verde (8,5%).
+
+P: os crioulos de sao tome estao em risco
+P: o forro esta a desaparecer
+R: Sim. Linguistas alertam que os crioulos de São Tomé e Príncipe estão em declínio: quase toda a população fala português, e a soma dos falantes de forro, angolar e lung'ie já é inferior a metade. O caso mais grave é o do **lung'ie**, no Príncipe.
+
+P: o que e leve-leve
+R: **Leve-leve** é a expressão que resume o modo de vida são-tomense: com calma, devagar, sem pressa. Ex.: «Aqui é tudo leve-leve.»
+
+P: qual a moeda de sao tome e principe
+R: A moeda de São Tomé e Príncipe é a **dobra** (STN).

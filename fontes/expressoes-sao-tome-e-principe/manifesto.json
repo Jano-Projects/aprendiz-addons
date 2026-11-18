@@ -1,22 +1,26 @@
 {
   "id": "expressoes-sao-tome-e-principe",
-  "nome": "Expressões de São Tomé e Príncipe",
-  "versao": "2.0.0",
-  "descricao": "O jeito leve-leve das ilhas: palavras do forro (santome), línguas, pratos e manifestações culturais santomenses. Pergunte também \"como se diz floresta em forro?\".",
+  "nome": "Português de São Tomé e Príncipe",
+  "versao": "3.0.0",
+  "descricao": "Norma de São Tomé e Príncipe: vocabulário de mais de 400 mil formas (Acordo Ortográfico de 1990, em vigor no país), revisão de texto com regras de gramática, palavras do português santomense e dos crioulos (forro, angolar e lung'ie) e respostas sobre as línguas do país. Escreva \"revise: o seu texto\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
     "são tomé e príncipe",
+    "norma",
+    "gramática",
+    "ortografia",
+    "revisão de texto",
     "forro",
-    "santome",
+    "crioulo",
     "dicionário",
     "lusofonia"
   ],
   "autor": "Jano Projects",
-  "licenca": "CC-BY-4.0",
+  "licenca": "CC-BY-4.0 AND LGPL-2.1",
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.4.1"
+    "versao_minima": "0.8.0"
   },
   "regiao": {
     "nome": "São Tomé e Príncipe",
@@ -26,12 +30,51 @@
       "sao tome e principe",
       "santomense",
       "santomenses",
-      "sao tomense",
       "sao tomenses",
-      "principe",
-      "forro",
-      "santome",
-      "stp"
+      "stp",
+      "principe"
+    ],
+    "variedades": [
+      {
+        "id": "forro",
+        "nome": "forro",
+        "artigo": "o",
+        "termos": [
+          "forro",
+          "santome",
+          "lungwa santome",
+          "sao tomense"
+        ],
+        "descricao": "Forro ou santome, o crioulo mais falado da ilha de São Tomé."
+      },
+      {
+        "id": "angolar",
+        "nome": "angolar",
+        "artigo": "o",
+        "termos": [
+          "angolar",
+          "lunga ngola",
+          "ngola"
+        ],
+        "descricao": "Crioulo da comunidade angolar, no sul da ilha de São Tomé."
+      },
+      {
+        "id": "lungie",
+        "nome": "lung'ie",
+        "artigo": "o",
+        "termos": [
+          "lungie",
+          "lung ie",
+          "lunguye",
+          "lunguie"
+        ],
+        "descricao": "Crioulo da ilha do Príncipe, hoje com poucos falantes."
+      }
     ]
+  },
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.96
   }
 }

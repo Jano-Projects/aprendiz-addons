@@ -108,18 +108,22 @@ T: boteco, bar
 R: **tasca** (Portugal): restaurante ou bar simples e popular.
 
 V: bica
+L: lisboa
 T: café expresso, cafezinho
 R: **bica** (Portugal, Lisboa): café expresso.
 
 V: cimbalino
+L: norte
 T: café expresso, cafezinho
 R: **cimbalino** (Portugal, Porto): café expresso.
 
 V: fino
+L: norte
 T: chope
 R: **fino** (Portugal, Norte): copo de cerveja de pressão, o chope.
 
 V: imperial
+L: lisboa
 T: chope
 R: **imperial** (Portugal, Lisboa e Sul): copo de cerveja de pressão, o chope.
 
@@ -225,3 +229,83 @@ R: **guarda-redes** (Portugal): goleiro.
 V: relvado
 T: gramado
 R: **relvado** (Portugal): gramado (campo de futebol).
+
+# ---- 3.0: falares regionais ------------------------------------------------
+V: francesinha
+L: norte
+R: **francesinha** (Porto): sanduíche de pão de forma com carnes e queijo, coberta de molho picante de tomate e cerveja.
+
+V: sertã
+L: norte
+T: frigideira
+R: **sertã** (Norte): frigideira.
+
+V: cruzeta
+L: norte
+T: cabide
+R: **cruzeta** (Norte): cabide de pendurar roupa.
+
+V: carago
+L: norte
+R: **carago!** (Norte, sobretudo Porto): interjeição de espanto ou de ênfase.
+
+V: morcão
+L: norte
+T: tolo, parvo
+R: **morcão** (Porto): tolo, parvo (pejorativo).
+
+V: tripeiro
+L: norte
+T: portuense
+R: **tripeiro** (Portugal): natural do Porto, por causa das tripas à moda do Porto.
+
+V: alfacinha
+L: lisboa
+T: lisboeta
+R: **alfacinha** (Portugal): natural de Lisboa.
+
+V: monte
+L: alentejo
+T: casa de campo, herdade
+R: **monte** (Alentejo): casa de lavoura isolada no campo, com as suas terras.
+
+V: açorda
+L: alentejo
+R: **açorda** (Alentejo): sopa de pão com alho, coentros, azeite e ovo escalfado.
+
+V: migas
+L: alentejo
+R: **migas** (Alentejo): pão esmigalhado e frito com alho e azeite, servido com carne de porco.
+
+V: cataplana
+L: algarve
+R: **cataplana** (Algarve): panela de cobre em forma de concha que se fecha; e o prato de peixe ou marisco cozinhado nela.
+
+V: medronho
+L: algarve
+R: **medronho** (Algarve e Sul): fruto do medronheiro e a aguardente feita com ele.
+
+V: fajã
+L: acores
+R: **fajã** (Açores e Madeira): terreno plano junto ao mar, formado por desabamento da encosta ou por lava.
+
+V: cozido das furnas
+L: acores
+R: **cozido das Furnas** (Açores, São Miguel): cozido de carnes e legumes feito numa panela enterrada no calor vulcânico do solo.
+
+V: semilha
+L: madeira
+T: batata
+R: **semilha** (Madeira): batata.
+
+V: poncha
+L: madeira
+R: **poncha** (Madeira): bebida de aguardente de cana, mel e sumo de limão.
+
+V: bolo do caco
+L: madeira
+R: **bolo do caco** (Madeira): pão achatado cozido numa pedra de basalto, servido com manteiga de alho.
+
+V: levada
+L: madeira
+R: **levada** (Madeira): canal estreito que leva a água pelas encostas; os caminhos ao longo delas são trilhos famosos.
