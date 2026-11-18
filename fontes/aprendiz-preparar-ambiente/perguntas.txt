@@ -1,0 +1,340 @@
+# Aprendiz por dentro 1 · Preparar o ambiente
+# Do zero absoluto até o Aprendiz rodando a partir do código, com os testes passando.
+# Tudo feito à mão, passo a passo, no Ubuntu, no Fedora e no Windows.
+
+P: como estudar o código do aprendiz
+P: por onde começar a trilha aprendiz por dentro
+P: o que é a trilha aprendiz por dentro
+P: como aprender a criar o aprendiz do zero
+R: A trilha **Aprendiz por dentro** ensina, do zero, como o próprio Aprendiz funciona e como recriá-lo e customizá-lo. Ela tem cinco addons, para fazer em ordem:
+1. **Preparar o ambiente** (este): terminal, Python, Git, VS Code, baixar o código, rodar o app e os testes;
+2. **Arquitetura e arquivos**: o mapa do projeto e o que faz cada pasta e cada arquivo;
+3. **O código explicado**: módulo por módulo, com os comandos de Python que cada um usa;
+4. **Como os algoritmos pensam**: normalização, Naive Bayes, BM25, TF-IDF, Fuzzy, Híbrido, TextRank e o resto;
+5. **Construir e customizar do zero**: um mini-Aprendiz feito à mão e, depois, mudanças no Aprendiz de verdade.
+Pré-requisitos: os addons de Fundamentos e o **Python 1 · Básico** ajudam muito. Reserve um caderno: anote o que fizer, e faça cada passo no seu computador em vez de só ler.
+
+P: o que eu preciso instalar para estudar o aprendiz
+P: quais ferramentas preciso para programar no aprendiz
+P: lista de ferramentas do ambiente de desenvolvimento
+R: Quatro ferramentas, todas gratuitas:
+- **um terminal**: já vem com o sistema (Terminal no Linux; Windows Terminal ou PowerShell no Windows);
+- **Python 3.10 ou mais novo**: a linguagem do Aprendiz;
+- **Git**: para baixar o código e guardar o histórico das suas mudanças;
+- **VS Code** (ou outro editor): para ler e editar o código, com depurador.
+Opcional: um navegador Chromium (Chrome, Chromium, Edge ou Brave), para o Aprendiz abrir como janela de aplicativo, e uma conta no **GitHub**, para guardar e compartilhar o seu trabalho.
+O Aprendiz em si só precisa de três bibliotecas Python (FastAPI, Uvicorn e RapidFuzz, cerca de 15 MB), que são instaladas num ambiente virtual dentro da pasta do projeto, sem mexer no sistema.
+
+P: como abrir o terminal
+P: como abrir o terminal no ubuntu
+P: como abrir o terminal no windows
+P: comandos básicos do terminal para iniciantes
+R: - **Ubuntu/Fedora:** Ctrl+Alt+T, ou procure "Terminal" no menu.
+- **Windows:** tecla Windows, digite "Terminal" (Windows 11) ou "PowerShell" (Windows 10).
+Os comandos que você vai usar nesta trilha:
+- `pwd` (Linux) / `cd` sozinho (Windows cmd): mostra em que pasta você está;
+- `ls` (Linux) / `dir` (Windows): lista os arquivos;
+- `cd nome-da-pasta`: entra numa pasta; `cd ..` volta uma;
+- `mkdir projetos`: cria uma pasta;
+- seta para cima: repete o comando anterior; **Tab** completa nomes de arquivos;
+- **Ctrl+C**: interrompe o programa que está rodando (é assim que se para o Aprendiz no terminal).
+Crie uma pasta para os estudos: `mkdir ~/projetos` e `cd ~/projetos` (no Windows: `mkdir $HOME\projetos` e `cd $HOME\projetos`).
+
+P: como instalar o git
+P: como instalar git no ubuntu
+P: como instalar git no fedora
+P: como instalar git no windows
+R: - **Ubuntu/Debian:** `sudo apt update && sudo apt install git`
+- **Fedora:** `sudo dnf install git` (normalmente já vem instalado)
+- **Windows:** `winget install --id Git.Git -e` no PowerShell, ou baixe em git-scm.com e aceite as opções padrão do instalador. Feche e abra o terminal depois.
+Confira com `git --version`. Depois, diga ao Git quem você é (vai em cada commit):
+```bash
+git config --global user.name "Seu Nome"
+git config --global user.email "voce@exemplo.com"
+git config --global init.defaultBranch main
+```
+Se não quiser que o seu e-mail real apareça em repositórios públicos, use o e-mail "noreply" que o GitHub oferece em Settings → Emails.
+
+P: como instalar o python para o aprendiz
+P: qual versão do python o aprendiz precisa
+P: como saber se o python tem fts5
+R: O Aprendiz precisa do **Python 3.10 ou mais novo**, com o módulo `venv` e um SQLite com **FTS5** (a busca textual).
+- **Ubuntu/Debian:** `sudo apt install python3 python3-venv python3-pip`
+- **Fedora:** já vem com tudo; se faltar, `sudo dnf install python3`
+- **Windows:** `winget install Python.Python.3.13` ou o instalador do python.org, marcando **"Add python.exe to PATH"**.
+Confira tudo de uma vez (no Windows, troque `python3` por `python`):
+```bash
+python3 --version
+python3 -c "import sqlite3; sqlite3.connect(':memory:').execute('create virtual table t using fts5(x)'); print('FTS5 ok')"
+python3 -m venv --help > /dev/null && echo "venv ok"
+```
+Se não quiser instalar nada à mão, o `instalar.sh`/`instalar.bat` do Aprendiz faz essa conferência e instala o Python sozinho quando falta.
+
+P: como instalar o vs code
+P: quais extensões do vs code usar no aprendiz
+P: como configurar o vs code para python
+R: Instale o **VS Code**:
+- **Ubuntu:** `sudo snap install code --classic`, ou o pacote .deb de code.visualstudio.com;
+- **Fedora:** siga as instruções de "RHEL, Fedora" em code.visualstudio.com (repositório da Microsoft) ou use o Flatpak;
+- **Windows:** `winget install Microsoft.VisualStudioCode`.
+Extensões recomendadas (ícone de blocos na barra lateral, ou Ctrl+Shift+X):
+- **Python** (Microsoft): executar, depurar, escolher o ambiente virtual;
+- **Pylance**: autocompletar e checagem de tipos;
+- **EditorConfig**: respeita o `.editorconfig` do projeto (4 espaços, fim de linha);
+- opcional: **Ruff** (estilo e erros comuns), **GitLens** (histórico de cada linha), **SQLite Viewer** (abrir o `aprendiz.db`).
+Prefere algo mais leve? O **Geany** ou o **Kate** funcionam; o importante é ter realce de sintaxe e um terminal por perto.
+
+P: como baixar o código do aprendiz
+P: como clonar o repositório do aprendiz
+P: onde está o código do aprendiz no github
+R: O código fica em **github.com/Jano-Projects/aprendiz-dev** (licença MIT). Com o Git:
+```bash
+cd ~/projetos
+git clone https://github.com/Jano-Projects/aprendiz-dev.git aprendiz
+cd aprendiz
+git log --oneline | head    # a história do projeto
+```
+Sem Git: no site do GitHub, botão verde **Code → Download ZIP**, e extraia. (Nesse caso os scripts `.sh` podem perder a permissão de execução; use sempre `bash instalar.sh`.)
+Para estudar e mudar o código com histórico, prefira o Git. Melhor ainda: faça um **fork** (botão Fork no GitHub), clone o seu fork e assim você pode publicar as suas mudanças e abrir pull requests para o projeto original.
+
+P: como instalar o aprendiz pelo código
+P: como usar o instalar.sh
+P: como usar o instalar.bat
+P: como instalar o aprendiz no ubuntu
+P: como instalar o aprendiz no fedora
+P: como instalar o aprendiz no windows
+P: instalar o aprendiz
+R: O jeito automático, que é o mesmo que o GitHub Actions usa para testar o projeto:
+- **Linux:** `bash instalar.sh --dev`
+- **Windows:** dois cliques em `instalar.bat`, ou no terminal: `instalar.bat --dev`
+O que ele faz:
+1. confere se há um Python 3.10+ com FTS5 que consegue criar ambientes virtuais;
+2. se faltar, avisa que precisa de administrador e instala (no Linux pelo apt, dnf, zypper, pacman ou apk, pedindo a senha certa: sudo, su ou a janela gráfica; no Windows baixando do python.org);
+3. cria o ambiente virtual `.venv` dentro da pasta;
+4. instala as dependências; com `--dev`, também pytest, httpx e PyInstaller.
+Não rode o instalador com `sudo`: ele pede a senha só no passo que precisa. Para entender cada etapa, faça uma vez do jeito manual (veja "como instalar o aprendiz manualmente").
+
+P: como instalar o aprendiz manualmente
+P: como criar o ambiente virtual do aprendiz
+P: instalar as dependências do aprendiz sem o instalador
+R: O que o instalador faz, à mão (na pasta do projeto):
+**Linux:**
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip
+.venv/bin/python -m pip install -r requirements-dev.txt
+```
+**Windows (PowerShell):**
+```
+py -m venv .venv
+.venv\Scripts\python -m pip install --upgrade pip
+.venv\Scripts\python -m pip install -r requirements-dev.txt
+```
+- `requirements.txt` tem só o essencial (fastapi, uvicorn, rapidfuzz);
+- `requirements-dev.txt` inclui o essencial (linha `-r requirements.txt`) mais pytest, httpx e PyInstaller;
+- `requirements-janela.txt` é opcional: o pywebview, para a janela nativa.
+Se preferir **ativar** o ambiente (para digitar só `python`): `source .venv/bin/activate` no Linux, `.venv\Scripts\Activate.ps1` no PowerShell. Se o PowerShell bloquear, rode uma vez `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`.
+
+P: como rodar o aprendiz pelo código
+P: como executar o aprendiz
+P: o que faz python -m aprendiz
+P: como abrir o aprendiz
+P: rodar o aprendiz
+R: Com o ambiente pronto, na pasta do projeto:
+```bash
+.venv/bin/python -m aprendiz                    # Linux
+.venv\Scripts\python -m aprendiz                # Windows
+bash executar.sh                                # atalho (instala na 1ª vez)
+```
+`python -m aprendiz` roda o arquivo `aprendiz/__main__.py`, que chama `main()` de `aprendiz/desktop.py`. Ele:
+1. escolhe uma porta livre (a 8765, se puder);
+2. sobe o servidor web local numa thread, em `127.0.0.1`;
+3. abre a interface: janela nativa (se o pywebview estiver instalado), ou um Chromium em modo aplicativo, ou uma aba do navegador.
+Opções úteis:
+- `--modo servidor`: só o servidor; abra `http://127.0.0.1:8765` no navegador. É o melhor modo para estudar;
+- `--modo navegador`: abre numa aba comum;
+- `--porta 9000`: escolhe a porta.
+Para parar: feche a janela (o servidor encerra sozinho em até 90 s) ou Ctrl+C no terminal.
+
+P: o que é a documentação interativa do aprendiz
+P: como testar a api do aprendiz sem a interface
+P: o que é a rota /docs
+R: Com o Aprendiz rodando (`--modo servidor`), abra **`http://127.0.0.1:8765/docs`**. É a documentação que o FastAPI gera sozinho a partir do código: todas as rotas, os campos de cada pedido e um botão **Try it out** para chamar cada uma.
+Experimente:
+1. `POST /api/conhecimentos` com `{"pergunta": "senha do wifi", "conteudo": "casa123"}`;
+2. `POST /api/chat` com `{"mensagem": "qual a senha do wifi?"}`;
+3. veja no JSON da resposta o campo `meta.explicacao`: são as etapas do pipeline, as mesmas do painel "Por que respondi isso?".
+Pelo terminal, o mesmo com `curl`:
+```bash
+curl -s -X POST http://127.0.0.1:8765/api/chat \
+     -H "Content-Type: application/json" \
+     -d '{"mensagem": "qual a senha do wifi?"}'
+```
+
+P: como ver as requisições da interface no navegador
+P: como usar o devtools com o aprendiz
+R: A interface é uma página web, então dá para "espiar" tudo pelo **DevTools** do navegador:
+1. com o Aprendiz em `--modo servidor`, abra `http://127.0.0.1:8765` no Chrome ou no Firefox;
+2. aperte **F12** (ou Ctrl+Shift+I);
+3. aba **Rede (Network)**: mande uma mensagem e clique na requisição `chat` para ver o JSON enviado (`Payload`) e o recebido (`Response`);
+4. aba **Console**: erros de JavaScript aparecem aqui; você pode digitar JavaScript para testar;
+5. aba **Elementos**: o HTML ao vivo; mude uma cor no CSS e veja na hora (sem salvar);
+6. aba **Fontes (Sources)**: abra `app.js`, clique no número de uma linha para pôr um breakpoint e mande uma mensagem.
+Foi por isso que o projeto escolheu uma interface web local: quem estuda vê cada pedido e cada resposta.
+
+P: como rodar os testes do aprendiz
+P: como usar pytest no aprendiz
+P: os testes do aprendiz estão falhando
+P: como rodar os testes
+P: rodar pytest no aprendiz
+R: Na pasta do projeto, com as dependências de desenvolvimento instaladas:
+```bash
+.venv/bin/python -m pytest -q             # todos (Windows: .venv\Scripts\python -m pytest -q)
+.venv/bin/python -m pytest tests/test_linguagem.py -v       # um arquivo
+.venv/bin/python -m pytest -k bm25                          # só os que têm "bm25" no nome
+.venv/bin/python -m pytest -x --lf                          # para no 1º erro; só os que falharam
+```
+São perto de 300 testes, e todos rodam em poucos segundos, cada um com um banco temporário (veja `tests/conftest.py`).
+Se falhar logo de cara: confira se usou o Python do `.venv` (e não o do sistema) e se instalou o `requirements-dev.txt` (faltando o `httpx`, os testes da API não rodam). Depois de mudar qualquer coisa no código, rode os testes de novo: essa é a sua rede de proteção.
+
+P: como verificar a instalação do aprendiz
+P: o que faz o verificar.py
+R: O `ferramentas/verificar.py` confere a instalação de ponta a ponta, numa pasta de dados temporária (sem tocar na sua memória):
+```bash
+.venv/bin/python ferramentas/verificar.py         # Linux
+.venv\Scripts\python ferramentas\verificar.py     # Windows
+```
+Ele testa: a versão do Python, o SQLite com FTS5, as dependências e um chat completo (sobe o servidor, ensina, pergunta e confere a resposta). Com `--executavel caminho`, testa o executável gerado pelo PyInstaller. É o mesmo script que o GitHub Actions roda em Windows, Ubuntu, Fedora e Debian a cada push.
+
+P: onde ficam os dados do aprendiz
+P: onde fica o arquivo aprendiz.db
+P: como apagar a memória do aprendiz
+P: onde fica o banco de dados do aprendiz
+P: onde o aprendiz guarda a memória
+R: A memória inteira é **um arquivo SQLite**, `aprendiz.db`, fora da pasta do programa (assim, atualizar ou reinstalar não apaga nada):
+- **Linux:** `~/.local/share/aprendiz/`
+- **Windows:** `%APPDATA%\Aprendiz\` (cole no Explorador de Arquivos)
+- **macOS:** `~/Library/Application Support/Aprendiz/`
+Para estudar sem misturar com a sua memória de verdade, use outra pasta com a variável `APRENDIZ_DADOS`:
+```bash
+APRENDIZ_DADOS=/tmp/aprendiz-teste .venv/bin/python -m aprendiz --modo servidor
+```
+(No PowerShell: `$env:APRENDIZ_DADOS="C:\temp\aprendiz-teste"` antes do comando.)
+Para começar do zero: use **Configurações → Resetar** (faz backup antes) ou apague o `aprendiz.db` com o app fechado. Para abrir o banco e olhar as tabelas: `sqlite3 ~/.local/share/aprendiz/aprendiz.db` e `.tables`, ou o DB Browser for SQLite.
+
+P: como abrir o projeto aprendiz no vs code
+P: como escolher o interpretador python no vs code
+R: 1. No terminal, dentro da pasta do projeto: `code .` (ou **Arquivo → Abrir Pasta**).
+2. Ctrl+Shift+P → **Python: Select Interpreter** → escolha o que está em `.venv` (o VS Code costuma sugerir sozinho).
+3. Abra um terminal integrado com Ctrl+' : ele já ativa o `.venv`.
+4. Explore pela ordem sugerida no README: `aprendiz/core/assistente.py` primeiro.
+Atalhos que ajudam a ler código:
+- **F12**: ir para a definição de uma função ou classe;
+- **Shift+F12**: ver onde ela é usada;
+- **Ctrl+P**: abrir um arquivo pelo nome;
+- **Ctrl+Shift+F**: buscar um texto em todo o projeto;
+- **passar o mouse** sobre um nome: mostra o tipo e a docstring.
+
+P: como depurar o aprendiz no vs code
+P: como colocar breakpoint no aprendiz
+P: launch.json para o aprendiz
+P: como depurar o aprendiz
+P: debug do aprendiz
+R: Crie o arquivo `.vscode/launch.json` na pasta do projeto:
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Aprendiz (servidor)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "aprendiz",
+      "args": ["--modo", "servidor"],
+      "env": {"APRENDIZ_DADOS": "${workspaceFolder}/.dados-estudo"},
+      "justMyCode": true
+    },
+    {
+      "name": "Testes (pytest)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["-q", "tests/test_algoritmos.py"]
+    }
+  ]
+}
+```
+Depois:
+1. abra `aprendiz/core/assistente.py` e clique à esquerda do número da linha da função `_pipeline` (bolinha vermelha = breakpoint);
+2. F5 com "Aprendiz (servidor)";
+3. abra `http://127.0.0.1:8765` e mande uma mensagem: o VS Code para no breakpoint;
+4. F10 avança uma linha, F11 entra na função, e o painel **Variáveis** mostra `consulta`, `candidatos`… Passe por todo o pipeline assim pelo menos uma vez.
+Acrescente `.dados-estudo/` ao seu `.gitignore` local para não versionar o banco de estudo.
+
+P: como atualizar o código do aprendiz
+P: como baixar a versão nova do aprendiz
+R: Se você clonou com Git:
+```bash
+git status                  # confira se não há mudanças suas sem commit
+git pull                    # baixa e junta as novidades
+.venv/bin/python -m pip install -r requirements-dev.txt   # se as dependências mudaram
+.venv/bin/python -m pytest -q
+```
+Se você fez um **fork**, acrescente o original como `upstream` e traga as novidades dele:
+```bash
+git remote add upstream https://github.com/Jano-Projects/aprendiz-dev.git
+git fetch upstream
+git merge upstream/main
+```
+Leia o `CHANGELOG.md` para saber o que mudou em cada versão. O banco de dados se atualiza sozinho ao abrir o app (as migrações em `memoria/banco.py`).
+
+P: como criar uma branch para estudar o aprendiz
+P: fluxo de git para mexer no aprendiz
+R: Nunca experimente direto na `main`. Para cada ideia, uma branch:
+```bash
+git switch -c estudo/meu-algoritmo     # cria e entra na branch
+# ... edite, rode os testes ...
+git add -A
+git commit -m "feat(busca): adiciona algoritmo Jaccard"
+git switch main                        # volta para a versão limpa
+git switch estudo/meu-algoritmo        # e de novo para o seu experimento
+```
+Deu tudo errado e quer jogar fora o que não foi commitado? `git restore .` (cuidado: apaga as mudanças).
+Para mandar a sua contribuição: `git push -u origin estudo/meu-algoritmo` (no seu fork) e abra um **pull request** no GitHub. O `CONTRIBUTING.md` explica os padrões do projeto (Conventional Commits em português, testes, CHANGELOG).
+
+P: erro externally managed environment no aprendiz
+P: erro python não encontrado no windows
+P: problemas comuns ao instalar o aprendiz
+R: Os problemas mais comuns e a saída:
+- **"externally-managed-environment"** ao usar pip: você está no Python do sistema. Use o `.venv` (`.venv/bin/python -m pip ...`).
+- **"No module named venv"** ou "ensurepip is not available" (Debian/Ubuntu): `sudo apt install python3-venv`.
+- **Windows: "python não é reconhecido"** ou abre a Microsoft Store: reinstale marcando "Add to PATH", ou use `py` no lugar de `python`.
+- **"Permission denied" no `./instalar.sh`**: use `bash instalar.sh`.
+- **Linux sem sudo** (usuário fora do sudoers, comum em VMs Debian): o instalador pede a senha do **root** com `su`; se não souber, peça a quem administra para rodar o comando que ele mostra.
+- **Porta ocupada:** o app escolhe outra sozinho; ou use `--porta 9000`.
+- **ModuleNotFoundError: fastapi**: você rodou com um Python diferente do `.venv`.
+- **Testes de API falhando com "httpx"**: instale o `requirements-dev.txt`.
+O `docs/empacotamento.md` do projeto tem mais casos.
+
+P: como usar uma máquina virtual para estudar o aprendiz
+P: como testar o aprendiz numa vm debian
+R: Uma máquina virtual (VirtualBox, GNOME Boxes, Hyper-V) é ótima para testar a instalação do zero sem medo:
+1. instale o VirtualBox e crie uma VM com a ISO do Debian, Ubuntu ou Fedora (2 GB de RAM e 20 GB de disco bastam);
+2. instale os "Adicionais para Convidado" para ter área de transferência compartilhada;
+3. dentro da VM: `sudo apt install git` (ou peça ao root, se o seu usuário não estiver no sudoers: `su -c "apt install git"`);
+4. `git clone https://github.com/Jano-Projects/aprendiz-dev.git aprendiz && cd aprendiz && bash instalar.sh --dev`;
+5. tire um **snapshot** da VM limpa antes de instalar: assim dá para voltar e testar o instalador de novo.
+Para usar o navegador do computador real com o Aprendiz da VM, rode com `--modo servidor` e configure no VirtualBox um redirecionamento de porta (Rede → Avançado → Redirecionamento de Portas: 8765 → 8765). O servidor só escuta em 127.0.0.1, então o acesso de fora precisa desse redirecionamento.
+
+P: checklist do ambiente pronto para o aprendiz
+P: como saber se meu ambiente está pronto
+R: Antes de seguir para o próximo addon da trilha, confira:
+- [ ] `git --version` e `python3 --version` (3.10+) funcionam;
+- [ ] o projeto está clonado e você vê a pasta `aprendiz/` lá dentro;
+- [ ] o `.venv` existe e `.venv/bin/python -m pytest -q` termina com todos os testes passando;
+- [ ] `ferramentas/verificar.py` dá tudo OK;
+- [ ] o app abre com `python -m aprendiz --modo servidor` e responde em `http://127.0.0.1:8765`;
+- [ ] você abriu `/docs` e chamou o `/api/chat` pelo "Try it out";
+- [ ] o VS Code abre o projeto com o interpretador do `.venv`, e você parou num breakpoint em `_pipeline`;
+- [ ] você criou uma branch de estudo.
+Tudo certo? Siga para **Aprendiz por dentro 2 · Arquitetura e arquivos**.

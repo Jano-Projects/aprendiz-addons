@@ -1,0 +1,33 @@
+{
+  "id": "aprendiz-arquitetura",
+  "nome": "Aprendiz por dentro 2 · Arquitetura e arquivos",
+  "versao": "1.0.0",
+  "autor": "Jano Projects",
+  "descricao": "O mapa do projeto: o caminho de uma pergunta até a resposta, as camadas e o que faz cada pasta e cada arquivo do Aprendiz, dos instaladores aos testes.",
+  "licenca": "CC-BY-4.0",
+  "categoria": "Programação",
+  "etiquetas": [
+    "aprendiz",
+    "arquitetura",
+    "projeto",
+    "arquivos",
+    "trilha aprendiz por dentro"
+  ],
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.6.0"
+  },
+  "dependencias": [
+    {
+      "id": "aprendiz-preparar-ambiente",
+      "versao": "1.0.0",
+      "nome": "Aprendiz por dentro 1 · Preparar o ambiente"
+    }
+  ],
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.96
+  }
+}

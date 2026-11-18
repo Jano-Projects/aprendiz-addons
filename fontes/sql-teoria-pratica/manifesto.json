@@ -1,0 +1,34 @@
+{
+  "id": "sql-teoria-pratica",
+  "nome": "SQL 3 · Teoria e prática",
+  "versao": "1.0.0",
+  "autor": "Jano Projects",
+  "descricao": "A teoria por trás do SQL (modelo relacional, álgebra relacional, dependências funcionais, 1FN a BCNF, níveis de isolamento, B-tree) e exercícios resolvidos sobre um banco de exemplo de uma loja.",
+  "licenca": "CC-BY-4.0",
+  "categoria": "Programação",
+  "etiquetas": [
+    "sql",
+    "teoria",
+    "normalização",
+    "exercícios",
+    "álgebra relacional",
+    "trilha sql"
+  ],
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.6.0"
+  },
+  "dependencias": [
+    {
+      "id": "sql-avancado",
+      "versao": "1.0.0",
+      "nome": "SQL 2 · Avançado"
+    }
+  ],
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.93
+  }
+}

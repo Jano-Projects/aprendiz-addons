@@ -1,0 +1,400 @@
+# SQL 2 · Avançado
+# Subconsultas, CTEs, funções de janela, índices, transações, triggers e as diferenças entre bancos.
+# Os exemplos usam o banco de exemplo da loja (addon "SQL 1 · Básico") e rodam no SQLite 3.39 ou mais novo.
+
+P: o que é subconsulta em sql
+P: o que é subquery
+P: como usar select dentro de select
+P: subconsulta
+P: subquery
+R: **Subconsulta** é um `SELECT` dentro de outro. Pode aparecer em vários lugares:
+```sql
+-- no WHERE, devolvendo um valor: produtos acima da média
+SELECT nome, preco FROM produtos
+WHERE preco > (SELECT AVG(preco) FROM produtos);
+
+-- no WHERE, devolvendo uma lista: clientes que já compraram
+SELECT nome FROM clientes
+WHERE id IN (SELECT cliente_id FROM pedidos);
+
+-- no FROM, como uma tabela temporária
+SELECT categoria, MAX(preco) AS mais_caro
+FROM (SELECT * FROM produtos WHERE preco > 50) AS caros
+GROUP BY categoria;
+
+-- no SELECT, um valor por linha
+SELECT c.nome,
+       (SELECT COUNT(*) FROM pedidos p WHERE p.cliente_id = c.id) AS qtd_pedidos
+FROM clientes c;
+```
+
+P: o que é subconsulta correlacionada
+P: como usar exists em sql
+P: diferença entre in e exists
+R: Uma subconsulta **correlacionada** usa colunas da consulta de fora, e roda (logicamente) uma vez por linha. O `EXISTS` é verdadeiro se ela devolver pelo menos uma linha:
+```sql
+-- clientes que têm algum pedido entregue
+SELECT c.nome FROM clientes c
+WHERE EXISTS (
+    SELECT 1 FROM pedidos p
+    WHERE p.cliente_id = c.id AND p.status = 'entregue'
+);
+
+-- produtos que nunca foram vendidos
+SELECT nome FROM produtos pr
+WHERE NOT EXISTS (SELECT 1 FROM itens_pedido i WHERE i.produto_id = pr.id);
+```
+Cuidado com **`NOT IN`** quando a subconsulta pode ter NULL: `x NOT IN (1, NULL)` nunca é verdadeiro, e a consulta volta vazia sem erro. `NOT EXISTS` não tem esse problema; prefira-o.
+
+P: o que é cte em sql
+P: como usar with em sql
+P: o que é common table expression
+P: o que é uma cte
+P: with em sql
+P: cte
+R: **CTE** (`WITH`) dá nome a uma subconsulta e deixa a consulta legível, de cima para baixo, como passos:
+```sql
+WITH totais AS (
+    SELECT pedido_id, SUM(quantidade * preco_unit) AS total
+    FROM itens_pedido
+    GROUP BY pedido_id
+),
+entregues AS (
+    SELECT p.id, p.cliente_id, t.total
+    FROM pedidos p JOIN totais t ON t.pedido_id = p.id
+    WHERE p.status = 'entregue'
+)
+SELECT c.nome, SUM(e.total) AS gasto
+FROM entregues e JOIN clientes c ON c.id = e.cliente_id
+GROUP BY c.nome
+ORDER BY gasto DESC;
+```
+Cada CTE pode usar as anteriores. Em vez de subconsultas aninhadas três níveis para dentro, você lê uma sequência de passos com nome.
+
+P: o que é cte recursiva
+P: como usar with recursive
+P: como consultar hierarquia em sql
+R: Uma **CTE recursiva** se refere a si mesma: parte de um caso inicial e repete até não gerar linhas novas. Serve para hierarquias (organogramas, categorias com subcategorias, pastas) e para gerar sequências:
+```sql
+-- números de 1 a 10
+WITH RECURSIVE n(x) AS (
+    SELECT 1
+    UNION ALL
+    SELECT x + 1 FROM n WHERE x < 10
+)
+SELECT x FROM n;
+
+-- todos os subordinados (diretos e indiretos) do funcionário 1,
+-- numa tabela funcionarios(id, nome, chefe_id)
+WITH RECURSIVE equipe(id, nome, nivel) AS (
+    SELECT id, nome, 0 FROM funcionarios WHERE id = 1
+    UNION ALL
+    SELECT f.id, f.nome, e.nivel + 1
+    FROM funcionarios f JOIN equipe e ON f.chefe_id = e.id
+)
+SELECT * FROM equipe;
+```
+Sempre tenha uma condição de parada; dados com ciclos podem fazer a recursão não terminar.
+
+P: o que são funções de janela em sql
+P: o que é window function
+P: o que é over partition by
+P: window function
+P: funções de janela
+P: over partition
+R: **Funções de janela** calculam algo sobre um grupo de linhas **sem juntá-las numa só** (diferente do `GROUP BY`): cada linha continua lá, com o cálculo ao lado.
+```sql
+SELECT nome, categoria, preco,
+       AVG(preco) OVER (PARTITION BY categoria) AS media_categoria,
+       preco - AVG(preco) OVER (PARTITION BY categoria) AS diferenca
+FROM produtos;
+```
+- `OVER (...)` define a janela;
+- `PARTITION BY` divide em grupos (como o GROUP BY, mas sem colapsar);
+- `ORDER BY` dentro do OVER define a ordem (necessário para ranking e acumulados).
+Funcionam no SQLite (3.25 ou mais novo), PostgreSQL, MySQL 8, SQL Server e Oracle.
+
+P: como usar row_number rank e dense_rank
+P: como fazer ranking em sql
+P: como pegar o mais caro de cada categoria
+P: como fazer ranking com sql
+P: ranking em sql
+P: row_number
+R: ```sql
+SELECT nome, categoria, preco,
+       ROW_NUMBER() OVER (PARTITION BY categoria ORDER BY preco DESC) AS posicao,
+       RANK()       OVER (ORDER BY preco DESC) AS rank_geral,
+       DENSE_RANK() OVER (ORDER BY preco DESC) AS rank_denso
+FROM produtos;
+```
+- `ROW_NUMBER`: 1, 2, 3, 4 (sempre único);
+- `RANK`: empates ganham o mesmo número e pulam o seguinte: 1, 2, 2, 4;
+- `DENSE_RANK`: empates sem pular: 1, 2, 2, 3.
+O "top 1 de cada grupo" clássico:
+```sql
+WITH ordenados AS (
+    SELECT nome, categoria, preco,
+           ROW_NUMBER() OVER (PARTITION BY categoria ORDER BY preco DESC) AS rn
+    FROM produtos
+)
+SELECT nome, categoria, preco FROM ordenados WHERE rn = 1;
+```
+Não dá para usar a função de janela direto no `WHERE` (ele roda antes); por isso a CTE.
+
+P: como fazer soma acumulada em sql
+P: como usar lag e lead
+P: como comparar com a linha anterior em sql
+R: Com `ORDER BY` dentro do `OVER`:
+```sql
+WITH vendas AS (
+    SELECT p.data, SUM(i.quantidade * i.preco_unit) AS total
+    FROM pedidos p JOIN itens_pedido i ON i.pedido_id = p.id
+    GROUP BY p.data
+)
+SELECT data, total,
+       SUM(total) OVER (ORDER BY data) AS acumulado,
+       LAG(total)  OVER (ORDER BY data) AS anterior,
+       total - LAG(total) OVER (ORDER BY data) AS variacao,
+       LEAD(data)  OVER (ORDER BY data) AS proxima_data,
+       AVG(total)  OVER (ORDER BY data ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS media_movel_3
+FROM vendas;
+```
+- `LAG(col, n)` / `LEAD(col, n)`: o valor n linhas antes / depois;
+- `FIRST_VALUE`, `LAST_VALUE`, `NTILE(4)` (quartis);
+- `ROWS BETWEEN ...` define uma moldura (os 3 últimos, para média móvel).
+
+P: como usar union em sql
+P: diferença entre union e union all
+P: como usar intersect e except
+R: Operações de conjunto juntam resultados de consultas com as **mesmas colunas**:
+```sql
+SELECT cidade FROM clientes WHERE uf = 'PE'
+UNION                      -- junta e tira duplicados
+SELECT cidade FROM clientes WHERE uf = 'SP';
+
+SELECT nome FROM clientes
+UNION ALL                  -- junta tudo, com duplicados (mais rápido)
+SELECT nome FROM produtos;
+
+SELECT id FROM clientes
+EXCEPT                     -- está na primeira e não na segunda
+SELECT cliente_id FROM pedidos;    -- clientes sem pedido
+
+SELECT cliente_id FROM pedidos WHERE status = 'entregue'
+INTERSECT                  -- está nas duas
+SELECT cliente_id FROM pedidos WHERE data >= '2026-02-01';
+```
+Use `UNION ALL` quando duplicados não forem problema: o `UNION` precisa ordenar ou usar hash para tirá-los. No Oracle, o `EXCEPT` se chama `MINUS`.
+
+P: o que é view materializada
+P: como criar view em sql
+R: Uma **view** guarda a consulta; uma **view materializada** guarda o **resultado**, e precisa ser atualizada:
+```sql
+CREATE VIEW resumo_pedidos AS
+SELECT p.id, c.nome, p.status, SUM(i.quantidade * i.preco_unit) AS total
+FROM pedidos p
+JOIN clientes c ON c.id = p.cliente_id
+JOIN itens_pedido i ON i.pedido_id = p.id
+GROUP BY p.id;
+
+SELECT * FROM resumo_pedidos WHERE status = 'entregue';
+```
+- PostgreSQL: `CREATE MATERIALIZED VIEW ...` e `REFRESH MATERIALIZED VIEW ...`;
+- Oracle também tem; SQL Server usa "indexed views";
+- SQLite não tem: o jeito é uma tabela atualizada por triggers ou por um script.
+Materializar vale quando a consulta é cara e os dados mudam pouco (relatórios).
+
+P: como criar índice em sql
+P: quando criar um índice
+P: o que é índice composto
+P: como criar índice no banco
+P: create index
+P: índice em sql
+R: ```sql
+CREATE INDEX idx_pedidos_cliente ON pedidos (cliente_id);
+CREATE INDEX idx_pedidos_status_data ON pedidos (status, data);   -- composto
+CREATE UNIQUE INDEX idx_clientes_nome ON clientes (nome);
+DROP INDEX idx_clientes_nome;
+```
+Crie índices em colunas usadas com frequência em `WHERE`, `JOIN` (as chaves estrangeiras!) e `ORDER BY`.
+No **índice composto**, a ordem das colunas importa: `(status, data)` ajuda `WHERE status = ?` e `WHERE status = ? AND data > ?`, mas **não** ajuda `WHERE data > ?` sozinho (como uma lista telefônica ordenada por sobrenome e depois nome: não serve para achar todos os "João").
+O índice deixa de ser usado quando a coluna aparece dentro de uma função (`WHERE UPPER(nome) = 'ANA'`) ou num `LIKE '%texto'`. Índices custam espaço e deixam as escritas mais lentas: não crie em tudo.
+
+P: como ver o plano de execução em sql
+P: o que é explain query plan
+P: como saber se a consulta usa índice
+R: O banco mostra **como** vai executar a consulta:
+```sql
+EXPLAIN QUERY PLAN
+SELECT * FROM pedidos WHERE cliente_id = 1;
+```
+- `SCAN pedidos`: lê a tabela inteira (ruim em tabelas grandes);
+- `SEARCH pedidos USING INDEX idx_pedidos_cliente (cliente_id=?)`: usa o índice.
+Nos outros bancos: `EXPLAIN ANALYZE` (PostgreSQL, mostra também o tempo real), `EXPLAIN` (MySQL), "Plano de Execução" no SQL Server Management Studio, `EXPLAIN PLAN FOR` (Oracle).
+Método: ache a consulta lenta, veja o plano, crie ou ajuste um índice, veja o plano de novo e meça.
+
+P: como usar transação em sql
+P: como usar begin commit rollback
+P: o que é savepoint
+P: transação em sql
+P: rollback
+R: ```sql
+BEGIN;
+INSERT INTO pedidos (id, cliente_id, data) VALUES (6, 2, '2026-03-10');
+INSERT INTO itens_pedido VALUES (6, 1, 1, 120.0);
+SAVEPOINT antes_do_brinde;
+INSERT INTO itens_pedido VALUES (6, 6, 1, 0.0);
+ROLLBACK TO antes_do_brinde;     -- desfaz só o brinde
+COMMIT;                          -- confirma o resto
+```
+- tudo entre `BEGIN` e `COMMIT` acontece junto, ou nada (com `ROLLBACK`);
+- `SAVEPOINT` marca um ponto para desfazer parcialmente;
+- se o programa cair no meio, o banco desfaz a transação incompleta ao reabrir.
+Agrupar muitos INSERTs numa transação também deixa tudo **muito** mais rápido no SQLite (uma gravação em disco no fim, em vez de uma por linha).
+
+P: o que é upsert
+P: como inserir ou atualizar se já existir em sql
+P: como usar on conflict
+R: **Upsert** = inserir; se já existir (conflito numa chave única), atualizar:
+```sql
+-- SQLite e PostgreSQL
+INSERT INTO produtos (id, nome, categoria, preco)
+VALUES (1, 'Teclado', 'Informática', 125.0)
+ON CONFLICT (id) DO UPDATE SET preco = excluded.preco;
+
+INSERT INTO clientes (id, nome) VALUES (1, 'Ana Souza')
+ON CONFLICT (id) DO NOTHING;     -- ignora se já existe
+```
+`excluded` é a linha que você tentou inserir. Nos outros bancos: MySQL usa `INSERT ... ON DUPLICATE KEY UPDATE`; SQL Server e Oracle usam `MERGE`.
+
+P: o que é trigger em sql
+P: como criar um gatilho no sqlite
+P: como manter histórico de alterações com trigger
+R: **Trigger** roda automaticamente antes ou depois de um INSERT, UPDATE ou DELETE:
+```sql
+CREATE TABLE historico_precos (
+    produto_id INTEGER,
+    preco_antigo REAL,
+    preco_novo REAL,
+    alterado_em TEXT DEFAULT (datetime('now'))
+);
+
+CREATE TRIGGER trg_historico_preco
+AFTER UPDATE OF preco ON produtos
+WHEN OLD.preco <> NEW.preco
+BEGIN
+    INSERT INTO historico_precos (produto_id, preco_antigo, preco_novo)
+    VALUES (OLD.id, OLD.preco, NEW.preco);
+END;
+```
+`OLD` é a linha antes da mudança e `NEW`, depois. Bons usos: auditoria, histórico, manter um total atualizado. Evite esconder regras de negócio importantes em triggers: ninguém lembra que elas existem.
+
+P: como trabalhar com json no sql
+P: funções json do sqlite
+R: Os bancos modernos guardam e consultam JSON:
+```sql
+CREATE TABLE eventos (id INTEGER PRIMARY KEY, dados TEXT);
+INSERT INTO eventos (dados) VALUES
+    ('{"tipo": "login", "usuario": "ana", "tags": ["web", "mobile"]}');
+
+SELECT dados ->> '$.usuario' FROM eventos;                    -- 'ana' (SQLite 3.38+)
+SELECT json_extract(dados, '$.tipo') FROM eventos;            -- 'login'
+SELECT value FROM eventos, json_each(dados, '$.tags');        -- uma linha por tag
+SELECT json_object('nome', nome, 'uf', uf) FROM clientes;     -- monta JSON
+SELECT json_group_array(nome) FROM clientes;                  -- ["Ana Souza", ...]
+```
+O PostgreSQL tem o tipo `JSONB` com índices próprios (GIN). Use JSON para dados realmente variáveis; o que tem estrutura fixa merece colunas de verdade.
+
+P: como fazer busca de texto no sqlite
+P: o que é fts5
+R: O **FTS5** é o motor de busca de texto do SQLite, com índice invertido e ranking **BM25**, o mesmo algoritmo que o Aprendiz implementa em Python:
+```sql
+CREATE VIRTUAL TABLE docs USING fts5(titulo, corpo);
+INSERT INTO docs VALUES ('Receita de bolo', 'farinha, ovos, açúcar e leite');
+INSERT INTO docs VALUES ('Medidas', 'uma xícara de farinha tem 120 g');
+
+SELECT titulo, bm25(docs) AS pontuacao
+FROM docs
+WHERE docs MATCH 'farinha'
+ORDER BY pontuacao;      -- no FTS5, quanto MENOR, mais relevante
+```
+Aceita `AND`, `OR`, `NOT`, prefixos (`farin*`) e frases (`"xícara de farinha"`). Para português com acentos, use o tokenizador `unicode61 remove_diacritics 2`.
+
+P: o que é pivot em sql
+P: como transformar linhas em colunas em sql
+R: **Pivotar** é transformar valores de linhas em colunas. O jeito portátil é com `CASE` dentro da agregação:
+```sql
+SELECT c.nome,
+       SUM(CASE WHEN pr.categoria = 'Informática' THEN i.quantidade * i.preco_unit ELSE 0 END) AS informatica,
+       SUM(CASE WHEN pr.categoria = 'Móveis'      THEN i.quantidade * i.preco_unit ELSE 0 END) AS moveis,
+       SUM(CASE WHEN pr.categoria = 'Cozinha'     THEN i.quantidade * i.preco_unit ELSE 0 END) AS cozinha
+FROM clientes c
+JOIN pedidos p       ON p.cliente_id = c.id
+JOIN itens_pedido i  ON i.pedido_id = p.id
+JOIN produtos pr     ON pr.id = i.produto_id
+GROUP BY c.nome;
+```
+SQL Server e Oracle têm o operador `PIVOT`; o PostgreSQL tem a extensão `tablefunc` (`crosstab`). O SQLite também aceita `SUM(... ) FILTER (WHERE ...)`, mais curto.
+
+P: diferenças entre sqlite postgresql mysql sql server e oracle
+P: qual banco de dados escolher
+P: o sql é igual em todos os bancos
+R: O núcleo (`SELECT`, `JOIN`, `GROUP BY`, `INSERT`…) é o mesmo. Mudam os detalhes:
+- **Limitar linhas:** `LIMIT` (SQLite, PostgreSQL, MySQL) · `TOP`/`OFFSET FETCH` (SQL Server) · `FETCH FIRST` (Oracle).
+- **Autoincremento:** `INTEGER PRIMARY KEY` (SQLite) · `GENERATED ALWAYS AS IDENTITY` (PostgreSQL, Oracle) · `AUTO_INCREMENT` (MySQL) · `IDENTITY(1,1)` (SQL Server).
+- **Concatenar:** `||` (SQLite, PostgreSQL, Oracle) · `CONCAT()` (MySQL, SQL Server).
+- **Datas e tipos:** cada um tem as suas funções; o SQLite guarda datas como texto.
+- **Procedimentos:** PL/pgSQL, PL/SQL (Oracle), T-SQL (SQL Server); o SQLite não tem.
+Como escolher:
+- **SQLite:** apps locais, celulares, protótipos, um dono só (o Aprendiz);
+- **PostgreSQL:** a escolha padrão para servidores, livre e muito completo;
+- **MySQL/MariaDB:** web tradicional, hospedagens baratas;
+- **SQL Server / Oracle:** empresas que já usam o ecossistema (Oracle com APEX, por exemplo).
+
+P: como otimizar consultas sql
+P: minha consulta sql está lenta
+R: Um roteiro:
+1. **meça** e veja o **plano de execução** (`EXPLAIN QUERY PLAN` / `EXPLAIN ANALYZE`);
+2. crie **índices** para os filtros e as junções (principalmente nas chaves estrangeiras);
+3. não envolva colunas indexadas em funções no `WHERE`: troque `WHERE strftime('%Y', data) = '2026'` por `WHERE data >= '2026-01-01' AND data < '2027-01-01'`;
+4. traga só as colunas e linhas que precisa (nada de `SELECT *` com filtro feito no programa);
+5. evite o problema **N+1**: uma consulta por item num laço do programa. Faça um JOIN só;
+6. prefira `EXISTS` a `COUNT(*) > 0` para saber se existe;
+7. agrupe escritas em transações;
+8. atualize as estatísticas do otimizador (`ANALYZE`) depois de grandes cargas.
+
+P: o que é sql dinâmico
+P: como montar sql com segurança
+R: **SQL dinâmico** é montar o comando em tempo de execução (filtros opcionais, colunas escolhidas pelo usuário). A regra de segurança:
+- **valores** (o que o usuário digita) sempre como **parâmetros** (`?`, `:nome`, `%s` conforme a biblioteca);
+- **nomes** (tabelas, colunas, direção do ORDER BY) não podem ser parâmetros: escolha-os de uma **lista fechada** no código.
+```python
+COLUNAS_ORDENAVEIS = {"nome", "preco"}
+coluna = pedido_do_usuario if pedido_do_usuario in COLUNAS_ORDENAVEIS else "nome"
+sql = f"SELECT nome, preco FROM produtos WHERE categoria = ? ORDER BY {coluna}"
+con.execute(sql, (categoria,))
+```
+É exatamente o padrão do banco do Aprendiz: textos de fora entram por `?`, e só nomes fixos do próprio código são colocados no SQL.
+
+P: o que é tabela temporária em sql
+R: Uma **tabela temporária** existe só durante a conexão e some sozinha ao fechar:
+```sql
+CREATE TEMP TABLE carrinho AS
+SELECT produto_id, SUM(quantidade) AS qtd FROM itens_pedido GROUP BY produto_id;
+
+SELECT * FROM carrinho WHERE qtd > 1;
+```
+Útil para quebrar um processamento grande em etapas ou guardar um resultado intermediário usado várias vezes. Para uma só consulta, uma CTE costuma bastar.
+
+P: exercícios de sql avançado
+R: Usando o banco de exemplo da loja:
+1. o produto mais caro de cada categoria (com `ROW_NUMBER`);
+2. o total gasto por cliente, só pedidos entregues, do maior para o menor (com CTE);
+3. a posição de cada produto no ranking de preço dentro da categoria (com `RANK`);
+4. o faturamento por mês e o acumulado do ano (com `SUM ... OVER`);
+5. clientes que nunca compraram (com `NOT EXISTS` e com `EXCEPT`);
+6. a quantidade vendida de cada produto, incluindo os nunca vendidos (com `LEFT JOIN` e `COALESCE`);
+7. o ticket médio (valor médio por pedido) por estado;
+8. um trigger que impede vender com quantidade maior que 100 (`RAISE(ABORT, 'mensagem')`);
+9. um índice que faça `SELECT * FROM pedidos WHERE status = 'aberto' ORDER BY data` virar `SEARCH` no plano.
+As respostas estão no addon "SQL 3 · Teoria e prática" (pergunte "resposta do exercício 2 de sql avançado").

@@ -1,0 +1,26 @@
+{
+  "id": "prog-logica",
+  "nome": "Programação 1 · Lógica e algoritmos",
+  "versao": "1.0.0",
+  "autor": "Jano Projects",
+  "descricao": "O começo de tudo: o que é um programa, algoritmo, variável, tipos, operadores, decisões, repetições, funções, recursão, pseudocódigo, fluxograma e como encontrar erros. Primeiro passo da trilha de programação.",
+  "licenca": "CC-BY-4.0",
+  "categoria": "Programação",
+  "etiquetas": [
+    "programação",
+    "lógica",
+    "algoritmos",
+    "iniciante",
+    "trilha programação"
+  ],
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.6.0"
+  },
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.96
+  }
+}

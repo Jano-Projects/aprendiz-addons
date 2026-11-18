@@ -1,0 +1,34 @@
+{
+  "id": "aprendiz-preparar-ambiente",
+  "nome": "Aprendiz por dentro 1 · Preparar o ambiente",
+  "versao": "1.0.0",
+  "autor": "Jano Projects",
+  "descricao": "Passo a passo manual, do zero, no Ubuntu, no Fedora e no Windows: terminal, Python, pip, Git, VS Code, baixar o código do Aprendiz, criar o ambiente virtual, instalar as dependências, rodar o app e os testes.",
+  "licenca": "CC-BY-4.0",
+  "categoria": "Programação",
+  "etiquetas": [
+    "aprendiz",
+    "ambiente",
+    "instalação",
+    "git",
+    "vs code",
+    "trilha aprendiz por dentro"
+  ],
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.6.0"
+  },
+  "dependencias": [
+    {
+      "id": "python-basico",
+      "versao": "1.0.0",
+      "nome": "Python 1 · Básico"
+    }
+  ],
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.92
+  }
+}

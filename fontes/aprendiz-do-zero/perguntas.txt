@@ -1,0 +1,546 @@
+# Aprendiz por dentro 5 · Construir e customizar do zero
+# Parte 1: um mini-Aprendiz escrito do zero, arquivo por arquivo (testado em Python 3.10+).
+# Parte 2: mudanças no Aprendiz de verdade: algoritmo, parâmetro, rota, addon, testes,
+# executável e contribuição. Cada passo foi conferido com a suíte de testes passando.
+
+P: como criar um assistente como o aprendiz do zero
+P: como construir um mini aprendiz
+P: passo a passo para criar o aprendiz do zero
+P: como fazer um mini aprendiz
+P: mini aprendiz
+R: Vamos construir um **mini-Aprendiz**: um chat que só sabe o que você ensina, com as mesmas ideias do original, em cerca de 150 linhas.
+São sete passos e uma lista de evoluções. Peça cada um pelo número: **"mini aprendiz passo 1"**, depois 2, 3… até 7, e por fim **"mini aprendiz próximos passos"**.
+Ao final, você terá um pacote Python com quatro arquivos (linguagem, memória, API e página) e um arquivo de testes, rodando no navegador.
+
+P: mini aprendiz passo 1
+P: como começar o projeto do mini aprendiz
+P: criar a pasta e o ambiente virtual do mini aprendiz
+R: **Passo 1: a pasta e o ambiente.** No terminal:
+```bash
+mkdir -p ~/projetos/mini/mini_aprendiz ~/projetos/mini/tests
+cd ~/projetos/mini
+python3 -m venv .venv
+source .venv/bin/activate              # Windows: .venv\Scripts\Activate.ps1
+python -m pip install fastapi uvicorn pytest httpx
+git init
+```
+Crie `mini_aprendiz/__init__.py` com uma linha só:
+```python
+"""Mini-Aprendiz: um assistente que só sabe o que você ensina."""
+```
+O `__init__.py` transforma a pasta num **pacote** Python (dá para fazer `from mini_aprendiz.linguagem import processar`). Crie também um `.gitignore` com `.venv/`, `__pycache__/` e `*.db`.
+
+P: mini aprendiz passo 2
+P: como fazer o normalizador do mini aprendiz
+P: linguagem.py do mini aprendiz
+P: radical e stopwords do mini aprendiz
+R: **Passo 2: a linguagem.** Crie `mini_aprendiz/linguagem.py`:
+```python
+"""Prepara o texto para a busca: minúsculas, sem acento, sem stopwords, radicais."""
+import re
+import unicodedata
+
+STOPWORDS = set("""
+a o as os um uma de da do das dos em na no nas nos por para com e ou que
+qual quais como onde quando quem eu voce me meu minha seu sua isso isto
+eh ser esta estar tem ter sabe
+""".split())
+
+SUFIXOS = ["mente", "coes", "cao", "oes", "ando", "endo", "indo", "ar", "er", "ir",
+           "as", "es", "os", "a", "e", "o", "s"]
+
+
+def remover_acentos(texto: str) -> str:
+    decomposto = unicodedata.normalize("NFKD", texto)
+    return "".join(c for c in decomposto if not unicodedata.combining(c))
+
+
+def radical(palavra: str) -> str:
+    """Corta o primeiro sufixo da lista que deixe pelo menos 3 letras."""
+    for sufixo in SUFIXOS:
+        if palavra.endswith(sufixo) and len(palavra) - len(sufixo) >= 3:
+            return palavra[: -len(sufixo)]
+    return palavra
+
+
+def processar(texto: str) -> list[str]:
+    texto = remover_acentos(texto.lower())
+    tokens = re.sub(r"[^a-z0-9]+", " ", texto).split()
+    return [radical(t) for t in tokens if t not in STOPWORDS]
+```
+Teste no terminal: `python -c "from mini_aprendiz.linguagem import processar; print(processar('Qual o horário da farmácia?'))"` → `['horari', 'farmaci']`.
+É uma versão bem simplificada do que o Aprendiz faz (lá o radicalizador é o RSLP em seis passos, com tamanhos mínimos por regra). O importante: **o mesmo `processar`** vai ser usado ao ensinar e ao perguntar.
+
+P: mini aprendiz passo 3
+P: como fazer a memória sqlite do mini aprendiz
+P: memoria.py do mini aprendiz
+P: busca bm25 do mini aprendiz com fts5
+R: **Passo 3: a memória.** Crie `mini_aprendiz/memoria.py`:
+```python
+"""Guarda os conhecimentos num arquivo SQLite, com índice de busca FTS5."""
+import sqlite3
+import threading
+
+from mini_aprendiz.linguagem import processar
+
+ESQUEMA = """
+CREATE TABLE IF NOT EXISTS conhecimentos (
+    id       INTEGER PRIMARY KEY,
+    pergunta TEXT NOT NULL,
+    resposta TEXT NOT NULL
+);
+CREATE VIRTUAL TABLE IF NOT EXISTS busca USING fts5(texto);
+"""
+
+
+class Memoria:
+    def __init__(self, caminho: str) -> None:
+        self.con = sqlite3.connect(caminho, check_same_thread=False)
+        self.con.row_factory = sqlite3.Row
+        self.trava = threading.Lock()
+        with self.trava:
+            self.con.executescript(ESQUEMA)
+
+    def ensinar(self, pergunta: str, resposta: str) -> int:
+        texto = " ".join(processar(f"{pergunta} {resposta}"))
+        with self.trava, self.con:   # trava + transação (commit no fim)
+            cur = self.con.execute(
+                "INSERT INTO conhecimentos (pergunta, resposta) VALUES (?, ?)",
+                (pergunta, resposta))
+            self.con.execute("INSERT INTO busca (rowid, texto) VALUES (?, ?)",
+                             (cur.lastrowid, texto))
+        return cur.lastrowid
+
+    def buscar(self, pergunta: str, limiar: float = 0.5) -> dict | None:
+        termos = list(dict.fromkeys(processar(pergunta)))
+        if not termos:
+            return None
+        expressao = " OR ".join(f'"{t}"' for t in termos)
+        with self.trava:
+            linhas = self.con.execute(
+                "SELECT c.id, c.pergunta, c.resposta, b.texto, bm25(busca) AS nota "
+                "FROM busca b JOIN conhecimentos c ON c.id = b.rowid "
+                "WHERE busca MATCH ? ORDER BY nota LIMIT 5", (expressao,)).fetchall()
+        melhor = None
+        for linha in linhas:
+            do_doc = set(linha["texto"].split())
+            cobertura = sum(t in do_doc for t in termos) / len(termos)
+            if cobertura >= limiar and (melhor is None or cobertura > melhor["confianca"]):
+                melhor = {**dict(linha), "confianca": round(cobertura, 2)}
+        return melhor
+```
+O que acontece aqui:
+- o texto de busca (radicais) vai para uma tabela **FTS5**, ligada ao conhecimento pelo `rowid`;
+- a busca monta `"horari" OR "farmaci"` e deixa o SQLite ordenar por **BM25**;
+- a **confiança** é a **cobertura** (fração dos termos da pergunta presentes), e abaixo do **limiar** nada é aceito: o **modo estrito**;
+- `with self.trava, self.con:` junta a trava (várias threads do servidor) e a transação.
+
+P: mini aprendiz passo 4
+P: como fazer a api do mini aprendiz
+P: api.py do mini aprendiz
+P: fastapi do mini aprendiz
+R: **Passo 4: a API.** Crie `mini_aprendiz/api.py`:
+```python
+"""API local: a página conversa com a memória por aqui."""
+from pathlib import Path
+
+from fastapi import FastAPI
+from fastapi.responses import FileResponse
+from pydantic import BaseModel, Field
+
+from mini_aprendiz.memoria import Memoria
+
+PASTA = Path(__file__).resolve().parent
+
+
+class Ensino(BaseModel):
+    pergunta: str = Field(min_length=1)
+    resposta: str = Field(min_length=1)
+
+
+class Pergunta(BaseModel):
+    mensagem: str = Field(min_length=1)
+
+
+def criar_app(caminho_banco: str = "mini.db") -> FastAPI:
+    memoria = Memoria(caminho_banco)
+    app = FastAPI(title="Mini-Aprendiz")
+
+    @app.get("/")
+    def pagina():
+        return FileResponse(PASTA / "index.html")
+
+    @app.post("/api/ensinar")
+    def ensinar(e: Ensino):
+        return {"id": memoria.ensinar(e.pergunta, e.resposta)}
+
+    @app.post("/api/perguntar")
+    def perguntar(p: Pergunta):
+        achado = memoria.buscar(p.mensagem)
+        if not achado:
+            return {"resposta": "Ainda não fui ensinado sobre isso.", "confianca": 0}
+        return {"resposta": achado["resposta"], "confianca": achado["confianca"]}
+
+    return app
+
+
+app = criar_app()
+```
+- `criar_app` é uma **fábrica**, como no Aprendiz: os testes criam apps com bancos temporários;
+- a variável `app` no fim é o que o Uvicorn procura (`mini_aprendiz.api:app`). Ela cria o `mini.db` na pasta onde você rodar o comando.
+
+P: mini aprendiz passo 5
+P: como fazer a tela de chat do mini aprendiz
+P: index.html do mini aprendiz
+P: html e javascript do mini aprendiz
+R: **Passo 5: a interface.** Crie `mini_aprendiz/index.html`:
+```html
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Mini-Aprendiz</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; }
+    #chat p { padding: .5rem .8rem; border-radius: 10px; }
+    .eu { background: #4f46e5; color: #fff; text-align: right; }
+    .ele { background: #f0f0f5; }
+  </style>
+</head>
+<body>
+  <h1>Mini-Aprendiz</h1>
+  <div id="chat"></div>
+  <form id="form">
+    <input id="msg" autocomplete="off" placeholder="Pergunte, ou: pergunta: ... resposta: ..." size="50">
+    <button>Enviar</button>
+  </form>
+  <script>
+    const chat = document.getElementById("chat");
+    function mostrar(texto, classe) {
+      const p = document.createElement("p");
+      p.className = classe;
+      p.textContent = texto;          // textContent: nunca interpreta HTML
+      chat.appendChild(p);
+    }
+    async function postar(rota, corpo) {
+      const r = await fetch(rota, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(corpo),
+      });
+      return r.json();
+    }
+    document.getElementById("form").addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      const campo = document.getElementById("msg");
+      const texto = campo.value.trim();
+      if (!texto) return;
+      campo.value = "";
+      mostrar(texto, "eu");
+      const ensino = texto.match(/^pergunta:\s*(.+?)\s*resposta:\s*(.+)$/i);
+      if (ensino) {
+        await postar("/api/ensinar", { pergunta: ensino[1], resposta: ensino[2] });
+        mostrar("Aprendi!", "ele");
+      } else {
+        const r = await postar("/api/perguntar", { mensagem: texto });
+        mostrar(r.resposta + (r.confianca ? ` (confiança ${r.confianca})` : ""), "ele");
+      }
+    });
+  </script>
+</body>
+</html>
+```
+- `textContent` (e não `innerHTML`) garante que nada do que for ensinado vire HTML ou script;
+- a mesma regex do Aprendiz (`pergunta: … resposta: …`) reconhece o ensino, aqui no navegador;
+- `ev.preventDefault()` impede o formulário de recarregar a página.
+
+P: mini aprendiz passo 6
+P: como rodar o mini aprendiz
+P: uvicorn do mini aprendiz
+P: conversar com o mini aprendiz
+R: **Passo 6: rodar.** Na pasta `mini/`, com o ambiente ativado:
+```bash
+uvicorn mini_aprendiz.api:app --reload
+```
+Abra `http://127.0.0.1:8000` e converse:
+1. `pergunta: horário da farmácia resposta: 8h às 20h`
+2. `que horário a farmácia abre?` → "8h às 20h (confiança 1.0)"
+3. `qual a capital da frança?` → "Ainda não fui ensinado sobre isso."
+- `--reload` reinicia o servidor sempre que você salvar um arquivo;
+- `http://127.0.0.1:8000/docs` mostra a documentação automática da sua API;
+- Ctrl+C para.
+Faça um commit: `git add -A && git commit -m "feat: mini-aprendiz funcionando"`.
+
+P: mini aprendiz passo 7
+P: como testar o mini aprendiz
+P: pytest do mini aprendiz
+P: test_mini.py
+R: **Passo 7: testes.** Crie `tests/test_mini.py`:
+```python
+from fastapi.testclient import TestClient
+
+from mini_aprendiz.api import criar_app
+from mini_aprendiz.linguagem import processar
+from mini_aprendiz.memoria import Memoria
+
+
+def test_processar_tira_acento_stopwords_e_sufixos():
+    assert processar("Qual o horário da farmácia?") == ["horari", "farmaci"]
+
+
+def test_ensina_e_encontra(tmp_path):
+    m = Memoria(str(tmp_path / "t.db"))
+    m.ensinar("senha do wifi", "casa123")
+    assert m.buscar("qual a senha do wifi?")["resposta"] == "casa123"
+    assert m.buscar("capital da frança") is None
+
+
+def test_api(tmp_path):
+    cliente = TestClient(criar_app(str(tmp_path / "api.db")))
+    cliente.post("/api/ensinar", json={"pergunta": "horário da farmácia", "resposta": "8h às 20h"})
+    r = cliente.post("/api/perguntar", json={"mensagem": "que horário a farmácia abre?"})
+    assert r.json()["resposta"] == "8h às 20h"
+```
+Rode `python -m pytest -q` na pasta `mini/`: `3 passed`. O `tmp_path` é uma fixture do pytest que dá uma pasta temporária por teste, como o `conftest.py` do Aprendiz faz com o banco.
+(O import de `mini_aprendiz.api` cria um `mini.db` na pasta atual por causa da variável `app` do fim do arquivo; ele já está no `.gitignore`.)
+
+P: mini aprendiz próximos passos
+P: como evoluir o mini aprendiz
+P: o que acrescentar no mini aprendiz
+R: Para chegar perto do Aprendiz original, um passo de cada vez (com teste para cada um):
+1. **sinônimos e abreviações:** dois dicionários aplicados em `processar` antes das stopwords (`vc → voce`, `horas → horario`);
+2. **correção de digitação:** com `rapidfuzz.process.extractOne` contra o vocabulário da base, só em palavras de 4+ letras;
+3. **TF-IDF** em Python puro como segunda busca, e um parâmetro `busca` na API para escolher;
+4. **intenções** com Naive Bayes, para responder "oi" e "obrigado" sem buscar;
+5. **explicação:** devolver também os radicais, os candidatos e a confiança, e mostrar num painel;
+6. **conversas:** tabelas `conversas` e `mensagens` e uma barra lateral;
+7. **resposta extrativa:** dividir textos longos em frases e escolher a mais relevante;
+8. **addons:** importar um ZIP com um `manifesto.json` e um `conhecimentos.json`, validando tudo.
+Compare cada passo com o arquivo correspondente do Aprendiz (o addon **Arquitetura e arquivos** diz onde está cada coisa): é o melhor jeito de entender por que o original é do jeito que é.
+
+P: como customizar o aprendiz
+P: o que dá para mudar no aprendiz
+R: Há três níveis, do mais fácil ao mais profundo:
+- **pela interface**, sem programar: o menu Configurações e o menu Linguagem;
+- **com um addon**, só com dados, para compartilhar;
+- **no código**, numa branch, com os testes passando antes e depois.
+Cada caso tem a sua pergunta neste addon: tema e nome, sinônimos de fábrica, algoritmo novo, parâmetro novo, rota nova, addon, executável e contribuição.
+
+P: como mudar a cor e o nome do aprendiz
+P: como criar um tema para o aprendiz
+P: como mudar a cor do aprendiz
+P: como mudar o nome do assistente
+R: **Sem programar:** Configurações → Personalização: nome (até 30 caracteres), cor de destaque e mensagem de boas-vindas.
+**Como addon de tema**, para compartilhar: crie uma pasta `meu-tema/` com
+`manifesto.json`:
+```json
+{"id": "tema-cafe", "nome": "Tema Café", "versao": "1.0.0",
+ "autor": "Seu nome", "descricao": "Destaque marrom café.", "licenca": "CC0-1.0"}
+```
+`personalizacao.json`:
+```json
+{"personalizacao.cor": "#6f4e37", "personalizacao.nome": "Barista"}
+```
+e gere: `python ferramentas/criar_addon.py meu-tema -o tema-cafe.aprendiz`. Importe em Addons → Importar addon.
+**No código** (o padrão de fábrica): o valor padrão está na `Definicao("personalizacao.cor", ...)` em `aprendiz/configuracoes.py` (`"#4f46e5"`), e os tons do tema ficam nas variáveis `--primaria`, `--primaria-hover` e `--primaria-suave` de `aprendiz/web/estilo.css`, uma vez no tema claro (`:root`) e outra no escuro (`[data-tema="escuro"]`).
+
+P: como criar um algoritmo de busca no aprendiz
+P: como adicionar o algoritmo jaccard no aprendiz
+P: como criar um algoritmo novo no aprendiz
+P: novo algoritmo no aprendiz
+R: Exemplo completo, conferido com a suíte de testes: a **similaridade de Jaccard** (termos em comum ÷ termos no total).
+**1.** Crie `aprendiz/algoritmos/busca/jaccard.py`:
+```python
+"""Busca por similaridade de Jaccard: |A ∩ B| / |A ∪ B|."""
+
+from aprendiz.algoritmos.base import AlgoritmoBusca, Candidato, ContextoBusca, registrar
+from aprendiz.linguagem import TextoProcessado
+
+
+@registrar
+class BuscaJaccard(AlgoritmoBusca):
+    nome = "jaccard"
+    titulo = "Jaccard"
+    descricao = "Termos em comum ÷ termos no total."
+    explicacao = """
+**Ideia:** comparar CONJUNTOS de radicais. A nota é o número de termos em comum dividido
+pelo número de termos diferentes somando a pergunta e o conhecimento: |A ∩ B| / |A ∪ B|.
+
+**Exemplo:** "senha do wifi" (`senh wifi`) contra "A senha do wifi é casa123."
+(`senh wifi casa123`): 2 termos em comum ÷ 3 no total = **0,667**.
+
+**Limite:** textos longos têm muitos termos e a nota cai, mesmo quando respondem.
+"""
+    limiar = 0.3
+
+    def buscar(self, consulta: TextoProcessado, ctx: ContextoBusca, limite: int = 5):
+        q = set(consulta.radicais)
+        if not q:
+            return []
+        resultados = []
+        for doc in ctx.banco.conhecimentos_ativos():
+            d = set(doc["texto_busca"].split())
+            j = len(q & d) / len(q | d) if d else 0.0
+            if j > 0:
+                resultados.append(Candidato(doc, pontuacao=j, confianca=j,
+                                            detalhes={"jaccard": round(j, 3)}))
+        resultados.sort(key=lambda c: c.pontuacao, reverse=True)
+        return resultados[:limite]
+```
+**2.** Em `aprendiz/algoritmos/busca/__init__.py`, acrescente `jaccard` ao import (a ordem é a do seletor).
+**3.** Rode os testes e siga a pergunta "testes que falham ao criar um algoritmo no aprendiz".
+Use `conhecimentos_ativos()` (e não `todos_conhecimentos()`) para respeitar os addons desativados.
+
+P: testes que falham ao criar um algoritmo no aprendiz
+P: o que fazer depois de criar um algoritmo no aprendiz
+R: Depois de criar o `jaccard.py`, a suíte mostra três falhas, e cada uma ensina algo:
+- **`test_todo_algoritmo_tem_explicacao`**: o campo `explicacao` precisa ter mais de 100 caracteres, porque aparece no botão **?** do app. Escreva a ideia, um exemplo com números e o limite;
+- **`test_docs_estrutura_esta_atualizado`**: há um arquivo novo; rode `python ferramentas/gerar_estrutura.py` (a primeira linha da docstring vira a descrição no `docs/estrutura.md`);
+- **`test_recomendar_testa_todos_os_algoritmos`** (em `tests/test_recomendacao.py`): ele compara com uma lista fixa de quatro algoritmos; troque `{"bm25", "tfidf", "fuzzy", "hibrido"}` por `set(BUSCAS)` (com `from aprendiz.algoritmos import BUSCAS`), e o teste passa a valer para qualquer algoritmo futuro.
+Depois: `python -m pytest -q` (tudo verde), `python benchmarks/comparar.py` para comparar o Jaccard com os outros, e uma linha no `CHANGELOG.md`, na seção **[Não lançado]**. Os testes parametrizados de `test_algoritmos.py` já rodam sozinhos para o algoritmo novo.
+
+P: como criar um parâmetro novo no aprendiz
+P: como adicionar o limiar do jaccard nas configurações
+R: Os parâmetros ficam na lista fechada `DEFINICOES` de `aprendiz/configuracoes.py`. Para o Jaccard ganhar um limiar ajustável em Configurações (e por addons), acrescente-o à lista que gera os limiares:
+```python
+    *[Definicao(f"limiar.{nome}", "parametros", f"Limiar: {titulo}", ...)
+      for nome, titulo in [("bm25", "BM25"), ("tfidf", "TF-IDF"),
+                           ("fuzzy", "Fuzzy"), ("hibrido", "Híbrido"),
+                           ("jaccard", "Jaccard")]],
+```
+Pronto: o padrão vem do atributo `limiar` da classe, a validação aceita de 0,05 a 1, a tela de Configurações mostra o controle sozinha, e o algoritmo recebe o valor por `ctx.limiar("jaccard")`, que o `Assistente` preenche a cada pergunta.
+Para um parâmetro de outro tipo, crie uma `Definicao` com chave, tipo (`parametros` ou `personalizacao`), título, descrição, valor padrão e um validador (`_numero(min, max)`, `_escolha(...)`, `_texto(min, max)`). Lembre: só o que está nessa lista pode ser mudado, inclusive por addons.
+
+P: como criar uma rota nova no aprendiz
+P: como adicionar um endpoint na api do aprendiz
+R: Exemplo: `GET /api/estatisticas`, que conta os conhecimentos ativos por tipo. Em `aprendiz/api/servidor.py`, dentro de `criar_app`, junto das outras rotas:
+```python
+    @app.get("/api/estatisticas")
+    def estatisticas():
+        """Quantos conhecimentos ativos existem, por tipo."""
+        por_tipo: dict[str, int] = {}
+        for c in banco.conhecimentos_ativos():
+            por_tipo[c["tipo"]] = por_tipo.get(c["tipo"], 0) + 1
+        return {"total": sum(por_tipo.values()), "por_tipo": por_tipo}
+```
+Um teste em `tests/test_estatisticas.py` (comece o arquivo com uma docstring: o `test_documentacao` exige):
+```python
+"""Testes da rota de estatísticas."""
+
+from fastapi.testclient import TestClient
+
+from aprendiz.api import criar_app
+
+
+def test_estatisticas_conta_por_tipo(tmp_path):
+    with TestClient(criar_app(tmp_path / "e.db")) as cliente:
+        cliente.post("/api/conhecimentos", json={"pergunta": "senha do wifi", "conteudo": "casa123"})
+        cliente.post("/api/conhecimentos", json={"conteudo": "Levar o carro na revisão."})
+        r = cliente.get("/api/estatisticas").json()
+        assert r == {"total": 2, "por_tipo": {"pergunta": 1, "nota": 1}}
+```
+Rode `gerar_estrutura.py` e os testes. Para ver na interface, abra o console do DevTools e digite `fetch("/api/estatisticas").then(r => r.json()).then(console.log)`; o passo seguinte é criar um botão em `index.html` e uma função em `app.js` que chame `api("/api/estatisticas")`. Acrescente a rota à lista da docstring do `servidor.py`.
+
+P: como adicionar sinônimos de fábrica no aprendiz
+P: como mudar as sementes do aprendiz
+R: As **sementes** (`aprendiz/memoria/sementes.py`) são gravadas só na **primeira** execução, num banco novo. Então há três caminhos:
+- **para você:** menu **Linguagem** (sinônimos, abreviações, frases de intenção). Vale na hora, e a base é reindexada;
+- **para compartilhar:** um addon com `linguagem.json` (`"sinonimos"`, `"abreviacoes"`, `"stopwords"`, `"intencoes"`), que vale enquanto o addon estiver ativo;
+- **para todo mundo, no código:** acrescente a `SINONIMOS` (ou `ABREVIACOES`, `INTENCOES`…) em `sementes.py`, sem acento e em minúsculas. Bancos novos já nascem com eles; para os bancos que **já existem**, é preciso um passo de **migração** em `Banco._migrar()`, como o projeto fez na versão 0.3 com `SINONIMOS_V3` (um `INSERT OR IGNORE` condicionado à `versao_esquema`, que depois é aumentada).
+Mais frases de exemplo para as intenções são, inclusive, uma das "primeiras contribuições" sugeridas no `CONTRIBUTING.md`.
+
+P: como criar um addon para o aprendiz
+P: passo a passo para criar um addon
+P: como criar meu próprio addon
+P: como fazer um addon
+R: 1. Crie uma pasta, por exemplo `meu-addon/`, com um `manifesto.json`:
+```json
+{"id": "receitas-da-vo", "nome": "Receitas da vó", "versao": "1.0.0",
+ "autor": "Seu nome", "descricao": "As receitas da família.", "licenca": "CC-BY-4.0"}
+```
+2. Escreva um `perguntas.txt` com blocos separados por linha em branco:
+```
+P: como fazer o bolo de fubá da vó
+P: receita do bolo de fubá
+R: 3 ovos, 2 xícaras de fubá, 1 de açúcar, 1 de leite, meia de óleo e 1 colher de fermento. Forno médio por 40 minutos.
+```
+(várias linhas `P:` = jeitos diferentes de perguntar; o `R:` pode ter várias linhas.)
+3. Opcional: `linguagem.json` com sinônimos, textos `.md` (divididos em trechos), `verbetes.txt` para dicionários.
+4. Gere e confira, na pasta do Aprendiz:
+```bash
+python ferramentas/criar_addon.py meu-addon -o receitas-da-vo.aprendiz
+python ferramentas/criar_addon.py --conferir receitas-da-vo.aprendiz
+```
+A ferramenta testa os algoritmos com o conteúdo e grava a busca e a resposta recomendadas.
+5. Importe em **Addons → Importar addon** e pergunte do seu jeito.
+O guia completo está em `docs/addons.md`.
+
+P: como colocar código dentro das respostas de um addon
+P: bloco de código no perguntas.txt
+R: As respostas aceitam Markdown (negrito, itálico, `código`, listas e blocos de código). Nas versões do `criar_addon.py` posteriores à 0.8.0, um bloco entre linhas com três crases é copiado **como está**: a indentação, as linhas em branco e as linhas com `#` (um `#include` do C ou um comentário do Python) são mantidas. Fora do bloco, continuam valendo as regras de sempre: linha em branco encerra a resposta e linha começando com `#` é comentário.
+```
+P: hello world em c
+R: Assim:
+` ``c
+#include <stdio.h>
+
+int main(void) {
+    printf("Olá!\n");
+}
+` ``
+Compile com gcc.
+```
+(Escreva as três crases juntas; aqui elas aparecem separadas para não fecharem este próprio bloco.) Esta trilha inteira foi escrita assim. Um bloco aberto e não fechado é recusado com uma mensagem clara.
+
+P: como exportar o que eu ensinei como addon
+R: Em **Addons → Exportar meu conhecimento…**:
+1. escolha nome, versão, autor, licença e descrição;
+2. marque os itens: conhecimentos, sinônimos e abreviações que você acrescentou, parâmetros e personalização. Itens com cara de dado pessoal (senha, e-mail, telefone, CPF, números longos…) vêm **desmarcados**, com o motivo;
+3. veja o teste dos algoritmos com os itens marcados (troque a busca e a resposta se quiser) e gere o arquivo.
+Os addons que você tem instalados entram como **dependências** (só nome e versão). Todo addon exportado sai com `"origem": "terceiros"` e é compartilhado diretamente como arquivo: a loja oficial publica só addons da Jano Projects.
+
+P: como gerar o executável do aprendiz
+P: como empacotar o aprendiz com pyinstaller
+R: Com o ambiente do Aprendiz instalado (o script instala o PyInstaller no `.venv` se faltar):
+```bash
+bash empacotar.sh          # Linux
+empacotar.bat              # Windows
+```
+O resultado fica em `dist/Aprendiz/`. Os scripts já tratam os detalhes do **PyInstaller**:
+- `--add-data aprendiz/web`: os arquivos da interface não são Python e precisam ser incluídos (separador `;` no Windows e `:` no Linux);
+- `--collect-submodules uvicorn`: o uvicorn importa partes de si dinamicamente;
+- `--windowed` no Windows: sem a janela preta do console;
+- `iniciar.py` como ponto de entrada, porque o PyInstaller não aceita `-m`.
+Gere em cada sistema de destino (não há compilação cruzada) e confira com `python ferramentas/verificar.py --executavel dist/Aprendiz/Aprendiz`. No GitHub, uma tag `v*` faz o Actions gerar os executáveis sozinho.
+
+P: como contribuir com o aprendiz
+P: como mandar minha mudança para o projeto aprendiz
+R: O fluxo, do `CONTRIBUTING.md`:
+1. **fork** no GitHub e clone o seu fork;
+2. `bash instalar.sh --dev`; `python -m pytest` tudo verde;
+3. `git switch -c feat/algoritmo-jaccard`;
+4. faça a mudança seguindo os padrões: português em nomes e comentários, docstring no topo de todo arquivo, comentar o **porquê**, sem dependências novas no núcleo, nada carregado da internet pela interface;
+5. antes do PR: testes; `benchmarks/comparar.py` se mexeu em busca ou linguagem (cole o antes e depois no PR); `gerar_estrutura.py` se criou ou moveu arquivos; uma linha no `CHANGELOG.md` em **[Não lançado]**;
+6. commit no padrão **Conventional Commits** em português: `feat(busca): adiciona algoritmo Jaccard`;
+7. `git push -u origin feat/algoritmo-jaccard` e abra o **pull request**, preenchendo o checklist do modelo.
+Ideias de primeira contribuição: um algoritmo novo, mais frases de exemplo para as intenções, um addon útil, melhorias de acessibilidade.
+
+P: como publicar um addon na loja oficial
+P: como funciona a loja de addons do aprendiz
+R: A loja (**jano-projects.github.io/aprendiz-addons**) é um repositório separado no GitHub, publicado pelo GitHub Pages, e distribui **somente addons oficiais da Jano Projects**:
+1. a fonte de cada addon fica em `fontes/<id>/` e o arquivo gerado em `addons/<id>.aprendiz`;
+2. o manifesto leva `"origem": "oficial"`, `"editor": "Jano Projects"`, e para a loja `"categoria"` e `"etiquetas"`;
+3. a cada push na `main`, o GitHub Actions roda `ferramentas/gerar_catalogo.py`: confere cada addon (recusando terceiros, formato 1 e tipos com código), calcula o SHA-256 e gera o `catalogo.json` que o site mostra. **Se algum addon for inválido, o site não é atualizado**;
+4. quando um addon é criado ou muda, também se gera de novo a compreensão (`ferramentas/catalogo_compreensao.py`), porque o addon de compreensão leva uma cópia do catálogo para recomendar addons sem internet.
+Addons de terceiros não entram na loja: quem os cria compartilha o arquivo diretamente.
+
+P: roteiro de projeto final da trilha aprendiz por dentro
+P: desafio final do aprendiz
+R: Para fechar a trilha, um projeto que passa por todas as camadas:
+1. **algoritmo:** implemente o "BM25 com cobertura ponderada pelo IDF" (exercício 1 do `docs/algoritmos.md`) como uma busca nova, com explicação, testes e benchmark;
+2. **parâmetro:** dê a ele um limiar ajustável em Configurações;
+3. **rota e tela:** crie `/api/estatisticas` e um botão que mostre, num diálogo, quantos conhecimentos há por tipo e por addon;
+4. **addon:** gere um addon com as suas próprias perguntas e respostas sobre o que aprendeu, com blocos de código;
+5. **qualidade:** suíte de testes verde, `gerar_estrutura.py`, `CHANGELOG.md` e commits no padrão do projeto;
+6. **entrega:** abra um pull request no seu fork (ou no projeto original) e gere o executável para o seu sistema.
+Se conseguir fazer tudo isso, você entende o Aprendiz de ponta a ponta, do clique no botão Enviar até a linha do SQLite.

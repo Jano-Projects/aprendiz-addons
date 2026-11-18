@@ -1,0 +1,33 @@
+{
+  "id": "aprendiz-do-zero",
+  "nome": "Aprendiz por dentro 5 · Construir e customizar do zero",
+  "versao": "1.0.0",
+  "autor": "Jano Projects",
+  "descricao": "Construa um mini-Aprendiz do zero, passo a passo (banco SQLite, normalizador, BM25, API e tela de chat), e depois customize o Aprendiz de verdade: novo algoritmo, novo parâmetro, nova rota, novo addon, testes e empacotamento.",
+  "licenca": "CC-BY-4.0",
+  "categoria": "Programação",
+  "etiquetas": [
+    "aprendiz",
+    "do zero",
+    "tutorial",
+    "customizar",
+    "trilha aprendiz por dentro"
+  ],
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.6.0"
+  },
+  "dependencias": [
+    {
+      "id": "aprendiz-algoritmos",
+      "versao": "1.0.0",
+      "nome": "Aprendiz por dentro 4 · Como os algoritmos pensam"
+    }
+  ],
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.82
+  }
+}

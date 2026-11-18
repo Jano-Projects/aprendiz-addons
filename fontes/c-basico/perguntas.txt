@@ -1,0 +1,488 @@
+# C 1 · Básico
+# A linguagem C do zero. Todos os exemplos compilam com: gcc -Wall -Wextra -std=c17 arquivo.c
+
+P: o que é a linguagem c
+P: para que serve a linguagem c
+P: por que aprender c
+R: **C** foi criada por Dennis Ritchie, no Bell Labs, no começo dos anos 1970, para escrever o sistema Unix. Até hoje é a base de quase tudo:
+- os núcleos do **Linux**, do Windows e do macOS;
+- o interpretador do **Python** (CPython), o SQLite, o Git;
+- firmware de microcontroladores (Arduino, injeção eletrônica de carros, aviônicos).
+Por que aprender: C mostra **como o computador funciona por dentro** (memória, endereços, bytes). Quem entende C entende melhor qualquer outra linguagem. É pequena (dá para conhecer a linguagem inteira), compilada e muito rápida, mas não tem rede de proteção: erros de memória são responsabilidade sua.
+
+P: como instalar o compilador c
+P: como instalar o gcc
+P: como compilar c no windows
+P: como instalar gcc no ubuntu
+P: como instalar gcc no fedora
+P: como instalar o gcc no windows
+P: gcc
+P: compilador c
+R: Você precisa de um **compilador**. O mais comum é o **GCC** (o Clang também serve).
+- **Ubuntu/Debian:** `sudo apt install build-essential` (traz gcc, g++ e make).
+- **Fedora:** `sudo dnf install gcc gcc-c++ make`.
+- **Windows:** instale o **MSYS2** (msys2.org), abra o terminal "MSYS2 UCRT64" e rode `pacman -S mingw-w64-ucrt-x86_64-gcc`; depois coloque `C:\msys64\ucrt64\bin` no PATH. Outra opção é o WSL (um Ubuntu dentro do Windows).
+Confira com `gcc --version`. Para editar, o **VS Code** com a extensão "C/C++" da Microsoft funciona bem nos três sistemas.
+
+P: hello world em c
+P: primeiro programa em c
+P: como fazer um programa em c
+P: olá mundo em c
+P: hello world c
+R: Crie o arquivo `ola.c`:
+```c
+#include <stdio.h>
+
+int main(void) {
+    printf("Olá, mundo!\n");
+    return 0;
+}
+```
+Linha a linha:
+- `#include <stdio.h>`: traz as funções de entrada e saída (como `printf`);
+- `int main(void)`: a função por onde todo programa C começa; devolve um `int`;
+- `printf(...)`: escreve na tela; `\n` pula linha;
+- `return 0;`: avisa o sistema que deu tudo certo (outro número indica erro);
+- cada instrução termina com `;` e os blocos ficam entre `{ }`.
+
+P: como compilar e executar um programa em c
+P: como rodar um código c
+P: o que faz gcc -o
+P: como compilar em c
+P: compilar c no terminal
+R: No terminal, na pasta do arquivo:
+```bash
+gcc -Wall -Wextra -std=c17 ola.c -o ola
+./ola
+```
+No Windows o executável é `ola.exe`; rode com `.\ola.exe`.
+As opções:
+- `-o ola`: nome do executável (sem isso, vira `a.out`);
+- `-Wall -Wextra`: liga os **avisos**, que pegam muitos erros. Use sempre;
+- `-std=c17`: qual versão do C seguir;
+- `-g`: inclui informações para o depurador;
+- `-O2`: otimiza o código.
+Se aparecer `error`, leia a primeira mensagem: ela traz `arquivo:linha:coluna`.
+
+P: o que acontece na compilação em c
+P: o que é pré processador compilador e linker
+P: quais as etapas da compilação
+R: O `gcc` faz quatro etapas:
+1. **Pré-processador:** trata as linhas com `#` (copia os `#include`, troca os `#define`). Veja com `gcc -E ola.c`.
+2. **Compilação:** traduz C para Assembly (`gcc -S` gera o `.s`).
+3. **Montagem:** Assembly vira código de máquina num arquivo **objeto** (`.o`, com `gcc -c`).
+4. **Ligação (linker):** junta os `.o` com as bibliotecas (como a que tem o `printf`) e gera o executável.
+Erro de "undefined reference" é da etapa 4: a função foi declarada mas o código dela não foi encontrado (faltou um arquivo ou uma biblioteca, como `-lm` para a `math.h`).
+
+P: como usar printf em c
+P: o que é %d %f %s %c
+P: quais os especificadores de formato do printf
+P: printf
+P: printf em c
+P: como imprimir na tela em c
+R: O `printf` recebe um texto com **marcadores** e os valores na ordem:
+```c
+int idade = 30;
+double altura = 1.75;
+char inicial = 'V';
+char nome[] = "Victor";
+printf("%s (%c) tem %d anos e %.2f m\n", nome, inicial, idade, altura);
+```
+Os marcadores principais:
+- `%d` int · `%ld` long · `%lld` long long · `%u` unsigned;
+- `%f` double (no printf, float também usa `%f`) · `%.2f` duas casas · `%e` notação científica;
+- `%c` char · `%s` string · `%p` endereço (ponteiro) · `%x` hexadecimal · `%%` o próprio %;
+- `%5d` ocupa 5 colunas · `%-10s` alinha à esquerda em 10 colunas.
+Marcador errado para o tipo é comportamento indefinido; o `-Wall` avisa.
+
+P: como ler dados do teclado em c
+P: como usar scanf em c
+P: por que o scanf usa &
+P: scanf
+P: scanf em c
+P: entrada de dados em c
+R: O `scanf` lê do teclado e **guarda no endereço** da variável, por isso o `&` ("endereço de"):
+```c
+int idade;
+double altura;
+printf("Idade e altura: ");
+if (scanf("%d %lf", &idade, &altura) != 2) {
+    printf("Entrada inválida\n");
+    return 1;
+}
+```
+Atenção:
+- para **double**, no scanf é `%lf` (no printf é `%f`);
+- confira o retorno: é quantos valores ele conseguiu ler;
+- strings não levam `&` (o nome do vetor já é um endereço) e precisam de limite: `scanf("%49s", nome)` para um `char nome[50]`;
+- `%s` para no primeiro espaço. Para ler uma linha inteira, use `fgets`.
+
+P: como ler uma linha inteira em c
+P: como usar fgets
+P: por que não usar gets
+R: Use `fgets`, que respeita o tamanho do vetor:
+```c
+char nome[100];
+if (fgets(nome, sizeof nome, stdin)) {
+    nome[strcspn(nome, "\n")] = '\0';  /* tira o \n que o fgets guarda */
+}
+```
+(`strcspn` vem de `<string.h>`.)
+**Nunca use `gets`**: ela não sabe o tamanho do vetor e escreve além dele se a pessoa digitar demais. Foi removida do C em 2011 por ser a causa de incontáveis falhas de segurança.
+Misturar `scanf("%d")` com `fgets` deixa um `\n` sobrando no buffer; leia tudo com `fgets` e converta com `strtol` ou `sscanf`.
+
+P: quais são os tipos de dados em c
+P: tamanho dos tipos em c
+P: o que é int float double char em c
+P: tipos em c
+P: tipos de dados em c
+R: Tipos básicos (tamanhos típicos num PC de 64 bits):
+- `char`: 1 byte; um caractere ou um número pequeno;
+- `short`: 2 bytes;
+- `int`: 4 bytes; cerca de ±2,1 bilhões;
+- `long`: 8 bytes no Linux, **4 no Windows**;
+- `long long`: 8 bytes; cerca de ±9,2 × 10¹⁸;
+- `float`: 4 bytes, ~7 dígitos de precisão;
+- `double`: 8 bytes, ~15 dígitos. Prefira `double`;
+- `_Bool` / `bool` (com `<stdbool.h>`): verdadeiro/falso.
+Os tamanhos dependem da máquina; confira com `sizeof(int)`. Para tamanhos exatos, use `<stdint.h>`: `int32_t`, `uint8_t`, `int64_t`.
+
+P: o que é unsigned em c
+P: o que é signed e unsigned
+R: `unsigned` faz o tipo guardar **só números não negativos**, dobrando o limite positivo:
+- `int`: −2 147 483 648 a 2 147 483 647;
+- `unsigned int`: 0 a 4 294 967 295.
+Cuidado: `unsigned` "dá a volta". `0u - 1` vira 4 294 967 295. Um laço `for (unsigned i = n - 1; i >= 0; i--)` nunca termina, porque `i >= 0` é sempre verdadeiro.
+Use `unsigned` para bits, tamanhos (`size_t`) e quantidades que nunca são negativas.
+
+P: como declarar variáveis em c
+P: como criar uma variável em c
+P: como declarar variavel em c
+P: variável em c
+P: variaveis em c
+R: Em C, toda variável tem um **tipo declarado** antes do uso:
+```c
+int idade = 30;
+double preco = 9.90;
+char letra = 'A';           /* aspas simples: um caractere */
+char nome[] = "Ana";        /* aspas duplas: uma string */
+int a = 1, b = 2, c;        /* várias de uma vez */
+```
+Uma variável local **sem valor inicial** contém lixo (o que estava na memória). Sempre inicialize.
+Nomes: letras, dígitos e `_`, sem começar com dígito; maiúsculas e minúsculas são diferentes (`idade` ≠ `Idade`).
+
+P: como fazer constantes em c
+P: diferença entre const e define
+R: Duas formas:
+```c
+#define TAMANHO 100          /* o pré-processador troca o texto antes de compilar */
+const double PI = 3.14159;   /* uma variável que não pode mudar */
+```
+- `#define` não tem tipo nem escopo: é só substituição de texto. Comum para tamanhos de vetor e configurações.
+- `const` tem tipo, o compilador confere e o depurador mostra.
+Convenção: constantes em MAIÚSCULAS. Para listas de valores com nome, use `enum` (trilha intermediária).
+
+P: quais os operadores em c
+P: o que é incremento e decremento em c
+P: diferença entre i++ e ++i
+R: Além de `+ - * / %`:
+- **atribuição composta:** `x += 5` (x = x + 5), `-=`, `*=`, `/=`, `%=`;
+- **incremento/decremento:** `x++`, `x--`;
+- **lógicos:** `&&` (e), `||` (ou), `!` (não);
+- **relacionais:** `== != < > <= >=`;
+- **ternário:** `maior = (a > b) ? a : b;`.
+`i++` usa o valor e **depois** soma; `++i` soma e **depois** usa:
+```c
+int i = 5;
+int a = i++;   /* a = 5, i = 6 */
+int b = ++i;   /* b = 7, i = 7 */
+```
+Sozinhos numa linha (`i++;` ou `++i;`) dão no mesmo. Nunca use a mesma variável duas vezes com `++` na mesma expressão (`i = i++ + 1`): é comportamento indefinido.
+
+P: por que 5 dividido por 2 dá 2 em c
+P: divisão de inteiros em c
+P: como fazer conversão de tipo em c
+P: o que é cast em c
+R: Entre dois **inteiros**, `/` faz divisão inteira e descarta a parte decimal: `5 / 2` é `2`. Basta um dos lados ser real para a divisão ser real:
+```c
+int a = 5, b = 2;
+double r1 = a / b;            /* 2.0: a divisão já foi inteira */
+double r2 = (double)a / b;    /* 2.5: o cast converte antes */
+double r3 = a / 2.0;          /* 2.5 */
+```
+`(double)a` é um **cast**: converte o valor para outro tipo. Conversões de real para inteiro **cortam** a parte decimal (`(int)3.9` é 3); para arredondar, use `round()` de `<math.h>` (compile com `-lm` no Linux).
+
+P: como usar if em c
+P: como fazer if else em c
+P: o que é verdadeiro e falso em c
+P: if em c
+P: condicional em c
+P: if else em c
+R: ```c
+if (nota >= 7.0) {
+    printf("Aprovado\n");
+} else if (nota >= 5.0) {
+    printf("Recuperação\n");
+} else {
+    printf("Reprovado\n");
+}
+```
+Em C, **zero é falso** e **qualquer outro valor é verdadeiro**. Por isso `if (n)` significa "se n não for zero" e `if (ponteiro)` significa "se não for nulo".
+Use sempre chaves, mesmo com uma linha só: evita o erro de acrescentar uma segunda linha achando que ela está dentro do `if`.
+
+P: como usar switch em c
+P: switch case em c
+R: ```c
+switch (opcao) {
+    case 'a':
+    case 'A':
+        printf("Adicionar\n");
+        break;
+    case 'r':
+        printf("Remover\n");
+        break;
+    default:
+        printf("Opção inválida\n");
+}
+```
+- só funciona com valores **inteiros** (int, char, enum), não com strings nem reais;
+- sem `break`, a execução continua no próximo `case` (*fall-through*), o que aqui foi usado de propósito para 'a' e 'A';
+- `default` pega todo o resto.
+
+P: como fazer laço for em c
+P: como usar while em c
+P: como usar do while em c
+P: laços de repetição em c
+P: como faço um laço for em c
+P: for em c
+P: while em c
+P: laço em c
+P: repetição em c
+R: ```c
+/* for: início; condição; passo */
+for (int i = 0; i < 10; i++) {
+    printf("%d ", i);
+}
+
+/* while: testa antes */
+int n = 100;
+while (n > 1) {
+    n /= 2;
+}
+
+/* do-while: roda pelo menos uma vez */
+int opcao;
+do {
+    printf("1-Jogar 0-Sair: ");
+    scanf("%d", &opcao);
+} while (opcao != 0);
+```
+`break` sai do laço e `continue` pula para a próxima volta. Declarar a variável dentro do `for` (`int i = 0`) vale desde o C99 e deixa `i` restrita ao laço.
+
+P: como criar uma função em c
+P: funções em c
+P: o que é protótipo de função em c
+P: função em c
+R: ```c
+#include <stdio.h>
+
+double media(double a, double b);   /* protótipo: avisa que a função existe */
+
+int main(void) {
+    printf("%.1f\n", media(7.0, 8.5));
+    return 0;
+}
+
+double media(double a, double b) {  /* definição */
+    return (a + b) / 2.0;
+}
+```
+- o tipo antes do nome é o do **retorno**; `void` se não devolver nada;
+- C lê de cima para baixo: para usar uma função antes de defini-la, declare o **protótipo** (normalmente num arquivo `.h`);
+- os parâmetros são **cópias** (passagem por valor). Para alterar a variável de quem chamou, passe um ponteiro (trilha intermediária);
+- função sem parâmetros se declara com `(void)`.
+
+P: como criar um vetor em c
+P: como usar array em c
+P: como percorrer um vetor em c
+P: vetor em c
+P: array em c
+P: vetores em c
+R: ```c
+int notas[5] = {7, 8, 6, 9, 10};
+int soma = 0;
+int n = sizeof notas / sizeof notas[0];   /* 5 */
+for (int i = 0; i < n; i++) {
+    soma += notas[i];
+}
+printf("média: %.1f\n", (double)soma / n);
+```
+- o tamanho é fixo e vai de `0` a `tamanho - 1`;
+- `int v[100] = {0};` zera tudo;
+- C **não confere os limites**: `notas[5]` compila e escreve fora do vetor, corrompendo outra memória (uma das maiores fontes de falhas de segurança);
+- o truque do `sizeof` só funciona onde o vetor foi declarado; dentro de uma função que o recebe, passe o tamanho como parâmetro.
+
+P: como passar vetor para função em c
+R: Um vetor é passado como o **endereço do primeiro elemento**; a função não sabe o tamanho, então passe-o junto:
+```c
+double media(const int v[], int n) {
+    int soma = 0;
+    for (int i = 0; i < n; i++) soma += v[i];
+    return (double)soma / n;
+}
+
+int notas[] = {7, 8, 9};
+media(notas, 3);
+```
+Como a função recebe o endereço, ela **pode alterar** o vetor original. O `const` promete que não vai, e o compilador cobra a promessa.
+
+P: como fazer matriz em c
+P: vetor bidimensional em c
+R: ```c
+int m[3][4] = {
+    {1, 2, 3, 4},
+    {5, 6, 7, 8},
+    {9, 10, 11, 12}
+};
+for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 4; j++) {
+        printf("%3d", m[i][j]);
+    }
+    printf("\n");
+}
+```
+Na memória, a matriz é um bloco único, linha após linha. Ao passar para uma função, o número de colunas precisa ser informado: `void mostrar(int linhas, int m[][4])`.
+
+P: como funciona string em c
+P: o que é o caractere nulo em c
+P: o que é a barra zero no fim da string em c
+P: string em c
+P: strings em c
+P: texto em c
+R: Em C, string é um **vetor de `char` terminado por `'\0'`** (o caractere de código zero). É assim que as funções sabem onde o texto acaba.
+```c
+char nome[] = "Ana";      /* 4 bytes: 'A' 'n' 'a' '\0' */
+char saudacao[20] = "Oi"; /* cabe até 19 letras + '\0' */
+```
+- sempre reserve **um a mais** para o `'\0'`;
+- não dá para atribuir com `=` depois de declarado (`nome = "Bia";` é erro): use `strcpy` ou, melhor, `snprintf`;
+- não dá para comparar com `==` (compararia endereços): use `strcmp`.
+As funções de texto estão em `<string.h>` (trilha intermediária).
+
+P: como comparar strings em c
+P: como usar strcmp
+R: `strcmp(a, b)` devolve **0 se forem iguais**, negativo se `a` vem antes na ordem e positivo se vem depois:
+```c
+#include <string.h>
+
+if (strcmp(senha, "1234") == 0) {
+    printf("Senha correta\n");
+}
+```
+Erro clássico: `if (senha == "1234")` compila, mas compara **endereços**, quase sempre falso.
+`strcmp` diferencia maiúsculas; ele compara byte a byte, então acentos em UTF-8 não ficam em ordem alfabética "humana".
+
+P: como gerar número aleatório em c
+P: como usar rand em c
+R: ```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main(void) {
+    srand((unsigned)time(NULL));        /* uma vez, no início */
+    int dado = rand() % 6 + 1;          /* de 1 a 6 */
+    printf("Saiu %d\n", dado);
+    return 0;
+}
+```
+- `rand()` dá um número de 0 a `RAND_MAX`;
+- sem `srand`, a sequência é sempre a mesma (bom para testes);
+- `rand() % n` serve para jogos e exercícios. Para criptografia, nunca use `rand`: use as fontes do sistema (`getrandom` no Linux).
+
+P: como usar funções matemáticas em c
+P: como usar math.h
+P: undefined reference to sqrt
+R: As funções matemáticas ficam em `<math.h>`: `sqrt` (raiz), `pow` (potência), `fabs` (módulo), `round`, `floor`, `ceil`, `sin`, `cos`, `log`, `exp`.
+```c
+#include <math.h>
+double hipotenusa = sqrt(pow(3, 2) + pow(4, 2));   /* 5.0 */
+```
+No Linux, a biblioteca matemática precisa ser ligada com **`-lm`** no fim do comando; sem isso dá "undefined reference to sqrt":
+```bash
+gcc programa.c -o programa -lm
+```
+Para quadrados, `x * x` é mais rápido e preciso que `pow(x, 2)`.
+
+P: quais os erros mais comuns em c para iniciantes
+P: erros comuns em c
+R: Os campeões:
+- esquecer o `;` no fim da linha;
+- `=` no lugar de `==` dentro do `if`;
+- esquecer o `&` no `scanf` (o programa trava ou quebra);
+- `%d` para ler um `double` (é `%lf`);
+- acessar `v[n]` num vetor de tamanho n (o último é `v[n-1]`);
+- usar uma variável sem inicializar;
+- esquecer o `break` no `switch`;
+- comparar strings com `==`;
+- divisão inteira sem querer (`1 / 2` é 0);
+- esquecer o `'\0'` ao montar strings à mão.
+Compilar com `-Wall -Wextra` aponta a maioria deles antes de rodar.
+
+P: o que é segmentation fault
+P: o que é falha de segmentação
+P: core dumped em c
+R: **Segmentation fault** (falha de segmentação) é o sistema operacional matando o programa porque ele tentou acessar memória que não é dele. Causas comuns:
+- usar um ponteiro `NULL` ou não inicializado;
+- passar do fim de um vetor;
+- `scanf("%d", n)` sem o `&`;
+- recursão infinita (estouro da pilha);
+- usar memória já liberada com `free`.
+Para achar a linha: compile com `-g -fsanitize=address` e rode de novo; o relatório aponta o arquivo e a linha. Ou use o depurador `gdb` (trilha avançada).
+
+P: exemplo de programa completo em c
+P: calculadora em c
+R: Uma calculadora simples, usando tudo do básico:
+```c
+#include <stdio.h>
+
+int main(void) {
+    double a, b;
+    char op;
+    printf("Conta (ex.: 3 + 4): ");
+    if (scanf("%lf %c %lf", &a, &op, &b) != 3) {
+        printf("Formato inválido\n");
+        return 1;
+    }
+    switch (op) {
+        case '+': printf("= %g\n", a + b); break;
+        case '-': printf("= %g\n", a - b); break;
+        case '*': printf("= %g\n", a * b); break;
+        case '/':
+            if (b == 0) {
+                printf("Divisão por zero\n");
+                return 1;
+            }
+            printf("= %g\n", a / b);
+            break;
+        default:
+            printf("Operador desconhecido: %c\n", op);
+            return 1;
+    }
+    return 0;
+}
+```
+`%g` mostra o número sem zeros desnecessários (7 em vez de 7.000000).
+
+P: exercícios de c para iniciantes
+P: o que praticar em c
+R: Do mais simples ao mais desafiador:
+1. ler a temperatura em Celsius e mostrar em Fahrenheit;
+2. dizer se um ano é bissexto (divisível por 4, exceto os centenários não divisíveis por 400);
+3. mostrar a tabuada de 1 a 10 com `printf` alinhado (`%3d`);
+4. ler 10 números num vetor e mostrar o maior, o menor e a média;
+5. contar as vogais de uma frase lida com `fgets`;
+6. inverter uma string no próprio vetor;
+7. jogo de adivinhar um número sorteado com `rand`, dizendo "maior" ou "menor";
+8. ordenar um vetor com bubble sort e mostrar a cada passada.
+Compile sempre com `-Wall -Wextra` e não avance com avisos.

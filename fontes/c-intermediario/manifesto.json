@@ -1,0 +1,33 @@
+{
+  "id": "c-intermediario",
+  "nome": "C 2 · Intermediário",
+  "versao": "1.0.0",
+  "autor": "Jano Projects",
+  "descricao": "Ponteiros, aritmética de ponteiros, malloc e free, structs, enums, typedef, strings da string.h, arquivos, o pré-processador, vários arquivos .c/.h e o make.",
+  "licenca": "CC-BY-4.0",
+  "categoria": "Programação",
+  "etiquetas": [
+    "c",
+    "ponteiros",
+    "memória",
+    "struct",
+    "trilha c"
+  ],
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.6.0"
+  },
+  "dependencias": [
+    {
+      "id": "c-basico",
+      "versao": "1.0.0",
+      "nome": "C 1 · Básico"
+    }
+  ],
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.99
+  }
+}

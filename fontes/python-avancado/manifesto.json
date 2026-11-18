@@ -1,0 +1,34 @@
+{
+  "id": "python-avancado",
+  "nome": "Python 2 · Avançado",
+  "versao": "1.0.0",
+  "autor": "Jano Projects",
+  "descricao": "Compreensões, geradores, decoradores, gerenciadores de contexto, classes e dunder methods, dataclasses, type hints, ambientes virtuais e pip, pacotes, testes com pytest, async, threads e processos, sqlite3, performance e o que o Aprendiz usa.",
+  "licenca": "CC-BY-4.0",
+  "categoria": "Programação",
+  "etiquetas": [
+    "python",
+    "avançado",
+    "pytest",
+    "async",
+    "orientação a objetos",
+    "trilha python"
+  ],
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.6.0"
+  },
+  "dependencias": [
+    {
+      "id": "python-basico",
+      "versao": "1.0.0",
+      "nome": "Python 1 · Básico"
+    }
+  ],
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.99
+  }
+}
