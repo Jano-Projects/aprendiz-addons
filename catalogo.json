@@ -1,8 +1,401 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-18T13:51:21+00:00",
-  "total": 19,
+  "gerado_em": "2026-11-18T15:31:32+00:00",
+  "total": 39,
   "addons": [
+    {
+      "id": "aprendiz-preparar-ambiente",
+      "nome": "Aprendiz por dentro 1 · Preparar o ambiente",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "Passo a passo manual, do zero, no Ubuntu, no Fedora e no Windows: terminal, Python, pip, Git, VS Code, baixar o código do Aprendiz, criar o ambiente virtual, instalar as dependências, rodar o app e os testes.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "aprendiz",
+        "ambiente",
+        "instalação",
+        "git",
+        "vs code",
+        "trilha aprendiz por dentro"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "python-basico",
+          "versao": "1.0.0",
+          "nome": "Python 1 · Básico"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.92
+      },
+      "conhecimentos": 22,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/aprendiz-preparar-ambiente.aprendiz",
+      "tamanho": 9281,
+      "sha256": "c8e180aa2ab48e508f5b570eee8fb9ebb3b6cff53da401f334f76ced0d9e16bc",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "como estudar o código do aprendiz",
+          "conteudo": "A trilha **Aprendiz por dentro** ensina, do zero, como o próprio Aprendiz funciona e como recriá-lo e customizá-lo. Ela tem cinco addons, para fazer em ordem:\n1. **Preparar o ambiente** (este): terminal, Python, Git, …"
+        },
+        {
+          "pergunta": "o que eu preciso instalar para estudar o aprendiz",
+          "conteudo": "Quatro ferramentas, todas gratuitas:\n- **um terminal**: já vem com o sistema (Terminal no Linux; Windows Terminal ou PowerShell no Windows);\n- **Python 3.10 ou mais novo**: a linguagem do Aprendiz;\n- **Git**: para bai…"
+        },
+        {
+          "pergunta": "como abrir o terminal",
+          "conteudo": "- **Ubuntu/Fedora:** Ctrl+Alt+T, ou procure \"Terminal\" no menu.\n- **Windows:** tecla Windows, digite \"Terminal\" (Windows 11) ou \"PowerShell\" (Windows 10).\nOs comandos que você vai usar nesta trilha:\n- `pwd` (Linux) / …"
+        },
+        {
+          "pergunta": "como instalar o git",
+          "conteudo": "- **Ubuntu/Debian:** `sudo apt update && sudo apt install git`\n- **Fedora:** `sudo dnf install git` (normalmente já vem instalado)\n- **Windows:** `winget install --id Git.Git -e` no PowerShell, ou baixe em git-scm.com…"
+        },
+        {
+          "pergunta": "como instalar o python para o aprendiz",
+          "conteudo": "O Aprendiz precisa do **Python 3.10 ou mais novo**, com o módulo `venv` e um SQLite com **FTS5** (a busca textual).\n- **Ubuntu/Debian:** `sudo apt install python3 python3-venv python3-pip`\n- **Fedora:** já vem com tud…"
+        },
+        {
+          "pergunta": "como instalar o vs code",
+          "conteudo": "Instale o **VS Code**:\n- **Ubuntu:** `sudo snap install code --classic`, ou o pacote .deb de code.visualstudio.com;\n- **Fedora:** siga as instruções de \"RHEL, Fedora\" em code.visualstudio.com (repositório da Microsoft…"
+        }
+      ]
+    },
+    {
+      "id": "aprendiz-arquitetura",
+      "nome": "Aprendiz por dentro 2 · Arquitetura e arquivos",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "O mapa do projeto: o caminho de uma pergunta até a resposta, as camadas e o que faz cada pasta e cada arquivo do Aprendiz, dos instaladores aos testes.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "aprendiz",
+        "arquitetura",
+        "projeto",
+        "arquivos",
+        "trilha aprendiz por dentro"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "aprendiz-preparar-ambiente",
+          "versao": "1.0.0",
+          "nome": "Aprendiz por dentro 1 · Preparar o ambiente"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.96
+      },
+      "conhecimentos": 30,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/aprendiz-arquitetura.aprendiz",
+      "tamanho": 12680,
+      "sha256": "76dd453c3f7c1090f3899a1c3cbc0d47787c303ee6570415b0a02d646565eb40",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "como o aprendiz funciona por dentro",
+          "conteudo": "O Aprendiz tem **três camadas** que conversam por interfaces simples:\n```\n┌─────────────────────────────────────────────────────┐\n│ Interface (aprendiz/web/)   HTML + CSS + JS puros    │\n│        │  fetch() em JSON   …"
+        },
+        {
+          "pergunta": "qual o caminho de uma mensagem no aprendiz",
+          "conteudo": "Do Enter até a resposta na tela:\n1. **Interface** (`web/app.js`, função `enviar`): faz `POST /api/chat` com a mensagem e os algoritmos escolhidos.\n2. **API** (`api/servidor.py`, rota `chat`): valida o JSON e chama `As…"
+        },
+        {
+          "pergunta": "quais as decisões de projeto do aprendiz",
+          "conteudo": "As escolhas principais e o porquê (estão em `docs/arquitetura.md`):\n- **Servidor web local em vez de Tkinter ou Qt:** HTML/CSS é o jeito mais acessível de fazer uma interface bonita, e quem estuda abre o DevTools e vê…"
+        },
+        {
+          "pergunta": "quais são as pastas do projeto aprendiz",
+          "conteudo": "A raiz do repositório:\n- `aprendiz/`: o **pacote Python**, o app em si (núcleo, API, interface);\n- `tests/`: os testes automatizados (pytest);\n- `docs/`: a documentação de estudo (algoritmos, arquitetura, linguagem, a…"
+        },
+        {
+          "pergunta": "o que tem dentro da pasta aprendiz",
+          "conteudo": "Dentro do pacote `aprendiz/`:\n- `__init__.py`: a versão (`__version__ = \"0.8.0\"`) e o mapa dos pacotes;\n- `__main__.py`: permite `python -m aprendiz`;\n- `config.py`: nome, porta padrão, endereço da loja oficial e onde…"
+        },
+        {
+          "pergunta": "o que faz o arquivo __init__.py do aprendiz",
+          "conteudo": "- `aprendiz/__init__.py` roda no primeiro `import aprendiz`. Ele guarda a **versão** (`__version__`, usada pela API, pelos addons e pelo `pyproject.toml`) e uma docstring com o mapa dos subpacotes.\n- `aprendiz/__main_…"
+        }
+      ]
+    },
+    {
+      "id": "aprendiz-codigo",
+      "nome": "Aprendiz por dentro 3 · O código explicado",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "Módulo por módulo: as classes, funções e comandos de Python que o Aprendiz usa (dataclasses, sqlite3, FastAPI, rapidfuzz, zipfile, re…), com trechos do código real e o porquê de cada escolha.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "aprendiz",
+        "código",
+        "python",
+        "fastapi",
+        "sqlite",
+        "trilha aprendiz por dentro"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "aprendiz-arquitetura",
+          "versao": "1.0.0",
+          "nome": "Aprendiz por dentro 2 · Arquitetura e arquivos"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 1.0
+      },
+      "conhecimentos": 30,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/aprendiz-codigo.aprendiz",
+      "tamanho": 15932,
+      "sha256": "d5673dfaa4abc554fd0ef4cc6d9f548b468499ec278eb24984242615f6807d45",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "como o aprendiz descobre onde guardar os dados",
+          "conteudo": "Em `aprendiz/config.py`:\n```python\ndef pasta_dados() -> Path:\n    personalizada = os.environ.get(\"APRENDIZ_DADOS\")\n    if personalizada:\n        pasta = Path(personalizada)\n    elif sys.platform.startswith(\"win\"):\n   …"
+        },
+        {
+          "pergunta": "como o aprendiz escolhe a porta do servidor",
+          "conteudo": "Em `aprendiz/desktop.py`:\n```python\ndef escolher_porta(preferida: int) -> int:\n    for porta in (preferida, 0):\n        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:\n            if not sys.platform.star…"
+        },
+        {
+          "pergunta": "como o aprendiz sobe o servidor numa thread",
+          "conteudo": "Em `aprendiz/desktop.py`:\n```python\ndef iniciar_servidor(porta: int):\n    app = criar_app()\n    cfg = uvicorn.Config(app, host=\"127.0.0.1\", port=porta,\n                         log_level=\"warning\", access_log=False)\n …"
+        },
+        {
+          "pergunta": "como o aprendiz sabe que a janela foi fechada",
+          "conteudo": "Três pedaços trabalham juntos:\n**1. A página** (`web/app.js`) avisa que está viva a cada 10 s:\n```javascript\nfunction enviarSinal() {\n  fetch(\"/api/sinal\", { method: \"POST\" }).catch(() => {});\n}\nsetInterval(enviarSina…"
+        },
+        {
+          "pergunta": "como funciona a função criar_app",
+          "conteudo": "Em `aprendiz/api/servidor.py`:\n```python\ndef criar_app(caminho_banco: str | Path | None = None) -> FastAPI:\n    banco = Banco(caminho_banco or config.caminho_banco())\n    assistente = Assistente(banco)\n    app = FastA…"
+        },
+        {
+          "pergunta": "o que são os modelos pydantic do servidor",
+          "conteudo": "Cada rota que recebe JSON tem um modelo **Pydantic**:\n```python\nclass PedidoChat(BaseModel):\n    mensagem: str = Field(min_length=1, max_length=5000)\n    conversa_id: str | None = None\n    busca: str | None = None    …"
+        }
+      ]
+    },
+    {
+      "id": "aprendiz-algoritmos",
+      "nome": "Aprendiz por dentro 4 · Como os algoritmos pensam",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "Como o Aprendiz entende e responde: normalização, radicais, intenções com Naive Bayes, BM25, TF-IDF, Fuzzy, Híbrido, resposta Direta e Extrativa, prioridade do dono, dicionários, compreensão, vetores, revisão de texto e recomendação.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "aprendiz",
+        "algoritmos",
+        "bm25",
+        "tf-idf",
+        "naive bayes",
+        "trilha aprendiz por dentro"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "aprendiz-codigo",
+          "versao": "1.0.0",
+          "nome": "Aprendiz por dentro 3 · O código explicado"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.99
+      },
+      "conhecimentos": 23,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/aprendiz-algoritmos.aprendiz",
+      "tamanho": 10492,
+      "sha256": "eb3fda759234c1ca24ad8067a2a022e4028993f9eaa7502488adbbeb6e9f9953",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "como o aprendiz pensa",
+          "conteudo": "Toda resposta passa por duas etapas, depois da preparação do texto:\n```\npergunta ─► normalização ─► BUSCA ─► candidatos ─► limiar ─► RESPOSTA ─► texto\n            (radicais)      (bm25,    (com          (descarta  (di…"
+        },
+        {
+          "pergunta": "como funciona a normalização do aprendiz",
+          "conteudo": "A mensagem **\"Vc sabe qual o HORÁRIO da farmásia?\"** passa por:\n1. minúsculas e sem acento → `vc sabe qual o horario da farmasia?`\n2. pontuação vira espaço → `vc sabe qual o horario da farmasia`\n3. tokens → `vc` `sabe…"
+        },
+        {
+          "pergunta": "como funciona a correção de digitação do aprendiz",
+          "conteudo": "Regra: uma palavra é corrigida só se\n- tiver **4 letras ou mais**;\n- **não existir na base** de conhecimento (o vocabulário);\n- não for stopword nem sinônimo conhecido;\n- (com addon de compreensão) não for uma palavra…"
+        },
+        {
+          "pergunta": "o que são stopwords no aprendiz",
+          "conteudo": "**Stopwords** são palavras muito frequentes que quase não dizem do que se trata a pergunta: `o`, `de`, `qual`, `como`, `voce`, `tem`…\nElas são removidas **da busca** (senão todo conhecimento com \"de\" pareceria relevan…"
+        },
+        {
+          "pergunta": "como funciona o radicalizador do aprendiz",
+          "conteudo": "**Radicalizar** (*stemming*) é cortar as terminações para que variações caiam no mesmo termo: \"ensinar\", \"ensinei\", \"ensinando\" → `ensin`; \"farmácia\", \"farmácias\" → `farmac`.\nO Aprendiz usa uma versão simplificada do …"
+        },
+        {
+          "pergunta": "como o aprendiz reconhece cumprimentos",
+          "conteudo": "Antes de buscar, o Aprendiz tenta saber a **intenção**: saudação, despedida, agradecimento, ajuda, pergunta ou ensinar. Ele usa um **Naive Bayes Multinomial**, treinado com as frases de exemplo (editáveis em Linguagem…"
+        }
+      ]
+    },
+    {
+      "id": "aprendiz-do-zero",
+      "nome": "Aprendiz por dentro 5 · Construir e customizar do zero",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "Construa um mini-Aprendiz do zero, passo a passo (banco SQLite, normalizador, BM25, API e tela de chat), e depois customize o Aprendiz de verdade: novo algoritmo, novo parâmetro, nova rota, novo addon, testes e empacotamento.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "aprendiz",
+        "do zero",
+        "tutorial",
+        "customizar",
+        "trilha aprendiz por dentro"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "aprendiz-algoritmos",
+          "versao": "1.0.0",
+          "nome": "Aprendiz por dentro 4 · Como os algoritmos pensam"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.82
+      },
+      "conhecimentos": 23,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/aprendiz-do-zero.aprendiz",
+      "tamanho": 12631,
+      "sha256": "3b33f525015fbd100f52c1dcbff092848e9b5233177df47694f2d08569d36335",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "como criar um assistente como o aprendiz do zero",
+          "conteudo": "Vamos construir um **mini-Aprendiz**: um chat que só sabe o que você ensina, com as mesmas ideias do original, em cerca de 150 linhas.\nSão sete passos e uma lista de evoluções. Peça cada um pelo número: **\"mini aprend…"
+        },
+        {
+          "pergunta": "mini aprendiz passo 1",
+          "conteudo": "**Passo 1: a pasta e o ambiente.** No terminal:\n```bash\nmkdir -p ~/projetos/mini/mini_aprendiz ~/projetos/mini/tests\ncd ~/projetos/mini\npython3 -m venv .venv\nsource .venv/bin/activate              # Windows: .venv\\Scr…"
+        },
+        {
+          "pergunta": "mini aprendiz passo 2",
+          "conteudo": "**Passo 2: a linguagem.** Crie `mini_aprendiz/linguagem.py`:\n```python\n\"\"\"Prepara o texto para a busca: minúsculas, sem acento, sem stopwords, radicais.\"\"\"\nimport re\nimport unicodedata\n\nSTOPWORDS = set(\"\"\"\na o as os u…"
+        },
+        {
+          "pergunta": "mini aprendiz passo 3",
+          "conteudo": "**Passo 3: a memória.** Crie `mini_aprendiz/memoria.py`:\n```python\n\"\"\"Guarda os conhecimentos num arquivo SQLite, com índice de busca FTS5.\"\"\"\nimport sqlite3\nimport threading\n\nfrom mini_aprendiz.linguagem import proce…"
+        },
+        {
+          "pergunta": "mini aprendiz passo 4",
+          "conteudo": "**Passo 4: a API.** Crie `mini_aprendiz/api.py`:\n```python\n\"\"\"API local: a página conversa com a memória por aqui.\"\"\"\nfrom pathlib import Path\n\nfrom fastapi import FastAPI\nfrom fastapi.responses import FileResponse\nfr…"
+        },
+        {
+          "pergunta": "mini aprendiz passo 5",
+          "conteudo": "**Passo 5: a interface.** Crie `mini_aprendiz/index.html`:\n```html\n<!doctype html>\n<html lang=\"pt-BR\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>Mini-Aprendiz</title>\n  <style>\n    body { font-family: system-ui, sans-s…"
+        }
+      ]
+    },
     {
       "id": "atalhos-windows",
       "nome": "Atalhos de teclado do Windows",
@@ -161,6 +554,477 @@
       "amostra": []
     },
     {
+      "id": "c-basico",
+      "nome": "C 1 · Básico",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "Linguagem C do zero: instalar o compilador (gcc), primeiro programa, main, printf e scanf, tipos, operadores, if, switch, laços, funções, vetores e strings básicas.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "c",
+        "linguagem c",
+        "gcc",
+        "iniciante",
+        "trilha c"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "prog-logica",
+          "versao": "1.0.0",
+          "nome": "Programação 1 · Lógica e algoritmos"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.98
+      },
+      "conhecimentos": 29,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/c-basico.aprendiz",
+      "tamanho": 9058,
+      "sha256": "aeb72b9f0fe5a47a896979a896ffcbe4ca72feb5ed727077e8ecc4d0e07e3bb2",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "o que é a linguagem c",
+          "conteudo": "**C** foi criada por Dennis Ritchie, no Bell Labs, no começo dos anos 1970, para escrever o sistema Unix. Até hoje é a base de quase tudo:\n- os núcleos do **Linux**, do Windows e do macOS;\n- o interpretador do **Pytho…"
+        },
+        {
+          "pergunta": "como instalar o compilador c",
+          "conteudo": "Você precisa de um **compilador**. O mais comum é o **GCC** (o Clang também serve).\n- **Ubuntu/Debian:** `sudo apt install build-essential` (traz gcc, g++ e make).\n- **Fedora:** `sudo dnf install gcc gcc-c++ make`.\n- …"
+        },
+        {
+          "pergunta": "hello world em c",
+          "conteudo": "Crie o arquivo `ola.c`:\n```c\n#include <stdio.h>\n\nint main(void) {\n    printf(\"Olá, mundo!\\n\");\n    return 0;\n}\n```\nLinha a linha:\n- `#include <stdio.h>`: traz as funções de entrada e saída (como `printf`);\n- `int main…"
+        },
+        {
+          "pergunta": "como compilar e executar um programa em c",
+          "conteudo": "No terminal, na pasta do arquivo:\n```bash\ngcc -Wall -Wextra -std=c17 ola.c -o ola\n./ola\n```\nNo Windows o executável é `ola.exe`; rode com `.\\ola.exe`.\nAs opções:\n- `-o ola`: nome do executável (sem isso, vira `a.out`)…"
+        },
+        {
+          "pergunta": "o que acontece na compilação em c",
+          "conteudo": "O `gcc` faz quatro etapas:\n1. **Pré-processador:** trata as linhas com `#` (copia os `#include`, troca os `#define`). Veja com `gcc -E ola.c`.\n2. **Compilação:** traduz C para Assembly (`gcc -S` gera o `.s`).\n3. **Mon…"
+        },
+        {
+          "pergunta": "como usar printf em c",
+          "conteudo": "O `printf` recebe um texto com **marcadores** e os valores na ordem:\n```c\nint idade = 30;\ndouble altura = 1.75;\nchar inicial = 'V';\nchar nome[] = \"Victor\";\nprintf(\"%s (%c) tem %d anos e %.2f m\\n\", nome, inicial, idade…"
+        }
+      ]
+    },
+    {
+      "id": "c-intermediario",
+      "nome": "C 2 · Intermediário",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "Ponteiros, aritmética de ponteiros, malloc e free, structs, enums, typedef, strings da string.h, arquivos, o pré-processador, vários arquivos .c/.h e o make.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "c",
+        "ponteiros",
+        "memória",
+        "struct",
+        "trilha c"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "c-basico",
+          "versao": "1.0.0",
+          "nome": "C 1 · Básico"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.99
+      },
+      "conhecimentos": 27,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/c-intermediario.aprendiz",
+      "tamanho": 8595,
+      "sha256": "7b8e89533c185f32a5f17cfe3a4e911659438f52deec19dc128423e6867288f8",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "o que é ponteiro em c",
+          "conteudo": "**Ponteiro** é uma variável que guarda um **endereço de memória**, o lugar onde outro valor está.\n```c\nint idade = 30;\nint *p = &idade;      /* p guarda o endereço de idade */\n\nprintf(\"%d\\n\", *p);   /* 30: o valor que…"
+        },
+        {
+          "pergunta": "o que significam os símbolos & e * dos ponteiros em c",
+          "conteudo": "Os dois operadores são opostos:\n- `&` pega o **endereço** de uma variável: `&idade` → onde ela mora;\n- `*` vai **ao endereço** e pega o valor: `*p` → o que está lá (isso se chama **desreferenciar**).\n`*(&idade)` é o p…"
+        },
+        {
+          "pergunta": "como passar parâmetro por referência em c",
+          "conteudo": "C sempre passa **cópias**. Para a função alterar a variável original, passe o **endereço** dela:\n```c\nvoid trocar(int *a, int *b) {\n    int aux = *a;\n    *a = *b;\n    *b = aux;\n}\n\nint x = 1, y = 2;\ntrocar(&x, &y);   /…"
+        },
+        {
+          "pergunta": "o que é ponteiro nulo",
+          "conteudo": "`NULL` é um ponteiro que **não aponta para nada** (valor zero). Serve para dizer \"ainda não tem\" ou \"deu erro\":\n```c\nint *p = NULL;\nif (p != NULL) {\n    printf(\"%d\\n\", *p);\n}\n```\nDesreferenciar `NULL` (`*p` com p nulo…"
+        },
+        {
+          "pergunta": "o que é aritmética de ponteiros",
+          "conteudo": "Somar 1 a um ponteiro avança **um elemento**, não um byte: num `int *`, `p + 1` anda 4 bytes.\nO nome de um vetor se converte num ponteiro para o primeiro elemento, e `v[i]` é exatamente `*(v + i)`:\n```c\nint v[] = {10,…"
+        },
+        {
+          "pergunta": "o que é alocação dinâmica de memória em c",
+          "conteudo": "Vetores comuns têm tamanho fixo, decidido ao compilar. Com **alocação dinâmica**, você pede memória enquanto o programa roda, do tamanho que precisar, num lugar chamado **heap**:\n```c\n#include <stdlib.h>\n\nint n;\nscanf…"
+        }
+      ]
+    },
+    {
+      "id": "c-avancado",
+      "nome": "C 3 · Avançado",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "Ponteiros de função, ponteiro para ponteiro, listas ligadas em C, union, operações de bits, const e volatile, comportamento indefinido, Valgrind e sanitizers, gdb, static e extern, bibliotecas e padrões C11/C17/C23.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "c",
+        "avançado",
+        "gdb",
+        "valgrind",
+        "bits",
+        "trilha c"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "c-intermediario",
+          "versao": "1.0.0",
+          "nome": "C 2 · Intermediário"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.97
+      },
+      "conhecimentos": 25,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/c-avancado.aprendiz",
+      "tamanho": 9231,
+      "sha256": "6b299b9c82e276ce2bc55fdc6d24e347590ed11c94c7388db62f999972a99eaf",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "o que é ponteiro de função em c",
+          "conteudo": "Uma função também tem endereço, e dá para guardá-lo num **ponteiro de função** e chamá-la depois. É assim que se passa um comportamento como parâmetro (**callback**):\n```c\n#include <stdio.h>\n\nint dobro(int x)    { ret…"
+        },
+        {
+          "pergunta": "como usar qsort em c",
+          "conteudo": "O `qsort` (de `<stdlib.h>`) ordena qualquer coisa: você passa uma função que compara dois itens.\n```c\n#include <stdlib.h>\n#include <string.h>\n\ntypedef struct { char nome[40]; int idade; } Pessoa;\n\nint por_idade(const …"
+        },
+        {
+          "pergunta": "o que é void pointer em c",
+          "conteudo": "`void *` é um ponteiro **sem tipo**: guarda qualquer endereço. É assim que `malloc`, `memcpy` e `qsort` funcionam com qualquer tipo.\n- em C, `void *` converte para qualquer ponteiro sem cast: `int *v = malloc(...)`;\n-…"
+        },
+        {
+          "pergunta": "o que é ponteiro para ponteiro em c",
+          "conteudo": "`int **pp` aponta para um `int *`. Usos principais:\n- **alterar um ponteiro dentro de uma função** (como inserir no começo de uma lista, mudando a cabeça);\n- **matrizes dinâmicas** (um vetor de ponteiros, um por linha…"
+        },
+        {
+          "pergunta": "como fazer lista encadeada em c",
+          "conteudo": "```c\n#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct No {\n    int valor;\n    struct No *prox;\n} No;\n\nvoid inserir_inicio(No **cabeca, int valor) {\n    No *novo = malloc(sizeof *novo);\n    if (!novo) exit(1);\n  …"
+        },
+        {
+          "pergunta": "o que é union em c",
+          "conteudo": "Numa **struct**, cada campo tem seu espaço. Numa **union**, todos os campos **compartilham o mesmo espaço**: só um vale por vez, e o tamanho é o do maior campo.\nO uso típico é a **union marcada** (*tagged union*), com…"
+        }
+      ]
+    },
+    {
+      "id": "cpp-basico",
+      "nome": "C++ 1 · Básico",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "C++ do zero: g++, iostream, namespaces, std::string, referências, sobrecarga, std::vector, for de intervalo, auto, classes, construtores e a diferença entre C e C++.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "c++",
+        "cpp",
+        "iniciante",
+        "classes",
+        "trilha c++"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "c-basico",
+          "versao": "1.0.0",
+          "nome": "C 1 · Básico"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.98
+      },
+      "conhecimentos": 25,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/cpp-basico.aprendiz",
+      "tamanho": 8314,
+      "sha256": "5efd78a73ad5dc3e1fc1e35d4989fe61933dae4906cb9f5204171f146d137b86",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "o que é c++",
+          "conteudo": "**C++** foi criada por Bjarne Stroustrup no começo dos anos 1980 como \"C com classes\". Hoje é uma linguagem enorme, que junta o controle de baixo nível do C com abstrações de alto nível (classes, templates, a bibliote…"
+        },
+        {
+          "pergunta": "diferença entre c e c++",
+          "conteudo": "C++ nasceu do C e compila quase todo código C, mas são linguagens diferentes:\n- **C:** procedural, pequena, você gerencia tudo à mão.\n- **C++:** acrescenta classes, referências, sobrecarga, templates, exceções, namesp…"
+        },
+        {
+          "pergunta": "como instalar compilador c++",
+          "conteudo": "O **g++** é o compilador C++ do GCC (o **clang++** e o **MSVC**, do Visual Studio, também servem).\n- **Ubuntu/Debian:** `sudo apt install build-essential`.\n- **Fedora:** `sudo dnf install gcc-c++`.\n- **Windows:** MSYS…"
+        },
+        {
+          "pergunta": "hello world em c++",
+          "conteudo": "`ola.cpp`:\n```cpp\n#include <iostream>\n\nint main() {\n    std::cout << \"Olá, mundo!\\n\";\n    return 0;\n}\n```\n- `#include <iostream>`: entrada e saída de C++;\n- `std::cout`: a saída padrão (a tela); `<<` \"empurra\" o valor…"
+        },
+        {
+          "pergunta": "como ler do teclado em c++",
+          "conteudo": "```cpp\n#include <iostream>\n#include <string>\n\nint main() {\n    int idade;\n    std::cout << \"Idade: \";\n    if (!(std::cin >> idade)) {\n        std::cout << \"Número inválido\\n\";\n        return 1;\n    }\n    std::cin.igno…"
+        },
+        {
+          "pergunta": "o que é namespace em c++",
+          "conteudo": "**Namespace** agrupa nomes para evitar conflitos: a biblioteca padrão fica em `std`, então `std::vector` não briga com um `vector` seu.\n```cpp\nnamespace geometria {\n    double area_circulo(double r) { return 3.14159 *…"
+        }
+      ]
+    },
+    {
+      "id": "cpp-intermediario",
+      "nome": "C++ 2 · Intermediário",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "Orientação a objetos em C++: herança, virtual, polimorfismo, classes abstratas, RAII, destrutor, regra dos 3/5/0, ponteiros inteligentes, templates, a STL (map, set, algoritmos), lambdas e exceções.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "c++",
+        "cpp",
+        "stl",
+        "templates",
+        "orientação a objetos",
+        "trilha c++"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "cpp-basico",
+          "versao": "1.0.0",
+          "nome": "C++ 1 · Básico"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.92
+      },
+      "conhecimentos": 23,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/cpp-intermediario.aprendiz",
+      "tamanho": 8273,
+      "sha256": "213dea99fb8f147c34bab469ce614913e07ceea52f2461009de03c06b100e563",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "como fazer herança em c++",
+          "conteudo": "Uma classe **derivada** herda membros de uma classe **base** e pode acrescentar ou especializar:\n```cpp\nclass Animal {\npublic:\n    explicit Animal(std::string nome) : nome_(std::move(nome)) {}\n    const std::string &n…"
+        },
+        {
+          "pergunta": "o que é virtual em c++",
+          "conteudo": "Com `virtual`, a chamada vai para a versão da **classe real do objeto**, mesmo através de um ponteiro ou referência para a base. Isso é **polimorfismo**:\n```cpp\n#include <iostream>\n#include <memory>\n#include <vector>\n…"
+        },
+        {
+          "pergunta": "por que o destrutor deve ser virtual",
+          "conteudo": "Se você apagar um objeto derivado **através de um ponteiro para a base**, e o destrutor da base **não** for virtual, só o destrutor da base roda: os recursos da derivada vazam (e tecnicamente é comportamento indefinid…"
+        },
+        {
+          "pergunta": "o que é classe abstrata em c++",
+          "conteudo": "Uma **função virtual pura** (`= 0`) não tem implementação na base; as derivadas são obrigadas a implementar. Uma classe com pelo menos uma é **abstrata**: não dá para criar objetos dela.\nC++ não tem a palavra `interfa…"
+        },
+        {
+          "pergunta": "o que é destrutor em c++",
+          "conteudo": "O **destrutor** (`~NomeDaClasse()`) roda automaticamente quando o objeto deixa de existir: no fim do escopo, num `delete` ou quando o contêiner que o guarda é destruído.\n**RAII** é a ideia mais importante do C++: amar…"
+        },
+        {
+          "pergunta": "o que é regra dos três",
+          "conteudo": "Se uma classe gerencia um recurso à mão, ela precisa definir como **copiar** e **destruir** corretamente:\n- **Regra dos três:** se precisar de um destes, precisa dos três: destrutor, construtor de cópia e atribuição d…"
+        }
+      ]
+    },
+    {
+      "id": "cpp-avancado",
+      "nome": "C++ 3 · Avançado",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "Semântica de movimento, rvalue, perfect forwarding, constexpr, SFINAE e concepts, variadic templates, threads, mutex, atomic, ranges, std::optional/variant, CMake, otimizações e o C++ moderno (11 a 23).",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "c++",
+        "cpp",
+        "avançado",
+        "concorrência",
+        "c++20",
+        "trilha c++"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "cpp-intermediario",
+          "versao": "1.0.0",
+          "nome": "C++ 2 · Intermediário"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.99
+      },
+      "conhecimentos": 25,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/cpp-avancado.aprendiz",
+      "tamanho": 9557,
+      "sha256": "59166221a15dc246d58c7abafa8aaa95b05818ba48ce7675e42d3b1d9befd44d",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "o que é semântica de movimento em c++",
+          "conteudo": "**Mover** é transferir os recursos de um objeto para outro em vez de copiá-los. Mover um `std::vector` de um milhão de itens só troca três ponteiros; copiar duplicaria um milhão de itens.\n```cpp\nstd::vector<int> a(1'0…"
+        },
+        {
+          "pergunta": "o que é lvalue e rvalue",
+          "conteudo": "- **lvalue:** algo com nome e endereço, que continua existindo (`x`, `v[0]`).\n- **rvalue:** um valor temporário, prestes a sumir (`x + 1`, `std::string(\"oi\")`, o retorno de uma função por valor).\nA **referência rvalue…"
+        },
+        {
+          "pergunta": "o que é perfect forwarding",
+          "conteudo": "Num template, `T&&` com `T` deduzido é uma **referência de encaminhamento** (universal): aceita lvalues e rvalues. `std::forward<T>` repassa o argumento **mantendo** o que ele era:\n```cpp\ntemplate <typename T, typenam…"
+        },
+        {
+          "pergunta": "o que é rvo",
+          "conteudo": "Sim, devolva por valor sem medo. O compilador constrói o resultado **direto no lugar de destino**, sem cópia nem movimento (**RVO**, *return value optimization*). Desde o C++17 isso é **garantido** quando se devolve u…"
+        },
+        {
+          "pergunta": "o que é constexpr e consteval",
+          "conteudo": "- `constexpr`: pode ser calculado ao compilar **se** os argumentos forem constantes; senão roda normalmente.\n- `consteval` (C++20): **obrigatoriamente** ao compilar.\n- `constinit` (C++20): a variável é inicializada ao…"
+        },
+        {
+          "pergunta": "o que é variadic template",
+          "conteudo": "**Template variádico** aceita qualquer número de parâmetros de tipos diferentes (`typename... Args`). A **fold expression** (C++17) aplica um operador a todos:\n```cpp\ntemplate <typename... Ts>\nauto somar(Ts... xs) {\n …"
+        }
+      ]
+    },
+    {
       "id": "atalhos-terminal-linux",
       "nome": "Comandos do terminal Linux",
       "versao": "2.0.0",
@@ -234,7 +1098,7 @@
     {
       "id": "compreensao-portugues",
       "nome": "Compreensão do português",
-      "versao": "1.1.0",
+      "versao": "1.2.0",
       "autor": "Jano Projects",
       "descricao": "A raiz da conversa do Aprendiz: entende o tipo de pergunta (o que é, como fazer, onde fica…), expressões (\"dar um jeito\", \"pequeno-almoço\"), formas irregulares (\"fui\", \"fiz\" → ser, fazer), responde sobre si mesmo e as próprias limitações e, quando não sabe algo, indica o addon da loja oficial que sabe. Mais pesado: traz um léxico com mais de 300 mil palavras. Lemas derivados de lemmatization-lists, de Michal Měchura (ODbL).",
       "licenca": "ODbL-1.0",
@@ -268,15 +1132,15 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": {
-        "regras": 160,
-        "catalogo": 17,
+        "regras": 180,
+        "catalogo": 37,
         "lemas": 317331,
         "vetores": 0
       },
       "norma": null,
       "arquivo": "addons/compreensao-portugues.aprendiz",
-      "tamanho": 845725,
-      "sha256": "d7717ac478a0e8277dc8052095393a8c1c2e7b787a9c47839e14dd4e034990bd",
+      "tamanho": 856569,
+      "sha256": "450a45fbc2cda2af214a70f3c367ec4c644569774c1edee9f8a6b22e45c3c192",
       "atualizado_em": "2026-11-18",
       "amostra": []
     },
@@ -1982,6 +2846,705 @@
         {
           "pergunta": "estou fazendo ou estou a fazer",
           "conteudo": "No Brasil, usa-se **estar + gerúndio**: \"estou fazendo\", \"estava estudando\". \"Estar a + infinitivo\" (estou a fazer) é a construção de Portugal e da África. Cuidado só com o **gerundismo** (\"vou estar enviando\"), consi…"
+        }
+      ]
+    },
+    {
+      "id": "prog-logica",
+      "nome": "Programação 1 · Lógica e algoritmos",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "O começo de tudo: o que é um programa, algoritmo, variável, tipos, operadores, decisões, repetições, funções, recursão, pseudocódigo, fluxograma e como encontrar erros. Primeiro passo da trilha de programação.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "programação",
+        "lógica",
+        "algoritmos",
+        "iniciante",
+        "trilha programação"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.96
+      },
+      "conhecimentos": 45,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/prog-logica.aprendiz",
+      "tamanho": 12162,
+      "sha256": "20f4a3004aa9cc08b692add202c8db5339016a13ae4bf45844ff58f949a7f9be",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "o que é programação",
+          "conteudo": "**Programar** é escrever instruções que o computador consegue seguir, passo a passo, para resolver um problema.\nO computador não \"entende\" a ideia: ele executa exatamente o que está escrito, na ordem, muito rápido. O …"
+        },
+        {
+          "pergunta": "o que é um algoritmo",
+          "conteudo": "**Algoritmo** é uma sequência finita de passos bem definidos que resolve um problema.\nUma receita de bolo é um algoritmo: tem entradas (ingredientes), passos em ordem e uma saída (o bolo).\nUm bom algoritmo é:\n- **prec…"
+        },
+        {
+          "pergunta": "o que é um programa de computador",
+          "conteudo": "O **algoritmo** é a ideia (os passos). O **programa** é esse algoritmo escrito numa linguagem que o computador consegue executar.\nO mesmo algoritmo pode virar programas em C, Python ou Java. Um programa pode juntar mu…"
+        },
+        {
+          "pergunta": "o que é uma linguagem de programação",
+          "conteudo": "Uma **linguagem de programação** é um idioma com regras rígidas (sintaxe) que serve de ponte entre a pessoa e o computador.\nAlgumas das mais usadas e para que costumam servir:\n- **Python:** automação, dados, IA, back-…"
+        },
+        {
+          "pergunta": "o que é linguagem compilada e interpretada",
+          "conteudo": "O computador só executa **código de máquina** (números). Há dois jeitos de chegar lá:\n- **Compilada:** um **compilador** traduz o programa inteiro antes, gerando um executável. Ex.: C e C++ (`gcc`, `g++`). Roda muito …"
+        },
+        {
+          "pergunta": "o que é código fonte",
+          "conteudo": "**Código-fonte** é o texto que a pessoa escreve (`programa.c`, `app.py`).\n**Código de máquina** é o que o processador executa: instruções em binário, específicas de cada tipo de processador.\n- **Baixo nível:** perto d…"
+        }
+      ]
+    },
+    {
+      "id": "prog-vocabulario",
+      "nome": "Programação 2 · Vocabulário e boas práticas",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "Os nomes que todo programador usa: camelCase e snake_case, compilador, IDE, biblioteca, framework, API, Git, commit, branch, testes, paradigmas, DRY, KISS, SOLID e como escolher bons nomes.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "programação",
+        "nomenclatura",
+        "git",
+        "boas práticas",
+        "iniciante",
+        "trilha programação"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "prog-logica",
+          "versao": "1.0.0",
+          "nome": "Programação 1 · Lógica e algoritmos"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.99
+      },
+      "conhecimentos": 42,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/prog-vocabulario.aprendiz",
+      "tamanho": 12181,
+      "sha256": "26c7c8ae32f6f8996ba95630c9f350c3e170cde871f614f01d13716adf5b62e2",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "o que é camelcase",
+          "conteudo": "Como juntar palavras num nome, já que nomes não podem ter espaço:\n- **camelCase:** a primeira minúscula, as outras com maiúscula: `nomeCompleto`. Comum em Java, JavaScript, C# (variáveis e métodos).\n- **PascalCase:** …"
+        },
+        {
+          "pergunta": "qual padrão de nome usar em python",
+          "conteudo": "A **PEP 8** é o guia de estilo oficial do Python:\n- variáveis, funções e módulos: `snake_case` (`calcular_media`, `banco.py`);\n- classes: `PascalCase` (`Assistente`, `RespostaDireta`);\n- constantes: `MAIUSCULAS` (`TAM…"
+        },
+        {
+          "pergunta": "como dar bons nomes para variáveis",
+          "conteudo": "Um bom nome diz **o que é** sem precisar de comentário:\n- variáveis são **substantivos**: `preco_total`, não `pt` nem `x`;\n- funções são **verbos**: `calcular_frete()`, `buscar_usuario()`;\n- booleanos são **perguntas*…"
+        },
+        {
+          "pergunta": "devo programar em português ou inglês",
+          "conteudo": "As duas escolhas são válidas; o importante é ser **consistente** dentro do projeto.\n- **Inglês:** padrão em projetos abertos internacionais e nas bibliotecas; facilita contribuições de fora.\n- **Português:** facilita …"
+        },
+        {
+          "pergunta": "o que é comentário no código",
+          "conteudo": "**Comentário** é texto que o computador ignora, escrito para pessoas.\n- Python: `# comentário` e docstrings `\"\"\"...\"\"\"` no começo de funções e módulos;\n- C/C++/Java/JS: `// uma linha` e `/* várias linhas */`;\n- SQL: `…"
+        },
+        {
+          "pergunta": "o que é indentação",
+          "conteudo": "**Indentação** é o recuo no começo das linhas para mostrar o que está dentro de quê (um bloco dentro de um `if`, de um laço, de uma função).\n- Em **C, C++, Java**, os blocos são marcados por `{ }`; a indentação é para…"
+        }
+      ]
+    },
+    {
+      "id": "prog-estruturas-dados",
+      "nome": "Programação 3 · Estruturas de dados",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "Vetores, listas ligadas, pilhas, filas, tabelas hash, árvores, grafos e heaps; Big-O, busca linear e binária e os algoritmos de ordenação, explicados com exemplos.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "programação",
+        "estruturas de dados",
+        "algoritmos",
+        "big o",
+        "trilha programação"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "prog-logica",
+          "versao": "1.0.0",
+          "nome": "Programação 1 · Lógica e algoritmos"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.94
+      },
+      "conhecimentos": 36,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/prog-estruturas-dados.aprendiz",
+      "tamanho": 10579,
+      "sha256": "d108f0eb1310b834c15f6d2c6af8a7e52883c242275d02653a0ee22291e0c1f4",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "o que é estrutura de dados",
+          "conteudo": "**Estrutura de dados** é um jeito de organizar dados na memória para que certas operações fiquem rápidas.\nNão existe a melhor; existe a melhor **para o que você vai fazer**:\n- acessar pela posição → **vetor**;\n- inser…"
+        },
+        {
+          "pergunta": "o que é complexidade de algoritmo",
+          "conteudo": "A notação **Big-O** diz como o tempo (ou a memória) **cresce** quando a entrada cresce, ignorando constantes. Da melhor para a pior:\n- **O(1) constante:** não depende do tamanho. Acessar `v[i]`, buscar num dicionário.…"
+        },
+        {
+          "pergunta": "como calcular a complexidade de um código",
+          "conteudo": "Regras práticas:\n1. conte os laços: um laço de n voltas → O(n); dois aninhados → O(n²);\n2. passos em sequência **somam**, e fica o maior: O(n) + O(n²) = O(n²);\n3. constantes somem: 3n + 5 → O(n);\n4. se a cada passo o …"
+        },
+        {
+          "pergunta": "o que é melhor caso pior caso e caso médio",
+          "conteudo": "O mesmo algoritmo pode demorar diferente conforme a entrada:\n- **melhor caso:** a entrada mais favorável (o item procurado é o primeiro: O(1));\n- **pior caso:** a mais desfavorável (o item não existe: O(n));\n- **caso …"
+        },
+        {
+          "pergunta": "o que é complexidade de espaço",
+          "conteudo": "É quanto de **memória extra** o algoritmo usa em função da entrada. Ordenar no lugar (heap sort) usa O(1) extra; o merge sort usa O(n) para as metades.\nMuitas vezes se troca memória por tempo: guardar resultados já ca…"
+        },
+        {
+          "pergunta": "o que é vetor em estrutura de dados",
+          "conteudo": "O **vetor** guarda os elementos **lado a lado** na memória. Como todos têm o mesmo tamanho, o endereço de `v[i]` é calculado direto: `início + i × tamanho`. Por isso o acesso é **O(1)**.\n- acessar por índice: O(1);\n- …"
+        }
+      ]
+    },
+    {
+      "id": "prog-banco-dados",
+      "nome": "Programação 4 · Bancos de dados (conceitos)",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "Como os dados são guardados: tabela, linha, coluna, chave primária e estrangeira, relacionamentos 1:1, 1:N e N:N, modelo ER, normalização, índices, transações, ACID, SQL e NoSQL. Prepara para a trilha de SQL.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "programação",
+        "banco de dados",
+        "modelagem",
+        "sql",
+        "nosql",
+        "trilha programação"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "prog-logica",
+          "versao": "1.0.0",
+          "nome": "Programação 1 · Lógica e algoritmos"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.94
+      },
+      "conhecimentos": 27,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/prog-banco-dados.aprendiz",
+      "tamanho": 8188,
+      "sha256": "6c2adc09dd406ea270b436becacd5eb8a55580c2fc8ba589e7b4709018000024",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "o que é banco de dados",
+          "conteudo": "**Banco de dados** é uma coleção organizada de dados, guardada de forma que seja fácil **consultar, inserir, alterar e apagar**, com segurança, mesmo com muitos usuários ao mesmo tempo.\nPor que não guardar tudo em arq…"
+        },
+        {
+          "pergunta": "o que é sgbd",
+          "conteudo": "**SGBD** (Sistema Gerenciador de Banco de Dados) é o programa que cuida do banco: guarda, consulta, controla acesso e concorrência.\nOs mais usados:\n- **SQLite:** um arquivo, sem servidor, embutido no programa. Celular…"
+        },
+        {
+          "pergunta": "o que é banco de dados relacional",
+          "conteudo": "No **banco relacional**, os dados ficam em **tabelas** (relações) com linhas e colunas, e as tabelas se ligam por **chaves**. A ideia é de Edgar F. Codd (IBM, 1970).\nExemplo, uma loja:\n- `clientes` (id, nome, cidade)\n…"
+        },
+        {
+          "pergunta": "o que é tabela linha e coluna",
+          "conteudo": "- **Tabela:** um conjunto de dados sobre uma coisa (clientes, produtos).\n- **Coluna** (campo, atributo): uma característica, com um tipo (nome: texto; preço: número).\n- **Linha** (registro, tupla): uma ocorrência (o c…"
+        },
+        {
+          "pergunta": "o que é chave primária",
+          "conteudo": "**Chave primária** (PK) é a coluna (ou conjunto de colunas) que identifica **cada linha de forma única**. Não pode repetir nem ficar vazia.\nTipos:\n- **natural:** um dado do mundo real que já é único (CPF, ISBN);\n- **s…"
+        },
+        {
+          "pergunta": "o que é chave estrangeira",
+          "conteudo": "**Chave estrangeira** (FK) é uma coluna que aponta para a chave primária de outra tabela, criando o **relacionamento**.\n```sql\nCREATE TABLE pedidos (\n    id         INTEGER PRIMARY KEY,\n    cliente_id INTEGER NOT NULL…"
+        }
+      ]
+    },
+    {
+      "id": "python-basico",
+      "nome": "Python 1 · Básico",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "Python do zero: instalar, rodar, print e input, variáveis, tipos, strings, f-strings, listas, tuplas, dicionários, conjuntos, if, for, while, funções, módulos, erros e arquivos.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "python",
+        "iniciante",
+        "trilha python"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "prog-logica",
+          "versao": "1.0.0",
+          "nome": "Programação 1 · Lógica e algoritmos"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.99
+      },
+      "conhecimentos": 36,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/python-basico.aprendiz",
+      "tamanho": 11041,
+      "sha256": "0db3329080920815163fbfd12a2e343e6f7e1d89345e77e17abe73c712864119",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "o que é python",
+          "conteudo": "**Python** é uma linguagem criada por Guido van Rossum (lançada em 1991), famosa por ser **fácil de ler**: o código parece quase pseudocódigo.\nÉ usada em: automação de tarefas, análise de dados, inteligência artificia…"
+        },
+        {
+          "pergunta": "como instalar python",
+          "conteudo": "- **Windows:** baixe em python.org/downloads e, na primeira tela do instalador, marque **\"Add python.exe to PATH\"**. Ou, no terminal: `winget install Python.Python.3.13`.\n- **Ubuntu/Debian:** já vem instalado; acresce…"
+        },
+        {
+          "pergunta": "como rodar um programa python",
+          "conteudo": "Duas formas:\n- **arquivo:** crie `ola.py` com `print(\"Olá!\")` e rode no terminal: `python ola.py` (no Linux, `python3 ola.py`);\n- **modo interativo (REPL):** digite só `python` e teste linha por linha (os `>>>` são o …"
+        },
+        {
+          "pergunta": "hello world em python",
+          "conteudo": "```python\nprint(\"Olá, mundo!\")\n```\nÉ isso: sem `main`, sem `;`, sem chaves.\nMais do `print`:\n```python\nprint(\"Ana\", 30, True)          # separa com espaço: Ana 30 True\nprint(\"a\", \"b\", sep=\"-\")        # a-b\nprint(\"sem …"
+        },
+        {
+          "pergunta": "como ler dados do teclado em python",
+          "conteudo": "`input()` mostra uma mensagem e devolve o que foi digitado, **sempre como texto**:\n```python\nnome = input(\"Seu nome: \")\nidade = int(input(\"Sua idade: \"))      # converte para inteiro\naltura = float(input(\"Sua altura: …"
+        },
+        {
+          "pergunta": "como criar variáveis em python",
+          "conteudo": "Em Python, a variável nasce na primeira atribuição, sem declarar o tipo:\n```python\nnome = \"Ana\"        # str\nidade = 30          # int\naltura = 1.68       # float\nativo = True        # bool\nnada = None         # ausên…"
+        }
+      ]
+    },
+    {
+      "id": "python-avancado",
+      "nome": "Python 2 · Avançado",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "Compreensões, geradores, decoradores, gerenciadores de contexto, classes e dunder methods, dataclasses, type hints, ambientes virtuais e pip, pacotes, testes com pytest, async, threads e processos, sqlite3, performance e o que o Aprendiz usa.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "python",
+        "avançado",
+        "pytest",
+        "async",
+        "orientação a objetos",
+        "trilha python"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "python-basico",
+          "versao": "1.0.0",
+          "nome": "Python 1 · Básico"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.99
+      },
+      "conhecimentos": 37,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 16,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/python-avancado.aprendiz",
+      "tamanho": 14550,
+      "sha256": "59bb564d87c9b526053f49e629dc76002971271a70832584207d3c068d52ffc8",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "o que é ambiente virtual em python",
+          "conteudo": "Um **ambiente virtual** (venv) é uma pasta com um Python e pacotes **só daquele projeto**. Assim, as versões de bibliotecas de um projeto não brigam com as de outro nem com o Python do sistema.\n```bash\npython -m venv …"
+        },
+        {
+          "pergunta": "como gerenciar dependências em python",
+          "conteudo": "- **requirements.txt:** a lista de pacotes para o `pip install -r`. Aceita faixas de versão (`fastapi>=0.110`) ou versões fixas (`fastapi==0.115.0`, geradas com `pip freeze`).\n- **pyproject.toml:** o arquivo moderno q…"
+        },
+        {
+          "pergunta": "como organizar um projeto python",
+          "conteudo": "Um **pacote** é uma pasta de módulos com um `__init__.py`, que roda no primeiro `import` do pacote e define o que ele expõe.\nEstrutura comum (é a do Aprendiz):\n```\nprojeto/\n├── aprendiz/             # o pacote\n│   ├──…"
+        },
+        {
+          "pergunta": "o que é list comprehension",
+          "conteudo": "**Compreensões** criam coleções numa linha, de forma legível:\n```python\nquadrados = [n * n for n in range(10)]\npares = [n for n in range(20) if n % 2 == 0]\npalavras = [\"Olá\", \"Mundo\"]\ntamanhos = {p: len(p) for p in pa…"
+        },
+        {
+          "pergunta": "o que é gerador em python",
+          "conteudo": "Um **gerador** produz os valores **um de cada vez**, sob demanda, em vez de montar a lista inteira na memória:\n```python\ndef numeros_pares(limite):\n    n = 0\n    while n < limite:\n        yield n          # entrega um…"
+        },
+        {
+          "pergunta": "o que é iterador em python",
+          "conteudo": "**Iterável** é qualquer coisa que dá para percorrer com `for` (lista, string, arquivo, dicionário). Por baixo, o `for` chama `iter()` para obter um **iterador**, e `next()` até receber `StopIteration`.\nO módulo `itert…"
+        }
+      ]
+    },
+    {
+      "id": "sql-basico",
+      "nome": "SQL 1 · Básico",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "SQL do zero com SQLite: criar tabelas, tipos, INSERT, SELECT, WHERE, ORDER BY, LIMIT, UPDATE, DELETE, funções de agregação, GROUP BY, HAVING e JOIN.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "sql",
+        "sqlite",
+        "banco de dados",
+        "iniciante",
+        "trilha sql"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "prog-banco-dados",
+          "versao": "1.0.0",
+          "nome": "Programação 4 · Bancos de dados (conceitos)"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.96
+      },
+      "conhecimentos": 27,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 15,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/sql-basico.aprendiz",
+      "tamanho": 9061,
+      "sha256": "203457392d23b89d7b51d865d28370d4d908fd1a6d41d6dbccf9731fd7280eae",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "como começar a aprender sql",
+          "conteudo": "O jeito mais simples é o **SQLite**: um banco inteiro num arquivo, sem servidor.\n- **Ubuntu/Debian:** `sudo apt install sqlite3` · **Fedora:** `sudo dnf install sqlite`;\n- **Windows:** baixe o \"sqlite-tools\" em sqlite…"
+        },
+        {
+          "pergunta": "banco de exemplo da loja",
+          "conteudo": "O banco usado em todos os exemplos de SQL (cole no `sqlite3 loja.db`):\n```sql\nPRAGMA foreign_keys = ON;\n\nCREATE TABLE clientes (\n    id     INTEGER PRIMARY KEY,\n    nome   TEXT NOT NULL,\n    cidade TEXT,\n    uf     TE…"
+        },
+        {
+          "pergunta": "como criar uma tabela em sql",
+          "conteudo": "```sql\nCREATE TABLE contatos (\n    id       INTEGER PRIMARY KEY,\n    nome     TEXT NOT NULL,\n    email    TEXT UNIQUE,\n    idade    INTEGER CHECK (idade >= 0),\n    ativo    INTEGER NOT NULL DEFAULT 1\n);\n```\nCada colun…"
+        },
+        {
+          "pergunta": "quais os tipos de dados no sql",
+          "conteudo": "O SQLite tem cinco classes de armazenamento: `INTEGER`, `REAL`, `TEXT`, `BLOB` (bytes) e `NULL`, e é flexível com os tipos (uma coluna INTEGER aceita texto, a não ser em tabelas `STRICT`).\nOutros bancos são rígidos e …"
+        },
+        {
+          "pergunta": "como inserir dados em uma tabela",
+          "conteudo": "```sql\n-- informando as colunas (recomendado)\nINSERT INTO clientes (nome, cidade, uf) VALUES ('Fábio Nunes', 'Natal', 'RN');\n\n-- várias linhas de uma vez\nINSERT INTO produtos (nome, categoria, preco) VALUES\n    ('Webc…"
+        },
+        {
+          "pergunta": "como consultar dados em sql",
+          "conteudo": "```sql\nSELECT * FROM clientes;                 -- todas as colunas\nSELECT nome, cidade FROM clientes;      -- só algumas\nSELECT nome AS cliente, uf AS estado    -- AS dá apelidos\nFROM clientes;\nSELECT nome, preco, pre…"
+        }
+      ]
+    },
+    {
+      "id": "sql-avancado",
+      "nome": "SQL 2 · Avançado",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "Subconsultas, CTE e WITH RECURSIVE, funções de janela (ROW_NUMBER, RANK, LAG), CASE, UNION, views, índices, EXPLAIN, transações, triggers, UPSERT, JSON e as diferenças entre SQLite, PostgreSQL, MySQL, SQL Server e Oracle.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "sql",
+        "avançado",
+        "window functions",
+        "cte",
+        "índices",
+        "trilha sql"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "sql-basico",
+          "versao": "1.0.0",
+          "nome": "SQL 1 · Básico"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 1.0
+      },
+      "conhecimentos": 22,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 15,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/sql-avancado.aprendiz",
+      "tamanho": 8481,
+      "sha256": "c47865b1eedfa8c4bf03ed978d22f13db7d2df39aff1b1091d769f75c0aa49bb",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "o que é subconsulta em sql",
+          "conteudo": "**Subconsulta** é um `SELECT` dentro de outro. Pode aparecer em vários lugares:\n```sql\n-- no WHERE, devolvendo um valor: produtos acima da média\nSELECT nome, preco FROM produtos\nWHERE preco > (SELECT AVG(preco) FROM p…"
+        },
+        {
+          "pergunta": "o que é subconsulta correlacionada",
+          "conteudo": "Uma subconsulta **correlacionada** usa colunas da consulta de fora, e roda (logicamente) uma vez por linha. O `EXISTS` é verdadeiro se ela devolver pelo menos uma linha:\n```sql\n-- clientes que têm algum pedido entregu…"
+        },
+        {
+          "pergunta": "o que é cte em sql",
+          "conteudo": "**CTE** (`WITH`) dá nome a uma subconsulta e deixa a consulta legível, de cima para baixo, como passos:\n```sql\nWITH totais AS (\n    SELECT pedido_id, SUM(quantidade * preco_unit) AS total\n    FROM itens_pedido\n    GRO…"
+        },
+        {
+          "pergunta": "o que é cte recursiva",
+          "conteudo": "Uma **CTE recursiva** se refere a si mesma: parte de um caso inicial e repete até não gerar linhas novas. Serve para hierarquias (organogramas, categorias com subcategorias, pastas) e para gerar sequências:\n```sql\n-- …"
+        },
+        {
+          "pergunta": "o que são funções de janela em sql",
+          "conteudo": "**Funções de janela** calculam algo sobre um grupo de linhas **sem juntá-las numa só** (diferente do `GROUP BY`): cada linha continua lá, com o cálculo ao lado.\n```sql\nSELECT nome, categoria, preco,\n       AVG(preco) …"
+        },
+        {
+          "pergunta": "como usar row_number rank e dense_rank",
+          "conteudo": "```sql\nSELECT nome, categoria, preco,\n       ROW_NUMBER() OVER (PARTITION BY categoria ORDER BY preco DESC) AS posicao,\n       RANK()       OVER (ORDER BY preco DESC) AS rank_geral,\n       DENSE_RANK() OVER (ORDER BY …"
+        }
+      ]
+    },
+    {
+      "id": "sql-teoria-pratica",
+      "nome": "SQL 3 · Teoria e prática",
+      "versao": "1.0.0",
+      "autor": "Jano Projects",
+      "descricao": "A teoria por trás do SQL (modelo relacional, álgebra relacional, dependências funcionais, 1FN a BCNF, níveis de isolamento, B-tree) e exercícios resolvidos sobre um banco de exemplo de uma loja.",
+      "licenca": "CC-BY-4.0",
+      "site": null,
+      "categoria": "Programação",
+      "etiquetas": [
+        "sql",
+        "teoria",
+        "normalização",
+        "exercícios",
+        "álgebra relacional",
+        "trilha sql"
+      ],
+      "formato": 2,
+      "origem": "oficial",
+      "editor": "Jano Projects",
+      "classificacao": [
+        "memoria",
+        "linguagem"
+      ],
+      "versao_minima_app": "0.6.0",
+      "criado_com": "0.8.0",
+      "dependencias": [
+        {
+          "id": "sql-avancado",
+          "versao": "1.0.0",
+          "nome": "SQL 2 · Avançado"
+        }
+      ],
+      "recomendado": {
+        "busca": "hibrido",
+        "resposta": "direta",
+        "acerto": 0.93
+      },
+      "conhecimentos": 27,
+      "verbetes": 0,
+      "palavras": [],
+      "traducoes": [],
+      "regiao": null,
+      "termos_linguagem": 15,
+      "ajustes": [],
+      "configuracoes": 0,
+      "compreensao": null,
+      "norma": null,
+      "arquivo": "addons/sql-teoria-pratica.aprendiz",
+      "tamanho": 10076,
+      "sha256": "44daad989d7ebb12163f43b497b9d569e68aefa8ac49c28131ccacfa44d17e24",
+      "atualizado_em": "2026-11-18",
+      "amostra": [
+        {
+          "pergunta": "o que é o modelo relacional de codd",
+          "conteudo": "Em 1970, Edgar F. Codd (IBM) propôs tratar os dados como **relações** matemáticas. Os termos formais e seus equivalentes práticos:\n- **relação** = tabela;\n- **tupla** = linha;\n- **atributo** = coluna;\n- **domínio** = …"
+        },
+        {
+          "pergunta": "o que é álgebra relacional",
+          "conteudo": "**Álgebra relacional** é o conjunto de operações sobre relações que está por trás de todo SQL:\n- **seleção σ** (filtrar linhas) → `WHERE`;\n- **projeção π** (escolher colunas) → a lista do `SELECT`;\n- **produto cartesi…"
+        },
+        {
+          "pergunta": "o que é divisão relacional",
+          "conteudo": "A **divisão** responde perguntas com \"todos\": quais clientes compraram **todos** os produtos de Móveis?\nJeito 1, com contagem:\n```sql\nSELECT p.cliente_id\nFROM pedidos p\nJOIN itens_pedido i ON i.pedido_id = p.id\nJOIN p…"
+        },
+        {
+          "pergunta": "o que é dependência funcional",
+          "conteudo": "Há uma **dependência funcional** A → B quando o valor de A **determina** o valor de B: duas linhas com o mesmo A têm sempre o mesmo B.\nExemplos:\n- `cpf → nome` (o mesmo CPF é sempre da mesma pessoa);\n- `cep → cidade`;…"
+        },
+        {
+          "pergunta": "o que é anomalia de atualização inserção e exclusão",
+          "conteudo": "Imagine uma tabela única `vendas(pedido, data, cliente, cidade_cliente, produto, preco_produto, quantidade)`. Ela sofre de três **anomalias**:\n- **atualização:** o preço do Teclado aparece em cada venda. Mudou o preço…"
+        },
+        {
+          "pergunta": "o que é 1fn em detalhes",
+          "conteudo": "**1FN:** todo atributo é **atômico** (um valor só) e não há grupos repetidos.\nFora da 1FN:\n```\nclientes(id, nome, telefones)            telefones = '9999-1111, 9888-2222'\nclientes(id, nome, tel1, tel2, tel3)     grupo…"
         }
       ]
     },

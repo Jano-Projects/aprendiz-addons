@@ -1,0 +1,488 @@
+# C 2 · Intermediário
+# Ponteiros, memória dinâmica, structs, strings, arquivos, pré-processador e projetos com vários arquivos.
+
+P: o que é ponteiro em c
+P: como funciona ponteiro em c
+P: para que serve ponteiro
+P: o que é um ponteiro
+P: ponteiro
+P: ponteiros em c
+P: ponteiro em c
+R: **Ponteiro** é uma variável que guarda um **endereço de memória**, o lugar onde outro valor está.
+```c
+int idade = 30;
+int *p = &idade;      /* p guarda o endereço de idade */
+
+printf("%d\n", *p);   /* 30: o valor que está no endereço */
+*p = 31;              /* muda idade através do ponteiro */
+printf("%p\n", (void *)p);  /* o endereço, ex.: 0x7ffd5e8c */
+```
+- `&x`: "endereço de x";
+- `*p` (fora da declaração): "o valor apontado por p";
+- `int *p`: "p é um ponteiro para int".
+Servem para: alterar variáveis dentro de funções, percorrer vetores, usar memória dinâmica (`malloc`) e montar estruturas como listas e árvores.
+
+P: o que significam os símbolos & e * dos ponteiros em c
+P: diferença entre & e * em ponteiros
+R: Os dois operadores são opostos:
+- `&` pega o **endereço** de uma variável: `&idade` → onde ela mora;
+- `*` vai **ao endereço** e pega o valor: `*p` → o que está lá (isso se chama **desreferenciar**).
+`*(&idade)` é o próprio `idade`.
+O `*` aparece com dois sentidos: na **declaração** (`int *p;`) diz que p é ponteiro; numa **expressão** (`*p = 5;`) acessa o valor. E ainda é a multiplicação, conforme o contexto.
+
+P: como passar parâmetro por referência em c
+P: como alterar uma variável dentro de uma função em c
+P: como fazer função de troca swap em c
+R: C sempre passa **cópias**. Para a função alterar a variável original, passe o **endereço** dela:
+```c
+void trocar(int *a, int *b) {
+    int aux = *a;
+    *a = *b;
+    *b = aux;
+}
+
+int x = 1, y = 2;
+trocar(&x, &y);   /* agora x = 2, y = 1 */
+```
+É por isso que o `scanf` pede `&idade`: ele precisa do endereço para guardar o valor lido. Também é o jeito de uma função "devolver" mais de um resultado.
+
+P: o que é ponteiro nulo
+P: o que é null em c
+R: `NULL` é um ponteiro que **não aponta para nada** (valor zero). Serve para dizer "ainda não tem" ou "deu erro":
+```c
+int *p = NULL;
+if (p != NULL) {
+    printf("%d\n", *p);
+}
+```
+Desreferenciar `NULL` (`*p` com p nulo) derruba o programa com *segmentation fault*. Regras:
+- inicialize ponteiros com `NULL` se ainda não tiver um endereço;
+- confira o retorno de funções que podem devolver `NULL` (`malloc`, `fopen`);
+- depois de `free(p)`, faça `p = NULL;`.
+Desde o C23 também existe `nullptr`.
+
+P: o que é aritmética de ponteiros
+P: relação entre vetor e ponteiro em c
+R: Somar 1 a um ponteiro avança **um elemento**, não um byte: num `int *`, `p + 1` anda 4 bytes.
+O nome de um vetor se converte num ponteiro para o primeiro elemento, e `v[i]` é exatamente `*(v + i)`:
+```c
+int v[] = {10, 20, 30};
+int *p = v;              /* o mesmo que &v[0] */
+printf("%d\n", *(p + 2)); /* 30 */
+
+for (int *q = v; q < v + 3; q++) {
+    printf("%d ", *q);
+}
+```
+Diferença importante: `sizeof v` é o tamanho do vetor inteiro (12), e `sizeof p` é o tamanho de um ponteiro (8). E não dá para fazer `v = outra_coisa`, porque o vetor não é uma variável ponteiro.
+
+P: o que é alocação dinâmica de memória em c
+P: como usar malloc em c
+P: como usar free em c
+P: como alocar memória dinamicamente em c
+P: malloc
+P: pra que serve o malloc
+P: malloc em c
+P: memória dinâmica em c
+P: como liberar memória em c
+P: como reservar memória em c
+R: Vetores comuns têm tamanho fixo, decidido ao compilar. Com **alocação dinâmica**, você pede memória enquanto o programa roda, do tamanho que precisar, num lugar chamado **heap**:
+```c
+#include <stdlib.h>
+
+int n;
+scanf("%d", &n);
+int *v = malloc(n * sizeof *v);   /* n inteiros */
+if (v == NULL) {
+    fprintf(stderr, "Sem memória\n");
+    return 1;
+}
+for (int i = 0; i < n; i++) v[i] = i * i;
+free(v);      /* devolve a memória */
+v = NULL;
+```
+Regras de ouro:
+- todo `malloc` tem **exatamente um** `free`;
+- confira se voltou `NULL`;
+- `sizeof *v` (em vez de `sizeof(int)`) continua certo se o tipo de `v` mudar.
+
+P: diferença entre malloc calloc e realloc
+P: como aumentar um vetor dinâmico em c
+R: - `malloc(bytes)`: reserva memória **sem limpar** (contém lixo).
+- `calloc(qtd, tamanho)`: reserva e **zera** tudo.
+- `realloc(p, novos_bytes)`: muda o tamanho de um bloco, copiando o conteúdo se precisar mudar de lugar.
+Um vetor que cresce, dobrando a capacidade quando enche:
+```c
+int *dados = NULL;
+size_t qtd = 0, cap = 0;
+
+void adicionar(int x) {
+    if (qtd == cap) {
+        size_t nova = cap ? cap * 2 : 4;
+        int *tmp = realloc(dados, nova * sizeof *tmp);
+        if (!tmp) { perror("realloc"); exit(1); }
+        dados = tmp;
+        cap = nova;
+    }
+    dados[qtd++] = x;
+}
+```
+Guarde o retorno do `realloc` num ponteiro temporário: se ele falhar, devolve `NULL` e o bloco antigo continua válido; escrever direto em `dados` perderia o bloco antigo (vazamento).
+
+P: o que é vazamento de memória
+P: o que é memory leak
+P: o que é dangling pointer
+P: o que é double free
+R: Os três erros clássicos de memória dinâmica:
+- **Vazamento (memory leak):** esquecer o `free`. O programa vai ocupando cada vez mais memória.
+- **Ponteiro pendurado (dangling pointer):** usar a memória **depois** do `free`. Pode "funcionar" por um tempo e quebrar longe dali.
+- **Double free:** chamar `free` duas vezes no mesmo bloco. Corrompe o gerenciador de memória.
+Defesas: `p = NULL;` logo após o `free` (e `free(NULL)` não faz nada); deixar claro quem é o "dono" de cada bloco; e ferramentas como **Valgrind** e `-fsanitize=address` (trilha avançada), que apontam a linha exata.
+
+P: diferença entre stack e heap
+P: o que é pilha e heap na memória
+P: diferença entre stack e heap em c
+P: stack e heap
+P: pilha e heap
+R: Duas regiões de memória:
+- **Pilha (stack):** variáveis locais e parâmetros. Alocação automática e muito rápida; tudo some quando a função termina. É pequena (em geral 1 a 8 MB).
+- **Heap:** memória pedida com `malloc` e devolvida com `free`. Grande e flexível; dura até você liberar.
+Consequências:
+- não devolva o endereço de uma variável local: ela morre no fim da função;
+- vetores enormes (`int v[10000000];` dentro de uma função) estouram a pilha: use `malloc`.
+```c
+int *errado(void) {
+    int x = 5;
+    return &x;   /* ERRO: x deixa de existir aqui */
+}
+```
+
+P: o que é struct em c
+P: como criar uma struct em c
+P: como usar struct em c
+P: struct
+P: como criar uma struct
+P: struct em c
+P: estrutura em c
+R: **struct** junta variáveis de tipos diferentes num tipo novo:
+```c
+struct Aluno {
+    char nome[50];
+    int matricula;
+    double nota;
+};
+
+struct Aluno a = {"Ana", 1001, 8.5};
+a.nota = 9.0;                 /* acessa um campo com ponto */
+printf("%s: %.1f\n", a.nome, a.nota);
+
+struct Aluno turma[30];       /* vetor de structs */
+turma[0] = a;                 /* copia todos os campos */
+```
+Desde o C99 dá para inicializar pelo nome dos campos: `struct Aluno b = {.nome = "Bia", .nota = 7.0};`. Os campos não citados ficam zerados.
+
+P: o que é typedef em c
+P: como usar typedef com struct
+R: `typedef` dá um **apelido** a um tipo, e o código fica mais limpo:
+```c
+typedef struct {
+    double x, y;
+} Ponto;
+
+Ponto p = {1.0, 2.0};     /* sem precisar escrever "struct" */
+
+typedef unsigned char byte;
+byte b = 255;
+```
+Para uma struct que aponta para si mesma (como o nó de uma lista), ela precisa de um nome:
+```c
+typedef struct No {
+    int valor;
+    struct No *proximo;
+} No;
+```
+
+P: o que é operador seta em c
+P: diferença entre ponto e seta em struct
+R: Com a struct em si, use **ponto**; com um **ponteiro** para struct, use **seta**:
+```c
+Ponto p = {1, 2};
+Ponto *ptr = &p;
+p.x = 10;        /* struct */
+ptr->x = 10;     /* ponteiro: o mesmo que (*ptr).x */
+```
+Passar ponteiro para struct em funções é o normal: evita copiar a struct inteira e permite alterá-la.
+```c
+void mover(Ponto *p, double dx, double dy) {
+    p->x += dx;
+    p->y += dy;
+}
+```
+
+P: o que é enum em c
+P: como usar enum
+R: **enum** cria constantes inteiras com nome, para um conjunto fechado de opções:
+```c
+typedef enum { VERMELHO, AMARELO, VERDE } Sinal;   /* 0, 1, 2 */
+
+Sinal s = VERDE;
+switch (s) {
+    case VERMELHO: printf("Pare\n"); break;
+    case AMARELO:  printf("Atenção\n"); break;
+    case VERDE:    printf("Siga\n"); break;
+}
+```
+É muito mais legível que usar 0, 1 e 2 soltos, e com `-Wall` o compilador avisa se o `switch` esquecer algum valor. Dá para fixar valores: `enum { OK = 0, ERRO_ARQUIVO = 2 };`.
+
+P: funções de string em c
+P: o que tem na string.h
+P: como copiar e concatenar strings em c
+P: strcpy
+P: strlen
+P: string.h
+R: As principais de `<string.h>`:
+- `strlen(s)`: tamanho, sem o `'\0'`;
+- `strcmp(a, b)`: compara (0 = iguais); `strncmp` compara só os n primeiros;
+- `strcpy(dest, orig)` e `strcat(dest, orig)`: copiar e concatenar. **Perigosas**: não conferem o tamanho do destino;
+- `strchr(s, 'x')` / `strstr(s, "ab")`: procuram um caractere ou um trecho, devolvendo um ponteiro ou NULL;
+- `memcpy`, `memset`, `memcmp`: trabalham com bytes.
+Para montar textos com segurança, prefira `snprintf`, que nunca passa do tamanho:
+```c
+char msg[64];
+snprintf(msg, sizeof msg, "%s tem %d anos", nome, idade);
+```
+
+P: como converter string para número em c
+P: como usar atoi e strtol
+R: `atoi("42")` funciona, mas não avisa erro: `atoi("abc")` devolve 0, igual a `atoi("0")`. Prefira `strtol` (inteiros) e `strtod` (reais):
+```c
+#include <errno.h>
+#include <stdlib.h>
+
+char *fim;
+errno = 0;
+long n = strtol(texto, &fim, 10);   /* base 10 */
+if (fim == texto || *fim != '\0' || errno == ERANGE) {
+    printf("Número inválido\n");
+}
+```
+`fim` aponta para onde a leitura parou; se não andou, não havia número. E para o caminho inverso (número → texto), use `snprintf`.
+
+P: como ler e escrever arquivos em c
+P: como usar fopen em c
+P: como gravar em arquivo em c
+P: como abrir arquivo em c
+P: arquivo em c
+P: fopen
+P: arquivos em c
+P: como escrever num arquivo em c
+P: como gravar dados em arquivo em c
+P: como ler um arquivo texto em c
+R: ```c
+#include <stdio.h>
+
+FILE *f = fopen("notas.txt", "w");      /* "w" cria/sobrescreve */
+if (f == NULL) {
+    perror("notas.txt");                /* mostra o motivo do erro */
+    return 1;
+}
+fprintf(f, "%s;%.1f\n", "Ana", 8.5);
+fclose(f);
+
+f = fopen("notas.txt", "r");            /* "r" lê */
+char linha[256];
+while (fgets(linha, sizeof linha, f)) {
+    printf("lido: %s", linha);
+}
+fclose(f);
+```
+Modos: `"r"` ler, `"w"` escrever do zero, `"a"` acrescentar no fim, `"r+"` ler e escrever; acrescente `b` para binário (`"rb"`, `"wb"`). Sempre confira o `NULL` e sempre feche com `fclose`.
+
+P: como ler arquivo binário em c
+P: como usar fread e fwrite
+R: Para gravar e ler os bytes de structs e vetores direto:
+```c
+typedef struct { int id; double saldo; } Conta;
+
+Conta contas[3] = {{1, 10.0}, {2, 20.0}, {3, 30.0}};
+FILE *f = fopen("contas.bin", "wb");
+fwrite(contas, sizeof(Conta), 3, f);
+fclose(f);
+
+Conta lidas[3];
+f = fopen("contas.bin", "rb");
+size_t n = fread(lidas, sizeof(Conta), 3, f);   /* quantas leu */
+fclose(f);
+```
+`fseek(f, pos, SEEK_SET)` pula para uma posição e `ftell(f)` diz onde está. Cuidado: arquivos binários dependem do computador (tamanho dos tipos, ordem dos bytes); para trocar dados entre máquinas, prefira texto ou um formato definido.
+
+P: o que é o pré processador em c
+P: o que é #define e #include
+P: o que é macro em c
+P: como usar o define
+P: define em c
+P: include em c
+R: O **pré-processador** roda antes do compilador e trata as linhas com `#`:
+- `#include <stdio.h>`: cola ali o conteúdo do arquivo (`<>` busca nas pastas do sistema; `""` busca primeiro na pasta do projeto);
+- `#define N 100`: troca o texto `N` por `100`;
+- **macros com parâmetros**:
+```c
+#define QUADRADO(x) ((x) * (x))
+#define MAX(a, b)   ((a) > (b) ? (a) : (b))
+```
+Os parênteses em volta de tudo são obrigatórios: sem eles, `QUADRADO(1 + 2)` viraria `1 + 2 * 1 + 2` = 5. E cuidado: `MAX(i++, j)` avalia `i++` duas vezes. Em C moderno, prefira funções `static inline` às macros com parâmetros.
+
+P: o que é #ifndef em c
+P: o que é include guard
+P: o que é compilação condicional
+R: A **compilação condicional** inclui ou não um trecho conforme uma condição do pré-processador:
+```c
+#ifdef DEBUG
+    printf("x = %d\n", x);
+#endif
+```
+Compile com `gcc -DDEBUG ...` para ligar.
+O **include guard** evita que um `.h` seja incluído duas vezes no mesmo arquivo (o que daria erro de redefinição):
+```c
+#ifndef PILHA_H
+#define PILHA_H
+
+/* ... conteúdo do cabeçalho ... */
+
+#endif
+```
+Muitos compiladores aceitam `#pragma once` com o mesmo efeito, mas ele não faz parte do padrão.
+
+P: como dividir um programa c em vários arquivos
+P: o que é arquivo .h e .c
+P: como criar uma biblioteca própria em c
+R: Separe a **interface** (`.h`, o que existe) da **implementação** (`.c`, como funciona):
+`pilha.h`:
+```c
+#ifndef PILHA_H
+#define PILHA_H
+void empilhar(int x);
+int desempilhar(void);
+int vazia(void);
+#endif
+```
+`pilha.c`:
+```c
+#include "pilha.h"
+static int dados[100];   /* static: invisível fora deste arquivo */
+static int topo = 0;
+void empilhar(int x) { dados[topo++] = x; }
+int desempilhar(void) { return dados[--topo]; }
+int vazia(void) { return topo == 0; }
+```
+`main.c` faz `#include "pilha.h"` e usa as funções. Compile tudo junto:
+```bash
+gcc -Wall main.c pilha.c -o programa
+```
+
+P: o que é makefile
+P: como usar make em c
+P: como escrever um makefile
+P: como fazer um makefile
+P: makefile
+P: make
+R: O **make** automatiza a compilação e só recompila o que mudou. As regras ficam num arquivo `Makefile`:
+```make
+CC = gcc
+CFLAGS = -Wall -Wextra -std=c17 -g
+
+programa: main.o pilha.o
+	$(CC) $(CFLAGS) -o programa main.o pilha.o
+
+main.o: main.c pilha.h
+pilha.o: pilha.c pilha.h
+
+clean:
+	rm -f programa *.o
+```
+Cada regra é `alvo: dependências`, e a linha de comando abaixo **começa com TAB**, não com espaços (erro clássico: "missing separator").
+Rode `make` para compilar e `make clean` para apagar o que foi gerado. Projetos maiores usam o **CMake**, que gera Makefiles para cada sistema.
+
+P: o que é const com ponteiro em c
+P: diferença entre const int * e int * const
+R: Leia da direita para a esquerda:
+- `const int *p` (ou `int const *p`): ponteiro para um **int constante**. Não dá para mudar `*p`, mas `p` pode apontar para outro lugar. É o uso mais comum em parâmetros: "esta função só lê".
+- `int *const p`: ponteiro **constante** para int. `*p` pode mudar, `p` não.
+- `const int *const p`: nada muda.
+```c
+size_t contar_vogais(const char *texto);   /* promete não alterar o texto */
+```
+
+P: o que é argc e argv em c
+P: como receber argumentos da linha de comando em c
+R: O `main` pode receber o que foi digitado depois do nome do programa:
+```c
+#include <stdio.h>
+
+int main(int argc, char *argv[]) {
+    printf("%d argumentos\n", argc);
+    for (int i = 0; i < argc; i++) {
+        printf("argv[%d] = %s\n", i, argv[i]);
+    }
+    return 0;
+}
+```
+Rodando `./prog ola 42`: `argc` é 3; `argv[0]` é o nome do programa, `argv[1]` é "ola" e `argv[2]` é "42" (sempre texto; converta com `strtol`).
+
+P: como tratar erros em c
+P: o que é errno e perror
+P: c tem exceção
+P: tratamento de erros em c
+P: exceção em c
+R: C **não tem exceções**. O padrão é: a função devolve um código (0 para sucesso, −1 ou `NULL` para erro), e a variável global `errno` (de `<errno.h>`) diz o motivo.
+```c
+FILE *f = fopen("nao_existe.txt", "r");
+if (!f) {
+    perror("Erro ao abrir");   /* "Erro ao abrir: No such file or directory" */
+    return 1;
+}
+```
+`strerror(errno)` devolve o texto do erro. Boas práticas: confira **todo** retorno que pode falhar; numa função com vários recursos, use um único ponto de limpeza no fim (o `goto` para isso é aceito em C, até no núcleo do Linux).
+
+P: o que é static em c
+P: variável static dentro de função
+R: `static` tem dois usos:
+- **dentro de uma função:** a variável mantém o valor entre as chamadas (é criada uma vez só):
+```c
+int proximo_id(void) {
+    static int id = 0;
+    return ++id;      /* 1, 2, 3, ... */
+}
+```
+- **fora das funções** (numa variável global ou numa função): fica **visível só naquele arquivo `.c`**. É o "privado" do C, e evita conflito de nomes entre arquivos.
+
+P: como medir tempo de execução em c
+R: ```c
+#include <stdio.h>
+#include <time.h>
+
+int main(void) {
+    struct timespec ini, fim;
+    timespec_get(&ini, TIME_UTC);   /* C11 */
+
+    volatile double soma = 0;
+    for (long i = 0; i < 100000000; i++) soma += i;
+
+    timespec_get(&fim, TIME_UTC);
+    double s = (fim.tv_sec - ini.tv_sec) + (fim.tv_nsec - ini.tv_nsec) / 1e9;
+    printf("%.3f s\n", s);
+    return 0;
+}
+```
+`clock()` mede o tempo de **processador** (não conta esperas). No terminal, `time ./programa` mede o programa inteiro. Compare versões sempre com a mesma otimização (`-O2`).
+
+P: exercícios de c intermediário
+P: projeto para praticar ponteiros e structs
+R: Projetos para fixar:
+1. uma agenda com `struct Contato` num vetor dinâmico (`realloc`), salva e carregada de um arquivo texto;
+2. uma pilha e uma fila em arquivos `.h`/`.c` separados, com Makefile;
+3. contar a frequência de cada palavra de um arquivo;
+4. implementar `meu_strlen`, `meu_strcpy` e `meu_strcmp` só com ponteiros;
+5. ler uma matriz de tamanho informado pelo usuário com `malloc` e transpô-la;
+6. um programa que recebe nomes de arquivos por `argv` e mostra quantas linhas cada um tem (um mini `wc -l`).
+Rode tudo com `-fsanitize=address` até não aparecer nenhum aviso.

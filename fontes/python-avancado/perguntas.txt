@@ -1,0 +1,693 @@
+# Python 2 · Avançado
+# Recursos da linguagem, organização de projetos, testes, concorrência e desempenho.
+# Sempre que possível, com o exemplo de onde o Aprendiz usa cada recurso.
+
+P: o que é ambiente virtual em python
+P: como criar um venv
+P: como ativar o ambiente virtual
+P: o que é externally managed environment
+P: o que é venv
+P: venv
+P: virtualenv
+R: Um **ambiente virtual** (venv) é uma pasta com um Python e pacotes **só daquele projeto**. Assim, as versões de bibliotecas de um projeto não brigam com as de outro nem com o Python do sistema.
+```bash
+python -m venv .venv                     # cria (no Linux: python3 -m venv .venv)
+source .venv/bin/activate                # ativa no Linux/macOS
+.venv\Scripts\activate                   # ativa no Windows (cmd ou PowerShell)
+python -m pip install -r requirements.txt
+deactivate                               # sai
+```
+Sem ativar, dá para chamar direto: `.venv/bin/python` (Linux) ou `.venv\Scripts\python` (Windows). É assim que o `executar.sh` do Aprendiz abre o app.
+O erro **externally-managed-environment** (Ubuntu, Debian e Fedora recentes) é o sistema protegendo o Python dele: a solução é justamente criar um venv. No Debian/Ubuntu, instale antes o `python3-venv`.
+
+P: como gerenciar dependências em python
+P: o que é requirements.txt
+P: o que é pyproject.toml
+R: - **requirements.txt:** a lista de pacotes para o `pip install -r`. Aceita faixas de versão (`fastapi>=0.110`) ou versões fixas (`fastapi==0.115.0`, geradas com `pip freeze`).
+- **pyproject.toml:** o arquivo moderno que descreve o projeto como **pacote**: nome, versão, dependências, comandos e configuração de ferramentas (pytest, ruff…).
+O Aprendiz usa os dois: `requirements.txt` (FastAPI, Uvicorn, RapidFuzz), `requirements-dev.txt` (inclui o anterior com `-r` e acrescenta pytest, httpx e PyInstaller) e um `pyproject.toml` que declara o comando `aprendiz` e configura o pytest.
+Outras ferramentas populares: **uv** (muito rápida, cuida de venv, dependências e até da instalação do Python), Poetry e pip-tools.
+
+P: como organizar um projeto python
+P: o que é um pacote python
+P: para que serve o __init__.py
+R: Um **pacote** é uma pasta de módulos com um `__init__.py`, que roda no primeiro `import` do pacote e define o que ele expõe.
+Estrutura comum (é a do Aprendiz):
+```
+projeto/
+├── aprendiz/             # o pacote
+│   ├── __init__.py       # versão e docstring do pacote
+│   ├── __main__.py       # permite "python -m aprendiz"
+│   ├── core/
+│   │   ├── __init__.py   # from .assistente import Assistente
+│   │   └── assistente.py
+│   └── memoria/...
+├── tests/
+├── docs/
+├── pyproject.toml
+└── requirements.txt
+```
+- **imports absolutos** (`from aprendiz.memoria import Banco`) são os mais claros;
+- **relativos** (`from .banco import Banco`) só dentro do pacote;
+- o `__main__.py` faz o pacote rodar com `python -m nome`.
+
+P: o que é list comprehension
+P: como usar compreensão de lista em python
+P: o que é dict comprehension
+P: list comprehension
+P: compreensão de lista
+R: **Compreensões** criam coleções numa linha, de forma legível:
+```python
+quadrados = [n * n for n in range(10)]
+pares = [n for n in range(20) if n % 2 == 0]
+palavras = ["Olá", "Mundo"]
+tamanhos = {p: len(p) for p in palavras}           # dict
+iniciais = {p[0].lower() for p in palavras}        # set
+matriz = [[0] * 3 for _ in range(3)]               # 3x3 de zeros
+achatada = [x for linha in matriz for x in linha]  # dois for
+```
+No Aprendiz há várias, como `[t for t in tokens if t not in self.stopwords]` no normalizador.
+Use enquanto ficar legível; com muitos `if` e `for`, um laço comum é melhor. Cuidado: `[[0] * 3] * 3` cria três referências à **mesma** lista.
+
+P: o que é gerador em python
+P: o que é yield
+P: diferença entre lista e gerador
+R: Um **gerador** produz os valores **um de cada vez**, sob demanda, em vez de montar a lista inteira na memória:
+```python
+def numeros_pares(limite):
+    n = 0
+    while n < limite:
+        yield n          # entrega um valor e pausa aqui até pedirem o próximo
+        n += 2
+
+for p in numeros_pares(10):
+    print(p)
+
+total = sum(x * x for x in range(10_000_000))   # expressão geradora: quase sem memória
+```
+Use para dados grandes ou infinitos: ler um arquivo enorme linha por linha, processar resultados de banco aos poucos. Um gerador só pode ser percorrido **uma vez**.
+
+P: o que é iterador em python
+P: o que é iterável
+P: como usar itertools
+R: **Iterável** é qualquer coisa que dá para percorrer com `for` (lista, string, arquivo, dicionário). Por baixo, o `for` chama `iter()` para obter um **iterador**, e `next()` até receber `StopIteration`.
+O módulo `itertools` tem ferramentas prontas para iteradores:
+```python
+from itertools import chain, islice, groupby, combinations, product, count
+
+list(chain([1, 2], [3]))               # [1, 2, 3]
+list(islice(count(10), 3))             # [10, 11, 12]
+list(combinations("abc", 2))           # [('a','b'), ('a','c'), ('b','c')]
+list(product([0, 1], repeat=2))        # [(0,0), (0,1), (1,0), (1,1)]
+for chave, grupo in groupby(sorted(palavras, key=len), key=len):
+    print(chave, list(grupo))
+```
+`enumerate`, `zip`, `map`, `filter`, `reversed` e `sorted` também trabalham com iteráveis.
+
+P: o que é decorador em python
+P: como criar um decorador
+P: o que significa @ em cima da função
+P: o que é decorator em python
+P: decorator
+P: decorador
+R: Um **decorador** é uma função que recebe outra função (ou classe) e devolve uma versão modificada. O `@` é só um atalho: `@d` em cima de `def f` equivale a `f = d(f)`.
+```python
+import functools
+import time
+
+def cronometrar(funcao):
+    @functools.wraps(funcao)          # preserva nome e docstring
+    def envolvida(*args, **kwargs):
+        inicio = time.perf_counter()
+        resultado = funcao(*args, **kwargs)
+        print(f"{funcao.__name__}: {time.perf_counter() - inicio:.3f} s")
+        return resultado
+    return envolvida
+
+@cronometrar
+def lento():
+    time.sleep(0.2)
+```
+No Aprendiz: `@registrar` (em `algoritmos/base.py`) coloca cada classe de algoritmo no seletor; `@dataclass` gera métodos das classes de dados; `@lru_cache` guarda os radicais já calculados no stemmer; e no FastAPI `@app.post("/api/chat")` liga uma função a uma rota.
+
+P: o que é lru_cache
+P: como fazer cache de função em python
+R: `functools.lru_cache` guarda os resultados de uma função: chamou de novo com os mesmos argumentos, devolve o valor guardado na hora.
+```python
+from functools import lru_cache
+
+@lru_cache(maxsize=50_000)
+def radical(palavra: str) -> str:
+    ...   # cálculo caro
+```
+É exatamente o que o `stemmer.py` do Aprendiz faz: palavras se repetem muito, então cada uma é radicalizada uma vez só. `maxsize` limita a memória (os menos usados recentemente saem primeiro; *LRU*); `radical.cache_info()` mostra acertos e erros.
+Só serve para funções **puras** (mesma entrada, mesma saída) com argumentos imutáveis. Para métodos de classe, cuidado: o cache segura uma referência ao `self`.
+
+P: o que é gerenciador de contexto
+P: como funciona o with em python
+P: como criar um context manager
+R: O `with` garante que algo seja **finalizado**, mesmo se der erro: fechar arquivo, liberar trava, confirmar ou desfazer transação.
+```python
+with open("dados.txt", encoding="utf-8") as f:   # fecha sozinho
+    ...
+with con:                                        # sqlite3: COMMIT ou ROLLBACK
+    con.execute("INSERT ...")
+with self._trava:                                # threading: trava e destrava
+    ...
+```
+Para criar o seu, o jeito mais simples é o `contextlib.contextmanager`:
+```python
+from contextlib import contextmanager
+import os
+
+@contextmanager
+def na_pasta(caminho):
+    anterior = os.getcwd()
+    os.chdir(caminho)
+    try:
+        yield
+    finally:
+        os.chdir(anterior)
+```
+Ou uma classe com `__enter__` e `__exit__`. O `Banco` do Aprendiz usa `with self._trava:` em todo acesso, para várias threads do servidor não escreverem ao mesmo tempo.
+
+P: como criar classes em python
+P: o que é self e __init__
+P: orientação a objetos em python
+P: como criar classe em python
+P: classe em python
+P: classes python
+P: o que é self
+P: o que é __init__
+R: ```python
+class Conta:
+    taxa = 0.01                      # atributo de CLASSE (compartilhado)
+
+    def __init__(self, titular, saldo=0.0):
+        self.titular = titular       # atributos de INSTÂNCIA
+        self._saldo = saldo          # "_" = interno, por convenção
+
+    def depositar(self, valor):
+        if valor <= 0:
+            raise ValueError("valor inválido")
+        self._saldo += valor
+
+    @property
+    def saldo(self):                 # lido como atributo: conta.saldo
+        return self._saldo
+
+    @classmethod
+    def vazia(cls, titular):         # construtor alternativo
+        return cls(titular)
+
+    @staticmethod
+    def formatar(valor):             # não usa self nem cls
+        return f"R$ {valor:.2f}"
+```
+`self` é o próprio objeto (escrito explicitamente em Python). `__init__` inicializa; não é o construtor de memória. Python não tem `private`: o `_` avisa "não mexa", e `__nome` embaralha o nome para evitar conflitos em herança.
+
+P: o que é herança em python
+P: o que é super em python
+P: o que é classe abstrata em python
+R: ```python
+from abc import ABC, abstractmethod
+
+class AlgoritmoBusca(ABC):
+    nome = ""
+    limiar = 0.5
+
+    @abstractmethod
+    def buscar(self, consulta, ctx, limite=5):
+        """Cada algoritmo implementa do seu jeito."""
+
+class BuscaBM25(AlgoritmoBusca):
+    nome = "bm25"
+    def buscar(self, consulta, ctx, limite=5):
+        ...
+```
+Esse é o desenho real do Aprendiz (`algoritmos/base.py`): `ABC` + `@abstractmethod` impedem criar um `AlgoritmoBusca()` "genérico" e obrigam as filhas a ter `buscar`.
+`super()` chama a versão da classe-mãe:
+```python
+class ContaEspecial(Conta):
+    def __init__(self, titular, limite):
+        super().__init__(titular)
+        self.limite = limite
+```
+Python tem herança múltipla; a ordem de busca dos métodos é a MRO (`Classe.__mro__`). Prefira composição a hierarquias profundas.
+
+P: o que são métodos mágicos em python
+P: o que é dunder method
+P: o que é __str__ e __repr__
+R: Métodos com dois sublinhados dos dois lados (*dunder*) deixam suas classes funcionarem com os operadores e funções da linguagem:
+```python
+class Vetor:
+    def __init__(self, x, y):
+        self.x, self.y = x, y
+    def __repr__(self):              # para o programador: repr(), depurador, listas
+        return f"Vetor({self.x}, {self.y})"
+    def __str__(self):               # para o usuário: print(), str()
+        return f"({self.x}, {self.y})"
+    def __add__(self, outro):        # v1 + v2
+        return Vetor(self.x + outro.x, self.y + outro.y)
+    def __eq__(self, outro):         # v1 == v2
+        return (self.x, self.y) == (outro.x, outro.y)
+    def __len__(self):               # len(v)
+        return 2
+    def __iter__(self):              # for c in v / x, y = v
+        yield self.x
+        yield self.y
+```
+Outros úteis: `__lt__` (ordenar), `__hash__` (usar como chave), `__getitem__` (`obj[i]`), `__contains__` (`in`), `__call__` (chamar o objeto como função), `__enter__`/`__exit__` (`with`).
+
+P: o que é dataclass em python
+P: como usar @dataclass
+P: dataclass
+R: `@dataclass` gera sozinho o `__init__`, o `__repr__` e o `__eq__` de classes que servem principalmente para guardar dados:
+```python
+from dataclasses import dataclass, field
+
+@dataclass
+class Candidato:
+    conhecimento: dict
+    pontuacao: float
+    confianca: float
+    detalhes: dict = field(default_factory=dict)   # nunca use {} direto como padrão
+
+c = Candidato({"id": "1"}, 2.5, 0.8)
+print(c)   # Candidato(conhecimento={'id': '1'}, pontuacao=2.5, confianca=0.8, detalhes={})
+```
+Esse é o `Candidato` real do Aprendiz (`algoritmos/base.py`), junto com `ContextoBusca`, `RespostaGerada` e `TextoProcessado`.
+Opções úteis: `@dataclass(frozen=True)` (imutável, pode ser chave de dicionário), `order=True` (comparações), `slots=True` (menos memória). Para validar dados vindos de fora, o **Pydantic** (usado pelo FastAPI) vai além.
+
+P: o que são type hints em python
+P: o que é tipagem em python
+P: o que é mypy
+P: type hints
+P: tipagem python
+R: **Type hints** anotam os tipos esperados. O Python **não** os confere ao rodar; servem para documentar, para o editor completar e para ferramentas como **mypy** e **pyright** acharem erros antes:
+```python
+from __future__ import annotations
+from typing import Any
+
+def buscar(termos: list[str], limite: int = 5) -> list[dict[str, Any]]:
+    ...
+
+def obter(id: str) -> dict[str, Any] | None:   # pode devolver None
+    ...
+
+Regra = tuple[str, int, str]                  # apelido de tipo
+```
+`from __future__ import annotations` (presente em todos os módulos do Aprendiz) faz as anotações não serem avaliadas na hora, o que permite usar `list[str]` e `X | None` em versões mais antigas do Python 3 e referências a classes definidas mais abaixo.
+O **FastAPI** e o **Pydantic** usam as anotações **de verdade**, ao rodar: é pelo `pedido: PedidoChat` que o FastAPI sabe validar o JSON recebido.
+
+P: o que é pydantic
+P: como validar dados em python
+R: **Pydantic** valida e converte dados a partir das anotações de tipo:
+```python
+from pydantic import BaseModel, Field
+
+class PedidoChat(BaseModel):
+    mensagem: str = Field(min_length=1, max_length=5000)
+    conversa_id: str | None = None
+    busca: str | None = None
+
+PedidoChat(mensagem="oi")          # ok
+PedidoChat(mensagem="")            # ValidationError, com a explicação
+```
+No Aprendiz, cada rota da API recebe um modelo assim (`api/servidor.py`). Se a interface mandar um JSON inválido, o FastAPI responde **422** com o campo errado, sem a função nem rodar.
+Para dados **não confiáveis** com regras próprias (como os arquivos de addon), o Aprendiz valida campo a campo à mão em `addons.py`, com limites de tamanho e listas fechadas.
+
+P: como testar código python
+P: como usar pytest
+P: o que é fixture no pytest
+P: pytest
+P: testes em python
+R: O **pytest** acha arquivos `test_*.py` e funções `test_*`, e usa o `assert` comum:
+```python
+# tests/test_calculo.py
+import pytest
+from calculo import dividir
+
+def test_divide():
+    assert dividir(6, 3) == 2
+
+def test_divisao_por_zero():
+    with pytest.raises(ZeroDivisionError):
+        dividir(1, 0)
+
+@pytest.mark.parametrize("a, b, esperado", [(4, 2, 2), (9, 3, 3), (1, 4, 0.25)])
+def test_varios(a, b, esperado):
+    assert dividir(a, b) == esperado
+```
+**Fixtures** preparam o que o teste precisa; o pytest injeta pelo nome do parâmetro. No Aprendiz (`tests/conftest.py`), cada teste ganha um banco novo num arquivo temporário:
+```python
+@pytest.fixture
+def banco(tmp_path):
+    b = Banco(tmp_path / "teste.db")
+    yield b          # o teste roda aqui
+    b.fechar()       # limpeza, sempre
+```
+Rodar: `python -m pytest -q` (todos), `-k nome` (filtra), `-x` (para no primeiro erro), `--lf` (só os que falharam da última vez).
+
+P: como testar uma api fastapi
+P: o que é testclient
+R: O FastAPI tem um cliente que chama as rotas **sem subir servidor**:
+```python
+from fastapi.testclient import TestClient
+from aprendiz.api import criar_app
+
+def test_status(tmp_path):
+    with TestClient(criar_app(tmp_path / "api.db")) as cliente:
+        r = cliente.get("/api/status")
+        assert r.status_code == 200
+        assert r.json()["app"] == "Aprendiz"
+```
+Por isso o `criar_app` do Aprendiz recebe o caminho do banco como parâmetro: cada teste usa um banco descartável. (O `TestClient` precisa do pacote `httpx`, que está no `requirements-dev.txt`.)
+
+P: o que é mock em testes python
+P: como usar monkeypatch
+R: Às vezes o teste precisa **substituir** algo: uma data, a rede, um limite. O pytest tem o `monkeypatch`, que desfaz tudo no fim do teste:
+```python
+def test_limite_de_tamanho(monkeypatch):
+    from aprendiz import addons
+    monkeypatch.setattr(addons, "MAX_DESCOMPACTADO", 100)   # limite pequeno só neste teste
+    ...
+
+def test_pasta_de_dados(monkeypatch, tmp_path):
+    monkeypatch.setenv("APRENDIZ_DADOS", str(tmp_path))
+    ...
+```
+O módulo `unittest.mock` faz o mesmo com `patch` e `MagicMock`, e ainda registra como o objeto falso foi chamado. Os testes de addons do Aprendiz usam `monkeypatch` para simular *zip bombs* sem criar arquivos gigantes.
+
+P: o que são expressões regulares em python
+P: como usar regex em python
+P: como usar o módulo re
+R: **Expressões regulares** descrevem padrões de texto:
+```python
+import re
+
+re.search(r"\d{2}/\d{2}/\d{4}", "nasci em 20/05/1990").group()   # '20/05/1990'
+re.findall(r"[\w.]+@[\w.]+", "ana@x.com e bia@y.org")             # os dois e-mails
+re.sub(r"\s+", " ", "muitos    espaços")                          # 'muitos espaços'
+
+padrao = re.compile(r"^\s*pergunta\s*:\s*(?P<p>.+?)\s*resposta\s*:\s*(?P<r>.+)$", re.I)
+m = padrao.match("pergunta: senha do wifi resposta: casa123")
+m["p"], m["r"]                                                   # ('senha do wifi', 'casa123')
+```
+Esse último é o padrão real do Aprendiz para ensinar pelo chat (`core/assistente.py`). Peças: `\d` dígito, `\w` letra/dígito/_, `\s` espaço, `+` um ou mais, `*` zero ou mais, `?` opcional (e "preguiçoso" depois de `+`/`*`), `^`/`$` início/fim, `(?P<nome>...)` grupo com nome.
+Use `r"..."` (string crua) e `re.compile` para padrões usados muitas vezes. E nunca rode uma regex vinda de fora (de um addon, por exemplo): uma regex maliciosa pode travar o programa; por isso o Aprendiz não aceita regex em addons.
+
+P: como trabalhar com arquivos zip em python
+P: como ler um zip sem extrair
+R: O módulo `zipfile` lê e cria ZIPs:
+```python
+import io
+import zipfile
+
+with zipfile.ZipFile("pacote.zip") as z:
+    print(z.namelist())
+    dados = z.read("manifesto.json")       # bytes, sem extrair para o disco
+
+buffer = io.BytesIO()
+with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED) as z:
+    z.writestr("manifesto.json", '{"id": "x"}')
+bytes_do_zip = buffer.getvalue()
+```
+Um arquivo `.aprendiz` é um ZIP. O `addons.py` do Aprendiz lê **só os nomes conhecidos** de dentro dele e nunca extrai nada para o disco: isso evita ataques com caminhos como `../../`. Ele também soma o tamanho descompactado de tudo antes de ler e, ao ler cada arquivo, nunca lê mais que o limite (contra *zip bombs*, ZIPs pequenos que viram gigabytes).
+
+P: como fazer hash de arquivo em python
+P: como usar hashlib
+R: ```python
+import hashlib
+
+hashlib.sha256(b"texto").hexdigest()
+
+def sha256_do_arquivo(caminho):
+    h = hashlib.sha256()
+    with open(caminho, "rb") as f:
+        for bloco in iter(lambda: f.read(65536), b""):   # em blocos: serve para arquivos enormes
+            h.update(bloco)
+    return h.hexdigest()
+```
+O Aprendiz calcula o SHA-256 de cada addon; a loja publica o mesmo valor, para quem quiser conferir que o arquivo não foi alterado. Para senhas, não use SHA-256 puro: use `hashlib.scrypt` ou bibliotecas como `argon2-cffi`.
+
+P: como usar threads em python
+P: o que é gil
+P: diferença entre thread e processo em python
+P: como usar threads no python
+P: threads python
+P: multiprocessing
+R: - **Threads** (`threading`): várias tarefas no mesmo processo, compartilhando memória. Por causa do **GIL** (trava global do interpretador), só uma executa código Python por vez, então threads **não aceleram cálculo**, mas são ótimas para **esperar** (rede, disco, um servidor).
+- **Processos** (`multiprocessing`, `concurrent.futures.ProcessPoolExecutor`): cada um com o seu interpretador e memória; aí sim usam vários núcleos para cálculo pesado.
+```python
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
+
+with ThreadPoolExecutor() as ex:              # tarefas de espera
+    paginas = list(ex.map(baixar, urls))
+
+with ProcessPoolExecutor() as ex:             # tarefas de cálculo
+    resultados = list(ex.map(calcular, dados))
+```
+O Aprendiz roda o servidor Uvicorn numa **thread** (`desktop.py`), enquanto a thread principal cuida da janela. Desde o Python 3.13 existe uma versão experimental **sem GIL** (*free-threaded*).
+
+P: o que é async await em python
+P: o que é asyncio
+P: o que é programação assíncrona
+P: async
+P: asyncio
+R: Com `async`/`await`, **uma só thread** atende muitas tarefas que passam a maior parte do tempo **esperando** (rede, disco): enquanto uma espera, outra avança.
+```python
+import asyncio
+
+async def buscar(nome, segundos):
+    await asyncio.sleep(segundos)       # espera sem bloquear as outras
+    return f"{nome} pronto"
+
+async def principal():
+    resultados = await asyncio.gather(  # as três ao mesmo tempo: ~2 s no total, não 4,5 s
+        buscar("a", 2), buscar("b", 1.5), buscar("c", 1))
+    print(resultados)
+
+asyncio.run(principal())
+```
+Só ajuda com espera; para cálculo pesado, use processos. O FastAPI aceita rotas `async def` e `def` comuns: as comuns (como as do Aprendiz) rodam num pool de threads, o que é o mais simples quando o trabalho é rápido e usa o SQLite (que não é assíncrono).
+
+P: como usar sqlite3 em python de forma profissional
+P: boas práticas com sqlite3 no python
+R: O que o `banco.py` do Aprendiz faz, e por quê:
+```python
+con = sqlite3.connect(caminho, check_same_thread=False)   # usado por várias threads...
+trava = threading.RLock()                                  # ...então todo acesso passa por uma trava
+con.row_factory = sqlite3.Row                              # linhas acessíveis pelo nome
+con.execute("PRAGMA foreign_keys = ON")                    # chaves estrangeiras de verdade
+con.execute("PRAGMA journal_mode = WAL")                   # leituras não bloqueiam a escrita
+
+with trava:
+    con.execute("INSERT INTO t (a, b) VALUES (?, ?)", (a, b))   # sempre parâmetros "?"
+    con.commit()
+
+con.executemany("INSERT INTO t VALUES (?, ?)", muitas_linhas)   # carga em lote, numa transação
+```
+Mais: crie o esquema com `CREATE TABLE IF NOT EXISTS` e mantenha **migrações** idempotentes para bancos antigos; para cópias de segurança use `con.backup(destino)`, nunca a cópia do arquivo com o banco aberto.
+
+P: como criar uma api com fastapi
+P: o que é fastapi
+P: o que é uvicorn
+R: **FastAPI** é um framework web que usa as anotações de tipo para validar dados e gerar documentação automática. **Uvicorn** é o servidor que o executa.
+```python
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Pedido(BaseModel):
+    mensagem: str
+
+@app.get("/api/status")
+def status():
+    return {"ok": True}                       # dicionário vira JSON
+
+@app.post("/api/eco")
+def eco(pedido: Pedido):                      # JSON do corpo, já validado
+    if not pedido.mensagem.strip():
+        raise HTTPException(400, "Mensagem vazia.")
+    return {"resposta": pedido.mensagem}
+```
+Rode com `uvicorn arquivo:app --reload` e abra `http://127.0.0.1:8000/docs`: a documentação interativa é gerada sozinha (o Aprendiz também tem a sua em `/docs`).
+
+P: como medir desempenho em python
+P: como achar o que está lento em python
+P: como usar cprofile
+R: Meça antes de otimizar:
+```bash
+python -m timeit -s "lista = list(range(1000))" "sum(lista)"     # um trecho pequeno
+python -m cProfile -s cumtime programa.py | head -30             # o programa inteiro
+```
+```python
+import time
+inicio = time.perf_counter()
+...
+print(f"{(time.perf_counter() - inicio) * 1000:.1f} ms")
+```
+O Aprendiz faz exatamente isso em cada etapa do pipeline (classe `Etapas` em `core/assistente.py`), e o painel "Por que respondi isso?" mostra os milissegundos de cada uma.
+Ferramentas visuais: **snakeviz** (para a saída do cProfile), **py-spy** (observa um programa rodando, sem alterar) e **scalene** (tempo e memória por linha).
+
+P: como deixar python mais rápido
+P: dicas de otimização em python
+R: Por ordem de impacto:
+1. **o algoritmo e a estrutura de dados certos:** `x in set` em vez de `x in list`; dicionário em vez de procurar numa lista;
+2. **não repita trabalho:** cache (`lru_cache`), calcule fora do laço;
+3. **use o que já é rápido** (feito em C): funções embutidas (`sum`, `sorted`, `max`), `collections`, `itertools`, compreensões, métodos de string, o próprio banco de dados;
+4. **bibliotecas com núcleo nativo:** NumPy para números, RapidFuzz para similaridade de texto (o Aprendiz usa), Polars/pandas para tabelas;
+5. só então: processos para vários núcleos, Cython/Numba, ou reescrever o trecho crítico em C/C++/Rust.
+O Aprendiz é um bom exemplo do item 3: o BM25 não é calculado em Python, e sim pelo **SQLite** (FTS5), em C. Por isso é o algoritmo mais leve.
+
+P: o que é walrus operator
+P: o que é o operador morsa do python
+R: O **operador morsa** `:=` (Python 3.8+) atribui **e** devolve o valor numa expressão só:
+```python
+while (linha := arquivo.readline()):
+    processar(linha)
+
+if (m := padrao.match(texto)):
+    print(m["nome"])
+
+dados = [y for x in valores if (y := transformar(x)) is not None]
+```
+Evita chamar a mesma coisa duas vezes ou criar a variável numa linha à parte. Use com moderação: em excesso, o código fica difícil de ler.
+
+P: o que é unpacking em python
+P: o que é * e ** em chamadas de função
+R: **Desempacotar** distribui os itens de uma coleção:
+```python
+a, b, c = [1, 2, 3]
+primeiro, *resto = [1, 2, 3, 4]         # 1, [2, 3, 4]
+x, (y, z) = 1, (2, 3)
+
+def f(a, b, c): ...
+args = [1, 2, 3]
+f(*args)                                 # espalha a lista como argumentos
+opcoes = {"b": 2, "c": 3}
+f(1, **opcoes)                           # espalha o dicionário como argumentos nomeados
+
+junto = [*lista1, *lista2]
+mesclado = {**padrao, **personalizado}   # o da direita vence
+```
+O `criar_pacote` do Aprendiz monta o manifesto assim: `{"origem": "terceiros", "dependencias": [], **manifesto}`. Os padrões vêm primeiro e o que está no arquivo, por vir depois, vence.
+
+P: o que é collections em python
+P: como usar counter defaultdict e deque
+R: O módulo `collections` tem estruturas prontas e rápidas:
+```python
+from collections import Counter, defaultdict, deque, namedtuple, OrderedDict
+
+Counter("abracadabra").most_common(2)     # [('a', 5), ('b', 2)]
+
+grupos = defaultdict(list)                 # cria a lista na primeira vez
+for palavra in ["ana", "bia", "alan"]:
+    grupos[palavra[0]].append(palavra)
+
+fila = deque(maxlen=3)                     # fila com as 3 últimas
+fila.append(1); fila.appendleft(0); fila.popleft()
+
+Ponto = namedtuple("Ponto", "x y")         # tupla com nomes
+p = Ponto(1, 2); p.x
+```
+No Aprendiz: o Naive Bayes conta palavras por intenção com `defaultdict(Counter)`, e o TF-IDF usa `Counter` para as frequências dos termos.
+
+P: como usar enum em python
+R: `Enum` cria um conjunto fechado de valores com nome:
+```python
+from enum import Enum, auto
+
+class Status(Enum):
+    ABERTO = "aberto"
+    ENTREGUE = "entregue"
+    CANCELADO = "cancelado"
+
+s = Status("entregue")      # a partir do valor
+s.name, s.value             # ('ENTREGUE', 'entregue')
+Status.ABERTO == "aberto"   # False: compare com o membro, não com o texto
+```
+Use `StrEnum` (3.11+) quando quiser que o membro **seja** também uma string. Evita "textos mágicos" espalhados pelo código e erros de digitação que só aparecem rodando.
+
+P: como fazer logging em python
+P: como usar o módulo logging
+R: Em vez de `print` para diagnóstico, use `logging`, que tem níveis e pode ir para arquivo:
+```python
+import logging
+
+logging.basicConfig(level=logging.INFO,
+                    format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+log = logging.getLogger(__name__)
+
+log.debug("detalhe só para depurar")
+log.info("addon %s instalado", addon_id)        # formatação preguiçosa com %s
+log.warning("porta %d ocupada, usando outra", porta)
+try:
+    ...
+except Exception:
+    log.exception("falha ao abrir o banco")      # inclui o traceback
+```
+Níveis: DEBUG < INFO < WARNING < ERROR < CRITICAL. Em bibliotecas, crie o logger com `getLogger(__name__)` e deixe a configuração para o programa principal.
+
+P: como criar um programa de linha de comando em python
+P: como usar argparse
+R: ```python
+import argparse
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(prog="aprendiz", description="Assistente pessoal local.")
+    parser.add_argument("--porta", type=int, default=8765)
+    parser.add_argument("--modo", choices=["auto", "janela", "app", "navegador", "servidor"],
+                        default="auto", help="como abrir a interface")
+    args = parser.parse_args(argv)
+    print(args.porta, args.modo)
+
+if __name__ == "__main__":
+    main()
+```
+Esse é o `main()` real do Aprendiz (`desktop.py`): `python -m aprendiz --modo servidor --porta 9000`. O argparse gera o `--help` sozinho e valida os tipos e as escolhas. Receber `argv` como parâmetro facilita testar. Alternativas: **click** e **typer**.
+
+P: como empacotar um programa python em executável
+P: o que é pyinstaller
+P: como criar um executável do meu programa python
+P: gerar .exe do python
+R: O **PyInstaller** junta o seu código, as bibliotecas e o próprio interpretador Python numa pasta (ou num arquivo) que roda sem Python instalado:
+```bash
+python -m pip install pyinstaller
+pyinstaller --name Aprendiz --add-data "aprendiz/web:aprendiz/web" \
+            --collect-submodules uvicorn iniciar.py
+```
+Pontos de atenção (todos tratados no `empacotar.sh` do Aprendiz):
+- arquivos que não são Python (HTML, CSS, imagens) precisam de `--add-data` (separador `;` no Windows, `:` no Linux);
+- bibliotecas com imports dinâmicos (o uvicorn) precisam de `--collect-submodules`;
+- `--windowed` no Windows evita a janela preta do console;
+- o PyInstaller não aceita `-m`, por isso existe o `iniciar.py`;
+- gere em cada sistema de destino: não há compilação cruzada.
+
+P: o que é pep e zen do python
+P: o que é import this
+R: **PEP** (*Python Enhancement Proposal*) é o documento que propõe e descreve mudanças e convenções da linguagem. As mais citadas: **PEP 8** (estilo), **PEP 20** (o Zen), **PEP 257** (docstrings), **PEP 484** (type hints).
+Digite `import this` no Python para ler o **Zen do Python**, 19 aforismos de Tim Peters que resumem a filosofia da linguagem: o explícito é melhor que o implícito, o simples é melhor que o complexo, legibilidade conta, deve haver um jeito óbvio de fazer as coisas…
+
+P: quais recursos novos do python 3.10 ao 3.14
+P: novidades do python
+R: Os destaques das versões recentes:
+- **3.10:** `match`/`case`; `X | Y` nas anotações; mensagens de erro muito melhores.
+- **3.11:** de 10% a 60% mais rápido; `ExceptionGroup` e `except*`; `tomllib`; notas em exceções.
+- **3.12:** sintaxe nova para genéricos (`def primeiro[T](v: list[T]) -> T`); f-strings mais livres; `itertools.batched`.
+- **3.13:** novo terminal interativo (cores, edição de várias linhas); modo experimental **sem GIL**; JIT experimental.
+- **3.14:** *template strings* (`t"..."`); anotações avaliadas só quando usadas; o modo sem GIL passa a ser oficialmente suportado.
+O Aprendiz exige o **3.10** ou mais novo e é testado no 3.10 e no 3.14.
+
+P: projetos avançados em python
+P: o que construir para dominar python
+R: Projetos que juntam tudo:
+1. uma **API** com FastAPI e SQLite (um CRUD de tarefas), com testes usando `TestClient`;
+2. um **raspador** assíncrono com `httpx` + `asyncio`, respeitando limites de requisição;
+3. um **pacote** publicável com `pyproject.toml`, testes, tipagem conferida pelo mypy e CI no GitHub Actions;
+4. um **mini-buscador**: índice invertido + BM25 em Python puro, comparado com o FTS5 do SQLite;
+5. um **CLI** com argparse que organiza arquivos por data;
+6. um **algoritmo novo** para o Aprendiz (por exemplo, BM25 com cobertura ponderada pelo IDF), seguindo `docs/criar-algoritmo.md`, com teste e benchmark.
+O próximo passo natural é a trilha **Aprendiz por dentro**, que mostra um projeto Python real de ponta a ponta.

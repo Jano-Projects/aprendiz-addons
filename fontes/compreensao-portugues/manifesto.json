@@ -1,7 +1,7 @@
 {
   "id": "compreensao-portugues",
   "nome": "Compreensão do português",
-  "versao": "1.1.0",
+  "versao": "1.2.0",
   "descricao": "A raiz da conversa do Aprendiz: entende o tipo de pergunta (o que é, como fazer, onde fica…), expressões (\"dar um jeito\", \"pequeno-almoço\"), formas irregulares (\"fui\", \"fiz\" → ser, fazer), responde sobre si mesmo e as próprias limitações e, quando não sabe algo, indica o addon da loja oficial que sabe. Mais pesado: traz um léxico com mais de 300 mil palavras. Lemas derivados de lemmatization-lists, de Michal Měchura (ODbL).",
   "categoria": "Compreensão",
   "etiquetas": [

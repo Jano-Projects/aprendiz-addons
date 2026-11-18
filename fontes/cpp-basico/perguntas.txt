@@ -1,0 +1,485 @@
+# C++ 1 · Básico
+# C++ do zero. Os exemplos compilam com: g++ -Wall -Wextra -std=c++20 arquivo.cpp
+
+P: o que é c++
+P: para que serve c++
+P: por que aprender c++
+R: **C++** foi criada por Bjarne Stroustrup no começo dos anos 1980 como "C com classes". Hoje é uma linguagem enorme, que junta o controle de baixo nível do C com abstrações de alto nível (classes, templates, a biblioteca padrão), **sem custo extra em tempo de execução** quando não são usadas.
+Onde está: motores de jogos (Unreal), navegadores (Chrome, Firefox), Photoshop, bancos de dados (MySQL, MongoDB), sistemas de aviônica e simuladores de voo, compiladores e bibliotecas de IA (o núcleo do PyTorch e do TensorFlow).
+Aprenda C++ moderno (C++17/20): ele é muito mais seguro e agradável que o C++ dos anos 90.
+
+P: diferença entre c e c++
+P: c++ é a mesma coisa que c
+R: C++ nasceu do C e compila quase todo código C, mas são linguagens diferentes:
+- **C:** procedural, pequena, você gerencia tudo à mão.
+- **C++:** acrescenta classes, referências, sobrecarga, templates, exceções, namespaces e uma biblioteca padrão rica (`std::string`, `std::vector`, `std::map`, algoritmos).
+No dia a dia de C++ moderno, você **evita** os jeitos do C:
+- `std::string` em vez de `char[]`;
+- `std::vector` em vez de vetores com `malloc`;
+- referências e ponteiros inteligentes em vez de ponteiros crus;
+- `std::cout` em vez de `printf` (ou `std::print` no C++23).
+
+P: como instalar compilador c++
+P: como instalar g++
+P: como compilar c++ no windows
+R: O **g++** é o compilador C++ do GCC (o **clang++** e o **MSVC**, do Visual Studio, também servem).
+- **Ubuntu/Debian:** `sudo apt install build-essential`.
+- **Fedora:** `sudo dnf install gcc-c++`.
+- **Windows:** MSYS2 com `pacman -S mingw-w64-ucrt-x86_64-gcc`, ou o **Visual Studio Community** (carga de trabalho "Desenvolvimento para desktop com C++"), ou o WSL.
+Confira com `g++ --version`. Para C++20 completo, use o GCC 11 ou mais novo.
+
+P: hello world em c++
+P: primeiro programa em c++
+P: o que é iostream e cout
+P: olá mundo em c++
+P: hello world cpp
+R: `ola.cpp`:
+```cpp
+#include <iostream>
+
+int main() {
+    std::cout << "Olá, mundo!\n";
+    return 0;
+}
+```
+- `#include <iostream>`: entrada e saída de C++;
+- `std::cout`: a saída padrão (a tela); `<<` "empurra" o valor para ela;
+- `std::`: o **namespace** da biblioteca padrão;
+- `"\n"` pula linha (`std::endl` também, mas além disso força a gravação imediata, o que é mais lento).
+Compile e rode:
+```bash
+g++ -Wall -Wextra -std=c++20 ola.cpp -o ola
+./ola
+```
+
+P: como ler do teclado em c++
+P: como usar cin em c++
+P: como ler uma linha inteira em c++
+P: como usar getline
+P: cin
+P: entrada de dados em c++
+R: ```cpp
+#include <iostream>
+#include <string>
+
+int main() {
+    int idade;
+    std::cout << "Idade: ";
+    if (!(std::cin >> idade)) {
+        std::cout << "Número inválido\n";
+        return 1;
+    }
+    std::cin.ignore();               // descarta o '\n' que sobrou
+
+    std::string nome;
+    std::cout << "Nome completo: ";
+    std::getline(std::cin, nome);    // lê a linha inteira, com espaços
+    std::cout << nome << " tem " << idade << " anos\n";
+}
+```
+`std::cin >> x` para no primeiro espaço; `std::getline` lê até o fim da linha. No `main`, o `return 0` é opcional em C++.
+
+P: o que é namespace em c++
+P: o que é std::
+P: devo usar using namespace std
+P: como usar namespace
+P: namespace
+R: **Namespace** agrupa nomes para evitar conflitos: a biblioteca padrão fica em `std`, então `std::vector` não briga com um `vector` seu.
+```cpp
+namespace geometria {
+    double area_circulo(double r) { return 3.14159 * r * r; }
+}
+geometria::area_circulo(2.0);
+```
+`using namespace std;` evita digitar `std::`, mas traz **centenas** de nomes para o seu código e pode causar conflitos difíceis de entender. Regra comum:
+- **nunca** num arquivo `.h`;
+- num `.cpp` pequeno ou num exercício, tudo bem;
+- melhor ainda: traga só o que usa: `using std::cout;`.
+
+P: como usar string em c++
+P: std::string em c++
+P: funções de string em c++
+P: string em c++
+P: std string
+R: `std::string` cuida da memória sozinha e cresce conforme precisa:
+```cpp
+#include <string>
+
+std::string nome = "Ana";
+nome += " Souza";                    // concatena
+nome.size();                         // 9
+nome[0];                             // 'A'
+nome == "Ana Souza";                 // compara com ==
+nome.substr(0, 3);                   // "Ana"
+nome.find("Souza");                  // posição 4 (ou std::string::npos)
+nome.replace(0, 3, "Bia");           // "Bia Souza"
+std::to_string(42);                  // "42"
+std::stoi("42");                     // 42 (lança exceção se não for número)
+```
+Para textos que você só lê, receba `std::string_view` (C++17): não copia nada. Atenção: `size()` conta **bytes**; em UTF-8, "ação" tem 6.
+
+P: o que é referência em c++
+P: diferença entre referência e ponteiro em c++
+P: o que é passagem por referência em c++
+P: referência em c++
+P: referencia c++
+R: **Referência** é um **apelido** para uma variável existente:
+```cpp
+int x = 10;
+int &r = x;   // r é outro nome para x
+r = 20;       // x agora é 20
+```
+Diferenças para o ponteiro: precisa ser inicializada, **não pode ser nula** e não muda de alvo. Sem `*` nem `&` para usar.
+Em funções:
+```cpp
+void dobrar(int &n) { n *= 2; }                // altera o original
+void mostrar(const std::string &s) {           // só lê, sem copiar
+    std::cout << s << '\n';
+}
+```
+Regra prática para parâmetros: tipos pequenos (`int`, `double`) **por valor**; objetos grandes **por `const &`**; para alterar o original, **por `&`**.
+
+P: o que é sobrecarga de função em c++
+P: o que é overload
+P: o que são parâmetros padrão em c++
+R: **Sobrecarga:** várias funções com o **mesmo nome** e parâmetros diferentes; o compilador escolhe pela chamada:
+```cpp
+int area(int lado) { return lado * lado; }
+double area(double base, double altura) { return base * altura; }
+
+area(3);         // primeira
+area(2.0, 5.0);  // segunda
+```
+**Parâmetros padrão:** valores usados se o argumento for omitido (sempre os últimos):
+```cpp
+void saudar(const std::string &nome, const std::string &saudacao = "Olá") {
+    std::cout << saudacao << ", " << nome << "!\n";
+}
+saudar("Ana");          // Olá, Ana!
+saudar("Ana", "Oi");    // Oi, Ana!
+```
+C não tem nenhum dos dois.
+
+P: o que é auto em c++
+P: inferência de tipo em c++
+R: `auto` deixa o compilador **deduzir o tipo** pelo valor:
+```cpp
+auto x = 42;            // int
+auto pi = 3.14;         // double
+auto nome = std::string("Ana");
+auto it = mapa.find("chave");   // em vez de std::map<std::string, int>::iterator
+```
+O tipo continua fixo e conferido (não é tipagem dinâmica). Use quando o tipo é óbvio ou longo demais; evite quando esconde informação importante. Cuidado: `auto s = "texto";` é `const char *`, não `std::string`.
+
+P: como usar vector em c++
+P: o que é std::vector
+P: como adicionar e remover itens de um vector
+P: vector
+P: vector em c++
+P: lista em c++
+R: `std::vector` é o vetor dinâmico de C++: cresce sozinho e libera a memória sozinho. É o contêiner padrão: na dúvida, use vector.
+```cpp
+#include <vector>
+
+std::vector<int> notas = {7, 8, 6};
+notas.push_back(9);            // adiciona no fim
+notas.size();                  // 4
+notas[0];                      // 7 (sem conferir limites)
+notas.at(10);                  // lança std::out_of_range
+notas.back();                  // 9
+notas.pop_back();              // remove o último
+notas.erase(notas.begin());    // remove o primeiro
+notas.insert(notas.begin(), 5);
+notas.clear();
+notas.empty();                 // true
+```
+Se souber o tamanho, `notas.reserve(1000)` evita realocações.
+
+P: como percorrer um vector em c++
+P: o que é for de intervalo em c++
+P: range based for
+P: como escrever um for em c++
+P: for em c++
+P: laço em c++
+P: for each em c++
+R: O **for de intervalo** (C++11) percorre qualquer contêiner:
+```cpp
+std::vector<std::string> nomes = {"Ana", "Bia", "Caio"};
+
+for (const auto &nome : nomes) {   // só lê, sem copiar
+    std::cout << nome << '\n';
+}
+for (auto &nome : nomes) {         // altera os itens
+    nome += "!";
+}
+```
+Com índice, quando precisar da posição:
+```cpp
+for (std::size_t i = 0; i < nomes.size(); ++i) {
+    std::cout << i << ": " << nomes[i] << '\n';
+}
+```
+Não adicione nem remova itens do vector **enquanto** o percorre com for de intervalo: os iteradores ficam inválidos.
+
+P: como criar uma classe em c++
+P: classes em c++
+P: o que é public e private em c++
+P: como criar classe em c++
+P: classe em c++
+P: classes c++
+R: ```cpp
+#include <iostream>
+#include <string>
+
+class Conta {
+public:                               // visível para todos
+    Conta(std::string titular, double saldo)
+        : titular_(std::move(titular)), saldo_(saldo) {}
+
+    void depositar(double valor) {
+        if (valor > 0) saldo_ += valor;
+    }
+    bool sacar(double valor) {
+        if (valor <= 0 || valor > saldo_) return false;
+        saldo_ -= valor;
+        return true;
+    }
+    double saldo() const { return saldo_; }   // const: não altera o objeto
+
+private:                              // só a própria classe acessa
+    std::string titular_;
+    double saldo_;
+};
+
+int main() {
+    Conta c("Ana", 100.0);
+    c.depositar(50);
+    c.sacar(30);
+    std::cout << c.saldo() << '\n';   // 120
+}
+```
+Os dados ficam `private` e só mudam pelos métodos, que garantem as regras (saldo nunca negativo). Isso é **encapsulamento**. Uma `struct` em C++ é igual a uma classe, só que começa `public`.
+
+P: o que é construtor em c++
+P: o que é lista de inicialização em c++
+P: o que é construtor padrão
+R: O **construtor** tem o nome da classe, sem tipo de retorno, e roda ao criar o objeto. A **lista de inicialização** (depois do `:`) inicializa os membros diretamente; prefira-a a atribuir dentro do corpo:
+```cpp
+class Ponto {
+public:
+    Ponto() = default;                       // construtor padrão
+    Ponto(double x, double y) : x_(x), y_(y) {}
+private:
+    double x_ = 0.0;                         // valor padrão do membro
+    double y_ = 0.0;
+};
+
+Ponto a;            // (0, 0)
+Ponto b(1.0, 2.0);
+Ponto c{3.0, 4.0};  // inicialização com chaves
+```
+Os membros são inicializados na **ordem em que foram declarados** na classe, não na ordem da lista. Construtores de um parâmetro devem ser `explicit` para evitar conversões automáticas inesperadas.
+
+P: o que é this em c++
+R: `this` é um ponteiro para o **próprio objeto** dentro de um método. Usos:
+- desambiguar quando o parâmetro tem o mesmo nome do membro: `this->x = x;`;
+- devolver o próprio objeto para encadear chamadas:
+```cpp
+class Texto {
+public:
+    Texto &add(const std::string &s) { valor += s; return *this; }
+    std::string valor;
+};
+Texto t;
+t.add("a").add("b").add("c");   // "abc"
+```
+Muitos projetos evitam o `this->` explícito com uma convenção de nomes para membros (`saldo_`, `m_saldo`).
+
+P: o que são new e delete em c++
+P: devo usar new em c++
+R: `new` cria um objeto no heap e `delete` o destrói (para vetores, `new[]` e `delete[]`):
+```cpp
+int *p = new int(5);
+delete p;
+```
+No C++ moderno, você quase **nunca** escreve `new` e `delete` à mão:
+- coleções → `std::vector`, `std::string`;
+- um objeto no heap com um dono → `std::make_unique<T>()`;
+- dono compartilhado → `std::make_shared<T>()`.
+Eles liberam a memória sozinhos quando saem de escopo, inclusive se houver uma exceção. `new` solto no código é sinal de vazamento esperando para acontecer (veja **RAII** e ponteiros inteligentes na trilha intermediária).
+
+P: o que é bool em c++
+P: o que é nullptr em c++
+R: - `bool` é um tipo nativo em C++, com `true` e `false` (em C só vieram com o C99/C23).
+- `nullptr` (C++11) é o ponteiro nulo, com tipo próprio. Use-o sempre em vez de `NULL` ou `0`, que são números e podem escolher a sobrecarga errada:
+```cpp
+void f(int);
+void f(char *);
+f(NULL);      // pode chamar f(int)!
+f(nullptr);   // chama f(char *)
+```
+
+P: como usar const em c++
+P: o que é método const
+P: o que é constexpr
+R: `const` aparece em vários lugares:
+- variável que não muda: `const double taxa = 0.05;`;
+- parâmetro que não será alterado: `void mostrar(const std::string &s)`;
+- **método const:** promete não alterar o objeto, e é o único que pode ser chamado num objeto `const`:
+```cpp
+double saldo() const { return saldo_; }
+```
+`constexpr` vai além: o valor (ou a função) pode ser calculado **ao compilar**:
+```cpp
+constexpr int quadrado(int x) { return x * x; }
+constexpr int N = quadrado(8);   // 64, calculado pelo compilador
+std::array<int, N> tabela{};
+```
+Regra: torne `const` tudo que puder. O compilador vira seu revisor.
+
+P: como funcionam os arquivos .h e .cpp em c++
+P: como separar classe em arquivos c++
+R: Como no C: a **declaração** da classe vai no `.h` (ou `.hpp`) e a **implementação** dos métodos no `.cpp`.
+`conta.h`:
+```cpp
+#pragma once
+#include <string>
+
+class Conta {
+public:
+    explicit Conta(double saldo);
+    void depositar(double valor);
+    double saldo() const;
+private:
+    double saldo_;
+};
+```
+`conta.cpp`:
+```cpp
+#include "conta.h"
+
+Conta::Conta(double saldo) : saldo_(saldo) {}
+void Conta::depositar(double valor) { saldo_ += valor; }
+double Conta::saldo() const { return saldo_; }
+```
+O `Conta::` diz a qual classe o método pertence. Compile: `g++ -std=c++20 main.cpp conta.cpp -o app`. Métodos curtos podem ficar direto no `.h`; templates **precisam** ficar no `.h`.
+
+P: como usar array em c++
+P: diferença entre std::array e vector
+R: - `std::array<T, N>`: tamanho **fixo**, conhecido ao compilar; mora na pilha, sem alocação. Substitui o vetor do C, mas sabe o próprio tamanho e pode ser copiado e comparado.
+- `std::vector<T>`: tamanho **variável**, mora no heap.
+```cpp
+#include <array>
+std::array<int, 3> rgb = {255, 128, 0};
+rgb.size();      // 3
+for (int c : rgb) std::cout << c << ' ';
+```
+Use `std::array` para coisas de tamanho fixo (coordenadas, os dias da semana) e `std::vector` para o resto.
+
+P: como ordenar um vector em c++
+P: como usar sort em c++
+P: como ordenar vector c++
+P: sort em c++
+P: ordenar em c++
+R: Com `std::sort`, de `<algorithm>`:
+```cpp
+#include <algorithm>
+#include <vector>
+
+std::vector<int> v = {5, 2, 9, 1};
+std::sort(v.begin(), v.end());                       // 1 2 5 9
+std::sort(v.begin(), v.end(), std::greater<>());     // 9 5 2 1
+
+struct Pessoa { std::string nome; int idade; };
+std::vector<Pessoa> ps = {{"Ana", 30}, {"Bia", 25}};
+std::sort(ps.begin(), ps.end(), [](const Pessoa &a, const Pessoa &b) {
+    return a.idade < b.idade;
+});
+```
+No C++20 há a forma curta com ranges: `std::ranges::sort(v);`. O `[](...) {...}` é uma **lambda**, uma função sem nome (trilha intermediária).
+
+P: como ler e escrever arquivos em c++
+P: como usar fstream em c++
+P: ifstream e ofstream
+P: ler arquivo em c++
+P: arquivo em c++
+P: fstream
+R: ```cpp
+#include <fstream>
+#include <iostream>
+#include <string>
+
+int main() {
+    {
+        std::ofstream saida("notas.txt");      // abre para escrever
+        if (!saida) { std::cerr << "Erro ao criar\n"; return 1; }
+        saida << "Ana;8.5\n" << "Bia;9.0\n";
+    }                                          // fecha sozinho aqui
+
+    std::ifstream entrada("notas.txt");        // abre para ler
+    std::string linha;
+    while (std::getline(entrada, linha)) {
+        std::cout << "lido: " << linha << '\n';
+    }
+}
+```
+Não precisa de `close()`: o arquivo fecha quando o objeto sai de escopo (isso é **RAII**). Para acrescentar no fim: `std::ofstream f("x.txt", std::ios::app);`.
+
+P: erros comuns em c++ para iniciantes
+R: Os mais frequentes:
+- esquecer o `;` depois do `}` de uma **classe** ou **struct**;
+- `std::cin >> x` seguido de `getline` sem `cin.ignore()` (a linha sai vazia);
+- passar `std::string` e `std::vector` **por valor** sem necessidade (cópias caras);
+- comparar `int` com `v.size()` (sem sinal) e receber aviso; use `std::size_t`;
+- usar `new` sem `delete`; use contêineres e ponteiros inteligentes;
+- `v[i]` fora dos limites (use `.at(i)` enquanto aprende);
+- `using namespace std;` em cabeçalhos;
+- mensagens de erro enormes de templates: leia a **primeira** linha com "error" e o seu arquivo/linha mencionado.
+Compile com `-Wall -Wextra` e, nos testes, `-fsanitize=address,undefined`.
+
+P: exemplo de programa completo em c++
+P: lista de tarefas em c++
+R: Uma lista de tarefas no terminal, com o básico:
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+
+struct Tarefa {
+    std::string texto;
+    bool feita = false;
+};
+
+int main() {
+    std::vector<Tarefa> tarefas;
+    std::string linha;
+    std::cout << "Comandos: + texto | x numero | l | q\n";
+    while (std::cout << "> " && std::getline(std::cin, linha)) {
+        if (linha.empty()) continue;
+        if (linha[0] == '+') {
+            tarefas.push_back({linha.substr(2)});
+        } else if (linha[0] == 'x') {
+            auto n = std::stoul(linha.substr(2));
+            if (n >= 1 && n <= tarefas.size()) tarefas[n - 1].feita = true;
+        } else if (linha[0] == 'l') {
+            for (std::size_t i = 0; i < tarefas.size(); ++i) {
+                std::cout << i + 1 << ". [" << (tarefas[i].feita ? 'x' : ' ')
+                          << "] " << tarefas[i].texto << '\n';
+            }
+        } else if (linha[0] == 'q') {
+            break;
+        }
+    }
+}
+```
+Exercício: salvar e carregar a lista de um arquivo com `fstream`.
+
+P: exercícios de c++ para iniciantes
+R: Para praticar:
+1. ler nomes até uma linha vazia, guardar num `std::vector<std::string>` e mostrar em ordem alfabética;
+2. contar quantas vezes cada palavra aparece numa frase (dica: `std::map`, na trilha intermediária);
+3. uma classe `Retangulo` com construtor, `area()` e `perimetro()` const;
+4. uma classe `ContaBancaria` que não permite saldo negativo;
+5. funções sobrecarregadas `maior(int, int)` e `maior(double, double)`;
+6. ler um arquivo de notas ("nome;nota") e mostrar a média da turma;
+7. refazer em C++ um exercício que você fez em C e comparar o tamanho do código.

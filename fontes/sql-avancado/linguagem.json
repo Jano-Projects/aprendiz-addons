@@ -1,0 +1,21 @@
+{
+  "abreviacoes": {
+    "bd": "banco dados",
+    "sgbd": "sistema gerenciador banco dados",
+    "pk": "chave primaria",
+    "fk": "chave estrangeira",
+    "cte": "common table expression"
+  },
+  "sinonimos": {
+    "deletar": "apagar",
+    "excluir": "apagar",
+    "registro": "linha",
+    "registros": "linhas",
+    "tupla": "linha",
+    "tuplas": "linhas",
+    "campo": "coluna",
+    "campos": "colunas",
+    "atributo": "coluna",
+    "atributos": "colunas"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "abreviacoes": {
+    "bd": "banco dados",
+    "bds": "bancos dados",
+    "sgbd": "sistema gerenciador banco dados",
+    "var": "variavel",
+    "func": "funcao",
+    "poo": "programacao orientada objetos",
+    "ds": "estruturas dados"
+  },
+  "sinonimos": {
+    "array": "vetor",
+    "arrays": "vetores",
+    "arranjo": "vetor",
+    "loop": "laco",
+    "loops": "lacos",
+    "diretorio": "pasta",
+    "diretorios": "pastas",
+    "deletar": "apagar",
+    "excluir": "apagar"
+  }
+}

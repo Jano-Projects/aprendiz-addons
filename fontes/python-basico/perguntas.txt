@@ -1,0 +1,646 @@
+# Python 1 · Básico
+# Python do zero. Os exemplos rodam no Python 3.10 ou mais novo.
+
+P: o que é python
+P: para que serve python
+P: por que aprender python
+R: **Python** é uma linguagem criada por Guido van Rossum (lançada em 1991), famosa por ser **fácil de ler**: o código parece quase pseudocódigo.
+É usada em: automação de tarefas, análise de dados, inteligência artificial, sites e APIs (back-end), ciência, scripts de administração de sistemas e ensino.
+Pontos fortes: sintaxe limpa, uma biblioteca padrão enorme ("pilhas incluídas") e centenas de milhares de pacotes prontos no PyPI.
+Ponto fraco: é mais lenta que C e C++ em cálculos pesados (por isso muitas bibliotecas Python têm o núcleo em C).
+O Aprendiz é escrito em Python, de propósito, para servir de material de estudo.
+
+P: como instalar python
+P: como instalar python no windows
+P: como instalar python no linux
+P: como saber a versão do python
+P: instalar python no fedora
+P: instalar python no ubuntu
+R: - **Windows:** baixe em python.org/downloads e, na primeira tela do instalador, marque **"Add python.exe to PATH"**. Ou, no terminal: `winget install Python.Python.3.13`.
+- **Ubuntu/Debian:** já vem instalado; acrescente o pip e o venv: `sudo apt install python3-pip python3-venv`.
+- **Fedora:** já vem instalado; `sudo dnf install python3-pip` se precisar.
+- **macOS:** `brew install python` ou o instalador do python.org.
+Confira a versão: `python --version` (no Linux, `python3 --version`). Use uma versão 3 recente; o Python 2 morreu em 2020.
+
+P: como rodar um programa python
+P: como executar um arquivo .py
+P: o que é o modo interativo do python
+R: Duas formas:
+- **arquivo:** crie `ola.py` com `print("Olá!")` e rode no terminal: `python ola.py` (no Linux, `python3 ola.py`);
+- **modo interativo (REPL):** digite só `python` e teste linha por linha (os `>>>` são o convite para digitar). Sai com `exit()` ou Ctrl+D (Ctrl+Z e Enter no Windows).
+```python
+>>> 2 + 3
+5
+>>> nome = "Ana"
+>>> nome.upper()
+'ANA'
+```
+No VS Code, instale a extensão "Python" e use o botão ▶ no canto superior direito.
+
+P: hello world em python
+P: primeiro programa em python
+P: como usar print em python
+R: ```python
+print("Olá, mundo!")
+```
+É isso: sem `main`, sem `;`, sem chaves.
+Mais do `print`:
+```python
+print("Ana", 30, True)          # separa com espaço: Ana 30 True
+print("a", "b", sep="-")        # a-b
+print("sem pular linha", end="")
+print()                         # só pula uma linha
+```
+
+P: como ler dados do teclado em python
+P: como usar input em python
+P: como converter input para número
+P: como pegar o que o usuário digitou em python
+P: input em python
+P: como ler do teclado em python
+R: `input()` mostra uma mensagem e devolve o que foi digitado, **sempre como texto**:
+```python
+nome = input("Seu nome: ")
+idade = int(input("Sua idade: "))      # converte para inteiro
+altura = float(input("Sua altura: "))  # converte para real
+print(f"{nome} tem {idade} anos e {altura} m")
+```
+Se a pessoa digitar algo que não é número, o `int()` lança `ValueError`. Para tratar:
+```python
+try:
+    idade = int(input("Idade: "))
+except ValueError:
+    print("Digite só números.")
+```
+
+P: como criar variáveis em python
+P: variáveis em python
+P: como declarar variavel em python
+P: variável em python
+R: Em Python, a variável nasce na primeira atribuição, sem declarar o tipo:
+```python
+nome = "Ana"        # str
+idade = 30          # int
+altura = 1.68       # float
+ativo = True        # bool
+nada = None         # ausência de valor
+a, b = 1, 2         # várias de uma vez
+x = y = 0           # o mesmo valor para duas
+```
+A variável é uma **etiqueta** presa a um objeto; o tipo é do objeto, não da variável (`type(idade)` mostra `int`). Nomes em `snake_case`, sem acento por convenção (embora Python aceite), e sem começar com número.
+
+P: quais os tipos de dados em python
+P: o que é int float str bool em python
+R: Os tipos básicos:
+- `int`: inteiros de **qualquer tamanho** (`2 ** 100` funciona);
+- `float`: reais (`3.14`, `1e-3`);
+- `str`: textos (`"olá"` ou `'olá'`);
+- `bool`: `True` e `False`;
+- `None`: "nada", o tipo `NoneType`.
+E as coleções: `list` `[1, 2]`, `tuple` `(1, 2)`, `dict` `{"a": 1}`, `set` `{1, 2}`.
+Conversões: `int("42")`, `float("3.5")`, `str(42)`, `bool(0)` (False), `list("abc")` (`['a', 'b', 'c']`).
+Valores "falsos": `0`, `0.0`, `""`, `[]`, `{}`, `set()` e `None`. Todo o resto é verdadeiro, por isso `if lista:` significa "se a lista não estiver vazia".
+
+P: operadores em python
+P: o que é divisão inteira e potência em python
+P: como fazer potência em python
+R: ```python
+7 + 2    # 9
+7 - 2    # 5
+7 * 2    # 14
+7 / 2    # 3.5   (sempre dá float)
+7 // 2   # 3     (divisão inteira)
+7 % 2    # 1     (resto)
+2 ** 10  # 1024  (potência)
+-7 // 2  # -4    (arredonda para baixo, não para zero)
+```
+Comparações: `==`, `!=`, `<`, `>`, `<=`, `>=`, e dá para encadear: `0 <= nota <= 10`.
+Lógicos: `and`, `or`, `not` (por extenso).
+Atribuição composta: `x += 1`, `x *= 2`. Não existe `x++` em Python.
+`is` compara se é **o mesmo objeto** (use só com `None`: `if x is None`); `==` compara o **valor**.
+
+P: como usar strings em python
+P: métodos de string em python
+P: como manipular texto em python
+R: ```python
+s = "  Olá, Mundo  "
+s.strip()              # "Olá, Mundo"  (tira espaços das pontas)
+s.lower(), s.upper()   # minúsculas / maiúsculas
+s.replace("Mundo", "Python")
+"a,b,c".split(",")     # ['a', 'b', 'c']
+"-".join(["a", "b"])   # "a-b"
+"Python".startswith("Py")   # True
+"py" in "python"       # True
+"banana".count("a")    # 3
+"banana".find("n")     # 2 (-1 se não achar)
+len("ação")            # 4
+"ab" * 3               # "ababab"
+```
+Strings são **imutáveis**: os métodos devolvem uma string nova, sem alterar a original. Por isso se escreve `s = s.strip()`.
+
+P: o que é f-string em python
+P: como formatar texto em python
+P: como mostrar duas casas decimais em python
+P: o que é f string
+P: f string
+P: formatar string python
+R: A **f-string** (o `f` antes das aspas) coloca valores e expressões dentro do texto, entre `{}`:
+```python
+nome, preco, qtd = "Café", 12.5, 3
+print(f"{nome}: {qtd} x R$ {preco:.2f} = R$ {qtd * preco:.2f}")
+# Café: 3 x R$ 12.50 = R$ 37.50
+
+f"{1234567.891:,.2f}"   # '1,234,567.89'
+f"{0.256:.1%}"          # '25.6%'
+f"{'esq':<10}|"         # alinhado à esquerda em 10 colunas
+f"{42:05d}"             # '00042'
+f"{x=}"                 # 'x=10': ótimo para depurar
+```
+Para o formato brasileiro (1.234,56), troque os separadores: `f"{v:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")`.
+
+P: como fatiar string em python
+P: o que é slicing em python
+P: como inverter uma string em python
+R: **Fatiar** pega um pedaço com `[início:fim:passo]` (o fim não entra):
+```python
+s = "Python"
+s[0]      # 'P'
+s[-1]     # 'n' (índice negativo conta do fim)
+s[0:3]    # 'Pyt'
+s[2:]     # 'thon'
+s[:2]     # 'Py'
+s[::2]    # 'Pto' (de 2 em 2)
+s[::-1]   # 'nohtyP' (invertida)
+```
+Funciona igual em listas e tuplas. Fatiar nunca dá erro de índice: `s[10:20]` devolve `''`.
+
+P: como usar if em python
+P: como fazer if elif else em python
+P: if em python
+P: condicional em python
+R: ```python
+nota = float(input("Nota: "))
+
+if nota >= 7:
+    print("Aprovado")
+elif nota >= 5:
+    print("Recuperação")
+else:
+    print("Reprovado")
+```
+- o `:` no fim da linha abre o bloco;
+- o bloco é definido pela **indentação** (4 espaços);
+- `elif` é o "senão se".
+Forma curta (expressão condicional): `situacao = "maior" if idade >= 18 else "menor"`.
+Para comparar um valor com muitos casos, o Python 3.10 tem o `match`.
+
+P: como usar match case em python
+R: O `match` (Python 3.10+) compara um valor com padrões:
+```python
+comando = input("> ").split()
+match comando:
+    case ["sair"]:
+        print("Tchau")
+    case ["ola", nome]:
+        print(f"Olá, {nome}!")
+    case ["somar", *numeros]:
+        print(sum(int(n) for n in numeros))
+    case _:
+        print("Comando desconhecido")
+```
+Ele vai além do `switch` de outras linguagens: desmonta listas, tuplas e dicionários e captura partes em variáveis (`nome`, `*numeros`). O `_` pega qualquer coisa.
+
+P: como usar for em python
+P: como usar range em python
+P: como percorrer uma lista em python
+P: for em python
+P: laço em python
+P: loop em python
+P: repetição em python
+R: O `for` do Python percorre **qualquer coleção**, item por item:
+```python
+for fruta in ["maçã", "pera", "uva"]:
+    print(fruta)
+
+for letra in "abc":
+    print(letra)
+
+for i in range(5):          # 0, 1, 2, 3, 4
+    print(i)
+for i in range(1, 11, 2):   # 1, 3, 5, 7, 9 (início, fim, passo)
+    print(i)
+
+for i, fruta in enumerate(["maçã", "pera"], start=1):   # posição e item
+    print(i, fruta)
+
+for nome, nota in zip(["Ana", "Bia"], [8, 9]):          # duas listas juntas
+    print(nome, nota)
+```
+Evite `for i in range(len(lista))` só para pegar `lista[i]`: use o item direto ou `enumerate`.
+
+P: como usar while em python
+P: como usar break e continue em python
+P: while em python
+R: ```python
+tentativas = 0
+while tentativas < 3:
+    senha = input("Senha: ")
+    if senha == "1234":
+        print("Entrou")
+        break                # sai do laço
+    tentativas += 1
+else:
+    print("Bloqueado")       # roda se o laço terminou SEM break
+```
+- `break` sai do laço; `continue` pula para a próxima volta;
+- o `else` de um laço (raro em outras linguagens) roda quando não houve `break`;
+- laço infinito proposital: `while True:` com um `break` lá dentro.
+
+P: como criar uma lista em python
+P: métodos de lista em python
+P: como adicionar e remover itens de uma lista
+P: como ordenar lista em python
+P: lista em python
+P: listas python
+R: A **lista** é ordenada, mutável e aceita qualquer tipo:
+```python
+notas = [7, 8.5, 6]
+notas.append(9)          # adiciona no fim
+notas.insert(0, 10)      # na posição 0
+notas.extend([5, 4])     # junta outra lista
+notas.remove(6)          # remove o primeiro 6 (erro se não existir)
+ultimo = notas.pop()     # tira e devolve o último
+notas[1] = 8             # altera
+len(notas), sum(notas), max(notas), min(notas)
+notas.sort()             # ordena a própria lista
+ordenada = sorted(notas, reverse=True)   # devolve uma nova
+7 in notas               # True/False
+notas.index(8)           # posição do 8
+```
+Cuidado: `b = a` não copia a lista; as duas variáveis apontam para a mesma. Para copiar: `b = a.copy()` ou `b = a[:]`.
+
+P: o que é tupla em python
+P: diferença entre lista e tupla
+R: A **tupla** é como uma lista, mas **imutável**: depois de criada, não muda.
+```python
+ponto = (3, 4)
+x, y = ponto              # desempacotar
+rgb = 255, 128, 0         # os parênteses são opcionais
+um_item = (5,)            # a vírgula é que faz a tupla
+```
+Quando usar: dados fixos que andam juntos (coordenadas, uma linha de banco, retornar vários valores de uma função). Por serem imutáveis, tuplas podem ser **chave de dicionário**; listas não.
+
+P: o que é dicionário em python
+P: como usar dict em python
+P: como percorrer um dicionário
+P: dicionário python
+P: dict
+P: como usar dicionários em python
+R: O **dicionário** guarda pares **chave → valor** e acha uma chave muito rápido:
+```python
+aluno = {"nome": "Ana", "idade": 20}
+aluno["curso"] = "ADS"            # adiciona
+aluno["idade"] = 21               # altera
+aluno["nome"]                     # 'Ana' (KeyError se não existir)
+aluno.get("email", "sem email")   # valor padrão se não existir
+"nome" in aluno                   # True
+del aluno["curso"]
+
+for chave, valor in aluno.items():
+    print(chave, "→", valor)
+```
+As chaves precisam ser imutáveis (str, int, tupla) e não se repetem. Desde o Python 3.7, o dicionário mantém a **ordem de inserção**.
+
+P: como contar ocorrências em python
+P: como contar palavras em um texto em python
+R: Com dicionário:
+```python
+texto = "o rato roeu a roupa do rei de roma o rato"
+contagem = {}
+for palavra in texto.split():
+    contagem[palavra] = contagem.get(palavra, 0) + 1
+```
+Ou, mais curto, com `Counter`:
+```python
+from collections import Counter
+contagem = Counter(texto.split())
+contagem.most_common(2)     # [('o', 2), ('rato', 2)]
+```
+
+P: o que é set em python
+P: como remover duplicados de uma lista em python
+P: o que é um set
+P: conjunto em python
+R: O **conjunto** (`set`) guarda itens **sem repetição** e responde "está aqui?" muito rápido:
+```python
+cores = {"azul", "verde", "azul"}    # {'azul', 'verde'}
+cores.add("rosa")
+cores.discard("verde")
+"azul" in cores                       # True
+
+a, b = {1, 2, 3}, {2, 3, 4}
+a | b   # união {1, 2, 3, 4}
+a & b   # interseção {2, 3}
+a - b   # diferença {1}
+
+unicos = list(set([3, 1, 3, 2]))      # sem duplicados (perde a ordem)
+unicos_em_ordem = list(dict.fromkeys([3, 1, 3, 2]))   # [3, 1, 2]
+```
+Conjunto vazio é `set()`; `{}` cria um dicionário vazio.
+
+P: como criar uma função em python
+P: como usar def em python
+P: o que é return em python
+P: função em python
+P: def python
+R: ```python
+def imc(peso, altura):
+    """Calcula o índice de massa corporal."""   # docstring
+    return peso / altura ** 2
+
+resultado = imc(70, 1.75)
+print(f"{resultado:.1f}")
+```
+- `def` cria a função; o corpo é o bloco indentado;
+- `return` devolve o valor e **encerra** a função; sem `return`, a função devolve `None`;
+- dá para devolver vários valores (vira uma tupla): `return minimo, maximo`;
+- a **docstring** documenta a função e aparece em `help(imc)`.
+
+P: o que são parâmetros com valor padrão em python
+P: o que é argumento nomeado em python
+P: o que é args e kwargs
+R: ```python
+def saudar(nome, saudacao="Olá", pontuacao="!"):
+    return f"{saudacao}, {nome}{pontuacao}"
+
+saudar("Ana")                        # 'Olá, Ana!'
+saudar("Ana", pontuacao=".")         # argumento nomeado: 'Olá, Ana.'
+
+def somar(*numeros):                 # *args: quantos quiser, numa tupla
+    return sum(numeros)
+somar(1, 2, 3)
+
+def ficha(**dados):                  # **kwargs: nomeados, num dicionário
+    for k, v in dados.items():
+        print(k, v)
+ficha(nome="Ana", idade=30)
+```
+Armadilha clássica: **nunca** use lista ou dicionário como valor padrão (`def f(itens=[])`): a mesma lista é reaproveitada entre as chamadas. Use `def f(itens=None):` e, dentro, `itens = itens or []`.
+
+P: o que é escopo em python
+P: o que é global em python
+R: Variáveis criadas dentro de uma função são **locais**. A função **lê** variáveis de fora, mas, ao **atribuir**, cria uma local nova:
+```python
+contador = 0
+
+def incrementar():
+    global contador     # sem isto, daria UnboundLocalError
+    contador += 1
+```
+Evite `global`: prefira receber por parâmetro e devolver com `return`:
+```python
+def incrementar(contador):
+    return contador + 1
+contador = incrementar(contador)
+```
+A ordem de busca de um nome é **LEGB**: Local, Enclosing (função de fora), Global, Built-in.
+
+P: o que é lambda em python
+P: o que é lambda no python
+P: lambda python
+R: `lambda` cria uma função pequena, de uma expressão só, sem nome:
+```python
+dobro = lambda x: x * 2
+dobro(4)    # 8
+
+pessoas = [("Ana", 30), ("Bia", 25)]
+pessoas.sort(key=lambda p: p[1])    # ordena pela idade
+```
+O uso típico é como argumento (`key=` do `sort`, `sorted`, `max`, `min`). Se precisar de mais de uma linha ou de um nome, use `def`.
+
+P: como importar módulos em python
+P: o que é import em python
+P: o que é módulo em python
+P: como importar um módulo
+P: import em python
+R: Um **módulo** é um arquivo `.py`; `import` traz o que ele tem:
+```python
+import math
+math.sqrt(16)                     # 4.0
+
+from random import randint, choice
+randint(1, 6)
+choice(["pedra", "papel", "tesoura"])
+
+import datetime as dt             # apelido
+dt.date.today()
+```
+Seu próprio arquivo também é um módulo: com `util.py` na mesma pasta, faça `import util` ou `from util import formatar`.
+Módulos da biblioteca padrão muito usados: `math`, `random`, `datetime`, `os`, `pathlib`, `json`, `csv`, `re`, `sqlite3`, `collections`, `itertools`.
+
+P: o que é if __name__ == "__main__"
+P: para que serve __main__ em python
+R: Cada módulo tem a variável `__name__`. Ela vale `"__main__"` quando o arquivo é **executado direto**, e o nome do módulo quando é **importado**. Assim, o mesmo arquivo serve de programa e de biblioteca:
+```python
+def somar(a, b):
+    return a + b
+
+if __name__ == "__main__":
+    print(somar(2, 3))     # só roda com "python arquivo.py", não no import
+```
+O `iniciar.py` do Aprendiz usa esse padrão para chamar a função `main()`.
+
+P: como tratar erros em python
+P: como usar try except em python
+P: quais as exceções mais comuns em python
+P: como tratar exceção em python
+P: exceção em python
+P: try except
+R: ```python
+try:
+    numero = int(input("Número: "))
+    print(10 / numero)
+except ValueError:
+    print("Isso não é um número.")
+except ZeroDivisionError:
+    print("Não dá para dividir por zero.")
+else:
+    print("Deu certo")            # só se não houve erro
+finally:
+    print("Sempre roda")          # com ou sem erro
+```
+As exceções mais comuns:
+- `ValueError`: valor inválido (`int("abc")`);
+- `TypeError`: tipo errado (`"a" + 1`);
+- `KeyError`: chave inexistente num dicionário;
+- `IndexError`: índice fora da lista;
+- `AttributeError`: atributo ou método que não existe;
+- `FileNotFoundError`: arquivo inexistente;
+- `ZeroDivisionError`, `NameError` (variável não definida).
+Capture só os erros que sabe tratar; um `except:` sozinho esconde bugs. Para lançar: `raise ValueError("idade negativa")`.
+
+P: como ler um arquivo em python
+P: como escrever em arquivo em python
+P: como usar open em python
+P: quero ler um arquivo texto usando python
+P: arquivo em python
+P: abrir arquivo em python
+P: como gravar um arquivo em python
+P: como salvar texto em arquivo no python
+R: Use sempre `with`: ele fecha o arquivo sozinho, mesmo se der erro.
+```python
+# escrever ("w" apaga o conteúdo; "a" acrescenta no fim)
+with open("notas.txt", "w", encoding="utf-8") as f:
+    f.write("Ana;8.5\n")
+    f.write("Bia;9.0\n")
+
+# ler linha por linha
+with open("notas.txt", encoding="utf-8") as f:
+    for linha in f:
+        nome, nota = linha.strip().split(";")
+        print(nome, float(nota))
+
+# ler tudo de uma vez
+with open("notas.txt", encoding="utf-8") as f:
+    conteudo = f.read()
+```
+Sempre informe `encoding="utf-8"`: sem isso, no Windows, acentos podem virar lixo.
+
+P: como trabalhar com caminhos de arquivo em python
+P: o que é pathlib
+R: O `pathlib` trata caminhos do mesmo jeito no Windows e no Linux:
+```python
+from pathlib import Path
+
+pasta = Path.home() / "Documentos" / "projeto"    # junta com /
+pasta.mkdir(parents=True, exist_ok=True)
+
+arquivo = pasta / "dados.txt"
+arquivo.write_text("olá", encoding="utf-8")
+arquivo.read_text(encoding="utf-8")
+arquivo.exists(), arquivo.name, arquivo.suffix, arquivo.stem   # True, 'dados.txt', '.txt', 'dados'
+
+for p in pasta.glob("*.txt"):
+    print(p)
+```
+O Aprendiz usa `pathlib` em todo o código (por exemplo, para achar a pasta `web/` relativa ao próprio arquivo, com `Path(__file__).parent`).
+
+P: como ler e escrever json em python
+R: ```python
+import json
+
+dados = {"nome": "Ana", "linguagens": ["Python", "C"], "ativo": True}
+
+with open("dados.json", "w", encoding="utf-8") as f:
+    json.dump(dados, f, ensure_ascii=False, indent=2)
+
+with open("dados.json", encoding="utf-8") as f:
+    lido = json.load(f)
+
+texto = json.dumps(dados)        # para texto
+de_volta = json.loads(texto)     # de texto
+```
+`ensure_ascii=False` grava os acentos como são (em vez de `ç`). Os manifestos dos addons do Aprendiz são lidos e gravados exatamente assim.
+
+P: como trabalhar com datas em python
+P: como usar datetime em python
+R: ```python
+from datetime import date, datetime, timedelta
+
+hoje = date.today()
+agora = datetime.now()
+amanha = hoje + timedelta(days=1)
+idade_em_dias = (hoje - date(1990, 5, 20)).days
+
+agora.strftime("%d/%m/%Y %H:%M")              # data → texto: '18/11/2026 11:16'
+datetime.strptime("25/12/2026", "%d/%m/%Y")    # texto → data
+hoje.isoformat()                               # '2026-11-18' (bom para bancos e JSON)
+```
+Para fusos horários, use `zoneinfo`: `datetime.now(ZoneInfo("America/Sao_Paulo"))`.
+
+P: como gerar números aleatórios em python
+P: como usar random em python
+R: ```python
+import random
+
+random.randint(1, 6)                 # inteiro de 1 a 6 (inclui os dois)
+random.random()                      # float entre 0 e 1
+random.choice(["a", "b", "c"])       # um item
+random.sample(range(1, 61), 6)       # 6 números diferentes (mega-sena)
+lista = [1, 2, 3, 4]
+random.shuffle(lista)                # embaralha no lugar
+random.seed(42)                      # sequência repetível (para testes)
+```
+Para senhas e tokens, use `secrets` (`secrets.token_hex(16)`), que é seguro para criptografia; `random` não é.
+
+P: como instalar bibliotecas em python
+P: como usar pip
+P: o que é pip install
+R: O **pip** instala pacotes do PyPI (pypi.org):
+```bash
+python -m pip install requests
+python -m pip install -r requirements.txt   # tudo de uma lista
+python -m pip list                          # o que está instalado
+python -m pip uninstall requests
+```
+Use `python -m pip` (em vez de só `pip`) para garantir que é o pip do Python certo.
+**Sempre use um ambiente virtual** para cada projeto (veja "o que é ambiente virtual" no addon Python 2): no Ubuntu/Debian e no Fedora recentes, o pip até se recusa a instalar no Python do sistema (erro "externally-managed-environment").
+
+P: erros comuns em python para iniciantes
+P: o que é indentationerror
+R: Os mais comuns:
+- **IndentationError:** indentação inconsistente; use sempre 4 espaços e nunca misture com tab;
+- esquecer o `:` no fim de `if`, `for`, `def`, `class`;
+- **TypeError** ao somar texto com número: `"Idade: " + 30` → use f-string;
+- esquecer que `input()` devolve texto;
+- `=` no lugar de `==` no `if` (o Python dá erro de sintaxe, ainda bem);
+- modificar uma lista enquanto a percorre com `for`;
+- `b = a` achando que copiou a lista;
+- lista como valor padrão de parâmetro;
+- dar a um arquivo seu o nome de um módulo (`random.py`, `json.py`): o `import` pega o seu arquivo no lugar do módulo de verdade.
+Leia o **traceback** de baixo para cima: a última linha diz o erro, as de cima mostram o caminho.
+
+P: exemplo de programa completo em python
+P: jogo de adivinhação em python
+R: Um jogo de adivinhar o número, com o básico todo:
+```python
+import random
+
+def jogar():
+    segredo = random.randint(1, 100)
+    tentativas = 0
+    print("Pensei num número de 1 a 100.")
+    while True:
+        try:
+            chute = int(input("Seu chute: "))
+        except ValueError:
+            print("Digite um número inteiro.")
+            continue
+        tentativas += 1
+        if chute < segredo:
+            print("É maior.")
+        elif chute > segredo:
+            print("É menor.")
+        else:
+            print(f"Acertou em {tentativas} tentativas!")
+            break
+
+if __name__ == "__main__":
+    jogar()
+```
+Exercício: limitar a 7 tentativas e guardar o recorde num arquivo.
+
+P: exercícios de python para iniciantes
+P: o que praticar em python
+R: Para praticar, do mais simples ao mais desafiador:
+1. ler o salário e mostrar com 10% de aumento, formatado com duas casas;
+2. dizer se uma palavra é palíndromo (dica: `s[::-1]`);
+3. tabuada de um número com `for` e f-string alinhada;
+4. ler notas até digitar "fim" e mostrar média, maior e menor;
+5. contar as vogais de uma frase;
+6. agenda de contatos num dicionário, com menu (adicionar, buscar, listar, sair);
+7. salvar a agenda em JSON e carregar ao abrir;
+8. ler um arquivo de texto e mostrar as 10 palavras mais frequentes (`Counter`);
+9. gerador de senhas aleatórias com `secrets` e `string.ascii_letters`;
+10. pedra, papel e tesoura contra o computador, com placar.
+Depois disso, siga para "Python 2 · Avançado" e para a trilha "Aprendiz por dentro".

@@ -1,0 +1,33 @@
+{
+  "id": "sql-basico",
+  "nome": "SQL 1 · Básico",
+  "versao": "1.0.0",
+  "autor": "Jano Projects",
+  "descricao": "SQL do zero com SQLite: criar tabelas, tipos, INSERT, SELECT, WHERE, ORDER BY, LIMIT, UPDATE, DELETE, funções de agregação, GROUP BY, HAVING e JOIN.",
+  "licenca": "CC-BY-4.0",
+  "categoria": "Programação",
+  "etiquetas": [
+    "sql",
+    "sqlite",
+    "banco de dados",
+    "iniciante",
+    "trilha sql"
+  ],
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.6.0"
+  },
+  "dependencias": [
+    {
+      "id": "prog-banco-dados",
+      "versao": "1.0.0",
+      "nome": "Programação 4 · Bancos de dados (conceitos)"
+    }
+  ],
+  "recomendado": {
+    "busca": "hibrido",
+    "resposta": "direta",
+    "acerto": 0.96
+  }
+}

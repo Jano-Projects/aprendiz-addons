@@ -60,6 +60,31 @@ jeito diferente de perguntar a mesma coisa. Veja `fontes/atalhos-windows/`.
 **Temas** são só um `personalizacao.json` com `{"personalizacao.cor": "#RRGGBB"}`; veja
 `fontes/tema-oceano/`.
 
+**Programação** (categoria própria na loja): 20 addons em cinco trilhas encadeadas pelas
+`dependencias` do manifesto, do iniciante ao avançado:
+
+| Trilha | Addons |
+|---|---|
+| Fundamentos | `prog-logica` · `prog-vocabulario` · `prog-estruturas-dados` · `prog-banco-dados` |
+| C e C++ | `c-basico` · `c-intermediario` · `c-avancado` · `cpp-basico` · `cpp-intermediario` · `cpp-avancado` |
+| SQL | `sql-basico` · `sql-avancado` · `sql-teoria-pratica` (teoria e respostas dos exercícios) |
+| Python | `python-basico` · `python-avancado` |
+| Aprendiz por dentro | `aprendiz-preparar-ambiente` · `aprendiz-arquitetura` · `aprendiz-codigo` · `aprendiz-algoritmos` · `aprendiz-do-zero` |
+
+As respostas trazem código em blocos de três crases, que o `criar_addon.py` copia como estão
+(indentação, linhas em branco, `#include`) a partir da versão posterior à 0.8.0 do Aprendiz.
+Antes de publicar, o código foi conferido: os programas C e C++ compilam com `-Wall -Wextra`,
+todo o SQL roda no banco de exemplo da loja (o resultado de cada exercício saiu dele), e os
+exemplos de Python e do mini-Aprendiz passam nos testes.
+
+Os 20 addons fixam no manifesto a mesma recomendação, **Híbrido · Direta**, para formarem um
+grupo só no app ("Usar este grupo"). O `acerto` gravado é o que o `criar_addon.py` mediu para o
+Híbrido com o conteúdo de cada addon. O Fuzzy acerta um pouco mais nesse teste, que usa as
+próprias perguntas cadastradas; com perguntas escritas de outro jeito e os 20 addons instalados
+juntos, o Híbrido acertou mais (71% contra 53% do Fuzzy, em 34 perguntas novas). Para
+regenerar a recomendação depois de mudar uma fonte, apague o `recomendado` do manifesto, gere
+o addon, anote o acerto do Híbrido e grave-o de volta.
+
 **Compreensão** (Aprendiz 0.7+): os addons `compreensao-portugues` e `vetores-portugues`
 ensinam o app a interpretar as perguntas e a indicar o addon certo quando ele não sabe algo.
 Eles levam uma cópia resumida desta loja (o catálogo), então, **sempre que um addon for criado

@@ -1,0 +1,448 @@
+# C 3 · Avançado
+# Ponteiros de função, estruturas com ponteiros, bits, comportamento indefinido, ferramentas e padrões.
+
+P: o que é ponteiro de função em c
+P: como passar uma função como parâmetro em c
+P: o que é callback em c
+P: ponteiro de função
+P: callback em c
+R: Uma função também tem endereço, e dá para guardá-lo num **ponteiro de função** e chamá-la depois. É assim que se passa um comportamento como parâmetro (**callback**):
+```c
+#include <stdio.h>
+
+int dobro(int x)    { return x * 2; }
+int quadrado(int x) { return x * x; }
+
+void aplicar(int *v, int n, int (*f)(int)) {
+    for (int i = 0; i < n; i++) v[i] = f(v[i]);
+}
+
+int main(void) {
+    int v[] = {1, 2, 3};
+    aplicar(v, 3, quadrado);           /* v = {1, 4, 9} */
+    int (*op)(int) = dobro;
+    printf("%d\n", op(21));            /* 42 */
+    return 0;
+}
+```
+A sintaxe `int (*f)(int)` lê-se "f é um ponteiro para uma função que recebe int e devolve int". Um `typedef int (*Operacao)(int);` deixa tudo mais legível.
+
+P: como usar qsort em c
+P: como ordenar um vetor de structs em c
+P: ordenar vetor em c com qsort
+P: qsort
+P: ordenar em c
+R: O `qsort` (de `<stdlib.h>`) ordena qualquer coisa: você passa uma função que compara dois itens.
+```c
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct { char nome[40]; int idade; } Pessoa;
+
+int por_idade(const void *a, const void *b) {
+    const Pessoa *pa = a, *pb = b;
+    return (pa->idade > pb->idade) - (pa->idade < pb->idade);
+}
+
+int por_nome(const void *a, const void *b) {
+    return strcmp(((const Pessoa *)a)->nome, ((const Pessoa *)b)->nome);
+}
+
+/* uso: qsort(pessoas, n, sizeof pessoas[0], por_idade); */
+```
+A comparação devolve negativo, zero ou positivo. Evite `return pa->idade - pb->idade;`: com números grandes a subtração estoura. O `bsearch` usa a mesma função para buscar num vetor ordenado.
+
+P: o que é void pointer em c
+P: o que é ponteiro genérico void *
+R: `void *` é um ponteiro **sem tipo**: guarda qualquer endereço. É assim que `malloc`, `memcpy` e `qsort` funcionam com qualquer tipo.
+- em C, `void *` converte para qualquer ponteiro sem cast: `int *v = malloc(...)`;
+- não dá para desreferenciar nem fazer aritmética com ele: converta para o tipo certo antes.
+Com `void *` dá para escrever estruturas **genéricas**, como uma lista que guarda qualquer coisa:
+```c
+typedef struct No {
+    void *dado;
+    struct No *prox;
+} No;
+```
+O preço é perder a checagem de tipos: o compilador não avisa se você guardar um `int *` e ler como `double *`.
+
+P: o que é ponteiro para ponteiro em c
+P: o que é ponteiro duplo em c
+P: como alterar um ponteiro dentro de uma função
+R: `int **pp` aponta para um `int *`. Usos principais:
+- **alterar um ponteiro dentro de uma função** (como inserir no começo de uma lista, mudando a cabeça);
+- **matrizes dinâmicas** (um vetor de ponteiros, um por linha);
+- `char **argv`, a lista de strings da linha de comando.
+```c
+void alocar(int **p, int n) {
+    *p = malloc(n * sizeof **p);   /* muda o ponteiro de quem chamou */
+}
+
+int *v = NULL;
+alocar(&v, 10);
+```
+Matriz dinâmica com um bloco só (mais rápida e simples de liberar):
+```c
+double *m = malloc(linhas * colunas * sizeof *m);
+m[i * colunas + j] = 1.0;   /* elemento (i, j) */
+free(m);
+```
+
+P: como fazer lista encadeada em c
+P: lista ligada em c com malloc
+P: lista ligada em c
+P: lista encadeada em c
+R: ```c
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct No {
+    int valor;
+    struct No *prox;
+} No;
+
+void inserir_inicio(No **cabeca, int valor) {
+    No *novo = malloc(sizeof *novo);
+    if (!novo) exit(1);
+    novo->valor = valor;
+    novo->prox = *cabeca;
+    *cabeca = novo;
+}
+
+void remover(No **cabeca, int valor) {
+    for (No **p = cabeca; *p; p = &(*p)->prox) {
+        if ((*p)->valor == valor) {
+            No *alvo = *p;
+            *p = alvo->prox;
+            free(alvo);
+            return;
+        }
+    }
+}
+
+void liberar(No *n) {
+    while (n) {
+        No *prox = n->prox;
+        free(n);
+        n = prox;
+    }
+}
+
+int main(void) {
+    No *lista = NULL;
+    for (int i = 1; i <= 3; i++) inserir_inicio(&lista, i);   /* 3 2 1 */
+    remover(&lista, 2);
+    for (No *n = lista; n; n = n->prox) printf("%d ", n->valor);
+    liberar(lista);
+    return 0;
+}
+```
+O truque do `No **p` no `remover` trata o primeiro nó igual aos outros, sem caso especial.
+
+P: o que é union em c
+P: diferença entre struct e union
+R: Numa **struct**, cada campo tem seu espaço. Numa **union**, todos os campos **compartilham o mesmo espaço**: só um vale por vez, e o tamanho é o do maior campo.
+O uso típico é a **union marcada** (*tagged union*), com um campo que diz qual está valendo:
+```c
+typedef enum { INTEIRO, REAL, TEXTO } Tipo;
+
+typedef struct {
+    Tipo tipo;
+    union {
+        long i;
+        double d;
+        const char *s;
+    } valor;
+} Valor;
+
+Valor v = {.tipo = REAL, .valor.d = 3.14};
+if (v.tipo == REAL) printf("%f\n", v.valor.d);
+```
+É assim que interpretadores (como o do Python e o do SQLite) guardam valores de tipos diferentes.
+
+P: o que são operadores bit a bit em c
+P: como usar os operadores and or xor e deslocamento de bits em c
+P: o que é bitwise
+P: operadores de bits em c
+P: bitwise em c
+R: Operam em cada **bit**:
+- `a & b` (E): 1 onde os dois são 1;
+- `a | b` (OU): 1 onde algum é 1;
+- `a ^ b` (OU exclusivo): 1 onde são diferentes;
+- `~a` (NÃO): inverte todos;
+- `a << n`: desloca n bits para a esquerda (multiplica por 2ⁿ);
+- `a >> n`: desloca para a direita (divide por 2ⁿ, em números sem sinal).
+```c
+unsigned x = 0x0F;   /* 0000 1111 */
+x & 0x03;            /* 0000 0011 */
+x | 0x30;            /* 0011 1111 */
+1u << 4;             /* 0001 0000 = 16 */
+```
+Use tipos **unsigned** com operações de bits; deslocar números negativos ou por mais bits do que o tipo tem é comportamento indefinido.
+
+P: como ligar desligar e testar um bit em c
+P: o que são flags de bits
+P: o que é máscara de bits
+R: Um inteiro pode guardar várias opções liga/desliga, uma por bit (**flags**):
+```c
+enum {
+    LEITURA  = 1u << 0,   /* 001 */
+    ESCRITA  = 1u << 1,   /* 010 */
+    EXECUCAO = 1u << 2    /* 100 */
+};
+
+unsigned perm = LEITURA | ESCRITA;   /* liga dois bits */
+perm |= EXECUCAO;                    /* liga */
+perm &= ~ESCRITA;                    /* desliga */
+perm ^= LEITURA;                     /* inverte */
+if (perm & EXECUCAO) { /* testa */ }
+```
+As permissões do Linux (`chmod 755`) são exatamente isso: 7 = 111 (ler, escrever, executar). Truques úteis: `n & 1` diz se é ímpar; `n & (n - 1)` apaga o bit 1 mais baixo, e dá zero se n for potência de 2.
+
+P: o que é endianness
+P: o que é little endian e big endian
+R: É a **ordem dos bytes** de um número na memória. O inteiro `0x12345678`:
+- **little-endian** (x86, ARM normalmente): `78 56 34 12`, o byte menos significativo primeiro;
+- **big-endian** ("ordem de rede"): `12 34 56 78`.
+Importa quando bytes saem do programa: arquivos binários e protocolos de rede. Na rede se usa big-endian, com as funções `htonl`/`ntohl` para converter. Para ler um formato definido, monte o número byte a byte com deslocamentos, e o código funciona em qualquer máquina:
+```c
+uint32_t ler_u32_le(const unsigned char *b) {
+    return b[0] | (uint32_t)b[1] << 8 | (uint32_t)b[2] << 16 | (uint32_t)b[3] << 24;
+}
+```
+
+P: o que é comportamento indefinido em c
+P: o que é undefined behavior
+R: **Comportamento indefinido** (UB) é uma operação para a qual o padrão do C não define resultado. O programa pode funcionar, quebrar, ou fazer algo absurdo, e o compilador **assume que UB nunca acontece** ao otimizar, o que gera bugs muito estranhos com `-O2`.
+Exemplos:
+- acessar fora de um vetor ou usar memória liberada;
+- desreferenciar `NULL`;
+- **estouro de inteiro com sinal** (`INT_MAX + 1`);
+- ler variável não inicializada;
+- `i = i++ + 1;`;
+- deslocar bits demais;
+- modificar uma string literal (`char *s = "oi"; s[0] = 'O';`).
+Defesa: `-Wall -Wextra`, os sanitizers (`-fsanitize=address,undefined`) e não confiar em "na minha máquina funciona".
+
+P: o que é overflow de inteiro em c
+P: como evitar estouro de inteiro
+R: Estouro com **unsigned** é definido: dá a volta (módulo 2ⁿ). Com **signed** é **comportamento indefinido**.
+Confira **antes** da conta:
+```c
+#include <limits.h>
+#include <stdbool.h>
+
+bool soma_segura(int a, int b, int *res) {
+    if ((b > 0 && a > INT_MAX - b) || (b < 0 && a < INT_MIN - b)) return false;
+    *res = a + b;
+    return true;
+}
+```
+GCC e Clang têm `__builtin_add_overflow(a, b, &res)`, e o C23 padronizou `ckd_add` em `<stdckdint.h>`. Erros clássicos: `malloc(n * tamanho)` com n enorme estoura a multiplicação e aloca pouco (por isso `calloc(n, tamanho)` confere isso por você).
+
+P: o que é buffer overflow
+P: o que é estouro de buffer
+R: **Buffer overflow** é escrever além do fim de um vetor, sobrescrevendo a memória vizinha. Na pilha, isso pode alterar o **endereço de retorno** da função, e um atacante pode desviar o programa para código dele. É uma das falhas de segurança mais exploradas da história.
+Causas: `gets`, `strcpy`/`strcat` sem conferir tamanho, `scanf("%s")` sem limite, laços com `<=`.
+Defesas:
+- funções com limite: `fgets`, `snprintf`, `scanf("%49s")`;
+- sempre carregar o **tamanho** junto com o ponteiro;
+- compilar com `-fsanitize=address` nos testes e com `-D_FORTIFY_SOURCE=2 -fstack-protector-strong` em produção.
+
+P: como usar o valgrind
+P: como achar vazamento de memória em c
+P: o que é address sanitizer
+P: valgrind
+P: sanitizer
+R: Duas ferramentas indispensáveis:
+**AddressSanitizer** (rápido, embutido no gcc/clang):
+```bash
+gcc -g -fsanitize=address,undefined programa.c -o programa
+./programa
+```
+Ao acessar memória errada, ele para e mostra o tipo do erro (heap-buffer-overflow, use-after-free…), a linha e onde aquela memória foi alocada. No fim, lista os vazamentos.
+**Valgrind** (Linux; não precisa recompilar, mas é bem mais lento):
+```bash
+gcc -g programa.c -o programa
+valgrind --leak-check=full ./programa
+```
+"definitely lost" no resumo é vazamento de verdade. Rode os dois nos testes e só considere o programa pronto com zero avisos.
+
+P: como usar o gdb
+P: como depurar programa c
+P: comandos do gdb
+P: gdb
+P: depurador c
+R: O **gdb** é o depurador de linha de comando. Compile com `-g` (e sem `-O2`, para as linhas baterem):
+```bash
+gcc -g -O0 programa.c -o programa
+gdb ./programa
+```
+Comandos essenciais:
+- `break main` ou `break arquivo.c:42`: ponto de parada;
+- `run argumentos`: executa;
+- `next` (n): próxima linha, sem entrar em funções; `step` (s): entra na função;
+- `print x` (p x), `print *p`, `print v[0]@5` (5 elementos);
+- `backtrace` (bt): a pilha de chamadas. Depois de um *segfault*, mostra exatamente onde foi;
+- `watch x`: para quando `x` mudar;
+- `continue` (c), `finish`, `quit`.
+No VS Code, a extensão C/C++ usa o gdb por trás, com botões e variáveis na tela.
+
+P: o que é volatile em c
+R: `volatile` diz ao compilador: "esta variável pode mudar por fora do código que você está vendo; leia da memória toda vez, não otimize".
+Usos legítimos:
+- registradores de hardware em microcontroladores (um sensor muda o valor sozinho);
+- variáveis alteradas num tratador de sinal (`volatile sig_atomic_t parar;`);
+- impedir que o compilador apague um laço de teste de desempenho.
+`volatile` **não** serve para comunicação entre threads: não garante atomicidade nem ordem. Para isso existem `<stdatomic.h>` e mutexes.
+
+P: o que é extern em c
+P: como compartilhar variável global entre arquivos
+R: `extern` **declara** algo que está **definido** em outro arquivo:
+`config.h`:
+```c
+extern int nivel_log;     /* declaração: existe em algum lugar */
+```
+`config.c`:
+```c
+int nivel_log = 1;        /* definição: só UMA, num só .c */
+```
+Os outros arquivos fazem `#include "config.h"` e usam `nivel_log`. Funções são `extern` por padrão. Se duas `.c` definirem a mesma global, o linker reclama de "multiple definition". Use globais compartilhadas com parcimônia.
+
+P: o que é inline em c
+R: `inline` sugere ao compilador colocar o corpo da função no lugar da chamada, evitando o custo da chamada. Hoje os compiladores decidem isso sozinhos com `-O2`, então o uso prático é `static inline` em cabeçalhos, para funções pequenas que substituem macros com segurança de tipo:
+```c
+static inline int max_int(int a, int b) { return a > b ? a : b; }
+```
+Diferente da macro `MAX(a, b)`, cada argumento é avaliado uma vez só e o tipo é conferido.
+
+P: como criar biblioteca estática e dinâmica em c
+P: o que são os arquivos de biblioteca .a e .so do linux
+P: o que é dll
+R: - **Estática** (`.a` no Linux, `.lib` no Windows): o código é **copiado** para dentro do executável ao ligar.
+```bash
+gcc -c pilha.c -o pilha.o
+ar rcs libpilha.a pilha.o
+gcc main.c -L. -lpilha -o programa
+```
+- **Dinâmica** (`.so` no Linux, `.dll` no Windows, `.dylib` no macOS): fica **separada** e é carregada ao executar; vários programas compartilham uma cópia, e atualizar a biblioteca não exige recompilar o programa.
+```bash
+gcc -fPIC -shared pilha.c -o libpilha.so
+gcc main.c -L. -lpilha -o programa
+LD_LIBRARY_PATH=. ./programa
+```
+`ldd programa` lista as bibliotecas dinâmicas que um executável usa. O próprio Python usa isso: módulos como o `sqlite3` e o núcleo do RapidFuzz são bibliotecas dinâmicas (`.so` no Linux, `.pyd` no Windows) carregadas no `import`.
+
+P: como chamar código c a partir do python
+P: o que é ctypes
+R: Compile o C como biblioteca dinâmica e carregue com o módulo `ctypes`, que vem com o Python:
+`soma.c`:
+```c
+int soma(int a, int b) { return a + b; }
+```
+```bash
+gcc -shared -fPIC soma.c -o libsoma.so
+```
+```python
+import ctypes
+lib = ctypes.CDLL("./libsoma.so")
+lib.soma.argtypes = [ctypes.c_int, ctypes.c_int]
+lib.soma.restype = ctypes.c_int
+print(lib.soma(2, 3))   # 5
+```
+É o caminho para acelerar um trecho crítico em Python. Projetos maiores usam extensões C, Cython, CFFI ou pybind11 (C++). Muitas bibliotecas Python rápidas, como o RapidFuzz que o Aprendiz usa, têm o núcleo em C/C++.
+
+P: quais as versões do c
+P: o que mudou no c99 c11 c17 e c23
+R: As versões do padrão ISO C:
+- **C89/C90:** o "ANSI C" original.
+- **C99:** comentários `//`, declarar variáveis em qualquer lugar e no `for`, `bool` (`<stdbool.h>`), `<stdint.h>`, `long long`, inicializadores com nome (`.campo = x`), vetores de tamanho variável.
+- **C11:** threads (`<threads.h>`), atômicos (`<stdatomic.h>`), `_Static_assert`, `_Generic`, remoção do `gets`.
+- **C17:** só correções do C11. Um ótimo padrão de base hoje.
+- **C23:** `true`/`false`/`bool` como palavras-chave, `nullptr`, `constexpr`, `typeof`, `#embed` (embutir arquivos binários), atributos `[[nodiscard]]`, inteiros checados (`<stdckdint.h>`), literais binários `0b1010`.
+Escolha com `-std=c17` ou `-std=c23` (gcc 14 ou mais novo para quase todo o C23).
+
+P: como usar threads em c
+P: o que é pthread
+P: threads em c
+P: pthread em c
+P: concorrência em c
+R: No Linux e no macOS, o mais usado é a **pthreads** (POSIX):
+```c
+#include <pthread.h>
+#include <stdio.h>
+
+long contador = 0;
+pthread_mutex_t trava = PTHREAD_MUTEX_INITIALIZER;
+
+void *trabalhar(void *arg) {
+    (void)arg;
+    for (int i = 0; i < 1000000; i++) {
+        pthread_mutex_lock(&trava);
+        contador++;
+        pthread_mutex_unlock(&trava);
+    }
+    return NULL;
+}
+
+int main(void) {
+    pthread_t t1, t2;
+    pthread_create(&t1, NULL, trabalhar, NULL);
+    pthread_create(&t2, NULL, trabalhar, NULL);
+    pthread_join(t1, NULL);
+    pthread_join(t2, NULL);
+    printf("%ld\n", contador);   /* 2000000 */
+    return 0;
+}
+```
+Compile com `-pthread`. Sem o **mutex**, as duas threads se atropelam no `contador++` (uma **condição de corrida**) e o resultado sai menor. Para um contador simples, `atomic_long` de `<stdatomic.h>` é mais leve.
+
+P: o que é alinhamento e padding em struct
+P: por que o sizeof da struct é maior
+R: O processador acessa dados mais rápido em endereços **alinhados** (um `double` num múltiplo de 8). Por isso o compilador insere bytes vazios (**padding**) entre os campos:
+```c
+struct A { char c; double d; char e; };   /* 1 + 7 + 8 + 1 + 7 = 24 bytes */
+struct B { double d; char c; char e; };   /* 8 + 1 + 1 + 6 = 16 bytes */
+```
+Ordenar os campos do maior para o menor economiza memória. `offsetof(struct A, d)` (de `<stddef.h>`) mostra o deslocamento de cada campo. Ao gravar structs em arquivo ou mandar pela rede, o padding vai junto, mais um motivo para serializar campo a campo.
+
+P: o que é _generic em c
+P: o que é static_assert em c
+R: Dois recursos do C11:
+- **`_Static_assert`** (no C23, `static_assert`): confere uma condição **ao compilar**:
+```c
+_Static_assert(sizeof(int) == 4, "este código supõe int de 4 bytes");
+```
+- **`_Generic`**: escolhe uma expressão pelo **tipo** do argumento, uma espécie de sobrecarga:
+```c
+#define nome_tipo(x) _Generic((x), int: "int", double: "double", default: "outro")
+
+printf("%s\n", nome_tipo(3.0));   /* double */
+```
+É como o `<tgmath.h>` faz `sqrt` funcionar com `float`, `double` e `long double`.
+
+P: como escrever c seguro
+P: boas práticas em c
+R: Uma lista de hábitos que evita a maioria dos problemas:
+- compile com `-Wall -Wextra -Wpedantic` e trate avisos como erros (`-Werror`) no projeto;
+- teste com `-fsanitize=address,undefined` e com o Valgrind;
+- sempre passe **ponteiro + tamanho** juntos; nunca `gets`, `strcpy`, `sprintf`;
+- confira **todos** os retornos (`malloc`, `fopen`, `scanf`, `fwrite`);
+- inicialize toda variável; `free` + `= NULL`;
+- um "dono" claro para cada bloco de memória;
+- `const` em tudo que não muda;
+- funções pequenas, `static` para o que é interno ao arquivo;
+- analisadores estáticos: `clang-tidy`, `cppcheck` e o `-fanalyzer` do gcc;
+- escreva testes (Unity, CMocka ou um `assert` simples).
+
+P: projetos avançados em c
+P: o que construir para dominar c
+R: Projetos que ensinam muito:
+1. uma **tabela hash** genérica (`void *`) com redimensionamento;
+2. um **interpretador de expressões** ("2 * (3 + 4)") com análise léxica e uma pilha;
+3. um **shell** simples que lê comandos e usa `fork` e `exec` (Linux);
+4. um **servidor HTTP** mínimo com sockets que serve arquivos de uma pasta;
+5. um **alocador de memória** próprio (um `malloc` sobre um bloco grande);
+6. um programa para **Arduino** ou outro microcontrolador lendo um sensor;
+7. reescrever em C o BM25 da trilha "Aprendiz por dentro" e chamá-lo do Python com `ctypes`, comparando a velocidade.
+Leitura recomendada: *The C Programming Language* (Kernighan e Ritchie) e *Modern C* (Jens Gustedt, gratuito em PDF).

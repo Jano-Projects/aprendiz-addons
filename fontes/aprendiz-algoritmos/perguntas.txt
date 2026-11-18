@@ -1,0 +1,258 @@
+# Aprendiz por dentro 4 · Como os algoritmos pensam
+# A teoria por trás de cada etapa, com os números calculados pelo próprio código.
+# Exemplo usado ao longo do addon (o mesmo de docs/algoritmos.md):
+#   1. pergunta "horário da farmácia" → "8h às 20h, de segunda a sábado."
+#   2. pergunta "senha do wifi"      → "A senha do wifi é casa123."
+#   3. nota "A farmácia do bairro entrega remédios em casa."
+#   Pergunta de teste: "que horas a farmácia abre?"
+
+P: como o aprendiz pensa
+P: visão geral dos algoritmos do aprendiz
+P: como o aprendiz encontra a resposta
+R: Toda resposta passa por duas etapas, depois da preparação do texto:
+```
+pergunta ─► normalização ─► BUSCA ─► candidatos ─► limiar ─► RESPOSTA ─► texto
+            (radicais)      (bm25,    (com          (descarta  (direta,
+                             tfidf,    confiança)    os fracos) extrativa)
+                             fuzzy,
+                             hibrido)
+```
+- a **normalização** transforma o texto em radicais comparáveis ("que horas a farmácia abre?" → `horari farmac abr`);
+- a **busca** devolve candidatos com dois números: a **pontuação** (bruta, para ordenar) e a **confiança** (de 0 a 1, comparada com o **limiar**);
+- abaixo do limiar, o candidato é descartado; se nenhum sobra, o **modo estrito** diz "ainda não fui ensinado". Nada é inventado;
+- a **resposta** monta o texto final com os candidatos aceitos.
+Antes da busca ainda há atalhos: ensino pelo chat, revisão de texto, dicionário, intenções sociais ("oi", "obrigado") e, com addon, compreensão.
+
+P: como funciona a normalização do aprendiz
+P: quais as etapas da normalização
+R: A mensagem **"Vc sabe qual o HORÁRIO da farmásia?"** passa por:
+1. minúsculas e sem acento → `vc sabe qual o horario da farmasia?`
+2. pontuação vira espaço → `vc sabe qual o horario da farmasia`
+3. tokens → `vc` `sabe` `qual` `o` `horario` `da` `farmasia`
+4. **abreviações** → `vc → voce`
+5. **correção de digitação** → `farmasia → farmacia`
+6. **sinônimos** → (nenhum aqui; "horas" viraria "horario")
+7. **stopwords** removidas → `horario` `farmacia`
+8. **radicais** → `horari` `farmac`
+Por que tirar acentos? As pessoas digitam sem acento o tempo todo; perder o acento custa pouco e ganha muito. E o mais importante: **o mesmo processamento** é aplicado ao que é ensinado e ao que é perguntado, então os dois lados se encontram.
+Com addon de compreensão entram mais três passos: expressões ("dar um jeito" → resolver), lemas ("fui" → ser) e o léxico, que impede a correção de "corrigir" palavras que existem.
+
+P: como funciona a correção de digitação do aprendiz
+P: por que o aprendiz não corrige qualquer palavra
+R: Regra: uma palavra é corrigida só se
+- tiver **4 letras ou mais**;
+- **não existir na base** de conhecimento (o vocabulário);
+- não for stopword nem sinônimo conhecido;
+- (com addon de compreensão) não for uma palavra que existe no português.
+Então a RapidFuzz procura a palavra **mais parecida no vocabulário da base**, e a troca é feita se a semelhança for **pelo menos 80** (de 0 a 100).
+O ponto-chave: o corretor só sugere palavras que **o assistente conhece**. Ele não tenta corrigir para o português em geral: "farmasia" vira "farmacia" porque "farmácia" foi ensinada. E palavras curtas ficam de fora porque nelas uma letra de diferença muda tudo ("mal" × "mel").
+
+P: o que são stopwords no aprendiz
+P: por que nao não é stopword
+R: **Stopwords** são palavras muito frequentes que quase não dizem do que se trata a pergunta: `o`, `de`, `qual`, `como`, `voce`, `tem`…
+Elas são removidas **da busca** (senão todo conhecimento com "de" pareceria relevante), mas continuam valendo para a **intenção**: "tudo bem?" é só stopword e mesmo assim é uma saudação.
+A palavra **`nao` fica fora da lista de propósito**: negação muda o sentido ("o que **não** posso comer" é o oposto de "o que posso comer").
+As stopwords estão em `memoria/sementes.py` e podem ser ampliadas por addons (os dicionários acrescentam "significa", "quer", "dizer" para "o que significa X" virar só "X").
+
+P: como funciona o radicalizador do aprendiz
+P: o que é stemming
+P: o que é o rslp
+R: **Radicalizar** (*stemming*) é cortar as terminações para que variações caiam no mesmo termo: "ensinar", "ensinei", "ensinando" → `ensin`; "farmácia", "farmácias" → `farmac`.
+O Aprendiz usa uma versão simplificada do **RSLP** (Orengo e Huyck, 2001), em passos, cada um com regras `(sufixo, tamanho mínimo do radical, troca)`:
+1. **plural**: farmacias → farmacia; botoes → botao;
+2. **feminino**: obrigada → obrigado;
+3. **grau**: carrinho → carr;
+4. **sufixos de substantivo**: atualizacao → atualiz;
+5. **sufixos verbais**, só se o passo 4 não agiu: ensinando → ensin;
+6. **vogal final**: carro → carr.
+O tamanho mínimo protege palavras curtas. O radicalizador não precisa ser linguisticamente perfeito; precisa ser **consistente**: a mesma palavra sempre gera o mesmo radical, ao ensinar e ao perguntar. Formas irregulares ("fui" × "foi") ele não junta; para isso existem os lemas do addon de compreensão.
+
+P: como o aprendiz reconhece cumprimentos
+P: como funciona o naive bayes do aprendiz
+P: o que é classificação de intenções
+R: Antes de buscar, o Aprendiz tenta saber a **intenção**: saudação, despedida, agradecimento, ajuda, pergunta ou ensinar. Ele usa um **Naive Bayes Multinomial**, treinado com as frases de exemplo (editáveis em Linguagem → Intenções):
+```
+P(intenção | palavras) ∝ P(intenção) × Π P(palavra | intenção)
+P(palavra | intenção) = (vezes da palavra na intenção + 1) / (palavras da intenção + vocabulário)
+```
+- "ingênuo" porque supõe as palavras independentes umas das outras (não são, mas funciona);
+- o **+1** é a **suavização de Laplace**: uma palavra nunca vista numa intenção não zera tudo;
+- soma **logaritmos** em vez de multiplicar (produtos de números pequenos viram zero no computador: *underflow*);
+- no fim, **softmax** transforma as pontuações em probabilidades que somam 100%.
+Uma resposta social só é dada se a mensagem tiver **até 6 palavras**, a probabilidade for **pelo menos 45%** e for **pelo menos o dobro** da segunda colocada. Mensagens iguais a uma frase de exemplo pulam o classificador ("frase exata").
+
+P: como o aprendiz aprende pelo chat
+P: quais frases ensinam o aprendiz
+R: Três formatos são reconhecidos por expressões regulares, antes de qualquer busca:
+- **par:** `pergunta: horário da farmácia resposta: 8h às 20h`;
+- **fato:** `aprenda que a senha do wifi é casa123` (verbos como aprenda, memorize, lembre, anote, guarde, grave, registre + "é/são/fica/custa/abre…"). Vira a pergunta "a senha do wifi" e a resposta "A senha do wifi é casa123.";
+- **nota:** `anote: levar o carro na revisão em março` (pelo menos duas palavras).
+E há a **correção**: depois de uma resposta errada, o botão **Corrigir** transforma a resposta certa num ensinamento ligado à pergunta original.
+Se o Naive Bayes achar que a pessoa quer ensinar (probabilidade ≥ 60%) mas o formato não bateu, o Aprendiz explica os formatos aceitos.
+
+P: o que é entidade no aprendiz
+P: como o aprendiz reconhece datas e telefones
+R: **Entidades** são pedaços com significado estruturado, reconhecidos por **regex** em `linguagem/entidades.py`: e-mail, valor em reais (R$ 10,50), data, horário, telefone e número.
+Um trecho já reconhecido não é pego de novo por um padrão mais genérico (um telefone não vira também "número").
+Para que servem: aparecem no painel "Por que respondi isso?" e ajudam a **exportação** a apontar possíveis dados pessoais (um conhecimento com e-mail ou telefone vem desmarcado, com aviso).
+
+P: como funciona o bm25 do aprendiz
+P: explica a fórmula do bm25
+R: **BM25** é o algoritmo clássico dos buscadores (foi o padrão do Elasticsearch/Lucene por anos):
+```
+score(D, Q) = Σ IDF(q) · f(q,D)·(k1+1) / ( f(q,D) + k1·(1 − b + b·|D|/média) )
+```
+- **IDF(q):** termo raro na base vale mais;
+- **f(q,D):** quantas vezes o termo aparece no documento;
+- **k1** (saturação): repetir ajuda, mas cada vez menos;
+- **b** (tamanho): documentos mais longos que a média perdem um pouco.
+No Aprendiz quem calcula é o **SQLite**, em C, no índice FTS5 (`bm25()`): nada é carregado na memória. Por isso é o padrão e o mais leve.
+Como a nota BM25 não tem escala fixa (depende do tamanho da base), a **confiança** é a **cobertura**: a fração dos termos da pergunta presentes no documento.
+No exemplo (`horari farmac abr`): o item 1 tem `horari` e `farmac` → 2/3 = **0,667**, aceito (limiar 0,5); o item 3 tem só `farmac` → 0,333, descartado.
+Limite: palavras diferentes de mesmo sentido ("horas" × "horário") só se encontram se houver o sinônimo.
+
+P: como funciona o tf-idf do aprendiz
+P: explica o tf-idf com exemplo
+P: o que é similaridade do cosseno
+R: **TF-IDF + cosseno**, em Python puro (dá para conferir cada conta):
+**1. IDF** de cada termo, com N = 3 documentos: `IDF(t) = log((N+1)/(df+1)) + 1`
+- `farmac` aparece em 2 documentos: log(4/3) + 1 = **1,288**;
+- os outros aparecem em 1: log(4/2) + 1 = **1,693**.
+**2. Vetor de cada documento:** peso = TF × IDF, normalizado para comprimento 1. Documento 1: `horari 0,423 · farmac 0,322 · 8h 0,423 · 20h 0,423 · segund 0,423 · sab 0,423`.
+**3. Vetor da pergunta:** `abr` não existe na base e é ignorado: `horari 1,693 · farmac 1,288` → normalizado `horari 0,796 · farmac 0,606`.
+**4. Cosseno** = soma dos produtos dos termos em comum:
+- item 1: 0,796 × 0,423 + 0,606 × 0,322 = **0,532** (aceito; limiar 0,25);
+- item 3: 0,606 × 0,355 = 0,215 (descartado).
+Repare: `farmac`, que aparece em dois documentos, pesa menos que `horari`. O termo que **diferencia** os documentos decide. Limite: o índice fica na memória e é reconstruído quando a base muda.
+
+P: como funciona a busca fuzzy do aprendiz
+P: o que é wratio
+R: **Fuzzy** compara **letras**, não termos: tolera erros de digitação que escaparam do corretor.
+A base é a **distância de Levenshtein** (inserções, remoções e trocas de letras para transformar um texto no outro), convertida em nota de 0 a 100 pela RapidFuzz: `ratio("farmcia", "farmacia") = 93,3`.
+O comparador é o **WRatio**, que combina várias estratégias (ignora a ordem das palavras, lida com tamanhos diferentes). Ele compara as palavras da pergunta, **sem radicalizar**, com a **pergunta** de cada par ensinado (e com cada variação) ou com o conteúdo das notas.
+No exemplo ("horario farmacia abre"): item 1 → 95,0 (confiança 0,95); item 3 → 85,5; item 2 → 37,9. Limiar 0,75: os dois de farmácia passam, e a resposta usa o primeiro.
+Bom para: erros de digitação e perguntas curtas, muito parecidas com as cadastradas. Limite: em notas longas, a pergunta é uma parte pequena do texto e a nota cai.
+
+P: como funciona a busca híbrida do aprendiz
+P: o que é reciprocal rank fusion
+P: o que é rrf
+P: busca híbrida
+R: Como juntar três notas em escalas diferentes (BM25 sem limite, cosseno de 0 a 1, WRatio de 0 a 100)? O **Reciprocal Rank Fusion** ignora as notas e usa só a **posição** de cada documento em cada lista:
+```
+RRF(d) = Σ 1 / (60 + posição de d no algoritmo i)
+```
+No exemplo: o item 1 é 1º nos três → 3 × 1/61 = **0,04918**; o item 3 é 2º nos três → 3 × 1/62 = 0,04839; o item 2 só aparece no Fuzzy, em 3º → 1/63 = 0,01587.
+O 60 suaviza: a diferença entre 1º e 2º existe, mas não é exagerada.
+**Confiança:** o híbrido aceita um documento se **pelo menos um** algoritmo estiver confiante: `0,5 × max(confiança_i / limiar_i)`, limitada a 1. Ela vale exatamente 0,5 (o limiar do híbrido) quando algum algoritmo atinge o próprio limiar. No item 1, o TF-IDF dá 0,532 / 0,25 = 2,13 → confiança 1,0.
+Bom para: o resultado mais robusto. Limite: roda os três algoritmos, então é o mais lento.
+
+P: o que é limiar no aprendiz
+P: o que é o modo estrito
+P: por que o aprendiz diz que não sabe
+P: o que é o limiar
+P: limiar de confiança
+R: O **limiar** é a confiança mínima para aceitar um candidato, um por algoritmo (padrões: BM25 0,5; TF-IDF 0,25; Fuzzy 0,75; Híbrido 0,5), ajustáveis em Configurações ou por addons (como o "modo exigente").
+Sem nenhum candidato acima do limiar, entra o **modo estrito**: o Aprendiz responde que ainda não foi ensinado, sugere até três itens parecidos e, com o addon de compreensão, pode indicar um addon da loja que trate do assunto. Ele **nunca inventa**.
+O dilema clássico é **precisão × revocação**:
+- limiar alto → inventa menos, mas recusa perguntas que tinha como responder;
+- limiar baixo → responde mais, mas às vezes com o item errado ("qual a senha do **banco**?" pode trazer a senha do wifi, porque metade dos termos bate).
+Use o benchmark (`benchmarks/comparar.py`) para ver o efeito de cada mudança.
+
+P: o que é a prioridade do dono no aprendiz
+P: por que o que eu ensino vence o addon
+R: Depois da busca, se o primeiro candidato veio de um **addon** e existe algo ensinado pelo **dono** com confiança de pelo menos **90%** da dele, o do dono passa à frente.
+A margem existe porque respostas mais longas pontuam um pouco menos em alguns algoritmos, mesmo respondendo à mesma pergunta. Ela é ajustável em Configurações (`prioridade_dono.margem`, de 0,5 a 1).
+A mesma filosofia vale em todo o app: sinônimos, abreviações, parâmetros e personalização do dono vencem os de addons; e um verbete de dicionário só perde para algo que o dono ensinou com exatamente aquela palavra.
+
+P: como funciona a resposta direta
+P: como funciona a resposta extrativa
+P: o que é textrank
+P: como funciona o textrank
+P: resposta extrativa
+R: **Direta** (`resposta/direta.py`): devolve o conteúdo do melhor candidato aceito, exatamente como foi ensinado. Custo zero; ideal para pares pergunta/resposta.
+**Extrativa** (`resposta/extrativa.py`): para notas longas e arquivos importados, escolhe as **frases** certas em vez do texto inteiro:
+1. quebra os até 3 melhores conhecimentos em frases;
+2. dá uma nota a cada frase: **0,7 × relevância + 0,3 × centralidade**:
+   - relevância: fração dos termos da pergunta presentes na frase;
+   - centralidade (**TextRank**): o PageRank do Google aplicado a frases. Cada frase "vota" nas parecidas com ela, e a conta se repete até estabilizar: `nota(i) = (1 − d) + d · Σ sim(i,j)/Σ sim(j,k) · nota(j)`, com d = 0,85;
+3. devolve as 3 melhores, na ordem original (frases sem nenhum termo da pergunta só entram se não houver outra).
+Exemplo: no texto sobre óleo, filtro e pneus, a pergunta "qual a calibragem dos pneus?" devolve só "A calibragem dos pneus é 35 psi na frente e 33 atrás." (relevância 1,0, nota 0,745).
+
+P: como funciona o dicionário do aprendiz
+P: como o aprendiz responde o que significa uma gíria
+R: Os **verbetes** dos addons de dicionário só respondem quando a pessoa digita a **palavra sozinha** ou pergunta "o que significa…": numa frase com outras palavras eles são ignorados, para não "sequestrar" perguntas sobre outros assuntos.
+O motor (`core/dicionario.py`) entra **antes** das intenções (senão "como se diz obrigado em Timor?" viraria um agradecimento) e atende os dois sentidos:
+- **direto:** "kota", "o que é kota em Angola?" → o significado;
+- **inverso:** "como se diz dinheiro em Angola?", "aldeia em kriol" → o termo da região, usando as **traduções** (linha `T:`) dos verbetes.
+Ele separa a região do fim da frase (pelos `termos` declarados no manifesto), testa alguns padrões de pergunta e compara o termo por **igualdade de radicais**, nunca por semelhança: o dicionário só responde quando tem certeza. Se dois dicionários têm a mesma palavra ("bué" em Portugal e em Angola), a resposta mostra os dois.
+
+P: como funciona a compreensão do aprendiz
+P: o que fazem os addons de compreensão e vetores
+R: Os addons de **compreensão** e **vetores** não trazem respostas: ensinam o app a **interpretar**. O motor (`core/compreensao.py`) faz:
+1. **tipo da pergunta e assunto:** "o que é", "como faço", "onde fica"… Deixa o "não sei" mais preciso ("entendi que você quer saber como fazer X");
+2. **autoconhecimento:** "qual a sua versão?", "o que você não sabe fazer?", com respostas calculadas na hora por uma lista fechada de funções;
+3. quando a busca não acha nada:
+   - **fora de alcance:** "qual a previsão do tempo?" → explica que não acessa a internet;
+   - **busca por sentido (vetores):** troca palavras ausentes por outras de sentido parecido (moto → bicicleta) e busca de novo, avisando que fez isso;
+   - **recomendação de addon:** compara a pergunta com as palavras de cada addon da loja (o catálogo vai dentro do addon, sem internet) e sugere instalar ou ativar o certo.
+Os **vetores** são números que representam o sentido de cada palavra; a semelhança é o **cosseno** entre eles (1 = mesmo sentido). Os **lemas** juntam formas irregulares ("fui", "foi", "era" → ser), o que o radicalizador sozinho não consegue.
+
+P: como funciona a revisão de texto do aprendiz
+P: como o aprendiz corrige ortografia
+R: Com um addon de **norma** (o português de um país), o Aprendiz revisa textos (`core/revisao.py`). O que ele aponta, do mais grave ao mais leve:
+1. **erros comuns** da lista do addon ("excessão" → exceção);
+2. **grafia de outra norma** ("facto" numa norma que escreve "fato"; "acção" onde vale o Acordo de 1990);
+3. **ortografia:** palavra fora do **vocabulário** da norma, com sugestões por acento e por uma edição de letra;
+4. **regras de gramática** do addon, feitas só de dados (palavras, classes e exceções), como "fazem dois anos" → faz dois anos;
+5. **palavras de outra variante** ("autocarro" num texto do Brasil).
+O vocabulário tem milhões de formas e é consultado por **busca binária** num bloco de bytes ordenado, sem montar listas na memória. Na conversa: `revise: …`, `o certo é X ou Y?`, `como se escreve X?`; ou a tela **Revisar texto**.
+
+P: como o aprendiz recomenda o algoritmo de um addon
+P: o que é acerto@1
+R: A recomendação de busca e resposta de cada addon **não é palpite**, é medida (`core/recomendacao.py`):
+1. monta um Aprendiz temporário, num arquivo descartável, só com os itens do addon;
+2. para cada item, faz perguntas parecidas com as de uma pessoa: a própria pergunta e até três variações; a pergunta com um **erro de digitação** (duas letras trocadas); "o que significa…" nos verbetes; o começo do texto nas notas. Addons grandes usam uma amostra de até 150 itens;
+3. conta, para cada algoritmo, quantas vezes o item certo veio em **primeiro lugar e acima do limiar**: o **acerto@1**;
+4. recomenda o que mais acertou; no empate, o mais leve (BM25, TF-IDF, Híbrido, Fuzzy).
+A resposta recomendada depende do formato: a maior parte do conteúdo em textos longos (mais de 400 caracteres) → **Extrativa**; pares curtos → **Direta**.
+Os addons com a mesma recomendação formam um **grupo**, que pode ser ativado de uma vez ("Usar este grupo").
+
+P: como o aprendiz detecta dados pessoais na exportação
+R: Ao exportar o que o dono ensinou (`core/exportacao.py`), cada item passa por uma **heurística**: itens com cara de dado pessoal vêm **desmarcados** e com o motivo:
+- palavras que costumam vir perto de dado pessoal (senha, PIN, CPF, CNPJ, RG, cartão, CVV, agência, conta bancária, Pix, token, login, usuário, endereço, placa, nascimento), procuradas por uma expressão regular no texto normalizado;
+- números longos (6 dígitos ou mais);
+- entidades reconhecidas como **e-mail** ou **telefone**.
+É uma ajuda para revisar, não uma garantia: heurísticas erram para os dois lados. O dono sempre vê a lista e decide.
+Além disso, os addons instalados não vão no arquivo: viram **dependências** (só o nome e a versão), o que respeita a licença de cada um.
+
+P: como comparar os algoritmos do aprendiz
+P: como usar o benchmark do aprendiz
+R: `python benchmarks/comparar.py --detalhes` roda as mesmas perguntas em todos os algoritmos e mede:
+- **acerto@1:** a resposta aceita foi o conhecimento esperado;
+- **recusas indevidas:** disse "não sei" para perguntas que **têm** resposta (ruim);
+- **estrito:** disse "não sei" para perguntas **sem** resposta na base (bom);
+- **tempo** médio por pergunta.
+Com os dados de exemplo (14 conhecimentos, 18 perguntas com resposta e 5 sem): BM25, TF-IDF e Híbrido acertam 100%; o Fuzzy, 83%. No estrito, os três primeiros não inventam em 3 de 5, e o Fuzzy em 4 de 5.
+Para testar com os seus dados, crie um JSON com `"conhecimentos"` e `"testes"` (`{"pergunta": ..., "esperado": id ou null}`) e rode com `--dados arquivo.json`. Mude um limiar, um sinônimo ou uma regra do radicalizador e rode de novo: é o melhor jeito de aprender o efeito de cada técnica.
+
+P: qual algoritmo de busca usar no aprendiz
+P: diferença entre bm25 tfidf fuzzy e híbrido
+R: Resumo prático:
+- **BM25:** o padrão. Roda dentro do SQLite, quase não usa memória. Ótimo para uso geral e máquinas fracas. Precisa que as palavras (ou os sinônimos) batam.
+- **TF-IDF:** o mais didático. Bom quando a pergunta é escrita de outro jeito, com palavras em outra ordem. Mantém um índice na memória.
+- **Fuzzy:** tolera erros de digitação e brilha com perguntas curtas e muito parecidas com as cadastradas (como as dos addons, que trazem muitas variações). Sofre com textos longos.
+- **Híbrido:** junta os três por posição (RRF). O mais robusto para perguntas variadas, e o mais lento.
+Na dúvida: comece com o **recomendado** de cada addon e use o seletor do topo para comparar na hora; o painel "Por que respondi isso?" mostra a confiança de cada candidato.
+
+P: exercícios sobre os algoritmos do aprendiz
+P: como praticar com os algoritmos do aprendiz
+R: Exercícios propostos pelo próprio projeto (`docs/algoritmos.md` e `docs/linguagem.md`):
+1. faça a cobertura do BM25 ponderar cada termo pelo **IDF**: um termo inexistente na base ("banco" em "senha do banco") deveria pesar mais. Rode o benchmark antes e depois;
+2. remova o sinônimo "horas → horário" (menu Linguagem) e refaça o exemplo: o que acontece com cada algoritmo?
+3. troque o `WRatio` do Fuzzy por `token_set_ratio` e observe as notas longas;
+4. mude os pesos 0,7/0,3 da resposta Extrativa;
+5. troque o radicalizador pelo `nltk.stem.RSLPStemmer` e compare;
+6. acrescente **bigramas** (pares de palavras) como atributos no Naive Bayes;
+7. faça o corretor considerar a **frequência** das palavras na base;
+8. crie uma intenção `data` que responda "hoje é …" usando a entidade reconhecida;
+9. crie o seu algoritmo (veja o addon **Construir e customizar do zero**).
