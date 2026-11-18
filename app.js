@@ -144,7 +144,8 @@
       if (estado.categoria !== "Todas" && a.categoria !== estado.categoria) return false;
       if (!termos.length) return true;
       const texto = normalizar([a.nome, a.descricao, a.autor, a.categoria, ...(a.etiquetas || []),
-        ...(a.amostra || []).map((x) => `${x.pergunta || ""} ${x.conteudo}`), ...(a.palavras || [])].join(" "));
+        ...(a.amostra || []).map((x) => `${x.pergunta || ""} ${x.conteudo}`), ...(a.palavras || []),
+        ...(a.traducoes || [])].join(" "));
       return termos.every((t) => texto.includes(t));  // todos os termos precisam aparecer
     });
     const ordem = $("#ordem").value;
@@ -222,6 +223,7 @@
         `<button class="etiqueta" data-etiqueta="${esc(t)}">#${destacar(t, termos)}</button>`).join("")}</div>
       <div class="numeros">
         ${a.verbetes ? `<span><b>${a.verbetes}</b> verbetes</span>` : ""}
+        ${(a.traducoes || []).length ? `<span><b>${a.traducoes.length}</b> traduções</span>` : ""}
         ${a.conhecimentos - (a.verbetes || 0) ? `<span><b>${a.conhecimentos - (a.verbetes || 0)}</b> conhecimentos</span>` : ""}
         ${a.termos_linguagem ? `<span><b>${a.termos_linguagem}</b> termos de linguagem</span>` : ""}
         ${a.configuracoes ? `<span><b>${a.configuracoes}</b> ${a.configuracoes === 1 ? "configuração" : "configurações"}</span>` : ""}

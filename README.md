@@ -48,8 +48,15 @@ pelo app) não são publicados aqui: quem os cria compartilha o arquivo diretame
 recusa addons do formato 1, de origem diferente de `oficial`, com tipos que trariam código
 (`algoritmo`, `aplicacao`) ou cuja classificação não bate com o conteúdo.
 
-**Dicionários** (gírias, regionalismos) usam `verbetes.txt` com blocos `V:`/`R:` e as stopwords
-`significa`, `significado`, `quer`, `dizer` no `linguagem.json`; veja `fontes/girias-brasil/`.
+**Dicionários** (gírias, regionalismos) usam `verbetes.txt` com blocos `V:` (o termo; linhas
+`V:` a mais são outras grafias), `T:` (as traduções para o português padrão, separadas por
+vírgula) e `R:` (o significado), as stopwords `significa`, `significado`, `quer`, `dizer` no
+`linguagem.json` e a `regiao` no manifesto (nome, artigo e os termos que as pessoas usam para
+falar do lugar). Com isso o app responde nos dois sentidos: "o que significa kota?" e "como se
+diz dinheiro em Angola?". Veja `fontes/girias-angola/`.
+
+**Addons de perguntas e respostas** aceitam várias linhas `P:` no mesmo bloco: cada uma é um
+jeito diferente de perguntar a mesma coisa. Veja `fontes/atalhos-windows/`.
 **Temas** são só um `personalizacao.json` com `{"personalizacao.cor": "#RRGGBB"}`; veja
 `fontes/tema-oceano/`.
 

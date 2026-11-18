@@ -1,8 +1,8 @@
 {
   "id": "expressoes-timor-leste",
   "nome": "Expressões de Timor-Leste",
-  "versao": "1.0.0",
-  "descricao": "Palavras do tétum, língua oficial de Timor-Leste ao lado do português, ouvidas no dia a dia: obrigadu barak, maun, mana, malae, lulik…",
+  "versao": "2.0.0",
+  "descricao": "Palavras do tétum, língua oficial de Timor-Leste ao lado do português: obrigadu barak, maun, mana, malae, uma, hahan… Pergunte também \"como se diz casa em tétum?\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
     "timor-leste",
@@ -16,5 +16,20 @@
   "editor": "Jano Projects",
   "app": {
     "versao_minima": "0.4.1"
+  },
+  "regiao": {
+    "nome": "Timor-Leste",
+    "artigo": "",
+    "termos": [
+      "timor",
+      "timor leste",
+      "timorense",
+      "timorenses",
+      "tetum",
+      "tetun",
+      "dili",
+      "maubere",
+      "maubeses"
+    ]
   }
 }

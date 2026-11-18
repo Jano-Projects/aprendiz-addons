@@ -1,69 +1,169 @@
-# Dicionário: cada bloco V:/R: vira um verbete.
-# Responde à palavra sozinha ou a "o que significa <palavra>";
-# numa frase com outras palavras, o verbete é ignorado.
+# Dicionário: cada bloco é um verbete.
+#   V: o termo (linhas V: a mais = outras grafias)
+#   T: traduções para o português padrão (para "como se diz X em ...?")
+#   R: o significado
 
 V: bué
+V: bue
+V: bwe
+T: muito, bastante
 R: **bué** (Angola): muito, bastante. Também muito usado em Portugal. Ex.: «Tem bué de gente na festa.»
 
 V: kota
+V: cota
+T: pessoa mais velha, idoso, mais velho
 R: **kota** (Angola): pessoa mais velha; tratamento de respeito.
 
+V: mais-velho
+V: mais velho
+T: idoso, pessoa mais velha
+R: **mais-velho** (Angola): tratamento respeitoso para uma pessoa mais velha.
+
 V: kamba
+T: amigo, companheiro
 R: **kamba** (Angola): amigo, companheiro.
 
 V: kumbu
+T: dinheiro
 R: **kumbu** (Angola): dinheiro.
 
+V: kilapi
+T: dívida, fiado
+R: **kilapi** (Angola): dívida, compra fiada. Ex.: «Comprei a kilapi.»
+
 V: maka
+T: problema, confusão
 R: **maka** (Angola): problema, confusão. "Não tem maka" = não tem problema.
 
+V: mujimbo
+T: boato, fofoca
+R: **mujimbo** (Angola): boato, fofoca.
+
 V: bazar
+T: ir embora, sair
 R: **bazar** (Angola): ir embora, sair. Também se ouve em Portugal. Ex.: «Vou bazar.»
 
 V: garina
+T: moça, garota
 R: **garina** (Angola): moça, garota.
 
 V: mambo
+T: coisa, assunto
 R: **mambo** (Angola): coisa, assunto, situação. Ex.: «Que mambo é esse?»
 
 V: cubico
+T: casa, lar
 R: **cubico** (Angola): casa, lar.
 
 V: candengue
+T: criança, menino
 R: **candengue** (Angola): criança, miúdo.
 
+V: ndengue
+T: criança, jovem
+R: **ndengue** (Angola): criança, jovem.
+
 V: muadiê
+V: muadie
+V: mwadie
+T: homem, senhor, cara
 R: **muadiê** (Angola): homem, senhor; também "cara", "o tipo".
 
 V: bumbar
+T: trabalhar
 R: **bumbar** (Angola): trabalhar.
 
 V: anduta
+T: fácil
 R: **anduta** (Angola): fácil. "Está anduta" = está fácil.
 
 V: dioba
+T: fome
 R: **dioba** (Angola): fome.
 
+V: kuia
+T: bom, gostoso
+R: **kuia** (Angola): bom, gostoso, agradável. "Está kuia".
+
+V: banga
+T: estilo, elegância
+R: **banga** (Angola): estilo, elegância, vaidade. "Ter banga".
+
+V: muxoxo
+T: desprezo
+R: **muxoxo** (Angola): estalo de boca que mostra desprezo ou desagrado.
+
 V: gasosa
+T: refrigerante, suborno
 R: **gasosa** (Angola): refrigerante; na gíria, também suborno, "propina".
 
 V: jinguba
+V: ginguba
+T: amendoim
 R: **jinguba** (Angola): amendoim.
 
 V: chuinga
+T: chiclete
 R: **chuinga** (Angola): chiclete.
 
+V: funje
+T: pirão
+R: **funje** (Angola): pirão espesso de farinha de mandioca ou de milho, base de muitas refeições.
+
+V: fuba
+T: farinha
+R: **fuba** (Angola): farinha de mandioca ou de milho.
+
+V: muamba
+T: moqueca de galinha
+R: **muamba** (Angola): prato de galinha cozida com óleo de palma (dendê) e quiabo.
+
+V: quitanda
+T: mercado, feira
+R: **quitanda** (Angola): mercado, banca de venda.
+
+V: zungueira
+T: vendedora ambulante, camelô
+R: **zungueira** (Angola): vendedora ambulante.
+
+V: zunga
+T: venda ambulante
+R: **zunga** (Angola): venda ambulante, de rua.
+
 V: machimbombo
+T: ônibus
 R: **machimbombo** (Angola): ônibus. Também usado em Moçambique.
 
 V: candongueiro
+T: táxi coletivo, van, lotação
 R: **candongueiro** (Angola): táxi coletivo; van de passageiros.
 
 V: musseque
+T: periferia, bairro popular
 R: **musseque** (Angola): bairro popular da periferia, de casas simples, sobretudo em Luanda.
 
 V: cacimbo
+T: inverno, estação seca
 R: **cacimbo** (Angola): estação seca e mais fresca do ano, com neblina.
 
+V: caluanda
+T: luandense
+R: **caluanda** (Angola): natural de Luanda; o que é de Luanda.
+
+V: mwangolê
+V: mwangole
+T: angolano
+R: **mwangolê** (Angola): angolano.
+
+V: kizomba
+R: **kizomba** (Angola): gênero musical e dança angolana, de ritmo lento e dançada a dois.
+
+V: semba
+R: **semba** (Angola): gênero musical e dança tradicional angolana, uma das raízes do samba e da kizomba.
+
+V: kuduro
+R: **kuduro** (Angola): gênero musical e dança eletrônica de ritmo acelerado, nascida em Luanda.
+
 V: xé
+V: xe
 R: **xé** (Angola): interjeição para chamar a atenção, como "ei!".

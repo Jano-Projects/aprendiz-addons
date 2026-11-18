@@ -10,7 +10,11 @@
     "giria",
     "girias",
     "expressao",
-    "expressoes"
+    "expressoes",
+    "definicao",
+    "traducao",
+    "palavra",
+    "termo"
   ],
   "intencoes": {
     "saudacao": [
@@ -18,7 +22,8 @@
       "fala mano",
       "salve mano",
       "e ai beleza",
-      "fala ai"
+      "fala ai",
+      "coe"
     ],
     "agradecimento": [
       "valeu mano",

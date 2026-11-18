@@ -1,14 +1,14 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-18T02:23:27+00:00",
+  "gerado_em": "2026-11-18T11:05:25+00:00",
   "total": 17,
   "addons": [
     {
       "id": "atalhos-windows",
       "nome": "Atalhos de teclado do Windows",
-      "versao": "1.1.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
-      "descricao": "Atalhos do Windows 10 e 11 para janelas, capturas de tela, área de transferência e produtividade.",
+      "descricao": "Atalhos do Windows 10 e 11 para janelas, capturas de tela, área de transferência, navegador e produtividade. Entende vários jeitos de perguntar (\"como tirar print\", \"o que faz Win+D\"…).",
       "licenca": "CC0-1.0",
       "site": null,
       "categoria": "Tecnologia",
@@ -29,44 +29,46 @@
       "criado_com": "0.5.0",
       "dependencias": [],
       "recomendado": {
-        "busca": "bm25",
+        "busca": "fuzzy",
         "resposta": "direta",
-        "acerto": 1.0
+        "acerto": 0.992
       },
-      "conhecimentos": 15,
+      "conhecimentos": 31,
       "verbetes": 0,
       "palavras": [],
+      "traducoes": [],
+      "regiao": null,
       "termos_linguagem": 7,
       "ajustes": [],
       "configuracoes": 0,
       "arquivo": "addons/atalhos-windows.aprendiz",
-      "tamanho": 1487,
-      "sha256": "fd6308eb7408af4764986e2db004a5a597e7162dccd02163377238734bb0091e",
-      "atualizado_em": "2026-11-17",
+      "tamanho": 2880,
+      "sha256": "8377b69ee740482575e6fad3eff2f5d03aa94b7bf1012b4c979b0569ddb1da2b",
+      "atualizado_em": "2026-11-18",
       "amostra": [
         {
           "pergunta": "como abrir o explorador de arquivos no windows",
-          "conteudo": "Win+E."
+          "conteudo": "Win+E abre o Explorador de Arquivos."
         },
         {
           "pergunta": "como mostrar a área de trabalho no windows",
-          "conteudo": "Win+D. Aperte de novo para voltar às janelas."
+          "conteudo": "Win+D mostra a área de trabalho. Aperte de novo para voltar às janelas."
         },
         {
           "pergunta": "como bloquear o computador no windows",
-          "conteudo": "Win+L."
+          "conteudo": "Win+L bloqueia o computador na hora."
         },
         {
           "pergunta": "como tirar um print de uma parte da tela no windows",
-          "conteudo": "Win+Shift+S abre a Ferramenta de Captura para escolher a área. A imagem vai para a área de transferência."
+          "conteudo": "Win+Shift+S abre a Ferramenta de Captura para escolher a área. A imagem vai para a área de transferência. A tecla PrtSc (Print Screen) captura a tela inteira."
+        },
+        {
+          "pergunta": "como tirar print da tela inteira e salvar em arquivo no windows",
+          "conteudo": "Win+PrtSc captura a tela inteira e salva o arquivo em Imagens > Capturas de Tela."
         },
         {
           "pergunta": "como ver o histórico da área de transferência no windows",
           "conteudo": "Win+V. Na primeira vez, o Windows pede para ativar o recurso."
-        },
-        {
-          "pergunta": "como alternar entre janelas no windows",
-          "conteudo": "Alt+Tab. Win+Tab abre a Visão de Tarefas, com todas as janelas e áreas de trabalho."
         }
       ]
     },
@@ -138,6 +140,8 @@
       "conhecimentos": 0,
       "verbetes": 0,
       "palavras": [],
+      "traducoes": [],
+      "regiao": null,
       "termos_linguagem": 0,
       "ajustes": [
         {
@@ -148,14 +152,14 @@
       "configuracoes": 1,
       "arquivo": "addons/boas-vindas-lusofonia.aprendiz",
       "tamanho": 899,
-      "sha256": "da700ee1fddb6265d36d699ada4038cea9fd973b39177804414c07e39680a958",
-      "atualizado_em": "2026-11-17",
+      "sha256": "7e3aa4decf771ec197564d08af65d07eac870c8f9406b270006382a8dc498e0a",
+      "atualizado_em": "2026-11-18",
       "amostra": []
     },
     {
       "id": "atalhos-terminal-linux",
       "nome": "Comandos do terminal Linux",
-      "versao": "1.1.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Os comandos de terminal mais usados no dia a dia: arquivos, pastas, busca, disco, processos e atualização do sistema.",
       "licenca": "CC0-1.0",
@@ -178,20 +182,22 @@
       "criado_com": "0.5.0",
       "dependencias": [],
       "recomendado": {
-        "busca": "tfidf",
+        "busca": "fuzzy",
         "resposta": "direta",
         "acerto": 1.0
       },
-      "conhecimentos": 21,
+      "conhecimentos": 34,
       "verbetes": 0,
       "palavras": [],
+      "traducoes": [],
+      "regiao": null,
       "termos_linguagem": 9,
       "ajustes": [],
       "configuracoes": 0,
       "arquivo": "addons/atalhos-terminal-linux.aprendiz",
-      "tamanho": 1915,
-      "sha256": "9164001b0debe248e95e05f4c95f9ca6b5e8e8f370dcdd3d21d612395e96db7f",
-      "atualizado_em": "2026-11-17",
+      "tamanho": 3114,
+      "sha256": "5e84dbe7f19bd53888f14fcfb34c835a5cca43e07ebed5318fbbfb5d031e0b72",
+      "atualizado_em": "2026-11-18",
       "amostra": [
         {
           "pergunta": "como listar os arquivos de uma pasta no terminal linux",
@@ -199,7 +205,7 @@
         },
         {
           "pergunta": "como entrar em uma pasta no terminal linux",
-          "conteudo": "`cd nome-da-pasta`. Para voltar uma pasta: `cd ..`. Para ir à pasta pessoal: `cd ~`."
+          "conteudo": "`cd nome-da-pasta`. Para voltar uma pasta: `cd ..`. Para ir à pasta pessoal: `cd ~`. Para voltar à pasta anterior: `cd -`."
         },
         {
           "pergunta": "como saber em qual pasta eu estou no terminal linux",
@@ -210,21 +216,21 @@
           "conteudo": "`mkdir nome`. Para criar várias pastas encadeadas de uma vez: `mkdir -p a/b/c`."
         },
         {
-          "pergunta": "como copiar um arquivo no terminal linux",
-          "conteudo": "`cp origem destino`. Para copiar uma pasta inteira: `cp -r pasta destino`."
+          "pergunta": "como criar um arquivo vazio no terminal linux",
+          "conteudo": "`touch arquivo.txt` cria um arquivo vazio (ou atualiza a data de um que já existe)."
         },
         {
-          "pergunta": "como mover ou renomear um arquivo no terminal linux",
-          "conteudo": "`mv origem destino`. O mesmo comando serve para mover e para renomear."
+          "pergunta": "como copiar um arquivo no terminal linux",
+          "conteudo": "`cp origem destino`. Para copiar uma pasta inteira: `cp -r pasta destino`."
         }
       ]
     },
     {
       "id": "conversoes-medidas",
       "nome": "Conversões de medidas",
-      "versao": "1.1.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
-      "descricao": "Medidas de cozinha, distância, peso, volume, temperatura, área e pressão. Addon de exemplo.",
+      "descricao": "Cozinha, distância, velocidade, peso, volume, área, temperatura, pressão, energia e informática. Entende vários jeitos de perguntar (\"1 polegada tem quantos cm\", \"converter libras para quilos\"…).",
       "licenca": "CC0-1.0",
       "site": null,
       "categoria": "Utilidades",
@@ -249,49 +255,51 @@
         "resposta": "direta",
         "acerto": 1.0
       },
-      "conhecimentos": 20,
+      "conhecimentos": 36,
       "verbetes": 0,
       "palavras": [],
+      "traducoes": [],
+      "regiao": null,
       "termos_linguagem": 5,
       "ajustes": [],
       "configuracoes": 0,
       "arquivo": "addons/conversoes-medidas.aprendiz",
-      "tamanho": 1618,
-      "sha256": "4638aa3cbda58af12222f01a57ac2cfa0a6a2111f4d2860eadbcbfaedcb66697",
-      "atualizado_em": "2026-11-17",
+      "tamanho": 2776,
+      "sha256": "3760a347bcbf490d9459a1b029d2a16cc5529f59ee18fcac1ed2bc7f2c1ec549",
+      "atualizado_em": "2026-11-18",
       "amostra": [
         {
           "pergunta": "quantos ml tem uma xícara de chá",
           "conteudo": "Uma xícara de chá tem cerca de 240 ml."
         },
         {
+          "pergunta": "quantos gramas de farinha tem uma xícara",
+          "conteudo": "Uma xícara de farinha de trigo pesa cerca de 120 g (peneirada, um pouco menos)."
+        },
+        {
+          "pergunta": "quantos gramas de açúcar tem uma xícara",
+          "conteudo": "Uma xícara de açúcar refinado pesa cerca de 180 a 200 g."
+        },
+        {
+          "pergunta": "quantos gramas de manteiga tem uma xícara",
+          "conteudo": "Uma xícara de manteiga pesa cerca de 200 g."
+        },
+        {
+          "pergunta": "quantos ml tem um copo americano",
+          "conteudo": "O copo americano tem 190 ml (cheio até a borda, cerca de 200 ml)."
+        },
+        {
           "pergunta": "quantos ml tem uma colher de sopa",
           "conteudo": "Uma colher de sopa tem 15 ml."
-        },
-        {
-          "pergunta": "quantos ml tem uma colher de chá",
-          "conteudo": "Uma colher de chá tem 5 ml."
-        },
-        {
-          "pergunta": "quantos centímetros tem uma polegada",
-          "conteudo": "1 polegada = 2,54 cm."
-        },
-        {
-          "pergunta": "quantos centímetros tem um pé",
-          "conteudo": "1 pé = 30,48 cm (12 polegadas)."
-        },
-        {
-          "pergunta": "quantos metros tem uma jarda",
-          "conteudo": "1 jarda = 0,9144 m (3 pés)."
         }
       ]
     },
     {
       "id": "expressoes-guine-bissau",
       "nome": "Expressões da Guiné-Bissau",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
-      "descricao": "Palavras do crioulo guineense (kriol) e da cultura da Guiné-Bissau: tabanka, djumbai, mantenha, mancarra, gumbé…",
+      "descricao": "Palavras do crioulo guineense (kriol) e da cultura da Guiné-Bissau: tabanka, djumbai, bajuda, mancarra, gumbé… Pergunte também \"como se fala aldeia em kriol?\".",
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Idiomas e gírias",
@@ -317,31 +325,96 @@
         "resposta": "direta",
         "acerto": 1.0
       },
-      "conhecimentos": 14,
-      "verbetes": 14,
+      "conhecimentos": 31,
+      "verbetes": 31,
       "palavras": [
         "kriol",
         "tabanka",
+        "tchon",
         "djumbai",
         "mandjuandadi",
         "gumbé",
+        "bombolom",
+        "fanadu",
+        "baloba",
+        "djambakus",
         "mantenha",
         "kuma ku bu sta",
+        "n sta bon",
+        "bon dia",
         "obrigadu",
-        "mancarra",
-        "bianda",
-        "djintis",
+        "papia",
+        "manga di",
+        "garandi",
+        "bedju",
+        "mininu",
+        "anju",
+        "fidju",
+        "bajuda",
         "mindjer",
         "omi",
-        "garandi"
+        "djintis",
+        "kasa",
+        "iagu",
+        "bianda",
+        "mancarra",
+        "kaldu di tchebem"
       ],
-      "termos_linguagem": 13,
+      "traducoes": [
+        "adivinho",
+        "aldeia",
+        "amendoim",
+        "arroz",
+        "bastante",
+        "bebê",
+        "bom dia",
+        "caldo de chabéu",
+        "casa",
+        "chão",
+        "comida",
+        "como vai",
+        "conversar",
+        "convívio",
+        "criança",
+        "criança pequena",
+        "crioulo",
+        "cumprimentos",
+        "curandeiro",
+        "estou bem",
+        "falar",
+        "filho",
+        "garota",
+        "gente",
+        "grande",
+        "homem",
+        "idoso",
+        "iniciação",
+        "lembranças",
+        "lugar sagrado",
+        "mais velho",
+        "menino",
+        "moça",
+        "muito",
+        "mulher",
+        "obrigado",
+        "pessoas",
+        "povoado",
+        "reunião",
+        "santuário",
+        "tambor",
+        "terra",
+        "tudo bem",
+        "velho",
+        "água"
+      ],
+      "regiao": "Guiné-Bissau",
+      "termos_linguagem": 17,
       "ajustes": [],
       "configuracoes": 0,
       "arquivo": "addons/expressoes-guine-bissau.aprendiz",
-      "tamanho": 1428,
-      "sha256": "958c3d12b6b7c9b1ef2e339e2fec7feb4bc6b56085480ebf36c37be40fba8d02",
-      "atualizado_em": "2026-11-17",
+      "tamanho": 2320,
+      "sha256": "ceaf007fede25a57ab654c9aec72e62bd4ea57ab6fc4c0755a8b44db7b5acb01",
+      "atualizado_em": "2026-11-18",
       "amostra": [
         {
           "pergunta": "kriol",
@@ -349,7 +422,11 @@
         },
         {
           "pergunta": "tabanka",
-          "conteudo": "**tabanka** (Guiné-Bissau): aldeia, povoado."
+          "conteudo": "**tabanka** (Guiné-Bissau): aldeia, povoado. (Em Cabo Verde, a mesma palavra é uma festa tradicional.)"
+        },
+        {
+          "pergunta": "tchon",
+          "conteudo": "**tchon** (Guiné-Bissau): terra, chão; também o país ou a terra natal."
         },
         {
           "pergunta": "djumbai",
@@ -362,25 +439,22 @@
         {
           "pergunta": "gumbé",
           "conteudo": "**gumbé** (Guiné-Bissau): gênero musical tradicional guineense, nascido em Bissau."
-        },
-        {
-          "pergunta": "mantenha",
-          "conteudo": "**mantenha** (Guiné-Bissau): saudação, cumprimentos."
         }
       ]
     },
     {
       "id": "expressoes-cabo-verde",
       "nome": "Expressões de Cabo Verde",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
-      "descricao": "Palavras do crioulo cabo-verdiano e da cultura das ilhas: morabeza, sodade, cretcheu, mantenha, sabi, cachupa…",
+      "descricao": "Palavras do crioulo cabo-verdiano e da cultura das ilhas: morabeza, sodade, cretcheu, txeu, cachupa… Pergunte também \"como se diz muito em crioulo cabo-verdiano?\".",
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Idiomas e gírias",
       "etiquetas": [
         "cabo verde",
         "crioulo",
+        "kriolu",
         "dicionário",
         "lusofonia"
       ],
@@ -397,34 +471,94 @@
       "recomendado": {
         "busca": "bm25",
         "resposta": "direta",
-        "acerto": 1.0
+        "acerto": 0.988
       },
-      "conhecimentos": 15,
-      "verbetes": 15,
+      "conhecimentos": 34,
+      "verbetes": 34,
       "palavras": [
         "morabeza",
         "sodade",
-        "morna",
-        "funaná",
-        "batuku",
         "cretcheu",
         "mantenha",
         "sabi",
+        "txeu",
         "tud dret",
+        "dretu",
         "modi ki bu sta",
+        "kuzé",
+        "undi",
+        "fla",
+        "odja",
         "nha",
         "mininu",
         "fidju",
+        "mudjer",
+        "omi",
+        "kaza",
+        "agu",
+        "txuba",
+        "kumida",
+        "obrigadu",
+        "badiu",
+        "sampadjudu",
+        "tabanka",
         "cachupa",
-        "grogue"
+        "xerém",
+        "grogue",
+        "pontxe",
+        "morna",
+        "coladeira",
+        "funaná",
+        "batuku"
       ],
-      "termos_linguagem": 13,
+      "traducoes": [
+        "aguardente",
+        "amor",
+        "bastante",
+        "bem",
+        "bom",
+        "cachaça",
+        "casa",
+        "chuva",
+        "comida",
+        "como vai",
+        "criança",
+        "cumprimentos",
+        "direito",
+        "dizer",
+        "falar",
+        "filho",
+        "gentileza",
+        "gostoso",
+        "homem",
+        "hospitalidade",
+        "lembranças",
+        "licor",
+        "menino",
+        "meu",
+        "minha",
+        "muito",
+        "mulher",
+        "o quê",
+        "obrigado",
+        "olhar",
+        "onde",
+        "querida",
+        "querido",
+        "santiaguense",
+        "saudade",
+        "tudo bem",
+        "ver",
+        "água"
+      ],
+      "regiao": "Cabo Verde",
+      "termos_linguagem": 17,
       "ajustes": [],
       "configuracoes": 0,
       "arquivo": "addons/expressoes-cabo-verde.aprendiz",
-      "tamanho": 1576,
-      "sha256": "b955c5d9ef9efcc0afb90dae525220c16c20629eb077237114fed6a852e59bb1",
-      "atualizado_em": "2026-11-17",
+      "tamanho": 2453,
+      "sha256": "e3d7e0dfabbd7d8455f096f51f90ed61b4604c231e36cd834426c00cb5c698e6",
+      "atualizado_em": "2026-11-18",
       "amostra": [
         {
           "pergunta": "morabeza",
@@ -435,35 +569,36 @@
           "conteudo": "**sodade** (Cabo Verde): saudade; sentimento de nostalgia e melancolia, tema central da morna."
         },
         {
-          "pergunta": "morna",
-          "conteudo": "**morna** (Cabo Verde): gênero musical tradicional, lento e melancólico, muitas vezes comparado ao fado."
-        },
-        {
-          "pergunta": "funaná",
-          "conteudo": "**funaná** (Cabo Verde): gênero musical e dança animada, tocado com gaita (acordeão) e ferrinho."
-        },
-        {
-          "pergunta": "batuku",
-          "conteudo": "**batuku** (Cabo Verde): gênero musical e dança tradicional da ilha de Santiago, com canto e percussão."
-        },
-        {
           "pergunta": "cretcheu",
           "conteudo": "**cretcheu** (Cabo Verde): amor, pessoa amada, querido ou querida."
+        },
+        {
+          "pergunta": "mantenha",
+          "conteudo": "**mantenha** (Cabo Verde): saudação, cumprimentos. \"Manda mantenhas\" = manda lembranças."
+        },
+        {
+          "pergunta": "sabi",
+          "conteudo": "**sabi** (Cabo Verde): bom, gostoso, agradável. \"Sta sabi\" = está bom."
+        },
+        {
+          "pergunta": "txeu",
+          "conteudo": "**txeu** (Cabo Verde): muito, bastante. Ex.: «Txeu obrigadu.»"
         }
       ]
     },
     {
       "id": "expressoes-sao-tome-e-principe",
       "nome": "Expressões de São Tomé e Príncipe",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
-      "descricao": "O jeito leve-leve das ilhas: expressões, línguas, pratos e manifestações culturais santomenses.",
+      "descricao": "O jeito leve-leve das ilhas: palavras do forro (santome), línguas, pratos e manifestações culturais santomenses. Pergunte também \"como se diz floresta em forro?\".",
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Idiomas e gírias",
       "etiquetas": [
         "são tomé e príncipe",
-        "crioulo",
+        "forro",
+        "santome",
         "dicionário",
         "lusofonia"
       ],
@@ -480,31 +615,60 @@
       "recomendado": {
         "busca": "bm25",
         "resposta": "direta",
-        "acerto": 1.0
+        "acerto": 0.983
       },
-      "conhecimentos": 12,
-      "verbetes": 12,
+      "conhecimentos": 24,
+      "verbetes": 24,
       "palavras": [
         "leve-leve",
         "forro",
         "angolar",
         "lung'ie",
-        "calulu",
-        "fruta-pão",
+        "tongas",
+        "tela non",
+        "ngê",
+        "mina",
+        "sum",
+        "san",
+        "ôbô",
         "roça",
+        "calulu",
+        "izaquente",
+        "matabala",
+        "fruta-pão",
+        "vinho de palma",
+        "djambi",
         "tchiloli",
         "danço-congo",
         "socopé",
         "puíta",
+        "bulawê",
         "ússua"
       ],
-      "termos_linguagem": 11,
+      "traducoes": [
+        "com calma",
+        "criança",
+        "devagar",
+        "fazenda",
+        "filho",
+        "floresta",
+        "gente",
+        "inhame",
+        "mata",
+        "nossa terra",
+        "pessoa",
+        "senhor",
+        "senhora",
+        "taro"
+      ],
+      "regiao": "São Tomé e Príncipe",
+      "termos_linguagem": 15,
       "ajustes": [],
       "configuracoes": 0,
       "arquivo": "addons/expressoes-sao-tome-e-principe.aprendiz",
-      "tamanho": 1501,
-      "sha256": "ec78924ee3581f375b967fc747d35f0bcc864d8d4135250c94a38f02ac10d61c",
-      "atualizado_em": "2026-11-17",
+      "tamanho": 2165,
+      "sha256": "78369c375825ee664da24a9e61d6ce33ec50d3828ae04dd19756fc69611f80fd",
+      "atualizado_em": "2026-11-18",
       "amostra": [
         {
           "pergunta": "leve-leve",
@@ -516,28 +680,28 @@
         },
         {
           "pergunta": "angolar",
-          "conteudo": "**angolar** (São Tomé e Príncipe): língua crioula dos angolares, comunidade do sul da ilha de São Tomé."
+          "conteudo": "**angolar** (São Tomé e Príncipe): língua crioula dos angolares, comunidade de pescadores do sul da ilha de São Tomé."
         },
         {
           "pergunta": "lung'ie",
-          "conteudo": "**lung'ie** (São Tomé e Príncipe): língua crioula da ilha do Príncipe."
+          "conteudo": "**lung'ie** (São Tomé e Príncipe): língua crioula da ilha do Príncipe, também chamada principense."
         },
         {
-          "pergunta": "calulu",
-          "conteudo": "**calulu** (São Tomé e Príncipe): prato típico: peixe ou carne cozidos com legumes e ervas, servido com angu ou arroz."
+          "pergunta": "tongas",
+          "conteudo": "**tongas** (São Tomé e Príncipe): descendentes dos trabalhadores contratados trazidos para as roças."
         },
         {
-          "pergunta": "fruta-pão",
-          "conteudo": "**fruta-pão** (São Tomé e Príncipe): fruta grande e rica em amido, comida cozida ou assada."
+          "pergunta": "tela non",
+          "conteudo": "**tela non** (São Tomé e Príncipe): \"nossa terra\" em forro: São Tomé e Príncipe."
         }
       ]
     },
     {
       "id": "expressoes-timor-leste",
       "nome": "Expressões de Timor-Leste",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
-      "descricao": "Palavras do tétum, língua oficial de Timor-Leste ao lado do português, ouvidas no dia a dia: obrigadu barak, maun, mana, malae, lulik…",
+      "descricao": "Palavras do tétum, língua oficial de Timor-Leste ao lado do português: obrigadu barak, maun, mana, malae, uma, hahan… Pergunte também \"como se diz casa em tétum?\".",
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Idiomas e gírias",
@@ -558,66 +722,150 @@
       "criado_com": "0.5.0",
       "dependencias": [],
       "recomendado": {
-        "busca": "bm25",
+        "busca": "hibrido",
         "resposta": "direta",
-        "acerto": 1.0
+        "acerto": 0.989
       },
-      "conhecimentos": 12,
-      "verbetes": 12,
+      "conhecimentos": 44,
+      "verbetes": 44,
       "palavras": [
         "tétum",
-        "obrigadu barak",
-        "barak",
-        "maun",
-        "mana",
-        "malae",
-        "lulik",
-        "tais",
-        "di'ak",
         "bondia",
         "botarde",
-        "lafaek"
+        "bonoite",
+        "di'ak",
+        "obrigadu",
+        "obrigadu barak",
+        "barak",
+        "saida",
+        "naran",
+        "maun",
+        "mana",
+        "maluk",
+        "inan",
+        "aman",
+        "labarik",
+        "feto",
+        "mane",
+        "katuas",
+        "malae",
+        "timor-oan",
+        "rai",
+        "lulik",
+        "tais",
+        "be",
+        "hahan",
+        "etu",
+        "foos",
+        "ikan",
+        "manu",
+        "fahi",
+        "karau",
+        "lafaek",
+        "osan",
+        "servisu",
+        "ohin",
+        "aban",
+        "horiseik",
+        "loron",
+        "kalan",
+        "han",
+        "hemu",
+        "toba",
+        "furak"
       ],
-      "termos_linguagem": 13,
+      "traducoes": [
+        "amanhã",
+        "amigo",
+        "ancião",
+        "arroz",
+        "arroz cozido",
+        "beber",
+        "bem",
+        "boa noite",
+        "boa tarde",
+        "bom",
+        "bom dia",
+        "bonito",
+        "búfalo",
+        "comer",
+        "comida",
+        "companheiro",
+        "criança",
+        "crocodilo",
+        "dia",
+        "dinheiro",
+        "dormir",
+        "estrangeiro",
+        "frango",
+        "galinha",
+        "gostoso",
+        "hoje",
+        "homem",
+        "idoso",
+        "irmã",
+        "irmão",
+        "muito",
+        "muito obrigado",
+        "mulher",
+        "mãe",
+        "noite",
+        "nome",
+        "o quê",
+        "obrigado",
+        "ontem",
+        "pai",
+        "país",
+        "peixe",
+        "porco",
+        "sagrado",
+        "sol",
+        "terra",
+        "timorense",
+        "trabalho",
+        "água"
+      ],
+      "regiao": "Timor-Leste",
+      "termos_linguagem": 17,
       "ajustes": [],
       "configuracoes": 0,
       "arquivo": "addons/expressoes-timor-leste.aprendiz",
-      "tamanho": 1415,
-      "sha256": "c3feca42334892c7549b3932d5155c453d14a3c9f288cce652f58744f6e9fb36",
-      "atualizado_em": "2026-11-17",
+      "tamanho": 2285,
+      "sha256": "2413ef950faca49fa7b0fd820859a242fce16d67243716babb7fbd92aadd6adf",
+      "atualizado_em": "2026-11-18",
       "amostra": [
         {
           "pergunta": "tétum",
           "conteudo": "**tétum** (Timor-Leste): língua nacional e oficial de Timor-Leste, ao lado do português; tem muitas palavras de origem portuguesa."
         },
         {
-          "pergunta": "obrigadu barak",
-          "conteudo": "**obrigadu barak** (Timor-Leste): muito obrigado."
+          "pergunta": "bondia",
+          "conteudo": "**bondia** (Timor-Leste): bom dia."
         },
         {
-          "pergunta": "barak",
-          "conteudo": "**barak** (Timor-Leste): muito."
+          "pergunta": "botarde",
+          "conteudo": "**botarde** (Timor-Leste): boa tarde."
         },
         {
-          "pergunta": "maun",
-          "conteudo": "**maun** (Timor-Leste): irmão mais velho; forma respeitosa de chamar um homem."
+          "pergunta": "bonoite",
+          "conteudo": "**bonoite** (Timor-Leste): boa noite."
         },
         {
-          "pergunta": "mana",
-          "conteudo": "**mana** (Timor-Leste): irmã mais velha; forma respeitosa de chamar uma mulher."
+          "pergunta": "di'ak",
+          "conteudo": "**di'ak** (Timor-Leste): bem, bom. \"Di'ak ka lae?\" = \"Tudo bem?\""
         },
         {
-          "pergunta": "malae",
-          "conteudo": "**malae** (Timor-Leste): estrangeiro."
+          "pergunta": "obrigadu",
+          "conteudo": "**obrigadu** (Timor-Leste): obrigado."
         }
       ]
     },
     {
       "id": "girias-angola",
       "nome": "Gírias de Angola",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
-      "descricao": "Palavras do português de Angola, muitas vindas do quimbundo: kota, kamba, kumbu, maka, bazar, mambo…",
+      "descricao": "Palavras do português de Angola, muitas vindas do quimbundo: kota, kamba, kumbu, maka, bazar, mambo… Pergunte também \"como se diz dinheiro em Angola?\".",
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Idiomas e gírias",
@@ -643,39 +891,118 @@
         "resposta": "direta",
         "acerto": 1.0
       },
-      "conhecimentos": 22,
-      "verbetes": 22,
+      "conhecimentos": 40,
+      "verbetes": 40,
       "palavras": [
         "bué",
         "kota",
+        "mais-velho",
         "kamba",
         "kumbu",
+        "kilapi",
         "maka",
+        "mujimbo",
         "bazar",
         "garina",
         "mambo",
         "cubico",
         "candengue",
+        "ndengue",
         "muadiê",
         "bumbar",
         "anduta",
         "dioba",
+        "kuia",
+        "banga",
+        "muxoxo",
         "gasosa",
         "jinguba",
         "chuinga",
+        "funje",
+        "fuba",
+        "muamba",
+        "quitanda",
+        "zungueira",
+        "zunga",
         "machimbombo",
         "candongueiro",
         "musseque",
         "cacimbo",
+        "caluanda",
+        "mwangolê",
+        "kizomba",
+        "semba",
+        "kuduro",
         "xé"
       ],
-      "termos_linguagem": 13,
+      "traducoes": [
+        "amendoim",
+        "amigo",
+        "angolano",
+        "assunto",
+        "bairro popular",
+        "bastante",
+        "boato",
+        "bom",
+        "camelô",
+        "cara",
+        "casa",
+        "chiclete",
+        "coisa",
+        "companheiro",
+        "confusão",
+        "criança",
+        "desprezo",
+        "dinheiro",
+        "dívida",
+        "elegância",
+        "estação seca",
+        "estilo",
+        "farinha",
+        "feira",
+        "fiado",
+        "fofoca",
+        "fome",
+        "fácil",
+        "garota",
+        "gostoso",
+        "homem",
+        "idoso",
+        "inverno",
+        "ir embora",
+        "jovem",
+        "lar",
+        "lotação",
+        "luandense",
+        "mais velho",
+        "menino",
+        "mercado",
+        "moqueca de galinha",
+        "moça",
+        "muito",
+        "periferia",
+        "pessoa mais velha",
+        "pirão",
+        "problema",
+        "refrigerante",
+        "sair",
+        "senhor",
+        "suborno",
+        "trabalhar",
+        "táxi coletivo",
+        "van",
+        "venda ambulante",
+        "vendedora ambulante",
+        "ônibus"
+      ],
+      "regiao": "Angola",
+      "termos_linguagem": 17,
       "ajustes": [],
       "configuracoes": 0,
       "arquivo": "addons/girias-angola.aprendiz",
-      "tamanho": 1650,
-      "sha256": "6c28959580a758ad32741f84c5df1e33dfb15d1100177cfddd08bd04f4511801",
-      "atualizado_em": "2026-11-17",
+      "tamanho": 2656,
+      "sha256": "72faa3cd2407f65f34349ee9c4ac65a751a9c04fc30ba132b0cfcd0dfa6025b8",
+      "atualizado_em": "2026-11-18",
       "amostra": [
         {
           "pergunta": "bué",
@@ -686,6 +1013,10 @@
           "conteudo": "**kota** (Angola): pessoa mais velha; tratamento de respeito."
         },
         {
+          "pergunta": "mais-velho",
+          "conteudo": "**mais-velho** (Angola): tratamento respeitoso para uma pessoa mais velha."
+        },
+        {
           "pergunta": "kamba",
           "conteudo": "**kamba** (Angola): amigo, companheiro."
         },
@@ -694,21 +1025,17 @@
           "conteudo": "**kumbu** (Angola): dinheiro."
         },
         {
-          "pergunta": "maka",
-          "conteudo": "**maka** (Angola): problema, confusão. \"Não tem maka\" = não tem problema."
-        },
-        {
-          "pergunta": "bazar",
-          "conteudo": "**bazar** (Angola): ir embora, sair. Também se ouve em Portugal. Ex.: «Vou bazar.»"
+          "pergunta": "kilapi",
+          "conteudo": "**kilapi** (Angola): dívida, compra fiada. Ex.: «Comprei a kilapi.»"
         }
       ]
     },
     {
       "id": "girias-brasil",
       "nome": "Gírias do Brasil",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
-      "descricao": "Dicionário de gírias e expressões brasileiras, de norte a sul. Pergunte \"o que significa rolê?\" ou digite só a palavra.",
+      "descricao": "Dicionário de gírias e expressões brasileiras, de norte a sul. Pergunte \"o que significa rolê?\", \"como se diz mandioca no Nordeste?\" ou digite só a palavra.",
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Idiomas e gírias",
@@ -716,7 +1043,8 @@
         "brasil",
         "gírias",
         "dicionário",
-        "lusofonia"
+        "lusofonia",
+        "regionalismos"
       ],
       "formato": 2,
       "origem": "oficial",
@@ -729,54 +1057,163 @@
       "criado_com": "0.5.0",
       "dependencias": [],
       "recomendado": {
-        "busca": "bm25",
+        "busca": "fuzzy",
         "resposta": "direta",
-        "acerto": 1.0
+        "acerto": 0.985
       },
-      "conhecimentos": 29,
-      "verbetes": 29,
+      "conhecimentos": 63,
+      "verbetes": 63,
       "palavras": [
         "mano",
+        "parça",
         "trampo",
         "grana",
+        "bufunfa",
         "busão",
         "rolê",
+        "balada",
+        "rango",
+        "breja",
         "de boa",
+        "suave",
         "treta",
-        "parça",
         "zoar",
         "bagulho",
+        "parada",
+        "mina",
+        "cara",
         "sextou",
         "firmeza",
         "mó",
         "top",
+        "irado",
+        "sinistro",
+        "vacilo",
+        "mancada",
+        "pagar mico",
+        "dar um perdido",
+        "zica",
         "cringe",
         "crush",
-        "sinistro",
         "tmj",
         "pdp",
         "sqn",
         "uai",
+        "trem",
+        "sô",
         "bah",
         "tchê",
+        "guri",
+        "piá",
+        "bergamota",
+        "cacetinho",
+        "sinaleira",
+        "chimarrão",
         "oxente",
         "oxe",
         "arretado",
         "massa",
+        "visse",
+        "cabra",
+        "macaxeira",
+        "jerimum",
+        "aipim",
+        "mexerica",
         "mermão",
-        "véi"
+        "maneiro",
+        "caô",
+        "bolado",
+        "coé",
+        "véi",
+        "égua",
+        "pai d'égua"
       ],
-      "termos_linguagem": 17,
+      "traducoes": [
+        "abóbora",
+        "aipim",
+        "amigo",
+        "assunto",
+        "azar",
+        "bacana",
+        "bergamota",
+        "boate",
+        "briga",
+        "brincar",
+        "caçoar",
+        "cerveja",
+        "chateado",
+        "coisa",
+        "combinado",
+        "comida",
+        "confusão",
+        "constrangedor",
+        "deslize",
+        "dinheiro",
+        "emprego",
+        "erro",
+        "escapar",
+        "estamos juntos",
+        "excelente",
+        "festa",
+        "garota",
+        "garoto",
+        "homem",
+        "impressionante",
+        "irmão",
+        "legal",
+        "macaxeira",
+        "mancada",
+        "mandioca",
+        "mate",
+        "menino",
+        "mentira",
+        "meu irmão",
+        "mexerica",
+        "moça",
+        "muito",
+        "objeto",
+        "paixão",
+        "paquera",
+        "parceiro",
+        "passar vergonha",
+        "passeio",
+        "pessoa",
+        "pode deixar",
+        "preocupado",
+        "pão francês",
+        "refeição",
+        "saída",
+        "sem problema",
+        "semáforo",
+        "sensacional",
+        "sinal de trânsito",
+        "sujeito",
+        "sumir",
+        "tangerina",
+        "trabalho",
+        "tranquilo",
+        "tudo certo",
+        "vergonha alheia",
+        "zangado",
+        "ótimo",
+        "ônibus"
+      ],
+      "regiao": "Brasil",
+      "termos_linguagem": 21,
       "ajustes": [],
       "configuracoes": 0,
       "arquivo": "addons/girias-brasil.aprendiz",
-      "tamanho": 2287,
-      "sha256": "6cde02238ec0792cb42d08edf79b294edc2fc42a63ea1caab0c8624d1482b9c6",
-      "atualizado_em": "2026-11-17",
+      "tamanho": 4016,
+      "sha256": "c38bd04f25c764ffa90138633cd5bdef0716e65d4c2db87f64ca44a3b054f891",
+      "atualizado_em": "2026-11-18",
       "amostra": [
         {
           "pergunta": "mano",
           "conteudo": "**mano** (Brasil): amigo, parceiro; forma de chamar alguém. Para mulheres, \"mana\". Ex.: «E aí, mano, beleza?»"
+        },
+        {
+          "pergunta": "parça",
+          "conteudo": "**parça** (Brasil): parceiro, amigo próximo. Ex.: «Esse aí é meu parça.»"
         },
         {
           "pergunta": "trampo",
@@ -787,25 +1224,21 @@
           "conteudo": "**grana** (Brasil): dinheiro. Ex.: «Tô sem grana este mês.»"
         },
         {
+          "pergunta": "bufunfa",
+          "conteudo": "**bufunfa** (Brasil): dinheiro (bem informal)."
+        },
+        {
           "pergunta": "busão",
           "conteudo": "**busão** (Brasil): ônibus. Ex.: «Vou de busão.»"
-        },
-        {
-          "pergunta": "rolê",
-          "conteudo": "**rolê** (Brasil): passeio, saída, programa com os amigos. Ex.: «Bora dar um rolê?»"
-        },
-        {
-          "pergunta": "de boa",
-          "conteudo": "**de boa** (Brasil): tranquilo, sem problema; também estar sem fazer nada. Ex.: «Tô de boa hoje.»"
         }
       ]
     },
     {
       "id": "girias-portugal",
       "nome": "Gírias e expressões de Portugal",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
-      "descricao": "Gírias e palavras do dia a dia de Portugal que confundem quem fala o português do Brasil: bué, fixe, autocarro, pequeno-almoço…",
+      "descricao": "Gírias e palavras do dia a dia de Portugal que confundem quem fala o português do Brasil: bué, fixe, autocarro, pequeno-almoço… Pergunte também \"como se diz ônibus em Portugal?\".",
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Idiomas e gírias",
@@ -830,41 +1263,133 @@
         "resposta": "direta",
         "acerto": 1.0
       },
-      "conhecimentos": 24,
-      "verbetes": 24,
+      "conhecimentos": 52,
+      "verbetes": 52,
       "palavras": [
         "bué",
         "fixe",
         "giro",
         "porreiro",
+        "baril",
+        "brutal",
+        "à brava",
+        "ganda",
         "gajo",
         "miúdo",
+        "malta",
         "pá",
         "bacano",
         "ya",
+        "seca",
+        "nabo",
+        "lata",
+        "bacalhau",
+        "fazer uma direta",
+        "pôr-se a andar",
+        "estar-se nas tintas",
+        "desenrascar",
+        "chumbar",
+        "chavalo",
         "tasca",
         "bica",
+        "cimbalino",
         "fino",
         "imperial",
         "pequeno-almoço",
         "autocarro",
         "comboio",
+        "elétrico",
+        "carrinha",
+        "camião",
+        "passadeira",
+        "peão",
         "telemóvel",
+        "ecrã",
+        "rato",
+        "frigorífico",
         "casa de banho",
+        "talho",
         "sumo",
         "rebuçado",
-        "chumbar",
-        "desenrascar",
-        "estar-se nas tintas",
-        "chavalo"
+        "pastilha elástica",
+        "fato",
+        "constipação",
+        "propina",
+        "betão",
+        "guarda-redes",
+        "relvado"
       ],
-      "termos_linguagem": 14,
+      "traducoes": [
+        "amigo",
+        "aperto de mão",
+        "açougue",
+        "bacana",
+        "bala",
+        "banheiro",
+        "bar",
+        "bastante",
+        "bonde",
+        "bonito",
+        "boteco",
+        "cafezinho",
+        "café da manhã",
+        "café expresso",
+        "caminhão",
+        "cara",
+        "cara de pau",
+        "celular",
+        "chatice",
+        "chiclete",
+        "chope",
+        "concreto",
+        "criança",
+        "dar um jeito",
+        "desajeitado",
+        "descaramento",
+        "excelente",
+        "faixa de pedestres",
+        "galera",
+        "garoto",
+        "geladeira",
+        "gente boa",
+        "goleiro",
+        "gramado",
+        "grande",
+        "improvisar",
+        "incrível",
+        "interessante",
+        "ir embora",
+        "legal",
+        "mensalidade",
+        "mouse",
+        "muito",
+        "não ligar",
+        "não se importar",
+        "pedestre",
+        "perua",
+        "rapaz",
+        "reprovar",
+        "resfriado",
+        "sim",
+        "suco",
+        "sujeito",
+        "tela",
+        "terno",
+        "trem",
+        "turma",
+        "van",
+        "virar a noite",
+        "ótimo",
+        "ônibus"
+      ],
+      "regiao": "Portugal",
+      "termos_linguagem": 18,
       "ajustes": [],
       "configuracoes": 0,
       "arquivo": "addons/girias-portugal.aprendiz",
-      "tamanho": 1801,
-      "sha256": "08000bf14b02dc96a4ba61ad74e1b83fb9aecef14b8b512dc9f214e8a023ea8d",
-      "atualizado_em": "2026-11-17",
+      "tamanho": 3099,
+      "sha256": "60b3a8932c1fe59e277668da8e9111b30dc910f9aa65999c3e23963ab9505cbc",
+      "atualizado_em": "2026-11-18",
       "amostra": [
         {
           "pergunta": "bué",
@@ -883,21 +1408,21 @@
           "conteudo": "**porreiro** (Portugal): ótimo, bacana; pessoa gente boa."
         },
         {
-          "pergunta": "gajo",
-          "conteudo": "**gajo** (Portugal): cara, sujeito (informal). Feminino: \"gaja\"."
+          "pergunta": "baril",
+          "conteudo": "**baril** (Portugal): ótimo, excelente."
         },
         {
-          "pergunta": "miúdo",
-          "conteudo": "**miúdo** (Portugal): criança, garoto. \"Os miúdos\" são as crianças."
+          "pergunta": "brutal",
+          "conteudo": "**brutal** (Portugal): excelente, incrível (no bom sentido). Ex.: «O concerto foi brutal!»"
         }
       ]
     },
     {
       "id": "girias-mocambique",
       "nome": "Gírias e palavras de Moçambique",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
-      "descricao": "Expressões do português de Moçambique e palavras do dia a dia: maningue, chapa, txopela, capulana, khanimambo…",
+      "descricao": "Expressões do português de Moçambique e palavras do dia a dia: maningue, chapa, txopela, machamba, capulana, khanimambo… Pergunte também \"como se diz obrigado em changana?\".",
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Idiomas e gírias",
@@ -905,7 +1430,8 @@
         "moçambique",
         "gírias",
         "dicionário",
-        "lusofonia"
+        "lusofonia",
+        "changana"
       ],
       "formato": 2,
       "origem": "oficial",
@@ -922,37 +1448,94 @@
         "resposta": "direta",
         "acerto": 1.0
       },
-      "conhecimentos": 16,
-      "verbetes": 16,
+      "conhecimentos": 28,
+      "verbetes": 28,
       "palavras": [
         "maningue",
+        "nice",
         "chapa",
         "machimbombo",
         "txopela",
+        "tchova",
         "mola",
         "mufana",
         "mamana",
         "madala",
-        "dumba-nengue",
         "khanimambo",
+        "bichar",
+        "machamba",
+        "mukhero",
+        "dumba-nengue",
+        "mbaula",
         "capulana",
         "xima",
         "matapa",
+        "chamussa",
+        "badjia",
+        "cacana",
+        "piri-piri",
         "refresco",
+        "xiconhoca",
         "marrabenta",
-        "timbila"
+        "timbila",
+        "xipalapala"
       ],
-      "termos_linguagem": 12,
+      "traducoes": [
+        "angu",
+        "bastante",
+        "bolinho de feijão",
+        "bom",
+        "bonito",
+        "camelódromo",
+        "canga",
+        "carrinho de mão",
+        "contrabando",
+        "dinheiro",
+        "fazer fila",
+        "fogareiro",
+        "garoto",
+        "homem mais velho",
+        "horta",
+        "idoso",
+        "lavoura",
+        "lotação",
+        "menino",
+        "mercado informal",
+        "mototáxi",
+        "muito",
+        "obrigado",
+        "oportunista",
+        "pastel",
+        "pimenta",
+        "polenta",
+        "rapaz",
+        "refrigerante",
+        "roça",
+        "sacoleiro",
+        "samosa",
+        "senhor",
+        "senhora",
+        "transporte coletivo",
+        "tuk-tuk",
+        "van",
+        "ônibus"
+      ],
+      "regiao": "Moçambique",
+      "termos_linguagem": 16,
       "ajustes": [],
       "configuracoes": 0,
       "arquivo": "addons/girias-mocambique.aprendiz",
-      "tamanho": 1578,
-      "sha256": "83c9483b463bf7c68d49f28c6f99d0331a96e25e00d53f44a8701c825c65698f",
-      "atualizado_em": "2026-11-17",
+      "tamanho": 2412,
+      "sha256": "32883d82d43b3a391b14ca4960354c59f227a01b59599126d634566b6c6c5b2d",
+      "atualizado_em": "2026-11-18",
       "amostra": [
         {
           "pergunta": "maningue",
           "conteudo": "**maningue** (Moçambique): muito, bastante. \"Maningue nice\" = muito bom. Ex.: «Está maningue quente.»"
+        },
+        {
+          "pergunta": "nice",
+          "conteudo": "**nice** (Moçambique): bom, bonito, agradável (muito usado em \"maningue nice\")."
         },
         {
           "pergunta": "chapa",
@@ -967,12 +1550,8 @@
           "conteudo": "**txopela** (Moçambique): triciclo motorizado usado como táxi."
         },
         {
-          "pergunta": "mola",
-          "conteudo": "**mola** (Moçambique): dinheiro (gíria)."
-        },
-        {
-          "pergunta": "mufana",
-          "conteudo": "**mufana** (Moçambique): rapaz, garoto."
+          "pergunta": "tchova",
+          "conteudo": "**tchova** (Moçambique): carrinho de mão, de duas rodas, para levar cargas."
         }
       ]
     },
@@ -1003,6 +1582,8 @@
       "conhecimentos": 0,
       "verbetes": 0,
       "palavras": [],
+      "traducoes": [],
+      "regiao": null,
       "termos_linguagem": 0,
       "ajustes": [
         {
@@ -1013,8 +1594,8 @@
       "configuracoes": 1,
       "arquivo": "addons/tema-floresta.aprendiz",
       "tamanho": 588,
-      "sha256": "78c17d4fe0b5fe33080ff75657d61019ab864cd1876f7a07b391f7ae1031945c",
-      "atualizado_em": "2026-11-17",
+      "sha256": "019c01889193afc7f505c97d94aa5ae1997613a91b2636de98944ba72b47fd24",
+      "atualizado_em": "2026-11-18",
       "amostra": []
     },
     {
@@ -1044,6 +1625,8 @@
       "conhecimentos": 0,
       "verbetes": 0,
       "palavras": [],
+      "traducoes": [],
+      "regiao": null,
       "termos_linguagem": 0,
       "ajustes": [
         {
@@ -1054,8 +1637,8 @@
       "configuracoes": 1,
       "arquivo": "addons/tema-grafite.aprendiz",
       "tamanho": 604,
-      "sha256": "43abf182cfdf5598ead60274bfe8dd5aaa3bdf6b924172df8c1fa2f15433d557",
-      "atualizado_em": "2026-11-17",
+      "sha256": "2eda6b70602b39bd856793f1a18035bfcc22d3f8cc2b3cd610f8889a0dcbaf61",
+      "atualizado_em": "2026-11-18",
       "amostra": []
     },
     {
@@ -1085,6 +1668,8 @@
       "conhecimentos": 0,
       "verbetes": 0,
       "palavras": [],
+      "traducoes": [],
+      "regiao": null,
       "termos_linguagem": 0,
       "ajustes": [
         {
@@ -1095,8 +1680,8 @@
       "configuracoes": 1,
       "arquivo": "addons/tema-ipe.aprendiz",
       "tamanho": 590,
-      "sha256": "cd051024eb6d73b3f9b73170d3eee5df73cc680187aefbd79c6371e59746143b",
-      "atualizado_em": "2026-11-17",
+      "sha256": "1154c252d57b4fa1cd3c02b8f4a941bf85084d6cf5200231c20164a1191a44d4",
+      "atualizado_em": "2026-11-18",
       "amostra": []
     },
     {
@@ -1126,6 +1711,8 @@
       "conhecimentos": 0,
       "verbetes": 0,
       "palavras": [],
+      "traducoes": [],
+      "regiao": null,
       "termos_linguagem": 0,
       "ajustes": [
         {
@@ -1136,8 +1723,8 @@
       "configuracoes": 1,
       "arquivo": "addons/tema-oceano.aprendiz",
       "tamanho": 599,
-      "sha256": "180e7fed99974cf5a45beea65ca0966a5493a2560fe9849a6884227365b97923",
-      "atualizado_em": "2026-11-17",
+      "sha256": "64b0fc02d0ed79f7f2b3c01154ed5b72db068081a0fafa1c801f098c77dcca89",
+      "atualizado_em": "2026-11-18",
       "amostra": []
     },
     {
@@ -1167,6 +1754,8 @@
       "conhecimentos": 0,
       "verbetes": 0,
       "palavras": [],
+      "traducoes": [],
+      "regiao": null,
       "termos_linguagem": 0,
       "ajustes": [
         {
@@ -1177,8 +1766,8 @@
       "configuracoes": 1,
       "arquivo": "addons/tema-por-do-sol.aprendiz",
       "tamanho": 601,
-      "sha256": "e447f5e1b489d7467ec5308797f37e6d5bbba44d47915d38bb20361ffd22cee9",
-      "atualizado_em": "2026-11-17",
+      "sha256": "86154fc5fca5d8302348294373de2dca0cd709d68fd061b53c8b872d5aabcb65",
+      "atualizado_em": "2026-11-18",
       "amostra": []
     }
   ]

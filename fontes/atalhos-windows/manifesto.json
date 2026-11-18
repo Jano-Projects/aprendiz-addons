@@ -1,9 +1,9 @@
 {
   "id": "atalhos-windows",
   "nome": "Atalhos de teclado do Windows",
-  "versao": "1.1.0",
+  "versao": "2.0.0",
   "autor": "Jano Projects",
-  "descricao": "Atalhos do Windows 10 e 11 para janelas, capturas de tela, área de transferência e produtividade.",
+  "descricao": "Atalhos do Windows 10 e 11 para janelas, capturas de tela, área de transferência, navegador e produtividade. Entende vários jeitos de perguntar (\"como tirar print\", \"o que faz Win+D\"…).",
   "licenca": "CC0-1.0",
   "categoria": "Tecnologia",
   "etiquetas": [

@@ -1,14 +1,15 @@
 {
   "id": "girias-mocambique",
   "nome": "Gírias e palavras de Moçambique",
-  "versao": "1.0.0",
-  "descricao": "Expressões do português de Moçambique e palavras do dia a dia: maningue, chapa, txopela, capulana, khanimambo…",
+  "versao": "2.0.0",
+  "descricao": "Expressões do português de Moçambique e palavras do dia a dia: maningue, chapa, txopela, machamba, capulana, khanimambo… Pergunte também \"como se diz obrigado em changana?\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
     "moçambique",
     "gírias",
     "dicionário",
-    "lusofonia"
+    "lusofonia",
+    "changana"
   ],
   "autor": "Jano Projects",
   "licenca": "CC-BY-4.0",
@@ -16,5 +17,21 @@
   "editor": "Jano Projects",
   "app": {
     "versao_minima": "0.4.1"
+  },
+  "regiao": {
+    "nome": "Moçambique",
+    "artigo": "",
+    "termos": [
+      "mocambique",
+      "mocambicano",
+      "mocambicana",
+      "mocambicanos",
+      "mocambicanas",
+      "maputo",
+      "changana",
+      "xichangana",
+      "ronga",
+      "moz"
+    ]
   }
 }

@@ -10,16 +10,22 @@
     "giria",
     "girias",
     "expressao",
-    "expressoes"
+    "expressoes",
+    "definicao",
+    "traducao",
+    "palavra",
+    "termo"
   ],
   "intencoes": {
     "saudacao": [
       "bondia",
       "botarde",
-      "di'ak ka lae"
+      "bonoite",
+      "di ak ka lae"
     ],
     "agradecimento": [
-      "obrigadu barak"
+      "obrigadu barak",
+      "obrigadu"
     ]
   }
 }

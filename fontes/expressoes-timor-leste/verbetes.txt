@@ -1,39 +1,182 @@
-# Dicionário: cada bloco V:/R: vira um verbete.
-# Responde à palavra sozinha ou a "o que significa <palavra>";
-# numa frase com outras palavras, o verbete é ignorado.
+# Dicionário: cada bloco é um verbete.
+#   V: o termo (linhas V: a mais = outras grafias)
+#   T: traduções para o português padrão (para "como se diz X em ...?")
+#   R: o significado
 
 V: tétum
+V: tetum
+V: tetun
 R: **tétum** (Timor-Leste): língua nacional e oficial de Timor-Leste, ao lado do português; tem muitas palavras de origem portuguesa.
 
+V: bondia
+T: bom dia
+R: **bondia** (Timor-Leste): bom dia.
+
+V: botarde
+T: boa tarde
+R: **botarde** (Timor-Leste): boa tarde.
+
+V: bonoite
+T: boa noite
+R: **bonoite** (Timor-Leste): boa noite.
+
+V: di'ak
+V: diak
+T: bem, bom
+R: **di'ak** (Timor-Leste): bem, bom. "Di'ak ka lae?" = "Tudo bem?"
+
+V: obrigadu
+T: obrigado
+R: **obrigadu** (Timor-Leste): obrigado.
+
 V: obrigadu barak
+T: muito obrigado
 R: **obrigadu barak** (Timor-Leste): muito obrigado.
 
 V: barak
+T: muito
 R: **barak** (Timor-Leste): muito.
 
+V: saida
+T: o quê
+R: **saida** (Timor-Leste): "o quê?" Ex.: «Ita-nia naran saida? (Qual é o seu nome?)»
+
+V: naran
+T: nome
+R: **naran** (Timor-Leste): nome.
+
 V: maun
+T: irmão
 R: **maun** (Timor-Leste): irmão mais velho; forma respeitosa de chamar um homem.
 
 V: mana
+T: irmã
 R: **mana** (Timor-Leste): irmã mais velha; forma respeitosa de chamar uma mulher.
 
+V: maluk
+T: amigo, companheiro
+R: **maluk** (Timor-Leste): amigo, companheiro.
+
+V: inan
+T: mãe
+R: **inan** (Timor-Leste): mãe.
+
+V: aman
+T: pai
+R: **aman** (Timor-Leste): pai.
+
+V: labarik
+T: criança
+R: **labarik** (Timor-Leste): criança.
+
+V: feto
+T: mulher
+R: **feto** (Timor-Leste): mulher.
+
+V: mane
+T: homem
+R: **mane** (Timor-Leste): homem.
+
+V: katuas
+T: idoso, ancião
+R: **katuas** (Timor-Leste): homem idoso, ancião.
+
 V: malae
+T: estrangeiro
 R: **malae** (Timor-Leste): estrangeiro.
 
+V: timor-oan
+V: timor oan
+T: timorense
+R: **timor-oan** (Timor-Leste): timorense, pessoa de Timor.
+
+V: rai
+T: terra, país
+R: **rai** (Timor-Leste): terra, país.
+
 V: lulik
+T: sagrado
 R: **lulik** (Timor-Leste): sagrado. A *uma lulik* é a casa sagrada, onde se guardam os objetos sagrados da aldeia ou da família.
 
 V: tais
 R: **tais** (Timor-Leste): tecido tradicional tecido à mão, usado em roupas e cerimônias.
 
-V: di'ak
-R: **di'ak** (Timor-Leste): bem, bom. "Di'ak ka lae?" = "Tudo bem?"
+V: be
+T: água
+R: **be** (Timor-Leste): água.
 
-V: bondia
-R: **bondia** (Timor-Leste): bom dia.
+V: hahan
+T: comida
+R: **hahan** (Timor-Leste): comida.
 
-V: botarde
-R: **botarde** (Timor-Leste): boa tarde.
+V: etu
+T: arroz cozido
+R: **etu** (Timor-Leste): arroz cozido.
+
+V: foos
+T: arroz
+R: **foos** (Timor-Leste): arroz cru, em grão.
+
+V: ikan
+T: peixe
+R: **ikan** (Timor-Leste): peixe.
+
+V: manu
+T: galinha, frango
+R: **manu** (Timor-Leste): galinha, frango.
+
+V: fahi
+T: porco
+R: **fahi** (Timor-Leste): porco.
+
+V: karau
+T: búfalo
+R: **karau** (Timor-Leste): búfalo.
 
 V: lafaek
+T: crocodilo
 R: **lafaek** (Timor-Leste): crocodilo; símbolo de Timor, ligado à lenda de origem da ilha.
+
+V: osan
+T: dinheiro
+R: **osan** (Timor-Leste): dinheiro.
+
+V: servisu
+T: trabalho
+R: **servisu** (Timor-Leste): trabalho.
+
+V: ohin
+T: hoje
+R: **ohin** (Timor-Leste): hoje.
+
+V: aban
+T: amanhã
+R: **aban** (Timor-Leste): amanhã.
+
+V: horiseik
+T: ontem
+R: **horiseik** (Timor-Leste): ontem.
+
+V: loron
+T: dia, sol
+R: **loron** (Timor-Leste): dia; também o sol.
+
+V: kalan
+T: noite
+R: **kalan** (Timor-Leste): noite.
+
+V: han
+T: comer
+R: **han** (Timor-Leste): comer.
+
+V: hemu
+T: beber
+R: **hemu** (Timor-Leste): beber.
+
+V: toba
+T: dormir
+R: **toba** (Timor-Leste): dormir.
+
+V: furak
+T: bonito, gostoso
+R: **furak** (Timor-Leste): bonito, gostoso.

@@ -1,12 +1,13 @@
 {
   "id": "expressoes-cabo-verde",
   "nome": "Expressões de Cabo Verde",
-  "versao": "1.0.0",
-  "descricao": "Palavras do crioulo cabo-verdiano e da cultura das ilhas: morabeza, sodade, cretcheu, mantenha, sabi, cachupa…",
+  "versao": "2.0.0",
+  "descricao": "Palavras do crioulo cabo-verdiano e da cultura das ilhas: morabeza, sodade, cretcheu, txeu, cachupa… Pergunte também \"como se diz muito em crioulo cabo-verdiano?\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
     "cabo verde",
     "crioulo",
+    "kriolu",
     "dicionário",
     "lusofonia"
   ],
@@ -16,5 +17,23 @@
   "editor": "Jano Projects",
   "app": {
     "versao_minima": "0.4.1"
+  },
+  "regiao": {
+    "nome": "Cabo Verde",
+    "artigo": "",
+    "termos": [
+      "cabo verde",
+      "caboverde",
+      "cabo verdiano",
+      "cabo verdiana",
+      "cabo verdianos",
+      "caboverdiano",
+      "caboverdianos",
+      "kriolu",
+      "kabuverdianu",
+      "crioulo cabo verdiano",
+      "praia",
+      "mindelo"
+    ]
   }
 }

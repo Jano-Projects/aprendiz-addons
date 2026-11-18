@@ -192,6 +192,10 @@ def ler_addon(arquivo: Path) -> dict:
         # Palavras dos verbetes: deixam a busca do site achar "kota" no dicionário de Angola.
         "palavras": [str(k.get("pergunta")) for k in conhecimentos
                      if isinstance(k, dict) and k.get("tipo") == "verbete" and k.get("pergunta")][:500],
+        # Traduções dos verbetes: "dinheiro" acha os dicionários que têm a palavra.
+        "traducoes": sorted({str(t) for k in conhecimentos if isinstance(k, dict)
+                             for t in (k.get("traducoes") or []) if isinstance(t, str)})[:1000],
+        "regiao": (m.get("regiao") or {}).get("nome") if isinstance(m.get("regiao"), dict) else None,
         "termos_linguagem": termos,
         # Valores de parâmetros/personalização, para o site mostrar (ex.: a cor do tema).
         "ajustes": [{"chave": str(k), "valor": v} for k, v in {**parametros, **personalizacao}.items()

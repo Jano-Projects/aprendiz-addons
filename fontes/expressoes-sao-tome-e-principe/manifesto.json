@@ -1,12 +1,13 @@
 {
   "id": "expressoes-sao-tome-e-principe",
   "nome": "Expressões de São Tomé e Príncipe",
-  "versao": "1.0.0",
-  "descricao": "O jeito leve-leve das ilhas: expressões, línguas, pratos e manifestações culturais santomenses.",
+  "versao": "2.0.0",
+  "descricao": "O jeito leve-leve das ilhas: palavras do forro (santome), línguas, pratos e manifestações culturais santomenses. Pergunte também \"como se diz floresta em forro?\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
     "são tomé e príncipe",
-    "crioulo",
+    "forro",
+    "santome",
     "dicionário",
     "lusofonia"
   ],
@@ -16,5 +17,21 @@
   "editor": "Jano Projects",
   "app": {
     "versao_minima": "0.4.1"
+  },
+  "regiao": {
+    "nome": "São Tomé e Príncipe",
+    "artigo": "",
+    "termos": [
+      "sao tome",
+      "sao tome e principe",
+      "santomense",
+      "santomenses",
+      "sao tomense",
+      "sao tomenses",
+      "principe",
+      "forro",
+      "santome",
+      "stp"
+    ]
   }
 }

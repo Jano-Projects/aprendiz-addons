@@ -1,51 +1,114 @@
-# Dicionário: cada bloco V:/R: vira um verbete.
-# Responde à palavra sozinha ou a "o que significa <palavra>";
-# numa frase com outras palavras, o verbete é ignorado.
+# Dicionário: cada bloco é um verbete.
+#   V: o termo (linhas V: a mais = outras grafias)
+#   T: traduções para o português padrão (para "como se diz X em ...?")
+#   R: o significado
 
 V: maningue
+T: muito, bastante
 R: **maningue** (Moçambique): muito, bastante. "Maningue nice" = muito bom. Ex.: «Está maningue quente.»
 
+V: nice
+T: bom, bonito
+R: **nice** (Moçambique): bom, bonito, agradável (muito usado em "maningue nice").
+
 V: chapa
+T: lotação, van, transporte coletivo
 R: **chapa** (Moçambique): transporte coletivo de passageiros, geralmente uma van ou minibus.
 
 V: machimbombo
+T: ônibus
 R: **machimbombo** (Moçambique): ônibus. Também usado em Angola.
 
 V: txopela
+T: mototáxi, tuk-tuk
 R: **txopela** (Moçambique): triciclo motorizado usado como táxi.
 
+V: tchova
+T: carrinho de mão
+R: **tchova** (Moçambique): carrinho de mão, de duas rodas, para levar cargas.
+
 V: mola
+T: dinheiro
 R: **mola** (Moçambique): dinheiro (gíria).
 
 V: mufana
+T: rapaz, garoto, menino
 R: **mufana** (Moçambique): rapaz, garoto.
 
 V: mamana
+T: senhora
 R: **mamana** (Moçambique): senhora, mulher adulta; tratamento respeitoso.
 
 V: madala
+T: senhor, idoso, homem mais velho
 R: **madala** (Moçambique): homem mais velho; tratamento respeitoso.
 
-V: dumba-nengue
-R: **dumba-nengue** (Moçambique): mercado informal. Literalmente, "confie nas pernas".
-
 V: khanimambo
+V: kanimambo
+T: obrigado
 R: **khanimambo** (Moçambique): "obrigado" em changana, muito ouvido no sul do país.
 
+V: bichar
+T: fazer fila
+R: **bichar** (Moçambique): fazer fila, esperar na fila ("bicha").
+
+V: machamba
+T: horta, roça, lavoura
+R: **machamba** (Moçambique): horta, terreno de cultivo, roça.
+
+V: mukhero
+T: contrabando, sacoleiro
+R: **mukhero** (Moçambique): comércio informal de mercadorias trazidas do outro lado da fronteira.
+
+V: dumba-nengue
+V: dumba nengue
+T: mercado informal, camelódromo
+R: **dumba-nengue** (Moçambique): mercado informal. Literalmente, "confie nas pernas".
+
+V: mbaula
+T: fogareiro
+R: **mbaula** (Moçambique): fogareiro a carvão.
+
 V: capulana
+T: canga
 R: **capulana** (Moçambique): tecido estampado usado como saia, pano de cabeça ou para carregar bebês.
 
 V: xima
+T: polenta, angu
 R: **xima** (Moçambique): massa espessa de farinha de milho, prato básico do dia a dia.
 
 V: matapa
 R: **matapa** (Moçambique): prato de folhas de mandioca piladas, cozidas com amendoim e coco.
 
+V: chamussa
+T: pastel, samosa
+R: **chamussa** (Moçambique): salgado frito triangular recheado de carne ou legumes.
+
+V: badjia
+T: bolinho de feijão
+R: **badjia** (Moçambique): bolinho frito de feijão.
+
+V: cacana
+R: **cacana** (Moçambique): verdura de folha amarga, cozida com amendoim.
+
+V: piri-piri
+V: piripiri
+T: pimenta
+R: **piri-piri** (Moçambique): pimenta malagueta e o molho picante feito com ela.
+
 V: refresco
+T: refrigerante
 R: **refresco** (Moçambique): refrigerante.
+
+V: xiconhoca
+T: oportunista
+R: **xiconhoca** (Moçambique): pessoa oportunista, que age contra o interesse de todos (personagem de cartazes dos anos 1970).
 
 V: marrabenta
 R: **marrabenta** (Moçambique): gênero musical e dança do sul de Moçambique.
 
 V: timbila
 R: **timbila** (Moçambique): xilofone tradicional do povo chope; também a música e a dança tocadas com ele.
+
+V: xipalapala
+R: **xipalapala** (Moçambique): corneta feita de chifre, usada para chamar ou anunciar.

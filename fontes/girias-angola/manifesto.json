@@ -1,8 +1,8 @@
 {
   "id": "girias-angola",
   "nome": "Gírias de Angola",
-  "versao": "1.0.0",
-  "descricao": "Palavras do português de Angola, muitas vindas do quimbundo: kota, kamba, kumbu, maka, bazar, mambo…",
+  "versao": "2.0.0",
+  "descricao": "Palavras do português de Angola, muitas vindas do quimbundo: kota, kamba, kumbu, maka, bazar, mambo… Pergunte também \"como se diz dinheiro em Angola?\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
     "angola",
@@ -17,5 +17,24 @@
   "editor": "Jano Projects",
   "app": {
     "versao_minima": "0.4.1"
+  },
+  "regiao": {
+    "nome": "Angola",
+    "artigo": "",
+    "termos": [
+      "angola",
+      "angolano",
+      "angolana",
+      "angolanos",
+      "angolanas",
+      "luanda",
+      "luandense",
+      "caluanda",
+      "caluandas",
+      "mwangole",
+      "quimbundo",
+      "kimbundu",
+      "angoles"
+    ]
   }
 }

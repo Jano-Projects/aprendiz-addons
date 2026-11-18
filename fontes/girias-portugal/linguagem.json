@@ -10,7 +10,11 @@
     "giria",
     "girias",
     "expressao",
-    "expressoes"
+    "expressoes",
+    "definicao",
+    "traducao",
+    "palavra",
+    "termo"
   ],
   "intencoes": {
     "saudacao": [

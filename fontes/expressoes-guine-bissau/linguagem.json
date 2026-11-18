@@ -10,11 +10,16 @@
     "giria",
     "girias",
     "expressao",
-    "expressoes"
+    "expressoes",
+    "definicao",
+    "traducao",
+    "palavra",
+    "termo"
   ],
   "intencoes": {
     "saudacao": [
-      "kuma ku bu sta"
+      "kuma ku bu sta",
+      "bon dia"
     ],
     "agradecimento": [
       "obrigadu"

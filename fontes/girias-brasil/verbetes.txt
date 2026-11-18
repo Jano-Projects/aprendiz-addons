@@ -1,62 +1,140 @@
-# Dicionário: cada bloco V:/R: vira um verbete.
-# Responde à palavra sozinha ou a "o que significa <palavra>";
-# numa frase com outras palavras, o verbete é ignorado.
+# Dicionário: cada bloco é um verbete.
+#   V: o termo (linhas V: a mais = outras grafias)
+#   T: traduções para o português padrão (para "como se diz X em ...?")
+#   R: o significado
 
 V: mano
+T: amigo, irmão, parceiro
 R: **mano** (Brasil): amigo, parceiro; forma de chamar alguém. Para mulheres, "mana". Ex.: «E aí, mano, beleza?»
 
+V: parça
+V: parca
+T: parceiro, amigo
+R: **parça** (Brasil): parceiro, amigo próximo. Ex.: «Esse aí é meu parça.»
+
 V: trampo
+T: trabalho, emprego
 R: **trampo** (Brasil): trabalho, emprego. Ex.: «Tô indo pro trampo.»
 
 V: grana
+T: dinheiro
 R: **grana** (Brasil): dinheiro. Ex.: «Tô sem grana este mês.»
 
+V: bufunfa
+T: dinheiro
+R: **bufunfa** (Brasil): dinheiro (bem informal).
+
 V: busão
+V: buzão
+T: ônibus
 R: **busão** (Brasil): ônibus. Ex.: «Vou de busão.»
 
 V: rolê
+V: role
+T: passeio, saída
 R: **rolê** (Brasil): passeio, saída, programa com os amigos. Ex.: «Bora dar um rolê?»
 
+V: balada
+T: festa, boate
+R: **balada** (Brasil): festa, boate, noitada. Ex.: «Hoje tem balada.»
+
+V: rango
+T: comida, refeição
+R: **rango** (Brasil): comida, refeição. Ex.: «Bora fazer um rango?»
+
+V: breja
+T: cerveja
+R: **breja** (Brasil): cerveja. Ex.: «Uma breja gelada.»
+
 V: de boa
+T: tranquilo, sem problema
 R: **de boa** (Brasil): tranquilo, sem problema; também estar sem fazer nada. Ex.: «Tô de boa hoje.»
 
+V: suave
+T: tranquilo
+R: **suave** (Brasil): tranquilo, tudo certo. Também "suave na nave".
+
 V: treta
+T: briga, confusão
 R: **treta** (Brasil): briga, confusão, problema. Ex.: «Deu treta na reunião.»
 
-V: parça
-R: **parça** (Brasil): parceiro, amigo próximo. Ex.: «Esse aí é meu parça.»
-
 V: zoar
+T: brincar, caçoar
 R: **zoar** (Brasil): brincar, tirar sarro de alguém; também bagunçar. Ex.: «Para de me zoar!»
 
 V: bagulho
+T: coisa, objeto
 R: **bagulho** (Brasil): coisa, objeto qualquer (bem informal). Ex.: «Passa esse bagulho aí.»
+
+V: parada
+T: coisa, assunto
+R: **parada** (Brasil): coisa, assunto, situação. Ex.: «Que parada é essa?»
+
+V: mina
+T: moça, garota
+R: **mina** (Brasil): moça, garota.
+
+V: cara
+T: pessoa, sujeito
+R: **cara** (Brasil): pessoa, sujeito; também forma de chamar alguém. Ex.: «Cara, você não vai acreditar!»
 
 V: sextou
 R: **sextou** (Brasil): comemoração da chegada da sexta-feira e do fim de semana.
 
 V: firmeza
+T: combinado, tudo certo
 R: **firmeza** (Brasil): tudo certo, combinado; também usado como cumprimento. Ex.: «Firmeza, a gente se vê amanhã.»
 
 V: mó
+T: muito
 R: **mó** (Brasil): redução de "maior"; quer dizer "muito". Ex.: «Foi mó legal.»
 
 V: top
+T: ótimo, excelente
 R: **top** (Brasil): ótimo, excelente. Ex.: «O show foi top.»
 
+V: irado
+T: ótimo, sensacional
+R: **irado** (Brasil): muito bom, sensacional. Ex.: «Esse filme é irado!»
+
+V: sinistro
+T: impressionante
+R: **sinistro** (Brasil): impressionante, muito bom; em outro contexto, assustador. Ex.: «Esse jogo é sinistro!»
+
+V: vacilo
+T: erro, mancada
+R: **vacilo** (Brasil): erro, mancada, deslize. Ex.: «Foi mal, dei um vacilo.»
+
+V: mancada
+T: erro, deslize
+R: **mancada** (Brasil): erro, atitude errada com alguém. Ex.: «Que mancada, esqueci teu aniversário.»
+
+V: pagar mico
+T: passar vergonha
+R: **pagar mico** (Brasil): passar vergonha. Ex.: «Paguei o maior mico na festa.»
+
+V: dar um perdido
+T: sumir, escapar
+R: **dar um perdido** (Brasil): sumir sem avisar, escapar de alguém.
+
+V: zica
+T: azar
+R: **zica** (Brasil): azar, má sorte. Ex.: «Que zica, perdi o ônibus.»
+
 V: cringe
+T: vergonha alheia, constrangedor
 R: **cringe** (Brasil): vergonha alheia; algo constrangedor ou fora de moda.
 
 V: crush
+T: paixão, paquera
 R: **crush** (Brasil): pessoa por quem alguém tem uma paixão ou interesse amoroso.
 
-V: sinistro
-R: **sinistro** (Brasil): impressionante, muito bom; em outro contexto, assustador. Ex.: «Esse jogo é sinistro!»
-
 V: tmj
+T: estamos juntos
 R: **tmj** (Brasil): "tamo junto": estamos juntos, conte comigo; muito usado para agradecer.
 
 V: pdp
+T: pode deixar
 R: **pdp** (Brasil): "pode deixar": combinado, eu cuido disso.
 
 V: sqn
@@ -65,11 +143,43 @@ R: **sqn** (Brasil): "só que não": indica ironia, o contrário do que foi dito
 V: uai
 R: **uai** (Brasil, Minas Gerais): interjeição de surpresa ou de algo óbvio. Ex.: «Uai, já chegou?»
 
+V: trem
+T: coisa
+R: **trem** (Brasil, Minas Gerais): coisa, qualquer objeto ou situação. Ex.: «Pega aquele trem ali pra mim.»
+
+V: sô
+R: **sô** (Brasil, Minas Gerais): "senhor", "moço"; forma de chamar alguém. Ex.: «Ô, sô, vem cá!»
+
 V: bah
 R: **bah** (Brasil, Rio Grande do Sul): interjeição de espanto, admiração ou ênfase. Ex.: «Bah, que frio!»
 
 V: tchê
+V: tche
 R: **tchê** (Brasil, Rio Grande do Sul): forma de chamar alguém, como "cara" ou "amigo".
+
+V: guri
+T: menino, garoto
+R: **guri** (Brasil, Sul): menino, garoto. Feminino: "guria".
+
+V: piá
+T: menino, garoto
+R: **piá** (Brasil, Paraná e Santa Catarina): menino, garoto.
+
+V: bergamota
+T: tangerina, mexerica
+R: **bergamota** (Brasil, Sul): tangerina, mexerica.
+
+V: cacetinho
+T: pão francês
+R: **cacetinho** (Brasil, Rio Grande do Sul): pão francês.
+
+V: sinaleira
+T: semáforo, sinal de trânsito
+R: **sinaleira** (Brasil, Rio Grande do Sul): semáforo, sinal de trânsito.
+
+V: chimarrão
+T: mate
+R: **chimarrão** (Brasil, Rio Grande do Sul): bebida quente de erva-mate, tomada na cuia.
 
 V: oxente
 R: **oxente** (Brasil, Nordeste): interjeição de surpresa ou estranhamento. Forma curta: "oxe".
@@ -78,13 +188,64 @@ V: oxe
 R: **oxe** (Brasil, Nordeste): forma curta de "oxente": surpresa ou estranhamento.
 
 V: arretado
+T: ótimo, zangado
 R: **arretado** (Brasil, Nordeste): muito bom, excelente; conforme o contexto, também zangado, irritado.
 
 V: massa
+T: legal, ótimo
 R: **massa** (Brasil, Nordeste e outras regiões): legal, muito bom. Ex.: «Que massa!»
 
+V: visse
+R: **visse** (Brasil, Pernambuco): "viu?", usado no fim da frase para confirmar. Ex.: «Tô indo, visse?»
+
+V: cabra
+T: sujeito, homem
+R: **cabra** (Brasil, Nordeste): sujeito, homem. "Cabra da peste" é alguém valente.
+
+V: macaxeira
+T: mandioca, aipim
+R: **macaxeira** (Brasil, Nordeste): mandioca, aipim.
+
+V: jerimum
+T: abóbora
+R: **jerimum** (Brasil, Nordeste): abóbora.
+
+V: aipim
+T: mandioca, macaxeira
+R: **aipim** (Brasil, Rio de Janeiro e Sul): mandioca, macaxeira.
+
+V: mexerica
+T: tangerina, bergamota
+R: **mexerica** (Brasil, Sudeste): tangerina, bergamota.
+
 V: mermão
+T: meu irmão
 R: **mermão** (Brasil, Rio de Janeiro): "meu irmão"; forma de chamar alguém.
 
+V: maneiro
+T: legal, bacana
+R: **maneiro** (Brasil, Rio de Janeiro): legal, bacana. Ex.: «Teu tênis é maneiro.»
+
+V: caô
+V: cao
+T: mentira
+R: **caô** (Brasil, Rio de Janeiro): mentira, conversa fiada. Ex.: «Isso é caô!»
+
+V: bolado
+T: chateado, preocupado
+R: **bolado** (Brasil, Rio de Janeiro): chateado, preocupado ou irritado. Ex.: «Fiquei bolado com aquilo.»
+
+V: coé
+V: coe
+R: **coé** (Brasil, Rio de Janeiro): "qual é?"; cumprimento, como "e aí?". Ex.: «Coé, mermão!»
+
 V: véi
+V: vei
 R: **véi** (Brasil, Centro-Oeste): "velho", "cara"; forma de chamar alguém, muito usada em Brasília. Ex.: «Véi, que calor!»
+
+V: égua
+R: **égua** (Brasil, Pará): interjeição de espanto, surpresa ou admiração. Ex.: «Égua, que chuva!»
+
+V: pai d'égua
+T: ótimo, excelente
+R: **pai d'égua** (Brasil, Pará): muito bom, excelente.

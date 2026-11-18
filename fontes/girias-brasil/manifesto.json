@@ -1,14 +1,15 @@
 {
   "id": "girias-brasil",
   "nome": "Gírias do Brasil",
-  "versao": "1.0.0",
-  "descricao": "Dicionário de gírias e expressões brasileiras, de norte a sul. Pergunte \"o que significa rolê?\" ou digite só a palavra.",
+  "versao": "2.0.0",
+  "descricao": "Dicionário de gírias e expressões brasileiras, de norte a sul. Pergunte \"o que significa rolê?\", \"como se diz mandioca no Nordeste?\" ou digite só a palavra.",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
     "brasil",
     "gírias",
     "dicionário",
-    "lusofonia"
+    "lusofonia",
+    "regionalismos"
   ],
   "autor": "Jano Projects",
   "licenca": "CC-BY-4.0",
@@ -16,5 +17,44 @@
   "editor": "Jano Projects",
   "app": {
     "versao_minima": "0.4.1"
+  },
+  "regiao": {
+    "nome": "Brasil",
+    "artigo": "o",
+    "termos": [
+      "brasil",
+      "brazil",
+      "brasileiro",
+      "brasileira",
+      "brasileiros",
+      "brasileiras",
+      "br",
+      "nordeste",
+      "nordestino",
+      "nordestinos",
+      "minas",
+      "minas gerais",
+      "mineiro",
+      "mineiros",
+      "rio",
+      "rio de janeiro",
+      "carioca",
+      "cariocas",
+      "sao paulo",
+      "paulista",
+      "paulistano",
+      "rio grande do sul",
+      "gaucho",
+      "gauchos",
+      "sul",
+      "para",
+      "paraense",
+      "brasilia",
+      "pernambuco",
+      "pernambucano",
+      "bahia",
+      "baiano",
+      "baianos"
+    ]
   }
 }

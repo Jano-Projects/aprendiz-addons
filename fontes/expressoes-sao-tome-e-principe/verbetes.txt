@@ -1,39 +1,95 @@
-# Dicionário: cada bloco V:/R: vira um verbete.
-# Responde à palavra sozinha ou a "o que significa <palavra>";
-# numa frase com outras palavras, o verbete é ignorado.
+# Dicionário: cada bloco é um verbete.
+#   V: o termo (linhas V: a mais = outras grafias)
+#   T: traduções para o português padrão (para "como se diz X em ...?")
+#   R: o significado
 
 V: leve-leve
+V: leve leve
+T: devagar, com calma
 R: **leve-leve** (São Tomé e Príncipe): fazer as coisas com calma e prudência, cada coisa a seu tempo; lema e modo de vida das ilhas, usado até como cumprimento.
 
 V: forro
 R: **forro** (São Tomé e Príncipe): a principal língua crioula da ilha de São Tomé, também chamada santome.
 
 V: angolar
-R: **angolar** (São Tomé e Príncipe): língua crioula dos angolares, comunidade do sul da ilha de São Tomé.
+R: **angolar** (São Tomé e Príncipe): língua crioula dos angolares, comunidade de pescadores do sul da ilha de São Tomé.
 
 V: lung'ie
-R: **lung'ie** (São Tomé e Príncipe): língua crioula da ilha do Príncipe.
+V: lungie
+R: **lung'ie** (São Tomé e Príncipe): língua crioula da ilha do Príncipe, também chamada principense.
+
+V: tongas
+R: **tongas** (São Tomé e Príncipe): descendentes dos trabalhadores contratados trazidos para as roças.
+
+V: tela non
+T: nossa terra
+R: **tela non** (São Tomé e Príncipe): "nossa terra" em forro: São Tomé e Príncipe.
+
+V: ngê
+V: nge
+T: pessoa, gente
+R: **ngê** (São Tomé e Príncipe): pessoa, gente.
+
+V: mina
+T: filho, criança
+R: **mina** (São Tomé e Príncipe): filho, criança.
+
+V: sum
+T: senhor
+R: **sum** (São Tomé e Príncipe): senhor (tratamento).
+
+V: san
+T: senhora
+R: **san** (São Tomé e Príncipe): senhora (tratamento).
+
+V: ôbô
+V: obo
+T: floresta, mata
+R: **ôbô** (São Tomé e Príncipe): floresta, mata cerrada do interior das ilhas.
+
+V: roça
+T: fazenda
+R: **roça** (São Tomé e Príncipe): antiga grande propriedade agrícola, de cacau e café, do tempo colonial.
 
 V: calulu
 R: **calulu** (São Tomé e Príncipe): prato típico: peixe ou carne cozidos com legumes e ervas, servido com angu ou arroz.
 
+V: izaquente
+R: **izaquente** (São Tomé e Príncipe): prato feito com as sementes da árvore do mesmo nome.
+
+V: matabala
+T: inhame, taro
+R: **matabala** (São Tomé e Príncipe): tubérculo parecido com o inhame, muito usado na cozinha.
+
 V: fruta-pão
+V: fruta pao
 R: **fruta-pão** (São Tomé e Príncipe): fruta grande e rica em amido, comida cozida ou assada.
 
-V: roça
-R: **roça** (São Tomé e Príncipe): antiga grande propriedade agrícola, de cacau e café, do tempo colonial.
+V: vinho de palma
+R: **vinho de palma** (São Tomé e Príncipe): bebida tirada da seiva da palmeira.
+
+V: djambi
+R: **djambi** (São Tomé e Príncipe): ritual tradicional de cura, com música e dança.
 
 V: tchiloli
 R: **tchiloli** (São Tomé e Príncipe): teatro popular tradicional, representado ao ar livre, a partir de uma antiga tragédia europeia.
 
 V: danço-congo
+V: danco congo
 R: **danço-congo** (São Tomé e Príncipe): manifestação de dança dramática, com máscaras, música e personagens.
 
 V: socopé
+V: socope
 R: **socopé** (São Tomé e Príncipe): gênero de música e dança tradicional.
 
 V: puíta
+V: puita
 R: **puíta** (São Tomé e Príncipe): dança e ritmo tradicional, tocado com tambores.
 
+V: bulawê
+V: bulawe
+R: **bulawê** (São Tomé e Príncipe): dança e música tradicional animada.
+
 V: ússua
+V: ussua
 R: **ússua** (São Tomé e Príncipe): dança tradicional de pares, de raízes europeias adaptadas às ilhas.

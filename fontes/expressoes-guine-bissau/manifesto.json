@@ -1,8 +1,8 @@
 {
   "id": "expressoes-guine-bissau",
   "nome": "Expressões da Guiné-Bissau",
-  "versao": "1.0.0",
-  "descricao": "Palavras do crioulo guineense (kriol) e da cultura da Guiné-Bissau: tabanka, djumbai, mantenha, mancarra, gumbé…",
+  "versao": "2.0.0",
+  "descricao": "Palavras do crioulo guineense (kriol) e da cultura da Guiné-Bissau: tabanka, djumbai, bajuda, mancarra, gumbé… Pergunte também \"como se fala aldeia em kriol?\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
     "guiné-bissau",
@@ -17,5 +17,22 @@
   "editor": "Jano Projects",
   "app": {
     "versao_minima": "0.4.1"
+  },
+  "regiao": {
+    "nome": "Guiné-Bissau",
+    "artigo": "a",
+    "termos": [
+      "guine",
+      "guine bissau",
+      "guinea",
+      "guinea bissau",
+      "guineense",
+      "guineenses",
+      "bissau",
+      "bissau guineense",
+      "kriol",
+      "crioulo guineense",
+      "gb"
+    ]
   }
 }

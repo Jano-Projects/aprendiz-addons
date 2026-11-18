@@ -1,75 +1,227 @@
-# Dicionário: cada bloco V:/R: vira um verbete.
-# Responde à palavra sozinha ou a "o que significa <palavra>";
-# numa frase com outras palavras, o verbete é ignorado.
+# Dicionário: cada bloco é um verbete.
+#   V: o termo (linhas V: a mais = outras grafias)
+#   T: traduções para o português padrão (para "como se diz X em ...?")
+#   R: o significado
 
 V: bué
+V: bue
+V: bwe
+T: muito, bastante
 R: **bué** (Portugal): muito, bastante. Também muito usado em Angola. Ex.: «Gostei bué do filme.»
 
 V: fixe
+T: legal, bacana
 R: **fixe** (Portugal): legal, bacana. Ex.: «Que fixe!»
 
 V: giro
+T: bonito, interessante
 R: **giro** (Portugal): bonito, engraçado, interessante. Ex.: «Que vestido giro.»
 
 V: porreiro
+T: ótimo, gente boa
 R: **porreiro** (Portugal): ótimo, bacana; pessoa gente boa.
 
+V: baril
+T: ótimo, excelente
+R: **baril** (Portugal): ótimo, excelente.
+
+V: brutal
+T: incrível, excelente
+R: **brutal** (Portugal): excelente, incrível (no bom sentido). Ex.: «O concerto foi brutal!»
+
+V: à brava
+V: a brava
+T: muito
+R: **à brava** (Portugal): muito, em grande quantidade. Ex.: «Choveu à brava.»
+
+V: ganda
+T: grande
+R: **ganda** (Portugal): redução de "grande"; também "muito bom". Ex.: «Ganda festa!»
+
 V: gajo
+T: cara, sujeito
 R: **gajo** (Portugal): cara, sujeito (informal). Feminino: "gaja".
 
 V: miúdo
+V: miudo
+T: criança, garoto
 R: **miúdo** (Portugal): criança, garoto. "Os miúdos" são as crianças.
+
+V: malta
+T: galera, turma
+R: **malta** (Portugal): turma, galera, grupo de amigos. Ex.: «A malta vem jantar.»
 
 V: pá
 R: **pá** (Portugal): interjeição muito usada na fala, como "cara" ou "pô". Ex.: «Então, pá, tudo bem?»
 
 V: bacano
+T: amigo, legal
 R: **bacano** (Portugal): pessoa fixe, amigo; também "legal".
 
 V: ya
+T: sim
 R: **ya** (Portugal): sim (informal).
 
+V: seca
+T: chatice
+R: **seca** (Portugal): coisa chata, aborrecida. Ex.: «Que seca de aula!»
+
+V: nabo
+T: desajeitado
+R: **nabo** (Portugal): pessoa desajeitada, sem jeito.
+
+V: lata
+T: cara de pau, descaramento
+R: **lata** (Portugal): descaramento, cara de pau. "Que lata!"
+
+V: bacalhau
+T: aperto de mão
+R: **bacalhau** (Portugal): aperto de mão (informal). "Dar um bacalhau".
+
+V: fazer uma direta
+V: fazer uma directa
+T: virar a noite
+R: **fazer uma direta** (Portugal): passar a noite acordado, virar a noite.
+
+V: pôr-se a andar
+T: ir embora
+R: **pôr-se a andar** (Portugal): ir embora. Ex.: «Vou pôr-me a andar.»
+
+V: estar-se nas tintas
+T: não ligar, não se importar
+R: **estar-se nas tintas** (Portugal): não se importar, não ligar. Ex.: «Ele está-se nas tintas para isso.»
+
+V: desenrascar
+T: dar um jeito, improvisar
+R: **desenrascar** (Portugal): dar um jeito, improvisar uma solução. O "desenrascanço" é a arte de improvisar.
+
+V: chumbar
+T: reprovar
+R: **chumbar** (Portugal): reprovar, numa prova ou no ano escolar. Ex.: «Chumbei a Matemática.»
+
+V: chavalo
+T: rapaz, garoto
+R: **chavalo** (Portugal, Norte): rapaz, garoto.
+
 V: tasca
+T: boteco, bar
 R: **tasca** (Portugal): restaurante ou bar simples e popular.
 
 V: bica
+T: café expresso, cafezinho
 R: **bica** (Portugal, Lisboa): café expresso.
 
+V: cimbalino
+T: café expresso, cafezinho
+R: **cimbalino** (Portugal, Porto): café expresso.
+
 V: fino
+T: chope
 R: **fino** (Portugal, Norte): copo de cerveja de pressão, o chope.
 
 V: imperial
+T: chope
 R: **imperial** (Portugal, Lisboa e Sul): copo de cerveja de pressão, o chope.
 
 V: pequeno-almoço
+V: pequeno almoço
+T: café da manhã
 R: **pequeno-almoço** (Portugal): café da manhã.
 
 V: autocarro
+T: ônibus
 R: **autocarro** (Portugal): ônibus.
 
 V: comboio
+T: trem
 R: **comboio** (Portugal): trem.
 
+V: elétrico
+V: electrico
+T: bonde
+R: **elétrico** (Portugal): bonde.
+
+V: carrinha
+T: van, perua
+R: **carrinha** (Portugal): van, perua.
+
+V: camião
+V: camiao
+T: caminhão
+R: **camião** (Portugal): caminhão.
+
+V: passadeira
+T: faixa de pedestres
+R: **passadeira** (Portugal): faixa de pedestres.
+
+V: peão
+V: peao
+T: pedestre
+R: **peão** (Portugal): pedestre.
+
 V: telemóvel
+V: telemovel
+T: celular
 R: **telemóvel** (Portugal): telefone celular.
 
+V: ecrã
+V: ecra
+T: tela
+R: **ecrã** (Portugal): tela (de computador, TV, celular).
+
+V: rato
+T: mouse
+R: **rato** (Portugal): mouse do computador (além do animal).
+
+V: frigorífico
+V: frigorifico
+T: geladeira
+R: **frigorífico** (Portugal): geladeira.
+
 V: casa de banho
+T: banheiro
 R: **casa de banho** (Portugal): banheiro.
 
+V: talho
+T: açougue
+R: **talho** (Portugal): açougue.
+
 V: sumo
+T: suco
 R: **sumo** (Portugal): suco.
 
 V: rebuçado
+V: rebucado
+T: bala
 R: **rebuçado** (Portugal): bala (doce).
 
-V: chumbar
-R: **chumbar** (Portugal): reprovar, numa prova ou no ano escolar. Ex.: «Chumbei a Matemática.»
+V: pastilha elástica
+V: pastilha
+T: chiclete
+R: **pastilha elástica** (Portugal): chiclete.
 
-V: desenrascar
-R: **desenrascar** (Portugal): dar um jeito, improvisar uma solução. O "desenrascanço" é a arte de improvisar.
+V: fato
+T: terno
+R: **fato** (Portugal): terno (roupa). "Fato de banho" é maiô.
 
-V: estar-se nas tintas
-R: **estar-se nas tintas** (Portugal): não se importar, não ligar. Ex.: «Ele está-se nas tintas para isso.»
+V: constipação
+V: constipacao
+T: resfriado
+R: **constipação** (Portugal): resfriado. Ex.: «Apanhei uma constipação.»
 
-V: chavalo
-R: **chavalo** (Portugal, Norte): rapaz, garoto.
+V: propina
+T: mensalidade
+R: **propina** (Portugal): mensalidade ou taxa escolar (não é suborno!).
+
+V: betão
+V: betao
+T: concreto
+R: **betão** (Portugal): concreto (de construção).
+
+V: guarda-redes
+T: goleiro
+R: **guarda-redes** (Portugal): goleiro.
+
+V: relvado
+T: gramado
+R: **relvado** (Portugal): gramado (campo de futebol).

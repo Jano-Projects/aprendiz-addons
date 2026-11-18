@@ -1,45 +1,130 @@
-# Dicionário: cada bloco V:/R: vira um verbete.
-# Responde à palavra sozinha ou a "o que significa <palavra>";
-# numa frase com outras palavras, o verbete é ignorado.
+# Dicionário: cada bloco é um verbete.
+#   V: o termo (linhas V: a mais = outras grafias)
+#   T: traduções para o português padrão (para "como se diz X em ...?")
+#   R: o significado
 
 V: kriol
+T: crioulo
 R: **kriol** (Guiné-Bissau): o crioulo guineense, língua de comunicação entre as várias etnias do país.
 
 V: tabanka
-R: **tabanka** (Guiné-Bissau): aldeia, povoado.
+V: tabanca
+T: aldeia, povoado
+R: **tabanka** (Guiné-Bissau): aldeia, povoado. (Em Cabo Verde, a mesma palavra é uma festa tradicional.)
+
+V: tchon
+T: terra, chão
+R: **tchon** (Guiné-Bissau): terra, chão; também o país ou a terra natal.
 
 V: djumbai
+T: convívio, reunião
 R: **djumbai** (Guiné-Bissau): convívio, encontro para conversar e festejar em grupo.
 
 V: mandjuandadi
 R: **mandjuandadi** (Guiné-Bissau): associação de pessoas da mesma geração, sobretudo mulheres, que se reúnem para cantar, festejar e se apoiar.
 
 V: gumbé
+V: gumbe
 R: **gumbé** (Guiné-Bissau): gênero musical tradicional guineense, nascido em Bissau.
 
+V: bombolom
+V: bombolon
+T: tambor
+R: **bombolom** (Guiné-Bissau): tambor feito de tronco escavado, usado para mandar mensagens à distância.
+
+V: fanadu
+V: fanado
+T: iniciação
+R: **fanadu** (Guiné-Bissau): cerimônia tradicional de iniciação dos jovens.
+
+V: baloba
+T: santuário, lugar sagrado
+R: **baloba** (Guiné-Bissau): lugar sagrado da religião tradicional.
+
+V: djambakus
+T: curandeiro, adivinho
+R: **djambakus** (Guiné-Bissau): curandeiro e adivinho tradicional.
+
 V: mantenha
+T: cumprimentos, lembranças
 R: **mantenha** (Guiné-Bissau): saudação, cumprimentos.
 
 V: kuma ku bu sta
-R: **kuma ku bu sta** (Guiné-Bissau): "Como estás?" em kriol.
+T: como vai, tudo bem
+R: **kuma ku bu sta** (Guiné-Bissau): "Como estás?"
+
+V: n sta bon
+T: estou bem
+R: **n sta bon** (Guiné-Bissau): "Estou bem."
+
+V: bon dia
+T: bom dia
+R: **bon dia** (Guiné-Bissau): bom dia.
 
 V: obrigadu
+T: obrigado
 R: **obrigadu** (Guiné-Bissau): obrigado.
 
-V: mancarra
-R: **mancarra** (Guiné-Bissau): amendoim.
+V: papia
+T: falar, conversar
+R: **papia** (Guiné-Bissau): falar, conversar.
 
-V: bianda
-R: **bianda** (Guiné-Bissau): comida; em especial, arroz cozido.
+V: manga di
+T: muito, bastante
+R: **manga di** (Guiné-Bissau): muito, uma grande quantidade de. "Manga di djintis" = muita gente.
 
-V: djintis
-R: **djintis** (Guiné-Bissau): gente, pessoas.
+V: garandi
+T: grande, mais velho
+R: **garandi** (Guiné-Bissau): grande; pessoa mais velha, de respeito.
+
+V: bedju
+T: velho, idoso
+R: **bedju** (Guiné-Bissau): velho.
+
+V: mininu
+T: criança, menino
+R: **mininu** (Guiné-Bissau): criança, menino.
+
+V: anju
+T: bebê, criança pequena
+R: **anju** (Guiné-Bissau): criança pequena, bebê.
+
+V: fidju
+T: filho
+R: **fidju** (Guiné-Bissau): filho.
+
+V: bajuda
+T: moça, garota
+R: **bajuda** (Guiné-Bissau): moça, jovem solteira.
 
 V: mindjer
+T: mulher
 R: **mindjer** (Guiné-Bissau): mulher.
 
 V: omi
+T: homem
 R: **omi** (Guiné-Bissau): homem.
 
-V: garandi
-R: **garandi** (Guiné-Bissau): grande; pessoa mais velha, de respeito.
+V: djintis
+T: gente, pessoas
+R: **djintis** (Guiné-Bissau): gente, pessoas.
+
+V: kasa
+T: casa
+R: **kasa** (Guiné-Bissau): casa.
+
+V: iagu
+T: água
+R: **iagu** (Guiné-Bissau): água.
+
+V: bianda
+T: comida, arroz
+R: **bianda** (Guiné-Bissau): comida; em especial, arroz cozido.
+
+V: mancarra
+T: amendoim
+R: **mancarra** (Guiné-Bissau): amendoim.
+
+V: kaldu di tchebem
+T: caldo de chabéu
+R: **kaldu di tchebem** (Guiné-Bissau): caldo de chabéu: prato feito com o óleo do fruto da palmeira (dendê).
