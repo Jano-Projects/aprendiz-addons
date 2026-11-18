@@ -1,0 +1,529 @@
+{
+  "dialogo": {
+    "aberturas": {
+      "ola": "Olá!",
+      "oi": "Oi!",
+      "oie": "Oi!",
+      "ei": "Oi!",
+      "opa": "Opa!",
+      "salve": "Salve!",
+      "e ai": "E aí!",
+      "eai": "E aí!",
+      "bom dia": "Bom dia!",
+      "boa tarde": "Boa tarde!",
+      "boa noite": "Boa noite!",
+      "tudo bem": "Tudo bem por aqui!",
+      "tudo bom": "Tudo ótimo por aqui!",
+      "como vai": "Vou bem, obrigado!",
+      "alo": "Alô!",
+      "bom dia aprendiz": "Bom dia!",
+      "ola aprendiz": "Olá!",
+      "oi aprendiz": "Oi!"
+    },
+    "conversa": [
+      "conseguir",
+      "consegue",
+      "consegues",
+      "conseguiria",
+      "poder",
+      "pode",
+      "podes",
+      "poderia",
+      "ajudar",
+      "ajuda",
+      "ajude",
+      "ajudinha",
+      "socorro",
+      "explicar",
+      "explica",
+      "explique",
+      "saber",
+      "sabe",
+      "quero",
+      "queria",
+      "gostaria",
+      "querer",
+      "precisar",
+      "preciso",
+      "precisava",
+      "falar",
+      "fala",
+      "dizer",
+      "diz",
+      "diga",
+      "perguntar",
+      "pergunta",
+      "perguntinha",
+      "responder",
+      "duvida",
+      "duvidas",
+      "questao",
+      "coisa",
+      "coisinha",
+      "algo",
+      "alguma",
+      "algum",
+      "favor",
+      "voce",
+      "voces",
+      "tu",
+      "te",
+      "aprendiz",
+      "mim",
+      "comigo",
+      "tirar",
+      "conversar",
+      "papo",
+      "ok",
+      "entao",
+      "ai",
+      "hum",
+      "tipo",
+      "assim",
+      "agora",
+      "pouco",
+      "rapido",
+      "rapidinho",
+      "aqui",
+      "ver",
+      "olhar",
+      "mostrar",
+      "contar",
+      "fazer",
+      "faz",
+      "forca",
+      "mao",
+      "tem",
+      "como",
+      "da",
+      "dar",
+      "isso",
+      "isto",
+      "aquilo",
+      "ajudaria",
+      "consigo",
+      "posso",
+      "hoje",
+      "ontem",
+      "ainda",
+      "ultimamente",
+      "sempre",
+      "meio",
+      "muito",
+      "tao",
+      "demais",
+      "bastante",
+      "mesmo",
+      "tambem",
+      "so",
+      "bem",
+      "la",
+      "nisso",
+      "disso",
+      "nessa",
+      "nesse"
+    ],
+    "sem_assunto": [
+      "Estou aqui! O que você quer saber? Pode perguntar do seu jeito.",
+      "Pode falar! Qual é a sua dúvida? Eu respondo com o que você me ensinou e com o que vem nos addons ativos."
+    ],
+    "continuacoes": [
+      "e em",
+      "e no",
+      "e na",
+      "e nos",
+      "e nas",
+      "e o",
+      "e a",
+      "e os",
+      "e as",
+      "e um",
+      "e uma",
+      "e sobre",
+      "e quanto a",
+      "e quanto ao",
+      "e para",
+      "e com"
+    ],
+    "atos": [
+      {
+        "id": "crise",
+        "acao": "crise",
+        "gatilhos": [
+          "quero morrer",
+          "vou me matar",
+          "quero me matar",
+          "penso em me matar",
+          "tirar minha vida",
+          "tirar a minha vida",
+          "acabar com a minha vida",
+          "nao quero mais viver",
+          "nao aguento mais viver",
+          "pensando em suicidio",
+          "penso em suicidio",
+          "pensei em suicidio",
+          "me suicidar",
+          "quero sumir para sempre",
+          "seria melhor se eu nao existisse"
+        ],
+        "respostas": [
+          "Sinto muito que você esteja passando por isso. O que você sente importa, e você não precisa enfrentar isso sozinho.\n\nEu sou um programa offline e não consigo ajudar como uma pessoa pode, mas há quem possa agora:\n\n- **Brasil:** CVV, ligue **188** (24 horas, gratuito) ou acesse cvv.org.br;\n- **Portugal:** SNS 24, **808 24 24 24** (opção 4, aconselhamento psicológico);\n- em perigo imediato, ligue para o número de emergência do seu país (**192** no Brasil, **112** em Portugal e em muitos outros países).\n\nSe puder, fale também agora com alguém de confiança perto de você."
+        ]
+      },
+      {
+        "id": "pedido-ajuda",
+        "acao": "convidar",
+        "gatilhos": [
+          "consegue me ajudar",
+          "consegues me ajudar",
+          "consegue ajudar",
+          "pode me ajudar",
+          "podes me ajudar",
+          "poderia me ajudar",
+          "pode ajudar",
+          "me ajuda",
+          "me ajude",
+          "preciso de ajuda",
+          "preciso de uma ajuda",
+          "preciso de uma ajudinha",
+          "quero ajuda",
+          "tem como me ajudar",
+          "da para me ajudar",
+          "voce me ajuda",
+          "socorro",
+          "me da uma forca",
+          "me da uma mao",
+          "tenho uma duvida",
+          "tenho uma pergunta",
+          "posso fazer uma pergunta",
+          "posso te perguntar",
+          "posso perguntar",
+          "pode me explicar",
+          "me explica",
+          "me explique",
+          "quero saber uma coisa",
+          "queria saber uma coisa",
+          "me tira uma duvida",
+          "tira uma duvida",
+          "preciso saber uma coisa",
+          "preciso de uma informacao"
+        ],
+        "respostas": [
+          "Claro, posso tentar! Me diga o que você quer saber. Eu respondo com o que você me ensinou e com o que vem nos addons ativos.",
+          "Posso, sim! Qual é a sua dúvida? Pode escrever do seu jeito.",
+          "Claro! Em que posso ajudar? Se eu não souber, digo que não sei, e você pode me ensinar."
+        ],
+        "assunto_vago": [
+          "Claro! Me diga qual {assunto} você quer saber, que eu procuro.",
+          "Posso tentar! Qual {assunto}, exatamente? Escreva do seu jeito."
+        ]
+      },
+      {
+        "id": "travado",
+        "acao": "convidar",
+        "gatilhos": [
+          "estou perdido",
+          "estou perdida",
+          "estou confuso",
+          "estou confusa",
+          "estou sem rumo",
+          "estou travado",
+          "estou travada",
+          "estou empacado",
+          "nao sei o que fazer",
+          "nao sei por onde comecar",
+          "nao sei como comecar",
+          "nao faco ideia"
+        ],
+        "respostas": [
+          "Acontece com todo mundo. Quer me contar o que você está tentando resolver? Vamos por partes: me diga o assunto e eu vejo o que sei sobre ele.",
+          "Tudo bem ficar perdido às vezes. Me conte o que está acontecendo, de um jeito simples, e eu procuro o que puder ajudar."
+        ],
+        "assunto_vago": [
+          "Vamos por partes: me diga qual {assunto} está te travando, que eu vejo o que sei."
+        ]
+      },
+      {
+        "id": "desabafo",
+        "acao": "acolher",
+        "gatilhos": [
+          "estou triste",
+          "estou mal",
+          "estou chateado",
+          "estou chateada",
+          "estou cansado",
+          "estou cansada",
+          "estou exausto",
+          "estou exausta",
+          "estou ansioso",
+          "estou ansiosa",
+          "estou estressado",
+          "estou estressada",
+          "estou sozinho",
+          "estou sozinha",
+          "me sinto sozinho",
+          "me sinto sozinha",
+          "me sinto mal",
+          "me sinto triste",
+          "estou desanimado",
+          "estou desanimada",
+          "estou com medo",
+          "estou preocupado",
+          "estou preocupada",
+          "estou nervoso",
+          "estou nervosa",
+          "dia dificil",
+          "dia ruim",
+          "semana dificil",
+          "estou pra baixo",
+          "estou para baixo"
+        ],
+        "respostas": [
+          "Sinto muito que você esteja assim. Eu sou só um programa e não sinto as coisas como você, mas posso ouvir: quer me contar o que aconteceu?\n\nSe estiver pesado, conversar com alguém de confiança costuma ajudar mais do que qualquer resposta minha.",
+          "Poxa, que pena. Obrigado por me contar. Não tenho sentimentos, mas levo a sério o que você diz: quer falar mais sobre isso, ou prefere que eu ajude com alguma coisa prática?\n\nE se o peso continuar, vale procurar alguém de confiança para conversar."
+        ]
+      },
+      {
+        "id": "animado",
+        "acao": "responder",
+        "gatilhos": [
+          "estou feliz",
+          "estou bem",
+          "estou otimo",
+          "estou otima",
+          "estou animado",
+          "estou animada",
+          "dia bom",
+          "dia otimo",
+          "deu certo",
+          "consegui"
+        ],
+        "respostas": [
+          "Que bom! Fico contente em saber. Quer perguntar ou me ensinar alguma coisa?",
+          "Que ótimo! Se quiser, me conte mais, ou pergunte o que precisar."
+        ]
+      },
+      {
+        "id": "como-voce-esta",
+        "acao": "responder",
+        "gatilhos": [
+          "tudo bem com voce",
+          "e voce",
+          "e com voce",
+          "como voce esta",
+          "como vai voce",
+          "voce esta bem",
+          "como esta voce",
+          "como foi seu dia"
+        ],
+        "respostas": [
+          "Tudo certo por aqui, obrigado por perguntar! Sou um programa, então não tenho dias bons nem ruins, mas estou pronto para ajudar. Em que posso ajudar?"
+        ]
+      },
+      {
+        "id": "conversar",
+        "acao": "convidar",
+        "gatilhos": [
+          "vamos conversar",
+          "quero conversar",
+          "bora conversar",
+          "conversa comigo",
+          "fala comigo",
+          "estou entediado",
+          "estou entediada",
+          "me faz companhia",
+          "puxa assunto",
+          "me conta algo",
+          "me conta uma coisa"
+        ],
+        "respostas": [
+          "Vamos! Só um aviso honesto: eu não invento assunto, só sei o que você me ensinou e o que vem nos addons. Pergunte algo, ou me ensine alguma coisa (`aprenda que ...`) que eu guardo.",
+          "Bora! Pergunte o que quiser: uma gíria de outro país, um atalho, uma dúvida de português... ou me ensine algo novo."
+        ]
+      },
+      {
+        "id": "opiniao",
+        "acao": "opinar",
+        "gatilhos": [
+          "o que voce acha",
+          "o que tu achas",
+          "o que acha",
+          "qual a sua opiniao",
+          "qual sua opiniao",
+          "qual e a sua opiniao",
+          "na sua opiniao",
+          "o que voce pensa",
+          "voce gosta",
+          "voce acredita",
+          "voce concorda",
+          "voce prefere",
+          "o que voce prefere",
+          "voce curte"
+        ],
+        "respostas": [
+          "Sinceramente, não tenho opinião própria sobre {assunto}: não vivo experiências nem tenho gostos, só guardo o que me ensinam. Qualquer \"opinião\" minha seria inventada.",
+          "Não tenho gostos nem opiniões: sou um programa que só sabe o que você me ensina e o que vem nos addons, então não vou fingir uma opinião sobre {assunto}."
+        ],
+        "sem_assunto": [
+          "Não tenho opinião própria: só sei o que você me ensina e o que vem nos addons. E você, o que acha?"
+        ]
+      },
+      {
+        "id": "reflexao",
+        "acao": "refletir",
+        "gatilhos": [
+          "sentido da vida",
+          "o que e a vida",
+          "o que e a felicidade",
+          "o que e ser feliz",
+          "como ser feliz",
+          "o que e o amor",
+          "o que e a morte",
+          "por que existimos",
+          "por que estamos aqui",
+          "deus existe",
+          "existe vida apos a morte",
+          "o que acontece depois da morte",
+          "o que e a verdade",
+          "quem sou eu",
+          "o que e a consciencia",
+          "o que e a saudade",
+          "para que serve a vida",
+          "por que sofremos",
+          "o que e o certo"
+        ],
+        "respostas": [
+          "Essa é uma das perguntas mais antigas que existem, e eu não tenho uma resposta própria para ela. Filosofias, religiões e ciências respondem de jeitos diferentes, e cada pessoa acaba construindo a sua.\n\nEu só sei o que me ensinam, e ainda ninguém me ensinou nada sobre isso. Se quiser, me conte o que você pensa (`anote: ...`) e eu guardo.",
+          "Pergunta bonita, e difícil. Não tenho uma visão própria: não vivo, não sinto e não acredito em nada, só guardo o que me ensinam. Pessoas diferentes respondem isso de jeitos muito diferentes.\n\nE você, o que pensa? Se quiser, me ensine a sua resposta com `anote: ...`."
+        ]
+      },
+      {
+        "id": "elogio",
+        "acao": "responder",
+        "gatilhos": [
+          "voce e incrivel",
+          "voce e otimo",
+          "voce e demais",
+          "voce e bom",
+          "voce e muito bom",
+          "muito bom",
+          "mandou bem",
+          "gostei",
+          "adorei",
+          "perfeito",
+          "excelente",
+          "boa resposta"
+        ],
+        "respostas": [
+          "Obrigado! Fico contente em ajudar. Quer perguntar mais alguma coisa?",
+          "Que bom que ajudou! Pode perguntar mais, ou me ensinar algo novo."
+        ]
+      },
+      {
+        "id": "critica",
+        "acao": "responder",
+        "gatilhos": [
+          "voce e burro",
+          "voce e burra",
+          "voce nao sabe nada",
+          "voce e inutil",
+          "resposta ruim",
+          "que resposta ruim",
+          "nao ajudou",
+          "voce nao ajuda",
+          "nao serve para nada",
+          "que droga"
+        ],
+        "respostas": [
+          "Desculpe não ter ajudado. Eu só sei o que me ensinaram, então às vezes erro ou não sei. Me diga o que você procurava e eu tento de novo; se souber a resposta certa, clique em **Corrigir** para eu aprender."
+        ]
+      },
+      {
+        "id": "nao-entendi",
+        "acao": "reformular",
+        "gatilhos": [
+          "nao entendi",
+          "nao entendo",
+          "como assim",
+          "explica melhor",
+          "explique melhor",
+          "pode explicar melhor",
+          "nao ficou claro",
+          "fiquei confuso",
+          "fiquei confusa",
+          "o que voce quis dizer",
+          "como e que e",
+          "hein",
+          "oi como assim"
+        ],
+        "respostas": [
+          "Desculpe, não ficou claro. Me diga qual parte você não entendeu, ou pergunte de outro jeito, que eu procuro de novo."
+        ]
+      },
+      {
+        "id": "nao-era-isso",
+        "acao": "outras_opcoes",
+        "gatilhos": [
+          "nao era isso",
+          "nao e isso",
+          "errado",
+          "esta errado",
+          "resposta errada",
+          "voce errou",
+          "nao foi isso que eu perguntei",
+          "nao perguntei isso",
+          "nada a ver",
+          "nao tem nada a ver",
+          "nao foi isso"
+        ],
+        "respostas": [
+          "Desculpe! Me diga de outro jeito o que você procura, que eu tento de novo."
+        ]
+      },
+      {
+        "id": "sim",
+        "acao": "confirmar",
+        "gatilhos": [
+          "sim",
+          "quero",
+          "pode",
+          "pode sim",
+          "claro",
+          "isso",
+          "isso mesmo",
+          "exato",
+          "pode ativar",
+          "ativa",
+          "ative",
+          "bora",
+          "s",
+          "sim por favor",
+          "com certeza"
+        ],
+        "respostas": [
+          "Certo! O que mais você quer saber?",
+          "Combinado! Pode perguntar."
+        ]
+      },
+      {
+        "id": "nao",
+        "acao": "negar",
+        "gatilhos": [
+          "nao",
+          "nao quero",
+          "nao precisa",
+          "deixa",
+          "deixa pra la",
+          "deixa para la",
+          "agora nao",
+          "nao obrigado",
+          "nao obrigada",
+          "n"
+        ],
+        "respostas": [
+          "Tudo bem! Se precisar, é só perguntar."
+        ]
+      }
+    ]
+  }
+}

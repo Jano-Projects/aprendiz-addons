@@ -98,6 +98,21 @@ python ../aprendiz/ferramentas/criar_addon.py fontes/compreensao-portugues -o ad
 (aumente a `versao` no manifesto). O `lemas.tsv` e o `vetores.bin` só mudam quando as fontes
 de dados mudam: veja `ferramentas/dados_compreensao.py`.
 
+**Diálogo** (Aprendiz 0.9+): `dialogo-portugues` traz só a seção `dialogo` de um
+`compreensao.json` (cumprimentos, palavras de conversa, continuações e atos de fala: pedir
+ajuda, desabafar, pedir opinião, "não entendi", "sim"...). É escrito à mão em
+`fontes/dialogo-portugues/compreensao.json`; não entra no catálogo da compreensão.
+
+**Grupos no app**: addons de apoio (compreensão, diálogo, vetores, boas-vindas) não têm
+recomendação própria e entram no grupo dos addons que declaram em `"dependencias"` ou em
+`"complementa"` no manifesto. A compreensão e o diálogo declaram os oito addons de português:
+
+```json
+"complementa": ["girias-brasil", "girias-portugal", "girias-angola", "girias-mocambique",
+                "expressoes-cabo-verde", "expressoes-guine-bissau",
+                "expressoes-sao-tome-e-principe", "expressoes-timor-leste"]
+```
+
 **Normas da língua** (Aprendiz 0.8+): os oito addons de português de cada país (Brasil,
 Portugal, Angola, Moçambique, Cabo Verde, Guiné-Bissau, São Tomé e Príncipe e Timor-Leste)
 trazem, além dos verbetes, um `norma.json` (grafias, erros comuns, equivalências entre
