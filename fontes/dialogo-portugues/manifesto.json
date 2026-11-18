@@ -1,0 +1,40 @@
+{
+  "formato": 2,
+  "id": "dialogo-portugues",
+  "nome": "Diálogo do português",
+  "versao": "1.0.0",
+  "descricao": "Conversa de verdade, além de pergunta e resposta: entende o que você FAZ com a frase (cumprimentar e pedir ajuda na mesma mensagem, desabafar, pedir opinião, fazer uma pergunta reflexiva, elogiar ou criticar) e usa o contexto da conversa (\"não entendi\", \"não era isso\", \"sim\", \"e em Portugal?\"). Palavras de conversa como \"consegue\" e \"ajudar\" deixam de disparar buscas sem relação. Complementa a Compreensão do português.",
+  "categoria": "Compreensão",
+  "etiquetas": [
+    "diálogo",
+    "conversa",
+    "contexto",
+    "atos de fala",
+    "português",
+    "compreensão"
+  ],
+  "autor": "Jano Projects",
+  "licenca": "CC-BY-4.0",
+  "origem": "oficial",
+  "editor": "Jano Projects",
+  "app": {
+    "versao_minima": "0.9.0"
+  },
+  "dependencias": [
+    {
+      "id": "compreensao-portugues",
+      "versao": "1.3.0",
+      "nome": "Compreensão do português"
+    }
+  ],
+  "complementa": [
+    "girias-brasil",
+    "girias-portugal",
+    "girias-angola",
+    "girias-mocambique",
+    "expressoes-cabo-verde",
+    "expressoes-guine-bissau",
+    "expressoes-sao-tome-e-principe",
+    "expressoes-timor-leste"
+  ]
+}
