@@ -29,7 +29,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 FONTES = RAIZ / "fontes"
 BASE = FONTES / "compreensao-portugues" / "compreensao-base.json"
 DESTINO = FONTES / "compreensao-portugues" / "compreensao.json"
-PROPRIOS = {"compreensao-portugues", "vetores-portugues"}
+PROPRIOS = {"compreensao-portugues", "vetores-portugues", "dialogo-portugues"}
 MAX_PALAVRAS = 300
 
 # Palavras que não dizem nada sobre o ASSUNTO de um addon.
