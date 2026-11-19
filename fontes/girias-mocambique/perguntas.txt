@@ -1,14 +1,25 @@
 # O português de Moçambique.
 
+F: ortografia
+A: ortografia de moçambique, acordo em moçambique
+Q: porque | Moçambique ratificou o acordo, mas a aplicação nas escolas é gradual
+Q: diferente-de | em Portugal já é obrigatório | -> girias-portugal:ortografia
 P: qual a ortografia de mocambique
 P: mocambique segue o acordo ortografico
 P: mocambique ratificou o acordo ortografico
 R: Moçambique assinou o Acordo Ortográfico de 1990 e elaborou o seu Vocabulário Ortográfico Nacional, integrado no Vocabulário Ortográfico Comum (VOC) do IILP, mas o Acordo **não foi ratificado pelo parlamento** (em 2026, Moçambique e Angola eram os únicos países da CPLP nessa situação). No uso corrente segue-se a **grafia anterior ao Acordo**: **acção**, **óptimo**, **director**, **projecto**. Esta norma do Aprendiz segue essa grafia.
 
+F: linguas
+N: raiz
+A: línguas de moçambique, línguas nacionais de moçambique, changana, macua
+Q: definicao | o português é a língua oficial; a maioria fala também uma língua banta, como changana ou macua
 P: quais as linguas de mocambique
 P: linguas nacionais de mocambique
 R: O **português** é a língua oficial; nas cidades, é cada vez mais língua materna, mas para muitos moçambicanos é segunda língua. Convive com mais de vinte línguas bantu, como o **emakhuwa** (macua, a mais falada, no Norte), o **xichangana** (changana, no Sul), o cisena, o elomwe, o echuwabo, o cindau e o xironga, além do suaíli no extremo Norte.
 
+F: caracteristicas
+A: português de moçambique, diferenças de moçambique
+Q: porque | as línguas bantas deixaram palavras e construções | -> linguas
 P: caracteristicas do portugues de mocambique
 P: diferencas entre o portugues de mocambique e o de portugal
 R: O português de Moçambique segue a norma europeia na escrita formal, com marcas próprias, muitas do contacto com as línguas bantu:
@@ -18,11 +29,19 @@ R: O português de Moçambique segue a norma europeia na escrita formal, com mar
 - concordância nominal e verbal por vezes simplificada na fala;
 - regência própria de alguns verbos.
 
+F: ir-a
+A: vou na escola em moçambique
+Q: regra | a norma pede ir a; ir em é próprio da fala | -> girias-angola:ir-a
 P: vou na escola ou vou a escola em mocambique
 R: Com o verbo "ir" indicando destino, a norma pede **a** (ou **para**): "vou **à** escola", "fui **ao** mercado". "Vou na escola" é frequente na fala moçambicana, mas em texto formal prefira "à".
 
+F: lhe
+A: encontrei-lhe ou encontrei-o
+Q: porque | na fala o lhe também faz papel de objeto direto; a norma pede encontrei-o | -> girias-angola:lhe
 P: encontrei-lhe ou encontrei-o
 R: Na norma-padrão, com verbos que pedem complemento direto (ver, conhecer, encontrar, ajudar), usa-se **o** ou **a**: "encontrei-**o**". **Lhe** fica para o complemento indireto: "dei-**lhe** o livro". "Encontrei-lhe" é comum na fala de Moçambique e de Angola.
 
+F: moeda
+A: moeda de moçambique, metical
 P: qual a moeda de mocambique
 R: A moeda de Moçambique é o **metical** (MZN); no plural, **meticais**.

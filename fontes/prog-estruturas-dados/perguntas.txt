@@ -162,7 +162,7 @@ balanceado("(]")         # False
 ```
 
 F: fila
-A: fila, queue, primeiro a entrar primeiro a sair, fifo, ordem de chegada
+A: fila, queue, primeiro a entrar primeiro a sair, fifo, ordem de chegada, primeiro a chegar primeiro a ser atendido
 Q: porque | o primeiro que chega é o primeiro atendido, como uma fila de banco | -> estrutura-dados
 Q: diferente-de | na pilha sai o último que entrou | -> pilha
 P: o que é fila

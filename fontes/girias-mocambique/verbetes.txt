@@ -3,174 +3,256 @@
 #   T: traduções para o português padrão (para "como se diz X em ...?")
 #   R: o significado
 
+F: v-maningue
+Q: equivale | em Portugal se diz «bué» | -> girias-portugal:v-bue
+Q: equivale | em Angola se diz «bué» | -> girias-angola:v-bue
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «txeu» | -> expressoes-cabo-verde:v-txeu
+Q: equivale | no kriol (Guiné-Bissau) se diz «manga di» | -> expressoes-guine-bissau:v-manga-di
 V: maningue
 T: muito, bastante
 R: **maningue** (Moçambique): muito, bastante. "Maningue nice" = muito bom. Ex.: «Está maningue quente.»
 
+F: v-nice
+Q: equivale | em Portugal se diz «giro» | -> girias-portugal:v-giro
+Q: equivale | em Angola se diz «kuia» | -> girias-angola:v-kuia
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «sabi» | -> expressoes-cabo-verde:v-sabi
+Q: equivale | no tétum (Timor-Leste) se diz «di'ak» | -> expressoes-timor-leste:v-di-ak
 V: nice
 T: bom, bonito
 R: **nice** (Moçambique): bom, bonito, agradável (muito usado em "maningue nice").
 
+F: v-chapa
+Q: equivale | em Angola se diz «candongueiro» | -> girias-angola:v-candongueiro
+Q: equivale | em Portugal se diz «carrinha» | -> girias-portugal:v-carrinha
 V: chapa
 L: maputo
 T: lotação, van, transporte coletivo
 R: **chapa** (Moçambique): transporte coletivo de passageiros, geralmente uma van ou minibus.
 
+F: v-machimbombo
+Q: equivale | no Brasil se diz «busão» | -> girias-brasil:v-busao
+Q: equivale | em Portugal se diz «autocarro» | -> girias-portugal:v-autocarro
+Q: equivale | em Angola também se usa «machimbombo» | -> girias-angola:v-machimbombo
 V: machimbombo
 T: ônibus
 R: **machimbombo** (Moçambique): ônibus. Também usado em Angola.
 
+F: v-txopela
 V: txopela
 L: maputo
 T: mototáxi, tuk-tuk
 R: **txopela** (Moçambique): triciclo motorizado usado como táxi.
 
+F: v-tchova
 V: tchova
 T: carrinho de mão
 R: **tchova** (Moçambique): carrinho de mão, de duas rodas, para levar cargas.
 
+F: v-mola
+Q: equivale | no Brasil se diz «grana» | -> girias-brasil:v-grana
+Q: equivale | em Angola se diz «kumbu» | -> girias-angola:v-kumbu
+Q: equivale | no tétum (Timor-Leste) se diz «osan» | -> expressoes-timor-leste:v-osan
 V: mola
 T: dinheiro
 R: **mola** (Moçambique): dinheiro (gíria).
 
+F: v-mufana
+Q: equivale | no Sul (Brasil) se diz «guri» | -> girias-brasil:v-guri
+Q: equivale | em Portugal se diz «chavalo» | -> girias-portugal:v-chavalo
+Q: equivale | em Angola se diz «candengue» | -> girias-angola:v-candengue
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «mininu» | -> expressoes-cabo-verde:v-mininu
 V: mufana
 L: changana
 T: rapaz, garoto, menino
 R: **mufana** (Moçambique): rapaz, garoto.
 
+F: v-mamana
+Q: equivale | no forro (São Tomé e Príncipe) se diz «san» | -> expressoes-sao-tome-e-principe:v-san
 V: mamana
 L: changana
 T: senhora
 R: **mamana** (Moçambique): senhora, mulher adulta; tratamento respeitoso.
 
+F: v-madala
+Q: equivale | em Angola se diz «kota» | -> girias-angola:v-kota
+Q: equivale | no kriol (Guiné-Bissau) se diz «bedju» | -> expressoes-guine-bissau:v-bedju
+Q: equivale | no forro (São Tomé e Príncipe) se diz «sum» | -> expressoes-sao-tome-e-principe:v-sum
+Q: equivale | no tétum (Timor-Leste) se diz «katuas» | -> expressoes-timor-leste:v-katuas
 V: madala
 L: changana
 T: senhor, idoso, homem mais velho
 R: **madala** (Moçambique): homem mais velho; tratamento respeitoso.
 
+F: v-khanimambo
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «obrigadu» | -> expressoes-cabo-verde:v-obrigadu
+Q: equivale | no kriol (Guiné-Bissau) se diz «obrigadu» | -> expressoes-guine-bissau:v-obrigadu
+Q: equivale | no forro (São Tomé e Príncipe) se diz «dêsu ka paga» | -> expressoes-sao-tome-e-principe:v-desu-ka-paga
+Q: equivale | no tétum (Timor-Leste) se diz «obrigadu» | -> expressoes-timor-leste:v-obrigadu
 V: khanimambo
 V: kanimambo
 L: changana
 T: obrigado
 R: **khanimambo** (Moçambique): "obrigado" em changana, muito ouvido no sul do país.
 
+F: v-bichar
 V: bichar
 T: fazer fila
 R: **bichar** (Moçambique): fazer fila, esperar na fila ("bicha").
 
+F: v-machamba
 V: machamba
 T: horta, roça, lavoura
 R: **machamba** (Moçambique): horta, terreno de cultivo, roça.
 
+F: v-mukhero
 V: mukhero
 T: contrabando, sacoleiro
 R: **mukhero** (Moçambique): comércio informal de mercadorias trazidas do outro lado da fronteira.
 
+F: v-dumba-nengue
 V: dumba-nengue
 V: dumba nengue
 L: maputo
 T: mercado informal, camelódromo
 R: **dumba-nengue** (Moçambique): mercado informal. Literalmente, "confie nas pernas".
 
+F: v-mbaula
 V: mbaula
 T: fogareiro
 R: **mbaula** (Moçambique): fogareiro a carvão.
 
+F: v-capulana
 V: capulana
 T: canga
 R: **capulana** (Moçambique): tecido estampado usado como saia, pano de cabeça ou para carregar bebês.
 
+F: v-xima
 V: xima
 T: polenta, angu
 R: **xima** (Moçambique): massa espessa de farinha de milho, prato básico do dia a dia.
 
+F: v-matapa
 V: matapa
 R: **matapa** (Moçambique): prato de folhas de mandioca piladas, cozidas com amendoim e coco.
 
+F: v-chamussa
 V: chamussa
 T: pastel, samosa
 R: **chamussa** (Moçambique): salgado frito triangular recheado de carne ou legumes.
 
+F: v-badjia
 V: badjia
 T: bolinho de feijão
 R: **badjia** (Moçambique): bolinho frito de feijão.
 
+F: v-cacana
 V: cacana
 R: **cacana** (Moçambique): verdura de folha amarga, cozida com amendoim.
 
+F: v-piri-piri
 V: piri-piri
 V: piripiri
 T: pimenta
 R: **piri-piri** (Moçambique): pimenta malagueta e o molho picante feito com ela.
 
+F: v-refresco
+Q: equivale | em Angola se diz «gasosa» | -> girias-angola:v-gasosa
 V: refresco
 T: refrigerante
 R: **refresco** (Moçambique): refrigerante.
 
+F: v-xiconhoca
 V: xiconhoca
 T: oportunista
 R: **xiconhoca** (Moçambique): pessoa oportunista, que age contra o interesse de todos (personagem de cartazes dos anos 1970).
 
+F: v-marrabenta
 V: marrabenta
 R: **marrabenta** (Moçambique): gênero musical e dança do sul de Moçambique.
 
+F: v-timbila
 V: timbila
 R: **timbila** (Moçambique): xilofone tradicional do povo chope; também a música e a dança tocadas com ele.
 
+F: v-xipalapala
 V: xipalapala
 R: **xipalapala** (Moçambique): corneta feita de chifre, usada para chamar ou anunciar.
 
 # ---- 3.0 ---------------------------------------------------------------------
+F: v-avuxeni
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «bon dia» | -> expressoes-cabo-verde:v-bon-dia
+Q: equivale | no kriol (Guiné-Bissau) se diz «bon dia» | -> expressoes-guine-bissau:v-bon-dia
+Q: equivale | no tétum (Timor-Leste) se diz «bondia» | -> expressoes-timor-leste:v-bondia
 V: avuxeni
 L: changana
 T: bom dia
 R: **avuxeni** (changana): bom dia.
 
+F: v-salama
 V: salama
 L: macua
 T: olá
 R: **salama** (macua): saudação, olá.
 
+F: v-koxukhuru
+Q: equivale | no forro (São Tomé e Príncipe) se diz «dêsu ka paga» | -> expressoes-sao-tome-e-principe:v-desu-ka-paga
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «obrigadu» | -> expressoes-cabo-verde:v-obrigadu
+Q: equivale | no kriol (Guiné-Bissau) se diz «obrigadu» | -> expressoes-guine-bissau:v-obrigadu
+Q: equivale | no tétum (Timor-Leste) se diz «obrigadu» | -> expressoes-timor-leste:v-obrigadu
 V: koxukhuru
 L: macua
 T: obrigado, obrigada
 R: **koxukhuru** (macua): obrigado.
 
+F: v-xitique
 V: xitique
 V: chitique
 T: poupança, poupança coletiva
 R: **xitique** (Moçambique): poupança rotativa informal: um grupo junta dinheiro todos os meses e cada mês um membro recebe o total.
 
+F: v-muzungo
 V: muzungo
 V: mzungu
 T: branco, pessoa branca
 R: **muzungo** (Moçambique): pessoa branca ou estrangeira.
 
+F: v-nhamussoro
+Q: equivale | na Guiné-Bissau se diz «djambakus» | -> expressoes-guine-bissau:v-djambakus
 V: nhamussoro
 T: curandeiro
 R: **nhamussoro** (Moçambique): curandeiro tradicional, médico tradicional.
 
+F: v-chibalo
 V: chibalo
 V: xibalo
 T: trabalho forçado
 R: **chibalo** (Moçambique): o trabalho forçado imposto pela administração colonial.
 
+F: v-mata-bicho
+Q: equivale | em Angola também se usa «mata-bicho» | -> girias-angola:v-mata-bicho
+Q: equivale | em Portugal se diz «pequeno-almoço» | -> girias-portugal:v-pequeno-almoco
 V: mata-bicho
 V: matabicho
 T: pequeno-almoço, café da manhã
 R: **mata-bicho** (Moçambique e Angola): a primeira refeição do dia, o pequeno-almoço.
 
+F: v-geleira
+Q: equivale | em Angola também se usa «geleira» | -> girias-angola:v-geleira
+Q: equivale | em Portugal se diz «frigorífico» | -> girias-portugal:v-frigorifico
 V: geleira
 T: frigorífico, geladeira
 R: **geleira** (Moçambique e Angola): frigorífico, geladeira.
 
+F: v-nhemba
 V: nhemba
 T: feijão-frade
 R: **nhemba** (Moçambique): feijão-nhemba, o feijão-frade.
 
+F: v-mucapata
 V: mucapata
 R: **mucapata** (Zambézia): arroz cozido com leite de coco e feijão-nhemba.
 
+F: v-metical
 V: metical
 V: meticais
 T: dinheiro moçambicano

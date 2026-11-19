@@ -3,16 +3,19 @@
 #   T: traduções para o português padrão (para "como se diz X em ...?")
 #   R: o significado
 
+F: v-morabeza
 V: morabeza
 T: hospitalidade, gentileza
 R: **morabeza** (Cabo Verde): hospitalidade, gentileza e acolhimento típicos do povo cabo-verdiano.
 
+F: v-sodade
 V: sodade
 V: sodadi
 L: kabuverdianu
 T: saudade
 R: **sodade** (Cabo Verde): saudade; sentimento de nostalgia e melancolia, tema central da morna.
 
+F: v-cretcheu
 V: cretcheu
 V: kretxeu
 V: cretxeu
@@ -20,16 +23,27 @@ L: kabuverdianu
 T: amor, querido, querida
 R: **cretcheu** (Cabo Verde): amor, pessoa amada, querido ou querida.
 
+F: v-mantenha
+Q: equivale | no kriol (Guiné-Bissau) também se usa «mantenha» | -> expressoes-guine-bissau:v-mantenha
 V: mantenha
 L: kabuverdianu
 T: lembranças, cumprimentos
 R: **mantenha** (Cabo Verde): saudação, cumprimentos. "Manda mantenhas" = manda lembranças.
 
+F: v-sabi
+Q: equivale | em Angola se diz «kuia» | -> girias-angola:v-kuia
+Q: equivale | em Moçambique se diz «nice» | -> girias-mocambique:v-nice
+Q: equivale | no tétum (Timor-Leste) se diz «di'ak» | -> expressoes-timor-leste:v-di-ak
 V: sabi
 L: kabuverdianu
 T: bom, gostoso
 R: **sabi** (Cabo Verde): bom, gostoso, agradável. "Sta sabi" = está bom.
 
+F: v-txeu
+Q: equivale | em Portugal se diz «bué» | -> girias-portugal:v-bue
+Q: equivale | em Angola se diz «bué» | -> girias-angola:v-bue
+Q: equivale | em Moçambique se diz «maningue» | -> girias-mocambique:v-maningue
+Q: equivale | no kriol (Guiné-Bissau) se diz «manga di» | -> expressoes-guine-bissau:v-manga-di
 V: txeu
 V: tcheu
 V: cheu
@@ -37,194 +51,283 @@ L: kabuverdianu
 T: muito, bastante
 R: **txeu** (Cabo Verde): muito, bastante. Ex.: «Txeu obrigadu.»
 
+F: v-tud-dret
+Q: equivale | no kriol (Guiné-Bissau) se diz «kuma ku bu sta» | -> expressoes-guine-bissau:v-kuma-ku-bu-sta
+Q: equivale | também se diz «modi ki bu sta» | -> v-modi-ki-bu-sta
 V: tud dret
 V: tudu dretu
 L: kabuverdianu
 T: tudo bem
 R: **tud dret** (Cabo Verde): tudo bem, tudo certo.
 
+F: v-dretu
+Q: equivale | no tétum (Timor-Leste) se diz «di'ak» | -> expressoes-timor-leste:v-di-ak
 V: dretu
 T: bem, direito
 R: **dretu** (Cabo Verde): direito, bem.
 
+F: v-modi-ki-bu-sta
+Q: equivale | no kriol (Guiné-Bissau) se diz «kuma ku bu sta» | -> expressoes-guine-bissau:v-kuma-ku-bu-sta
+Q: equivale | também se diz «tud dret» | -> v-tud-dret
 V: modi ki bu sta
 L: kabuverdianu
 T: como vai, tudo bem
 R: **modi ki bu sta** (Cabo Verde): "Como estás?"
 
+F: v-kuze
+Q: equivale | no tétum (Timor-Leste) se diz «saida» | -> expressoes-timor-leste:v-saida
 V: kuzé
 V: kuze
 L: kabuverdianu
 T: o quê
 R: **kuzé** (Cabo Verde): "o quê?" Ex.: «Kuzé ki bu fla?»
 
+F: v-undi
 V: undi
 L: kabuverdianu
 T: onde
 R: **undi** (Cabo Verde): onde.
 
+F: v-fla
+Q: equivale | no kriol (Guiné-Bissau) se diz «papia» | -> expressoes-guine-bissau:v-papia
+Q: equivale | no tétum (Timor-Leste) se diz «koalia» | -> expressoes-timor-leste:v-koalia
 V: fla
 L: kabuverdianu
 T: dizer, falar
 R: **fla** (Cabo Verde): dizer, falar.
 
+F: v-odja
 V: odja
 L: kabuverdianu
 T: ver, olhar
 R: **odja** (Cabo Verde): ver, olhar.
 
+F: v-nha
 V: nha
 L: kabuverdianu
 T: meu, minha
 R: **nha** (Cabo Verde): meu, minha. Ex.: «Nha terra (minha terra).»
 
+F: v-mininu
+Q: equivale | no Norte (Brasil) se diz «curumim» | -> girias-brasil:v-curumim
+Q: equivale | em Angola se diz «candengue» | -> girias-angola:v-candengue
+Q: equivale | no kriol (Guiné-Bissau) também se usa «mininu» | -> expressoes-guine-bissau:v-mininu
+Q: equivale | em Portugal se diz «miúdo» | -> girias-portugal:v-miudo
 V: mininu
 L: kabuverdianu
 T: criança, menino
 R: **mininu** (Cabo Verde): criança, menino.
 
+F: v-fidju
+Q: equivale | no kriol (Guiné-Bissau) também se usa «fidju» | -> expressoes-guine-bissau:v-fidju
+Q: equivale | no forro (São Tomé e Príncipe) se diz «mina» | -> expressoes-sao-tome-e-principe:v-mina
 V: fidju
 L: kabuverdianu
 T: filho
 R: **fidju** (Cabo Verde): filho.
 
+F: v-mudjer
+Q: equivale | no kriol (Guiné-Bissau) se diz «mindjer» | -> expressoes-guine-bissau:v-mindjer
+Q: equivale | no tétum (Timor-Leste) se diz «feto» | -> expressoes-timor-leste:v-feto
 V: mudjer
 L: kabuverdianu
 T: mulher
 R: **mudjer** (Cabo Verde): mulher.
 
+F: v-omi
+Q: equivale | no Nordeste (Brasil) se diz «cabra» | -> girias-brasil:v-cabra
+Q: equivale | em Luanda (Angola) se diz «muadiê» | -> girias-angola:v-muadie
+Q: equivale | no kriol (Guiné-Bissau) também se usa «omi» | -> expressoes-guine-bissau:v-omi
+Q: equivale | no tétum (Timor-Leste) se diz «mane» | -> expressoes-timor-leste:v-mane
 V: omi
 L: kabuverdianu
 T: homem
 R: **omi** (Cabo Verde): homem.
 
+F: v-kaza
+Q: equivale | em Luanda (Angola) se diz «cubico» | -> girias-angola:v-cubico
+Q: equivale | no kriol (Guiné-Bissau) também se usa «kasa» | -> expressoes-guine-bissau:v-kasa
+Q: equivale | no tétum (Timor-Leste) se diz «uma» | -> expressoes-timor-leste:v-uma
 V: kaza
 V: kasa
 L: kabuverdianu
 T: casa
 R: **kaza** (Cabo Verde): casa.
 
+F: v-agu
+Q: equivale | no kriol (Guiné-Bissau) se diz «iagu» | -> expressoes-guine-bissau:v-iagu
+Q: equivale | no tétum (Timor-Leste) se diz «be» | -> expressoes-timor-leste:v-be
 V: agu
 L: kabuverdianu
 T: água
 R: **agu** (Cabo Verde): água.
 
+F: v-txuba
 V: txuba
 V: tchuba
 L: kabuverdianu
 T: chuva
 R: **txuba** (Cabo Verde): chuva.
 
+F: v-kumida
+Q: equivale | no Brasil se diz «rango» | -> girias-brasil:v-rango
+Q: equivale | no kriol (Guiné-Bissau) se diz «bianda» | -> expressoes-guine-bissau:v-bianda
+Q: equivale | no tétum (Timor-Leste) se diz «hahan» | -> expressoes-timor-leste:v-hahan
 V: kumida
 L: kabuverdianu
 T: comida
 R: **kumida** (Cabo Verde): comida.
 
+F: v-obrigadu
+Q: equivale | no changana (Moçambique) se diz «khanimambo» | -> girias-mocambique:v-khanimambo
+Q: equivale | no kriol (Guiné-Bissau) também se usa «obrigadu» | -> expressoes-guine-bissau:v-obrigadu
+Q: equivale | no forro (São Tomé e Príncipe) se diz «dêsu ka paga» | -> expressoes-sao-tome-e-principe:v-desu-ka-paga
+Q: equivale | no tétum (Timor-Leste) também se usa «obrigadu» | -> expressoes-timor-leste:v-obrigadu
 V: obrigadu
 L: kabuverdianu
 T: obrigado
 R: **obrigadu** (Cabo Verde): obrigado.
 
+F: v-badiu
 V: badiu
 T: santiaguense
 R: **badiu** (Cabo Verde): natural da ilha de Santiago.
 
+F: v-sampadjudu
 V: sampadjudu
 R: **sampadjudu** (Cabo Verde): natural das ilhas do norte (Barlavento), como São Vicente e Santo Antão.
 
+F: v-tabanka
 V: tabanka
 R: **tabanka** (Cabo Verde): festa e associação tradicional de ajuda mútua da ilha de Santiago, com cortejo e música (em Guiné-Bissau, a mesma palavra quer dizer aldeia).
 
+F: v-cachupa
 V: cachupa
 V: katxupa
 R: **cachupa** (Cabo Verde): prato nacional: milho cozido com feijão, legumes e carne ou peixe.
 
+F: v-xerem
 V: xerém
 V: xerem
 R: **xerém** (Cabo Verde): prato de milho pilado, cozido.
 
+F: v-grogue
 V: grogue
 V: grogu
 T: cachaça, aguardente
 R: **grogue** (Cabo Verde): aguardente de cana-de-açúcar típica das ilhas.
 
+F: v-pontxe
 V: pontxe
 V: ponche
 T: licor
 R: **pontxe** (Cabo Verde): licor de grogue com mel ou melaço.
 
+F: v-morna
 V: morna
 R: **morna** (Cabo Verde): gênero musical tradicional, lento e melancólico, muitas vezes comparado ao fado.
 
+F: v-coladeira
 V: coladeira
 R: **coladeira** (Cabo Verde): gênero musical mais animado, derivado da morna.
 
+F: v-funana
 V: funaná
 V: funana
 R: **funaná** (Cabo Verde): gênero musical e dança animada, tocado com gaita (acordeão) e ferrinho.
 
+F: v-batuku
 V: batuku
 V: batuque
 R: **batuku** (Cabo Verde): gênero musical e dança tradicional da ilha de Santiago, com canto e percussão.
 
 # ---- 3.0: crioulo cabo-verdiano (kabuverdianu), grafia ALUPEC ------------------
+F: v-bon-dia
+Q: equivale | no changana (Moçambique) se diz «avuxeni» | -> girias-mocambique:v-avuxeni
+Q: equivale | no kriol (Guiné-Bissau) também se usa «bon dia» | -> expressoes-guine-bissau:v-bon-dia
+Q: equivale | no tétum (Timor-Leste) se diz «bondia» | -> expressoes-timor-leste:v-bondia
 V: bon dia
 L: kabuverdianu
 T: bom dia
 R: **bon dia** (kabuverdianu): bom dia.
 
+F: v-bo-tarde
+Q: equivale | no tétum (Timor-Leste) se diz «botarde» | -> expressoes-timor-leste:v-botarde
 V: bo tarde
 V: boa tardi
 L: kabuverdianu
 T: boa tarde
 R: **bo tarde** (kabuverdianu): boa tarde.
 
+F: v-dja
 V: dja
 L: kabuverdianu
 T: já
 R: **dja** (kabuverdianu): já. Ex.: «N dja kume» — já comi.
 
+F: v-ka
+Q: equivale | no kriol (Guiné-Bissau) também se usa «ka» | -> expressoes-guine-bissau:v-ka
+Q: equivale | no tétum (Timor-Leste) se diz «lae» | -> expressoes-timor-leste:v-lae
 V: ka
 L: kabuverdianu
 T: não
 R: **ka** (kabuverdianu): partícula de negação, antes do verbo. Ex.: «N ka sabe» — não sei.
 
+F: v-sin
+Q: equivale | em Portugal se diz «ya» | -> girias-portugal:v-ya
+Q: equivale | no kriol (Guiné-Bissau) também se usa «sin» | -> expressoes-guine-bissau:v-sin
+Q: equivale | no tétum (Timor-Leste) se diz «loos» | -> expressoes-timor-leste:v-loos
 V: sin
 L: kabuverdianu
 T: sim
 R: **sin** (kabuverdianu): sim.
 
+F: v-bai
+Q: equivale | no kriol (Guiné-Bissau) também se usa «bai» | -> expressoes-guine-bissau:v-bai
+Q: equivale | no tétum (Timor-Leste) se diz «ba» | -> expressoes-timor-leste:v-ba
 V: bai
 L: kabuverdianu
 T: ir
 R: **bai** (kabuverdianu): ir. Ex.: «N sta bai kasa» — estou a ir para casa.
 
+F: v-ben
+Q: equivale | no tétum (Timor-Leste) se diz «mai» | -> expressoes-timor-leste:v-mai
 V: ben
 L: kabuverdianu
 T: vir
 R: **ben** (kabuverdianu): vir. Ex.: «Ben li!» — vem cá!
 
+F: v-kume
+Q: equivale | no kriol (Guiné-Bissau) também se usa «kume» | -> expressoes-guine-bissau:v-kume
+Q: equivale | no tétum (Timor-Leste) se diz «han» | -> expressoes-timor-leste:v-han
 V: kume
 L: kabuverdianu
 T: comer
 R: **kume** (kabuverdianu): comer.
 
+F: v-trabadju
+Q: equivale | no Brasil se diz «trampo» | -> girias-brasil:v-trampo
+Q: equivale | no kriol (Guiné-Bissau) se diz «tarbadju» | -> expressoes-guine-bissau:v-tarbadju
+Q: equivale | no tétum (Timor-Leste) se diz «servisu» | -> expressoes-timor-leste:v-servisu
 V: trabadju
 L: kabuverdianu
 T: trabalho
 R: **trabadju** (kabuverdianu): trabalho.
 
+F: v-djunta-mon
 V: djunta-mon
 V: djunta mon
 L: kabuverdianu
 T: ajuda mútua, entreajuda
 R: **djunta-mon** (kabuverdianu): "juntar as mãos": ajuda mútua da comunidade, como na construção de uma casa ou na colheita.
 
+F: v-kola-san-jon
 V: kola san jon
 L: kabuverdianu
 T: festa de são joão
 R: **kola san jon** (Cabo Verde): festa popular de São João, com tambores e dança, sobretudo em Santo Antão e São Vicente.
 
+F: v-nha-terra
 V: nha terra
 L: kabuverdianu
 T: minha terra

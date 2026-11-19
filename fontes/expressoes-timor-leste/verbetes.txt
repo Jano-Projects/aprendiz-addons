@@ -3,310 +3,449 @@
 #   T: traduções para o português padrão (para "como se diz X em ...?")
 #   R: o significado
 
+F: v-tetum
 V: tétum
 V: tetum
 V: tetun
 R: **tétum** (Timor-Leste): língua nacional e oficial de Timor-Leste, ao lado do português; tem muitas palavras de origem portuguesa.
 
+F: v-bondia
+Q: equivale | no changana (Moçambique) se diz «avuxeni» | -> girias-mocambique:v-avuxeni
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «bon dia» | -> expressoes-cabo-verde:v-bon-dia
+Q: equivale | no kriol (Guiné-Bissau) se diz «bon dia» | -> expressoes-guine-bissau:v-bon-dia
 V: bondia
 L: tetum
 T: bom dia
 R: **bondia** (Timor-Leste): bom dia.
 
+F: v-botarde
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «bo tarde» | -> expressoes-cabo-verde:v-bo-tarde
 V: botarde
 L: tetum
 T: boa tarde
 R: **botarde** (Timor-Leste): boa tarde.
 
+F: v-bonoite
 V: bonoite
 L: tetum
 T: boa noite
 R: **bonoite** (Timor-Leste): boa noite.
 
+F: v-di-ak
+Q: equivale | em Angola se diz «kuia» | -> girias-angola:v-kuia
+Q: equivale | em Moçambique se diz «nice» | -> girias-mocambique:v-nice
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «sabi» | -> expressoes-cabo-verde:v-sabi
 V: di'ak
 V: diak
 L: tetum
 T: bem, bom
 R: **di'ak** (Timor-Leste): bem, bom. "Di'ak ka lae?" = "Tudo bem?"
 
+F: v-obrigadu
+Q: equivale | no changana (Moçambique) se diz «khanimambo» | -> girias-mocambique:v-khanimambo
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) também se usa «obrigadu» | -> expressoes-cabo-verde:v-obrigadu
+Q: equivale | no kriol (Guiné-Bissau) também se usa «obrigadu» | -> expressoes-guine-bissau:v-obrigadu
+Q: equivale | no forro (São Tomé e Príncipe) se diz «dêsu ka paga» | -> expressoes-sao-tome-e-principe:v-desu-ka-paga
 V: obrigadu
 L: tetum
 T: obrigado
 R: **obrigadu** (Timor-Leste): obrigado.
 
+F: v-obrigadu-barak
 V: obrigadu barak
 L: tetum
 T: muito obrigado
 R: **obrigadu barak** (Timor-Leste): muito obrigado.
 
+F: v-barak
+Q: equivale | no Brasil se diz «mó» | -> girias-brasil:v-mo
+Q: equivale | em Portugal se diz «bué» | -> girias-portugal:v-bue
+Q: equivale | em Angola se diz «bué» | -> girias-angola:v-bue
+Q: equivale | em Moçambique se diz «maningue» | -> girias-mocambique:v-maningue
 V: barak
 L: tetum
 T: muito
 R: **barak** (Timor-Leste): muito.
 
+F: v-saida
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «kuzé» | -> expressoes-cabo-verde:v-kuze
 V: saida
 L: tetum
 T: o quê
 R: **saida** (Timor-Leste): "o quê?" Ex.: «Ita-nia naran saida? (Qual é o seu nome?)»
 
+F: v-naran
 V: naran
 L: tetum
 T: nome
 R: **naran** (Timor-Leste): nome.
 
+F: v-maun
+Q: equivale | no Brasil se diz «mano» | -> girias-brasil:v-mano
 V: maun
 L: tetum
 T: irmão
 R: **maun** (Timor-Leste): irmão mais velho; forma respeitosa de chamar um homem.
 
+F: v-mana
 V: mana
 L: tetum
 T: irmã
 R: **mana** (Timor-Leste): irmã mais velha; forma respeitosa de chamar uma mulher.
 
+F: v-maluk
+Q: equivale | em Angola se diz «kamba» | -> girias-angola:v-kamba
+Q: equivale | no Brasil se diz «mano» | -> girias-brasil:v-mano
+Q: equivale | em Portugal se diz «bacano» | -> girias-portugal:v-bacano
 V: maluk
 L: tetum
 T: amigo, companheiro
 R: **maluk** (Timor-Leste): amigo, companheiro.
 
+F: v-inan
+Q: equivale | no Nordeste (Brasil) se diz «mainha» | -> girias-brasil:v-mainha
 V: inan
 L: tetum
 T: mãe
 R: **inan** (Timor-Leste): mãe.
 
+F: v-aman
+Q: equivale | no Nordeste (Brasil) se diz «painho» | -> girias-brasil:v-painho
 V: aman
 L: tetum
 T: pai
 R: **aman** (Timor-Leste): pai.
 
+F: v-labarik
+Q: equivale | no Norte (Brasil) se diz «curumim» | -> girias-brasil:v-curumim
+Q: equivale | em Portugal se diz «miúdo» | -> girias-portugal:v-miudo
+Q: equivale | em Angola se diz «candengue» | -> girias-angola:v-candengue
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «mininu» | -> expressoes-cabo-verde:v-mininu
 V: labarik
 L: tetum
 T: criança
 R: **labarik** (Timor-Leste): criança.
 
+F: v-feto
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «mudjer» | -> expressoes-cabo-verde:v-mudjer
+Q: equivale | no kriol (Guiné-Bissau) se diz «mindjer» | -> expressoes-guine-bissau:v-mindjer
 V: feto
 L: tetum
 T: mulher
 R: **feto** (Timor-Leste): mulher.
 
+F: v-mane
+Q: equivale | no Nordeste (Brasil) se diz «cabra» | -> girias-brasil:v-cabra
+Q: equivale | em Luanda (Angola) se diz «muadiê» | -> girias-angola:v-muadie
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «omi» | -> expressoes-cabo-verde:v-omi
+Q: equivale | no kriol (Guiné-Bissau) se diz «omi» | -> expressoes-guine-bissau:v-omi
+Q: diferente-de | no Rio de Janeiro (Brasil), «mané» quer dizer bobo | -> girias-brasil:v-mane
 V: mane
 L: tetum
 T: homem
 R: **mane** (Timor-Leste): homem.
 
+F: v-katuas
+Q: equivale | em Angola se diz «kota» | -> girias-angola:v-kota
+Q: equivale | no changana (Moçambique) se diz «madala» | -> girias-mocambique:v-madala
+Q: equivale | no kriol (Guiné-Bissau) se diz «bedju» | -> expressoes-guine-bissau:v-bedju
 V: katuas
 L: tetum
 T: idoso, ancião
 R: **katuas** (Timor-Leste): homem idoso, ancião.
 
+F: v-malae
 V: malae
 L: tetum
 T: estrangeiro
 R: **malae** (Timor-Leste): estrangeiro.
 
+F: v-timor-oan
 V: timor-oan
 V: timor oan
 L: tetum
 T: timorense
 R: **timor-oan** (Timor-Leste): timorense, pessoa de Timor.
 
+F: v-rai
+Q: equivale | no kriol (Guiné-Bissau) se diz «tchon» | -> expressoes-guine-bissau:v-tchon
 V: rai
 L: tetum
 T: terra, país
 R: **rai** (Timor-Leste): terra, país.
 
+F: v-lulik
 V: lulik
 L: tetum
 T: sagrado
 R: **lulik** (Timor-Leste): sagrado. A *uma lulik* é a casa sagrada, onde se guardam os objetos sagrados da aldeia ou da família.
 
+F: v-tais
 V: tais
 L: tetum
 R: **tais** (Timor-Leste): tecido tradicional tecido à mão, usado em roupas e cerimônias.
 
+F: v-be
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «agu» | -> expressoes-cabo-verde:v-agu
+Q: equivale | no kriol (Guiné-Bissau) se diz «iagu» | -> expressoes-guine-bissau:v-iagu
 V: be
 L: tetum
 T: água
 R: **be** (Timor-Leste): água.
 
+F: v-hahan
+Q: equivale | no Brasil se diz «rango» | -> girias-brasil:v-rango
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «kumida» | -> expressoes-cabo-verde:v-kumida
+Q: equivale | no kriol (Guiné-Bissau) se diz «bianda» | -> expressoes-guine-bissau:v-bianda
 V: hahan
 L: tetum
 T: comida
 R: **hahan** (Timor-Leste): comida.
 
+F: v-etu
 V: etu
 L: tetum
 T: arroz cozido
 R: **etu** (Timor-Leste): arroz cozido.
 
+F: v-foos
+Q: equivale | no kriol (Guiné-Bissau) se diz «bianda» | -> expressoes-guine-bissau:v-bianda
 V: foos
 L: tetum
 T: arroz
 R: **foos** (Timor-Leste): arroz cru, em grão.
 
+F: v-ikan
 V: ikan
 L: tetum
 T: peixe
 R: **ikan** (Timor-Leste): peixe.
 
+F: v-manu
 V: manu
 L: tetum
 T: galinha, frango
 R: **manu** (Timor-Leste): galinha, frango.
 
+F: v-fahi
 V: fahi
 L: tetum
 T: porco
 R: **fahi** (Timor-Leste): porco.
 
+F: v-karau
 V: karau
 L: tetum
 T: búfalo
 R: **karau** (Timor-Leste): búfalo.
 
+F: v-lafaek
 V: lafaek
 L: tetum
 T: crocodilo
 R: **lafaek** (Timor-Leste): crocodilo; símbolo de Timor, ligado à lenda de origem da ilha.
 
+F: v-osan
+Q: equivale | no Brasil se diz «grana» | -> girias-brasil:v-grana
+Q: equivale | em Angola se diz «kumbu» | -> girias-angola:v-kumbu
+Q: equivale | em Moçambique se diz «mola» | -> girias-mocambique:v-mola
 V: osan
 L: tetum
 T: dinheiro
 R: **osan** (Timor-Leste): dinheiro.
 
+F: v-servisu
+Q: equivale | no Brasil se diz «trampo» | -> girias-brasil:v-trampo
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «trabadju» | -> expressoes-cabo-verde:v-trabadju
+Q: equivale | no kriol (Guiné-Bissau) se diz «tarbadju» | -> expressoes-guine-bissau:v-tarbadju
 V: servisu
 L: tetum
 T: trabalho
 R: **servisu** (Timor-Leste): trabalho.
 
+F: v-ohin
+Q: equivale | no kriol (Guiné-Bissau) se diz «aos» | -> expressoes-guine-bissau:v-aos
 V: ohin
 L: tetum
 T: hoje
 R: **ohin** (Timor-Leste): hoje.
 
+F: v-aban
+Q: equivale | no kriol (Guiné-Bissau) se diz «amanha» | -> expressoes-guine-bissau:v-amanha
 V: aban
 L: tetum
 T: amanhã
 R: **aban** (Timor-Leste): amanhã.
 
+F: v-horiseik
+Q: equivale | no kriol (Guiné-Bissau) se diz «aonti» | -> expressoes-guine-bissau:v-aonti
 V: horiseik
 L: tetum
 T: ontem
 R: **horiseik** (Timor-Leste): ontem.
 
+F: v-loron
 V: loron
 L: tetum
 T: dia, sol
 R: **loron** (Timor-Leste): dia; também o sol.
 
+F: v-kalan
 V: kalan
 L: tetum
 T: noite
 R: **kalan** (Timor-Leste): noite.
 
+F: v-han
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «kume» | -> expressoes-cabo-verde:v-kume
+Q: equivale | no kriol (Guiné-Bissau) se diz «kume» | -> expressoes-guine-bissau:v-kume
 V: han
 L: tetum
 T: comer
 R: **han** (Timor-Leste): comer.
 
+F: v-hemu
 V: hemu
 L: tetum
 T: beber
 R: **hemu** (Timor-Leste): beber.
 
+F: v-toba
 V: toba
 L: tetum
 T: dormir
 R: **toba** (Timor-Leste): dormir.
 
+F: v-furak
+Q: equivale | em Portugal se diz «giro» | -> girias-portugal:v-giro
+Q: equivale | em Angola se diz «kuia» | -> girias-angola:v-kuia
+Q: equivale | em Moçambique se diz «nice» | -> girias-mocambique:v-nice
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «sabi» | -> expressoes-cabo-verde:v-sabi
 V: furak
 L: tetum
 T: bonito, gostoso
 R: **furak** (Timor-Leste): bonito, gostoso.
 
 # ---- 3.0: tétum ----------------------------------------------------------------
+F: v-hau
 V: hau
 L: tetum
 T: eu
 R: **hau** (tétum): eu. Ex.: «Hau naran Maria» — o meu nome é Maria.
 
+F: v-ita
 V: ita
 L: tetum
 T: você, o senhor, nós
 R: **ita** (tétum): você (tratamento respeitoso); também "nós" incluindo quem ouve. Formal: "ita boot".
 
+F: v-nia
 V: nia
 L: tetum
 T: ele, ela
 R: **nia** (tétum): ele, ela.
 
+F: v-uma
+Q: equivale | em Luanda (Angola) se diz «cubico» | -> girias-angola:v-cubico
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «kaza» | -> expressoes-cabo-verde:v-kaza
+Q: equivale | no kriol (Guiné-Bissau) se diz «kasa» | -> expressoes-guine-bissau:v-kasa
 V: uma
 L: tetum
 T: casa
 R: **uma** (tétum): casa. A casa sagrada tradicional é a "uma lulik".
 
+F: v-ba
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «bai» | -> expressoes-cabo-verde:v-bai
+Q: equivale | no kriol (Guiné-Bissau) se diz «bai» | -> expressoes-guine-bissau:v-bai
 V: ba
 L: tetum
 T: ir, para
 R: **ba** (tétum): ir; também "para". Ex.: «Hau ba eskola» — vou à escola.
 
+F: v-mai
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «ben» | -> expressoes-cabo-verde:v-ben
 V: mai
 L: tetum
 T: vir
 R: **mai** (tétum): vir. Ex.: «Mai ne'e!» — vem cá!
 
+F: v-hakarak
+Q: equivale | no kriol (Guiné-Bissau) se diz «misti» | -> expressoes-guine-bissau:v-misti
 V: hakarak
 L: tetum
 T: querer
 R: **hakarak** (tétum): querer.
 
+F: v-hatene
+Q: equivale | no kriol (Guiné-Bissau) se diz «sibi» | -> expressoes-guine-bissau:v-sibi
 V: hatene
 L: tetum
 T: saber
 R: **hatene** (tétum): saber. «Hau la hatene» — não sei.
 
+F: v-koalia
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «fla» | -> expressoes-cabo-verde:v-fla
+Q: equivale | no kriol (Guiné-Bissau) se diz «papia» | -> expressoes-guine-bissau:v-papia
 V: koalia
 L: tetum
 T: falar
 R: **koalia** (tétum): falar. «Ita koalia portugés?» — fala português?
 
+F: v-lae
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «ka» | -> expressoes-cabo-verde:v-ka
+Q: equivale | no kriol (Guiné-Bissau) se diz «ka» | -> expressoes-guine-bissau:v-ka
 V: lae
 L: tetum
 T: não
 R: **lae** (tétum): não (resposta). A negação antes do verbo é "la": «hau la hatene».
 
+F: v-loos
+Q: equivale | em Portugal se diz «ya» | -> girias-portugal:v-ya
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «sin» | -> expressoes-cabo-verde:v-sin
+Q: equivale | no kriol (Guiné-Bissau) se diz «sin» | -> expressoes-guine-bissau:v-sin
 V: loos
 L: tetum
 T: sim, verdade, certo
 R: **loos** (tétum): certo, verdade; usado para dizer "sim".
 
+F: v-ki-ik
 V: ki'ik
 V: kiik
 L: tetum
 T: pequeno
 R: **ki'ik** (tétum): pequeno.
 
+F: v-boot
+Q: equivale | em Portugal se diz «ganda» | -> girias-portugal:v-ganda
+Q: equivale | no kriol (Guiné-Bissau) se diz «garandi» | -> expressoes-guine-bissau:v-garandi
 V: boot
 L: tetum
 T: grande
 R: **boot** (tétum): grande; também usado em tratamentos de respeito ("ita boot").
 
+F: v-liurai
 V: liurai
 L: tetum
 T: rei, chefe tradicional
 R: **liurai** (Timor-Leste): chefe tradicional, rei de um reino antigo.
 
+F: v-suku
+Q: equivale | em Portugal se diz «sumo» | -> girias-portugal:v-sumo
+Q: equivale | na Guiné-Bissau se diz «tabanka» | -> expressoes-guine-bissau:v-tabanka
 V: suku
 V: suco
 L: tetum
 T: suco, aldeia
 R: **suku** (Timor-Leste): divisão administrativa abaixo do posto administrativo, chefiada pelo "xefe suku" (chefe de suco).
 
+F: v-batar
 V: batar
 L: tetum
 T: milho
 R: **batar** (tétum): milho.
 
+F: v-ai-farina
+Q: equivale | no Nordeste (Brasil) se diz «macaxeira» | -> girias-brasil:v-macaxeira
 V: ai-farina
 L: tetum
 T: mandioca

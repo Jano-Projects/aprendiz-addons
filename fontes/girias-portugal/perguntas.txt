@@ -1,60 +1,109 @@
 # Gramática e ortografia do português de Portugal (norma europeia).
 
+F: ortografia
+N: raiz
+A: ortografia oficial de portugal, acordo ortográfico em portugal
+Q: definicao | Portugal segue o Acordo de 1990, obrigatório desde 2015
+Q: diferente-de | no Brasil ele vale desde 2009 | -> girias-brasil:ortografia
 P: qual a ortografia oficial de portugal
 P: portugal segue o acordo ortografico
 P: desde quando vale o acordo ortografico em portugal
 R: Portugal segue o **Acordo Ortográfico de 1990**. Entrou em vigor em 2009, com um período de transição de seis anos, e ficou obrigatório em maio de 2015. A grafia anterior ("acção", "óptimo", "director") ainda aparece em textos antigos e na escrita de quem não adotou o Acordo.
 
+F: acordo-mudancas
+A: consoantes mudas, ação ou acção
+Q: porque | as consoantes que não se pronunciam caíram: acção virou ação
+Q: parte-de | é uma das regras do Acordo de 1990 | -> ortografia
 P: o que mudou com o acordo ortografico em portugal
 P: consoantes mudas
 P: acao ou accao
 R: Em Portugal, a mudança mais visível foi a queda das **consoantes mudas** (que não se pronunciam): acção → **ação**, óptimo → **ótimo**, director → **diretor**, baptismo → **batismo**, Egipto → **Egito**. As que se pronunciam ficam: **facto**, **contacto**, **pacto**, **receção** (sem p, porque não se diz). Mudaram também os meses e as estações, que passaram a minúscula (janeiro, primavera), e o hífen (autoestrada, antirrugas, micro-ondas).
 
+F: grafias-duplas
+A: grafias duplas, receção, recepção
+Q: porque | o acordo segue a pronúncia de cada país: onde a consoante soa, ela fica | -> acordo-mudancas
 P: porque recepcao no brasil e rececao em portugal
 P: grafias duplas do acordo
 R: O Acordo de 1990 escreve conforme a **pronúncia de cada país**. Onde a consoante se pronuncia, ela fica: o Brasil escreve «recepção» e «fato»; Portugal escreve «receção» e «facto». Por isso há duplas grafias legítimas: facto/fato, contacto/contato, receção/recepção, aspeto/aspecto, perspetiva/perspectiva.
 
+F: pronomes
+A: colocação dos pronomes em portugal, ênclise
+Q: porque | em Portugal o pronome vem depois do verbo na frase afirmativa: disse-me
+Q: diferente-de | no Brasil o natural da fala é antes: me disse | -> girias-brasil:proclise
 P: colocacao dos pronomes em portugal
 P: enclise em portugal
 P: me disse ou disse-me
 R: Na norma europeia, a posição normal do pronome é **depois do verbo**, ligado por hífen (ênclise): "Ele **disse-me**", "Eu **lembro-me**", "**Dá-me** isso". O pronome passa para **antes** do verbo (próclise) quando há uma palavra que o "atrai": negação (**não me disse**), "que" (o livro **que me deste**), "quem", "já", "também", "nunca", "sempre", advérbios e interrogativas ("Onde **te** encontraste?").
 
+F: mesoclise
+A: mesóclise, dar-te-ei
+Q: porque | no futuro e no condicional, o pronome vai no meio do verbo; ainda se usa na escrita formal em Portugal | -> pronomes
 P: o que e mesoclise
 P: dar-te-ei
 R: A **mesóclise** põe o pronome **no meio** do verbo, no futuro e no condicional: "dar-**te**-ei", "dir-**lhe**-ia", "far-**se**-á". Em Portugal ainda se usa na escrita cuidada; com uma palavra atrativa, volta a próclise: "não **te** darei".
 
+F: gerundio
+A: estou a fazer, gerúndio em portugal
+Q: porque | em Portugal a ação em curso se diz com a mais infinitivo
+Q: diferente-de | no Brasil se usa o gerúndio | -> girias-brasil:gerundio
 P: estou a fazer ou estou fazendo
 P: gerundio em portugal
 R: Em Portugal, usa-se **estar a + infinitivo**: "estou **a fazer**", "estava **a ler**". O gerúndio ("estou fazendo") é a forma brasileira, mas também se ouve no Alentejo, no Algarve e nos Açores.
 
+F: tu-voce
+A: tu ou você em portugal, tratamento em portugal
+Q: porque | em Portugal tu é o tratamento íntimo; você pode soar distante ou rude
+Q: diferente-de | no Brasil você é o tratamento comum | -> girias-brasil:tu-voce
 P: tu ou voce em portugal
 P: voce e falta de educacao em portugal
 P: como tratar alguem em portugal
 R: Em Portugal, **tu** é o tratamento íntimo (família, amigos, colegas próximos). Para o tratamento formal usa-se **o senhor / a senhora**, ou o verbo sem pronome ("Quer um café?"). **Você** existe, mas numa pergunta direta pode soar distante ou pouco cortês, conforme a região e a pessoa.
 
+F: amamos
+A: amámos, acento no pretérito perfeito
+Q: porque | em Portugal o acento distingue o passado (amámos) do presente (amamos), que soam diferente lá
 P: amamos ou amamos com acento
 P: falamos ou falamos pretérito
 P: acento no preterito perfeito
 R: Na norma europeia, o pretérito perfeito dos verbos em -ar leva acento para se distinguir do presente: "hoje **falamos**" (presente) / "ontem **falámos**" (passado). Pelo Acordo de 1990, o acento é facultativo, mas continua muito usado em Portugal. No Brasil, não se usa.
 
+F: porque-pergunta
+A: porque na pergunta em portugal
+Q: regra | em Portugal se escreve porque junto também na pergunta
+Q: diferente-de | no Brasil, na pergunta, se escreve por que | -> girias-brasil:porques
 P: porque na pergunta em portugal
 P: porque ou por que em portugal
 R: Em Portugal, a pergunta pode começar por **porque**: "**Porque** não vieste?" "Por que" (separado) aparece quando equivale a "por qual": "Por que razão não vieste?" No fim da frase escreve-se **porquê**: "Não vieste porquê?"
 
+F: ter-de
+A: ter de ou ter que
+Q: regra | a forma mais cuidada é ter de para obrigação; ter que é aceite na fala
 P: ter de ou ter que
 R: A norma europeia prefere **ter de** para obrigação: "Tenho **de** sair." "Ter que" também se usa e é aceite, sobretudo quando "que" equivale a "algo": "Tenho muito **que** fazer."
 
+F: vos
+A: vós em portugal
+Q: porque | o vós quase sumiu, mas sobrevive em algumas regiões e em textos religiosos
 P: vos em portugal
 P: ainda se usa vos
 R: O pronome **vós** quase desapareceu da fala comum, mas ainda se ouve em algumas regiões do Norte de Portugal e aparece em textos religiosos e literários. Na fala corrente, para várias pessoas, usa-se **vocês**. O pronome átono **vos** continua comum: "Já **vos** disse."
 
+F: haver
+A: haviam ou havia em portugal
+Q: regra | haver no sentido de existir fica no singular | -> girias-brasil:haver
 P: haviam ou havia
 P: fazem dois anos ou faz dois anos
 R: No sentido de **existir** ou **acontecer**, "haver" é impessoal e fica no singular: "**havia** muitas pessoas", "**houve** problemas". O mesmo vale para "fazer" indicando **tempo**: "**faz** dois anos". O auxiliar acompanha: "**pode haver** problemas".
 
+F: crase
+A: crase em portugal, a ou à
+Q: regra | a regra é a mesma do Brasil | -> girias-brasil:crase
 P: quando usar crase em portugal
 P: a ou à
 R: A **crase** (à) junta a preposição "a" ao artigo "a". Truque: troque por uma palavra masculina; se ficar "ao", leva acento grave: "vou **à** escola" → "vou **ao** liceu". Não há crase antes de verbo ("começou **a** chover"), de palavra masculina ("**a** pé") nem em "estar **a** fazer".
 
+F: meses
+A: meses com maiúscula ou minúscula
+Q: regra | desde o acordo, meses e estações se escrevem com minúscula | -> ortografia
 P: meses com maiuscula ou minuscula
 R: Pelo Acordo de 1990, em Portugal os meses, as estações e os dias da semana escrevem-se com **minúscula**: janeiro, primavera, segunda-feira.

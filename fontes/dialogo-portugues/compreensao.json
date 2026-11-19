@@ -577,6 +577,11 @@
     "fechamento": [
       "Quer que eu aprofunde algum desses pontos?",
       "Se quiser, explico qualquer parte com mais calma."
+    ],
+    "equivale": [
+      "No mesmo sentido, {x}.",
+      "Em outros lugares, {x}.",
+      "Com o mesmo sentido, {x}."
     ]
   }
 }

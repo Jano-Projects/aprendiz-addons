@@ -1,18 +1,33 @@
 # O português de Angola.
 
+F: ortografia
+A: ortografia de angola, acordo em angola
+Q: porque | Angola assinou o Acordo de 1990, mas não o ratificou, e segue a norma de 1945 | -> ratificacao
+Q: diferente-de | Portugal e Brasil já aplicam o acordo | -> girias-portugal:ortografia
 P: qual a ortografia de angola
 P: angola segue o acordo ortografico
 P: acao ou accao em angola
 P: angola ratificou o acordo ortografico
 R: Angola assinou o Acordo Ortográfico de 1990, mas **não o ratificou** (em 2026, Angola e Moçambique eram os únicos países da CPLP nessa situação). Por isso, em Angola continua em uso a **ortografia anterior ao Acordo**, a mesma que Portugal usava antes de 2009: **acção**, **óptimo**, **director**, **projecto**, **facto**. Esta norma do Aprendiz segue essa grafia e aponta as formas do Acordo como "grafia não adotada em Angola".
 
+F: ratificacao
+A: angola não ratificou o acordo
+Q: porque | o país pede que o acordo reconheça termos das línguas nacionais angolanas
 P: porque angola nao ratificou o acordo
 R: Angola tem levantado reservas sobre o Acordo: entre elas, a falta de regras para as letras **k, w e y**, muito usadas em nomes e palavras de origem angolana (Kwanza, Kuito, Ndalatando), e a falta de clareza dos instrumentos de aplicação nas escolas.
 
+F: linguas
+N: raiz
+A: línguas de angola, línguas nacionais de angola, umbundu, kimbundu
+Q: definicao | o português é a língua oficial e convive com línguas bantas, como umbundu e kimbundu
 P: quais as linguas de angola
 P: linguas nacionais de angola
 R: O **português** é a língua oficial e, hoje, a língua materna de boa parte dos angolanos, sobretudo nas cidades. Convive com as **línguas nacionais**, quase todas bantu: umbundo (Planalto Central), quimbundo (Luanda, Malanje), quicongo (Norte), cokwe (Leste), kwanyama e nganguela (Sul), entre outras.
 
+F: caracteristicas
+A: português de angola, diferenças de angola
+Q: porque | muitas palavras vêm do kimbundu e do umbundu | -> linguas
+Q: diferente-de | a base da norma é a de Portugal | -> girias-portugal:ortografia
 P: caracteristicas do portugues de angola
 P: diferencas entre o portugues de angola e o de portugal
 R: O português de Angola segue a norma europeia na escrita formal, mas tem marcas próprias, muitas vindas do contacto com as línguas bantu:
@@ -22,15 +37,28 @@ R: O português de Angola segue a norma europeia na escrita formal, mas tem marc
 - tratamento de **respeito** aos mais velhos: "mais-velho", "kota", "tio", "tia";
 - concordância nominal e verbal por vezes simplificada na fala.
 
+F: lhe
+A: vi-lhe ou vi-o, lhe como objeto direto
+Q: porque | na fala angolana o lhe é usado também como objeto direto; a norma pede vi-o
+Q: diferente-de | o mesmo acontece em Moçambique | -> girias-mocambique:lhe
 P: vi-lhe ou vi-o
 P: lhe como objeto direto
 R: Em Angola é comum dizer "**vi-lhe**", "**conheço-lhe**", "**ajudei-lhe**". Na norma-padrão, com verbos que pedem complemento direto (ver, conhecer, encontrar, ajudar, convidar), usa-se **o** ou **a**: "vi-o", "conheço-a", "ajudei-o". **Lhe** fica para o complemento indireto: "dei-**lhe** o livro", "disse-**lhe** a verdade".
 
+F: ir-a
+A: vou na escola, vou à escola em angola
+Q: regra | a norma pede ir a; ir em é próprio da fala
+Q: diferente-de | no Brasil também é comum chegar em | -> girias-brasil:chegar
 P: vou na escola ou vou a escola
 R: Com o verbo "ir" indicando destino, a norma pede **a** (ou **para**): "vou **à** escola", "fui **ao** mercado". "Vou na escola" é muito usado na fala angolana (e brasileira), mas em texto formal prefira "à".
 
+F: gerundio
+A: estou a fazer em angola
+Q: porque | Angola segue o uso de Portugal | -> girias-portugal:gerundio
 P: estou a fazer ou estou fazendo em angola
 R: Em Angola, como em Portugal, a forma da norma é **estar a + infinitivo**: "estou **a trabalhar**". O gerúndio ("estou trabalhando") é a forma do Brasil.
 
+F: moeda
+A: moeda de angola, kwanza
 P: qual a moeda de angola
 R: A moeda de Angola é o **kwanza** (AOA).

@@ -144,9 +144,11 @@ do `perguntas.txt` e antes do `R:`, as linhas `F:` (ref), `A:` (assuntos: os nom
 conceito, e não temas vizinhos), `Q:` (porquê: `relação | explicação | -> ref`, ou
 `-> addon:ref` para outro addon) e `N: raiz`. O `dialogo-portugues` traz a seção `expressao`
 (como dizer cada parte da resposta) e o `compreensao-portugues`, a seção `padroes` (estruturas
-de frase). Convertidos até agora: `sql-basico`, `sql-avancado`, `sql-teoria-pratica`,
-`prog-logica`, `prog-vocabulario`, `prog-estruturas-dados`, `prog-banco-dados`, `python-basico`
-e `python-avancado`. Cada leva entra com perguntas próprias na homologação do aprendiz-dev
+de frase). Todos os addons de conhecimento estão convertidos: SQL, programação, Python, C,
+C++, utilidades, "Aprendiz por dentro" e os de idiomas. Nos idiomas, os verbetes (`V:`) também
+têm teia: `equivale` liga a mesma ideia em outros países ("grana" ↔ "kumbu") e `diferente-de`
+marca a mesma palavra com outro sentido ("mina"). Esses elos foram gerados das traduções `T:`
+pela ferramenta da leva e conferidos; os blocos de gramática têm porquês escritos à mão. Cada leva entra com perguntas próprias na homologação do aprendiz-dev
 (`ferramentas/homologar.py`).
 
 **Diálogo** (Aprendiz 0.9+): `dialogo-portugues` traz só a seção `dialogo` de um

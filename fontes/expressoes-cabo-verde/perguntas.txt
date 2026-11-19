@@ -1,21 +1,37 @@
 # As línguas e a norma de Cabo Verde.
 
+F: ortografia
+A: ortografia de cabo verde
+Q: porque | Cabo Verde ratificou e aplica o Acordo de 1990 | -> girias-portugal:ortografia
 P: qual a ortografia de cabo verde
 P: cabo verde segue o acordo ortografico
 R: Cabo Verde ratificou o Acordo Ortográfico de 1990 e tornou-o **obrigatório a 1 de outubro de 2015** nos documentos oficiais, no ensino e na comunicação social. A grafia do português segue a norma europeia do Acordo: **ação**, **ótimo**, **diretor**, **facto**, **receção**.
 
+F: linguas
+N: raiz
+A: línguas de cabo verde, crioulo cabo-verdiano, kabuverdianu
+Q: definicao | o português é a língua oficial; o crioulo cabo-verdiano é a língua do dia a dia
 P: quais as linguas de cabo verde
 P: o crioulo e lingua oficial em cabo verde
 R: O **português** é a língua oficial, usada na escrita, na administração e no ensino. A língua materna de quase todos os cabo-verdianos é o **crioulo cabo-verdiano** (kabuverdianu ou kriolu), língua de base lexical portuguesa formada nas ilhas a partir do século XV. O crioulo é a língua do dia a dia, da música (morna, coladeira, funaná) e da identidade nacional; a Constituição prevê a criação das condições para a sua oficialização.
 
+F: alupec
+A: alupec, escrever o crioulo
+Q: porque | o crioulo precisava de um alfabeto próprio, e o ALUPEC é o padrão oficial | -> linguas
 P: o que e o alupec
 P: como se escreve o crioulo cabo-verdiano
 R: O **ALUPEC** (Alfabeto Unificado para a Escrita do Cabo-verdiano) é o alfabeto oficial para escrever o crioulo. Usa letras como **k** (kasa), **dj** (djuntu), **tx** (txuba) e **x** (xinti), com uma letra para cada som. Por isso escreve-se "kasa", "fidju", "obrigadu".
 
+F: badiu-sampadjudu
+A: badiu, sampadjudu, variedades do crioulo
+Q: parte-de | são as duas grandes variedades do crioulo: a de Santiago e a das ilhas do norte | -> linguas
 P: diferenca entre badiu e sampadjudu
 P: variedades do crioulo cabo verdiano
 R: O crioulo tem duas grandes variedades: a de **Sotavento** (Santiago, Fogo, Brava, Maio), cujos falantes de Santiago se chamam **badius**, e a de **Barlavento** (São Vicente, Santo Antão, São Nicolau, Sal, Boa Vista), dos **sampadjudus**. Mudam a pronúncia, palavras e algumas formas gramaticais, mas os falantes entendem-se.
 
+F: frases
+A: como estás em crioulo, frases em kabuverdianu
+Q: exemplo-de | frases do crioulo do dia a dia | -> linguas
 P: como dizer como estas em crioulo cabo verdiano
 P: frases basicas em kabuverdianu
 R: Algumas frases em kabuverdianu (variedade de Santiago):
@@ -26,5 +42,7 @@ R: Algumas frases em kabuverdianu (variedade de Santiago):
 - **Undi ki bu ta mora?** — Onde moras?
 - **N ka sabe.** — Não sei.
 
+F: moeda
+A: moeda de cabo verde, escudo
 P: qual a moeda de cabo verde
 R: A moeda de Cabo Verde é o **escudo cabo-verdiano** (CVE).

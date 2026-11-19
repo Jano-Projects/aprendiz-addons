@@ -1,12 +1,22 @@
 # Gramática e ortografia do português do Brasil (norma-padrão).
 # Várias linhas P: = jeitos diferentes de perguntar a mesma coisa.
 
+F: ortografia
+N: raiz
+A: ortografia oficial, acordo ortográfico, volp
+Q: definicao | o Acordo Ortográfico de 1990 unificou quase toda a escrita do português; no Brasil vale desde 2009 e é obrigatório desde 2016
+Q: diferente-de | em Portugal ele é obrigatório desde 2015 | -> girias-portugal:ortografia
 P: qual a ortografia oficial do brasil
 P: o brasil segue o acordo ortografico
 P: desde quando vale o acordo ortografico no brasil
 R: O Brasil segue o **Acordo Ortográfico de 1990**. Ele passou a valer em 1º de janeiro de 2009 e ficou obrigatório em 1º de janeiro de 2016. A referência oficial das grafias é o VOLP (Vocabulário Ortográfico da Língua Portuguesa), da Academia Brasileira de Letras.
 
+F: acordo-mudancas
+A: mudanças do acordo, trema, hífen, acento diferencial, ideia sem acento
+Q: parte-de | são as regras do Acordo de 1990 | -> ortografia
+Q: diferente-de | em Portugal a mudança mais visível foi a queda das consoantes mudas | -> girias-portugal:acordo-mudancas
 P: o que mudou com o acordo ortografico no brasil
+P: quais as novas regras do hifen
 P: o que mudou na ortografia em 2009
 P: quais as mudancas do novo acordo
 R: No Brasil, as principais mudanças do Acordo de 1990 foram:
@@ -17,6 +27,12 @@ R: No Brasil, as principais mudanças do Acordo de 1990 foram:
 - novas regras de **hífen**: autoestima, antiaéreo, contrarregra, ultrassom, micro-ondas;
 - o alfabeto passou a ter 26 letras, com **k, w e y**.
 
+F: crase
+N: raiz
+A: crase, à, a craseado
+Q: definicao | a crase é a junção da preposição a com o artigo a
+Q: regra | só há crase antes de palavra feminina que aceita artigo: vou à escola, mas vou a pé
+Q: diferente-de | a regra é a mesma em Portugal | -> girias-portugal:crase
 P: quando usar crase
 P: regras da crase
 P: como saber se tem crase
@@ -24,6 +40,10 @@ R: A **crase** (à) é a junção da preposição "a" com o artigo "a". Um truqu
 - **Tem crase:** vou à praia; às 8 horas; à medida que; à noite; àquele (a + aquele).
 - **Não tem crase:** antes de palavra masculina (a pé, a prazo), de verbo (começou a chover), de pronomes como ele, você, isso (disse a ele), e entre palavras repetidas (cara a cara).
 
+F: porques
+A: porque, por que, porquê, por quê, os quatro porquês
+Q: regra | separado e sem acento na pergunta; junto na resposta; com acento no fim da frase ou como substantivo
+Q: diferente-de | em Portugal se escreve porque junto também na pergunta | -> girias-portugal:porque-pergunta
 P: qual a diferenca entre por que porque por que e porque
 P: quando usar porque junto ou separado
 P: os quatro porques
@@ -33,6 +53,10 @@ R: Os quatro "porquês" do Brasil:
 - **porque** (junto, sem acento): na resposta, = "pois". "Saí porque estava cansado."
 - **porquê** (junto, com acento): substantivo, = "o motivo". "Não sei o porquê."
 
+F: proclise
+A: colocação pronominal, próclise, ênclise, me empresta
+Q: porque | no Brasil o pronome antes do verbo é o natural da fala; a norma culta ainda pede ênclise no início da frase
+Q: diferente-de | em Portugal o natural é depois do verbo: disse-me | -> girias-portugal:pronomes
 P: me empresta ou empresta-me
 P: posso comecar frase com me
 P: colocacao pronominal no brasil
@@ -41,58 +65,115 @@ R: Pela norma-padrão, a frase **não começa** com pronome oblíquo átono: "Em
 - Com palavras que "atraem" o pronome (não, nunca, que, quem, já, também), use a próclise: "Não me disse."
 - A **mesóclise** (dir-te-ei) é rara no Brasil, restrita a textos muito formais.
 
+F: gerundio
+A: gerúndio, estou fazendo
+Q: porque | no Brasil a ação em curso se diz com gerúndio
+Q: diferente-de | em Portugal se diz estou a fazer | -> girias-portugal:gerundio
 P: estou fazendo ou estou a fazer
 P: gerundio no brasil
 R: No Brasil, usa-se **estar + gerúndio**: "estou fazendo", "estava estudando". "Estar a + infinitivo" (estou a fazer) é a construção de Portugal e da África. Cuidado só com o **gerundismo** ("vou estar enviando"), considerado vício de linguagem: prefira "vou enviar".
 
+F: tu-voce
+A: tu ou você, tratamento
+Q: porque | no Brasil você é o tratamento comum; o tu aparece em algumas regiões, muitas vezes com o verbo de você
+Q: diferente-de | em Portugal tu é o íntimo e você pode soar distante | -> girias-portugal:tu-voce
 P: tu ou voce no brasil
 P: onde se usa tu no brasil
 R: Na maior parte do Brasil, usa-se **você**. O **tu** é comum no Sul (sobretudo no Rio Grande do Sul), em partes do Nordeste e do Norte (como Pará e Maranhão) e em Santa Catarina. Na fala, muita gente diz "tu vai", com o verbo na 3ª pessoa; pela norma-padrão, o certo é "tu vais", "tu foste".
 
+F: a-gente
+A: a gente, concordância com a gente
+Q: regra | a gente leva o verbo na 3ª pessoa do singular: a gente vai
+Q: porque | a expressão é singular na forma, embora fale de várias pessoas
 P: a gente vamos esta certo
 P: como conjugar a gente
 R: "A gente" leva o verbo na **3ª pessoa do singular**, como "ele": "a gente vai", "a gente foi", "a gente está". "A gente vamos" não está de acordo com a norma-padrão; se quiser o verbo em "-mos", use "nós": "nós vamos".
 
+F: haver
+N: raiz
+A: haver no sentido de existir, haviam, fazer no sentido de tempo
+Q: regra | haver no sentido de existir e fazer indicando tempo são impessoais: ficam no singular
+Q: diferente-de | a regra vale igual em Portugal | -> girias-portugal:haver
 P: haviam ou havia
 P: haver no sentido de existir
 P: fazem dois anos ou faz dois anos
 R: No sentido de **existir** ou **acontecer**, "haver" é impessoal e fica no singular: "**havia** muitas pessoas", "**houve** problemas". O mesmo vale para "fazer" indicando **tempo**: "**faz** dois anos". O auxiliar acompanha: "**pode haver** problemas", "**vai fazer** três meses".
 
+F: mal-mau
+A: mal ou mau
+Q: regra | mal se opõe a bem; mau se opõe a bom
 P: qual a diferenca entre mal e mau
 P: mal ou mau
 R: **Mau** é o contrário de "bom" (adjetivo): mau humor, mau exemplo. **Mal** é o contrário de "bem" (advérbio ou substantivo): dormi mal, o mal do século, mal-educado.
 
+F: mas-mais
+A: mas ou mais
+Q: regra | mas indica oposição, como porém; mais indica quantidade, o contrário de menos
 P: qual a diferenca entre mas e mais
 R: **Mas** indica oposição, = "porém": "Quis ir, mas choveu." **Mais** indica quantidade ou intensidade, o contrário de "menos": "Quero mais café."
 
+F: ha-a
+A: há ou a para tempo
+Q: regra | há fala de tempo passado; a, de tempo futuro ou distância
+Q: porque | há vem do verbo haver, que no sentido de tempo é impessoal | -> haver
 P: ha ou a para tempo
 P: ha dois anos ou a dois anos
 R: **Há** (do verbo haver) indica tempo **passado**: "Cheguei há dois anos." **A** indica tempo **futuro** ou distância: "Volto daqui a dois dias", "fica a 3 km". "Há dois anos atrás" é redundante: basta "há dois anos".
 
+F: onde-aonde
+A: onde ou aonde
+Q: regra | aonde é com verbos de movimento que pedem a preposição a: aonde você vai?
 P: onde ou aonde
 R: **Aonde** = "a que lugar", com verbos de movimento: "Aonde você vai?". **Onde** = "em que lugar", para lugar fixo: "Onde você mora?".
 
+F: senao
+A: se não ou senão
+Q: regra | senão significa caso contrário ou a não ser; se não é a condição negativa
 P: se nao ou senao
 R: **Senão** = "caso contrário" ou "a não ser": "Corra, senão vai perder o ônibus." **Se não** = "caso não": "Se não chover, vamos à praia."
 
+F: a-fim
+A: a fim ou afim
+Q: regra | a fim de indica finalidade; afim quer dizer semelhante, parente
 P: a fim ou afim
 R: **A fim de** = "com o objetivo de": "Estudou a fim de passar." (Na gíria, "estar a fim" = ter vontade.) **Afim** = semelhante, que tem afinidade: "ideias afins".
 
+F: mim-eu
+A: para mim fazer, para eu fazer
+Q: regra | antes de verbo no infinitivo, o sujeito é eu: para eu fazer
+Q: porque | mim não pode ser sujeito de verbo
 P: para mim fazer ou para eu fazer
 R: Quando o pronome é o **sujeito** do verbo, use "eu": "Ele trouxe o livro **para eu** ler." "Mim" não faz ação. Mas "é difícil **para mim** entender" está certo, porque aí "para mim" completa "difícil".
 
+F: ver-vir
+A: se eu ver, se eu vir, futuro do subjuntivo de ver
+Q: regra | o futuro do subjuntivo de ver é vir: quando eu vir
 P: se eu ver ou se eu vir
 P: quando eu ver ou quando eu vir
 R: Falando do futuro, depois de "se" e "quando" vem o **futuro do subjuntivo**: se eu **vir** (ver), quando eu **vier** (vir), se eu **fizer**, quando você **puder**, se nós **tivermos**.
 
+F: assistir
+A: assistir ao filme, regência de assistir
+Q: regra | no sentido de ver, assistir pede a preposição a: assistir ao filme
+Q: exemplo-de | é um caso de regência verbal | -> chegar
 P: assistir o filme ou assistir ao filme
 R: No sentido de **ver**, a norma pede "assistir **a**": "assisti **ao** filme", "assistir **à** aula". No sentido de **ajudar**, sem preposição: "o médico assistiu o paciente". Na fala brasileira, "assistir o filme" é muito comum.
 
+F: chegar
+A: chegar em casa, chegar a casa, regência de chegar
+Q: regra | na norma culta, verbos de movimento pedem a preposição a: chegar a casa
+Q: diferente-de | em Angola, ir na escola é comum na fala | -> girias-angola:ir-a
 P: chegar em casa ou chegar a casa
 R: A norma-padrão prefere "chegar **a**": "cheguei ao trabalho". No Brasil, "chegar em" é muito usado e aceito na fala, e "chegar em casa" é a forma corrente.
 
+F: vende-se
+A: vende-se casas, vendem-se casas, voz passiva sintética
+Q: regra | com o se de voz passiva, o verbo concorda com o sujeito: vendem-se casas
 P: vende-se casas ou vendem-se casas
 R: Com o "se" apassivador, o verbo concorda com o que é vendido: "**vendem-se** casas" (= casas são vendidas), "aluga-se um quarto". Com preposição, o verbo fica no singular: "**precisa-se de** funcionários".
 
+F: meio
+A: meio cansada ou meia cansada
+Q: regra | como advérbio (um pouco), meio não varia: meio cansada
 P: meio cansada ou meia cansada
 R: No sentido de "um pouco", **meio** é advérbio e não varia: "ela está **meio** cansada". Como numeral, concorda: "meia hora", "meio-dia e **meia**".

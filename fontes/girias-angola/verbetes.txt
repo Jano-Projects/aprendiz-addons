@@ -3,68 +3,121 @@
 #   T: traduções para o português padrão (para "como se diz X em ...?")
 #   R: o significado
 
+F: v-bue
+Q: equivale | em Portugal também se usa «bué» | -> girias-portugal:v-bue
+Q: equivale | em Moçambique se diz «maningue» | -> girias-mocambique:v-maningue
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «txeu» | -> expressoes-cabo-verde:v-txeu
+Q: equivale | no kriol (Guiné-Bissau) se diz «manga di» | -> expressoes-guine-bissau:v-manga-di
 V: bué
 V: bue
 V: bwe
 T: muito, bastante
 R: **bué** (Angola): muito, bastante. Também muito usado em Portugal. Ex.: «Tem bué de gente na festa.»
 
+F: v-kota
+Q: equivale | no changana (Moçambique) se diz «madala» | -> girias-mocambique:v-madala
+Q: equivale | no kriol (Guiné-Bissau) se diz «garandi» | -> expressoes-guine-bissau:v-garandi
+Q: equivale | no tétum (Timor-Leste) se diz «katuas» | -> expressoes-timor-leste:v-katuas
+Q: equivale | também se diz «mais-velho» | -> v-mais-velho
 V: kota
 V: cota
 T: pessoa mais velha, idoso, mais velho
 R: **kota** (Angola): pessoa mais velha; tratamento de respeito.
 
+F: v-mais-velho
+Q: equivale | no changana (Moçambique) se diz «madala» | -> girias-mocambique:v-madala
+Q: equivale | no kriol (Guiné-Bissau) se diz «bedju» | -> expressoes-guine-bissau:v-bedju
+Q: equivale | no tétum (Timor-Leste) se diz «katuas» | -> expressoes-timor-leste:v-katuas
+Q: equivale | também se diz «kota» | -> v-kota
 V: mais-velho
 V: mais velho
 T: idoso, pessoa mais velha
 R: **mais-velho** (Angola): tratamento respeitoso para uma pessoa mais velha.
 
+F: v-kamba
+Q: equivale | no tétum (Timor-Leste) se diz «maluk» | -> expressoes-timor-leste:v-maluk
+Q: equivale | no Brasil se diz «mano» | -> girias-brasil:v-mano
+Q: equivale | em Portugal se diz «bacano» | -> girias-portugal:v-bacano
 V: kamba
 T: amigo, companheiro
 R: **kamba** (Angola): amigo, companheiro.
 
+F: v-kumbu
+Q: equivale | no Brasil se diz «grana» | -> girias-brasil:v-grana
+Q: equivale | em Moçambique se diz «mola» | -> girias-mocambique:v-mola
+Q: equivale | no tétum (Timor-Leste) se diz «osan» | -> expressoes-timor-leste:v-osan
 V: kumbu
 T: dinheiro
 R: **kumbu** (Angola): dinheiro.
 
+F: v-kilapi
 V: kilapi
 T: dívida, fiado
 R: **kilapi** (Angola): dívida, compra fiada. Ex.: «Comprei a kilapi.»
 
+F: v-maka
+Q: equivale | no Brasil se diz «treta» | -> girias-brasil:v-treta
 V: maka
 T: problema, confusão
 R: **maka** (Angola): problema, confusão. "Não tem maka" = não tem problema.
 
+F: v-mujimbo
 V: mujimbo
 T: boato, fofoca
 R: **mujimbo** (Angola): boato, fofoca.
 
+F: v-bazar
+Q: equivale | em Portugal se diz «pôr-se a andar» | -> girias-portugal:v-por-se-a-andar
 V: bazar
 T: ir embora, sair
 R: **bazar** (Angola): ir embora, sair. Também se ouve em Portugal. Ex.: «Vou bazar.»
 
+F: v-garina
+Q: equivale | no Brasil se diz «mina» | -> girias-brasil:v-mina
+Q: equivale | no kriol (Guiné-Bissau) se diz «bajuda» | -> expressoes-guine-bissau:v-bajuda
 V: garina
 L: luanda
 T: moça, garota
 R: **garina** (Angola): moça, garota.
 
+F: v-mambo
+Q: equivale | no Brasil se diz «parada» | -> girias-brasil:v-parada
 V: mambo
 T: coisa, assunto
 R: **mambo** (Angola): coisa, assunto, situação. Ex.: «Que mambo é esse?»
 
+F: v-cubico
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «kaza» | -> expressoes-cabo-verde:v-kaza
+Q: equivale | no kriol (Guiné-Bissau) se diz «kasa» | -> expressoes-guine-bissau:v-kasa
+Q: equivale | no tétum (Timor-Leste) se diz «uma» | -> expressoes-timor-leste:v-uma
 V: cubico
 L: luanda
 T: casa, lar
 R: **cubico** (Angola): casa, lar.
 
+F: v-candengue
+Q: equivale | no Norte (Brasil) se diz «curumim» | -> girias-brasil:v-curumim
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «mininu» | -> expressoes-cabo-verde:v-mininu
+Q: equivale | no kriol (Guiné-Bissau) se diz «mininu» | -> expressoes-guine-bissau:v-mininu
+Q: equivale | em Portugal se diz «miúdo» | -> girias-portugal:v-miudo
 V: candengue
 T: criança, menino
 R: **candengue** (Angola): criança, miúdo.
 
+F: v-ndengue
+Q: equivale | no Norte (Brasil) se diz «curumim» | -> girias-brasil:v-curumim
+Q: equivale | em Portugal se diz «miúdo» | -> girias-portugal:v-miudo
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «mininu» | -> expressoes-cabo-verde:v-mininu
+Q: equivale | no kriol (Guiné-Bissau) se diz «mininu» | -> expressoes-guine-bissau:v-mininu
 V: ndengue
 T: criança, jovem
 R: **ndengue** (Angola): criança, jovem.
 
+F: v-muadie
+Q: equivale | no Nordeste (Brasil) se diz «cabra» | -> girias-brasil:v-cabra
+Q: equivale | em Portugal se diz «gajo» | -> girias-portugal:v-gajo
+Q: equivale | no changana (Moçambique) se diz «madala» | -> girias-mocambique:v-madala
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «omi» | -> expressoes-cabo-verde:v-omi
 V: muadiê
 V: muadie
 V: mwadie
@@ -72,153 +125,207 @@ L: luanda
 T: homem, senhor, cara
 R: **muadiê** (Angola): homem, senhor; também "cara", "o tipo".
 
+F: v-bumbar
+Q: equivale | no kriol (Guiné-Bissau) se diz «tarbadju» | -> expressoes-guine-bissau:v-tarbadju
 V: bumbar
 T: trabalhar
 R: **bumbar** (Angola): trabalhar.
 
+F: v-anduta
 V: anduta
 T: fácil
 R: **anduta** (Angola): fácil. "Está anduta" = está fácil.
 
+F: v-dioba
 V: dioba
 T: fome
 R: **dioba** (Angola): fome.
 
+F: v-kuia
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «sabi» | -> expressoes-cabo-verde:v-sabi
+Q: equivale | em Moçambique se diz «nice» | -> girias-mocambique:v-nice
+Q: equivale | no tétum (Timor-Leste) se diz «di'ak» | -> expressoes-timor-leste:v-di-ak
 V: kuia
 T: bom, gostoso
 R: **kuia** (Angola): bom, gostoso, agradável. "Está kuia".
 
+F: v-banga
 V: banga
 T: estilo, elegância
 R: **banga** (Angola): estilo, elegância, vaidade. "Ter banga".
 
+F: v-muxoxo
 V: muxoxo
 T: desprezo
 R: **muxoxo** (Angola): estalo de boca que mostra desprezo ou desagrado.
 
+F: v-gasosa
+Q: equivale | em Moçambique se diz «refresco» | -> girias-mocambique:v-refresco
 V: gasosa
 T: refrigerante, suborno
 R: **gasosa** (Angola): refrigerante; na gíria, também suborno, "propina".
 
+F: v-jinguba
+Q: equivale | na Guiné-Bissau se diz «mancarra» | -> expressoes-guine-bissau:v-mancarra
 V: jinguba
 V: ginguba
 T: amendoim
 R: **jinguba** (Angola): amendoim.
 
+F: v-chuinga
+Q: equivale | em Portugal se diz «pastilha elástica» | -> girias-portugal:v-pastilha-elastica
 V: chuinga
 T: chiclete
 R: **chuinga** (Angola): chiclete.
 
+F: v-funje
 V: funje
 T: pirão
 R: **funje** (Angola): pirão espesso de farinha de mandioca ou de milho, base de muitas refeições.
 
+F: v-fuba
 V: fuba
 T: farinha
 R: **fuba** (Angola): farinha de mandioca ou de milho.
 
+F: v-muamba
 V: muamba
 T: moqueca de galinha
 R: **muamba** (Angola): prato de galinha cozida com óleo de palma (dendê) e quiabo.
 
+F: v-quitanda
+Q: diferente-de | em Minas Gerais (Brasil), «quitanda» quer dizer biscoitos caseiros | -> girias-brasil:v-quitanda
 V: quitanda
 T: mercado, feira
 R: **quitanda** (Angola): mercado, banca de venda.
 
+F: v-zungueira
 V: zungueira
 T: vendedora ambulante, camelô
 R: **zungueira** (Angola): vendedora ambulante.
 
+F: v-zunga
 V: zunga
 T: venda ambulante
 R: **zunga** (Angola): venda ambulante, de rua.
 
+F: v-machimbombo
+Q: equivale | no Brasil se diz «busão» | -> girias-brasil:v-busao
+Q: equivale | em Portugal se diz «autocarro» | -> girias-portugal:v-autocarro
+Q: equivale | em Moçambique também se usa «machimbombo» | -> girias-mocambique:v-machimbombo
 V: machimbombo
 T: ônibus
 R: **machimbombo** (Angola): ônibus. Também usado em Moçambique.
 
+F: v-candongueiro
+Q: equivale | em Maputo (Moçambique) se diz «chapa» | -> girias-mocambique:v-chapa
+Q: equivale | em Portugal se diz «carrinha» | -> girias-portugal:v-carrinha
 V: candongueiro
 T: táxi coletivo, van, lotação
 R: **candongueiro** (Angola): táxi coletivo; van de passageiros.
 
+F: v-musseque
 V: musseque
 T: periferia, bairro popular
 R: **musseque** (Angola): bairro popular da periferia, de casas simples, sobretudo em Luanda.
 
+F: v-cacimbo
+Q: equivale | em São Tomé e Príncipe se diz «gravana» | -> expressoes-sao-tome-e-principe:v-gravana
 V: cacimbo
 T: inverno, estação seca
 R: **cacimbo** (Angola): estação seca e mais fresca do ano, com neblina.
 
+F: v-caluanda
 V: caluanda
 L: luanda
 T: luandense
 R: **caluanda** (Angola): natural de Luanda; o que é de Luanda.
 
+F: v-mwangole
 V: mwangolê
 V: mwangole
 T: angolano
 R: **mwangolê** (Angola): angolano.
 
+F: v-kizomba
 V: kizomba
 R: **kizomba** (Angola): gênero musical e dança angolana, de ritmo lento e dançada a dois.
 
+F: v-semba
 V: semba
 R: **semba** (Angola): gênero musical e dança tradicional angolana, uma das raízes do samba e da kizomba.
 
+F: v-kuduro
 V: kuduro
 R: **kuduro** (Angola): gênero musical e dança eletrônica de ritmo acelerado, nascida em Luanda.
 
+F: v-xe
 V: xé
 V: xe
 L: luanda
 R: **xé** (Angola): interjeição para chamar a atenção, como "ei!".
 
 # ---- 3.0 ---------------------------------------------------------------------
+F: v-mata-bicho
+Q: equivale | em Moçambique também se usa «mata-bicho» | -> girias-mocambique:v-mata-bicho
+Q: equivale | em Portugal se diz «pequeno-almoço» | -> girias-portugal:v-pequeno-almoco
 V: mata-bicho
 V: matabicho
 T: pequeno-almoço, café da manhã
 R: **mata-bicho** (Angola e Moçambique): a primeira refeição do dia, o pequeno-almoço.
 
+F: v-geleira
+Q: equivale | em Moçambique também se usa «geleira» | -> girias-mocambique:v-geleira
+Q: equivale | em Portugal se diz «frigorífico» | -> girias-portugal:v-frigorifico
 V: geleira
 T: frigorífico, geladeira
 R: **geleira** (Angola e Moçambique): frigorífico, geladeira.
 
+F: v-cassule
 V: cassule
 V: caçula
 L: quimbundo
 T: filho mais novo, caçula
 R: **cassule** (Angola, do quimbundo): o filho mais novo. A mesma origem deu "caçula" no Brasil.
 
+F: v-mangonha
+Q: equivale | no Norte (Brasil) se diz «leseira» | -> girias-brasil:v-leseira
 V: mangonha
 L: quimbundo
 T: preguiça, moleza
 R: **mangonha** (Angola, do quimbundo): preguiça, moleza. Quem tem mangonha é "mangonheiro".
 
+F: v-muxima
 V: muxima
 L: quimbundo
 T: coração
 R: **muxima** (quimbundo): coração. Também é o nome de uma vila no Bengo e de uma canção tradicional muito conhecida.
 
+F: v-kalunga
 V: kalunga
 V: calunga
 L: quimbundo
 T: mar, morte
 R: **kalunga** (quimbundo): o mar; também o mundo dos mortos, a morte.
 
+F: v-kissangua
 V: kissângua
 V: quissângua
 T: bebida de milho
 R: **kissângua** (Angola): bebida tradicional de milho fermentado, levemente ácida.
 
+F: v-bessangana
 V: bessangana
 L: luanda
 T: senhora tradicional
 R: **bessangana** (Luanda): senhora luandense vestida à moda tradicional, com pano e lenço; símbolo da cultura de Luanda.
 
+F: v-tuga
 V: tuga
 T: português, portugueses
 R: **tuga** (Angola e outros países lusófonos): português (pessoa de Portugal), informal.
 
+F: v-kwanza
 V: kwanza
 V: kwanzas
 V: cuanza

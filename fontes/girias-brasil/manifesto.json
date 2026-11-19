@@ -1,7 +1,7 @@
 {
   "id": "girias-brasil",
   "nome": "Português do Brasil",
-  "versao": "3.0.0",
+  "versao": "2.0.0",
   "descricao": "Norma do Brasil: vocabulário de quase 3 milhões de formas (Acordo Ortográfico de 1990), revisão de texto com regras de gramática, gírias e falares regionais (Nordeste, Norte, Sul, Minas, Rio, São Paulo, Centro-Oeste) e respostas sobre gramática. Escreva \"revise: seu texto\" ou \"o certo é exceção ou excessão?\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
@@ -20,7 +20,7 @@
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.8.0"
+    "versao_minima": "2.0.0"
   },
   "regiao": {
     "nome": "Brasil",
@@ -174,10 +174,5 @@
         "descricao": "Falares de Brasília, Goiás e Mato Grosso."
       }
     ]
-  },
-  "recomendado": {
-    "busca": "hibrido",
-    "resposta": "direta",
-    "acerto": 0.94
   }
 }

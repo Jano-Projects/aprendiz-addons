@@ -1,7 +1,7 @@
 {
   "id": "prog-estruturas-dados",
   "nome": "Programação 3 · Estruturas de dados",
-  "versao": "2.0.0",
+  "versao": "2.0.1",
   "autor": "Jano Projects",
   "descricao": "Vetores, listas ligadas, pilhas, filas, tabelas hash, árvores, grafos e heaps; Big-O, busca linear e binária e os algoritmos de ordenação, explicados com exemplos.",
   "licenca": "CC-BY-4.0",

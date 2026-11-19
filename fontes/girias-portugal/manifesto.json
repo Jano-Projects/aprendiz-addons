@@ -1,7 +1,7 @@
 {
   "id": "girias-portugal",
   "nome": "Português de Portugal",
-  "versao": "3.0.0",
+  "versao": "2.0.0",
   "descricao": "Norma europeia de Portugal: vocabulário de mais de 400 mil formas (Acordo Ortográfico de 1990, com a grafia anterior apontada), revisão de texto com regras de gramática, gírias e falares regionais (Norte, Lisboa, Alentejo, Algarve, Açores, Madeira) e respostas sobre gramática. Escreva \"revise: o seu texto\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
@@ -20,7 +20,7 @@
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.8.0"
+    "versao_minima": "2.0.0"
   },
   "regiao": {
     "nome": "Portugal",
@@ -120,10 +120,5 @@
         "descricao": "Falares do arquipélago da Madeira."
       }
     ]
-  },
-  "recomendado": {
-    "busca": "hibrido",
-    "resposta": "direta",
-    "acerto": 0.98
   }
 }

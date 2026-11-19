@@ -3,452 +3,665 @@
 #   T: traduções para o português padrão (para "como se diz X em ...?")
 #   R: o significado
 
+F: v-mano
+Q: equivale | em Portugal se diz «bacano» | -> girias-portugal:v-bacano
+Q: equivale | em Angola se diz «kamba» | -> girias-angola:v-kamba
+Q: equivale | no tétum (Timor-Leste) se diz «maun» | -> expressoes-timor-leste:v-maun
+Q: equivale | também se diz «parça» | -> v-parca
 V: mano
 T: amigo, irmão, parceiro
 R: **mano** (Brasil): amigo, parceiro; forma de chamar alguém. Para mulheres, "mana". Ex.: «E aí, mano, beleza?»
 
+F: v-parca
+Q: equivale | em Portugal se diz «bacano» | -> girias-portugal:v-bacano
+Q: equivale | em Angola se diz «kamba» | -> girias-angola:v-kamba
+Q: equivale | no tétum (Timor-Leste) se diz «maluk» | -> expressoes-timor-leste:v-maluk
+Q: equivale | também se diz «mano» | -> v-mano
 V: parça
 V: parca
 T: parceiro, amigo
 R: **parça** (Brasil): parceiro, amigo próximo. Ex.: «Esse aí é meu parça.»
 
+F: v-trampo
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «trabadju» | -> expressoes-cabo-verde:v-trabadju
+Q: equivale | no kriol (Guiné-Bissau) se diz «tarbadju» | -> expressoes-guine-bissau:v-tarbadju
+Q: equivale | no tétum (Timor-Leste) se diz «servisu» | -> expressoes-timor-leste:v-servisu
 V: trampo
 T: trabalho, emprego
 R: **trampo** (Brasil): trabalho, emprego. Ex.: «Tô indo pro trampo.»
 
+F: v-grana
+Q: equivale | em Angola se diz «kumbu» | -> girias-angola:v-kumbu
+Q: equivale | em Moçambique se diz «mola» | -> girias-mocambique:v-mola
+Q: equivale | no tétum (Timor-Leste) se diz «osan» | -> expressoes-timor-leste:v-osan
+Q: equivale | também se diz «bufunfa» | -> v-bufunfa
 V: grana
 T: dinheiro
 R: **grana** (Brasil): dinheiro. Ex.: «Tô sem grana este mês.»
 
+F: v-bufunfa
+Q: equivale | em Angola se diz «kumbu» | -> girias-angola:v-kumbu
+Q: equivale | em Moçambique se diz «mola» | -> girias-mocambique:v-mola
+Q: equivale | no tétum (Timor-Leste) se diz «osan» | -> expressoes-timor-leste:v-osan
+Q: equivale | também se diz «grana» | -> v-grana
 V: bufunfa
 T: dinheiro
 R: **bufunfa** (Brasil): dinheiro (bem informal).
 
+F: v-busao
+Q: equivale | em Portugal se diz «autocarro» | -> girias-portugal:v-autocarro
+Q: equivale | em Angola se diz «machimbombo» | -> girias-angola:v-machimbombo
+Q: equivale | em Moçambique se diz «machimbombo» | -> girias-mocambique:v-machimbombo
+Q: equivale | no Centro-Oeste (Brasil) se diz «baú» | -> v-bau
 V: busão
 V: buzão
 T: ônibus
 R: **busão** (Brasil): ônibus. Ex.: «Vou de busão.»
 
+F: v-role
 V: rolê
 V: role
 T: passeio, saída
 R: **rolê** (Brasil): passeio, saída, programa com os amigos. Ex.: «Bora dar um rolê?»
 
+F: v-balada
 V: balada
 T: festa, boate
 R: **balada** (Brasil): festa, boate, noitada. Ex.: «Hoje tem balada.»
 
+F: v-rango
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «kumida» | -> expressoes-cabo-verde:v-kumida
+Q: equivale | no kriol (Guiné-Bissau) se diz «bianda» | -> expressoes-guine-bissau:v-bianda
+Q: equivale | no tétum (Timor-Leste) se diz «hahan» | -> expressoes-timor-leste:v-hahan
 V: rango
 T: comida, refeição
 R: **rango** (Brasil): comida, refeição. Ex.: «Bora fazer um rango?»
 
+F: v-breja
 V: breja
 T: cerveja
 R: **breja** (Brasil): cerveja. Ex.: «Uma breja gelada.»
 
+F: v-de-boa
+Q: equivale | também se diz «suave» | -> v-suave
 V: de boa
 T: tranquilo, sem problema
 R: **de boa** (Brasil): tranquilo, sem problema; também estar sem fazer nada. Ex.: «Tô de boa hoje.»
 
+F: v-suave
+Q: equivale | também se diz «de boa» | -> v-de-boa
 V: suave
 T: tranquilo
 R: **suave** (Brasil): tranquilo, tudo certo. Também "suave na nave".
 
+F: v-treta
+Q: equivale | em Angola se diz «maka» | -> girias-angola:v-maka
 V: treta
 T: briga, confusão
 R: **treta** (Brasil): briga, confusão, problema. Ex.: «Deu treta na reunião.»
 
+F: v-zoar
 V: zoar
 T: brincar, caçoar
 R: **zoar** (Brasil): brincar, tirar sarro de alguém; também bagunçar. Ex.: «Para de me zoar!»
 
+F: v-bagulho
+Q: equivale | em Angola se diz «mambo» | -> girias-angola:v-mambo
+Q: equivale | também se diz «parada» | -> v-parada
 V: bagulho
 T: coisa, objeto
 R: **bagulho** (Brasil): coisa, objeto qualquer (bem informal). Ex.: «Passa esse bagulho aí.»
 
+F: v-parada
+Q: equivale | em Angola se diz «mambo» | -> girias-angola:v-mambo
+Q: equivale | também se diz «bagulho» | -> v-bagulho
 V: parada
 T: coisa, assunto
 R: **parada** (Brasil): coisa, assunto, situação. Ex.: «Que parada é essa?»
 
+F: v-mina
+Q: equivale | em Luanda (Angola) se diz «garina» | -> girias-angola:v-garina
+Q: equivale | no kriol (Guiné-Bissau) se diz «bajuda» | -> expressoes-guine-bissau:v-bajuda
+Q: equivale | no Norte (Brasil) se diz «cunhantã» | -> v-cunhanta
+Q: diferente-de | no forro (São Tomé e Príncipe), «mina» quer dizer filho | -> expressoes-sao-tome-e-principe:v-mina
 V: mina
 T: moça, garota
 R: **mina** (Brasil): moça, garota.
 
+F: v-cara
+Q: equivale | em Portugal se diz «gajo» | -> girias-portugal:v-gajo
+Q: equivale | no forro (São Tomé e Príncipe) se diz «ngê» | -> expressoes-sao-tome-e-principe:v-nge
+Q: equivale | no Nordeste (Brasil) se diz «cabra» | -> v-cabra
 V: cara
 T: pessoa, sujeito
 R: **cara** (Brasil): pessoa, sujeito; também forma de chamar alguém. Ex.: «Cara, você não vai acreditar!»
 
+F: v-sextou
 V: sextou
 R: **sextou** (Brasil): comemoração da chegada da sexta-feira e do fim de semana.
 
+F: v-firmeza
 V: firmeza
 T: combinado, tudo certo
 R: **firmeza** (Brasil): tudo certo, combinado; também usado como cumprimento. Ex.: «Firmeza, a gente se vê amanhã.»
 
+F: v-mo
+Q: equivale | em Portugal se diz «bué» | -> girias-portugal:v-bue
+Q: equivale | em Angola se diz «bué» | -> girias-angola:v-bue
+Q: equivale | em Moçambique se diz «maningue» | -> girias-mocambique:v-maningue
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «txeu» | -> expressoes-cabo-verde:v-txeu
 V: mó
 T: muito
 R: **mó** (Brasil): redução de "maior"; quer dizer "muito". Ex.: «Foi mó legal.»
 
+F: v-top
+Q: equivale | em Portugal se diz «baril» | -> girias-portugal:v-baril
+Q: equivale | no Norte (Brasil) se diz «pai d'égua» | -> v-pai-d-egua
 V: top
 T: ótimo, excelente
 R: **top** (Brasil): ótimo, excelente. Ex.: «O show foi top.»
 
+F: v-irado
+Q: equivale | em Portugal se diz «porreiro» | -> girias-portugal:v-porreiro
+Q: equivale | também se diz «top» | -> v-top
 V: irado
 T: ótimo, sensacional
 R: **irado** (Brasil): muito bom, sensacional. Ex.: «Esse filme é irado!»
 
+F: v-sinistro
 V: sinistro
 T: impressionante
 R: **sinistro** (Brasil): impressionante, muito bom; em outro contexto, assustador. Ex.: «Esse jogo é sinistro!»
 
+F: v-vacilo
+Q: equivale | também se diz «mancada» | -> v-mancada
 V: vacilo
 T: erro, mancada
 R: **vacilo** (Brasil): erro, mancada, deslize. Ex.: «Foi mal, dei um vacilo.»
 
+F: v-mancada
+Q: equivale | também se diz «vacilo» | -> v-vacilo
 V: mancada
 T: erro, deslize
 R: **mancada** (Brasil): erro, atitude errada com alguém. Ex.: «Que mancada, esqueci teu aniversário.»
 
+F: v-pagar-mico
 V: pagar mico
 T: passar vergonha
 R: **pagar mico** (Brasil): passar vergonha. Ex.: «Paguei o maior mico na festa.»
 
+F: v-dar-um-perdido
 V: dar um perdido
 T: sumir, escapar
 R: **dar um perdido** (Brasil): sumir sem avisar, escapar de alguém.
 
+F: v-zica
 V: zica
 T: azar
 R: **zica** (Brasil): azar, má sorte. Ex.: «Que zica, perdi o ônibus.»
 
+F: v-cringe
 V: cringe
 T: vergonha alheia, constrangedor
 R: **cringe** (Brasil): vergonha alheia; algo constrangedor ou fora de moda.
 
+F: v-crush
 V: crush
 T: paixão, paquera
 R: **crush** (Brasil): pessoa por quem alguém tem uma paixão ou interesse amoroso.
 
+F: v-tmj
 V: tmj
 T: estamos juntos
 R: **tmj** (Brasil): "tamo junto": estamos juntos, conte comigo; muito usado para agradecer.
 
+F: v-pdp
 V: pdp
 T: pode deixar
 R: **pdp** (Brasil): "pode deixar": combinado, eu cuido disso.
 
+F: v-sqn
 V: sqn
 R: **sqn** (Brasil): "só que não": indica ironia, o contrário do que foi dito.
 
+F: v-uai
 V: uai
 L: minas
 R: **uai** (Brasil, Minas Gerais): interjeição de surpresa ou de algo óbvio. Ex.: «Uai, já chegou?»
 
+F: v-trem
+Q: equivale | em Angola se diz «mambo» | -> girias-angola:v-mambo
+Q: equivale | no Brasil se diz «bagulho» | -> v-bagulho
 V: trem
 L: minas
 T: coisa
 R: **trem** (Brasil, Minas Gerais): coisa, qualquer objeto ou situação. Ex.: «Pega aquele trem ali pra mim.»
 
+F: v-so
 V: sô
 L: minas
 R: **sô** (Brasil, Minas Gerais): "senhor", "moço"; forma de chamar alguém. Ex.: «Ô, sô, vem cá!»
 
+F: v-bah
 V: bah
 L: sul
 R: **bah** (Brasil, Rio Grande do Sul): interjeição de espanto, admiração ou ênfase. Ex.: «Bah, que frio!»
 
+F: v-tche
 V: tchê
 V: tche
 L: sul
 R: **tchê** (Brasil, Rio Grande do Sul): forma de chamar alguém, como "cara" ou "amigo".
 
+F: v-guri
+Q: equivale | no changana (Moçambique) se diz «mufana» | -> girias-mocambique:v-mufana
+Q: equivale | em Portugal se diz «miúdo» | -> girias-portugal:v-miudo
+Q: equivale | em Angola se diz «candengue» | -> girias-angola:v-candengue
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «mininu» | -> expressoes-cabo-verde:v-mininu
 V: guri
 L: sul
 T: menino, garoto
 R: **guri** (Brasil, Sul): menino, garoto. Feminino: "guria".
 
+F: v-pia
+Q: equivale | no changana (Moçambique) se diz «mufana» | -> girias-mocambique:v-mufana
+Q: equivale | em Portugal se diz «miúdo» | -> girias-portugal:v-miudo
+Q: equivale | em Angola se diz «candengue» | -> girias-angola:v-candengue
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «mininu» | -> expressoes-cabo-verde:v-mininu
 V: piá
 L: sul
 T: menino, garoto
 R: **piá** (Brasil, Paraná e Santa Catarina): menino, garoto.
 
+F: v-bergamota
+Q: equivale | no Brasil se diz «mexerica» | -> v-mexerica
 V: bergamota
 L: sul
 T: tangerina, mexerica
 R: **bergamota** (Brasil, Sul): tangerina, mexerica.
 
+F: v-cacetinho
 V: cacetinho
 L: sul
 T: pão francês
 R: **cacetinho** (Brasil, Rio Grande do Sul): pão francês.
 
+F: v-sinaleira
+Q: equivale | em São Paulo (Brasil) se diz «farol» | -> v-farol
 V: sinaleira
 L: sul
 T: semáforo, sinal de trânsito
 R: **sinaleira** (Brasil, Rio Grande do Sul): semáforo, sinal de trânsito.
 
+F: v-chimarrao
 V: chimarrão
 L: sul
 T: mate
 R: **chimarrão** (Brasil, Rio Grande do Sul): bebida quente de erva-mate, tomada na cuia.
 
+F: v-oxente
 V: oxente
 L: nordeste
 R: **oxente** (Brasil, Nordeste): interjeição de surpresa ou estranhamento. Forma curta: "oxe".
 
+F: v-oxe
 V: oxe
 R: **oxe** (Brasil, Nordeste): forma curta de "oxente": surpresa ou estranhamento.
 
+F: v-arretado
+Q: equivale | em Portugal se diz «porreiro» | -> girias-portugal:v-porreiro
+Q: equivale | no Brasil se diz «top» | -> v-top
 V: arretado
 L: nordeste
 T: ótimo, zangado
 R: **arretado** (Brasil, Nordeste): muito bom, excelente; conforme o contexto, também zangado, irritado.
 
+F: v-massa
+Q: equivale | em Portugal se diz «fixe» | -> girias-portugal:v-fixe
+Q: equivale | no Brasil se diz «top» | -> v-top
 V: massa
 L: nordeste
 T: legal, ótimo
 R: **massa** (Brasil, Nordeste e outras regiões): legal, muito bom. Ex.: «Que massa!»
 
+F: v-visse
 V: visse
 L: nordeste
 R: **visse** (Brasil, Pernambuco): "viu?", usado no fim da frase para confirmar. Ex.: «Tô indo, visse?»
 
+F: v-cabra
+Q: equivale | em Portugal se diz «gajo» | -> girias-portugal:v-gajo
+Q: equivale | em Luanda (Angola) se diz «muadiê» | -> girias-angola:v-muadie
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «omi» | -> expressoes-cabo-verde:v-omi
+Q: equivale | no kriol (Guiné-Bissau) se diz «omi» | -> expressoes-guine-bissau:v-omi
 V: cabra
 L: nordeste
 T: sujeito, homem
 R: **cabra** (Brasil, Nordeste): sujeito, homem. "Cabra da peste" é alguém valente.
 
+F: v-macaxeira
+Q: equivale | no tétum (Timor-Leste) se diz «ai-farina» | -> expressoes-timor-leste:v-ai-farina
+Q: equivale | no Brasil se diz «aipim» | -> v-aipim
 V: macaxeira
 L: nordeste
 T: mandioca, aipim
 R: **macaxeira** (Brasil, Nordeste): mandioca, aipim.
 
+F: v-jerimum
 V: jerimum
 L: nordeste
 T: abóbora
 R: **jerimum** (Brasil, Nordeste): abóbora.
 
+F: v-aipim
+Q: equivale | no tétum (Timor-Leste) se diz «ai-farina» | -> expressoes-timor-leste:v-ai-farina
+Q: equivale | no Nordeste (Brasil) se diz «macaxeira» | -> v-macaxeira
 V: aipim
 T: mandioca, macaxeira
 R: **aipim** (Brasil, Rio de Janeiro e Sul): mandioca, macaxeira.
 
+F: v-mexerica
+Q: equivale | no Sul (Brasil) se diz «bergamota» | -> v-bergamota
 V: mexerica
 T: tangerina, bergamota
 R: **mexerica** (Brasil, Sudeste): tangerina, bergamota.
 
+F: v-mermao
 V: mermão
 L: rio
 T: meu irmão
 R: **mermão** (Brasil, Rio de Janeiro): "meu irmão"; forma de chamar alguém.
 
+F: v-maneiro
+Q: equivale | em Portugal se diz «fixe» | -> girias-portugal:v-fixe
+Q: equivale | no Nordeste (Brasil) se diz «massa» | -> v-massa
 V: maneiro
 L: rio
 T: legal, bacana
 R: **maneiro** (Brasil, Rio de Janeiro): legal, bacana. Ex.: «Teu tênis é maneiro.»
 
+F: v-cao
 V: caô
 V: cao
 L: rio
 T: mentira
 R: **caô** (Brasil, Rio de Janeiro): mentira, conversa fiada. Ex.: «Isso é caô!»
 
+F: v-bolado
+Q: equivale | no Nordeste (Brasil) se diz «aperreado» | -> v-aperreado
 V: bolado
 L: rio
 T: chateado, preocupado
 R: **bolado** (Brasil, Rio de Janeiro): chateado, preocupado ou irritado. Ex.: «Fiquei bolado com aquilo.»
 
+F: v-coe
 V: coé
 V: coe
 L: rio
 R: **coé** (Brasil, Rio de Janeiro): "qual é?"; cumprimento, como "e aí?". Ex.: «Coé, mermão!»
 
+F: v-vei
 V: véi
 V: vei
 L: centro-oeste
 R: **véi** (Brasil, Centro-Oeste): "velho", "cara"; forma de chamar alguém, muito usada em Brasília. Ex.: «Véi, que calor!»
 
+F: v-egua
 V: égua
 L: norte
 R: **égua** (Brasil, Pará): interjeição de espanto, surpresa ou admiração. Ex.: «Égua, que chuva!»
 
+F: v-pai-d-egua
+Q: equivale | em Portugal se diz «baril» | -> girias-portugal:v-baril
+Q: equivale | no Brasil se diz «top» | -> v-top
 V: pai d'égua
 L: norte
 T: ótimo, excelente
 R: **pai d'égua** (Brasil, Pará): muito bom, excelente.
 
 # ---- 3.0: falares regionais ------------------------------------------------
+F: v-mainha
+Q: equivale | no tétum (Timor-Leste) se diz «inan» | -> expressoes-timor-leste:v-inan
 V: mainha
 L: nordeste
 T: mãe, mamãe
 R: **mainha** (Nordeste, sobretudo Bahia): mãe, mamãe. O pai é "painho".
 
+F: v-painho
+Q: equivale | no tétum (Timor-Leste) se diz «aman» | -> expressoes-timor-leste:v-aman
 V: painho
 L: nordeste
 T: pai, papai
 R: **painho** (Nordeste, sobretudo Bahia): pai, papai.
 
+F: v-avexado
+Q: equivale | também se diz «aperreado» | -> v-aperreado
 V: avexado
 V: avexada
 L: nordeste
 T: apressado, com pressa, aflito
 R: **avexado** (Nordeste): apressado, aflito. Ex.: «Não fique avexado, dá tempo.»
 
+F: v-aperreado
+Q: equivale | no Rio de Janeiro (Brasil) se diz «bolado» | -> v-bolado
 V: aperreado
 V: aperreada
 L: nordeste
 T: aflito, preocupado, em apuros
 R: **aperreado** (Nordeste): aflito, em apuros, aborrecido.
 
+F: v-abestado
+Q: equivale | no Norte (Portugal) se diz «morcão» | -> girias-portugal:v-morcao
+Q: equivale | no Rio de Janeiro (Brasil) se diz «mané» | -> v-mane
 V: abestado
 V: abestada
 L: nordeste
 T: bobo, tolo
 R: **abestado** (Nordeste, sobretudo Ceará): bobo, tolo.
 
+F: v-pirangueiro
 V: pirangueiro
 V: pirangueira
 L: nordeste
 T: pão-duro, sovina
 R: **pirangueiro** (Nordeste): pão-duro, sovina; também quem faz as coisas de qualquer jeito.
 
+F: v-eita
 V: eita
 L: nordeste
 R: **eita** (Nordeste, e hoje em todo o Brasil): interjeição de espanto. Ex.: «Eita, que calor!»
 
+F: v-mungunza
 V: mungunzá
 L: nordeste
 T: canjica
 R: **mungunzá** (Nordeste): doce de milho branco cozido com leite e coco — a "canjica" do Sudeste.
 
+F: v-curumim
+Q: equivale | em Angola se diz «candengue» | -> girias-angola:v-candengue
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «mininu» | -> expressoes-cabo-verde:v-mininu
+Q: equivale | no kriol (Guiné-Bissau) se diz «mininu» | -> expressoes-guine-bissau:v-mininu
+Q: equivale | em Portugal se diz «miúdo» | -> girias-portugal:v-miudo
 V: curumim
 L: norte
 T: menino, criança
 R: **curumim** (Norte, do tupi): menino, criança. A menina é "cunhantã".
 
+F: v-cunhanta
+Q: equivale | em Luanda (Angola) se diz «garina» | -> girias-angola:v-garina
+Q: equivale | no kriol (Guiné-Bissau) se diz «bajuda» | -> expressoes-guine-bissau:v-bajuda
+Q: equivale | no Brasil se diz «mina» | -> v-mina
 V: cunhantã
 V: cunhatã
 L: norte
 T: menina, moça
 R: **cunhantã** (Norte, do tupi): menina, moça.
 
+F: v-carapana
 V: carapanã
 L: norte
 T: pernilongo, mosquito
 R: **carapanã** (Norte, do tupi): mosquito, pernilongo.
 
+F: v-leseira
+Q: equivale | no quimbundo (Angola) se diz «mangonha» | -> girias-angola:v-mangonha
 V: leseira
 L: norte
 T: bobeira, preguiça
 R: **leseira** (Norte, sobretudo Pará e Amazonas): bobeira, moleza, falta de juízo. Ex.: «Deixa de leseira!»
 
+F: v-igarape
 V: igarapé
 L: norte
 T: riacho
 R: **igarapé** (Norte, do tupi): riacho, braço estreito de rio na floresta.
 
+F: v-tacaca
 V: tacacá
 L: norte
 R: **tacacá** (Norte, sobretudo Pará): caldo quente de tucupi com goma de mandioca, jambu e camarão, servido em cuia.
 
+F: v-guria
+Q: equivale | em Luanda (Angola) se diz «garina» | -> girias-angola:v-garina
+Q: equivale | no kriol (Guiné-Bissau) se diz «bajuda» | -> expressoes-guine-bissau:v-bajuda
+Q: equivale | no Brasil se diz «mina» | -> v-mina
 V: guria
 L: sul
 T: menina, garota
 R: **guria** (Sul): menina, moça. O menino é "guri".
 
+F: v-tri
+Q: equivale | em Portugal se diz «bué» | -> girias-portugal:v-bue
+Q: equivale | em Angola se diz «bué» | -> girias-angola:v-bue
+Q: equivale | em Moçambique se diz «maningue» | -> girias-mocambique:v-maningue
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «txeu» | -> expressoes-cabo-verde:v-txeu
 V: tri
 L: sul
 T: muito, muito legal
 R: **tri** (Rio Grande do Sul): muito; muito bom. Ex.: «O show foi tri legal.»
 
+F: v-capaz
 V: capaz
 L: sul
 T: de jeito nenhum, imagina
 R: **capaz!** (Rio Grande do Sul): usado sozinho, quer dizer "de jeito nenhum!" ou "imagina!". Ex.: «— Vais pagar? — Capaz!»
 
+F: v-cusco
 V: cusco
 L: sul
 T: cachorro, vira-lata
 R: **cusco** (Sul): cachorro pequeno, vira-lata.
 
+F: v-pandorga
 V: pandorga
 L: sul
 T: pipa, papagaio
 R: **pandorga** (Sul): pipa (o brinquedo de papel que voa).
 
+F: v-pila
+Q: equivale | em Angola se diz «kumbu» | -> girias-angola:v-kumbu
+Q: equivale | em Moçambique se diz «mola» | -> girias-mocambique:v-mola
+Q: equivale | no tétum (Timor-Leste) se diz «osan» | -> expressoes-timor-leste:v-osan
+Q: equivale | no Brasil se diz «grana» | -> v-grana
 V: pila
 V: pilas
 L: sul
 T: dinheiro, real
 R: **pila** (Rio Grande do Sul): dinheiro; um real. Ex.: «Custou dez pila.»
 
+F: v-lagartear
 V: lagartear
 L: sul
 T: tomar sol
 R: **lagartear** (Sul): ficar ao sol para se aquecer, como um lagarto.
 
+F: v-negrinho
 V: negrinho
 L: sul
 T: brigadeiro
 R: **negrinho** (Rio Grande do Sul): o doce que no resto do Brasil se chama "brigadeiro".
 
+F: v-xis
 V: xis
 L: sul
 T: sanduíche, x-burguer
 R: **xis** (Rio Grande do Sul): sanduíche grande, prensado na chapa.
 
+F: v-no
 V: nó
 L: minas
 R: **nó!** (Minas Gerais): interjeição de espanto, vem de "Nossa (Senhora)!". Ex.: «Nó, que trem bão!»
 
+F: v-quitanda
+Q: diferente-de | em Angola, «quitanda» quer dizer mercado | -> girias-angola:v-quitanda
 V: quitanda
 L: minas
 T: biscoitos caseiros, quitutes
 R: **quitanda** (Minas Gerais): bolos, biscoitos e pães caseiros servidos com café. (Em outras regiões, é a loja de frutas e verduras.)
 
+F: v-mane
+Q: equivale | no Nordeste (Brasil) se diz «abestado» | -> v-abestado
+Q: diferente-de | no tétum (Timor-Leste), «mane» quer dizer homem | -> expressoes-timor-leste:v-mane
 V: mané
 L: rio
 T: bobo, otário
 R: **mané** (Rio de Janeiro, e hoje em todo o Brasil): bobo, otário.
 
+F: v-caraca
 V: caraca
 L: rio
 R: **caraca!** (Rio de Janeiro): interjeição de espanto. Ex.: «Caraca, que golaço!»
 
+F: v-vacilao
 V: vacilão
 V: vacilona
 L: rio
 T: quem falha, quem pisa na bola
 R: **vacilão** (Rio de Janeiro): quem vacila, não cumpre o combinado ou faz besteira.
 
+F: v-meu
 V: meu
 L: sao-paulo
 R: **meu** (São Paulo): usado como vocativo, para chamar alguém. Ex.: «Meu, você não vai acreditar!»
 
+F: v-farol
+Q: equivale | no Sul (Brasil) se diz «sinaleira» | -> v-sinaleira
 V: farol
 L: sao-paulo
 T: semáforo, sinal
 R: **farol** (São Paulo): semáforo, sinal de trânsito. No Rio Grande do Sul é "sinaleira".
 
+F: v-bolacha
 V: bolacha
 L: sao-paulo
 T: biscoito
 R: **bolacha** (São Paulo e Sul): biscoito. No Rio de Janeiro, diz-se "biscoito".
 
+F: v-da-hora
+Q: equivale | em Portugal se diz «fixe» | -> girias-portugal:v-fixe
+Q: equivale | no Nordeste (Brasil) se diz «massa» | -> v-massa
 V: da hora
 L: sao-paulo
 T: legal, muito bom
 R: **da hora** (São Paulo): muito bom, legal. Ex.: «A festa foi da hora.»
 
+F: v-bau
+Q: equivale | em Portugal se diz «autocarro» | -> girias-portugal:v-autocarro
+Q: equivale | em Angola se diz «machimbombo» | -> girias-angola:v-machimbombo
+Q: equivale | em Moçambique se diz «machimbombo» | -> girias-mocambique:v-machimbombo
+Q: equivale | no Brasil se diz «busão» | -> v-busao
 V: baú
 L: centro-oeste
 T: ônibus
 R: **baú** (Brasília): ônibus.
 
+F: v-tesourinha
 V: tesourinha
 L: centro-oeste
 T: retorno, trevo
 R: **tesourinha** (Brasília): o retorno viário em forma de trevo que liga as vias do Plano Piloto.
 
+F: v-pequi
 V: pequi
 L: centro-oeste
 R: **pequi** (Centro-Oeste e cerrado): fruto amarelo de cheiro forte, muito usado no arroz com pequi de Goiás. Cuidado com os espinhos do caroço!

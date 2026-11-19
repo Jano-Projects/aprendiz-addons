@@ -3,309 +3,432 @@
 #   T: traduções para o português padrão (para "como se diz X em ...?")
 #   R: o significado
 
+F: v-bue
+Q: equivale | em Angola também se usa «bué» | -> girias-angola:v-bue
+Q: equivale | em Moçambique se diz «maningue» | -> girias-mocambique:v-maningue
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «txeu» | -> expressoes-cabo-verde:v-txeu
+Q: equivale | no kriol (Guiné-Bissau) se diz «manga di» | -> expressoes-guine-bissau:v-manga-di
 V: bué
 V: bue
 V: bwe
 T: muito, bastante
 R: **bué** (Portugal): muito, bastante. Também muito usado em Angola. Ex.: «Gostei bué do filme.»
 
+F: v-fixe
+Q: equivale | no Rio de Janeiro (Brasil) se diz «maneiro» | -> girias-brasil:v-maneiro
+Q: equivale | também se diz «bacano» | -> v-bacano
 V: fixe
 T: legal, bacana
 R: **fixe** (Portugal): legal, bacana. Ex.: «Que fixe!»
 
+F: v-giro
+Q: equivale | em Moçambique se diz «nice» | -> girias-mocambique:v-nice
+Q: equivale | no tétum (Timor-Leste) se diz «furak» | -> expressoes-timor-leste:v-furak
 V: giro
 T: bonito, interessante
 R: **giro** (Portugal): bonito, engraçado, interessante. Ex.: «Que vestido giro.»
 
+F: v-porreiro
+Q: equivale | no Brasil se diz «top» | -> girias-brasil:v-top
+Q: equivale | também se diz «baril» | -> v-baril
 V: porreiro
 T: ótimo, gente boa
 R: **porreiro** (Portugal): ótimo, bacana; pessoa gente boa.
 
+F: v-baril
+Q: equivale | no Brasil se diz «top» | -> girias-brasil:v-top
+Q: equivale | também se diz «porreiro» | -> v-porreiro
 V: baril
 T: ótimo, excelente
 R: **baril** (Portugal): ótimo, excelente.
 
+F: v-brutal
+Q: equivale | no Brasil se diz «top» | -> girias-brasil:v-top
+Q: equivale | também se diz «baril» | -> v-baril
 V: brutal
 T: incrível, excelente
 R: **brutal** (Portugal): excelente, incrível (no bom sentido). Ex.: «O concerto foi brutal!»
 
+F: v-a-brava
+Q: equivale | no Brasil se diz «mó» | -> girias-brasil:v-mo
+Q: equivale | em Angola se diz «bué» | -> girias-angola:v-bue
+Q: equivale | em Moçambique se diz «maningue» | -> girias-mocambique:v-maningue
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «txeu» | -> expressoes-cabo-verde:v-txeu
 V: à brava
 V: a brava
 T: muito
 R: **à brava** (Portugal): muito, em grande quantidade. Ex.: «Choveu à brava.»
 
+F: v-ganda
+Q: equivale | no kriol (Guiné-Bissau) se diz «garandi» | -> expressoes-guine-bissau:v-garandi
+Q: equivale | no tétum (Timor-Leste) se diz «boot» | -> expressoes-timor-leste:v-boot
 V: ganda
 T: grande
 R: **ganda** (Portugal): redução de "grande"; também "muito bom". Ex.: «Ganda festa!»
 
+F: v-gajo
+Q: equivale | no Brasil se diz «cara» | -> girias-brasil:v-cara
+Q: equivale | em Luanda (Angola) se diz «muadiê» | -> girias-angola:v-muadie
 V: gajo
 T: cara, sujeito
 R: **gajo** (Portugal): cara, sujeito (informal). Feminino: "gaja".
 
+F: v-miudo
+Q: equivale | no Sul (Brasil) se diz «guri» | -> girias-brasil:v-guri
+Q: equivale | em Angola se diz «candengue» | -> girias-angola:v-candengue
+Q: equivale | no changana (Moçambique) se diz «mufana» | -> girias-mocambique:v-mufana
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «mininu» | -> expressoes-cabo-verde:v-mininu
 V: miúdo
 V: miudo
 T: criança, garoto
 R: **miúdo** (Portugal): criança, garoto. "Os miúdos" são as crianças.
 
+F: v-malta
 V: malta
 T: galera, turma
 R: **malta** (Portugal): turma, galera, grupo de amigos. Ex.: «A malta vem jantar.»
 
+F: v-pa
 V: pá
 R: **pá** (Portugal): interjeição muito usada na fala, como "cara" ou "pô". Ex.: «Então, pá, tudo bem?»
 
+F: v-bacano
+Q: equivale | no Brasil se diz «mano» | -> girias-brasil:v-mano
+Q: equivale | em Angola se diz «kamba» | -> girias-angola:v-kamba
+Q: equivale | no tétum (Timor-Leste) se diz «maluk» | -> expressoes-timor-leste:v-maluk
+Q: equivale | também se diz «fixe» | -> v-fixe
 V: bacano
 T: amigo, legal
 R: **bacano** (Portugal): pessoa fixe, amigo; também "legal".
 
+F: v-ya
+Q: equivale | no crioulo cabo-verdiano (Cabo Verde) se diz «sin» | -> expressoes-cabo-verde:v-sin
+Q: equivale | no kriol (Guiné-Bissau) se diz «sin» | -> expressoes-guine-bissau:v-sin
+Q: equivale | no tétum (Timor-Leste) se diz «loos» | -> expressoes-timor-leste:v-loos
 V: ya
 T: sim
 R: **ya** (Portugal): sim (informal).
 
+F: v-seca
 V: seca
 T: chatice
 R: **seca** (Portugal): coisa chata, aborrecida. Ex.: «Que seca de aula!»
 
+F: v-nabo
 V: nabo
 T: desajeitado
 R: **nabo** (Portugal): pessoa desajeitada, sem jeito.
 
+F: v-lata
 V: lata
 T: cara de pau, descaramento
 R: **lata** (Portugal): descaramento, cara de pau. "Que lata!"
 
+F: v-bacalhau
 V: bacalhau
 T: aperto de mão
 R: **bacalhau** (Portugal): aperto de mão (informal). "Dar um bacalhau".
 
+F: v-fazer-uma-direta
 V: fazer uma direta
 V: fazer uma directa
 T: virar a noite
 R: **fazer uma direta** (Portugal): passar a noite acordado, virar a noite.
 
+F: v-por-se-a-andar
+Q: equivale | em Angola se diz «bazar» | -> girias-angola:v-bazar
 V: pôr-se a andar
 T: ir embora
 R: **pôr-se a andar** (Portugal): ir embora. Ex.: «Vou pôr-me a andar.»
 
+F: v-estar-se-nas-tintas
 V: estar-se nas tintas
 T: não ligar, não se importar
 R: **estar-se nas tintas** (Portugal): não se importar, não ligar. Ex.: «Ele está-se nas tintas para isso.»
 
+F: v-desenrascar
 V: desenrascar
 T: dar um jeito, improvisar
 R: **desenrascar** (Portugal): dar um jeito, improvisar uma solução. O "desenrascanço" é a arte de improvisar.
 
+F: v-chumbar
 V: chumbar
 T: reprovar
 R: **chumbar** (Portugal): reprovar, numa prova ou no ano escolar. Ex.: «Chumbei a Matemática.»
 
+F: v-chavalo
+Q: equivale | no changana (Moçambique) se diz «mufana» | -> girias-mocambique:v-mufana
+Q: equivale | no Sul (Brasil) se diz «guri» | -> girias-brasil:v-guri
+Q: equivale | também se diz «miúdo» | -> v-miudo
 V: chavalo
 T: rapaz, garoto
 R: **chavalo** (Portugal, Norte): rapaz, garoto.
 
+F: v-tasca
 V: tasca
 T: boteco, bar
 R: **tasca** (Portugal): restaurante ou bar simples e popular.
 
+F: v-bica
+Q: equivale | no Norte (Portugal) se diz «cimbalino» | -> v-cimbalino
 V: bica
 L: lisboa
 T: café expresso, cafezinho
 R: **bica** (Portugal, Lisboa): café expresso.
 
+F: v-cimbalino
+Q: equivale | em Lisboa (Portugal) se diz «bica» | -> v-bica
 V: cimbalino
 L: norte
 T: café expresso, cafezinho
 R: **cimbalino** (Portugal, Porto): café expresso.
 
+F: v-fino
+Q: equivale | em Lisboa (Portugal) se diz «imperial» | -> v-imperial
 V: fino
 L: norte
 T: chope
 R: **fino** (Portugal, Norte): copo de cerveja de pressão, o chope.
 
+F: v-imperial
+Q: equivale | no Norte (Portugal) se diz «fino» | -> v-fino
 V: imperial
 L: lisboa
 T: chope
 R: **imperial** (Portugal, Lisboa e Sul): copo de cerveja de pressão, o chope.
 
+F: v-pequeno-almoco
+Q: equivale | em Angola se diz «mata-bicho» | -> girias-angola:v-mata-bicho
+Q: equivale | em Moçambique se diz «mata-bicho» | -> girias-mocambique:v-mata-bicho
 V: pequeno-almoço
 V: pequeno almoço
 T: café da manhã
 R: **pequeno-almoço** (Portugal): café da manhã.
 
+F: v-autocarro
+Q: equivale | no Brasil se diz «busão» | -> girias-brasil:v-busao
+Q: equivale | em Angola se diz «machimbombo» | -> girias-angola:v-machimbombo
+Q: equivale | em Moçambique se diz «machimbombo» | -> girias-mocambique:v-machimbombo
 V: autocarro
 T: ônibus
 R: **autocarro** (Portugal): ônibus.
 
+F: v-comboio
 V: comboio
 T: trem
 R: **comboio** (Portugal): trem.
 
+F: v-eletrico
 V: elétrico
 V: electrico
 T: bonde
 R: **elétrico** (Portugal): bonde.
 
+F: v-carrinha
+Q: equivale | em Angola se diz «candongueiro» | -> girias-angola:v-candongueiro
+Q: equivale | em Maputo (Moçambique) se diz «chapa» | -> girias-mocambique:v-chapa
 V: carrinha
 T: van, perua
 R: **carrinha** (Portugal): van, perua.
 
+F: v-camiao
 V: camião
 V: camiao
 T: caminhão
 R: **camião** (Portugal): caminhão.
 
+F: v-passadeira
 V: passadeira
 T: faixa de pedestres
 R: **passadeira** (Portugal): faixa de pedestres.
 
+F: v-peao
 V: peão
 V: peao
 T: pedestre
 R: **peão** (Portugal): pedestre.
 
+F: v-telemovel
 V: telemóvel
 V: telemovel
 T: celular
 R: **telemóvel** (Portugal): telefone celular.
 
+F: v-ecra
 V: ecrã
 V: ecra
 T: tela
 R: **ecrã** (Portugal): tela (de computador, TV, celular).
 
+F: v-rato
 V: rato
 T: mouse
 R: **rato** (Portugal): mouse do computador (além do animal).
 
+F: v-frigorifico
+Q: equivale | em Angola se diz «geleira» | -> girias-angola:v-geleira
+Q: equivale | em Moçambique se diz «geleira» | -> girias-mocambique:v-geleira
 V: frigorífico
 V: frigorifico
 T: geladeira
 R: **frigorífico** (Portugal): geladeira.
 
+F: v-casa-de-banho
 V: casa de banho
 T: banheiro
 R: **casa de banho** (Portugal): banheiro.
 
+F: v-talho
 V: talho
 T: açougue
 R: **talho** (Portugal): açougue.
 
+F: v-sumo
+Q: equivale | no tétum (Timor-Leste) se diz «suku» | -> expressoes-timor-leste:v-suku
 V: sumo
 T: suco
 R: **sumo** (Portugal): suco.
 
+F: v-rebucado
 V: rebuçado
 V: rebucado
 T: bala
 R: **rebuçado** (Portugal): bala (doce).
 
+F: v-pastilha-elastica
+Q: equivale | em Angola se diz «chuinga» | -> girias-angola:v-chuinga
 V: pastilha elástica
 V: pastilha
 T: chiclete
 R: **pastilha elástica** (Portugal): chiclete.
 
+F: v-fato
 V: fato
 T: terno
 R: **fato** (Portugal): terno (roupa). "Fato de banho" é maiô.
 
+F: v-constipacao
 V: constipação
 V: constipacao
 T: resfriado
 R: **constipação** (Portugal): resfriado. Ex.: «Apanhei uma constipação.»
 
+F: v-propina
 V: propina
 T: mensalidade
 R: **propina** (Portugal): mensalidade ou taxa escolar (não é suborno!).
 
+F: v-betao
 V: betão
 V: betao
 T: concreto
 R: **betão** (Portugal): concreto (de construção).
 
+F: v-guarda-redes
 V: guarda-redes
 T: goleiro
 R: **guarda-redes** (Portugal): goleiro.
 
+F: v-relvado
 V: relvado
 T: gramado
 R: **relvado** (Portugal): gramado (campo de futebol).
 
 # ---- 3.0: falares regionais ------------------------------------------------
+F: v-francesinha
 V: francesinha
 L: norte
 R: **francesinha** (Porto): sanduíche de pão de forma com carnes e queijo, coberta de molho picante de tomate e cerveja.
 
+F: v-serta
 V: sertã
 L: norte
 T: frigideira
 R: **sertã** (Norte): frigideira.
 
+F: v-cruzeta
 V: cruzeta
 L: norte
 T: cabide
 R: **cruzeta** (Norte): cabide de pendurar roupa.
 
+F: v-carago
 V: carago
 L: norte
 R: **carago!** (Norte, sobretudo Porto): interjeição de espanto ou de ênfase.
 
+F: v-morcao
+Q: equivale | no Nordeste (Brasil) se diz «abestado» | -> girias-brasil:v-abestado
 V: morcão
 L: norte
 T: tolo, parvo
 R: **morcão** (Porto): tolo, parvo (pejorativo).
 
+F: v-tripeiro
 V: tripeiro
 L: norte
 T: portuense
 R: **tripeiro** (Portugal): natural do Porto, por causa das tripas à moda do Porto.
 
+F: v-alfacinha
 V: alfacinha
 L: lisboa
 T: lisboeta
 R: **alfacinha** (Portugal): natural de Lisboa.
 
+F: v-monte
 V: monte
 L: alentejo
 T: casa de campo, herdade
 R: **monte** (Alentejo): casa de lavoura isolada no campo, com as suas terras.
 
+F: v-acorda
 V: açorda
 L: alentejo
 R: **açorda** (Alentejo): sopa de pão com alho, coentros, azeite e ovo escalfado.
 
+F: v-migas
 V: migas
 L: alentejo
 R: **migas** (Alentejo): pão esmigalhado e frito com alho e azeite, servido com carne de porco.
 
+F: v-cataplana
 V: cataplana
 L: algarve
 R: **cataplana** (Algarve): panela de cobre em forma de concha que se fecha; e o prato de peixe ou marisco cozinhado nela.
 
+F: v-medronho
 V: medronho
 L: algarve
 R: **medronho** (Algarve e Sul): fruto do medronheiro e a aguardente feita com ele.
 
+F: v-faja
 V: fajã
 L: acores
 R: **fajã** (Açores e Madeira): terreno plano junto ao mar, formado por desabamento da encosta ou por lava.
 
+F: v-cozido-das-furnas
 V: cozido das furnas
 L: acores
 R: **cozido das Furnas** (Açores, São Miguel): cozido de carnes e legumes feito numa panela enterrada no calor vulcânico do solo.
 
+F: v-semilha
 V: semilha
 L: madeira
 T: batata
 R: **semilha** (Madeira): batata.
 
+F: v-poncha
 V: poncha
 L: madeira
 R: **poncha** (Madeira): bebida de aguardente de cana, mel e sumo de limão.
 
+F: v-bolo-do-caco
 V: bolo do caco
 L: madeira
 R: **bolo do caco** (Madeira): pão achatado cozido numa pedra de basalto, servido com manteiga de alho.
 
+F: v-levada
 V: levada
 L: madeira
 R: **levada** (Madeira): canal estreito que leva a água pelas encostas; os caminhos ao longo delas são trilhos famosos.

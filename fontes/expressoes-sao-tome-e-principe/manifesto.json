@@ -1,7 +1,7 @@
 {
   "id": "expressoes-sao-tome-e-principe",
   "nome": "Português de São Tomé e Príncipe",
-  "versao": "3.0.0",
+  "versao": "2.0.0",
   "descricao": "Norma de São Tomé e Príncipe: vocabulário de mais de 400 mil formas (Acordo Ortográfico de 1990, em vigor no país), revisão de texto com regras de gramática, palavras do português santomense e dos crioulos (forro, angolar e lung'ie) e respostas sobre as línguas do país. Escreva \"revise: o seu texto\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
@@ -20,7 +20,7 @@
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.8.0"
+    "versao_minima": "2.0.0"
   },
   "regiao": {
     "nome": "São Tomé e Príncipe",
@@ -71,10 +71,5 @@
         "descricao": "Crioulo da ilha do Príncipe, hoje com poucos falantes."
       }
     ]
-  },
-  "recomendado": {
-    "busca": "hibrido",
-    "resposta": "direta",
-    "acerto": 0.96
   }
 }

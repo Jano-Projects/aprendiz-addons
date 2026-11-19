@@ -1,7 +1,7 @@
 {
   "id": "expressoes-timor-leste",
   "nome": "Português de Timor-Leste",
-  "versao": "3.0.0",
+  "versao": "2.0.0",
   "descricao": "Norma de Timor-Leste: vocabulário de mais de 400 mil formas (Acordo Ortográfico de 1990), revisão de texto com regras de gramática, palavras e frases em tétum e respostas sobre as línguas timorenses. Escreva \"revise: o seu texto\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
@@ -19,7 +19,7 @@
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.8.0"
+    "versao_minima": "2.0.0"
   },
   "regiao": {
     "nome": "Timor-Leste",
@@ -48,10 +48,5 @@
         "descricao": "Língua oficial de Timor-Leste, ao lado do português; o tétum-praça é a variedade de Díli."
       }
     ]
-  },
-  "recomendado": {
-    "busca": "hibrido",
-    "resposta": "direta",
-    "acerto": 0.96
   }
 }

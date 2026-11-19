@@ -1,7 +1,7 @@
 {
   "id": "girias-mocambique",
   "nome": "Português de Moçambique",
-  "versao": "3.0.0",
+  "versao": "2.0.0",
   "descricao": "Norma de Moçambique: vocabulário de mais de 400 mil formas na grafia em uso no país (anterior ao Acordo de 1990, que Moçambique não ratificou), revisão de texto com regras de gramática, palavras moçambicanas (do changana, do ronga, do macua…) e respostas sobre o português de Moçambique. Escreva \"revise: o seu texto\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
@@ -20,7 +20,7 @@
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.8.0"
+    "versao_minima": "2.0.0"
   },
   "regiao": {
     "nome": "Moçambique",
@@ -71,10 +71,5 @@
         "descricao": "Emakhuwa (macua), a língua bantu mais falada de Moçambique, no Norte."
       }
     ]
-  },
-  "recomendado": {
-    "busca": "hibrido",
-    "resposta": "direta",
-    "acerto": 1.0
   }
 }

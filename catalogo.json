@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T13:59:19+00:00",
+  "gerado_em": "2026-11-19T14:37:10+00:00",
   "total": 40,
   "addons": [
     {
@@ -451,7 +451,7 @@
       "arquivo": "addons/atalhos-windows.aprendiz",
       "tamanho": 4607,
       "sha256": "c7c55c39be5ee5e06ed6796d2aa89a8a134244a8afd0d297724c304b40860018",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "como abrir o explorador de arquivos no windows",
@@ -1095,7 +1095,7 @@
       "arquivo": "addons/atalhos-terminal-linux.aprendiz",
       "tamanho": 5140,
       "sha256": "04f591d998aadf53338eddf6005106eae56165e6c59dd51916544beadbccf64d",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "como listar os arquivos de uma pasta no terminal linux",
@@ -1219,7 +1219,7 @@
       "arquivo": "addons/conversoes-medidas.aprendiz",
       "tamanho": 4415,
       "sha256": "c495bebe59282212de01e1194e3d7cceb0c31e700a13fefb8e62ba0bea8d432a",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "quantos ml tem uma xícara de chá",
@@ -1250,7 +1250,7 @@
     {
       "id": "dialogo-portugues",
       "nome": "Diálogo do português",
-      "versao": "2.0.0",
+      "versao": "2.0.1",
       "autor": "Jano Projects",
       "descricao": "Conversa de verdade, além de pergunta e resposta: entende o que você FAZ com a frase (cumprimentar e pedir ajuda na mesma mensagem, desabafar, pedir opinião, fazer uma pergunta reflexiva, elogiar ou criticar) e usa o contexto da conversa (\"não entendi\", \"não era isso\", \"sim\", \"e em Portugal?\"). Palavras de conversa como \"consegue\" e \"ajudar\" deixam de disparar buscas sem relação. Complementa a Compreensão do português.",
       "licenca": "CC-BY-4.0",
@@ -1273,7 +1273,7 @@
         "compreensao"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [
         {
           "id": "compreensao-portugues",
@@ -1291,28 +1291,28 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": {
-        "regras": 17,
+        "regras": 18,
         "catalogo": 0,
         "lemas": 0,
         "vetores": 0
       },
       "norma": null,
       "arquivo": "addons/dialogo-portugues.aprendiz",
-      "tamanho": 5176,
-      "sha256": "9105ad19a649bef43580e62d5b5734b590defd52d5d8da5f09b3bf849dec6c2f",
+      "tamanho": 5215,
+      "sha256": "ce7bdcb4e167057da4e512570545158dee9072f60fd59e893a68fd4aeda1ab4f",
       "atualizado_em": "2026-11-18",
       "amostra": []
     },
     {
       "id": "expressoes-guine-bissau",
       "nome": "Português da Guiné-Bissau",
-      "versao": "3.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Norma da Guiné-Bissau: vocabulário de mais de 400 mil formas que aceita as grafias de antes e de depois do Acordo de 1990 (ratificado, mas ainda não aplicado no país), revisão de texto com regras de gramática, palavras e frases do kriol e respostas sobre as línguas guineenses. Escreva \"revise: o seu texto\".",
       "licenca": "CC-BY-4.0 AND LGPL-2.1",
       "site": null,
       "categoria": "Idiomas e gírias",
-      "grupo": "idiomas",
+      "grupo": "conhecimento",
       "nivel": "basico",
       "etiquetas": [
         "guiné-bissau",
@@ -1329,15 +1329,14 @@
       "editor": "Jano Projects",
       "classificacao": [
         "memoria",
-        "linguagem",
-        "norma"
+        "linguagem"
       ],
-      "versao_minima_app": "0.8.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
+        "resposta": "trabalhada",
         "acerto": 0.96
       },
       "conhecimentos": 47,
@@ -1452,18 +1451,10 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": null,
-      "norma": {
-        "id": "pt-GW",
-        "nome": "Português da Guiné-Bissau",
-        "ortografia": "ambas",
-        "formas": 424907,
-        "regras": 52,
-        "grafias": 1230,
-        "equivalencias": 87
-      },
+      "norma": null,
       "arquivo": "addons/expressoes-guine-bissau.aprendiz",
-      "tamanho": 1077470,
-      "sha256": "1cf90ea05522ca8d12c1c7ba4b3d60d8fe0733c48ff9033b321e0b2ddb6779c0",
+      "tamanho": 5250,
+      "sha256": "5c25bb32cbe9377bdf9fadf73c5da1b5cce5f3f85761b63bc89e3cc46feab270",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -1495,13 +1486,13 @@
     {
       "id": "girias-angola",
       "nome": "Português de Angola",
-      "versao": "3.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Norma de Angola: vocabulário de mais de 400 mil formas na grafia em uso no país (anterior ao Acordo de 1990, que Angola não ratificou), revisão de texto com regras de gramática, palavras angolanas (muitas do quimbundo e do umbundo) e respostas sobre o português de Angola. Escreva \"revise: o seu texto\".",
       "licenca": "CC-BY-4.0 AND LGPL-2.1",
       "site": null,
       "categoria": "Idiomas e gírias",
-      "grupo": "idiomas",
+      "grupo": "conhecimento",
       "nivel": "basico",
       "etiquetas": [
         "angola",
@@ -1518,15 +1509,14 @@
       "editor": "Jano Projects",
       "classificacao": [
         "memoria",
-        "linguagem",
-        "norma"
+        "linguagem"
       ],
-      "versao_minima_app": "0.8.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
+        "resposta": "trabalhada",
         "acerto": 1.0
       },
       "conhecimentos": 58,
@@ -1664,18 +1654,10 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": null,
-      "norma": {
-        "id": "pt-AO",
-        "nome": "Português de Angola",
-        "ortografia": "1945",
-        "formas": 418840,
-        "regras": 54,
-        "grafias": 6964,
-        "equivalencias": 87
-      },
+      "norma": null,
       "arquivo": "addons/girias-angola.aprendiz",
-      "tamanho": 1118061,
-      "sha256": "6178e44bdb4ededd5a16e31a54954fd4b85b2cb79f8bc41ab3cb0d04b17d2325",
+      "tamanho": 6662,
+      "sha256": "170eb0b38a46e6c5a1f3cf02b348f100ebc53801d8af265851377f4234d3ce23",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -1707,13 +1689,13 @@
     {
       "id": "expressoes-cabo-verde",
       "nome": "Português de Cabo Verde",
-      "versao": "3.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Norma de Cabo Verde: vocabulário de mais de 400 mil formas (Acordo Ortográfico de 1990, obrigatório no país desde 2015), revisão de texto com regras de gramática, palavras e frases do crioulo cabo-verdiano (kabuverdianu) e respostas sobre as línguas de Cabo Verde. Escreva \"revise: o seu texto\".",
       "licenca": "CC-BY-4.0 AND LGPL-2.1",
       "site": null,
       "categoria": "Idiomas e gírias",
-      "grupo": "idiomas",
+      "grupo": "conhecimento",
       "nivel": "basico",
       "etiquetas": [
         "cabo verde",
@@ -1730,16 +1712,15 @@
       "editor": "Jano Projects",
       "classificacao": [
         "memoria",
-        "linguagem",
-        "norma"
+        "linguagem"
       ],
-      "versao_minima_app": "0.8.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.98
+        "resposta": "trabalhada",
+        "acerto": 0.984
       },
       "conhecimentos": 52,
       "verbetes": 46,
@@ -1849,18 +1830,10 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": null,
-      "norma": {
-        "id": "pt-CV",
-        "nome": "Português de Cabo Verde",
-        "ortografia": "1990",
-        "formas": 419473,
-        "regras": 52,
-        "grafias": 6301,
-        "equivalencias": 87
-      },
+      "norma": null,
       "arquivo": "addons/expressoes-cabo-verde.aprendiz",
-      "tamanho": 1112413,
-      "sha256": "67d8e4ddd2faa40ff8893f54b320c3bdbe92f9d2f19b724e87d7e77d3b5a8759",
+      "tamanho": 5790,
+      "sha256": "fdb54d4389c4a1332795294152264cdf004f2fb420696c0fc9873abad27cc5eb",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -1892,13 +1865,13 @@
     {
       "id": "girias-mocambique",
       "nome": "Português de Moçambique",
-      "versao": "3.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Norma de Moçambique: vocabulário de mais de 400 mil formas na grafia em uso no país (anterior ao Acordo de 1990, que Moçambique não ratificou), revisão de texto com regras de gramática, palavras moçambicanas (do changana, do ronga, do macua…) e respostas sobre o português de Moçambique. Escreva \"revise: o seu texto\".",
       "licenca": "CC-BY-4.0 AND LGPL-2.1",
       "site": null,
       "categoria": "Idiomas e gírias",
-      "grupo": "idiomas",
+      "grupo": "conhecimento",
       "nivel": "basico",
       "etiquetas": [
         "moçambique",
@@ -1915,15 +1888,14 @@
       "editor": "Jano Projects",
       "classificacao": [
         "memoria",
-        "linguagem",
-        "norma"
+        "linguagem"
       ],
-      "versao_minima_app": "0.8.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
+        "resposta": "trabalhada",
         "acerto": 1.0
       },
       "conhecimentos": 46,
@@ -2030,18 +2002,10 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": null,
-      "norma": {
-        "id": "pt-MZ",
-        "nome": "Português de Moçambique",
-        "ortografia": "1945",
-        "formas": 418839,
-        "regras": 54,
-        "grafias": 6964,
-        "equivalencias": 87
-      },
+      "norma": null,
       "arquivo": "addons/girias-mocambique.aprendiz",
-      "tamanho": 1117448,
-      "sha256": "3e75f60e8a1e3473d1fb5e1b5a73a8e757209be69c0cdebb1ba9cfbe32f38383",
+      "tamanho": 5689,
+      "sha256": "02b5246d32aebdd752e5e1c4910ee357684ddc49fbad6968f79351a7acd216be",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -2073,13 +2037,13 @@
     {
       "id": "girias-portugal",
       "nome": "Português de Portugal",
-      "versao": "3.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Norma europeia de Portugal: vocabulário de mais de 400 mil formas (Acordo Ortográfico de 1990, com a grafia anterior apontada), revisão de texto com regras de gramática, gírias e falares regionais (Norte, Lisboa, Alentejo, Algarve, Açores, Madeira) e respostas sobre gramática. Escreva \"revise: o seu texto\".",
       "licenca": "CC-BY-4.0 AND LGPL-2.1",
       "site": null,
       "categoria": "Idiomas e gírias",
-      "grupo": "idiomas",
+      "grupo": "conhecimento",
       "nivel": "basico",
       "etiquetas": [
         "portugal",
@@ -2096,16 +2060,15 @@
       "editor": "Jano Projects",
       "classificacao": [
         "memoria",
-        "linguagem",
-        "norma"
+        "linguagem"
       ],
-      "versao_minima_app": "0.8.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.98
+        "resposta": "trabalhada",
+        "acerto": 0.94
       },
       "conhecimentos": 84,
       "verbetes": 70,
@@ -2258,18 +2221,10 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": null,
-      "norma": {
-        "id": "pt-PT",
-        "nome": "Português de Portugal",
-        "ortografia": "1990",
-        "formas": 419458,
-        "regras": 52,
-        "grafias": 6301,
-        "equivalencias": 87
-      },
+      "norma": null,
       "arquivo": "addons/girias-portugal.aprendiz",
-      "tamanho": 1114846,
-      "sha256": "1d882c574676ce29951302947184c58f179354e432215b9192b3ff1698c9931a",
+      "tamanho": 8744,
+      "sha256": "24d4df22e120d0f262a0b4694e4a884be6725aacf2bbeacf02cd9083186f2889",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -2301,13 +2256,13 @@
     {
       "id": "expressoes-sao-tome-e-principe",
       "nome": "Português de São Tomé e Príncipe",
-      "versao": "3.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Norma de São Tomé e Príncipe: vocabulário de mais de 400 mil formas (Acordo Ortográfico de 1990, em vigor no país), revisão de texto com regras de gramática, palavras do português santomense e dos crioulos (forro, angolar e lung'ie) e respostas sobre as línguas do país. Escreva \"revise: o seu texto\".",
       "licenca": "CC-BY-4.0 AND LGPL-2.1",
       "site": null,
       "categoria": "Idiomas e gírias",
-      "grupo": "idiomas",
+      "grupo": "conhecimento",
       "nivel": "basico",
       "etiquetas": [
         "são tomé e príncipe",
@@ -2324,16 +2279,15 @@
       "editor": "Jano Projects",
       "classificacao": [
         "memoria",
-        "linguagem",
-        "norma"
+        "linguagem"
       ],
-      "versao_minima_app": "0.8.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.96
+        "resposta": "trabalhada",
+        "acerto": 0.964
       },
       "conhecimentos": 34,
       "verbetes": 29,
@@ -2394,18 +2348,10 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": null,
-      "norma": {
-        "id": "pt-ST",
-        "nome": "Português de São Tomé e Príncipe",
-        "ortografia": "1990",
-        "formas": 419472,
-        "regras": 52,
-        "grafias": 6301,
-        "equivalencias": 87
-      },
+      "norma": null,
       "arquivo": "addons/expressoes-sao-tome-e-principe.aprendiz",
-      "tamanho": 1111502,
-      "sha256": "0ca45285cd838597176799a42934d3853d2cd3720b522894e4bde85f87b01ca4",
+      "tamanho": 4220,
+      "sha256": "76bbff47125dc40b07d40e86c927e5bead9781e0dcbc57a7c7772d0a46fb0b2f",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -2437,13 +2383,13 @@
     {
       "id": "expressoes-timor-leste",
       "nome": "Português de Timor-Leste",
-      "versao": "3.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Norma de Timor-Leste: vocabulário de mais de 400 mil formas (Acordo Ortográfico de 1990), revisão de texto com regras de gramática, palavras e frases em tétum e respostas sobre as línguas timorenses. Escreva \"revise: o seu texto\".",
       "licenca": "CC-BY-4.0 AND LGPL-2.1",
       "site": null,
       "categoria": "Idiomas e gírias",
-      "grupo": "idiomas",
+      "grupo": "conhecimento",
       "nivel": "basico",
       "etiquetas": [
         "timor-leste",
@@ -2460,16 +2406,15 @@
       "editor": "Jano Projects",
       "classificacao": [
         "memoria",
-        "linguagem",
-        "norma"
+        "linguagem"
       ],
-      "versao_minima_app": "0.8.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.96
+        "resposta": "trabalhada",
+        "acerto": 0.965
       },
       "conhecimentos": 66,
       "verbetes": 61,
@@ -2617,18 +2562,10 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": null,
-      "norma": {
-        "id": "pt-TL",
-        "nome": "Português de Timor-Leste",
-        "ortografia": "1990",
-        "formas": 419484,
-        "regras": 52,
-        "grafias": 6301,
-        "equivalencias": 85
-      },
+      "norma": null,
       "arquivo": "addons/expressoes-timor-leste.aprendiz",
-      "tamanho": 1111954,
-      "sha256": "228e83c94291723673c14cc970d93405aacec5b6ff188ec1bc25aaa9095ea69c",
+      "tamanho": 5668,
+      "sha256": "131661b4b2927a44b9ce46032f975eb9d2473d835fd8979b5479b65ce4ccc8df",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -2660,13 +2597,13 @@
     {
       "id": "girias-brasil",
       "nome": "Português do Brasil",
-      "versao": "3.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Norma do Brasil: vocabulário de quase 3 milhões de formas (Acordo Ortográfico de 1990), revisão de texto com regras de gramática, gírias e falares regionais (Nordeste, Norte, Sul, Minas, Rio, São Paulo, Centro-Oeste) e respostas sobre gramática. Escreva \"revise: seu texto\" ou \"o certo é exceção ou excessão?\".",
       "licenca": "CC-BY-4.0 AND LGPL-3.0-or-later",
       "site": null,
       "categoria": "Idiomas e gírias",
-      "grupo": "idiomas",
+      "grupo": "conhecimento",
       "nivel": "basico",
       "etiquetas": [
         "brasil",
@@ -2683,16 +2620,15 @@
       "editor": "Jano Projects",
       "classificacao": [
         "memoria",
-        "linguagem",
-        "norma"
+        "linguagem"
       ],
-      "versao_minima_app": "0.8.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.94
+        "resposta": "trabalhada",
+        "acerto": 0.889
       },
       "conhecimentos": 119,
       "verbetes": 98,
@@ -2913,18 +2849,10 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": null,
-      "norma": {
-        "id": "pt-BR",
-        "nome": "Português do Brasil",
-        "ortografia": "1990",
-        "formas": 2921812,
-        "regras": 54,
-        "grafias": 30234,
-        "equivalencias": 88
-      },
+      "norma": null,
       "arquivo": "addons/girias-brasil.aprendiz",
-      "tamanho": 8101976,
-      "sha256": "a2bc1cb8b2e46588f33a34931a5b15df8bbbd73baf1b01a28495e9fcf6d487ad",
+      "tamanho": 12991,
+      "sha256": "d658957701015a108e0e69f5b80aa2fde25308f7b9c0da16a72ce33d700f8b85",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -3111,7 +3039,7 @@
     {
       "id": "prog-estruturas-dados",
       "nome": "Programação 3 · Estruturas de dados",
-      "versao": "2.0.0",
+      "versao": "2.0.1",
       "autor": "Jano Projects",
       "descricao": "Vetores, listas ligadas, pilhas, filas, tabelas hash, árvores, grafos e heaps; Big-O, busca linear e binária e os algoritmos de ordenação, explicados com exemplos.",
       "licenca": "CC-BY-4.0",
@@ -3134,7 +3062,7 @@
         "linguagem"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [
         {
           "id": "prog-logica",
@@ -3145,7 +3073,7 @@
       "recomendado": {
         "busca": "hibrido",
         "resposta": "trabalhada",
-        "acerto": 0.969
+        "acerto": 0.977
       },
       "conhecimentos": 36,
       "verbetes": 0,
@@ -3158,8 +3086,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/prog-estruturas-dados.aprendiz",
-      "tamanho": 13497,
-      "sha256": "1d02f571c7d83fbb4624584572dc582091cf280731cbd959eca69fa7b41ddfcd",
+      "tamanho": 13508,
+      "sha256": "f59b0f824efcfdc900721fc3a0772869f2b53213ee62e1838021cb1a843eb2db",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {
