@@ -683,7 +683,7 @@
         "como voce interpreta as perguntas",
         "o que faz o addon de compreensao"
       ],
-      "resposta": "O addon de compreensão me ensina a **interpretar** o que você escreve: reconheço o tipo de pergunta (o que é, como fazer, onde fica...), troco expressões por palavras simples (\"dar um jeito\" → resolver), junto formas irregulares (\"fui\", \"foi\" → ser), sei o que não consigo fazer offline e, quando não sei algo, procuro na lista da loja oficial um addon que saiba. Tudo isso aparece no painel **Por que respondi isso?**."
+      "resposta": "O addon de compreensão me ensina a **interpretar** o que você escreve: reconheço o tipo de pergunta (o que é, como fazer, onde fica...), troco expressões por palavras simples (\"dar um jeito\" → resolver), junto formas irregulares (\"fui\", \"foi\" → ser), sei o que não consigo fazer offline e, quando não sei algo, procuro na lista da loja oficial um addon que saiba. Tudo isso aparece no **Monitor**, o painel à direita do chat."
     }
   ],
   "fora_de_alcance": [

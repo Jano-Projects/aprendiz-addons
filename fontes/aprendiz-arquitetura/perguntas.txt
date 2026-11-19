@@ -28,7 +28,8 @@ Cada camada só conhece a de baixo: a interface não sabe nada de SQLite; o banc
 
 F: caminho-mensagem
 A: caminho de uma mensagem, pipeline, etapas
-Q: porque | cada mensagem passa por etapas em ordem, e cada uma registra o que fez no painel Por que respondi isso
+Q: porque | cada mensagem passa por etapas em ordem, e cada uma registra o que fez no Monitor
+Q: consequencia | na 2.4, as etapas chegam à interface ao vivo | -> monitor
 Q: consequencia | na 2.0 entram os padrões de frase, a teia e a resposta Trabalhada | -> aprendiz-algoritmos:teia
 P: qual o caminho de uma mensagem no aprendiz
 P: o que acontece quando eu mando uma mensagem no aprendiz
@@ -36,7 +37,7 @@ P: o que é o pipeline do aprendiz
 P: como funciona o pipeline
 P: pipeline do aprendiz
 R: Do Enter até a resposta na tela:
-1. **Interface** (`web/app.js`, função `enviar`): faz `POST /api/chat` com a mensagem e os algoritmos escolhidos.
+1. **Interface** (`web/app.js`, função `enviar`): faz `POST /api/chat/fluxo` (na 2.4; antes, `POST /api/chat`) com a mensagem e os algoritmos escolhidos.
 2. **API** (`api/servidor.py`, rota `chat`): valida o JSON e chama `Assistente.responder()`.
 3. **Núcleo** (`core/assistente.py`): grava a mensagem e roda o **pipeline** (`_pipeline`):
    - normalização (`Linguagem.processar`);
@@ -49,7 +50,7 @@ R: Do Enter até a resposta na tela:
    - nada acima do limiar → **modo estrito** ("ainda não fui ensinado");
    - **resposta** com o algoritmo escolhido (Direta ou Extrativa).
 4. Cada etapa é cronometrada (classe `Etapas`); tudo vira `meta.explicacao`, gravado com a resposta.
-5. A API devolve o JSON; a interface mostra o texto (com o mini-Markdown) e guarda a explicação para o painel **"Por que respondi isso?"**.
+5. A API devolve o JSON; a interface mostra o texto (com o mini-Markdown) e entrega a explicação ao **Monitor**. Na 2.4, cada etapa já chega ao Monitor assim que termina (NDJSON).
 **Na 2.0:** o caminho ganhou três etapas: **padrões de frase** antes da busca, as **regras do assunto** depois dela e a **teia de porquês** antes de montar a resposta. Veja o `docs/arquitetura.md`.
 
 F: decisoes
@@ -301,13 +302,35 @@ P: o que tem na pasta web do aprendiz
 P: o que fazem index.html estilo.css e app.js
 P: o que tem na pasta web
 P: o que faz o app.js
+P: o que faz o monitor.js
 P: o que faz o index.html
 R: A interface fica em `aprendiz/web/`, em HTML, CSS e JavaScript **puros** (sem framework e sem nada baixado da internet):
 - `index.html`: a estrutura da página: barra lateral (conversas e menus), área do chat, compositor, os **diálogos** (`<dialog>`: ensinar, base, addons, linguagem, configurações, revisão, reset) e os **ícones** em SVG (`<symbol id="i-...">`), usados com `<use href="#i-nome">`;
 - `estilo.css`: o visual, com **variáveis CSS** (`--primaria`, `--fundo`…) para os temas claro e escuro e regras responsivas;
-- `app.js`: toda a lógica: chamar a API (função `api`), conversas, mensagens com efeito de digitação, painel "Por que respondi isso?", os diálogos e a inicialização. Organizado em 8 seções numeradas no topo do arquivo;
+- `app.js`: toda a lógica: chamar a API (função `api`), conversas, mensagens com efeito de digitação, o envio ao vivo para o Monitor, os diálogos e a inicialização. Organizado em 8 seções numeradas no topo do arquivo;
+- `monitor.js` (2.4): o **Monitor**, painel técnico à direita do chat: pipeline ao vivo, busca, parâmetros do modelo, desempenho e glossário;
 - `markdown.js`: um mini-renderizador de Markdown (negrito, itálico, código, listas) que **escapa todo o texto antes** de virar HTML, para nenhum conteúdo virar script (proteção contra XSS);
 - `icone.svg`: o ícone do app.
+
+F: monitor
+A: monitor, painel técnico, pipeline ao vivo, parâmetros, ndjson, fluxo, telemetria
+Q: porque | mostra por dentro cada resposta, para quem estuda IA | -> caminho-mensagem
+Q: regra | o Monitor só lê dados: nada do que mostra muda a resposta
+Q: consequencia | a aba Busca mostra a conta da busca Calibrada sinal por sinal | -> aprendiz-algoritmos:calibrado
+P: o que é o monitor do aprendiz
+P: como funciona o monitor
+P: como o aprendiz mostra o pipeline ao vivo
+P: quantos parâmetros o aprendiz tem
+P: o que é a rota chat fluxo
+R: O **Monitor** (2.4) é o painel à direita do chat, com dois níveis de leitura (**Iniciante** e **Avançado**) e cinco abas:
+- **Pipeline:** cada etapa ao vivo, com tempo, início (gráfico de Gantt) e dados; a **câmera lenta** espaça as etapas;
+- **Busca:** candidatos, confiança × limiar e, na busca Calibrada, a conta inteira (`z = viés + Σ peso·sinal`, `p = σ(z)`);
+- **Modelo:** a ficha técnica, com os **parâmetros** de cada componente: aprendidos, estatísticas da base, pré-treinados e hiperparâmetros;
+- **Desempenho:** tempo médio de cada etapa, p90 e memória;
+- **Glossário:** os termos técnicos, de *token* a *validação cruzada*.
+Como chega ao vivo: `Assistente.responder(..., ouvinte=...)` chama o **ouvinte** a cada etapa marcada (classe `Etapas`). A rota `POST /api/chat/fluxo` roda o Assistente numa thread, põe cada etapa numa `queue.Queue` e envia uma linha JSON por etapa (**NDJSON**, `StreamingResponse`): é o padrão **produtor-consumidor**. A interface lê com `ReadableStream`.
+A ficha vem de `GET /api/modelo` (`core/monitor.py`). Com os addons da homologação, são cerca de 1,8 milhão de parâmetros, quase todos pré-treinados (vetores de palavras e lemas); os aprendidos com rótulos são menos de mil.
+Detalhes: `docs/monitor.md`.
 
 F: scripts
 A: instalar, executar, empacotar, scripts

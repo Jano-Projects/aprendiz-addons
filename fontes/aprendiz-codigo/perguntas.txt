@@ -287,7 +287,7 @@ def normalizar(texto: str) -> str:
 - `re.compile` prepara a regex uma vez só, no carregamento do módulo; `.sub(" ", texto)` troca tudo que não é letra ou número por espaço;
 - `\1` na troca é "o que o grupo 1 capturou";
 - `.strip()` tira os espaços das pontas.
-Depois, `Linguagem.processar()` faz o resto: tokens, abreviações, correção de digitação, expressões, sinônimos, lemas, stopwords e radicais, guardando cada etapa num `TextoProcessado` (uma `@dataclass`), que o painel "Por que respondi isso?" mostra.
+Depois, `Linguagem.processar()` faz o resto: tokens, abreviações, correção de digitação, expressões, sinônimos, lemas, stopwords e radicais, guardando cada etapa num `TextoProcessado` (uma `@dataclass`), que o **Monitor** mostra.
 
 F: correcao-codigo
 A: código da correção, process.extract
@@ -566,7 +566,7 @@ return nota_sentido + gerada.texto, "conhecimento", fontes
 
 F: etapas
 A: classe etapas, explicação, tempos
-Q: porque | cada etapa anota dados e tempo, e isso vira o painel Por que respondi isso
+Q: porque | cada etapa anota dados e tempo, e isso vira o Monitor
 P: explica a classe etapas do assistente
 P: como o aprendiz mede o tempo de cada etapa
 R: ```python
@@ -590,7 +590,7 @@ class Etapas:
 - `time.perf_counter()`: o relógio de maior precisão disponível, feito para medir durações curtas;
 - cada `marcar` mede o tempo **desde a marcação anterior** e reinicia o cronômetro;
 - `@property total_ms` é calculado na hora em que é lido.
-A `lista` vai inteira para `meta.explicacao.etapas`, e o painel "Por que respondi isso?" mostra cada etapa com os seus milissegundos.
+A `lista` vai inteira para `meta.explicacao.etapas`, e o **Monitor** mostra cada etapa com os seus milissegundos. Na 2.4, `Etapas` também tem um **ouvinte**, chamado a cada etapa: é assim que a rota `/api/chat/fluxo` envia o pipeline ao vivo.
 
 F: regex-ensino
 A: expressões regulares de ensino, aprenda que
