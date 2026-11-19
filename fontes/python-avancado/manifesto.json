@@ -1,7 +1,7 @@
 {
   "id": "python-avancado",
   "nome": "Python 2 · Avançado",
-  "versao": "2.0.0",
+  "versao": "2.0.1",
   "autor": "Jano Projects",
   "descricao": "Compreensões, geradores, decoradores, gerenciadores de contexto, classes e dunder methods, dataclasses, type hints, ambientes virtuais e pip, pacotes, testes com pytest, async, threads e processos, sqlite3, performance e o que o Aprendiz usa.",
   "licenca": "CC-BY-4.0",

@@ -1,12 +1,12 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T15:28:37+00:00",
+  "gerado_em": "2026-11-19T19:15:23+00:00",
   "total": 40,
   "addons": [
     {
       "id": "aprendiz-preparar-ambiente",
       "nome": "Aprendiz por dentro 1 · Preparar o ambiente",
-      "versao": "2.0.0",
+      "versao": "2.0.1",
       "autor": "Jano Projects",
       "descricao": "Passo a passo manual, do zero, no Ubuntu, no Fedora e no Windows: terminal, Python, pip, Git, VS Code, baixar o código do Aprendiz, criar o ambiente virtual, instalar as dependências, rodar o app e os testes.",
       "licenca": "CC-BY-4.0",
@@ -30,7 +30,7 @@
         "linguagem"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.0.0",
+      "criado_com": "2.4.0",
       "dependencias": [
         {
           "id": "python-basico",
@@ -54,8 +54,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/aprendiz-preparar-ambiente.aprendiz",
-      "tamanho": 10464,
-      "sha256": "018d6c4074b4f0edd8690c4e90034ae4e6d6418abdd813178c5e5f858ca18406",
+      "tamanho": 10466,
+      "sha256": "f40a474572dedf0e31ba91d0ea8434e9c9b2a7c6c9d728ed90f1e3f6356b4704",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {
@@ -87,7 +87,7 @@
     {
       "id": "aprendiz-arquitetura",
       "nome": "Aprendiz por dentro 2 · Arquitetura e arquivos",
-      "versao": "2.0.0",
+      "versao": "2.1.0",
       "autor": "Jano Projects",
       "descricao": "O mapa do projeto: o caminho de uma pergunta até a resposta, as camadas e o que faz cada pasta e cada arquivo do Aprendiz, dos instaladores aos testes.",
       "licenca": "CC-BY-4.0",
@@ -110,7 +110,7 @@
         "linguagem"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.0.0",
+      "criado_com": "2.4.0",
       "dependencias": [
         {
           "id": "aprendiz-preparar-ambiente",
@@ -121,9 +121,9 @@
       "recomendado": {
         "busca": "hibrido",
         "resposta": "trabalhada",
-        "acerto": 0.981
+        "acerto": 0.991
       },
-      "conhecimentos": 30,
+      "conhecimentos": 31,
       "verbetes": 0,
       "palavras": [],
       "traducoes": [],
@@ -134,8 +134,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/aprendiz-arquitetura.aprendiz",
-      "tamanho": 14973,
-      "sha256": "d5c35ccf9a973c9879dfd6e1a958ac64f602d8fc3355207c80622a52f62edb2f",
+      "tamanho": 15948,
+      "sha256": "d807b9fa0631a62cdd1e584a091b1bc70c976ba21cab468526e63e282a2885cd",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {
@@ -144,7 +144,7 @@
         },
         {
           "pergunta": "qual o caminho de uma mensagem no aprendiz",
-          "conteudo": "Do Enter até a resposta na tela:\n1. **Interface** (`web/app.js`, função `enviar`): faz `POST /api/chat` com a mensagem e os algoritmos escolhidos.\n2. **API** (`api/servidor.py`, rota `chat`): valida o JSON e chama `As…"
+          "conteudo": "Do Enter até a resposta na tela:\n1. **Interface** (`web/app.js`, função `enviar`): faz `POST /api/chat/fluxo` (na 2.4; antes, `POST /api/chat`) com a mensagem e os algoritmos escolhidos.\n2. **API** (`api/servidor.py`,…"
         },
         {
           "pergunta": "quais as decisões de projeto do aprendiz",
@@ -167,7 +167,7 @@
     {
       "id": "aprendiz-codigo",
       "nome": "Aprendiz por dentro 3 · O código explicado",
-      "versao": "2.0.0",
+      "versao": "2.0.1",
       "autor": "Jano Projects",
       "descricao": "Módulo por módulo: as classes, funções e comandos de Python que o Aprendiz usa (dataclasses, sqlite3, FastAPI, rapidfuzz, zipfile, re…), com trechos do código real e o porquê de cada escolha.",
       "licenca": "CC-BY-4.0",
@@ -191,7 +191,7 @@
         "linguagem"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.0.0",
+      "criado_com": "2.4.0",
       "dependencias": [
         {
           "id": "aprendiz-arquitetura",
@@ -215,8 +215,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/aprendiz-codigo.aprendiz",
-      "tamanho": 18084,
-      "sha256": "ee113bfe2e16f750904aa596582faadea35a6b9e2241723bbcb1a4fdc457af53",
+      "tamanho": 18132,
+      "sha256": "d6696b0465e09c9a8e18c2488669e5065721a84e0eb71a1e78cbbd9bc840f3ff",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {
@@ -248,9 +248,9 @@
     {
       "id": "aprendiz-algoritmos",
       "nome": "Aprendiz por dentro 4 · Como os algoritmos pensam",
-      "versao": "2.1.0",
+      "versao": "2.2.0",
       "autor": "Jano Projects",
-      "descricao": "Como o Aprendiz entende e responde: normalização, radicais, intenções com Naive Bayes, BM25, TF-IDF, Fuzzy, Híbrido, resposta Direta e Extrativa, prioridade do dono, dicionários, compreensão, vetores, revisão de texto e recomendação.",
+      "descricao": "Como o Aprendiz entende e responde: normalização, radicais, intenções com Naive Bayes, BM25, TF-IDF, Fuzzy, Híbrido, Calibrado (pesos aprendidos), resposta Direta e Extrativa, prioridade do dono, dicionários, compreensão, vetores, revisão de texto e recomendação.",
       "licenca": "CC-BY-4.0",
       "site": null,
       "categoria": "Programação",
@@ -262,7 +262,8 @@
         "bm25",
         "tf-idf",
         "naive bayes",
-        "trilha aprendiz por dentro"
+        "trilha aprendiz por dentro",
+        "machine learning"
       ],
       "formato": 2,
       "origem": "oficial",
@@ -272,7 +273,7 @@
         "linguagem"
       ],
       "versao_minima_app": "2.1.0",
-      "criado_com": "2.1.0",
+      "criado_com": "2.4.0",
       "dependencias": [
         {
           "id": "aprendiz-codigo",
@@ -285,7 +286,7 @@
         "resposta": "trabalhada",
         "acerto": 1.0
       },
-      "conhecimentos": 30,
+      "conhecimentos": 31,
       "verbetes": 0,
       "palavras": [],
       "traducoes": [],
@@ -296,8 +297,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/aprendiz-algoritmos.aprendiz",
-      "tamanho": 15396,
-      "sha256": "c4fd91eacf638f483e87a8a034f2af3995d668b1278ee8d1637fefc9e601f289",
+      "tamanho": 16324,
+      "sha256": "6cca8e7003fb3219618db3fbdb0ce5514a89d74f92bcfa7c11d84e2e715e0b43",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {
@@ -564,7 +565,7 @@
       "arquivo": "addons/boas-vindas-lusofonia.aprendiz",
       "tamanho": 886,
       "sha256": "503b6e866fbdf013a0942a323ebf725c94fc4b3bf10fb9ba517f8d94dac5023e",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": []
     },
     {
@@ -1126,7 +1127,7 @@
     {
       "id": "compreensao-portugues",
       "nome": "Compreensão do português",
-      "versao": "2.0.3",
+      "versao": "2.0.4",
       "autor": "Jano Projects",
       "descricao": "A raiz da conversa do Aprendiz: entende o tipo de pergunta (o que é, como fazer, onde fica…), junta tudo o que você ensinou sobre um assunto (\"o que você sabe sobre o carro?\"), entende expressões e formas irregulares (\"fui\", \"fiz\" → ser, fazer), responde sobre si mesmo e, quando não sabe algo, indica o addon da loja que sabe. Traz um léxico com mais de 300 mil palavras. Lemas derivados de lemmatization-lists, de Michal Měchura (ODbL).",
       "licenca": "ODbL-1.0",
@@ -1150,7 +1151,7 @@
         "compreensao"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.1.0",
+      "criado_com": "2.4.0",
       "dependencias": [],
       "recomendado": null,
       "conhecimentos": 0,
@@ -1169,8 +1170,8 @@
       },
       "norma": null,
       "arquivo": "addons/compreensao-portugues.aprendiz",
-      "tamanho": 858557,
-      "sha256": "ee17a3191146ef2d154f6ec796579be2c50d8855313c9252c42755766c3ea91d",
+      "tamanho": 858665,
+      "sha256": "c70dbb62516d9ed1228535b0fc89f71de3ccb910e1174f3499eb5cf88593ef46",
       "atualizado_em": "2026-11-19",
       "amostra": []
     },
@@ -3350,7 +3351,7 @@
     {
       "id": "python-avancado",
       "nome": "Python 2 · Avançado",
-      "versao": "2.0.0",
+      "versao": "2.0.1",
       "autor": "Jano Projects",
       "descricao": "Compreensões, geradores, decoradores, gerenciadores de contexto, classes e dunder methods, dataclasses, type hints, ambientes virtuais e pip, pacotes, testes com pytest, async, threads e processos, sqlite3, performance e o que o Aprendiz usa.",
       "licenca": "CC-BY-4.0",
@@ -3374,7 +3375,7 @@
         "linguagem"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.0.0",
+      "criado_com": "2.4.0",
       "dependencias": [
         {
           "id": "python-basico",
@@ -3398,8 +3399,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/python-avancado.aprendiz",
-      "tamanho": 17111,
-      "sha256": "de709814fce8714f21835dcb02dbeb4a1f9a35989e5421d7a8e553be8a1326cb",
+      "tamanho": 17115,
+      "sha256": "fd1decbb64f03459ab6e7b92c5f8637250a43ad46fce10e352aaf56839f2c3f1",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {
@@ -3714,7 +3715,7 @@
       "arquivo": "addons/tema-floresta.aprendiz",
       "tamanho": 588,
       "sha256": "019c01889193afc7f505c97d94aa5ae1997613a91b2636de98944ba72b47fd24",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": []
     },
     {
@@ -3761,7 +3762,7 @@
       "arquivo": "addons/tema-grafite.aprendiz",
       "tamanho": 604,
       "sha256": "2eda6b70602b39bd856793f1a18035bfcc22d3f8cc2b3cd610f8889a0dcbaf61",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": []
     },
     {
@@ -3808,7 +3809,7 @@
       "arquivo": "addons/tema-ipe.aprendiz",
       "tamanho": 590,
       "sha256": "1154c252d57b4fa1cd3c02b8f4a941bf85084d6cf5200231c20164a1191a44d4",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": []
     },
     {
@@ -3855,7 +3856,7 @@
       "arquivo": "addons/tema-oceano.aprendiz",
       "tamanho": 599,
       "sha256": "64b0fc02d0ed79f7f2b3c01154ed5b72db068081a0fafa1c801f098c77dcca89",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": []
     },
     {
@@ -3902,7 +3903,7 @@
       "arquivo": "addons/tema-por-do-sol.aprendiz",
       "tamanho": 601,
       "sha256": "86154fc5fca5d8302348294373de2dca0cd709d68fd061b53c8b872d5aabcb65",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": []
     },
     {
@@ -3957,7 +3958,7 @@
       "arquivo": "addons/vetores-portugues.aprendiz",
       "tamanho": 1711006,
       "sha256": "ad2e62bb8e5876d9feab5a0e6311f2f5c09b64c54636445d43b3d7cf36f3aa12",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": []
     }
   ]

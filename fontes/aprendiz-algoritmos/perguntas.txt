@@ -122,7 +122,7 @@ P: o que é entidade no aprendiz
 P: como o aprendiz reconhece datas e telefones
 R: **Entidades** são pedaços com significado estruturado, reconhecidos por **regex** em `linguagem/entidades.py`: e-mail, valor em reais (R$ 10,50), data, horário, telefone e número.
 Um trecho já reconhecido não é pego de novo por um padrão mais genérico (um telefone não vira também "número").
-Para que servem: aparecem no painel "Por que respondi isso?" e ajudam a **exportação** a apontar possíveis dados pessoais (um conhecimento com e-mail ou telefone vem desmarcado, com aviso).
+Para que servem: aparecem no **Monitor** (etapa Interpretação) e ajudam a **exportação** a apontar possíveis dados pessoais (um conhecimento com e-mail ou telefone vem desmarcado, com aviso).
 
 F: bm25
 A: bm25, busca por palavras, okapi
@@ -187,6 +187,26 @@ O 60 suaviza: a diferença entre 1º e 2º existe, mas não é exagerada.
 **Confiança:** o híbrido aceita um documento se **pelo menos um** algoritmo estiver confiante: `0,5 × max(confiança_i / limiar_i)`, limitada a 1. Ela vale exatamente 0,5 (o limiar do híbrido) quando algum algoritmo atinge o próprio limiar. No item 1, o TF-IDF dá 0,532 / 0,25 = 2,13 → confiança 1,0.
 Bom para: o resultado mais robusto. Limite: roda os três algoritmos, então é o mais lento.
 
+F: calibrado
+A: busca calibrada, calibrado, pesos aprendidos, regressão logística, machine learning, sigmoide
+Q: porque | troca as folgas fixas do assunto por pesos aprendidos com perguntas reais | -> regra-assunto
+Q: porque | junta os candidatos dos outros algoritmos, como o Híbrido | -> hibrido
+Q: regra | o limiar 0,25 sai do custo: certo vale +1, errado −1 e "não sei" −0,5 | -> limiar
+P: como funciona a busca calibrada do aprendiz
+P: o que é a busca calibrada
+P: o aprendiz usa machine learning
+P: como o aprendiz aprende os pesos da busca
+R: A busca **Calibrada** (2.4) troca as regras fixas por uma conta com **pesos aprendidos**:
+1. junta os candidatos de BM25, TF-IDF e Fuzzy;
+2. mede os **sinais** de cada um: confiança e posição em cada algoritmo, cobertura ponderada pela raridade, quanto a pergunta bate no assunto declarado, pergunta idêntica a uma variação e as próprias regras fixas;
+3. **1ª etapa (ordena):** soma ponderada dos sinais passada pela **sigmoide**, `p = 1 / (1 + e^(−z))`: a chance de cada candidato ser a resposta. É uma **regressão logística**;
+4. **2ª etapa (decide):** pela nota do 1º lugar e pela distância para o 2º, a chance de o 1º estar certo. Essa é a confiança.
+O **limiar 0,25** vem do custo: responder com chance `p` vale `2p − 1`; recusar custa 0,5. Compensa responder quando `p > 0,25`.
+No exemplo ("que horas a farmácia abre?"), o horário da farmácia fica com chance média na 1ª etapa, mas muito à frente do 2º lugar; na 2ª etapa, a chance de estar certo passa de 0,25, e ele responde. As contas, passo a passo, estão em `docs/algoritmos.md`.
+Os pesos vêm de `ferramentas/treinar_calibrado.py`, que roda com scikit-learn na máquina de quem desenvolve: uma variação de cada fragmento dos addons vira pergunta (e sai do índice), 10% dos fragmentos são removidos para ensinar a recusar, e treino e teste são separados pelo fragmento. O app leva só os números.
+No teste, com perguntas que o modelo não viu, ele acerta mais que o BM25 e o Híbrido, erra e inventa bem menos, e recusa um pouco mais. Os números de cada treino ficam em `docs/algoritmos.md` e no próprio `calibrado_pesos.py`.
+Bom para: uso geral quando errar custa caro. Limite: roda os três algoritmos e só sabe o que o treino viu.
+
 F: limiar
 A: limiar, confiança mínima, corte
 Q: porque | abaixo dele o candidato é descartado, e sem candidato o modo estrito diz que não sabe
@@ -196,7 +216,7 @@ P: o que é o modo estrito
 P: por que o aprendiz diz que não sabe
 P: o que é o limiar
 P: limiar de confiança
-R: O **limiar** é a confiança mínima para aceitar um candidato, um por algoritmo (padrões: BM25 0,5; TF-IDF 0,25; Fuzzy 0,75; Híbrido 0,5), ajustáveis em Configurações ou por addons (como o "modo exigente").
+R: O **limiar** é a confiança mínima para aceitar um candidato, um por algoritmo (padrões: BM25 0,5; TF-IDF 0,25; Fuzzy 0,75; Híbrido 0,5; Calibrado 0,25), ajustáveis em Configurações ou por addons (como o "modo exigente").
 Sem nenhum candidato acima do limiar, entra o **modo estrito**: o Aprendiz responde que ainda não foi ensinado, sugere até três itens parecidos e, com o addon de compreensão, pode indicar um addon da loja que trate do assunto. Ele **nunca inventa**.
 O dilema clássico é **precisão × revocação**:
 - limiar alto → inventa menos, mas recusa perguntas que tinha como responder;
@@ -318,12 +338,14 @@ A: qual algoritmo usar, qual busca escolher
 Q: porque | cada busca tem um ponto forte, e o Híbrido junta todos | -> hibrido
 P: qual algoritmo de busca usar no aprendiz
 P: diferença entre bm25 tfidf fuzzy e híbrido
+P: diferença entre híbrido e calibrado
 R: Resumo prático:
 - **BM25:** o padrão. Roda dentro do SQLite, quase não usa memória. Ótimo para uso geral e máquinas fracas. Precisa que as palavras (ou os sinônimos) batam.
 - **TF-IDF:** o mais didático. Bom quando a pergunta é escrita de outro jeito, com palavras em outra ordem. Mantém um índice na memória.
 - **Fuzzy:** tolera erros de digitação e brilha com perguntas curtas e muito parecidas com as cadastradas (como as dos addons, que trazem muitas variações). Sofre com textos longos.
 - **Híbrido:** junta os três por posição (RRF). O mais robusto para perguntas variadas, e o mais lento.
-Na dúvida: comece com o **recomendado** de cada addon e use o seletor do topo para comparar na hora; o painel "Por que respondi isso?" mostra a confiança de cada candidato.
+- **Calibrado (2.4):** pesa todos os sinais com pesos aprendidos e só responde quando a chance de acerto compensa. Erra e inventa bem menos, recusa um pouco mais. Tão lento quanto o Híbrido.
+Na dúvida: comece com o **recomendado** de cada addon e use o seletor do topo para comparar na hora; a aba **Busca** do Monitor mostra a confiança de cada candidato e de onde ela veio.
 **Na 2.0:** na homologação, o **Híbrido** acertou mais em todas as levas, por isso é o recomendado na maioria dos addons.
 
 F: exercicios
@@ -377,7 +399,7 @@ A partir do conhecimento achado, `core/teia.py` percorre os porquês em largura,
 - **raiz**: um fragmento `N: raiz` é a base, e não se desce além dele;
 - **assunto**: do nível 2 em diante, só segue para fragmentos com palavra em comum com a pergunta;
 - **causa x lado**: `porque`, `regra`, `definicao` e `parte-de` descem; as outras relações valem só no nível 1.
-A ligação `-> addon:ref` atravessa addons; se o outro addon estiver desativado, o texto do porquê continua valendo. O caminho aparece em "Por que respondi isso?".
+A ligação `-> addon:ref` atravessa addons; se o outro addon estiver desativado, o texto do porquê continua valendo. O caminho aparece no **Monitor**, na etapa Teia de porquês.
 **Na 2.1:** há a relação `equivale` (o mesmo sentido em outra variedade: "grana", no Brasil, e "kumbu", em Angola), lateral como `diferente-de`.
 
 F: padroes

@@ -196,7 +196,7 @@ R: Com o Aprendiz rodando (`--modo servidor`), abra **`http://127.0.0.1:8765/doc
 Experimente:
 1. `POST /api/conhecimentos` com `{"pergunta": "senha do wifi", "conteudo": "casa123"}`;
 2. `POST /api/chat` com `{"mensagem": "qual a senha do wifi?"}`;
-3. veja no JSON da resposta o campo `meta.explicacao`: são as etapas do pipeline, as mesmas do painel "Por que respondi isso?".
+3. veja no JSON da resposta o campo `meta.explicacao`: são as etapas do pipeline, as mesmas do **Monitor**.
 Pelo terminal, o mesmo com `curl`:
 ```bash
 curl -s -X POST http://127.0.0.1:8765/api/chat \

@@ -610,7 +610,7 @@ inicio = time.perf_counter()
 ...
 print(f"{(time.perf_counter() - inicio) * 1000:.1f} ms")
 ```
-O Aprendiz faz exatamente isso em cada etapa do pipeline (classe `Etapas` em `core/assistente.py`), e o painel "Por que respondi isso?" mostra os milissegundos de cada uma.
+O Aprendiz faz exatamente isso em cada etapa do pipeline (classe `Etapas` em `core/assistente.py`), e o **Monitor** mostra os milissegundos de cada uma, ao vivo.
 Ferramentas visuais: **snakeviz** (para a saída do cProfile), **py-spy** (observa um programa rodando, sem alterar) e **scalene** (tempo e memória por linha).
 
 F: rapido
