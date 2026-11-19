@@ -1229,6 +1229,21 @@
     "duplicacao",
     "nao repetir"
    ]
+  },
+  {
+   "padrao": "fica|ficou|esta|ficando|muito lento|lenta|devagar|demorado|demorada|pesado",
+   "conceitos": [
+    "desempenho",
+    "complexidade",
+    "lento"
+   ]
+  },
+  {
+   "padrao": "guardar|salvar|lembrar|reaproveitar * ja calculado|calculados|calculada|calculadas",
+   "conceitos": [
+    "memoizacao",
+    "nao recalcular"
+   ]
   }
  ],
  "catalogo": [

@@ -1,7 +1,7 @@
 {
   "id": "prog-estruturas-dados",
   "nome": "Programação 3 · Estruturas de dados",
-  "versao": "1.0.0",
+  "versao": "2.0.0",
   "autor": "Jano Projects",
   "descricao": "Vetores, listas ligadas, pilhas, filas, tabelas hash, árvores, grafos e heaps; Big-O, busca linear e binária e os algoritmos de ordenação, explicados com exemplos.",
   "licenca": "CC-BY-4.0",
@@ -16,7 +16,7 @@
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.6.0"
+    "versao_minima": "2.0.0"
   },
   "dependencias": [
     {
@@ -24,10 +24,5 @@
       "versao": "1.0.0",
       "nome": "Programação 1 · Lógica e algoritmos"
     }
-  ],
-  "recomendado": {
-    "busca": "hibrido",
-    "resposta": "direta",
-    "acerto": 0.94
-  }
+  ]
 }

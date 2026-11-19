@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T11:13:18+00:00",
+  "gerado_em": "2026-11-19T11:25:57+00:00",
   "total": 40,
   "addons": [
     {
@@ -1162,16 +1162,16 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": {
-        "regras": 221,
+        "regras": 223,
         "catalogo": 37,
         "lemas": 317331,
         "vetores": 0
       },
       "norma": null,
       "arquivo": "addons/compreensao-portugues.aprendiz",
-      "tamanho": 858078,
-      "sha256": "37512649ae0cd24580e6d6986af301d89721159901bf64aa5970c519fe651e70",
-      "atualizado_em": "2026-11-18",
+      "tamanho": 858353,
+      "sha256": "89ec85a9efc8219ebc3da2008cbfc13e0dcc6b642d99d48fd0b41c0acb1c3072",
+      "atualizado_em": "2026-11-19",
       "amostra": []
     },
     {
@@ -2999,7 +2999,7 @@
       "arquivo": "addons/prog-logica.aprendiz",
       "tamanho": 15472,
       "sha256": "38471868421da2e521df02bdd098fb5de67e70cfc9371a0c6edec7c4283b8245",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "o que é programação",
@@ -3080,7 +3080,7 @@
       "arquivo": "addons/prog-vocabulario.aprendiz",
       "tamanho": 15451,
       "sha256": "3deff40f2e918f63ee195b64961e750ecb60ef5f26222fdc743082578bfd5ad8",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "o que é camelcase",
@@ -3111,7 +3111,7 @@
     {
       "id": "prog-estruturas-dados",
       "nome": "Programação 3 · Estruturas de dados",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Vetores, listas ligadas, pilhas, filas, tabelas hash, árvores, grafos e heaps; Big-O, busca linear e binária e os algoritmos de ordenação, explicados com exemplos.",
       "licenca": "CC-BY-4.0",
@@ -3133,8 +3133,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.0",
       "dependencias": [
         {
           "id": "prog-logica",
@@ -3144,8 +3144,8 @@
       ],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.94
+        "resposta": "trabalhada",
+        "acerto": 0.969
       },
       "conhecimentos": 36,
       "verbetes": 0,
@@ -3158,8 +3158,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/prog-estruturas-dados.aprendiz",
-      "tamanho": 10579,
-      "sha256": "d108f0eb1310b834c15f6d2c6af8a7e52883c242275d02653a0ee22291e0c1f4",
+      "tamanho": 13497,
+      "sha256": "1d02f571c7d83fbb4624584572dc582091cf280731cbd959eca69fa7b41ddfcd",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -3241,7 +3241,7 @@
       "arquivo": "addons/prog-banco-dados.aprendiz",
       "tamanho": 10728,
       "sha256": "eaecee3b21bfbe536e1c60eeced894d03174e5a990290118038ed16467c5ebe8",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "o que é banco de dados",
@@ -3480,7 +3480,7 @@
       "arquivo": "addons/sql-basico.aprendiz",
       "tamanho": 12485,
       "sha256": "d0ff44821a18ac12e16a99658a4e3198a4978a8e13b4e2ceb3a6b43bfd911628",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "como começar a aprender sql",

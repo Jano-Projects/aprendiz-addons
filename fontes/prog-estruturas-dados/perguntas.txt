@@ -2,6 +2,11 @@
 # Os exemplos usam Python, que deixa a ideia mais visível. A trilha de C mostra as mesmas
 # estruturas montadas com ponteiros.
 
+F: estrutura-dados
+N: raiz
+A: estrutura de dados, organizar dados na memória
+Q: definicao | é um jeito de organizar dados na memória pensando em como eles vão ser usados
+Q: porque | cada organização deixa umas operações rápidas e outras lentas, e a escolha certa muda o desempenho | -> complexidade
 P: o que é estrutura de dados
 P: para que servem estruturas de dados
 P: quais são as principais estruturas de dados
@@ -16,6 +21,11 @@ Não existe a melhor; existe a melhor **para o que você vai fazer**:
 - pegar sempre o menor/maior → **heap**;
 - relações entre coisas (mapas, redes) → **grafo**.
 
+F: complexidade
+N: raiz
+A: complexidade, big o, notação o, lento com muitos dados, desempenho, eficiência
+Q: definicao | a complexidade diz como o tempo (ou a memória) cresce quando a quantidade de dados cresce
+Q: porque | um código rápido com 10 itens pode ficar lento com 1 milhão, e o Big O mostra isso antes de acontecer
 P: o que é complexidade de algoritmo
 P: o que é notação big o
 P: o que é o de n
@@ -32,6 +42,10 @@ R: A notação **Big-O** diz como o tempo (ou a memória) **cresce** quando a en
 - **O(2ⁿ) exponencial:** Fibonacci recursivo ingênuo. Inviável já com n = 50.
 Para n = 1 000 000: O(log n) ≈ 20, O(n) = 1 milhão, O(n²) = 1 trilhão de operações.
 
+F: calcular-complexidade
+A: calcular complexidade, contar operações, laços aninhados
+Q: porque | se conta quantas vezes a operação principal repete conforme o tamanho da entrada | -> complexidade
+Q: regra | um laço dentro de outro sobre os mesmos dados costuma dar O(n²)
 P: como calcular a complexidade de um código
 P: como saber o big o de um algoritmo
 R: Regras práticas:
@@ -47,6 +61,9 @@ for a in lista:          # n voltas
 ```
 Trocar `outra_lista` por `set(outra_lista)` deixa tudo O(n).
 
+F: casos
+A: melhor caso, pior caso, caso médio
+Q: porque | o mesmo algoritmo pode ter sorte ou azar com os dados, e o pior caso é o que garante o limite | -> complexidade
 P: o que é melhor caso pior caso e caso médio
 R: O mesmo algoritmo pode demorar diferente conforme a entrada:
 - **melhor caso:** a entrada mais favorável (o item procurado é o primeiro: O(1));
@@ -54,11 +71,18 @@ R: O mesmo algoritmo pode demorar diferente conforme a entrada:
 - **caso médio:** o esperado para entradas típicas.
 O Big-O costuma descrever o **pior caso**, a garantia. O quick sort é O(n log n) em média, mas O(n²) no pior caso; por isso as implementações escolhem bem o pivô.
 
+F: complexidade-espaco
+A: complexidade de espaço, memória usada
+Q: diferente-de | mede a memória extra que o algoritmo usa, e não o tempo | -> complexidade
 P: o que é complexidade de espaço
 P: o que é complexidade de memória
 R: É quanto de **memória extra** o algoritmo usa em função da entrada. Ordenar no lugar (heap sort) usa O(1) extra; o merge sort usa O(n) para as metades.
 Muitas vezes se troca memória por tempo: guardar resultados já calculados (**memoização**) gasta memória e economiza muito tempo. O Aprendiz faz isso ao guardar o índice de busca em memória em vez de recalcular a cada pergunta.
 
+F: vetor-ed
+A: vetor, array, acesso pela posição, posições seguidas
+Q: porque | os elementos ficam lado a lado na memória, então se chega a qualquer posição direto, em O(1) | -> estrutura-dados
+Q: consequencia | inserir no meio é caro, porque todo mundo depois precisa andar uma casa
 P: o que é vetor em estrutura de dados
 P: como funciona um array na memória
 P: vantagens e desvantagens do vetor
@@ -69,6 +93,10 @@ R: O **vetor** guarda os elementos **lado a lado** na memória. Como todos têm 
 - buscar um valor: O(n), ou O(log n) se estiver ordenado.
 A `list` do Python e o `std::vector` do C++ são vetores **dinâmicos**: quando enchem, alocam um espaço maior (em geral o dobro) e copiam tudo.
 
+F: lista-ligada
+A: lista ligada, lista encadeada, nós, próximo elemento, encadear
+Q: porque | cada elemento aponta para o próximo, então inserir e remover no meio não exige mover os outros | -> estrutura-dados
+Q: diferente-de | no vetor se acessa a posição direto; na lista ligada, é preciso andar de nó em nó | -> vetor-ed
 P: o que é lista ligada
 P: o que é lista encadeada
 P: diferença entre lista ligada e vetor
@@ -91,6 +119,10 @@ while no:
 - acessar o i-ésimo: O(n), é preciso andar nó por nó.
 Na **duplamente ligada**, cada nó aponta também para o anterior. Na prática, vetores costumam ser mais rápidos por aproveitarem o cache do processador; listas ligadas brilham em inserções frequentes no meio.
 
+F: pilha
+A: pilha, stack, último a entrar primeiro a sair, lifo, empilhar
+Q: porque | o último que entra é o primeiro que sai, como uma pilha de pratos | -> estrutura-dados
+Q: exemplo-de | o desfazer dos editores e a pilha de chamadas das funções usam pilha
 P: o que é pilha
 P: o que é stack em estrutura de dados
 P: o que é lifo
@@ -108,6 +140,9 @@ pilha.pop()         # "b"
 ```
 Usos: o **desfazer** (Ctrl+Z) dos editores, o botão voltar do navegador, a pilha de chamadas de função, conferir se parênteses estão balanceados.
 
+F: parenteses
+A: parênteses balanceados, abrir e fechar, conferir parênteses
+Q: porque | cada abertura vai para a pilha, e cada fechamento precisa casar com o último aberto | -> pilha
 P: como verificar se os parênteses estão balanceados
 R: Um uso clássico de pilha: empilhe cada abertura; a cada fechamento, o topo tem de ser a abertura correspondente.
 ```python
@@ -126,6 +161,10 @@ balanceado("(a[b]{c})")  # True
 balanceado("(]")         # False
 ```
 
+F: fila
+A: fila, queue, primeiro a entrar primeiro a sair, fifo, ordem de chegada
+Q: porque | o primeiro que chega é o primeiro atendido, como uma fila de banco | -> estrutura-dados
+Q: diferente-de | na pilha sai o último que entrou | -> pilha
 P: o que é fila
 P: o que é queue
 P: o que é fifo
@@ -144,6 +183,9 @@ fila.popleft()      # "ana"
 ```
 Usos: impressão de documentos, tarefas para processar em ordem, busca em largura em grafos.
 
+F: fila-prioridade
+A: fila de prioridade, heap, mais urgente primeiro
+Q: diferente-de | sai primeiro o mais importante, e não o que chegou antes | -> fila
 P: o que é fila de prioridade
 P: o que é heap
 P: o que é heap mínimo
@@ -159,6 +201,10 @@ heapq.heappop(h)    # (1, "pagar boleto")
 ```
 Usos: agendadores de tarefas, o algoritmo de Dijkstra e pegar os "k melhores" de uma lista enorme (`heapq.nlargest(10, itens)`) sem ordenar tudo.
 
+F: tabela-hash
+A: tabela hash, dicionário, mapa, chave e valor, dict, hashmap
+Q: porque | a chave vira um número que diz em que lugar guardar, então buscar costuma ser O(1) | -> funcao-hash
+Q: consequencia | é a estrutura por trás dos dicionários do Python
 P: o que é tabela hash
 P: o que é hash map
 P: como funciona um dicionário por dentro
@@ -176,6 +222,9 @@ estoque["uva"] = 7
 ```
 Limite: não mantém ordem de tamanho (para "o menor maior que x", use árvore).
 
+F: funcao-hash
+A: função hash, hash, espalhar chaves
+Q: porque | transforma qualquer chave num número de tamanho fixo, sempre o mesmo para a mesma chave | -> tabela-hash
 P: o que é função hash
 P: o que é hash sha256
 R: **Função hash** transforma qualquer dado num número de tamanho fixo. A mesma entrada sempre dá o mesmo resultado.
@@ -184,6 +233,9 @@ R: **Função hash** transforma qualquer dado num número de tamanho fixo. A mes
 O Aprendiz mostra o **SHA-256** de cada addon, e a loja publica o mesmo valor: se baterem, o arquivo é exatamente o publicado, sem um byte alterado.
 Senhas não se guardam com SHA-256 puro: usam-se funções lentas e com "sal" (bcrypt, argon2).
 
+F: arvore
+A: árvore, nós, raiz da árvore, folhas, hierarquia
+Q: porque | organiza dados em níveis, de cima para baixo, como pastas dentro de pastas | -> estrutura-dados
 P: o que é árvore em estrutura de dados
 P: o que é raiz folha e nó
 P: o que é árvore binária
@@ -191,6 +243,10 @@ R: **Árvore** organiza dados em hierarquia: um nó **raiz**, que tem **filhos**
 Na **árvore binária**, cada nó tem no máximo dois filhos (esquerdo e direito).
 Exemplos do dia a dia: as pastas do computador, o HTML de uma página (DOM), um organograma.
 
+F: arvore-busca
+A: árvore binária de busca, bst, menores à esquerda, maiores à direita
+Q: porque | em cada nó, os menores ficam à esquerda e os maiores à direita, então cada passo descarta metade | -> arvore
+Q: consequencia | buscar custa O(log n) quando a árvore está equilibrada
 P: o que é árvore binária de busca
 P: o que é bst
 P: árvore de busca
@@ -206,6 +262,9 @@ def buscar(no, valor):
 ```
 Problema: inserir dados já ordenados deixa a árvore "torta" (uma lista), e tudo vira O(n). As **árvores balanceadas** (AVL, rubro-negra) se reequilibram sozinhas; o `std::map` do C++ é uma rubro-negra.
 
+F: percurso-arvore
+A: percurso em árvore, pré-ordem, em ordem, pós-ordem, visitar nós
+Q: porque | há mais de uma ordem para visitar todos os nós, e cada uma serve a um uso | -> arvore
 P: o que é percurso em árvore
 P: o que é pré ordem em ordem e pós ordem
 R: Três jeitos de visitar todos os nós de uma árvore binária (em profundidade):
@@ -221,18 +280,29 @@ def em_ordem(no):
 ```
 Há ainda o percurso **em largura** (nível por nível), feito com uma fila.
 
+F: b-tree
+A: b tree, árvore b, índice de banco
+Q: porque | cada nó guarda muitas chaves, o que reduz as leituras de disco | -> arvore
+Q: exemplo-de | os índices dos bancos de dados costumam ser árvores B | -> prog-banco-dados:indice
 P: o que é b tree
 P: como funciona o índice do banco de dados
 R: A **árvore B** (B-tree, e a variante B+tree) é uma árvore de busca em que cada nó tem **muitos** filhos (centenas). Assim a árvore fica baixíssima: 3 ou 4 níveis guardam milhões de chaves.
 Ela foi pensada para disco: cada nó é um bloco lido de uma vez. Por isso é a estrutura dos **índices** de quase todos os bancos de dados (SQLite, PostgreSQL, MySQL) e de sistemas de arquivos.
 Um índice numa coluna faz a busca virar O(log n) em vez de ler a tabela inteira.
 
+F: trie
+A: trie, árvore de prefixos, autocompletar, começo da palavra
+Q: porque | as palavras com o mesmo começo compartilham o caminho, então achar tudo que começa com um prefixo é rápido | -> arvore
 P: o que é trie
 P: o que é árvore de prefixos
 R: **Trie** é uma árvore em que cada aresta é uma letra; o caminho da raiz até um nó forma um prefixo. Achar uma palavra de tamanho k custa O(k), não importa quantas palavras existam.
 Usos: autocompletar, corretores ortográficos, roteamento de IPs.
 O vocabulário da revisão de texto do Aprendiz resolve um problema parecido de outro jeito: milhões de palavras **ordenadas** num bloco de bytes, consultadas por **busca binária**, gastando pouca memória.
 
+F: grafo
+A: grafo, vértices, arestas, rede, ligações, conexões
+Q: porque | representa coisas e as ligações entre elas, como pessoas numa rede social ou cidades e estradas | -> estrutura-dados
+Q: diferente-de | a árvore é um grafo sem ciclos e com uma raiz | -> arvore
 P: o que é grafo
 P: o que é vértice e aresta
 P: o que é grafo direcionado e ponderado
@@ -248,6 +318,10 @@ Duas formas de guardar: **matriz de adjacência** (tabela n × n, boa para grafo
 grafo = {"GRU": ["GIG", "BSB"], "GIG": ["BSB"], "BSB": []}
 ```
 
+F: busca-largura
+A: busca em largura, bfs, vizinhos primeiro, nível por nível
+Q: porque | visita primeiro os vizinhos mais próximos e depois os mais distantes, usando uma fila | -> fila
+Q: consequencia | acha o caminho com menos passos num grafo sem pesos | -> grafo
 P: o que é busca em largura
 P: o que é busca em profundidade
 P: o que é bfs e dfs
@@ -268,6 +342,10 @@ def bfs(grafo, inicio):
 ```
 Sempre marque os **visitados**, senão um ciclo vira laço infinito.
 
+F: dijkstra
+A: dijkstra, menor caminho, caminho mais curto, rota
+Q: porque | sempre expande o lugar mais perto ainda não visitado, então a primeira vez que chega a um ponto já é pelo menor caminho | -> grafo
+Q: regra | não funciona com distâncias negativas
 P: o que é o algoritmo de dijkstra
 P: como achar o menor caminho num grafo
 R: **Dijkstra** acha o menor caminho de um vértice para todos os outros num grafo com pesos **não negativos**.
@@ -290,6 +368,9 @@ def dijkstra(grafo, origem):   # grafo: {v: [(vizinho, peso), ...]}
 ```
 Complexidade: O((V + A) log V). É a base dos GPS. Com pesos negativos, use Bellman-Ford.
 
+F: busca-linear
+A: busca linear, procurar um por um, busca sequencial
+Q: porque | olha cada elemento em sequência, então serve até para dados desordenados, mas custa O(n) | -> complexidade
 P: o que é busca linear
 P: o que é busca sequencial
 R: **Busca linear:** olha item por item até achar ou acabar. **O(n)**. Funciona em qualquer lista, ordenada ou não.
@@ -302,6 +383,10 @@ def busca_linear(lista, alvo):
 ```
 Para poucas buscas numa lista pequena, é a melhor escolha: simples e sem preparo.
 
+F: busca-binaria
+A: busca binária, dividir ao meio, metade, vetor ordenado
+Q: porque | com os dados ordenados, cada comparação descarta metade, então custa O(log n) | -> complexidade
+Q: regra | só funciona com os dados já ordenados | -> ordenacao
 P: o que é busca binária
 P: como funciona a busca binária
 P: busca binaria
@@ -322,6 +407,10 @@ def busca_binaria(lista, alvo):
 ```
 Em Python há o módulo `bisect`. A revisão de texto do Aprendiz usa busca binária para saber se uma palavra existe num vocabulário de milhões de formas.
 
+F: ordenacao
+A: ordenação, ordenar, algoritmos de ordenação, sort, mais rápido para ordenar
+Q: porque | dados em ordem deixam a busca, a comparação e a exibição muito mais rápidas | -> busca-binaria
+Q: regra | os bons ordenam em O(n log n); os simples, em O(n²) | -> complexidade
 P: quais são os algoritmos de ordenação
 P: como ordenar uma lista
 P: qual o melhor algoritmo de ordenação
@@ -336,6 +425,9 @@ R: Os mais conhecidos:
 - **Heap sort:** usa um heap. O(n log n), sem memória extra.
 Na vida real, use o da linguagem: o `sorted()`/`.sort()` do Python é o **Timsort** (merge + insertion), e o `std::sort` do C++ é o introsort (quick + heap + insertion).
 
+F: bubble-sort
+A: bubble sort, ordenação por bolha, trocar vizinhos
+Q: porque | troca vizinhos fora de ordem até nada mais trocar: simples, mas O(n²) | -> ordenacao
 P: como funciona o bubble sort
 P: código do bubble sort
 R: **Bubble sort:** percorre a lista trocando vizinhos fora de ordem; a cada passada, o maior "borbulha" para o fim.
@@ -354,6 +446,10 @@ def bubble_sort(v):
 ```
 O(n²) no pior caso. Útil para aprender laços aninhados e trocas; nunca para dados grandes.
 
+F: insertion-sort
+A: insertion sort, ordenação por inserção, cartas na mão
+Q: porque | encaixa cada elemento no lugar certo da parte já ordenada, como cartas na mão | -> ordenacao
+Q: consequencia | é rápido quando os dados já estão quase em ordem
 P: como funciona o insertion sort
 P: ordenação por inserção
 R: **Insertion sort:** como ordenar cartas na mão: pega a próxima e desliza para a esquerda até a posição certa.
@@ -370,6 +466,9 @@ def insertion_sort(v):
 ```
 O(n²) no pior caso, mas O(n) numa lista quase ordenada; por isso é usado dentro de ordenações "profissionais" para pedaços pequenos.
 
+F: merge-sort
+A: merge sort, intercalação, dividir e conquistar
+Q: porque | divide ao meio, ordena cada metade e junta as duas em ordem, sempre em O(n log n) | -> ordenacao
 P: como funciona o merge sort
 P: o que é dividir para conquistar
 P: mergesort
@@ -392,6 +491,10 @@ def merge_sort(v):
 ```
 Sempre O(n log n): log n níveis de divisão, cada um com O(n) de trabalho para intercalar. É **estável**: itens iguais mantêm a ordem original.
 
+F: quick-sort
+A: quick sort, pivô, ordenação rápida
+Q: porque | escolhe um pivô, põe os menores de um lado e os maiores do outro, e repete em cada lado | -> ordenacao
+Q: regra | em média é O(n log n), mas um pivô ruim leva a O(n²)
 P: como funciona o quick sort
 P: o que é pivô na ordenação
 P: como funciona o quicksort
@@ -409,11 +512,18 @@ def quick_sort(v):
 ```
 Esta versão é didática (usa memória extra). As implementações reais particionam **no lugar**. Média O(n log n); pior caso O(n²) com pivôs ruins (por isso pivô do meio, aleatório ou "mediana de três").
 
+F: ordenacao-estavel
+A: ordenação estável, manter a ordem dos iguais
+Q: porque | itens iguais mantêm a ordem em que estavam, o que importa ao ordenar por vários critérios | -> ordenacao
 P: o que é ordenação estável
 R: Uma ordenação é **estável** quando itens com a mesma chave mantêm a ordem em que estavam.
 Exemplo: uma lista de pessoas já em ordem alfabética, ordenada agora por cidade. Com ordenação estável, dentro de cada cidade os nomes continuam em ordem alfabética.
 Merge sort, insertion sort e o Timsort do Python são estáveis; quick sort e heap sort normalmente não.
 
+F: programacao-dinamica
+A: programação dinâmica, memoização, guardar resultados, não recalcular
+Q: porque | guarda o resultado de cada subproblema para não calcular de novo | -> complexidade
+Q: exemplo-de | o fibonacci recursivo fica rápido com memoização | -> prog-logica:fibonacci
 P: o que é programação dinâmica
 P: o que é memoização
 R: **Programação dinâmica:** resolver um problema guardando as respostas dos subproblemas que se repetem, para não recalculá-los.
@@ -430,6 +540,10 @@ fib(100)   # instantâneo; sem o cache, levaria mais que a idade do universo
 ```
 Problemas clássicos: troco com menos moedas, mochila, maior subsequência comum e a **distância de edição** (Levenshtein), que mede quantas letras mudar para transformar uma palavra em outra; é a ideia por trás da busca Fuzzy do Aprendiz.
 
+F: levenshtein
+A: distância de levenshtein, distância de edição, quantas letras mudar, palavras parecidas
+Q: porque | conta quantas inserções, remoções e trocas de letra transformam uma palavra na outra
+Q: exemplo-de | é calculada com programação dinâmica | -> programacao-dinamica
 P: o que é distância de levenshtein
 P: o que é distância de edição
 R: A **distância de Levenshtein** é o número mínimo de **inserções, remoções ou trocas** de uma letra para transformar um texto em outro. "farmasia" → "farmacia" = 1 (troca do s pelo c).
@@ -448,6 +562,10 @@ def levenshtein(a, b):
 ```
 O Aprendiz usa a biblioteca **RapidFuzz** (núcleo em C++) para isso: na correção de digitação e na busca Fuzzy.
 
+F: guloso
+A: algoritmo guloso, melhor escolha agora, greedy
+Q: porque | escolhe o que parece melhor em cada passo, sem voltar atrás: rápido, mas nem sempre dá o melhor resultado
+Q: exemplo-de | o Dijkstra é um algoritmo guloso | -> dijkstra
 P: o que é algoritmo guloso
 P: o que é greedy
 R: **Algoritmo guloso** escolhe, a cada passo, o que parece melhor **agora**, sem voltar atrás.
@@ -455,6 +573,9 @@ Exemplo: dar troco com o menor número de moedas usando sempre a maior moeda pos
 Mas nem sempre dá o ótimo: com moedas de 1, 3 e 4, o troco de 6 sai 4+1+1 (3 moedas), e o ótimo é 3+3 (2 moedas). Aí entra a programação dinâmica.
 Quando funciona, o guloso é simples e rápido: Dijkstra e os algoritmos de Prim e Kruskal são gulosos.
 
+F: backtracking
+A: backtracking, tentativa e erro, voltar atrás
+Q: porque | tenta um caminho e, quando ele não dá certo, volta e tenta outro | -> prog-logica:recursao
 P: o que é backtracking
 R: **Backtracking** tenta construir a solução passo a passo e **volta atrás** assim que percebe que o caminho não leva a nada.
 Usos: sudoku, o problema das 8 rainhas, labirintos, gerar todas as combinações que respeitam uma regra.
@@ -472,6 +593,9 @@ def permutacoes(itens, atual=None):
 ```
 É uma busca em profundidade com "poda": quanto antes descartar caminhos ruins, mais rápido.
 
+F: conjunto
+A: conjunto, set, sem elementos repetidos, valores únicos
+Q: porque | não guarda repetidos e responde rápido se um valor está nele, porque usa hash por dentro | -> tabela-hash
 P: o que é conjunto em programação
 P: o que é set
 R: **Conjunto** (set) guarda itens **sem repetição** e responde "está aqui?" em O(1) (é uma tabela hash só com chaves).
@@ -485,6 +609,9 @@ vistos.add("ana")
 ```
 Truque comum: `len(set(lista))` conta quantos valores **diferentes** há numa lista.
 
+F: indice-invertido
+A: índice invertido, busca de texto, palavra para documentos
+Q: porque | para cada palavra guarda a lista de documentos onde ela aparece, como o índice remissivo de um livro | -> tabela-hash
 P: o que é índice invertido
 P: como funciona um buscador
 R: **Índice invertido** é a estrutura dos buscadores: em vez de "documento → palavras", guarda "palavra → documentos em que ela aparece".
@@ -495,6 +622,9 @@ R: **Índice invertido** é a estrutura dos buscadores: em vez de "documento →
 Para buscar "xícara de farinha", junta-se as listas das palavras e calcula-se uma pontuação para cada documento (TF-IDF, BM25). Assim não é preciso ler todos os documentos a cada busca.
 O Aprendiz faz isso em memória: normaliza cada conhecimento em radicais e monta as estatísticas que o BM25 e o TF-IDF usam. A trilha "Aprendiz por dentro" mostra o código.
 
+F: qual-estrutura
+A: qual estrutura usar, escolher estrutura de dados, qual usar no meu problema
+Q: porque | a escolha depende da operação mais frequente: acessar por posição, buscar por chave, ordem de chegada | -> estrutura-dados
 P: qual estrutura de dados usar
 P: como escolher a estrutura de dados certa
 R: Pergunte qual operação vai acontecer **mais vezes**:
