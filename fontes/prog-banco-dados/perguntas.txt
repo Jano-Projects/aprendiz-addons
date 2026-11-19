@@ -192,15 +192,14 @@ R: **Normalização** é organizar as tabelas para **evitar dados repetidos** e 
 A regra de bolso: **cada fato num lugar só**. As formas normais (1FN, 2FN, 3FN) formalizam isso; a trilha "SQL 3 · Teoria e prática" mostra cada uma em detalhe.
 
 F: primeira-forma-normal
-A: primeira forma normal, 1fn, valores atômicos, lista numa coluna
-Q: parte-de | é o primeiro passo da normalização | -> normalizacao
-Q: regra | cada coluna guarda um valor só, sem listas
-P: o que é primeira forma normal
-P: o que é segunda forma normal
-P: o que é terceira forma normal
+A: formas normais, resumo das formas normais, primeira forma normal, 1fn
+Q: parte-de | são os passos da normalização | -> normalizacao
+Q: regra | a 1FN pede um valor só por coluna, sem listas
 P: resumo das formas normais
+P: quais são as formas normais
 P: formas normais
 P: 1fn 2fn 3fn
+P: o que é primeira forma normal
 R: Resumo das três principais:
 - **1FN:** cada célula tem **um valor só** (nada de "telefones: 9999, 8888" numa coluna) e não há grupos repetidos (telefone1, telefone2, telefone3). Valores múltiplos vão para outra tabela.
 - **2FN:** está na 1FN e cada coluna depende da chave **inteira**, não de parte dela. Só importa com chave composta: em `itens_pedido(pedido_id, produto_id, nome_produto)`, o nome depende só do produto e deve ir para `produtos`.

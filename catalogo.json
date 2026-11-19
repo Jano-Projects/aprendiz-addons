@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T14:46:37+00:00",
+  "gerado_em": "2026-11-19T15:00:09+00:00",
   "total": 40,
   "addons": [
     {
@@ -3191,7 +3191,7 @@
     {
       "id": "prog-banco-dados",
       "nome": "Programação 4 · Bancos de dados (conceitos)",
-      "versao": "2.0.0",
+      "versao": "2.0.1",
       "autor": "Jano Projects",
       "descricao": "Como os dados são guardados: tabela, linha, coluna, chave primária e estrangeira, relacionamentos 1:1, 1:N e N:N, modelo ER, normalização, índices, transações, ACID, SQL e NoSQL. Prepara para a trilha de SQL.",
       "licenca": "CC-BY-4.0",
@@ -3215,7 +3215,7 @@
         "linguagem"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.0.0",
+      "criado_com": "2.1.0",
       "dependencias": [
         {
           "id": "prog-logica",
@@ -3239,8 +3239,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/prog-banco-dados.aprendiz",
-      "tamanho": 10728,
-      "sha256": "eaecee3b21bfbe536e1c60eeced894d03174e5a990290118038ed16467c5ebe8",
+      "tamanho": 10725,
+      "sha256": "c87d332c212ceef81af2a0048ab2ca8c2b75fd2a2a2c5237975904508ac4bb39",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {

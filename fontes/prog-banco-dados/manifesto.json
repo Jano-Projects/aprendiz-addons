@@ -1,7 +1,7 @@
 {
   "id": "prog-banco-dados",
   "nome": "Programação 4 · Bancos de dados (conceitos)",
-  "versao": "2.0.0",
+  "versao": "2.0.1",
   "autor": "Jano Projects",
   "descricao": "Como os dados são guardados: tabela, linha, coluna, chave primária e estrangeira, relacionamentos 1:1, 1:N e N:N, modelo ER, normalização, índices, transações, ACID, SQL e NoSQL. Prepara para a trilha de SQL.",
   "licenca": "CC-BY-4.0",
