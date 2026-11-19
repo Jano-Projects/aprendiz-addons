@@ -357,7 +357,11 @@
     {"padrao": "de uma vez ou nenhuma|nada", "conceitos": ["tudo ou nada", "transacao"]},
     {"padrao": "tudo ou nada", "conceitos": ["tudo ou nada", "transacao"]},
     {"padrao": "nao|nunca muda|mudam|varia|variam|altera|alteram", "conceitos": ["constante", "valor fixo"]},
-    {"padrao": "nunca|nao para|termina|acaba|sai", "conceitos": ["infinito", "sem fim"]}
+    {"padrao": "nunca|nao para|termina|acaba|sai", "conceitos": ["infinito", "sem fim"]},
+    {"padrao": "modificar|mudar|trocar|alterar|editar|corrigir|atualizar o|a|os|as * de|do|da|dos|das um|uma|o|a|os|as *", "conceitos": ["atualizar", "modificar"]},
+    {"padrao": "colocar|por|botar|subir|publicar * no ar", "conceitos": ["publicar", "colocar no ar"]},
+    {"padrao": "mandar|enviar|subir|levar * pro|para|no|ao github|gitlab|repositorio|servidor", "conceitos": ["enviar", "push"]},
+    {"padrao": "nao repetir|duplicar|copiar *", "conceitos": ["duplicacao", "nao repetir"]}
   ],
 
   "catalogo": []

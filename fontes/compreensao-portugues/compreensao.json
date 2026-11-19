@@ -1201,6 +1201,34 @@
     "infinito",
     "sem fim"
    ]
+  },
+  {
+   "padrao": "modificar|mudar|trocar|alterar|editar|corrigir|atualizar o|a|os|as * de|do|da|dos|das um|uma|o|a|os|as *",
+   "conceitos": [
+    "atualizar",
+    "modificar"
+   ]
+  },
+  {
+   "padrao": "colocar|por|botar|subir|publicar * no ar",
+   "conceitos": [
+    "publicar",
+    "colocar no ar"
+   ]
+  },
+  {
+   "padrao": "mandar|enviar|subir|levar * pro|para|no|ao github|gitlab|repositorio|servidor",
+   "conceitos": [
+    "enviar",
+    "push"
+   ]
+  },
+  {
+   "padrao": "nao repetir|duplicar|copiar *",
+   "conceitos": [
+    "duplicacao",
+    "nao repetir"
+   ]
   }
  ],
  "catalogo": [

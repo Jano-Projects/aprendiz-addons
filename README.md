@@ -49,8 +49,13 @@ A `categoria` continua no catálogo e na busca, mas não organiza mais a página
 1. Crie o addon com a ferramenta do Aprendiz (veja o
    [guia de addons](https://github.com/Jano-Projects/aprendiz-dev/blob/main/docs/addons.md)):
    ```bash
-   python ferramentas/criar_addon.py fontes/meu-addon -o addons/meu-addon.aprendiz
+   python ferramentas/criar_addon.py fontes/meu-addon -o addons/meu-addon.aprendiz \
+       --junto addons/compreensao-portugues.aprendiz \
+       --junto addons/dialogo-portugues.aprendiz \
+       --junto addons/vetores-portugues.aprendiz
    ```
+   O `--junto` faz o teste de recomendação com os addons essenciais de linguagem instalados,
+   como no uso real.
 2. O arquivo precisa se chamar **`<id>.aprendiz`**, com o mesmo `id` do manifesto.
 3. Opcional, só para a loja: no `manifesto.json`, inclua `"categoria"`, `"etiquetas"` e, se a
    dedução automática não servir, `"grupo"` e `"nivel"` (veja [Grupos e níveis](#grupos-e-níveis)).

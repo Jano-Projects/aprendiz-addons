@@ -1,6 +1,9 @@
 # Programação 2 · Vocabulário e boas práticas
 # Os nomes e as convenções que aparecem em qualquer projeto, em qualquer linguagem.
 
+F: camelcase
+A: camelcase, snake case, padrão de nome, maiúsculas no meio
+Q: porque | nomes com várias palavras não podem ter espaço, então se marca o começo de cada palavra | -> bons-nomes
 P: o que é camelcase
 P: o que é camel case
 P: o que é snake case
@@ -18,6 +21,9 @@ R: Como juntar palavras num nome, já que nomes não podem ter espaço:
 - **kebab-case:** minúsculas com hífen: `nome-completo`. Usado em nomes de arquivos, URLs, CSS e ids (os addons do Aprendiz usam: `prog-logica`).
 O mais importante é seguir o padrão da linguagem e do projeto, sempre do mesmo jeito.
 
+F: nomes-python
+A: pep 8, padrão python, snake case python
+Q: regra | em Python, variáveis e funções usam snake_case e classes usam CamelCase | -> camelcase
 P: qual padrão de nome usar em python
 P: o que é a pep 8
 R: A **PEP 8** é o guia de estilo oficial do Python:
@@ -28,6 +34,9 @@ R: A **PEP 8** é o guia de estilo oficial do Python:
 - 4 espaços de indentação e linhas de até 79–99 caracteres.
 Ferramentas como **ruff** e **black** conferem e formatam isso sozinhas. O código do Aprendiz segue a PEP 8, com nomes em português.
 
+F: bons-nomes
+A: bons nomes, nomear variáveis, nome claro, nome de variável
+Q: porque | o código é lido muito mais vezes do que escrito, e um bom nome explica sem comentário | -> codigo-limpo
 P: como dar bons nomes para variáveis
 P: como nomear funções
 P: boas práticas de nomenclatura
@@ -40,6 +49,9 @@ R: Um bom nome diz **o que é** sem precisar de comentário:
 - unidades no nome quando ajudam: `tempo_ms`, `tamanho_bytes`.
 Nomes de uma letra só são aceitáveis em escopos minúsculos: `i` num laço curto, `x` e `y` em matemática.
 
+F: portugues-ingles
+A: português ou inglês, idioma do código, nomes em inglês
+Q: porque | as linguagens e bibliotecas são em inglês, e o código vai ser lido por outras pessoas | -> bons-nomes
 P: devo programar em português ou inglês
 P: nomes de variáveis em português
 R: As duas escolhas são válidas; o importante é ser **consistente** dentro do projeto.
@@ -47,6 +59,10 @@ R: As duas escolhas são válidas; o importante é ser **consistente** dentro do
 - **Português:** facilita o estudo para quem está começando e combina com projetos voltados ao público lusófono. O Aprendiz usa nomes em português de propósito, como material de estudo.
 Misturar no mesmo nome (`getUsuario`) costuma ficar estranho. Palavras-chave da linguagem (`if`, `for`, `return`) são sempre em inglês, e tudo bem.
 
+F: comentario
+A: comentário, comentar código, explicar código
+Q: porque | explica o porquê de uma decisão, coisa que o código sozinho não diz
+Q: diferente-de | um nome bom explica o que o código faz; o comentário, o motivo | -> bons-nomes
 P: o que é comentário no código
 P: como comentar código
 P: quando escrever comentários
@@ -61,6 +77,9 @@ i += 1  # soma 1 em i               ← inútil
 ```
 Se precisa de um comentário para explicar o que uma linha faz, talvez um nome melhor resolva.
 
+F: indentacao
+A: indentação, recuo, espaços no começo da linha, tab
+Q: porque | mostra o que está dentro do quê; em Python, o recuo faz parte da sintaxe | -> sintaxe
 P: o que é indentação
 P: para que serve indentar o código
 R: **Indentação** é o recuo no começo das linhas para mostrar o que está dentro de quê (um bloco dentro de um `if`, de um laço, de uma função).
@@ -68,11 +87,18 @@ R: **Indentação** é o recuo no começo das linhas para mostrar o que está de
 - Em **Python**, a indentação **é** a sintaxe: ela define o bloco. Use sempre 4 espaços (nunca misture tab e espaço).
 O arquivo `.editorconfig` (o Aprendiz tem um) faz o editor usar o mesmo padrão para todo mundo.
 
+F: sintaxe
+N: raiz
+A: sintaxe, semântica, gramática da linguagem, erro de sintaxe
+Q: definicao | sintaxe é a forma correta de escrever; semântica é o que aquilo significa ao rodar
 P: o que é sintaxe e semântica
 R: **Sintaxe** é a forma: as regras de escrita da linguagem (onde vai o `;`, como abrir um bloco).
 **Semântica** é o significado: o que aquele código faz quando roda.
 `x = "5" + 5` tem sintaxe válida em Python, mas a semântica é um erro (`TypeError`: não dá para somar texto e número).
 
+F: ide
+A: ide, editor de código, vs code, programa para escrever código, ambiente de desenvolvimento
+Q: porque | junta editor, execução, depuração e sugestões num lugar só, o que poupa tempo
 P: o que é ide
 P: o que é editor de código
 P: qual ide usar para programar
@@ -85,6 +111,9 @@ R: **IDE** (Ambiente de Desenvolvimento Integrado) junta editor, execução, dep
 - **Vim, Neovim, Nano:** editores de terminal, úteis em servidores.
 O que uma IDE oferece: realce de sintaxe, autocompletar, ir para a definição, achar erros enquanto você digita e depurar com breakpoints.
 
+F: terminal
+A: terminal, linha de comando, prompt, console, shell
+Q: porque | muitas ferramentas de programação, como o git, são usadas digitando comandos | -> git
 P: o que é terminal
 P: o que é linha de comando
 P: o que é cli
@@ -93,6 +122,10 @@ R: O **terminal** é uma janela onde você digita comandos em vez de clicar. O p
 **CLI** (interface de linha de comando) é um programa feito para ser usado por comandos: `git`, `python`, `gcc`, `pip`.
 Programadores usam muito o terminal porque é rápido, dá para automatizar com scripts e funciona até em servidores sem tela. Comandos básicos: `cd` (entrar numa pasta), `ls` ou `dir` (listar), `pwd` (onde estou).
 
+F: biblioteca
+A: biblioteca, pacote, módulo, lib, import
+Q: porque | reaproveita código pronto e testado em vez de escrever tudo do zero
+Q: diferente-de | você chama a biblioteca; o framework é que chama o seu código | -> framework
 P: o que é biblioteca em programação
 P: o que é uma lib
 P: o que é um pacote
@@ -102,6 +135,10 @@ R: **Biblioteca** (lib) é código pronto, escrito por outras pessoas, para voc�
 - **Pacote:** um conjunto de módulos organizado numa pasta e, em geral, distribuído por um **gerenciador de pacotes**: `pip` (Python), `npm` (JavaScript), `apt`/`dnf` (Linux), `vcpkg` e `conan` (C/C++).
 O Aprendiz depende de três bibliotecas externas: **FastAPI**, **Uvicorn** e **RapidFuzz** (listadas em `requirements.txt`).
 
+F: framework
+A: framework, django, react, estrutura pronta
+Q: porque | dá a estrutura pronta de um tipo de programa, e você preenche as partes
+Q: diferente-de | na biblioteca quem manda é o seu código; no framework, ele | -> biblioteca
 P: o que é framework
 P: diferença entre biblioteca e framework
 P: framework
@@ -109,6 +146,10 @@ R: Com uma **biblioteca**, você chama o código dela quando quer. Com um **fram
 Exemplos: FastAPI, Django e Flask (web em Python), React (interface web), Qt (janelas em C++).
 O Aprendiz usa o **FastAPI**: você escreve funções para cada rota (`/api/perguntar`), e o framework cuida de receber a requisição, validar e chamar a função certa.
 
+F: api
+A: api, rest, interface de programação, endpoint, integração
+Q: porque | define como um programa pede coisas a outro sem precisar saber como ele funciona por dentro
+Q: exemplo-de | na web, as APIs costumam trocar dados em JSON por HTTP | -> json
 P: o que é api
 P: para que serve uma api
 P: o que é api rest
@@ -122,6 +163,10 @@ Uma **API web REST** usa o protocolo HTTP com endereços (rotas) e verbos:
 - `DELETE /api/addons/x`: apaga.
 Os dados normalmente vão em **JSON**. No Aprendiz, a tela (HTML e JavaScript) conversa com o Python exatamente assim, por uma API local em `127.0.0.1`.
 
+F: json
+A: json, chaves e valores, formato de dados, objeto json
+Q: porque | é um texto simples de ler e escrever, que quase toda linguagem entende
+Q: parte-de | é o formato mais comum para trocar dados entre sistemas | -> api
 P: o que é json
 P: o que é xml
 P: o que é yaml
@@ -135,6 +180,9 @@ R: São formatos de **texto** para guardar e trocar dados estruturados.
 **YAML** usa indentação, fácil de ler; comum em arquivos de configuração (como o `publicar.yml` do GitHub Actions da loja de addons).
 Os addons do Aprendiz são um ZIP com arquivos JSON dentro.
 
+F: http
+A: http, https, requisição, get, post, protocolo da web
+Q: porque | é a regra de conversa entre navegador e servidor: um pede, o outro responde | -> cliente-servidor
 P: o que é http
 P: o que é https
 P: o que são os códigos de status http
@@ -145,6 +193,9 @@ R: **HTTP** é o protocolo da web: o cliente (navegador, app) faz uma **requisi�
 - **5xx erro do servidor:** 500 erro interno, 503 indisponível.
 **HTTPS** é o HTTP com criptografia (TLS): ninguém no caminho lê ou altera os dados. O Aprendiz só usa HTTP local (`127.0.0.1`), que não sai do computador.
 
+F: front-back
+A: front end, back end, parte que o usuário vê, interface, servidor
+Q: porque | separar a tela, que o usuário vê, da lógica e dos dados, que ficam no servidor, deixa cada parte evoluir sozinha | -> cliente-servidor
 P: o que é front end e back end
 P: o que é full stack
 R: - **Front-end:** a parte que a pessoa vê e usa: telas, botões. Na web: HTML, CSS e JavaScript.
@@ -152,6 +203,10 @@ R: - **Front-end:** a parte que a pessoa vê e usa: telas, botões. Na web: HTML
 - **Full stack:** quem trabalha nas duas.
 O Aprendiz tem os dois, no mesmo computador: o back-end em Python (FastAPI) na pasta `aprendiz/`, e o front-end em `aprendiz/web/` (`index.html`, `estilo.css`, `app.js`).
 
+F: cliente-servidor
+N: raiz
+A: cliente servidor, servidor, requisição e resposta
+Q: definicao | o cliente pede e o servidor responde; o mesmo servidor atende muitos clientes
 P: o que é cliente servidor
 P: o que é localhost
 P: o que é 127.0.0.1
@@ -160,6 +215,11 @@ R: No modelo **cliente-servidor**, o cliente pede e o servidor responde.
 **localhost** (`127.0.0.1`) é o endereço do **próprio computador**: um servidor ouvindo nele não é acessível pela rede, só pela máquina. É por isso que o Aprendiz é offline e privado.
 A **porta** é um número (0 a 65535) que diferencia os programas no mesmo endereço: a web usa 80 e 443, o PostgreSQL 5432. Um endereço completo fica `http://127.0.0.1:8000`.
 
+F: git
+N: raiz
+A: git, controle de versão, versionar código, histórico
+Q: definicao | o git guarda o histórico de cada mudança do código, permite voltar atrás e trabalhar em paralelo
+Q: porque | sem ele, as versões viram cópias soltas, e é fácil perder trabalho
 P: o que é git
 P: para que serve o git
 P: o que é controle de versão
@@ -177,6 +237,9 @@ git diff                  # o que mudou, linha por linha
 ```
 O **GitHub** (e o GitLab) é um site que hospeda repositórios Git na internet. Git é a ferramenta; GitHub é o lugar.
 
+F: commit
+A: commit, salvar versão, registrar mudança, ponto na história
+Q: porque | cada commit é uma foto do projeto com uma mensagem, um ponto para onde dá para voltar | -> git
 P: o que é commit
 P: como escrever uma boa mensagem de commit
 P: o que é conventional commits
@@ -190,6 +253,9 @@ Muitos projetos usam o padrão **Conventional Commits**, com um tipo na frente:
 - `refactor:` reorganização sem mudar o comportamento.
 O próprio Aprendiz usa: `feat: normas da língua e revisão de texto (v0.8.0)`. Faça commits pequenos, de uma ideia cada.
 
+F: branch
+A: branch, ramo, cópia separada, linha paralela, trabalhar sem mexer no principal
+Q: porque | permite mexer em algo novo sem estragar a versão principal; depois se junta com merge | -> git
 P: o que é branch
 P: o que é merge
 P: o que é pull request
@@ -199,6 +265,9 @@ R: - **Branch (ramo):** uma linha de desenvolvimento separada. Você cria uma br
 - **Fork:** sua cópia de um repositório de outra pessoa no GitHub.
 - **Pull request (PR):** o pedido para que suas mudanças entrem no projeto original; é onde acontece a revisão de código.
 
+F: clone-push-pull
+A: clone, push, pull, enviar, baixar, github, repositório remoto
+Q: porque | o clone traz o projeto, o push manda os seus commits e o pull busca os dos outros | -> commit
 P: o que é clone push e pull
 P: diferença entre git pull e git fetch
 R: - `git clone URL`: baixa um repositório inteiro, com a história.
@@ -207,6 +276,9 @@ R: - `git clone URL`: baixa um repositório inteiro, com a história.
 - `git pull`: `fetch` + `merge`: baixa e já junta na sua branch.
 Exemplo: `git clone https://github.com/Jano-Projects/aprendiz-dev` baixa o código do Aprendiz.
 
+F: gitignore
+A: gitignore, ignorar arquivos, arquivos que não vão para o git
+Q: porque | senhas, arquivos gerados e pastas de dependências não devem entrar no histórico | -> git
 P: o que é gitignore
 P: para que serve o arquivo gitignore
 R: O `.gitignore` lista arquivos que o Git **não** deve versionar: coisas geradas ou pessoais.
@@ -221,6 +293,11 @@ dist/
 ```
 Nunca versione senhas, chaves de API ou bancos com dados pessoais. Se uma senha for parar num commit, considere-a vazada e troque-a: apagar o arquivo depois não a tira da história.
 
+F: teste-automatizado
+N: raiz
+A: teste automatizado, teste unitário, pytest, testar código
+Q: definicao | é um código que roda o seu código e confere se o resultado é o esperado
+Q: porque | refazer os testes à mão a cada mudança é lento e se esquece
 P: o que é teste automatizado
 P: o que é teste unitário
 P: o que é teste de integração
@@ -237,6 +314,9 @@ def test_soma():
 ```
 Os testes dão coragem para mudar o código: se algo quebrar, você descobre na hora. O Aprendiz tem perto de 300 testes em `tests/`, rodados com `python -m pytest`.
 
+F: tdd
+A: tdd, test driven development, teste antes do código, escrever o teste primeiro
+Q: porque | escrever o teste antes obriga a pensar no que o código deve fazer | -> teste-automatizado
 P: o que é tdd
 P: o que é desenvolvimento guiado por testes
 R: **TDD** (Desenvolvimento Guiado por Testes) inverte a ordem:
@@ -245,11 +325,18 @@ R: **TDD** (Desenvolvimento Guiado por Testes) inverte a ordem:
 3. **refatorar:** melhore o código, com o teste garantindo que nada quebrou.
 Mesmo sem seguir TDD à risca, vale o hábito de escrever um teste para cada erro corrigido.
 
+F: refatoracao
+A: refatoração, refatorar, melhorar o código, reorganizar código
+Q: porque | o código vai ficando confuso com o tempo, e se melhora a estrutura sem mudar o que ele faz
+Q: regra | os testes garantem que a refatoração não quebrou nada | -> teste-automatizado
 P: o que é refatoração
 P: o que é refatorar código
 R: **Refatorar** é melhorar a estrutura do código **sem mudar o que ele faz**: dar nomes melhores, quebrar uma função grande em menores, tirar repetição.
 Regra de ouro: só refatore com testes passando, antes e depois. Faça um passo de cada vez e rode os testes a cada passo.
 
+F: codigo-limpo
+A: código limpo, clean code, código legível, boas práticas
+Q: porque | outra pessoa (ou você daqui a seis meses) precisa entender o código sem esforço
 P: o que é código limpo
 P: o que é clean code
 R: **Código limpo** é o que outra pessoa (ou você daqui a seis meses) entende rápido. Alguns hábitos:
@@ -261,6 +348,9 @@ R: **Código limpo** é o que outra pessoa (ou você daqui a seis meses) entende
 - seguir o estilo do projeto.
 O livro *Código Limpo*, de Robert C. Martin, popularizou o termo. Use as regras com bom senso, não como dogma.
 
+F: dry
+A: dry, não repetir código, don't repeat yourself, duplicação
+Q: porque | código repetido precisa ser corrigido em vários lugares, e um deles sempre fica para trás | -> codigo-limpo
 P: o que é dry
 P: o que é kiss
 P: o que é yagni
@@ -270,6 +360,9 @@ R: Três princípios curtos:
 - **YAGNI** (*You Aren't Gonna Need It*): não construa hoje o que talvez precise um dia.
 Eles se equilibram: repetir duas linhas parecidas às vezes é mais simples que uma abstração esperta.
 
+F: solid
+A: solid, princípios solid, responsabilidade única
+Q: parte-de | são cinco princípios de código limpo para orientação a objetos | -> codigo-limpo
 P: o que é solid
 P: quais são os princípios solid
 R: **SOLID** são cinco princípios de design orientado a objetos:
@@ -279,6 +372,9 @@ R: **SOLID** são cinco princípios de design orientado a objetos:
 - **I** (Segregação de interfaces): várias interfaces pequenas são melhores que uma gigante.
 - **D** (Inversão de dependência): dependa de abstrações (uma "busca qualquer"), não de implementações concretas.
 
+F: paradigma
+A: paradigma, estruturado, orientado a objetos, funcional
+Q: porque | são jeitos diferentes de organizar o programa: em passos, em objetos ou em funções
 P: o que é paradigma de programação
 P: o que é programação procedural
 P: o que é programação orientada a objetos
@@ -291,6 +387,10 @@ R: **Paradigma** é um jeito de organizar o programa:
 - **Declarativo:** você diz **o que** quer, não **como**. SQL é o exemplo: `SELECT nome FROM clientes WHERE cidade = 'Recife'`.
 Linguagens modernas misturam paradigmas.
 
+F: classe-objeto
+N: raiz
+A: classe, objeto, instância, orientação a objetos, poo
+Q: definicao | a classe é o molde; o objeto é cada coisa criada com ele, com os próprios dados
 P: o que é classe e objeto
 P: o que é atributo e método
 P: o que é instância
@@ -312,6 +412,10 @@ meu = Carro("Passat")             # instância
 meu.acelerar(20)
 ```
 
+F: pilares-poo
+A: encapsulamento, herança, polimorfismo, pilares da orientação a objetos
+Q: parte-de | são os pilares da orientação a objetos | -> classe-objeto
+Q: porque | escondem detalhes, reaproveitam código e deixam objetos diferentes responderem à mesma chamada
 P: o que é encapsulamento herança e polimorfismo
 P: quais os pilares da orientação a objetos
 P: o que é polimorfismo
@@ -324,6 +428,9 @@ R: Os quatro pilares da POO:
 - **Polimorfismo:** objetos diferentes respondem à mesma chamada, cada um do seu jeito.
 No Aprendiz: todos os algoritmos de busca herdam de `AlgoritmoBusca` e têm um método `buscar`. O assistente chama `buscar` sem saber se é BM25 ou TF-IDF. Isso é polimorfismo.
 
+F: interface
+A: interface, contrato, métodos obrigatórios
+Q: porque | define o que uma classe precisa saber fazer, sem dizer como | -> classe-objeto
 P: o que é interface em programação
 P: o que é classe abstrata
 R: **Interface** (ou classe abstrata) define **o que** um tipo precisa saber fazer, sem dizer **como**. É um contrato.
@@ -342,6 +449,9 @@ class Quadrado(Forma):
 ```
 Não dá para criar uma `Forma()` direto, só as concretas. Em Java e C# há a palavra `interface`; em C++, classes com métodos `virtual ... = 0`.
 
+F: design-pattern
+A: design pattern, padrão de projeto, singleton, observer
+Q: porque | são soluções já testadas para problemas que se repetem, com nomes que todo mundo conhece
 P: o que é design pattern
 P: o que é padrão de projeto
 P: quais os padrões de projeto mais usados
@@ -354,11 +464,18 @@ R: **Padrões de projeto** são soluções conhecidas para problemas que se repe
 - **Repository:** esconder o acesso ao banco atrás de métodos (`banco.adicionar_conhecimento`).
 Conheça os nomes para reconhecê-los, mas não force um padrão onde não precisa.
 
+F: bug
+A: bug, defeito, erro no programa, falha
+Q: porque | é qualquer diferença entre o que o programa faz e o que deveria fazer
+Q: consequencia | se acha depurando e se evita que volte com um teste | -> teste-automatizado
 P: o que é bug
 P: de onde vem o nome bug
 R: **Bug** é um defeito no programa. A história famosa: em 1947, a equipe de Grace Hopper achou uma mariposa presa num relé do computador Mark II e colou no diário de bordo como "primeiro caso real de bug encontrado". O termo já era usado antes para defeitos, mas a anedota o popularizou.
 **Debug** é remover bugs.
 
+F: deploy
+A: deploy, publicar, colocar no ar, implantar, subir para produção
+Q: porque | o programa só serve para os usuários quando sai da máquina do programador e vai para o servidor | -> cliente-servidor
 P: o que é deploy
 P: o que é ambiente de produção
 P: o que é homologação
@@ -367,6 +484,10 @@ R: - **Desenvolvimento:** a máquina de quem programa.
 - **Produção:** o ambiente que as pessoas usam de verdade.
 **Deploy** é levar uma versão do código para um ambiente, principalmente para produção. Erros em produção custam caro; por isso existem os testes e a homologação.
 
+F: ci-cd
+A: ci cd, integração contínua, entrega contínua, github actions, pipeline
+Q: porque | a cada push, testar e publicar sozinho evita esquecer um passo | -> teste-automatizado
+Q: consequencia | o deploy vira uma rotina automática | -> deploy
 P: o que é ci cd
 P: o que é integração contínua
 P: o que é github actions
@@ -374,6 +495,10 @@ R: - **CI (Integração Contínua):** a cada push, um servidor baixa o código, 
 - **CD (Entrega/Implantação Contínua):** se os testes passarem, a nova versão é publicada sozinha.
 O **GitHub Actions** faz isso com arquivos YAML na pasta `.github/workflows/`. A loja de addons do Aprendiz usa: a cada push, `publicar.yml` confere todos os addons, gera o catálogo e publica o site. Se um addon for inválido, o site não é atualizado.
 
+F: semver
+A: versionamento semântico, semver, número de versão, versão 2.1.3, major minor patch
+Q: regra | o primeiro número muda quando quebra compatibilidade, o segundo quando acrescenta e o terceiro quando corrige
+Q: porque | quem usa sabe, só pelo número, se a atualização pode quebrar alguma coisa
 P: o que é versionamento semântico
 P: o que significa versão 1.2.3
 P: o que é semver
@@ -383,6 +508,9 @@ R: **Versionamento semântico** (SemVer): `MAIOR.MENOR.CORREÇÃO`, como `0.8.0`
 - **CORREÇÃO:** só correções de erros.
 Versões `0.x` indicam um projeto em desenvolvimento, em que a API ainda pode mudar. O Aprendiz segue SemVer e registra tudo no `CHANGELOG.md`.
 
+F: licenca
+A: licença, mit, gpl, open source, código aberto
+Q: porque | diz o que os outros podem fazer com o seu código; sem licença, ninguém pode usar legalmente
 P: o que é licença de software
 P: o que é software livre
 P: o que é código aberto
@@ -394,6 +522,9 @@ R: A **licença** diz o que outras pessoas podem fazer com o seu código. Sem li
 - **CC BY / CC0:** licenças Creative Commons, mais usadas para conteúdo (textos, dados). Os addons oficiais usam CC BY 4.0 ou CC0.
 **Software livre** e **código aberto** são quase a mesma coisa na prática; o primeiro termo enfatiza a liberdade do usuário, o segundo, o modelo de desenvolvimento.
 
+F: sdk
+A: sdk, kit de desenvolvimento, ferramentas de uma plataforma
+Q: parte-de | junta bibliotecas, ferramentas e documentação para programar para uma plataforma | -> biblioteca
 P: o que é sdk
 P: o que é runtime
 P: o que é dependência
@@ -401,6 +532,9 @@ R: - **SDK** (kit de desenvolvimento): o conjunto de ferramentas para criar prog
 - **Runtime:** o que precisa estar instalado para o programa **rodar** (o interpretador Python, a JVM, o .NET Runtime).
 - **Dependência:** uma biblioteca que o seu programa precisa. Elas ficam listadas num arquivo (`requirements.txt`, `pyproject.toml`, `package.json`) para que qualquer um instale as mesmas.
 
+F: stack-trace
+A: stack trace, traceback, rastro do erro, mensagem de erro com lista de funções
+Q: porque | mostra o caminho de chamadas até onde o erro aconteceu, de onde começar a procurar | -> bug
 P: o que é stack trace
 P: o que é log
 P: como ler uma mensagem de erro
@@ -412,6 +546,9 @@ Como ler um traceback do Python:
 3. abra esse arquivo nessa linha.
 Copie a última linha numa busca: alguém quase sempre já teve o mesmo erro.
 
+F: stack-overflow-site
+A: stack overflow, site de perguntas, fórum de programação
+Q: porque | quase todo erro já aconteceu com alguém, e a resposta costuma estar lá | -> stack-trace
 P: o que é stack overflow site
 P: onde tirar dúvidas de programação
 P: como pesquisar um erro
@@ -421,11 +558,18 @@ R: Bons lugares:
 - as **issues** do projeto no GitHub, para erros de uma biblioteca.
 Para pesquisar: copie a mensagem de erro sem os trechos específicos seus (nomes de arquivo, valores) e inclua a linguagem. Ao perguntar, mostre o código mínimo que reproduz o erro, o que você esperava e o que aconteceu.
 
+F: deterministico
+A: algoritmo determinístico, mesmo resultado, aleatório
+Q: porque | com a mesma entrada, sempre dá a mesma saída, o que facilita testar | -> teste-automatizado
 P: o que é algoritmo determinístico
 P: o que é heurística
 R: **Determinístico:** a mesma entrada sempre produz a mesma saída, pelo mesmo caminho.
 **Heurística:** uma regra prática que dá uma resposta boa na maioria das vezes, sem garantia de ser a ótima, mas rápida. Exemplos: o GPS que escolhe "um caminho bom" sem testar todos; o detector de dados pessoais da exportação do Aprendiz, que avisa sobre o que *parece* senha ou telefone.
 
+F: ascii-unicode
+A: ascii, unicode, utf-8, acentos, codificação de caracteres
+Q: porque | o ASCII só tem 128 caracteres, sem acentos; o Unicode dá número a todos os caracteres do mundo
+Q: consequencia | quando a codificação não bate, os acentos viram símbolos estranhos
 P: o que é ascii e unicode
 P: o que é utf-8
 P: o que é encoding
