@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T11:25:57+00:00",
+  "gerado_em": "2026-11-19T11:32:33+00:00",
   "total": 40,
   "addons": [
     {
@@ -3160,7 +3160,7 @@
       "arquivo": "addons/prog-estruturas-dados.aprendiz",
       "tamanho": 13497,
       "sha256": "1d02f571c7d83fbb4624584572dc582091cf280731cbd959eca69fa7b41ddfcd",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "o que é estrutura de dados",
@@ -3511,7 +3511,7 @@
     {
       "id": "sql-avancado",
       "nome": "SQL 2 · Avançado",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Subconsultas, CTE e WITH RECURSIVE, funções de janela (ROW_NUMBER, RANK, LAG), CASE, UNION, views, índices, EXPLAIN, transações, triggers, UPSERT, JSON e as diferenças entre SQLite, PostgreSQL, MySQL, SQL Server e Oracle.",
       "licenca": "CC-BY-4.0",
@@ -3534,8 +3534,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.0",
       "dependencias": [
         {
           "id": "sql-basico",
@@ -3545,8 +3545,8 @@
       ],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 1.0
+        "resposta": "trabalhada",
+        "acerto": 0.94
       },
       "conhecimentos": 22,
       "verbetes": 0,
@@ -3559,8 +3559,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/sql-avancado.aprendiz",
-      "tamanho": 8481,
-      "sha256": "c47865b1eedfa8c4bf03ed978d22f13db7d2df39aff1b1091d769f75c0aa49bb",
+      "tamanho": 10348,
+      "sha256": "36e383fbf047191e6e50edf906f5491352f2ad96595e0cff6dfc15a6e42e22eb",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -3592,7 +3592,7 @@
     {
       "id": "sql-teoria-pratica",
       "nome": "SQL 3 · Teoria e prática",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "A teoria por trás do SQL (modelo relacional, álgebra relacional, dependências funcionais, 1FN a BCNF, níveis de isolamento, B-tree) e exercícios resolvidos sobre um banco de exemplo de uma loja.",
       "licenca": "CC-BY-4.0",
@@ -3615,8 +3615,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.0",
       "dependencias": [
         {
           "id": "sql-avancado",
@@ -3626,8 +3626,8 @@
       ],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.93
+        "resposta": "trabalhada",
+        "acerto": 0.962
       },
       "conhecimentos": 27,
       "verbetes": 0,
@@ -3640,8 +3640,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/sql-teoria-pratica.aprendiz",
-      "tamanho": 10076,
-      "sha256": "44daad989d7ebb12163f43b497b9d569e68aefa8ac49c28131ccacfa44d17e24",
+      "tamanho": 11952,
+      "sha256": "1722202cb4de757141a4cb0ca7b379281d7734e0aa836abe56e052d3acecfbee",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {

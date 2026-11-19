@@ -2,6 +2,11 @@
 # A teoria por trás do SQL e as respostas comentadas dos exercícios das trilhas SQL 1 e SQL 2.
 # As respostas usam o banco de exemplo da loja (addon "SQL 1 · Básico").
 
+F: modelo-codd
+N: raiz
+A: modelo relacional, codd, relação, tupla, teoria relacional
+Q: definicao | Codd propôs guardar dados em relações (tabelas) e consultá-los com uma álgebra, sem depender de como estão gravados
+Q: consequencia | é a base de todos os bancos SQL | -> prog-banco-dados:relacional
 P: o que é o modelo relacional de codd
 P: teoria do modelo relacional
 P: o que é uma relação na teoria de banco de dados
@@ -13,6 +18,9 @@ R: Em 1970, Edgar F. Codd (IBM) propôs tratar os dados como **relações** mate
 - **grau** = número de atributos; **cardinalidade** = número de tuplas.
 Na teoria, uma relação é um **conjunto**: não tem linhas repetidas nem ordem. O SQL relaxa isso (permite duplicados, por isso existe o `DISTINCT`, e a ordem vem do `ORDER BY`). A grande ideia de Codd foi a **independência de dados**: o programa diz *o que* quer, e o banco decide *como* guardar e buscar.
 
+F: algebra-relacional
+A: álgebra relacional, seleção, projeção, junção
+Q: porque | todo SQL vira por dentro uma combinação de operações como seleção, projeção e junção | -> modelo-codd
 P: o que é álgebra relacional
 P: quais as operações da álgebra relacional
 P: o que é seleção projeção e junção
@@ -28,6 +36,9 @@ R: **Álgebra relacional** é o conjunto de operações sobre relações que est
 Exemplo: "nome dos clientes de PE" = π nome (σ uf='PE' (clientes)) = `SELECT nome FROM clientes WHERE uf = 'PE'`.
 O otimizador do banco reescreve sua consulta usando as propriedades dessa álgebra (por exemplo, filtrar **antes** de juntar), por isso consultas escritas de jeitos diferentes podem ter o mesmo plano.
 
+F: divisao-relacional
+A: divisão relacional, todos os, que compraram todos
+Q: porque | responde perguntas do tipo “quem fez todos”, que o SQL não tem um comando pronto para responder | -> algebra-relacional
 P: o que é divisão relacional
 P: como achar quem comprou todos os produtos em sql
 R: A **divisão** responde perguntas com "todos": quais clientes compraram **todos** os produtos de Móveis?
@@ -55,6 +66,11 @@ WHERE NOT EXISTS (
 ```
 No banco de exemplo, ninguém comprou os dois móveis (Cadeira e Mesa), então o resultado é vazio. Insira um item de Mesa no pedido 3 da Ana e rode de novo.
 
+F: dependencia-funcional
+N: raiz
+A: dependência funcional, determina, a determina b
+Q: definicao | A determina B quando, sabendo A, só existe um B possível, como o CPF determina o nome
+Q: consequencia | as formas normais são regras sobre essas dependências | -> forma-1fn
 P: o que é dependência funcional
 P: o que significa a determina b em banco de dados
 R: Há uma **dependência funcional** A → B quando o valor de A **determina** o valor de B: duas linhas com o mesmo A têm sempre o mesmo B.
@@ -64,6 +80,9 @@ Exemplos:
 - `(pedido_id, produto_id) → quantidade`.
 Uma **chave** é exatamente um conjunto de atributos que determina **todos** os outros. As formas normais são regras sobre quais dependências podem existir numa tabela: dependências "fora do lugar" significam dados repetidos e anomalias.
 
+F: anomalias
+A: anomalia de atualização, anomalia de inserção, anomalia de exclusão, dados inconsistentes
+Q: porque | dado repetido gera três problemas: mudar num lugar e esquecer outro, não conseguir inserir e perder dados ao apagar | -> prog-banco-dados:normalizacao
 P: o que é anomalia de atualização inserção e exclusão
 P: por que dados repetidos são um problema
 R: Imagine uma tabela única `vendas(pedido, data, cliente, cidade_cliente, produto, preco_produto, quantidade)`. Ela sofre de três **anomalias**:
@@ -72,6 +91,10 @@ R: Imagine uma tabela única `vendas(pedido, data, cliente, cidade_cliente, prod
 - **exclusão:** apagar a única venda de um cliente apaga também o cadastro dele (nome e cidade).
 A solução é **decompor** em tabelas menores (`clientes`, `produtos`, `pedidos`, `itens_pedido`) em que cada fato aparece uma vez só. É o que as formas normais guiam.
 
+F: forma-1fn
+A: 1fn, primeira forma normal, valor atômico
+Q: regra | cada coluna guarda um valor só e cada linha é única | -> prog-banco-dados:primeira-forma-normal
+Q: depois-de | depois dela vem a 2FN | -> forma-2fn
 P: o que é 1fn em detalhes
 P: exemplo de primeira forma normal
 P: primeira forma normal na prática
@@ -93,6 +116,10 @@ CREATE TABLE telefones (
 ```
 "Atômico" depende do uso: uma data é atômica para a maioria dos sistemas, mesmo tendo dia, mês e ano.
 
+F: forma-2fn
+A: 2fn, segunda forma normal, dependência parcial
+Q: regra | estando na 1FN, nenhuma coluna depende só de parte de uma chave composta | -> forma-1fn
+Q: depois-de | depois dela vem a 3FN | -> forma-3fn
 P: o que é 2fn em detalhes
 P: exemplo de segunda forma normal
 P: o que é dependência parcial
@@ -107,6 +134,9 @@ itens_pedido(pedido_id, produto_id, quantidade, nome_produto, categoria)
 Na 2FN: tire o que depende só de `produto_id` para a tabela `produtos`, e deixe em `itens_pedido` só o que depende do par (`quantidade`, `preco_unit`).
 Tabelas com chave de uma coluna só já estão automaticamente na 2FN (se estiverem na 1FN).
 
+F: forma-3fn
+A: 3fn, terceira forma normal, dependência transitiva
+Q: regra | estando na 2FN, nenhuma coluna comum depende de outra coluna comum | -> forma-2fn
 P: o que é 3fn em detalhes
 P: exemplo de terceira forma normal
 P: o que é dependência transitiva
@@ -122,6 +152,9 @@ clientes(id, nome, cep, cidade, uf)
 Na 3FN: `ceps(cep, cidade, uf)` e `clientes(id, nome, cep)`.
 Na prática, muitos sistemas mantêm cidade e UF no cliente por simplicidade (desnormalização consciente). Saber a regra ajuda a decidir quando quebrá-la.
 
+F: bcnf
+A: bcnf, forma normal de boyce codd, boyce codd
+Q: regra | todo determinante precisa ser chave: é uma 3FN mais rígida | -> forma-3fn
 P: o que é forma normal de boyce codd
 P: o que é bcnf
 P: o que é 4fn e 5fn
@@ -131,11 +164,18 @@ Exemplo: `aulas(aluno, disciplina, professor)`, em que cada professor dá uma s�
 - **5FN:** a tabela não pode ser decomposta em menores sem perder informação.
 Na prática, chegar à 3FN/BCNF resolve quase todos os casos reais.
 
+F: decomposicao
+A: decomposição sem perda, dividir tabela, juntar de volta
+Q: porque | normalizar divide tabelas, e o JOIN precisa conseguir remontar exatamente os dados originais | -> anomalias
 P: o que é decomposição sem perda
 R: Ao dividir uma tabela em duas para normalizar, a **junção** das duas precisa devolver exatamente a original: nem menos linhas, nem linhas a mais ("espúrias").
 A decomposição de R em R1 e R2 é **sem perda** quando os atributos em comum formam uma **chave** de R1 ou de R2.
 Exemplo: `clientes(id, nome, cep, cidade)` → `clientes(id, nome, cep)` + `ceps(cep, cidade)`. Em comum: `cep`, que é chave de `ceps`. A junção pelo CEP reconstrói tudo. Dividir por `cidade` (em comum) não seria sem perda: duas cidades com o mesmo nome em estados diferentes gerariam combinações falsas.
 
+F: isolamento
+A: níveis de isolamento, read committed, serializable, leitura suja, dirty read, transação vendo a outra
+Q: porque | transações ao mesmo tempo podem enxergar mudanças umas das outras, e o nível decide o quanto | -> prog-banco-dados:acid
+Q: consequencia | mais isolamento dá mais segurança e menos desempenho
 P: o que são os níveis de isolamento de transação
 P: o que é read committed e serializable
 P: o que é leitura suja leitura não repetível e fantasma
@@ -152,6 +192,9 @@ Os **níveis de isolamento** do padrão SQL, do mais fraco ao mais forte:
 - **SERIALIZABLE:** o resultado é como se as transações rodassem uma de cada vez.
 Mais isolamento = mais segurança e menos concorrência. O SQLite, com uma escrita por vez, se comporta como serializable.
 
+F: mvcc
+A: mvcc, controle de concorrência multiversão, versões das linhas
+Q: porque | cada transação lê uma versão da linha, então leitores não esperam por escritores | -> isolamento
 P: o que é mvcc
 P: como o banco lida com acessos simultâneos
 P: o que é lock em banco de dados
@@ -160,6 +203,9 @@ R: Há duas estratégias para várias transações ao mesmo tempo:
 - **MVCC** (controle de concorrência multiversão): cada alteração cria uma **nova versão** da linha; cada transação enxerga um "retrato" consistente do momento em que começou. **Leitores não bloqueiam escritores e vice-versa.** É o que fazem PostgreSQL, Oracle e MySQL (InnoDB).
 O SQLite no modo **WAL** (o Aprendiz liga com `PRAGMA journal_mode = WAL`) faz algo parecido: as leituras continuam enquanto alguém escreve. O risco das travas é o **deadlock** (duas transações esperando uma pela outra); o banco detecta e cancela uma delas.
 
+F: log-transacoes
+A: log de transações, write ahead log, wal, recuperar depois de queda
+Q: porque | o banco anota cada mudança no log antes de aplicá-la, então recupera tudo depois de uma queda | -> prog-banco-dados:acid
 P: como funciona o log de transações
 P: o que é write ahead log
 P: como o banco garante a durabilidade
@@ -170,6 +216,9 @@ R: Para garantir a **durabilidade** (o D do ACID) sem gravar cada página da tab
 Se a energia cair, ao reabrir o banco **refaz** o que estava no log e confirmado, e **descarta** o que não foi confirmado. Escrever em sequência no log é muito mais rápido que pular pelo disco atualizando páginas.
 No SQLite em modo WAL, você vê o arquivo `banco.db-wal` ao lado do banco.
 
+F: btree-indice
+A: b-tree por dentro, índice b-tree, como o índice funciona
+Q: porque | o índice é uma árvore B: cada nó guarda muitas chaves, e poucas leituras de disco chegam a qualquer valor | -> prog-estruturas-dados:b-tree
 P: como funciona o índice b-tree por dentro
 P: por que o índice deixa a busca rápida
 R: Um índice **B+tree** guarda as chaves ordenadas numa árvore larga e baixa:
@@ -180,6 +229,9 @@ Com 300 chaves por nó, 3 níveis já indexam 300³ = 27 milhões de linhas: ach
 Como as folhas estão ligadas em ordem, o índice também acelera **faixas** (`BETWEEN`, `>`), `ORDER BY` e `MIN`/`MAX`. Ao inserir, um nó cheio se divide em dois e a árvore se mantém equilibrada sozinha.
 No SQLite, a própria tabela é uma B-tree ordenada pelo `rowid`, por isso buscar pela `INTEGER PRIMARY KEY` é tão rápido.
 
+F: otimizador
+A: otimizador de consultas, planejador, como o banco escolhe executar, estatísticas
+Q: porque | há muitas formas de executar a mesma consulta, e ele estima o custo de cada uma e escolhe a mais barata | -> sql-avancado:plano-execucao
 P: como o otimizador de consultas funciona
 P: o que é plano de execução por dentro
 R: Quando você manda uma consulta, o banco:
@@ -190,6 +242,9 @@ R: Quando você manda uma consulta, o banco:
 5. **executa** o mais barato.
 Por isso estatísticas desatualizadas levam a planos ruins (rode `ANALYZE` depois de grandes cargas), e por isso vale olhar o plano em vez de adivinhar.
 
+F: algoritmos-join
+A: algoritmos de join, nested loop, hash join, merge join
+Q: porque | juntar tabelas pode ser feito em laço, com hash ou com dados ordenados, e o otimizador escolhe pelo tamanho delas | -> otimizador
 P: quais os algoritmos de join
 P: o que é nested loop hash join e merge join
 R: O banco tem três jeitos principais de juntar duas tabelas:
@@ -198,6 +253,10 @@ R: O banco tem três jeitos principais de juntar duas tabelas:
 - **merge join:** com as duas já ordenadas pela coluna da junção, percorre as duas em paralelo, como intercalar duas listas. Ótimo quando já existem índices ordenados.
 O otimizador escolhe sozinho; você influencia criando os índices certos e mantendo as estatísticas em dia.
 
+F: teorema-cap
+A: teorema cap, consistência, disponibilidade, tolerância a partição, sistemas distribuídos
+Q: regra | quando a rede falha, um sistema distribuído escolhe entre responder sempre ou responder certo
+Q: exemplo-de | muitos bancos NoSQL escolhem a disponibilidade | -> prog-banco-dados:nosql
 P: o que é teorema cap
 P: o que é consistência eventual
 R: Em bancos **distribuídos** (vários servidores), o **teorema CAP** diz que, quando a rede entre eles falha (**P**artição), é preciso escolher entre:
@@ -206,6 +265,10 @@ R: Em bancos **distribuídos** (vários servidores), o **teorema CAP** diz que, 
 **Consistência eventual** é a escolha pela disponibilidade: as cópias podem divergir por um tempo, mas convergem depois (o contador de curtidas que demora a bater em todo lugar).
 Um banco relacional num servidor só (ou o SQLite do Aprendiz) não sofre esse dilema: é consistente por natureza.
 
+F: modelar
+A: modelar banco de dados, planejar tabelas, projeto de banco, sistema novo
+Q: porque | começar pelas entidades e relacionamentos evita refazer as tabelas depois | -> prog-banco-dados:modelo-er
+Q: regra | normalizar até a 3FN e só desnormalizar quando medir que precisa | -> forma-3fn
 P: como modelar um banco de dados na prática
 P: exemplo de modelagem de banco de dados passo a passo
 R: Exemplo: um sistema de **biblioteca**.
@@ -235,6 +298,9 @@ CREATE INDEX idx_emp_leitor ON emprestimos (leitor_id);
 ```
 5. **Conferir as formas normais** e as consultas mais importantes ("quais exemplares estão emprestados?" → `WHERE devolvido_em IS NULL`).
 
+F: resposta-basico-1
+A: exercício 1 sql básico, resposta
+Q: exemplo-de | resolve com SELECT e WHERE | -> sql-basico:where
 P: resposta do exercício 1 de sql básico
 P: resposta exercício 2 de sql básico
 P: resposta exercício 3 de sql básico
@@ -257,6 +323,9 @@ SELECT categoria, COUNT(*) AS qtd FROM produtos GROUP BY categoria;
 -- Cozinha 1 · Informática 4 · Móveis 2
 ```
 
+F: resposta-basico-4
+A: exercício 4 sql básico, resposta
+Q: exemplo-de | resolve com agregação e GROUP BY | -> sql-basico:group-by
 P: resposta do exercício 4 de sql básico
 P: resposta exercício 5 de sql básico
 P: resposta exercício 6 de sql básico
@@ -281,6 +350,9 @@ GROUP BY pedido_id;
 ```
 No 6, o total sai da soma dos itens (`quantidade × preço unitário`), e não da tabela de produtos: o preço do produto pode ter mudado depois da venda. Por isso o `preco_unit` fica guardado no item.
 
+F: resposta-basico-7
+A: exercício 7 sql básico, resposta
+Q: exemplo-de | resolve juntando tabelas | -> sql-basico:join
 P: resposta do exercício 7 de sql básico
 P: resposta exercício 8 de sql básico
 P: resposta do exercício 8 de sql básico
@@ -300,6 +372,9 @@ UPDATE produtos SET preco = ROUND(preco * 1.05, 2) WHERE categoria = 'Cozinha';
 ```
 No 7, o `LEFT JOIN` mantém a Elisa, e o `COUNT(p.id)` dá 0 para ela (o `COUNT(*)` daria 1, contando a linha com NULL).
 
+F: resposta-basico-9
+A: exercício 9 sql básico, resposta
+Q: exemplo-de | resolve com LEFT JOIN e IS NULL | -> sql-basico:left-join
 P: resposta do exercício 9 de sql básico
 P: resposta exercício 10 de sql básico
 P: resposta do exercício 10 de sql básico
@@ -318,6 +393,9 @@ WHERE i.produto_id IS NULL;
 ```
 O 10 também pode ser feito com `NOT EXISTS` ou com `EXCEPT` (trilha avançada).
 
+F: resposta-avancado-1
+A: exercício 1 sql avançado, resposta
+Q: exemplo-de | resolve com subconsulta | -> sql-avancado:subconsulta
 P: resposta do exercício 1 de sql avançado
 P: resposta exercício 2 de sql avançado
 P: resposta do exercício 2 de sql avançado
@@ -348,6 +426,9 @@ ORDER BY gasto DESC;
 ```
 No 1, com empate de preço o `ROW_NUMBER` escolhe um só; use `RANK() ... = 1` para trazer todos os empatados.
 
+F: resposta-avancado-3
+A: exercício 3 sql avançado, resposta
+Q: exemplo-de | resolve com função de janela | -> sql-avancado:janela
 P: resposta do exercício 3 de sql avançado
 P: resposta exercício 4 de sql avançado
 P: resposta do exercício 4 de sql avançado
@@ -373,6 +454,9 @@ FROM mensal;
 -- 2026-01: 2170 (2170) · 2026-02: 700 (2870) · 2026-03: 130 (3000)
 ```
 
+F: resposta-avancado-5
+A: exercício 5 sql avançado, resposta
+Q: exemplo-de | resolve com CTE | -> sql-avancado:cte
 P: resposta do exercício 5 de sql avançado
 P: resposta exercício 6 de sql avançado
 P: resposta exercício 7 de sql avançado
@@ -412,6 +496,9 @@ ORDER BY ticket_medio DESC;
 -- SP 1940 · PE 465 · PR 130
 ```
 
+F: resposta-avancado-8
+A: exercício 8 sql avançado, resposta
+Q: exemplo-de | resolve com transação | -> sql-avancado:transacao-sql
 P: resposta do exercício 8 de sql avançado
 P: resposta exercício 9 de sql avançado
 P: resposta do exercício 9 de sql avançado
@@ -438,6 +525,9 @@ SELECT * FROM pedidos WHERE status = 'aberto' ORDER BY data;   -- SEARCH ... USI
 ```
 No 9, o índice composto (`status`, `data`) resolve o filtro **e** a ordenação: dentro de cada status, as datas já estão em ordem no índice, e o "TEMP B-TREE" (ordenação extra) some do plano. Para um UPDATE também ser barrado, crie um segundo trigger `BEFORE UPDATE`.
 
+F: desafio
+A: desafio de sql, problema difícil
+Q: porque | junta várias técnicas num problema só, como no trabalho de verdade | -> sql-avancado:exercicios-avancado
 P: desafio de sql
 P: exercícios difíceis de sql
 R: Desafios para quem terminou as trilhas (banco de exemplo da loja):

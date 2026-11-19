@@ -2,6 +2,9 @@
 # Subconsultas, CTEs, funções de janela, índices, transações, triggers e as diferenças entre bancos.
 # Os exemplos usam o banco de exemplo da loja (addon "SQL 1 · Básico") e rodam no SQLite 3.39 ou mais novo.
 
+F: subconsulta
+A: subconsulta, subquery, consulta dentro de consulta, select dentro de select
+Q: porque | às vezes a condição depende do resultado de outra consulta, como os produtos acima da média | -> sql-basico:select
 P: o que é subconsulta em sql
 P: o que é subquery
 P: como usar select dentro de select
@@ -28,6 +31,9 @@ SELECT c.nome,
 FROM clientes c;
 ```
 
+F: subconsulta-correlacionada
+A: subconsulta correlacionada, subconsulta por linha, exists
+Q: diferente-de | ela usa uma coluna da consulta de fora, então roda de novo para cada linha | -> subconsulta
 P: o que é subconsulta correlacionada
 P: como usar exists em sql
 P: diferença entre in e exists
@@ -46,6 +52,9 @@ WHERE NOT EXISTS (SELECT 1 FROM itens_pedido i WHERE i.produto_id = pr.id);
 ```
 Cuidado com **`NOT IN`** quando a subconsulta pode ter NULL: `x NOT IN (1, NULL)` nunca é verdadeiro, e a consulta volta vazia sem erro. `NOT EXISTS` não tem esse problema; prefira-o.
 
+F: cte
+A: cte, with, common table expression, consulta com nome
+Q: porque | dá nome a uma subconsulta e deixa a consulta longa legível, de cima para baixo | -> subconsulta
 P: o que é cte em sql
 P: como usar with em sql
 P: o que é common table expression
@@ -71,6 +80,10 @@ ORDER BY gasto DESC;
 ```
 Cada CTE pode usar as anteriores. Em vez de subconsultas aninhadas três níveis para dentro, você lê uma sequência de passos com nome.
 
+F: cte-recursiva
+A: cte recursiva, with recursive, hierarquia, árvore no sql
+Q: porque | percorre hierarquias, como chefe e subordinados, repetindo a consulta sobre o resultado anterior | -> cte
+Q: parte-de | é a recursão escrita em SQL | -> prog-logica:recursao
 P: o que é cte recursiva
 P: como usar with recursive
 P: como consultar hierarquia em sql
@@ -96,6 +109,9 @@ SELECT * FROM equipe;
 ```
 Sempre tenha uma condição de parada; dados com ciclos podem fazer a recursão não terminar.
 
+F: janela
+A: funções de janela, window function, over, partition by
+Q: porque | calcula sobre um grupo de linhas sem juntar essas linhas numa só, como o GROUP BY faria | -> sql-basico:group-by
 P: o que são funções de janela em sql
 P: o que é window function
 P: o que é over partition by
@@ -114,6 +130,10 @@ FROM produtos;
 - `ORDER BY` dentro do OVER define a ordem (necessário para ranking e acumulados).
 Funcionam no SQLite (3.25 ou mais novo), PostgreSQL, MySQL 8, SQL Server e Oracle.
 
+F: row-number
+A: row_number, rank, dense_rank, numerar linhas, ranking, posição
+Q: parte-de | são funções de janela que numeram as linhas conforme uma ordem | -> janela
+Q: diferente-de | o RANK repete o número nos empates e pula o seguinte; o DENSE_RANK não pula
 P: como usar row_number rank e dense_rank
 P: como fazer ranking em sql
 P: como pegar o mais caro de cada categoria
@@ -141,6 +161,9 @@ SELECT nome, categoria, preco FROM ordenados WHERE rn = 1;
 ```
 Não dá para usar a função de janela direto no `WHERE` (ele roda antes); por isso a CTE.
 
+F: soma-acumulada
+A: soma acumulada, total acumulado, saldo acumulado, running total
+Q: parte-de | é um SUM usado como função de janela, com ordem | -> janela
 P: como fazer soma acumulada em sql
 P: como usar lag e lead
 P: como comparar com a linha anterior em sql
@@ -163,6 +186,10 @@ FROM vendas;
 - `FIRST_VALUE`, `LAST_VALUE`, `NTILE(4)` (quartis);
 - `ROWS BETWEEN ...` define uma moldura (os 3 últimos, para média móvel).
 
+F: union
+A: union, union all, juntar resultados, uma consulta embaixo da outra, empilhar resultados
+Q: porque | junta as linhas de duas consultas com as mesmas colunas, uma embaixo da outra
+Q: diferente-de | o JOIN junta colunas lado a lado; o UNION junta linhas | -> sql-basico:join
 P: como usar union em sql
 P: diferença entre union e union all
 P: como usar intersect e except
@@ -186,6 +213,9 @@ SELECT cliente_id FROM pedidos WHERE data >= '2026-02-01';
 ```
 Use `UNION ALL` quando duplicados não forem problema: o `UNION` precisa ordenar ou usar hash para tirá-los. No Oracle, o `EXCEPT` se chama `MINUS`.
 
+F: view-materializada
+A: view materializada, materialized view, resultado guardado
+Q: diferente-de | a view comum roda a consulta a cada uso; a materializada guarda o resultado e precisa ser atualizada | -> prog-banco-dados:view
 P: o que é view materializada
 P: como criar view em sql
 R: Uma **view** guarda a consulta; uma **view materializada** guarda o **resultado**, e precisa ser atualizada:
@@ -204,6 +234,9 @@ SELECT * FROM resumo_pedidos WHERE status = 'entregue';
 - SQLite não tem: o jeito é uma tabela atualizada por triggers ou por um script.
 Materializar vale quando a consulta é cara e os dados mudam pouco (relatórios).
 
+F: criar-indice
+A: create index, criar índice, índice composto
+Q: porque | o índice acelera as buscas pelas colunas que mais aparecem no WHERE e no JOIN | -> prog-banco-dados:indice
 P: como criar índice em sql
 P: quando criar um índice
 P: o que é índice composto
@@ -220,6 +253,9 @@ Crie índices em colunas usadas com frequência em `WHERE`, `JOIN` (as chaves es
 No **índice composto**, a ordem das colunas importa: `(status, data)` ajuda `WHERE status = ?` e `WHERE status = ? AND data > ?`, mas **não** ajuda `WHERE data > ?` sozinho (como uma lista telefônica ordenada por sobrenome e depois nome: não serve para achar todos os "João").
 O índice deixa de ser usado quando a coluna aparece dentro de uma função (`WHERE UPPER(nome) = 'ANA'`) ou num `LIKE '%texto'`. Índices custam espaço e deixam as escritas mais lentas: não crie em tudo.
 
+F: plano-execucao
+A: plano de execução, explain, explain query plan, como o banco executa
+Q: porque | mostra se o banco vai usar um índice ou ler a tabela inteira, o que explica a lentidão | -> otimizar
 P: como ver o plano de execução em sql
 P: o que é explain query plan
 P: como saber se a consulta usa índice
@@ -233,6 +269,9 @@ SELECT * FROM pedidos WHERE cliente_id = 1;
 Nos outros bancos: `EXPLAIN ANALYZE` (PostgreSQL, mostra também o tempo real), `EXPLAIN` (MySQL), "Plano de Execução" no SQL Server Management Studio, `EXPLAIN PLAN FOR` (Oracle).
 Método: ache a consulta lenta, veja o plano, crie ou ajuste um índice, veja o plano de novo e meça.
 
+F: transacao-sql
+A: begin, commit, rollback, transação em sql
+Q: porque | BEGIN abre, COMMIT confirma e ROLLBACK desfaz tudo o que foi feito desde o BEGIN | -> prog-banco-dados:transacao
 P: como usar transação em sql
 P: como usar begin commit rollback
 P: o que é savepoint
@@ -252,6 +291,9 @@ COMMIT;                          -- confirma o resto
 - se o programa cair no meio, o banco desfaz a transação incompleta ao reabrir.
 Agrupar muitos INSERTs numa transação também deixa tudo **muito** mais rápido no SQLite (uma gravação em disco no fim, em vez de uma por linha).
 
+F: upsert
+A: upsert, inserir ou atualizar, on conflict, insert or replace, se já existir
+Q: porque | evita ler antes para saber se a linha existe: o banco insere ou, havendo conflito de chave, atualiza | -> sql-basico:insert
 P: o que é upsert
 P: como inserir ou atualizar se já existir em sql
 P: como usar on conflict
@@ -267,6 +309,10 @@ ON CONFLICT (id) DO NOTHING;     -- ignora se já existe
 ```
 `excluded` é a linha que você tentou inserir. Nos outros bancos: MySQL usa `INSERT ... ON DUPLICATE KEY UPDATE`; SQL Server e Oracle usam `MERGE`.
 
+F: trigger
+A: trigger, gatilho, rodar automaticamente, ação automática ao inserir
+Q: porque | executa uma ação sozinho quando uma tabela muda, como registrar quem alterou
+Q: consequencia | a lógica fica escondida no banco, então deve ser usado com moderação
 P: o que é trigger em sql
 P: como criar um gatilho no sqlite
 P: como manter histórico de alterações com trigger
@@ -289,6 +335,9 @@ END;
 ```
 `OLD` é a linha antes da mudança e `NEW`, depois. Bons usos: auditoria, histórico, manter um total atualizado. Evite esconder regras de negócio importantes em triggers: ninguém lembra que elas existem.
 
+F: json-sql
+A: json no sql, json_extract, coluna json
+Q: porque | guarda dados de formato variável numa coluna, sem criar tabela para cada campo | -> prog-vocabulario:json
 P: como trabalhar com json no sql
 P: funções json do sqlite
 R: Os bancos modernos guardam e consultam JSON:
@@ -305,6 +354,9 @@ SELECT json_group_array(nome) FROM clientes;                  -- ["Ana Souza", .
 ```
 O PostgreSQL tem o tipo `JSONB` com índices próprios (GIN). Use JSON para dados realmente variáveis; o que tem estrutura fixa merece colunas de verdade.
 
+F: busca-texto
+A: busca de texto, fts5, full text search, pesquisar palavras
+Q: porque | o LIKE com % no começo lê a tabela inteira; a busca de texto usa um índice invertido de palavras | -> prog-estruturas-dados:indice-invertido
 P: como fazer busca de texto no sqlite
 P: o que é fts5
 R: O **FTS5** é o motor de busca de texto do SQLite, com índice invertido e ranking **BM25**, o mesmo algoritmo que o Aprendiz implementa em Python:
@@ -320,6 +372,10 @@ ORDER BY pontuacao;      -- no FTS5, quanto MENOR, mais relevante
 ```
 Aceita `AND`, `OR`, `NOT`, prefixos (`farin*`) e frases (`"xícara de farinha"`). Para português com acentos, use o tokenizador `unicode61 remove_diacritics 2`.
 
+F: pivot
+A: pivot, linhas em colunas, transformar linhas em colunas, tabela cruzada
+Q: porque | relatórios pedem um valor por coluna, como um mês em cada coluna, e os dados vêm um por linha
+Q: regra | no SQLite se faz com CASE WHEN dentro de SUM | -> sql-basico:case-when
 P: o que é pivot em sql
 P: como transformar linhas em colunas em sql
 R: **Pivotar** é transformar valores de linhas em colunas. O jeito portátil é com `CASE` dentro da agregação:
@@ -336,6 +392,9 @@ GROUP BY c.nome;
 ```
 SQL Server e Oracle têm o operador `PIVOT`; o PostgreSQL tem a extensão `tablefunc` (`crosstab`). O SQLite também aceita `SUM(... ) FILTER (WHERE ...)`, mais curto.
 
+F: diferencas-bancos
+A: diferença entre bancos, postgres, postgresql, mysql, sql server, oracle, sqlite
+Q: porque | todos falam SQL, mas cada um tem funções, tipos e recursos próprios | -> prog-banco-dados:sgbd
 P: diferenças entre sqlite postgresql mysql sql server e oracle
 P: qual banco de dados escolher
 P: o sql é igual em todos os bancos
@@ -351,6 +410,10 @@ Como escolher:
 - **MySQL/MariaDB:** web tradicional, hospedagens baratas;
 - **SQL Server / Oracle:** empresas que já usam o ecossistema (Oracle com APEX, por exemplo).
 
+F: otimizar
+A: otimizar consulta, consulta lenta, desempenho de sql, performance
+Q: porque | quase sempre a lentidão vem de ler linhas demais, por falta de índice ou de filtro | -> plano-execucao
+Q: regra | olhar o plano de execução antes de mudar qualquer coisa
 P: como otimizar consultas sql
 P: minha consulta sql está lenta
 R: Um roteiro:
@@ -363,6 +426,10 @@ R: Um roteiro:
 7. agrupe escritas em transações;
 8. atualize as estatísticas do otimizador (`ANALYZE`) depois de grandes cargas.
 
+F: sql-dinamico
+A: sql dinâmico, montar consulta em texto, execute
+Q: porque | algumas consultas só ficam prontas ao rodar, como filtros escolhidos pelo usuário
+Q: consequencia | montar SQL com texto do usuário abre a porta para SQL injection | -> prog-banco-dados:sql-injection
 P: o que é sql dinâmico
 P: como montar sql com segurança
 R: **SQL dinâmico** é montar o comando em tempo de execução (filtros opcionais, colunas escolhidas pelo usuário). A regra de segurança:
@@ -376,6 +443,9 @@ con.execute(sql, (categoria,))
 ```
 É exatamente o padrão do banco do Aprendiz: textos de fora entram por `?`, e só nomes fixos do próprio código são colocados no SQL.
 
+F: tabela-temporaria
+A: tabela temporária, temp table, tabela que some
+Q: porque | guarda resultados intermediários só durante a conexão, e depois some sozinha
 P: o que é tabela temporária em sql
 R: Uma **tabela temporária** existe só durante a conexão e some sozinha ao fechar:
 ```sql
@@ -386,6 +456,9 @@ SELECT * FROM carrinho WHERE qtd > 1;
 ```
 Útil para quebrar um processamento grande em etapas ou guardar um resultado intermediário usado várias vezes. Para uma só consulta, uma CTE costuma bastar.
 
+F: exercicios-avancado
+A: exercícios de sql avançado, praticar sql avançado
+Q: porque | as funções avançadas só fixam resolvendo problemas reais com elas | -> sql-basico:exercicios
 P: exercícios de sql avançado
 R: Usando o banco de exemplo da loja:
 1. o produto mais caro de cada categoria (com `ROW_NUMBER`);
