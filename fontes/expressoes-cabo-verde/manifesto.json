@@ -1,7 +1,7 @@
 {
   "id": "expressoes-cabo-verde",
   "nome": "Português de Cabo Verde",
-  "versao": "2.0.0",
+  "versao": "2.1.0",
   "descricao": "Norma de Cabo Verde: vocabulário de mais de 400 mil formas (Acordo Ortográfico de 1990, obrigatório no país desde 2015), revisão de texto com regras de gramática, palavras e frases do crioulo cabo-verdiano (kabuverdianu) e respostas sobre as línguas de Cabo Verde. Escreva \"revise: o seu texto\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
@@ -20,7 +20,7 @@
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "2.0.0"
+    "versao_minima": "2.1.0"
   },
   "regiao": {
     "nome": "Cabo Verde",

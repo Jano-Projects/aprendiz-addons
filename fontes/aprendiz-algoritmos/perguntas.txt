@@ -234,6 +234,7 @@ Exemplo: no texto sobre óleo, filtro e pneus, a pergunta "qual a calibragem dos
 F: dicionario
 A: dicionário, verbetes, o que significa, gírias
 Q: porque | verbetes respondem nos dois sentidos, do termo para o sentido e do sentido para o termo
+Q: consequencia | na 2.1, a resposta Trabalhada diz também como se fala o mesmo em outros países | -> teia
 P: como funciona o dicionário do aprendiz
 P: como o aprendiz responde o que significa uma gíria
 R: Os **verbetes** dos addons de dicionário só respondem quando a pessoa digita a **palavra sozinha** ou pergunta "o que significa…": numa frase com outras palavras eles são ignorados, para não "sequestrar" perguntas sobre outros assuntos.
@@ -241,6 +242,7 @@ O motor (`core/dicionario.py`) entra **antes** das intenções (senão "como se 
 - **direto:** "kota", "o que é kota em Angola?" → o significado;
 - **inverso:** "como se diz dinheiro em Angola?", "aldeia em kriol" → o termo da região, usando as **traduções** (linha `T:`) dos verbetes.
 Ele separa a região do fim da frase (pelos `termos` declarados no manifesto), testa alguns padrões de pergunta e compara o termo por **igualdade de radicais**, nunca por semelhança: o dicionário só responde quando tem certeza. Se dois dicionários têm a mesma palavra ("bué" em Portugal e em Angola), a resposta mostra os dois.
+**Na 2.1:** os verbetes têm teia. Na resposta **Trabalhada**, depois do significado vêm até 5 equivalências em outros lugares (`equivale`) e os falsos amigos (`diferente-de`: "mina" é moça no Brasil e filho em São Tomé), só de addons ativos.
 
 F: compreensao
 A: compreensão, tipo de pergunta, addon de compreensão
@@ -361,6 +363,7 @@ A: teia de porquês, porquês, fragmentos ligados, ligações entre addons
 Q: definicao | cada fragmento diz por que é assim e a que outros fragmentos se liga, formando uma rede
 Q: regra | só as causas descem até a raiz; comparações e consequências valem no primeiro nível
 Q: consequencia | a resposta Trabalhada conta esse caminho | -> trabalhada
+Q: consequencia | na 2.1, a relação equivale liga a mesma ideia em outras variedades da língua | -> dicionario
 P: o que é a teia de porquês do aprendiz
 P: como funciona a teia do aprendiz
 P: como o aprendiz liga um assunto a outro
@@ -375,6 +378,7 @@ A partir do conhecimento achado, `core/teia.py` percorre os porquês em largura,
 - **assunto**: do nível 2 em diante, só segue para fragmentos com palavra em comum com a pergunta;
 - **causa x lado**: `porque`, `regra`, `definicao` e `parte-de` descem; as outras relações valem só no nível 1.
 A ligação `-> addon:ref` atravessa addons; se o outro addon estiver desativado, o texto do porquê continua valendo. O caminho aparece em "Por que respondi isso?".
+**Na 2.1:** há a relação `equivale` (o mesmo sentido em outra variedade: "grana", no Brasil, e "kumbu", em Angola), lateral como `diferente-de`.
 
 F: padroes
 A: padrões de frase, estrutura da frase, sentido da frase, lacunas
@@ -411,6 +415,7 @@ F: regra-assunto
 A: regra do assunto, assunto declarado, resposta fala do assunto, palavra informativa
 Q: porque | sem ela, uma letra solta como o "c" de um apelido de tabela respondia "o que é um ponteiro em C?" com SQL
 Q: regra | a palavra da pergunta precisa estar no assunto declarado do conhecimento ou, se não estiver, todas precisam estar no texto
+Q: regra | na 2.1, quem declarou exatamente a pergunta vem primeiro; numa definição, o fragmento que define desempata
 P: como o aprendiz sabe se a resposta fala do assunto
 P: o que é o assunto declarado no aprendiz
 R: Depois da busca (2.0), cada candidato passa pelas **regras do assunto**:
@@ -418,6 +423,7 @@ R: Depois da busca (2.0), cada candidato passa pelas **regras do assunto**:
 - quem bate no assunto declarado é aceito até 80% do limiar (o melhor de todos, até 60%) e vem antes, a não ser que o dono tenha definido o limiar;
 - a palavra na pergunta do fragmento pesa mais do que nos assuntos, e palavras raras pesam mais do que as comuns.
 É o que faz "o que é um ponteiro em C?" dizer que não sabe, em vez de responder com um texto de SQL.
+**Na 2.1:** entre os aceitos, vem primeiro quem declarou **exatamente** a pergunta (como pergunta ou variação); num empate em "o que é X", o fragmento que **define** X passa à frente do que só o usa ("o que é c?" → a linguagem C, e não o laço `for`). E erro de digitação só conta em palavra que não existe também no peso do assunto: "seta" não é "set" mal digitado.
 
 F: homologacao
 A: homologação, homologar, perguntas reais, perguntas inéditas, medir acerto

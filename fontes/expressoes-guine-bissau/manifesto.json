@@ -1,7 +1,7 @@
 {
   "id": "expressoes-guine-bissau",
   "nome": "Português da Guiné-Bissau",
-  "versao": "2.0.0",
+  "versao": "2.1.0",
   "descricao": "Norma da Guiné-Bissau: vocabulário de mais de 400 mil formas que aceita as grafias de antes e de depois do Acordo de 1990 (ratificado, mas ainda não aplicado no país), revisão de texto com regras de gramática, palavras e frases do kriol e respostas sobre as línguas guineenses. Escreva \"revise: o seu texto\".",
   "categoria": "Idiomas e gírias",
   "etiquetas": [
@@ -20,7 +20,7 @@
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "2.0.0"
+    "versao_minima": "2.1.0"
   },
   "regiao": {
     "nome": "Guiné-Bissau",
