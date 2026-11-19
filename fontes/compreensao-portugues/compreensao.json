@@ -1244,6 +1244,18 @@
     "memoizacao",
     "nao recalcular"
    ]
+  },
+  {
+   "padrao": "o que * tem a mais que *",
+   "conceitos": [
+    "diferença entre"
+   ]
+  },
+  {
+   "padrao": "o que * tem de diferente do|da|de *",
+   "conceitos": [
+    "diferença entre"
+   ]
   }
  ],
  "catalogo": [
@@ -1253,22 +1265,25 @@
    "descricao": "Como o Aprendiz entende e responde: normalização, radicais, intenções com Naive Bayes, BM25, TF-IDF, Fuzzy, Híbrido, resposta Direta e Extrativa, prioridade do dono, dicionários, compreensão, vetores, revisão de texto e recomendação.",
    "palavras": [
     "aprendiz",
-    "algoritmos",
     "funciona",
+    "algoritmos",
     "dentro",
+    "resposta",
     "bm25",
     "tfidf",
     "naive",
     "bayes",
     "pensam",
     "trilha",
-    "resposta",
     "busca",
+    "explica",
     "limiar",
+    "trabalhada",
+    "assunto",
     "normalizacao",
     "corrige",
     "reconhece",
-    "explica",
+    "frases",
     "fuzzy",
     "hibrida",
     "addon",
@@ -1276,6 +1291,11 @@
     "textrank",
     "compreensao",
     "algoritmo",
+    "porques",
+    "teia",
+    "frase",
+    "entende",
+    "dois",
     "pensa",
     "visao",
     "geral",
@@ -1295,7 +1315,6 @@
     "intencoes",
     "aprende",
     "chat",
-    "frases",
     "ensinam",
     "entidade",
     "datas",
@@ -1338,7 +1357,20 @@
     "entre",
     "hibrido",
     "exercicios",
-    "praticar"
+    "praticar",
+    "liga",
+    "padroes",
+    "estrutura",
+    "expressao",
+    "vem",
+    "numeros",
+    "extenso",
+    "dao",
+    "mesma",
+    "declarado",
+    "homologacao",
+    "medir",
+    "acertando"
    ]
   },
   {
@@ -1463,8 +1495,8 @@
     "explica",
     "codigo",
     "dentro",
-    "funcao",
     "funciona",
+    "funcao",
     "python",
     "servidor",
     "banco",
@@ -1486,6 +1518,7 @@
     "assistente",
     "ler",
     "configuracoes",
+    "teia",
     "descobre",
     "guardar",
     "pasta",
@@ -1602,6 +1635,8 @@
     "nome",
     "jaccard",
     "codigo",
+    "perguntas",
+    "txt",
     "loja",
     "final",
     "comecar",
@@ -1646,8 +1681,6 @@
     "colocar",
     "respostas",
     "bloco",
-    "perguntas",
-    "txt",
     "exportar",
     "ensinei",
     "gerar",
@@ -1662,7 +1695,9 @@
     "funciona",
     "addons",
     "roteiro",
-    "desafio"
+    "desafio",
+    "escrever",
+    "porques"
    ]
   },
   {
@@ -2189,6 +2224,7 @@
     "erros",
     "comuns",
     "iniciantes",
+    "programacao",
     "serve",
     "aprender",
     "ubuntu",

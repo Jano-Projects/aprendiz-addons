@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T13:34:51+00:00",
+  "gerado_em": "2026-11-19T13:43:08+00:00",
   "total": 40,
   "addons": [
     {
@@ -619,7 +619,7 @@
       "arquivo": "addons/c-basico.aprendiz",
       "tamanho": 10978,
       "sha256": "46b14fa6e77fb9e22b3d2f68921c354b736578066f935072cdb8cec412975471",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "o que é a linguagem c",
@@ -650,7 +650,7 @@
     {
       "id": "c-intermediario",
       "nome": "C 2 · Intermediário",
-      "versao": "2.0.0",
+      "versao": "2.0.1",
       "autor": "Jano Projects",
       "descricao": "Ponteiros, aritmética de ponteiros, malloc e free, structs, enums, typedef, strings da string.h, arquivos, o pré-processador, vários arquivos .c/.h e o make.",
       "licenca": "CC-BY-4.0",
@@ -697,9 +697,9 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/c-intermediario.aprendiz",
-      "tamanho": 10349,
-      "sha256": "950a46ac6f1429fdd7a0f2e947a63a44794d06d56a01c10b67a14bd930c419ca",
-      "atualizado_em": "2026-11-18",
+      "tamanho": 10353,
+      "sha256": "399836f94c0c7bfb6c47b1c22541dfd026009aeb39d39f873305ffabc107f011",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "o que é ponteiro em c",
@@ -780,7 +780,7 @@
       "arquivo": "addons/c-avancado.aprendiz",
       "tamanho": 10819,
       "sha256": "127beec8a7b48733ff3995831dc9402d7447c35e022df51b60f6a64a4362d061",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "o que é ponteiro de função em c",
@@ -811,7 +811,7 @@
     {
       "id": "cpp-basico",
       "nome": "C++ 1 · Básico",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "C++ do zero: g++, iostream, namespaces, std::string, referências, sobrecarga, std::vector, for de intervalo, auto, classes, construtores e a diferença entre C e C++.",
       "licenca": "CC-BY-4.0",
@@ -833,8 +833,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [
         {
           "id": "c-basico",
@@ -843,9 +843,9 @@
         }
       ],
       "recomendado": {
-        "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.98
+        "busca": "tfidf",
+        "resposta": "trabalhada",
+        "acerto": 0.968
       },
       "conhecimentos": 25,
       "verbetes": 0,
@@ -858,9 +858,9 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/cpp-basico.aprendiz",
-      "tamanho": 8314,
-      "sha256": "5efd78a73ad5dc3e1fc1e35d4989fe61933dae4906cb9f5204171f146d137b86",
-      "atualizado_em": "2026-11-18",
+      "tamanho": 9897,
+      "sha256": "87c925085a385b6fbba7e6923f53d7b4450eedd4daf7b01b7b1d1d55fadc8583",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "o que é c++",
@@ -891,7 +891,7 @@
     {
       "id": "cpp-intermediario",
       "nome": "C++ 2 · Intermediário",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Orientação a objetos em C++: herança, virtual, polimorfismo, classes abstratas, RAII, destrutor, regra dos 3/5/0, ponteiros inteligentes, templates, a STL (map, set, algoritmos), lambdas e exceções.",
       "licenca": "CC-BY-4.0",
@@ -914,8 +914,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [
         {
           "id": "cpp-basico",
@@ -925,8 +925,8 @@
       ],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.92
+        "resposta": "trabalhada",
+        "acerto": 0.988
       },
       "conhecimentos": 23,
       "verbetes": 0,
@@ -939,9 +939,9 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/cpp-intermediario.aprendiz",
-      "tamanho": 8273,
-      "sha256": "213dea99fb8f147c34bab469ce614913e07ceea52f2461009de03c06b100e563",
-      "atualizado_em": "2026-11-18",
+      "tamanho": 9779,
+      "sha256": "a05ce906eb3beabb38bb038b50b305c46c7df2ca8a774a98dc2c6c7fb3890052",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "como fazer herança em c++",
@@ -972,7 +972,7 @@
     {
       "id": "cpp-avancado",
       "nome": "C++ 3 · Avançado",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Semântica de movimento, rvalue, perfect forwarding, constexpr, SFINAE e concepts, variadic templates, threads, mutex, atomic, ranges, std::optional/variant, CMake, otimizações e o C++ moderno (11 a 23).",
       "licenca": "CC-BY-4.0",
@@ -995,8 +995,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [
         {
           "id": "cpp-intermediario",
@@ -1006,8 +1006,8 @@
       ],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.99
+        "resposta": "trabalhada",
+        "acerto": 0.989
       },
       "conhecimentos": 25,
       "verbetes": 0,
@@ -1020,9 +1020,9 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/cpp-avancado.aprendiz",
-      "tamanho": 9557,
-      "sha256": "59166221a15dc246d58c7abafa8aaa95b05818ba48ce7675e42d3b1d9befd44d",
-      "atualizado_em": "2026-11-18",
+      "tamanho": 10995,
+      "sha256": "ea1fa096056e0f512a465bf999f613f614238368cf846473e6c82bc23cda8c6e",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "o que é semântica de movimento em c++",
@@ -1126,7 +1126,7 @@
     {
       "id": "compreensao-portugues",
       "nome": "Compreensão do português",
-      "versao": "2.0.0",
+      "versao": "2.0.1",
       "autor": "Jano Projects",
       "descricao": "A raiz da conversa do Aprendiz: entende o tipo de pergunta (o que é, como fazer, onde fica…), junta tudo o que você ensinou sobre um assunto (\"o que você sabe sobre o carro?\"), entende expressões e formas irregulares (\"fui\", \"fiz\" → ser, fazer), responde sobre si mesmo e, quando não sabe algo, indica o addon da loja que sabe. Traz um léxico com mais de 300 mil palavras. Lemas derivados de lemmatization-lists, de Michal Měchura (ODbL).",
       "licenca": "ODbL-1.0",
@@ -1150,7 +1150,7 @@
         "compreensao"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [],
       "recomendado": null,
       "conhecimentos": 0,
@@ -1162,15 +1162,15 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": {
-        "regras": 223,
+        "regras": 225,
         "catalogo": 37,
         "lemas": 317331,
         "vetores": 0
       },
       "norma": null,
       "arquivo": "addons/compreensao-portugues.aprendiz",
-      "tamanho": 858353,
-      "sha256": "89ec85a9efc8219ebc3da2008cbfc13e0dcc6b642d99d48fd0b41c0acb1c3072",
+      "tamanho": 858309,
+      "sha256": "04163f4af8e469f6c3d40052238f94fdf379c937aa4af7329e114f00532a0bf3",
       "atualizado_em": "2026-11-19",
       "amostra": []
     },

@@ -1,7 +1,7 @@
 {
   "id": "cpp-avancado",
   "nome": "C++ 3 · Avançado",
-  "versao": "1.0.0",
+  "versao": "2.0.0",
   "autor": "Jano Projects",
   "descricao": "Semântica de movimento, rvalue, perfect forwarding, constexpr, SFINAE e concepts, variadic templates, threads, mutex, atomic, ranges, std::optional/variant, CMake, otimizações e o C++ moderno (11 a 23).",
   "licenca": "CC-BY-4.0",
@@ -17,7 +17,7 @@
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.6.0"
+    "versao_minima": "2.0.0"
   },
   "dependencias": [
     {
@@ -25,10 +25,5 @@
       "versao": "1.0.0",
       "nome": "C++ 2 · Intermediário"
     }
-  ],
-  "recomendado": {
-    "busca": "hibrido",
-    "resposta": "direta",
-    "acerto": 0.99
-  }
+  ]
 }

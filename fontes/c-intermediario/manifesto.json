@@ -1,7 +1,7 @@
 {
   "id": "c-intermediario",
   "nome": "C 2 · Intermediário",
-  "versao": "2.0.0",
+  "versao": "2.0.1",
   "autor": "Jano Projects",
   "descricao": "Ponteiros, aritmética de ponteiros, malloc e free, structs, enums, typedef, strings da string.h, arquivos, o pré-processador, vários arquivos .c/.h e o make.",
   "licenca": "CC-BY-4.0",

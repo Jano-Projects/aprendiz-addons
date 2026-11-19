@@ -1,6 +1,9 @@
 # C++ 3 · Avançado
 # Movimento, templates avançados, concepts, concorrência, ranges, tipos-soma, ferramentas e o C++ moderno.
 
+F: movimento
+A: semântica de movimento, std::move, mover em vez de copiar
+Q: porque | transfere os recursos de um objeto que vai ser descartado, em vez de copiar | -> cpp-intermediario:copia
 P: o que é semântica de movimento em c++
 P: o que é move semantics
 P: o que faz std::move
@@ -16,6 +19,9 @@ std::vector<int> b = std::move(a);   // b "rouba" a memória de a
 `std::move` **não move nada**: é só um cast que diz "pode tratar este objeto como descartável". Quem move de fato é o **construtor de movimento** (ou a atribuição de movimento) do tipo.
 Usos típicos: passar para frente um valor que você não vai mais usar (`dados_.push_back(std::move(item))`), devolver objetos grandes, guardar parâmetros recebidos por valor (`: nome_(std::move(nome))`). Não use um objeto depois de movê-lo, a não ser para reatribuí-lo.
 
+F: lvalue
+A: lvalue e rvalue
+Q: porque | o lvalue tem nome e endereço; o rvalue é temporário e pode ter os recursos movidos | -> movimento
 P: o que é lvalue e rvalue
 P: o que é referência rvalue
 P: o que é a referência com dois e comerciais em c++
@@ -38,6 +44,9 @@ private:
 ```
 Marque construtores de movimento como `noexcept`: o `std::vector` só usa movimento ao realocar se tiver essa garantia; senão, copia.
 
+F: forwarding
+A: perfect forwarding, std::forward
+Q: porque | repassa um argumento mantendo se ele era lvalue ou rvalue | -> lvalue
 P: o que é perfect forwarding
 P: o que é std::forward
 P: o que é referência universal
@@ -50,6 +59,9 @@ std::unique_ptr<T> criar(Args &&...args) {
 ```
 Se quem chamou passou um temporário, o construtor de `T` recebe um temporário (e pode mover); se passou uma variável, recebe uma referência (e copia). É assim que `make_unique` e `emplace_back` funcionam.
 
+F: rvo
+A: rvo, otimização do valor de retorno
+Q: porque | o compilador constrói o resultado direto no destino, sem cópia | -> movimento
 P: o que é rvo
 P: o que é copy elision
 P: posso retornar vector por valor em c++
@@ -64,6 +76,9 @@ auto dados = gerar(1'000'000);
 ```
 Não escreva `return std::move(v);`: isso **atrapalha** a otimização.
 
+F: constexpr
+A: constexpr, consteval, calcular na compilação
+Q: porque | o cálculo é feito pelo compilador, e o programa já recebe o resultado pronto
 P: o que é constexpr e consteval
 P: como calcular em tempo de compilação em c++
 R: - `constexpr`: pode ser calculado ao compilar **se** os argumentos forem constantes; senão roda normalmente.
@@ -81,6 +96,9 @@ consteval int versao() { return 3; }
 ```
 `if constexpr (condição)` escolhe um ramo ao compilar e descarta o outro, essencial em templates. Tabelas, validações e cálculos fixos saem do tempo de execução.
 
+F: variadic
+A: variadic template, número variável de parâmetros
+Q: porque | um template aceita quantos argumentos vierem | -> cpp-intermediario:template
 P: o que é variadic template
 P: o que é fold expression
 R: **Template variádico** aceita qualquer número de parâmetros de tipos diferentes (`typename... Args`). A **fold expression** (C++17) aplica um operador a todos:
@@ -100,6 +118,9 @@ imprimir("idade", 30, 1.75);
 ```
 `sizeof...(Ts)` diz quantos parâmetros vieram. É assim que `std::tuple`, `std::make_unique` e `std::format` funcionam.
 
+F: concepts
+A: concepts, requisitos de template, c++20
+Q: porque | dizem o que um tipo precisa ter para o template funcionar, com mensagens de erro claras | -> cpp-intermediario:template
 P: o que são concepts em c++
 P: o que é requires em c++20
 P: o que é sfinae
@@ -126,6 +147,9 @@ concept TemTamanho = requires(T t) {
 ```
 Antes do C++20 isso era feito com **SFINAE** ("falha de substituição não é erro"), com `std::enable_if`: funcionava, mas era ilegível. Em código novo, use concepts.
 
+F: type-traits
+A: type traits, características de tipo
+Q: porque | perguntam ao compilador sobre um tipo, como se é número ou ponteiro | -> cpp-intermediario:template
 P: o que é type traits
 P: o que é decltype
 R: **Type traits** (`<type_traits>`) perguntam e transformam tipos ao compilar:
@@ -150,6 +174,9 @@ std::string descrever(const T &v) {
 }
 ```
 
+F: threads
+A: threads em c++, std::thread
+Q: porque | dividem o trabalho em linhas que rodam ao mesmo tempo | -> c-avancado:threads
 P: como usar threads em c++
 P: o que é std::thread e std::jthread
 P: threads em c++
@@ -174,6 +201,9 @@ int main() {
 - `std::thread::hardware_concurrency()` diz quantos núcleos a máquina tem.
 No Linux, compile com `-pthread`. Threads compartilham memória: tudo que duas threads acessam, e pelo menos uma altera, precisa de sincronização.
 
+F: mutex
+A: mutex, trava, duas threads no mesmo dado, condição de corrida
+Q: porque | só uma thread por vez entra no trecho protegido, então o dado não fica no meio de uma mudança | -> threads
 P: o que é mutex em c++
 P: o que é condição de corrida
 P: como usar lock_guard
@@ -195,6 +225,9 @@ void incrementar() {
 Nunca use `m.lock()`/`m.unlock()` à mão: uma exceção no meio deixaria travado para sempre.
 **Deadlock:** a thread A segura o mutex 1 e espera o 2; a B segura o 2 e espera o 1; ninguém anda. Evite travando sempre na **mesma ordem**, ou travando vários de uma vez com `std::scoped_lock trava(m1, m2);`, que evita o impasse.
 
+F: atomic
+A: atomic, std::atomic, operação atômica
+Q: porque | a operação acontece inteira, sem precisar de mutex para casos simples | -> mutex
 P: o que é atomic em c++
 P: quando usar std::atomic
 R: `std::atomic<T>` faz operações simples (incrementar, ler, trocar) de forma **indivisível**, sem mutex:
@@ -207,6 +240,9 @@ bool parar = flag.load();
 ```
 Use para contadores, flags e estatísticas. Para manter **várias** variáveis consistentes juntas (um saldo e um histórico), use mutex. Existem ordens de memória mais fracas (`memory_order_relaxed`…) para quem precisa do último grão de desempenho; o padrão (`seq_cst`) é o mais seguro.
 
+F: condition-variable
+A: condition variable, esperar sinal
+Q: porque | uma thread dorme até outra avisar que algo mudou | -> mutex
 P: o que é condition variable
 P: como fazer produtor consumidor em c++
 R: `std::condition_variable` deixa uma thread **dormir** até outra avisar que algo mudou, sem gastar processador:
@@ -239,6 +275,9 @@ void consumidor() {
 ```
 Sempre use a versão do `wait` **com condição**: a thread pode acordar sem motivo (*spurious wakeup*).
 
+F: async
+A: std::async, future, resultado depois
+Q: porque | roda uma tarefa e entrega o resultado depois, num future | -> threads
 P: o que é std::async e future
 P: como rodar tarefa em paralelo em c++
 R: `std::async` roda uma função em outra thread e devolve um `std::future` com o resultado, que você pega quando precisar:
@@ -256,6 +295,9 @@ long total = parte1.get() + parte2;   // get() espera, se ainda não terminou
 ```
 Exceções lançadas na tarefa reaparecem no `get()`. Outra opção são os algoritmos paralelos do C++17: `std::sort(std::execution::par, v.begin(), v.end());`.
 
+F: ranges
+A: ranges, c++20, views
+Q: porque | encadeiam filtros e transformações sobre coleções sem laços manuais | -> cpp-intermediario:algoritmos
 P: o que são ranges em c++20
 P: o que é views em c++
 R: **Ranges** (C++20) deixam encadear operações sobre sequências com `|`, de forma **preguiçosa** (nada é calculado nem copiado até ser usado):
@@ -276,6 +318,9 @@ std::ranges::sort(v);                                      // sem begin/end
 ```
 O C++23 trouxe `std::ranges::to<std::vector>()` para materializar o resultado, `views::enumerate`, `views::zip` e `views::chunk`.
 
+F: variant
+A: std::variant, um de vários tipos
+Q: porque | guarda um valor que pode ser de um entre alguns tipos, de forma segura | -> c-avancado:union
 P: o que é std::variant
 P: o que é std::visit
 P: como fazer tipo soma em c++
@@ -303,6 +348,9 @@ std::visit(overloaded{
 ```
 É uma alternativa ao polimorfismo com `virtual` quando o conjunto de tipos é fechado.
 
+F: format
+A: std::format, formatar texto
+Q: porque | formata textos com {} como o f-string do Python | -> python-basico:f-string
 P: o que é std::format
 P: o que é std::print
 R: `std::format` (C++20) formata textos com a sintaxe do Python, com segurança de tipos:
@@ -319,6 +367,9 @@ O C++23 trouxe `std::print` e `std::println` (`<print>`), que escrevem direto na
 std::println("Olá, {}!", nome);
 ```
 
+F: span
+A: std::span, string_view, ver sem copiar
+Q: porque | olham para dados de outro lugar sem copiar | -> cpp-basico:string
 P: o que é std::span e string_view
 R: Os dois são **visões** que não possuem os dados (não copiam nada):
 - `std::string_view` (C++17): qualquer texto (`std::string`, literal, pedaço de buffer);
@@ -337,6 +388,9 @@ media(c);
 ```
 Substituem o par "ponteiro + tamanho" do C. Cuidado: a visão não mantém os dados vivos; não guarde um `string_view` de uma `std::string` temporária.
 
+F: udl
+A: user defined literal, sufixo literal
+Q: porque | cria sufixos como 10_km para deixar o código mais claro
 P: o que é udl user defined literal
 P: o que é chrono em c++
 R: `<chrono>` trata tempo com **tipos**, sem confundir segundos com milissegundos:
@@ -353,6 +407,9 @@ std::cout << ms.count() << " ms\n";
 ```
 Os sufixos `150ms` e `2s` são **literais definidos pelo usuário**; dá para criar os seus (`operator""_km`). Use `steady_clock` para medir duração (nunca anda para trás) e `system_clock` para datas. O C++20 trouxe calendário e fusos horários.
 
+F: modulos
+A: módulos c++20, import
+Q: porque | substituem o #include, compilando mais rápido e sem repetir cabeçalhos | -> c-intermediario:preprocessador
 P: o que são módulos em c++20
 P: o que é import std
 R: **Módulos** (C++20) substituem o `#include`: em vez de colar o texto do cabeçalho em cada arquivo, o compilador processa o módulo **uma vez** e os outros importam o resultado. Compila mais rápido e macros não vazam de um arquivo para outro.
@@ -368,6 +425,9 @@ int main() { std::println("{}", quadrado(7)); }
 ```
 O suporte já existe no MSVC, no Clang e no GCC (14 ou mais novo) e no CMake 3.28 ou mais novo, mas ainda exige configuração. Em projetos novos vale experimentar; em projetos existentes, cabeçalhos continuam sendo o normal.
 
+F: otimizar
+A: otimizar c++, desempenho em c++
+Q: porque | o ganho grande vem do algoritmo e de evitar cópias, e não de truques | -> prog-estruturas-dados:complexidade
 P: como otimizar código c++
 P: como deixar c++ mais rápido
 R: Primeiro **meça**, depois otimize o que o perfilador apontar:
@@ -379,6 +439,9 @@ R: Primeiro **meça**, depois otimize o que o perfilador apontar:
 - evite alocações dentro de laços quentes;
 - perfiladores: `perf` (Linux), Valgrind/Callgrind, o perfilador do Visual Studio, e o Compiler Explorer (godbolt.org) para ver o Assembly gerado.
 
+F: testar
+A: testar c++, googletest, catch2
+Q: porque | uma biblioteca de testes roda cada caso e mostra o que falhou | -> prog-vocabulario:teste-automatizado
 P: como testar código c++
 P: o que é googletest
 P: o que é catch2
@@ -399,6 +462,9 @@ TEST_CASE("pilha empilha e desempilha") {
 ```
 Integre ao CMake (`enable_testing()` + `add_test`) e rode com `ctest`. Combine com os sanitizers (`-fsanitize=address,undefined,thread`) para pegar erros de memória e de concorrência durante os testes.
 
+F: ferramentas
+A: ferramentas c++ moderno, sanitizers, clang-tidy
+Q: porque | sanitizers e analisadores acham erros de memória antes de chegar ao usuário | -> c-avancado:valgrind
 P: ferramentas para c++ moderno
 P: o que é clang-tidy e clang-format
 P: como gerenciar dependências em c++
@@ -411,6 +477,9 @@ R: O kit de quem trabalha com C++ hoje:
 - **ccache** para reaproveitar compilações;
 - **Compiler Explorer** (godbolt.org) para testar trechos em vários compiladores.
 
+F: versoes
+A: versões do c++, c++11, c++14, c++17, c++20, c++23, novidades
+Q: porque | cada versão traz recursos novos, como lambdas no C++11 e concepts no C++20 | -> concepts
 P: o que mudou no c++11 c++14 c++17 c++20 e c++23
 P: quais as versões do c++
 P: c++ moderno
@@ -424,6 +493,9 @@ R: Os marcos do C++ moderno:
 - **C++26** está em finalização, com reflexão em tempo de compilação e contratos.
 Comece projetos novos em C++20 (`-std=c++20`).
 
+F: expected
+A: std::expected, valor ou erro
+Q: porque | devolve o resultado ou o erro sem exceções | -> cpp-intermediario:optional
 P: o que é std::expected
 P: como tratar erro sem exceção em c++
 R: `std::expected<T, E>` (C++23) guarda **ou** o resultado **ou** o erro, deixando explícito na assinatura que a função pode falhar, sem exceções:
@@ -449,6 +521,9 @@ if (auto r = ler_idade("abc"); r) {
 ```
 É o estilo do Rust (`Result`) e combina com `and_then`/`transform`. Útil em código onde exceções são proibidas (jogos, embarcados) ou onde o erro é esperado (validar entrada).
 
+F: projetos
+A: projetos avançados em c++
+Q: porque | um projeto real junta templates, memória e concorrência | -> threads
 P: projetos avançados em c++
 P: o que construir para dominar c++
 R: Projetos que exercitam o C++ moderno:

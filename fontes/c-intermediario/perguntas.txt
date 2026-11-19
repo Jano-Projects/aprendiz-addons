@@ -241,7 +241,7 @@ typedef struct No {
 ```
 
 F: seta
-A: operador seta, ->, ponteiro para struct
+A: operador seta, ->, usar ->, ponteiro para struct
 Q: porque | p->campo é o atalho de (*p).campo, para acessar um campo pela struct apontada | -> struct
 P: o que é operador seta em c
 P: diferença entre ponto e seta em struct

@@ -1,7 +1,7 @@
 {
   "id": "cpp-basico",
   "nome": "C++ 1 · Básico",
-  "versao": "1.0.0",
+  "versao": "2.0.0",
   "autor": "Jano Projects",
   "descricao": "C++ do zero: g++, iostream, namespaces, std::string, referências, sobrecarga, std::vector, for de intervalo, auto, classes, construtores e a diferença entre C e C++.",
   "licenca": "CC-BY-4.0",
@@ -16,7 +16,7 @@
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.6.0"
+    "versao_minima": "2.0.0"
   },
   "dependencias": [
     {
@@ -24,10 +24,5 @@
       "versao": "1.0.0",
       "nome": "C 1 · Básico"
     }
-  ],
-  "recomendado": {
-    "busca": "hibrido",
-    "resposta": "direta",
-    "acerto": 0.98
-  }
+  ]
 }
