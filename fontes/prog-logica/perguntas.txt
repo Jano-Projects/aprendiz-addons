@@ -2,6 +2,9 @@
 # Primeiro addon da trilha de programação: os conceitos que valem para qualquer linguagem.
 # Os exemplos usam pseudocódigo (português estruturado) e, às vezes, Python.
 
+F: programacao
+A: programação, programar, programador, escrever código
+Q: porque | o computador só faz o que é dito passo a passo, e programar é escrever esses passos numa linguagem que ele entende | -> algoritmo
 P: o que é programação
 P: o que é programar
 P: o que faz um programador
@@ -13,6 +16,11 @@ O computador não "entende" a ideia: ele executa exatamente o que está escrito,
 4. testar e corrigir.
 O passo 2 é o mais importante e não depende de linguagem nenhuma. É isso que esta trilha começa ensinando.
 
+F: algoritmo
+N: raiz
+A: algoritmo, passo a passo, sequência de passos, receita
+Q: definicao | um algoritmo é uma sequência finita e ordenada de passos que resolve um problema
+Q: exemplo-de | uma receita de bolo é um algoritmo do dia a dia
 P: o que é um algoritmo
 P: o que significa algoritmo
 P: exemplo de algoritmo do dia a dia
@@ -31,11 +39,18 @@ Exemplo, "trocar uma lâmpada":
 4. ligue o interruptor;
 5. se não acender, volte ao passo 1 e confira o interruptor.
 
+F: programa
+A: programa, software, aplicativo, executável
+Q: porque | um programa é um algoritmo escrito numa linguagem de programação para o computador executar | -> algoritmo
 P: o que é um programa de computador
 P: diferença entre algoritmo e programa
 R: O **algoritmo** é a ideia (os passos). O **programa** é esse algoritmo escrito numa linguagem que o computador consegue executar.
 O mesmo algoritmo pode virar programas em C, Python ou Java. Um programa pode juntar muitos algoritmos: o Aprendiz, por exemplo, tem um algoritmo para normalizar o texto, outros para buscar (BM25, TF-IDF…) e outros para montar a resposta.
 
+F: linguagem
+A: linguagem de programação, python, c, java, javascript
+Q: porque | o computador entende só instruções de máquina, e a linguagem é o meio-termo entre o que a pessoa escreve e o que ele executa
+Q: diferente-de | umas são compiladas antes de rodar, outras interpretadas enquanto rodam | -> compilada-interpretada
 P: o que é uma linguagem de programação
 P: para que serve uma linguagem de programação
 P: quais as linguagens de programação mais usadas
@@ -49,6 +64,10 @@ Algumas das mais usadas e para que costumam servir:
 - **SQL:** consultar e alterar bancos de dados.
 Os conceitos desta trilha (variáveis, decisões, laços, funções) existem em todas elas. Muda a escrita, não a lógica.
 
+F: compilada-interpretada
+A: compilada, interpretada, compilador, interpretador
+Q: porque | o compilador traduz o programa inteiro antes de rodar; o interpretador traduz e executa aos poucos | -> linguagem
+Q: consequencia | o compilado costuma rodar mais rápido, e o interpretado é mais rápido de testar
 P: o que é linguagem compilada e interpretada
 P: diferença entre compilador e interpretador
 P: python é compilado ou interpretado
@@ -58,6 +77,9 @@ R: O computador só executa **código de máquina** (números). Há dois jeitos 
 - **Interpretada:** um **interpretador** lê e executa o programa enquanto ele roda. Ex.: Python, JavaScript. Mais prático para testar, normalmente mais lento.
 Na prática há misturas: o Python primeiro traduz o código para **bytecode** (os arquivos `.pyc`) e uma máquina virtual executa esse bytecode; Java compila para bytecode e a JVM o executa, compilando as partes mais usadas na hora (JIT).
 
+F: codigo-fonte
+A: código fonte, código, arquivo do programa
+Q: porque | é o texto que a pessoa escreve e lê; o computador executa a versão traduzida dele | -> compilada-interpretada
 P: o que é código fonte
 P: o que é código de máquina
 P: o que é linguagem de baixo nível e alto nível
@@ -66,6 +88,9 @@ R: **Código-fonte** é o texto que a pessoa escreve (`programa.c`, `app.py`).
 - **Baixo nível:** perto da máquina, com controle total e pouca ajuda (Assembly e, em boa parte, C).
 - **Alto nível:** perto da linguagem humana, com muita coisa automática (Python, Java). Escreve-se menos para fazer mais, em troca de menos controle.
 
+F: pseudocodigo
+A: pseudocódigo, portugol, algoritmo em português
+Q: porque | escrever a lógica em português, sem as regras de uma linguagem, ajuda a pensar antes de programar | -> algoritmo
 P: o que é pseudocódigo
 P: o que é portugol
 P: como escrever um algoritmo em português
@@ -96,6 +121,9 @@ media = (n1 + n2) / 2
 print("Aprovado" if media >= 7 else "Reprovado")
 ```
 
+F: fluxograma
+A: fluxograma, diagrama, desenho do algoritmo
+Q: porque | desenhar os passos e as decisões em caixas e setas mostra o caminho do algoritmo de relance | -> algoritmo
 P: o que é fluxograma
 P: como fazer um fluxograma
 P: quais os símbolos do fluxograma
@@ -108,6 +136,9 @@ R: **Fluxograma** é o algoritmo desenhado. Os símbolos principais:
 - **setas:** a ordem dos passos.
 Desenhe primeiro o caminho principal, depois as decisões. Se uma seta voltar para cima, você tem uma **repetição** (laço). Ferramentas gratuitas: draw.io (diagrams.net) e o próprio papel.
 
+F: entrada-saida
+A: entrada, processamento, saída, ler, mostrar
+Q: porque | quase todo programa recebe dados, faz algo com eles e mostra um resultado | -> algoritmo
 P: o que é entrada processamento e saída
 P: o que é entrada e saída de dados
 R: Quase todo programa segue o modelo **entrada → processamento → saída**:
@@ -116,6 +147,11 @@ R: Quase todo programa segue o modelo **entrada → processamento → saída**:
 - **saída:** o resultado (na tela, num arquivo, num banco de dados).
 No Aprendiz: a entrada é a sua mensagem; o processamento é normalizar, buscar e escolher a resposta; a saída é a resposta no chat.
 
+F: variavel
+N: raiz
+A: variável, guardar valor, nome para um valor, memória
+Q: definicao | uma variável é um nome para um lugar da memória onde um valor fica guardado e pode mudar
+Q: diferente-de | a constante guarda um valor que não muda | -> constante
 P: o que é uma variável
 P: para que serve uma variável
 P: como funciona uma variável na memória
@@ -130,6 +166,10 @@ idade = idade + 1 # lê o valor (30), soma 1 e guarda 31
 ```
 O sinal `=` em programação é **atribuição** ("guarde isto aqui"), não igualdade matemática. Por isso `idade = idade + 1` faz sentido.
 
+F: constante
+A: constante, valor fixo, não muda, valor que não muda
+Q: porque | dar nome a um valor fixo, como o PI, evita repetir o número e erros de digitação
+Q: diferente-de | a variável pode mudar durante o programa | -> variavel
 P: o que é uma constante
 P: diferença entre variável e constante
 R: **Constante** é um valor que não muda durante o programa, como `PI = 3.14159` ou `LIMITE_DE_TENTATIVAS = 3`.
@@ -137,6 +177,11 @@ Vantagens: o número tem um nome que explica o que ele é, e se precisar mudar, 
 - C: `const double PI = 3.14159;` ou `#define PI 3.14159`
 - Python não tem constante de verdade; a convenção é escrever o nome em MAIÚSCULAS para avisar que não deve mudar.
 
+F: tipos-dados
+N: raiz
+A: tipos de dados, inteiro, real, texto, lógico, int, float, string, bool
+Q: definicao | o tipo diz que valores uma variável aceita e que operações fazem sentido com ela
+Q: parte-de | toda variável tem um tipo | -> variavel
 P: quais são os tipos de dados
 P: o que é tipo de dado
 P: o que é inteiro real caractere e lógico
@@ -149,6 +194,9 @@ R: O **tipo** diz que tipo de valor a variável guarda e o que dá para fazer co
 - **lógico / booleano** (`bool`): verdadeiro ou falso.
 Somar dois inteiros dá um número; "somar" dois textos, em muitas linguagens, junta os textos ("ab" + "c" = "abc"). Por isso o tipo importa.
 
+F: tipagem
+A: tipagem estática, tipagem dinâmica, declarar tipo
+Q: porque | na estática o tipo é decidido ao escrever o programa; na dinâmica, ao rodar | -> tipos-dados
 P: o que é tipagem estática e dinâmica
 P: o que é tipagem forte e fraca
 P: python tem tipo
@@ -158,6 +206,10 @@ R: **Estática:** o tipo da variável é decidido antes de rodar e não muda (C,
 **Fraca:** a linguagem converte sozinha: em JavaScript, `"1" + 1` vira `"11"`.
 Python é **dinâmica e forte**; C é **estática e fraca** (converte números entre si sem avisar).
 
+F: ponto-flutuante
+A: 0.1 mais 0.2, ponto flutuante, float, arredondamento, casas decimais
+Q: porque | o computador guarda números em binário, e 0,1 não tem representação exata em binário | -> binario
+Q: consequencia | para dinheiro se usa decimal ou se guarda em centavos, como inteiro
 P: por que 0.1 mais 0.2 não dá 0.3
 P: o que é ponto flutuante
 P: erro de arredondamento com float
@@ -170,6 +222,9 @@ Regras práticas:
 - não compare reais com `==`; use uma tolerância: `abs(a - b) < 1e-9` (em Python, `math.isclose(a, b)`);
 - para dinheiro, use inteiros em centavos ou um tipo decimal (`decimal.Decimal` em Python, `NUMERIC` em SQL).
 
+F: binario
+A: binário, base 2, bits, zeros e uns
+Q: porque | o circuito do computador só distingue dois estados, ligado e desligado
 P: o que é binário
 P: como funciona o sistema binário
 P: o que é bit e byte
@@ -180,6 +235,10 @@ Cada posição vale o dobro da anterior: 1, 2, 4, 8, 16…
 `1011` em binário = 8 + 0 + 2 + 1 = **11** em decimal.
 Um `int` comum tem 32 bits: vai de cerca de -2,1 bilhões a +2,1 bilhões. Também se usa **hexadecimal** (base 16, dígitos 0–9 e A–F) porque cada dígito hexa são exatamente 4 bits: `FF` = 255.
 
+F: aritmeticos
+A: operadores aritméticos, soma, subtração, multiplicação, divisão, resto, módulo
+Q: porque | são as contas básicas que o programa faz com números | -> tipos-dados
+Q: exemplo-de | o resto da divisão (%) diz se um número é par
 P: quais são os operadores aritméticos
 P: o que é o operador resto mod
 P: o que é divisão inteira
@@ -189,6 +248,9 @@ R: Os operadores aritméticos:
 - **divisão inteira:** em Python é `//` (`7 // 2` = 3); em C, `/` entre dois inteiros já é inteira (`7 / 2` = 3), e `7.0 / 2` = 3.5.
 A precedência é a da matemática: primeiro `*`, `/` e `%`, depois `+` e `-`. Na dúvida, use parênteses.
 
+F: relacionais
+A: operadores relacionais, maior, menor, igual, diferente, comparar
+Q: porque | comparar dois valores dá verdadeiro ou falso, e é isso que as decisões usam | -> booleana
 P: quais são os operadores relacionais
 P: o que é operador de comparação
 P: diferença entre = e ==
@@ -197,6 +259,9 @@ R: **Relacionais** comparam dois valores e dão verdadeiro ou falso:
 Cuidado com o clássico: `=` **atribui** (guarda um valor), `==` **compara**.
 Em C, `if (x = 5)` compila, guarda 5 em x e é sempre verdadeiro, um erro famoso. Ative os avisos do compilador (`gcc -Wall`) para ele te alertar.
 
+F: logicos
+A: operadores lógicos, e, ou, não, and, or, not
+Q: porque | juntam condições: E exige as duas, OU basta uma, NÃO inverte | -> booleana
 P: quais são os operadores lógicos
 P: o que é and or not
 P: como funciona e ou e não
@@ -211,6 +276,11 @@ Tabela-verdade do E e do OU (V = verdadeiro, F = falso):
 Exemplo: pode dirigir se `idade >= 18 and tem_cnh`.
 **Curto-circuito:** em `a and b`, se `a` for falso, `b` nem é avaliado. Isso permite `if lista and lista[0] > 0`, sem erro na lista vazia.
 
+F: booleana
+N: raiz
+A: lógica booleana, verdadeiro, falso, true, false, bool
+Q: definicao | a lógica booleana trabalha com só dois valores, verdadeiro e falso
+Q: consequencia | toda decisão de um programa, num se ou num laço, depende de um valor booleano | -> condicional
 P: o que é lógica booleana
 P: o que é álgebra de boole
 P: o que são as leis de de morgan
@@ -220,6 +290,10 @@ R: **Lógica booleana** é a matemática do verdadeiro/falso, criada por George 
 Exemplo: "não (é fim de semana e está chovendo)" é o mesmo que "não é fim de semana ou não está chovendo".
 Use isso para reescrever um `if not (...)` complicado numa forma mais fácil de ler.
 
+F: condicional
+A: estrutura condicional, se, senão, if, else, decisão
+Q: porque | o programa precisa escolher um caminho conforme uma condição for verdadeira ou falsa | -> booleana
+Q: diferente-de | o escolha-caso compara uma variável com vários valores possíveis | -> escolha-caso
 P: o que é estrutura condicional
 P: como funciona o se senão
 P: o que é if else
@@ -254,6 +328,9 @@ if (temperatura > 30) {
 ```
 As condições são testadas **de cima para baixo**; só o primeiro bloco verdadeiro roda. Por isso a ordem importa.
 
+F: escolha-caso
+A: escolha caso, switch, case, vários valores
+Q: porque | quando uma variável pode ter muitos valores, um escolha-caso é mais claro que muitos se encadeados | -> condicional
 P: o que é escolha caso
 P: o que é switch case
 P: quando usar switch em vez de if
@@ -274,6 +351,11 @@ match opcao:
     case _: print("Opção inválida")
 ```
 
+F: repeticao
+A: estrutura de repetição, laço, loop, repetir
+Q: porque | repetir um bloco com um laço evita copiar o mesmo código várias vezes
+Q: regra | todo laço precisa de uma condição que um dia fique falsa | -> booleana
+Q: diferente-de | o for é para quantidade conhecida; o while, para repetir enquanto algo for verdade | -> while-for
 P: o que é estrutura de repetição
 P: o que é laço de repetição
 P: o que é loop
@@ -285,6 +367,9 @@ R: Um **laço** (loop) repete um bloco de código. Há três formas clássicas:
 - **para (for):** repete um número conhecido de vezes, ou para cada item de uma coleção.
 Todo laço precisa de algo que o faça **terminar**; senão vira um **laço infinito**.
 
+F: while-for
+A: while, for, enquanto, para, diferença entre laços
+Q: porque | o for serve quando se sabe quantas vezes repetir; o while, quando depende de uma condição | -> repeticao
 P: diferença entre while e for
 P: quando usar while ou for
 P: como funciona o while
@@ -311,6 +396,9 @@ while (n > 0) {
 }
 ```
 
+F: do-while
+A: do while, faça enquanto, repita até
+Q: diferente-de | o do-while testa a condição no fim, então roda pelo menos uma vez | -> while-for
 P: o que é do while
 P: como fazer repita até
 R: O **do-while** (repita…até) executa o bloco **antes** de testar, então roda pelo menos uma vez. Ótimo para menus e para validar o que foi digitado.
@@ -329,6 +417,9 @@ while True:
         break
 ```
 
+F: laco-infinito
+A: laço infinito, loop infinito, nunca para, programa travado, não para de repetir
+Q: porque | a condição do laço nunca fica falsa, muitas vezes porque a variável não muda dentro dele | -> repeticao
 P: o que é laço infinito
 P: meu programa travou num loop
 P: como sair de um laço
@@ -346,6 +437,9 @@ for numero in numeros:
     print(numero)
 ```
 
+F: contador-acumulador
+A: contador, acumulador, contar, somar no laço
+Q: porque | dentro de um laço, o contador soma 1 a cada volta e o acumulador soma valores | -> repeticao
 P: o que é contador e acumulador
 P: como somar valores num laço
 R: Dois padrões que aparecem em quase todo programa:
@@ -361,6 +455,9 @@ print("média:", total / quantos)
 ```
 Comece sempre o acumulador de soma com 0 e o de produto com 1.
 
+F: laco-aninhado
+A: laço aninhado, laço dentro de laço, loop dentro de loop, tabela, matriz
+Q: porque | percorrer duas dimensões, como linhas e colunas, pede um laço para cada uma | -> repeticao
 P: o que é laço aninhado
 P: como fazer um for dentro de outro for
 R: **Laço aninhado** é um laço dentro de outro. Para cada volta do de fora, o de dentro roda inteiro.
@@ -378,6 +475,11 @@ Saída (tabuada 3×3):
 ```
 Atenção ao custo: dois laços de n voltas cada fazem n × n operações. Com n = 10 000, são 100 milhões.
 
+F: funcao
+N: raiz
+A: função, procedimento, sub-rotina, método, def
+Q: definicao | uma função é um bloco de código com nome, que recebe dados e pode devolver um resultado
+Q: porque | escrever uma vez e chamar várias evita repetir código e organiza o programa
 P: o que é uma função
 P: para que serve uma função
 P: o que é procedimento e função
@@ -398,6 +500,9 @@ double area_retangulo(double base, double altura) {
 ```
 Em algumas linguagens e cursos, **procedimento** é a função que não devolve nada (em C, `void`).
 
+F: parametro-argumento
+A: parâmetro, argumento, passar valores para função
+Q: porque | o parâmetro é o nome na definição da função; o argumento é o valor passado ao chamar | -> funcao
 P: o que é parâmetro e argumento
 P: diferença entre parâmetro e argumento
 P: o que é retorno de função
@@ -410,6 +515,10 @@ dobro(5)          # 5 é o argumento; o resultado é 10
 ```
 Uma função sem `return` devolve "nada": `None` em Python, `void` em C.
 
+F: valor-referencia
+A: passagem por valor, passagem por referência, por cópia, pelo original
+Q: porque | por valor a função recebe uma cópia; por referência, mexe no original | -> parametro-argumento
+Q: exemplo-de | em C, a passagem por referência é feita com ponteiros
 P: o que é passagem por valor e por referência
 P: a função altera a variável original
 R: **Por valor:** a função recebe uma **cópia**; mudar o parâmetro não muda a variável de quem chamou.
@@ -418,6 +527,10 @@ R: **Por valor:** a função recebe uma **cópia**; mudar o parâmetro não muda
 - **C++:** tem referência de verdade: `void zerar(int &x) { x = 0; }`.
 - **Python:** passa a referência ao objeto. Se o objeto for mutável (lista, dicionário), a função pode alterá-lo; reatribuir o parâmetro não afeta quem chamou.
 
+F: escopo
+A: escopo, variável local, variável global, só existe dentro da função
+Q: porque | uma variável criada dentro da função só existe ali, o que evita uma parte do programa estragar a outra | -> funcao
+Q: parte-de | toda variável tem um escopo | -> variavel
 P: o que é escopo de variável
 P: o que é variável local e global
 R: **Escopo** é onde uma variável existe e pode ser usada.
@@ -432,6 +545,11 @@ def somar():
 ```
 Prefira variáveis locais e passe valores por parâmetro: com globais, qualquer parte do código pode alterar o valor, e o erro fica difícil de achar.
 
+F: recursao
+A: recursão, recursiva, função que chama ela mesma
+Q: porque | alguns problemas se resolvem com uma versão menor do mesmo problema | -> funcao
+Q: regra | toda recursão precisa de um caso base, que para sem chamar de novo
+Q: consequencia | cada chamada ocupa espaço na pilha de chamadas | -> pilha-chamadas
 P: o que é recursão
 P: o que é uma função recursiva
 P: exemplo de recursividade
@@ -450,12 +568,19 @@ def fatorial(n):
 ```
 Sem caso base, a função se chama até estourar a pilha (**stack overflow**; em Python, `RecursionError`). Tudo que se faz com recursão dá para fazer com laço, e às vezes o laço é mais eficiente.
 
+F: pilha-chamadas
+A: pilha de chamadas, call stack, stack overflow
+Q: porque | cada função chamada guarda ali onde parou, para voltar quando terminar | -> funcao
 P: o que é a pilha de chamadas
 P: o que é stack overflow
 R: A **pilha de chamadas** (call stack) guarda, para cada função em execução, as variáveis locais e o ponto para onde voltar. Cada chamada empilha; cada `return` desempilha.
 **Stack overflow** acontece quando a pilha enche, quase sempre por recursão sem fim (ou profunda demais).
 Quando um programa quebra, o **traceback** (Python) ou o **backtrace** (gdb) mostra exatamente essa pilha: quem chamou quem até o erro. Leia de baixo para cima no Python: a última linha diz o erro, e as de cima, o caminho até ele.
 
+F: vetor
+A: vetor, array, lista, várias posições
+Q: porque | guarda vários valores do mesmo tipo com um nome só, acessados pela posição | -> variavel
+Q: consequencia | a primeira posição costuma ser a 0 | -> indice-zero
 P: o que é um vetor na lógica de programação
 P: o que é um array
 P: o que é uma matriz
@@ -473,11 +598,17 @@ print(m[1][2])    # linha 1, coluna 2 → 6
 ```
 Acessar um índice que não existe é erro: `IndexError` em Python; em C, comportamento indefinido (pode até "funcionar" e corromper outros dados).
 
+F: indice-zero
+A: índice começa em zero, índice do vetor, posição zero, primeira posição, começa do zero
+Q: porque | o índice é a distância a partir do começo do vetor, e o primeiro elemento está a zero passos dele | -> vetor
 P: por que o índice começa em zero
 R: Porque o índice é um **deslocamento** a partir do começo do vetor: o primeiro elemento está a 0 posições do início, o segundo a 1, e assim por diante.
 Em C isso é literal: `v[i]` é o mesmo que `*(v + i)`, o endereço inicial mais i elementos. Algumas linguagens (Lua, MATLAB, Fortran, o Portugol do VisuAlg) começam em 1.
 Consequência prática: um vetor de tamanho n vai do índice 0 ao **n − 1**. Escrever `i <= n` no laço é o famoso erro "um a mais" (*off-by-one*).
 
+F: string
+A: string, texto, cadeia de caracteres
+Q: porque | um texto é uma sequência de caracteres, guardada como um vetor de letras | -> vetor
 P: o que é string
 P: o que é cadeia de caracteres
 R: **String** (cadeia de caracteres) é um texto: uma sequência de caracteres.
@@ -485,6 +616,9 @@ R: **String** (cadeia de caracteres) é um texto: uma sequência de caracteres.
 - Em **C** é um vetor de `char` terminado pelo caractere nulo `'\0'`: `char nome[] = "Ana";` ocupa 4 bytes (A, n, a, \0).
 Cada caractere é guardado como um número (tabela **ASCII** ou **Unicode**). No UTF-8, letras acentuadas usam mais de um byte, então em C `strlen("ação")` dá 6, não 4.
 
+F: trocar-valores
+A: trocar valores, swap, variável auxiliar
+Q: porque | ao guardar o novo valor, o antigo se perde, então se usa uma variável auxiliar | -> variavel
 P: como trocar o valor de duas variáveis
 P: como fazer swap
 R: O clássico precisa de uma variável **auxiliar**, senão o primeiro valor se perde:
@@ -501,6 +635,9 @@ b = aux;
 ```
 Em Python há um atalho: `a, b = b, a`.
 
+F: maior-valor
+A: maior valor, menor valor, máximo, mínimo
+Q: porque | se guarda o maior visto até agora e se compara cada novo elemento com ele | -> repeticao
 P: como achar o maior valor de uma lista
 P: algoritmo para encontrar o maior e o menor
 R: Comece supondo que o primeiro é o maior e compare com todos os outros:
@@ -514,6 +651,9 @@ def maior(valores):
 ```
 Começar com 0 é um erro comum: falha se todos os números forem negativos. Em Python já existem `max()` e `min()`, mas saber fazer à mão é a base para problemas parecidos (o mais velho, o produto mais caro…).
 
+F: primo
+A: número primo, divisores
+Q: porque | primo só é divisível por 1 e por ele mesmo, então se testa o resto da divisão | -> aritmeticos
 P: como saber se um número é primo
 P: algoritmo de número primo
 R: Um número n > 1 é **primo** se só é divisível por 1 e por ele mesmo. Basta testar divisores de 2 até a **raiz quadrada** de n: se n tivesse um divisor maior que a raiz, teria também um menor.
@@ -530,6 +670,9 @@ def eh_primo(n):
 ```
 Testar até a raiz em vez de até n transforma um milhão de divisões em mil.
 
+F: teste-mesa
+A: teste de mesa, simular no papel, linha por linha, acompanhar variáveis
+Q: porque | executar o algoritmo à mão, anotando cada variável, mostra onde a lógica erra | -> variavel
 P: o que é teste de mesa
 P: como fazer teste de mesa
 P: teste de mesa
@@ -541,6 +684,10 @@ Exemplo para `soma = 0; para i de 1 até 3: soma = soma + i`:
 - i = 3 → soma = 6
 Faça uma tabela com uma coluna por variável e uma linha por passo. Se o resultado no papel for diferente do esperado, o erro está na lógica, não no computador.
 
+F: tipos-erro
+A: tipos de erro, erro de sintaxe, erro de lógica, erro de execução, bug
+Q: porque | cada erro aparece numa hora: sintaxe ao escrever, execução ao rodar e lógica no resultado errado
+Q: consequencia | o erro de lógica não avisa nada, e se acha depurando | -> depurar
 P: quais os tipos de erro em programação
 P: o que é erro de sintaxe
 P: o que é erro de lógica
@@ -551,6 +698,9 @@ R: Três tipos:
 - **Lógica:** roda sem erro, mas a resposta está errada (usou `<` no lugar de `<=`). É o mais difícil: só aparece testando.
 Leia a mensagem de erro inteira: ela diz o tipo, o arquivo e a linha.
 
+F: depurar
+A: depurar, debug, debugar, achar o erro, encontrar o erro
+Q: porque | acompanhar o programa passo a passo mostra onde o que acontece deixa de ser o esperado | -> teste-mesa
 P: o que é depurar
 P: o que é debug
 P: como encontrar um erro no código
@@ -562,6 +712,9 @@ R: **Depurar** (debugar) é encontrar e corrigir erros. Um método que funciona:
 5. depois de corrigir, escreva um **teste** para o erro não voltar.
 Explicar o código em voz alta, linha por linha, também resolve muita coisa (o "patinho de borracha").
 
+F: aprender
+A: aprender a programar, começar, por onde começar, iniciante
+Q: porque | a lógica vale para qualquer linguagem, então vem antes da linguagem | -> algoritmo
 P: como aprender a programar
 P: por onde começar a programar
 P: qual a melhor linguagem para começar
@@ -576,6 +729,9 @@ R: Um caminho que funciona:
 6. leia código dos outros. O próprio Aprendiz é comentado para isso (trilha "Aprendiz por dentro").
 Sites gratuitos para exercitar: Beecrowd (exercícios em português), Exercism, HackerRank.
 
+F: exercicios
+A: exercícios, praticar, treinar lógica
+Q: porque | lógica só fixa praticando, do simples ao composto | -> aprender
 P: quais exercícios de lógica de programação para iniciantes
 P: me dá um exercício de lógica
 R: Exercícios clássicos, do mais fácil ao mais difícil:
@@ -591,6 +747,9 @@ R: Exercícios clássicos, do mais fácil ao mais difícil:
 10. inverter um texto e dizer se é palíndromo ("arara").
 Faça primeiro em pseudocódigo, depois o teste de mesa, e só então na linguagem.
 
+F: fibonacci
+A: fibonacci, sequência
+Q: porque | cada termo é a soma dos dois anteriores, um exemplo clássico de laço e de recursão | -> recursao
 P: como fazer a sequência de fibonacci
 P: algoritmo de fibonacci
 R: Na **sequência de Fibonacci**, cada termo é a soma dos dois anteriores: 1, 1, 2, 3, 5, 8, 13…

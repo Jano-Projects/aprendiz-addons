@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T02:12:31+00:00",
+  "gerado_em": "2026-11-19T02:17:50+00:00",
   "total": 40,
   "addons": [
     {
@@ -1162,15 +1162,15 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": {
-        "regras": 215,
+        "regras": 217,
         "catalogo": 37,
         "lemas": 317331,
         "vetores": 0
       },
       "norma": null,
       "arquivo": "addons/compreensao-portugues.aprendiz",
-      "tamanho": 857843,
-      "sha256": "0bb2af938a7194d9e519818df2d77cb7314c203d7050fdf35aa4f4e45dbed7df",
+      "tamanho": 858121,
+      "sha256": "5bff860d88e6e2295154780c94295082556a5f67aac9e5cb5bc21261c4dd584a",
       "atualizado_em": "2026-11-18",
       "amostra": []
     },
@@ -2956,7 +2956,7 @@
     {
       "id": "prog-logica",
       "nome": "Programação 1 · Lógica e algoritmos",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "O começo de tudo: o que é um programa, algoritmo, variável, tipos, operadores, decisões, repetições, funções, recursão, pseudocódigo, fluxograma e como encontrar erros. Primeiro passo da trilha de programação.",
       "licenca": "CC-BY-4.0",
@@ -2978,13 +2978,13 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.0",
       "dependencias": [],
       "recomendado": {
-        "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.96
+        "busca": "tfidf",
+        "resposta": "trabalhada",
+        "acerto": 0.92
       },
       "conhecimentos": 45,
       "verbetes": 0,
@@ -2997,8 +2997,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/prog-logica.aprendiz",
-      "tamanho": 12162,
-      "sha256": "20f4a3004aa9cc08b692add202c8db5339016a13ae4bf45844ff58f949a7f9be",
+      "tamanho": 15468,
+      "sha256": "a086ad1b3362b6859544b379ec3610bd4caac6665cd2237e6105612e7cfb7fa7",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {

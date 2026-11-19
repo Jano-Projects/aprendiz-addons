@@ -1187,6 +1187,20 @@
     "tudo ou nada",
     "transacao"
    ]
+  },
+  {
+   "padrao": "nao|nunca muda|mudam|varia|variam|altera|alteram",
+   "conceitos": [
+    "constante",
+    "valor fixo"
+   ]
+  },
+  {
+   "padrao": "nunca|nao para|termina|acaba|sai",
+   "conceitos": [
+    "infinito",
+    "sem fim"
+   ]
   }
  ],
  "catalogo": [

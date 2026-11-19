@@ -355,7 +355,9 @@
     {"padrao": "em ordem de *", "conceitos": ["ordenar", "ordem"]},
     {"padrao": "* tem|faz|possui|participa|pertence varios|varias|muitos|muitas * e * tem|faz|possui|recebe varios|varias|muitos|muitas *", "conceitos": ["muitos para muitos", "tabela associativa", "relacionamento"]},
     {"padrao": "de uma vez ou nenhuma|nada", "conceitos": ["tudo ou nada", "transacao"]},
-    {"padrao": "tudo ou nada", "conceitos": ["tudo ou nada", "transacao"]}
+    {"padrao": "tudo ou nada", "conceitos": ["tudo ou nada", "transacao"]},
+    {"padrao": "nao|nunca muda|mudam|varia|variam|altera|alteram", "conceitos": ["constante", "valor fixo"]},
+    {"padrao": "nunca|nao para|termina|acaba|sai", "conceitos": ["infinito", "sem fim"]}
   ],
 
   "catalogo": []
