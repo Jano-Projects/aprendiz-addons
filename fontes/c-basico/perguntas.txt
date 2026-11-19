@@ -1,7 +1,14 @@
 # C 1 · Básico
 # A linguagem C do zero. Todos os exemplos compilam com: gcc -Wall -Wextra -std=c17 arquivo.c
 
+F: linguagem-c
+N: raiz
+A: linguagem c, c, o que é c
+Q: definicao | C é uma linguagem compilada, próxima da máquina, em que o programador cuida da memória
+Q: porque | dá controle e velocidade, por isso está em sistemas operacionais e dispositivos | -> prog-logica:compilada-interpretada
 P: o que é a linguagem c
+P: o que é c
+P: o que é a linguagem de programação c
 P: para que serve a linguagem c
 P: por que aprender c
 R: **C** foi criada por Dennis Ritchie, no Bell Labs, no começo dos anos 1970, para escrever o sistema Unix. Até hoje é a base de quase tudo:
@@ -10,6 +17,9 @@ R: **C** foi criada por Dennis Ritchie, no Bell Labs, no começo dos anos 1970, 
 - firmware de microcontroladores (Arduino, injeção eletrônica de carros, aviônicos).
 Por que aprender: C mostra **como o computador funciona por dentro** (memória, endereços, bytes). Quem entende C entende melhor qualquer outra linguagem. É pequena (dá para conhecer a linguagem inteira), compilada e muito rápida, mas não tem rede de proteção: erros de memória são responsabilidade sua.
 
+F: instalar
+A: instalar compilador, gcc, clang, mingw
+Q: porque | o código C precisa ser traduzido para a máquina antes de rodar | -> compilacao
 P: como instalar o compilador c
 P: como instalar o gcc
 P: como compilar c no windows
@@ -24,6 +34,9 @@ R: Você precisa de um **compilador**. O mais comum é o **GCC** (o Clang també
 - **Windows:** instale o **MSYS2** (msys2.org), abra o terminal "MSYS2 UCRT64" e rode `pacman -S mingw-w64-ucrt-x86_64-gcc`; depois coloque `C:\msys64\ucrt64\bin` no PATH. Outra opção é o WSL (um Ubuntu dentro do Windows).
 Confira com `gcc --version`. Para editar, o **VS Code** com a extensão "C/C++" da Microsoft funciona bem nos três sistemas.
 
+F: hello
+A: hello world em c, primeiro programa c
+Q: porque | o menor programa testa o compilador e mostra a estrutura: include, main e printf | -> printf
 P: hello world em c
 P: primeiro programa em c
 P: como fazer um programa em c
@@ -45,6 +58,9 @@ Linha a linha:
 - `return 0;`: avisa o sistema que deu tudo certo (outro número indica erro);
 - cada instrução termina com `;` e os blocos ficam entre `{ }`.
 
+F: compilar
+A: compilar e executar, gcc arquivo.c, executável
+Q: porque | o gcc gera um executável, que é o que de fato roda | -> compilacao
 P: como compilar e executar um programa em c
 P: como rodar um código c
 P: o que faz gcc -o
@@ -64,6 +80,9 @@ As opções:
 - `-O2`: otimiza o código.
 Se aparecer `error`, leia a primeira mensagem: ela traz `arquivo:linha:coluna`.
 
+F: compilacao
+A: compilação, pré-processador, ligador, linker, etapas
+Q: porque | o código passa por pré-processamento, compilação, montagem e ligação até virar executável | -> linguagem-c
 P: o que acontece na compilação em c
 P: o que é pré processador compilador e linker
 P: quais as etapas da compilação
@@ -74,6 +93,9 @@ R: O `gcc` faz quatro etapas:
 4. **Ligação (linker):** junta os `.o` com as bibliotecas (como a que tem o `printf`) e gera o executável.
 Erro de "undefined reference" é da etapa 4: a função foi declarada mas o código dela não foi encontrado (faltou um arquivo ou uma biblioteca, como `-lm` para a `math.h`).
 
+F: printf
+A: printf, mostrar na tela, imprimir, %d, %s, formatar saída
+Q: porque | os códigos como %d e %f dizem como mostrar cada tipo de valor | -> tipos
 P: como usar printf em c
 P: o que é %d %f %s %c
 P: quais os especificadores de formato do printf
@@ -95,6 +117,10 @@ Os marcadores principais:
 - `%5d` ocupa 5 colunas · `%-10s` alinha à esquerda em 10 colunas.
 Marcador errado para o tipo é comportamento indefinido; o `-Wall` avisa.
 
+F: scanf
+A: ler dados do teclado, scanf, digitar valor, pegar o que o usuário digitou
+Q: porque | o scanf precisa do endereço da variável (&) para guardar o valor nela | -> c-intermediario:simbolos
+Q: parte-de | é a entrada do programa | -> prog-logica:entrada-saida
 P: como ler dados do teclado em c
 P: como usar scanf em c
 P: por que o scanf usa &
@@ -117,6 +143,9 @@ Atenção:
 - strings não levam `&` (o nome do vetor já é um endereço) e precisam de limite: `scanf("%49s", nome)` para um `char nome[50]`;
 - `%s` para no primeiro espaço. Para ler uma linha inteira, use `fgets`.
 
+F: fgets
+A: ler uma linha inteira, fgets, ler texto com espaço
+Q: porque | o scanf com %s para no primeiro espaço; o fgets lê a linha toda com limite de tamanho | -> scanf
 P: como ler uma linha inteira em c
 P: como usar fgets
 P: por que não usar gets
@@ -131,6 +160,9 @@ if (fgets(nome, sizeof nome, stdin)) {
 **Nunca use `gets`**: ela não sabe o tamanho do vetor e escreve além dele se a pessoa digitar demais. Foi removida do C em 2011 por ser a causa de incontáveis falhas de segurança.
 Misturar `scanf("%d")` com `fgets` deixa um `\n` sobrando no buffer; leia tudo com `fgets` e converta com `strtol` ou `sscanf`.
 
+F: tipos
+A: tipos de dados em c, int, float, double, char
+Q: porque | cada tipo ocupa um tamanho de memória e guarda uma faixa de valores | -> prog-logica:tipos-dados
 P: quais são os tipos de dados em c
 P: tamanho dos tipos em c
 P: o que é int float double char em c
@@ -147,6 +179,9 @@ R: Tipos básicos (tamanhos típicos num PC de 64 bits):
 - `_Bool` / `bool` (com `<stdbool.h>`): verdadeiro/falso.
 Os tamanhos dependem da máquina; confira com `sizeof(int)`. Para tamanhos exatos, use `<stdint.h>`: `int32_t`, `uint8_t`, `int64_t`.
 
+F: unsigned
+A: unsigned, sem sinal, só positivos
+Q: porque | sem o bit de sinal, o mesmo espaço guarda o dobro de valores positivos | -> tipos
 P: o que é unsigned em c
 P: o que é signed e unsigned
 R: `unsigned` faz o tipo guardar **só números não negativos**, dobrando o limite positivo:
@@ -155,6 +190,9 @@ R: `unsigned` faz o tipo guardar **só números não negativos**, dobrando o lim
 Cuidado: `unsigned` "dá a volta". `0u - 1` vira 4 294 967 295. Um laço `for (unsigned i = n - 1; i >= 0; i--)` nunca termina, porque `i >= 0` é sempre verdadeiro.
 Use `unsigned` para bits, tamanhos (`size_t`) e quantidades que nunca são negativas.
 
+F: variaveis
+A: declarar variáveis em c
+Q: regra | toda variável em C precisa ter o tipo declarado antes de usar | -> prog-logica:tipagem
 P: como declarar variáveis em c
 P: como criar uma variável em c
 P: como declarar variavel em c
@@ -171,6 +209,9 @@ int a = 1, b = 2, c;        /* várias de uma vez */
 Uma variável local **sem valor inicial** contém lixo (o que estava na memória). Sempre inicialize.
 Nomes: letras, dígitos e `_`, sem começar com dígito; maiúsculas e minúsculas são diferentes (`idade` ≠ `Idade`).
 
+F: constantes
+A: constantes em c, const, define
+Q: porque | nomear um valor fixo evita números soltos no código | -> prog-logica:constante
 P: como fazer constantes em c
 P: diferença entre const e define
 R: Duas formas:
@@ -182,6 +223,9 @@ const double PI = 3.14159;   /* uma variável que não pode mudar */
 - `const` tem tipo, o compilador confere e o depurador mostra.
 Convenção: constantes em MAIÚSCULAS. Para listas de valores com nome, use `enum` (trilha intermediária).
 
+F: operadores
+A: operadores em c, aritméticos, lógicos, incremento
+Q: porque | são as contas e comparações do programa, como em qualquer linguagem | -> prog-logica:aritmeticos
 P: quais os operadores em c
 P: o que é incremento e decremento em c
 P: diferença entre i++ e ++i
@@ -199,6 +243,9 @@ int b = ++i;   /* b = 7, i = 7 */
 ```
 Sozinhos numa linha (`i++;` ou `++i;`) dão no mesmo. Nunca use a mesma variável duas vezes com `++` na mesma expressão (`i = i++ + 1`): é comportamento indefinido.
 
+F: divisao-inteira
+A: divisão inteira, 5 dividido por 2 dá 2, 7/2 dá 3, divisão de inteiros
+Q: porque | entre dois inteiros a divisão descarta a parte decimal; basta um dos dois ser double para dar 2.5 | -> tipos
 P: por que 5 dividido por 2 dá 2 em c
 P: divisão de inteiros em c
 P: como fazer conversão de tipo em c
@@ -212,6 +259,9 @@ double r3 = a / 2.0;          /* 2.5 */
 ```
 `(double)a` é um **cast**: converte o valor para outro tipo. Conversões de real para inteiro **cortam** a parte decimal (`(int)3.9` é 3); para arredondar, use `round()` de `<math.h>` (compile com `-lm` no Linux).
 
+F: if
+A: if em c, else, condição
+Q: porque | escolhe o caminho pela condição; em C, zero é falso e qualquer outro valor é verdadeiro | -> prog-logica:condicional
 P: como usar if em c
 P: como fazer if else em c
 P: o que é verdadeiro e falso em c
@@ -230,6 +280,9 @@ if (nota >= 7.0) {
 Em C, **zero é falso** e **qualquer outro valor é verdadeiro**. Por isso `if (n)` significa "se n não for zero" e `if (ponteiro)` significa "se não for nulo".
 Use sempre chaves, mesmo com uma linha só: evita o erro de acrescentar uma segunda linha achando que ela está dentro do `if`.
 
+F: switch
+A: switch em c, case, break
+Q: porque | compara uma variável com vários valores; sem break, continua no caso seguinte | -> prog-logica:escolha-caso
 P: como usar switch em c
 P: switch case em c
 R: ```c
@@ -249,6 +302,9 @@ switch (opcao) {
 - sem `break`, a execução continua no próximo `case` (*fall-through*), o que aqui foi usado de propósito para 'a' e 'A';
 - `default` pega todo o resto.
 
+F: for
+A: laço for em c, repetir em c
+Q: porque | junta início, condição e passo numa linha só | -> prog-logica:while-for
 P: como fazer laço for em c
 P: como usar while em c
 P: como usar do while em c
@@ -279,6 +335,9 @@ do {
 ```
 `break` sai do laço e `continue` pula para a próxima volta. Declarar a variável dentro do `for` (`int i = 0`) vale desde o C99 e deixa `i` restrita ao laço.
 
+F: funcao
+A: função em c, criar função, protótipo
+Q: porque | em C a função declara o tipo do retorno e dos parâmetros | -> prog-logica:funcao
 P: como criar uma função em c
 P: funções em c
 P: o que é protótipo de função em c
@@ -302,6 +361,10 @@ double media(double a, double b) {  /* definição */
 - os parâmetros são **cópias** (passagem por valor). Para alterar a variável de quem chamou, passe um ponteiro (trilha intermediária);
 - função sem parâmetros se declara com `(void)`.
 
+F: vetor
+A: vetor em c, array, criar vetor
+Q: porque | é um bloco de posições seguidas na memória, de tamanho fixo | -> prog-estruturas-dados:vetor-ed
+Q: regra | o C não confere o índice: passar do tamanho estraga a memória | -> c-avancado:buffer-overflow
 P: como criar um vetor em c
 P: como usar array em c
 P: como percorrer um vetor em c
@@ -322,6 +385,9 @@ printf("média: %.1f\n", (double)soma / n);
 - C **não confere os limites**: `notas[5]` compila e escreve fora do vetor, corrompendo outra memória (uma das maiores fontes de falhas de segurança);
 - o truque do `sizeof` só funciona onde o vetor foi declarado; dentro de uma função que o recebe, passe o tamanho como parâmetro.
 
+F: vetor-funcao
+A: passar vetor para função
+Q: porque | o vetor vai como ponteiro para o primeiro elemento, então o tamanho precisa ir junto | -> c-intermediario:ponteiro
 P: como passar vetor para função em c
 R: Um vetor é passado como o **endereço do primeiro elemento**; a função não sabe o tamanho, então passe-o junto:
 ```c
@@ -336,6 +402,9 @@ media(notas, 3);
 ```
 Como a função recebe o endereço, ela **pode alterar** o vetor original. O `const` promete que não vai, e o compilador cobra a promessa.
 
+F: matriz
+A: matriz em c, vetor de duas dimensões
+Q: porque | é um vetor de vetores, percorrido com dois laços | -> prog-logica:laco-aninhado
 P: como fazer matriz em c
 P: vetor bidimensional em c
 R: ```c
@@ -353,6 +422,9 @@ for (int i = 0; i < 3; i++) {
 ```
 Na memória, a matriz é um bloco único, linha após linha. Ao passar para uma função, o número de colunas precisa ser informado: `void mostrar(int linhas, int m[][4])`.
 
+F: string
+A: string em c, texto em c, char array, terminador nulo
+Q: porque | uma string em C é um vetor de char terminado em \0 | -> vetor
 P: como funciona string em c
 P: o que é o caractere nulo em c
 P: o que é a barra zero no fim da string em c
@@ -369,6 +441,9 @@ char saudacao[20] = "Oi"; /* cabe até 19 letras + '\0' */
 - não dá para comparar com `==` (compararia endereços): use `strcmp`.
 As funções de texto estão em `<string.h>` (trilha intermediária).
 
+F: comparar-strings
+A: comparar strings, strcmp
+Q: porque | o == compara endereços, não o texto; o strcmp compara letra por letra | -> string
 P: como comparar strings em c
 P: como usar strcmp
 R: `strcmp(a, b)` devolve **0 se forem iguais**, negativo se `a` vem antes na ordem e positivo se vem depois:
@@ -382,6 +457,9 @@ if (strcmp(senha, "1234") == 0) {
 Erro clássico: `if (senha == "1234")` compila, mas compara **endereços**, quase sempre falso.
 `strcmp` diferencia maiúsculas; ele compara byte a byte, então acentos em UTF-8 não ficam em ordem alfabética "humana".
 
+F: aleatorio
+A: número aleatório em c, rand, srand
+Q: porque | o rand precisa de uma semente diferente, como a hora, senão repete a mesma sequência
 P: como gerar número aleatório em c
 P: como usar rand em c
 R: ```c
@@ -400,6 +478,9 @@ int main(void) {
 - sem `srand`, a sequência é sempre a mesma (bom para testes);
 - `rand() % n` serve para jogos e exercícios. Para criptografia, nunca use `rand`: use as fontes do sistema (`getrandom` no Linux).
 
+F: matematica
+A: funções matemáticas, math.h, sqrt, pow, -lm
+Q: porque | ficam numa biblioteca separada, ligada com -lm | -> compilacao
 P: como usar funções matemáticas em c
 P: como usar math.h
 P: undefined reference to sqrt
@@ -414,6 +495,9 @@ gcc programa.c -o programa -lm
 ```
 Para quadrados, `x * x` é mais rápido e preciso que `pow(x, 2)`.
 
+F: erros-comuns
+A: erros comuns em c, iniciante
+Q: porque | a maioria vem de esquecer o &, o ; ou o tamanho do vetor | -> prog-logica:tipos-erro
 P: quais os erros mais comuns em c para iniciantes
 P: erros comuns em c
 R: Os campeões:
@@ -429,6 +513,9 @@ R: Os campeões:
 - esquecer o `'\0'` ao montar strings à mão.
 Compilar com `-Wall -Wextra` aponta a maioria deles antes de rodar.
 
+F: segfault
+A: segmentation fault, falha de segmentação, programa travou
+Q: porque | o programa tentou acessar memória que não é dele, quase sempre por ponteiro ou índice errado | -> c-intermediario:ponteiro
 P: o que é segmentation fault
 P: o que é falha de segmentação
 P: core dumped em c
@@ -440,6 +527,9 @@ R: **Segmentation fault** (falha de segmentação) é o sistema operacional mata
 - usar memória já liberada com `free`.
 Para achar a linha: compile com `-g -fsanitize=address` e rode de novo; o relatório aponta o arquivo e a linha. Ou use o depurador `gdb` (trilha avançada).
 
+F: programa-completo
+A: exemplo de programa completo em c
+Q: exemplo-de | junta entrada, decisões, laços e funções num programa só | -> funcao
 P: exemplo de programa completo em c
 P: calculadora em c
 R: Uma calculadora simples, usando tudo do básico:
@@ -474,6 +564,9 @@ int main(void) {
 ```
 `%g` mostra o número sem zeros desnecessários (7 em vez de 7.000000).
 
+F: exercicios
+A: exercícios de c para iniciantes
+Q: porque | C se aprende escrevendo e compilando, do simples ao composto | -> prog-logica:exercicios
 P: exercícios de c para iniciantes
 P: o que praticar em c
 R: Do mais simples ao mais desafiador:

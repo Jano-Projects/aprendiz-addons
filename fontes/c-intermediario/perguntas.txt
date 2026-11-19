@@ -1,6 +1,11 @@
 # C 2 · Intermediário
 # Ponteiros, memória dinâmica, structs, strings, arquivos, pré-processador e projetos com vários arquivos.
 
+F: ponteiro
+N: raiz
+A: ponteiro em c, ponteiro, endereço de memória, guarda o endereço de outra variável
+Q: definicao | um ponteiro é uma variável que guarda o endereço de outra variável
+Q: porque | com o endereço, uma função pode mexer no valor original e dados grandes não precisam ser copiados
 P: o que é ponteiro em c
 P: como funciona ponteiro em c
 P: para que serve ponteiro
@@ -22,6 +27,9 @@ printf("%p\n", (void *)p);  /* o endereço, ex.: 0x7ffd5e8c */
 - `int *p`: "p é um ponteiro para int".
 Servem para: alterar variáveis dentro de funções, percorrer vetores, usar memória dinâmica (`malloc`) e montar estruturas como listas e árvores.
 
+F: simbolos
+A: & e *, símbolos dos ponteiros, endereço de, conteúdo de
+Q: porque | & pega o endereço de uma variável e * acessa o valor que está no endereço | -> ponteiro
 P: o que significam os símbolos & e * dos ponteiros em c
 P: diferença entre & e * em ponteiros
 R: Os dois operadores são opostos:
@@ -30,6 +38,10 @@ R: Os dois operadores são opostos:
 `*(&idade)` é o próprio `idade`.
 O `*` aparece com dois sentidos: na **declaração** (`int *p;`) diz que p é ponteiro; numa **expressão** (`*p = 5;`) acessa o valor. E ainda é a multiplicação, conforme o contexto.
 
+F: referencia
+A: passagem por referência em c
+Q: porque | o C só passa cópias, então se passa o endereço para a função mudar o original | -> ponteiro
+Q: parte-de | é a passagem por referência da lógica | -> prog-logica:valor-referencia
 P: como passar parâmetro por referência em c
 P: como alterar uma variável dentro de uma função em c
 P: como fazer função de troca swap em c
@@ -46,6 +58,9 @@ trocar(&x, &y);   /* agora x = 2, y = 1 */
 ```
 É por isso que o `scanf` pede `&idade`: ele precisa do endereço para guardar o valor lido. Também é o jeito de uma função "devolver" mais de um resultado.
 
+F: nulo
+A: ponteiro nulo, null, NULL
+Q: porque | NULL marca um ponteiro que não aponta para nada, e acessá-lo derruba o programa | -> c-basico:segfault
 P: o que é ponteiro nulo
 P: o que é null em c
 R: `NULL` é um ponteiro que **não aponta para nada** (valor zero). Serve para dizer "ainda não tem" ou "deu erro":
@@ -61,6 +76,9 @@ Desreferenciar `NULL` (`*p` com p nulo) derruba o programa com *segmentation fau
 - depois de `free(p)`, faça `p = NULL;`.
 Desde o C23 também existe `nullptr`.
 
+F: aritmetica
+A: aritmética de ponteiros, ponteiro mais um
+Q: porque | somar 1 a um ponteiro avança um elemento inteiro do tipo, e não um byte | -> ponteiro
 P: o que é aritmética de ponteiros
 P: relação entre vetor e ponteiro em c
 R: Somar 1 a um ponteiro avança **um elemento**, não um byte: num `int *`, `p + 1` anda 4 bytes.
@@ -76,6 +94,10 @@ for (int *q = v; q < v + 3; q++) {
 ```
 Diferença importante: `sizeof v` é o tamanho do vetor inteiro (12), e `sizeof p` é o tamanho de um ponteiro (8). E não dá para fazer `v = outra_coisa`, porque o vetor não é uma variável ponteiro.
 
+F: malloc
+A: alocação dinâmica, malloc, free, reservar memória enquanto roda
+Q: porque | quando o tamanho só é conhecido durante a execução, a memória é pedida ao sistema no heap | -> stack-heap
+Q: regra | toda memória pedida com malloc precisa ser devolvida com free | -> vazamento
 P: o que é alocação dinâmica de memória em c
 P: como usar malloc em c
 P: como usar free em c
@@ -106,6 +128,9 @@ Regras de ouro:
 - confira se voltou `NULL`;
 - `sizeof *v` (em vez de `sizeof(int)`) continua certo se o tipo de `v` mudar.
 
+F: malloc-calloc
+A: malloc, calloc, realloc, diferença
+Q: diferente-de | o calloc zera a memória e o realloc muda o tamanho de um bloco já pedido | -> malloc
 P: diferença entre malloc calloc e realloc
 P: como aumentar um vetor dinâmico em c
 R: - `malloc(bytes)`: reserva memória **sem limpar** (contém lixo).
@@ -129,6 +154,10 @@ void adicionar(int x) {
 ```
 Guarde o retorno do `realloc` num ponteiro temporário: se ele falhar, devolve `NULL` e o bloco antigo continua válido; escrever direto em `dados` perderia o bloco antigo (vazamento).
 
+F: vazamento
+A: vazamento de memória, memory leak, esqueci de dar free
+Q: porque | memória pedida e nunca liberada fica ocupada até o programa terminar | -> malloc
+Q: consequencia | o valgrind mostra onde ela foi pedida | -> c-avancado:valgrind
 P: o que é vazamento de memória
 P: o que é memory leak
 P: o que é dangling pointer
@@ -139,6 +168,9 @@ R: Os três erros clássicos de memória dinâmica:
 - **Double free:** chamar `free` duas vezes no mesmo bloco. Corrompe o gerenciador de memória.
 Defesas: `p = NULL;` logo após o `free` (e `free(NULL)` não faz nada); deixar claro quem é o "dono" de cada bloco; e ferramentas como **Valgrind** e `-fsanitize=address` (trilha avançada), que apontam a linha exata.
 
+F: stack-heap
+A: stack e heap, pilha e heap
+Q: porque | a stack guarda as variáveis locais e se limpa sozinha; o heap guarda o que foi pedido com malloc | -> prog-estruturas-dados:pilha
 P: diferença entre stack e heap
 P: o que é pilha e heap na memória
 P: diferença entre stack e heap em c
@@ -157,6 +189,9 @@ int *errado(void) {
 }
 ```
 
+F: struct
+A: struct, estrutura, registro, juntar vários campos num tipo só
+Q: porque | agrupa dados relacionados de tipos diferentes num tipo novo | -> prog-logica:tipos-dados
 P: o que é struct em c
 P: como criar uma struct em c
 P: como usar struct em c
@@ -181,6 +216,9 @@ turma[0] = a;                 /* copia todos os campos */
 ```
 Desde o C99 dá para inicializar pelo nome dos campos: `struct Aluno b = {.nome = "Bia", .nota = 7.0};`. Os campos não citados ficam zerados.
 
+F: typedef
+A: typedef, apelido de tipo
+Q: porque | dá um nome curto a um tipo, como a uma struct | -> struct
 P: o que é typedef em c
 P: como usar typedef com struct
 R: `typedef` dá um **apelido** a um tipo, e o código fica mais limpo:
@@ -202,6 +240,9 @@ typedef struct No {
 } No;
 ```
 
+F: seta
+A: operador seta, ->, ponteiro para struct
+Q: porque | p->campo é o atalho de (*p).campo, para acessar um campo pela struct apontada | -> struct
 P: o que é operador seta em c
 P: diferença entre ponto e seta em struct
 R: Com a struct em si, use **ponto**; com um **ponteiro** para struct, use **seta**:
@@ -219,6 +260,9 @@ void mover(Ponto *p, double dx, double dy) {
 }
 ```
 
+F: enum
+A: enum em c, enumeração
+Q: porque | dá nomes a um conjunto fixo de números | -> prog-logica:constante
 P: o que é enum em c
 P: como usar enum
 R: **enum** cria constantes inteiras com nome, para um conjunto fechado de opções:
@@ -234,6 +278,9 @@ switch (s) {
 ```
 É muito mais legível que usar 0, 1 e 2 soltos, e com `-Wall` o compilador avisa se o `switch` esquecer algum valor. Dá para fixar valores: `enum { OK = 0, ERRO_ARQUIVO = 2 };`.
 
+F: funcoes-string
+A: funções de string, strlen, strcpy, strcat, string.h
+Q: porque | o C não tem tipo string, então as operações vêm de funções da string.h | -> c-basico:string
 P: funções de string em c
 P: o que tem na string.h
 P: como copiar e concatenar strings em c
@@ -252,6 +299,9 @@ char msg[64];
 snprintf(msg, sizeof msg, "%s tem %d anos", nome, idade);
 ```
 
+F: converter
+A: converter string para número, atoi, strtol
+Q: porque | o texto "42" não é o número 42; o strtol converte e avisa se o texto não era número
 P: como converter string para número em c
 P: como usar atoi e strtol
 R: `atoi("42")` funciona, mas não avisa erro: `atoi("abc")` devolve 0, igual a `atoi("0")`. Prefira `strtol` (inteiros) e `strtod` (reais):
@@ -268,6 +318,9 @@ if (fim == texto || *fim != '\0' || errno == ERANGE) {
 ```
 `fim` aponta para onde a leitura parou; se não andou, não havia número. E para o caminho inverso (número → texto), use `snprintf`.
 
+F: arquivos
+A: ler e escrever arquivos em c, fopen, fclose
+Q: porque | o fopen devolve um ponteiro de arquivo, que precisa ser fechado com fclose | -> ponteiro
 P: como ler e escrever arquivos em c
 P: como usar fopen em c
 P: como gravar em arquivo em c
@@ -298,6 +351,9 @@ fclose(f);
 ```
 Modos: `"r"` ler, `"w"` escrever do zero, `"a"` acrescentar no fim, `"r+"` ler e escrever; acrescente `b` para binário (`"rb"`, `"wb"`). Sempre confira o `NULL` e sempre feche com `fclose`.
 
+F: binario
+A: arquivo binário em c, fread, fwrite
+Q: porque | grava os bytes como estão na memória, sem converter para texto | -> arquivos
 P: como ler arquivo binário em c
 P: como usar fread e fwrite
 R: Para gravar e ler os bytes de structs e vetores direto:
@@ -316,6 +372,9 @@ fclose(f);
 ```
 `fseek(f, pos, SEEK_SET)` pula para uma posição e `ftell(f)` diz onde está. Cuidado: arquivos binários dependem do computador (tamanho dos tipos, ordem dos bytes); para trocar dados entre máquinas, prefira texto ou um formato definido.
 
+F: preprocessador
+A: pré-processador, #include, #define, macro
+Q: porque | as linhas com # são tratadas antes da compilação, copiando arquivos e trocando textos | -> c-basico:compilacao
 P: o que é o pré processador em c
 P: o que é #define e #include
 P: o que é macro em c
@@ -332,6 +391,9 @@ R: O **pré-processador** roda antes do compilador e trata as linhas com `#`:
 ```
 Os parênteses em volta de tudo são obrigatórios: sem eles, `QUADRADO(1 + 2)` viraria `1 + 2 * 1 + 2` = 5. E cuidado: `MAX(i++, j)` avalia `i++` duas vezes. Em C moderno, prefira funções `static inline` às macros com parâmetros.
 
+F: ifndef
+A: #ifndef, include guard, cabeçalho incluído duas vezes
+Q: porque | evita que o mesmo cabeçalho seja incluído duas vezes | -> preprocessador
 P: o que é #ifndef em c
 P: o que é include guard
 P: o que é compilação condicional
@@ -353,6 +415,9 @@ O **include guard** evita que um `.h` seja incluído duas vezes no mesmo arquivo
 ```
 Muitos compiladores aceitam `#pragma once` com o mesmo efeito, mas ele não faz parte do padrão.
 
+F: varios-arquivos
+A: dividir programa em vários arquivos, .h e .c, cabeçalho
+Q: porque | o .h declara o que existe e o .c implementa, e cada parte compila separada | -> ifndef
 P: como dividir um programa c em vários arquivos
 P: o que é arquivo .h e .c
 P: como criar uma biblioteca própria em c
@@ -380,6 +445,9 @@ int vazia(void) { return topo == 0; }
 gcc -Wall main.c pilha.c -o programa
 ```
 
+F: makefile
+A: makefile, make, compilar vários arquivos
+Q: porque | o make recompila só o que mudou, seguindo as regras do Makefile | -> varios-arquivos
 P: o que é makefile
 P: como usar make em c
 P: como escrever um makefile
@@ -403,6 +471,9 @@ clean:
 Cada regra é `alvo: dependências`, e a linha de comando abaixo **começa com TAB**, não com espaços (erro clássico: "missing separator").
 Rode `make` para compilar e `make clean` para apagar o que foi gerado. Projetos maiores usam o **CMake**, que gera Makefiles para cada sistema.
 
+F: const-ponteiro
+A: const com ponteiro, ponteiro constante
+Q: porque | a posição do const decide se o que não muda é o ponteiro ou o valor apontado | -> ponteiro
 P: o que é const com ponteiro em c
 P: diferença entre const int * e int * const
 R: Leia da direita para a esquerda:
@@ -413,6 +484,9 @@ R: Leia da direita para a esquerda:
 size_t contar_vogais(const char *texto);   /* promete não alterar o texto */
 ```
 
+F: argc-argv
+A: argc e argv, argumentos da linha de comando, parâmetros do main
+Q: porque | o main recebe quantos argumentos vieram do terminal e o texto de cada um | -> prog-vocabulario:terminal
 P: o que é argc e argv em c
 P: como receber argumentos da linha de comando em c
 R: O `main` pode receber o que foi digitado depois do nome do programa:
@@ -429,6 +503,9 @@ int main(int argc, char *argv[]) {
 ```
 Rodando `./prog ola 42`: `argc` é 3; `argv[0]` é o nome do programa, `argv[1]` é "ola" e `argv[2]` é "42" (sempre texto; converta com `strtol`).
 
+F: erros
+A: tratar erros em c, errno, perror, valor de retorno
+Q: porque | o C não tem exceções: cada função avisa o erro pelo valor de retorno | -> python-basico:excecoes
 P: como tratar erros em c
 P: o que é errno e perror
 P: c tem exceção
@@ -444,6 +521,9 @@ if (!f) {
 ```
 `strerror(errno)` devolve o texto do erro. Boas práticas: confira **todo** retorno que pode falhar; numa função com vários recursos, use um único ponto de limpeza no fim (o `goto` para isso é aceito em C, até no núcleo do Linux).
 
+F: static
+A: static em c, variável estática
+Q: porque | numa função, a variável mantém o valor entre chamadas; num arquivo, fica invisível aos outros | -> prog-logica:escopo
 P: o que é static em c
 P: variável static dentro de função
 R: `static` tem dois usos:
@@ -456,6 +536,9 @@ int proximo_id(void) {
 ```
 - **fora das funções** (numa variável global ou numa função): fica **visível só naquele arquivo `.c`**. É o "privado" do C, e evita conflito de nomes entre arquivos.
 
+F: tempo
+A: medir tempo de execução em c, clock
+Q: porque | medir antes de otimizar mostra onde o tempo é gasto | -> prog-estruturas-dados:complexidade
 P: como medir tempo de execução em c
 R: ```c
 #include <stdio.h>
@@ -476,6 +559,9 @@ int main(void) {
 ```
 `clock()` mede o tempo de **processador** (não conta esperas). No terminal, `time ./programa` mede o programa inteiro. Compare versões sempre com a mesma otimização (`-O2`).
 
+F: exercicios
+A: exercícios de c intermediário
+Q: porque | ponteiros e memória só ficam claros fazendo | -> ponteiro
 P: exercícios de c intermediário
 P: projeto para praticar ponteiros e structs
 R: Projetos para fixar:

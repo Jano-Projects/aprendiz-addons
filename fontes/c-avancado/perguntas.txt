@@ -1,6 +1,9 @@
 # C 3 · Avançado
 # Ponteiros de função, estruturas com ponteiros, bits, comportamento indefinido, ferramentas e padrões.
 
+F: ponteiro-funcao
+A: ponteiro de função, passar função como parâmetro, callback
+Q: porque | guarda o endereço de uma função, que pode ser passada e chamada depois | -> c-intermediario:ponteiro
 P: o que é ponteiro de função em c
 P: como passar uma função como parâmetro em c
 P: o que é callback em c
@@ -27,6 +30,10 @@ int main(void) {
 ```
 A sintaxe `int (*f)(int)` lê-se "f é um ponteiro para uma função que recebe int e devolve int". Um `typedef int (*Operacao)(int);` deixa tudo mais legível.
 
+F: qsort
+A: qsort, ordenar vetor em c
+Q: porque | ordena qualquer vetor recebendo um ponteiro para a função que compara dois elementos | -> ponteiro-funcao
+Q: parte-de | é um quick sort da biblioteca padrão | -> prog-estruturas-dados:quick-sort
 P: como usar qsort em c
 P: como ordenar um vetor de structs em c
 P: ordenar vetor em c com qsort
@@ -52,6 +59,9 @@ int por_nome(const void *a, const void *b) {
 ```
 A comparação devolve negativo, zero ou positivo. Evite `return pa->idade - pb->idade;`: com números grandes a subtração estoura. O `bsearch` usa a mesma função para buscar num vetor ordenado.
 
+F: void-pointer
+A: void pointer, void *, ponteiro genérico
+Q: porque | aponta para qualquer tipo, o que permite funções genéricas como malloc e qsort | -> c-intermediario:ponteiro
 P: o que é void pointer em c
 P: o que é ponteiro genérico void *
 R: `void *` é um ponteiro **sem tipo**: guarda qualquer endereço. É assim que `malloc`, `memcpy` e `qsort` funcionam com qualquer tipo.
@@ -66,6 +76,9 @@ typedef struct No {
 ```
 O preço é perder a checagem de tipos: o compilador não avisa se você guardar um `int *` e ler como `double *`.
 
+F: ponteiro-ponteiro
+A: ponteiro para ponteiro, **
+Q: porque | permite a uma função mudar para onde aponta um ponteiro de fora | -> c-intermediario:referencia
 P: o que é ponteiro para ponteiro em c
 P: o que é ponteiro duplo em c
 P: como alterar um ponteiro dentro de uma função
@@ -88,6 +101,9 @@ m[i * colunas + j] = 1.0;   /* elemento (i, j) */
 free(m);
 ```
 
+F: lista-encadeada
+A: lista encadeada em c, lista ligada em c, nó com struct
+Q: porque | cada nó é uma struct com o valor e um ponteiro para o próximo | -> prog-estruturas-dados:lista-ligada
 P: como fazer lista encadeada em c
 P: lista ligada em c com malloc
 P: lista ligada em c
@@ -139,6 +155,9 @@ int main(void) {
 ```
 O truque do `No **p` no `remover` trata o primeiro nó igual aos outros, sem caso especial.
 
+F: union
+A: union em c
+Q: diferente-de | numa union todos os campos dividem a mesma memória, ao contrário da struct | -> c-intermediario:struct
 P: o que é union em c
 P: diferença entre struct e union
 R: Numa **struct**, cada campo tem seu espaço. Numa **union**, todos os campos **compartilham o mesmo espaço**: só um vale por vez, e o tamanho é o do maior campo.
@@ -160,6 +179,9 @@ if (v.tipo == REAL) printf("%f\n", v.valor.d);
 ```
 É assim que interpretadores (como o do Python e o do SQLite) guardam valores de tipos diferentes.
 
+F: bit-a-bit
+A: operadores bit a bit, &, |, ^, deslocamento
+Q: porque | trabalham em cada bit do número, úteis para flags e protocolos | -> prog-logica:binario
 P: o que são operadores bit a bit em c
 P: como usar os operadores and or xor e deslocamento de bits em c
 P: o que é bitwise
@@ -180,6 +202,9 @@ x | 0x30;            /* 0011 1111 */
 ```
 Use tipos **unsigned** com operações de bits; deslocar números negativos ou por mais bits do que o tipo tem é comportamento indefinido.
 
+F: bits
+A: ligar desligar e testar bit, máscara de bits
+Q: porque | uma máscara com um bit ligado seleciona só aquele bit | -> bit-a-bit
 P: como ligar desligar e testar um bit em c
 P: o que são flags de bits
 P: o que é máscara de bits
@@ -199,6 +224,9 @@ if (perm & EXECUCAO) { /* testa */ }
 ```
 As permissões do Linux (`chmod 755`) são exatamente isso: 7 = 111 (ler, escrever, executar). Truques úteis: `n & 1` diz se é ímpar; `n & (n - 1)` apaga o bit 1 mais baixo, e dá zero se n for potência de 2.
 
+F: endianness
+A: endianness, little endian, big endian, ordem dos bytes
+Q: porque | cada processador guarda os bytes de um número numa ordem, o que importa ao ler arquivos binários | -> c-intermediario:binario
 P: o que é endianness
 P: o que é little endian e big endian
 R: É a **ordem dos bytes** de um número na memória. O inteiro `0x12345678`:
@@ -211,6 +239,10 @@ uint32_t ler_u32_le(const unsigned char *b) {
 }
 ```
 
+F: comportamento-indefinido
+A: comportamento indefinido, undefined behavior
+Q: porque | o padrão não diz o que acontece, então o programa pode parecer funcionar e falhar em outro lugar
+Q: exemplo-de | ler fora do vetor é comportamento indefinido | -> buffer-overflow
 P: o que é comportamento indefinido em c
 P: o que é undefined behavior
 R: **Comportamento indefinido** (UB) é uma operação para a qual o padrão do C não define resultado. O programa pode funcionar, quebrar, ou fazer algo absurdo, e o compilador **assume que UB nunca acontece** ao otimizar, o que gera bugs muito estranhos com `-O2`.
@@ -224,6 +256,9 @@ Exemplos:
 - modificar uma string literal (`char *s = "oi"; s[0] = 'O';`).
 Defesa: `-Wall -Wextra`, os sanitizers (`-fsanitize=address,undefined`) e não confiar em "na minha máquina funciona".
 
+F: overflow-inteiro
+A: overflow de inteiro, estouro de inteiro
+Q: porque | o valor passou do máximo do tipo; em tipos com sinal, isso é comportamento indefinido | -> comportamento-indefinido
 P: o que é overflow de inteiro em c
 P: como evitar estouro de inteiro
 R: Estouro com **unsigned** é definido: dá a volta (módulo 2ⁿ). Com **signed** é **comportamento indefinido**.
@@ -240,6 +275,10 @@ bool soma_segura(int a, int b, int *res) {
 ```
 GCC e Clang têm `__builtin_add_overflow(a, b, &res)`, e o C23 padronizou `ckd_add` em `<stdckdint.h>`. Erros clássicos: `malloc(n * tamanho)` com n enorme estoura a multiplicação e aloca pouco (por isso `calloc(n, tamanho)` confere isso por você).
 
+F: buffer-overflow
+A: buffer overflow, escrever além do tamanho do vetor, estouro de buffer
+Q: porque | o C não confere os limites do vetor, então escrever além estraga a memória vizinha | -> c-basico:vetor
+Q: consequencia | é uma das falhas de segurança mais exploradas | -> c-seguro
 P: o que é buffer overflow
 P: o que é estouro de buffer
 R: **Buffer overflow** é escrever além do fim de um vetor, sobrescrevendo a memória vizinha. Na pilha, isso pode alterar o **endereço de retorno** da função, e um atacante pode desviar o programa para código dele. É uma das falhas de segurança mais exploradas da história.
@@ -249,6 +288,9 @@ Defesas:
 - sempre carregar o **tamanho** junto com o ponteiro;
 - compilar com `-fsanitize=address` nos testes e com `-D_FORTIFY_SOURCE=2 -fstack-protector-strong` em produção.
 
+F: valgrind
+A: valgrind, achar vazamento de memória
+Q: porque | roda o programa vigiando cada acesso à memória e mostra onde está o erro | -> c-intermediario:vazamento
 P: como usar o valgrind
 P: como achar vazamento de memória em c
 P: o que é address sanitizer
@@ -268,6 +310,9 @@ valgrind --leak-check=full ./programa
 ```
 "definitely lost" no resumo é vazamento de verdade. Rode os dois nos testes e só considere o programa pronto com zero avisos.
 
+F: gdb
+A: gdb, depurador, depurar c, passo a passo
+Q: porque | para o programa num ponto e mostra as variáveis, linha por linha | -> prog-logica:depurar
 P: como usar o gdb
 P: como depurar programa c
 P: comandos do gdb
@@ -288,6 +333,9 @@ Comandos essenciais:
 - `continue` (c), `finish`, `quit`.
 No VS Code, a extensão C/C++ usa o gdb por trás, com botões e variáveis na tela.
 
+F: volatile
+A: volatile em c
+Q: porque | avisa o compilador que o valor pode mudar por fora, então ele não pode otimizar a leitura
 P: o que é volatile em c
 R: `volatile` diz ao compilador: "esta variável pode mudar por fora do código que você está vendo; leia da memória toda vez, não otimize".
 Usos legítimos:
@@ -296,6 +344,9 @@ Usos legítimos:
 - impedir que o compilador apague um laço de teste de desempenho.
 `volatile` **não** serve para comunicação entre threads: não garante atomicidade nem ordem. Para isso existem `<stdatomic.h>` e mutexes.
 
+F: extern
+A: extern em c, variável global em outro arquivo
+Q: porque | declara que a variável existe em outro arquivo | -> c-intermediario:varios-arquivos
 P: o que é extern em c
 P: como compartilhar variável global entre arquivos
 R: `extern` **declara** algo que está **definido** em outro arquivo:
@@ -309,6 +360,9 @@ int nivel_log = 1;        /* definição: só UMA, num só .c */
 ```
 Os outros arquivos fazem `#include "config.h"` e usam `nivel_log`. Funções são `extern` por padrão. Se duas `.c` definirem a mesma global, o linker reclama de "multiple definition". Use globais compartilhadas com parcimônia.
 
+F: inline
+A: inline em c
+Q: porque | sugere que o compilador copie a função no lugar da chamada, para economizar a chamada
 P: o que é inline em c
 R: `inline` sugere ao compilador colocar o corpo da função no lugar da chamada, evitando o custo da chamada. Hoje os compiladores decidem isso sozinhos com `-O2`, então o uso prático é `static inline` em cabeçalhos, para funções pequenas que substituem macros com segurança de tipo:
 ```c
@@ -316,6 +370,9 @@ static inline int max_int(int a, int b) { return a > b ? a : b; }
 ```
 Diferente da macro `MAX(a, b)`, cada argumento é avaliado uma vez só e o tipo é conferido.
 
+F: bibliotecas
+A: biblioteca estática, biblioteca dinâmica, .a, .so, .dll
+Q: porque | a estática entra no executável; a dinâmica é carregada ao rodar e pode ser compartilhada | -> c-basico:compilacao
 P: como criar biblioteca estática e dinâmica em c
 P: o que são os arquivos de biblioteca .a e .so do linux
 P: o que é dll
@@ -333,6 +390,9 @@ LD_LIBRARY_PATH=. ./programa
 ```
 `ldd programa` lista as bibliotecas dinâmicas que um executável usa. O próprio Python usa isso: módulos como o `sqlite3` e o núcleo do RapidFuzz são bibliotecas dinâmicas (`.so` no Linux, `.pyd` no Windows) carregadas no `import`.
 
+F: c-python
+A: chamar c do python, ctypes, extensão
+Q: porque | dá para escrever a parte pesada em C e chamar pelo Python | -> python-basico:python
 P: como chamar código c a partir do python
 P: o que é ctypes
 R: Compile o C como biblioteca dinâmica e carregue com o módulo `ctypes`, que vem com o Python:
@@ -352,6 +412,9 @@ print(lib.soma(2, 3))   # 5
 ```
 É o caminho para acelerar um trecho crítico em Python. Projetos maiores usam extensões C, Cython, CFFI ou pybind11 (C++). Muitas bibliotecas Python rápidas, como o RapidFuzz que o Aprendiz usa, têm o núcleo em C/C++.
 
+F: versoes
+A: versões do c, c89, c99, c11, c23
+Q: porque | cada padrão acrescentou recursos, e o compilador precisa saber qual usar
 P: quais as versões do c
 P: o que mudou no c99 c11 c17 e c23
 R: As versões do padrão ISO C:
@@ -362,6 +425,9 @@ R: As versões do padrão ISO C:
 - **C23:** `true`/`false`/`bool` como palavras-chave, `nullptr`, `constexpr`, `typeof`, `#embed` (embutir arquivos binários), atributos `[[nodiscard]]`, inteiros checados (`<stdckdint.h>`), literais binários `0b1010`.
 Escolha com `-std=c17` ou `-std=c23` (gcc 14 ou mais novo para quase todo o C23).
 
+F: threads
+A: threads em c, pthreads
+Q: porque | dividem o trabalho em linhas que rodam ao mesmo tempo, com cuidado para não usar os mesmos dados juntos | -> python-avancado:threads
 P: como usar threads em c
 P: o que é pthread
 P: threads em c
@@ -397,6 +463,9 @@ int main(void) {
 ```
 Compile com `-pthread`. Sem o **mutex**, as duas threads se atropelam no `contador++` (uma **condição de corrida**) e o resultado sai menor. Para um contador simples, `atomic_long` de `<stdatomic.h>` é mais leve.
 
+F: padding
+A: alinhamento, padding, tamanho da struct
+Q: porque | o compilador deixa espaços entre os campos para alinhar a memória, então a struct pode ficar maior que a soma | -> c-intermediario:struct
 P: o que é alinhamento e padding em struct
 P: por que o sizeof da struct é maior
 R: O processador acessa dados mais rápido em endereços **alinhados** (um `double` num múltiplo de 8). Por isso o compilador insere bytes vazios (**padding**) entre os campos:
@@ -406,6 +475,9 @@ struct B { double d; char c; char e; };   /* 8 + 1 + 1 + 6 = 16 bytes */
 ```
 Ordenar os campos do maior para o menor economiza memória. `offsetof(struct A, d)` (de `<stddef.h>`) mostra o deslocamento de cada campo. Ao gravar structs em arquivo ou mandar pela rede, o padding vai junto, mais um motivo para serializar campo a campo.
 
+F: generic
+A: _generic em c
+Q: porque | escolhe a função pelo tipo do argumento, uma forma simples de função genérica | -> versoes
 P: o que é _generic em c
 P: o que é static_assert em c
 R: Dois recursos do C11:
@@ -421,6 +493,9 @@ printf("%s\n", nome_tipo(3.0));   /* double */
 ```
 É como o `<tgmath.h>` faz `sqrt` funcionar com `float`, `double` e `long double`.
 
+F: c-seguro
+A: c seguro, escrever c seguro, boas práticas em c
+Q: porque | quase todas as falhas graves vêm de memória: limites, liberação e ponteiros | -> buffer-overflow
 P: como escrever c seguro
 P: boas práticas em c
 R: Uma lista de hábitos que evita a maioria dos problemas:
@@ -435,6 +510,9 @@ R: Uma lista de hábitos que evita a maioria dos problemas:
 - analisadores estáticos: `clang-tidy`, `cppcheck` e o `-fanalyzer` do gcc;
 - escreva testes (Unity, CMocka ou um `assert` simples).
 
+F: projetos
+A: projetos avançados em c
+Q: porque | um projeto real junta memória, arquivos e estruturas | -> lista-encadeada
 P: projetos avançados em c
 P: o que construir para dominar c
 R: Projetos que ensinam muito:

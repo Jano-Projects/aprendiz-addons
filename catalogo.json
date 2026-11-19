@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T13:27:15+00:00",
+  "gerado_em": "2026-11-19T13:34:51+00:00",
   "total": 40,
   "addons": [
     {
@@ -56,7 +56,7 @@
       "arquivo": "addons/aprendiz-preparar-ambiente.aprendiz",
       "tamanho": 10464,
       "sha256": "018d6c4074b4f0edd8690c4e90034ae4e6d6418abdd813178c5e5f858ca18406",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "como estudar o código do aprendiz",
@@ -136,7 +136,7 @@
       "arquivo": "addons/aprendiz-arquitetura.aprendiz",
       "tamanho": 14973,
       "sha256": "d5c35ccf9a973c9879dfd6e1a958ac64f602d8fc3355207c80622a52f62edb2f",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "como o aprendiz funciona por dentro",
@@ -217,7 +217,7 @@
       "arquivo": "addons/aprendiz-codigo.aprendiz",
       "tamanho": 18084,
       "sha256": "ee113bfe2e16f750904aa596582faadea35a6b9e2241723bbcb1a4fdc457af53",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "como o aprendiz descobre onde guardar os dados",
@@ -298,7 +298,7 @@
       "arquivo": "addons/aprendiz-algoritmos.aprendiz",
       "tamanho": 14999,
       "sha256": "ea3d26af3ff6f253deac125f867bb2b16f064f41f29b2ba4058387be606dc2cc",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "como o aprendiz pensa",
@@ -378,7 +378,7 @@
       "arquivo": "addons/aprendiz-do-zero.aprendiz",
       "tamanho": 14307,
       "sha256": "6752fc4fdda9eaa0355f21ad49d55a283993d8026ed96e6b0a428e74b6d9a4e4",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "como criar um assistente como o aprendiz do zero",
@@ -570,7 +570,7 @@
     {
       "id": "c-basico",
       "nome": "C 1 · Básico",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Linguagem C do zero: instalar o compilador (gcc), primeiro programa, main, printf e scanf, tipos, operadores, if, switch, laços, funções, vetores e strings básicas.",
       "licenca": "CC-BY-4.0",
@@ -592,8 +592,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [
         {
           "id": "prog-logica",
@@ -603,8 +603,8 @@
       ],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.98
+        "resposta": "trabalhada",
+        "acerto": 0.992
       },
       "conhecimentos": 29,
       "verbetes": 0,
@@ -617,8 +617,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/c-basico.aprendiz",
-      "tamanho": 9058,
-      "sha256": "aeb72b9f0fe5a47a896979a896ffcbe4ca72feb5ed727077e8ecc4d0e07e3bb2",
+      "tamanho": 10978,
+      "sha256": "46b14fa6e77fb9e22b3d2f68921c354b736578066f935072cdb8cec412975471",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -650,7 +650,7 @@
     {
       "id": "c-intermediario",
       "nome": "C 2 · Intermediário",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Ponteiros, aritmética de ponteiros, malloc e free, structs, enums, typedef, strings da string.h, arquivos, o pré-processador, vários arquivos .c/.h e o make.",
       "licenca": "CC-BY-4.0",
@@ -672,8 +672,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [
         {
           "id": "c-basico",
@@ -682,9 +682,9 @@
         }
       ],
       "recomendado": {
-        "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.99
+        "busca": "fuzzy",
+        "resposta": "trabalhada",
+        "acerto": 1.0
       },
       "conhecimentos": 27,
       "verbetes": 0,
@@ -697,8 +697,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/c-intermediario.aprendiz",
-      "tamanho": 8595,
-      "sha256": "7b8e89533c185f32a5f17cfe3a4e911659438f52deec19dc128423e6867288f8",
+      "tamanho": 10349,
+      "sha256": "950a46ac6f1429fdd7a0f2e947a63a44794d06d56a01c10b67a14bd930c419ca",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -730,7 +730,7 @@
     {
       "id": "c-avancado",
       "nome": "C 3 · Avançado",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Ponteiros de função, ponteiro para ponteiro, listas ligadas em C, union, operações de bits, const e volatile, comportamento indefinido, Valgrind e sanitizers, gdb, static e extern, bibliotecas e padrões C11/C17/C23.",
       "licenca": "CC-BY-4.0",
@@ -753,8 +753,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [
         {
           "id": "c-intermediario",
@@ -764,8 +764,8 @@
       ],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.97
+        "resposta": "trabalhada",
+        "acerto": 1.0
       },
       "conhecimentos": 25,
       "verbetes": 0,
@@ -778,8 +778,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/c-avancado.aprendiz",
-      "tamanho": 9231,
-      "sha256": "6b299b9c82e276ce2bc55fdc6d24e347590ed11c94c7388db62f999972a99eaf",
+      "tamanho": 10819,
+      "sha256": "127beec8a7b48733ff3995831dc9402d7447c35e022df51b60f6a64a4362d061",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {

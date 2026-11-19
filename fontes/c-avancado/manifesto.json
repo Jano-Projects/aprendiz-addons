@@ -1,7 +1,7 @@
 {
   "id": "c-avancado",
   "nome": "C 3 · Avançado",
-  "versao": "1.0.0",
+  "versao": "2.0.0",
   "autor": "Jano Projects",
   "descricao": "Ponteiros de função, ponteiro para ponteiro, listas ligadas em C, union, operações de bits, const e volatile, comportamento indefinido, Valgrind e sanitizers, gdb, static e extern, bibliotecas e padrões C11/C17/C23.",
   "licenca": "CC-BY-4.0",
@@ -17,7 +17,7 @@
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.6.0"
+    "versao_minima": "2.0.0"
   },
   "dependencias": [
     {
@@ -25,10 +25,5 @@
       "versao": "1.0.0",
       "nome": "C 2 · Intermediário"
     }
-  ],
-  "recomendado": {
-    "busca": "hibrido",
-    "resposta": "direta",
-    "acerto": 0.97
-  }
+  ]
 }
