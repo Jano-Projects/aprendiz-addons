@@ -47,7 +47,7 @@ A `categoria` continua no catálogo e na busca, mas não organiza mais a página
 ## Publicar um addon
 
 1. Crie o addon com a ferramenta do Aprendiz (veja o
-   [guia de addons](https://github.com/Jano-Projects/aprendiz-dev/blob/main/docs/addons.md)):
+   [guia de addons](https://github.com/Jano-Projects/aprendiz-dev/blob/main/docs/guias/addons.md)):
    ```bash
    python ferramentas/criar_addon.py fontes/meu-addon -o addons/meu-addon.aprendiz \
        --junto addons/compreensao-portugues.aprendiz \
@@ -137,7 +137,7 @@ fazer com…"), que junta numa lista tudo o que a base sabe sobre o assunto. Tam
 gatilhos de pedido ("me fala", "quero saber", "me lembra", "quero fazer") e mais jeitos de
 perguntar o nome do Aprendiz ("você tem nome?", "como te chamam?"). Os gatilhos ficam em
 `fontes/compreensao-portugues/compreensao-base.json`; o comportamento está em
-"Juntar e reinterpretar", em `docs/compreensao.md` do aprendiz-dev.
+"Juntar e reinterpretar", em `docs/estudo/compreensao.md` do aprendiz-dev.
 
 **Pacote** (Aprendiz 2.3+): no site da loja, marque vários addons (ou "Marcar todos" num grupo) e
 clique em **Baixar pacote**. Vem um `.aprendiz-pacote` só, montado no navegador: os addons

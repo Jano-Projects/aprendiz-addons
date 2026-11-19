@@ -1,12 +1,12 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T19:15:23+00:00",
+  "gerado_em": "2026-11-19T20:34:03+00:00",
   "total": 40,
   "addons": [
     {
       "id": "aprendiz-preparar-ambiente",
       "nome": "Aprendiz por dentro 1 · Preparar o ambiente",
-      "versao": "2.0.1",
+      "versao": "2.0.2",
       "autor": "Jano Projects",
       "descricao": "Passo a passo manual, do zero, no Ubuntu, no Fedora e no Windows: terminal, Python, pip, Git, VS Code, baixar o código do Aprendiz, criar o ambiente virtual, instalar as dependências, rodar o app e os testes.",
       "licenca": "CC-BY-4.0",
@@ -30,7 +30,7 @@
         "linguagem"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.4.0",
+      "criado_com": "2.5.0",
       "dependencias": [
         {
           "id": "python-basico",
@@ -54,8 +54,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/aprendiz-preparar-ambiente.aprendiz",
-      "tamanho": 10466,
-      "sha256": "f40a474572dedf0e31ba91d0ea8434e9c9b2a7c6c9d728ed90f1e3f6356b4704",
+      "tamanho": 10480,
+      "sha256": "8e7389f8028dc711d0ecdd4771be5d44404f82b60d567d627ed10ee553b04392",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {
@@ -87,7 +87,7 @@
     {
       "id": "aprendiz-arquitetura",
       "nome": "Aprendiz por dentro 2 · Arquitetura e arquivos",
-      "versao": "2.1.0",
+      "versao": "2.2.0",
       "autor": "Jano Projects",
       "descricao": "O mapa do projeto: o caminho de uma pergunta até a resposta, as camadas e o que faz cada pasta e cada arquivo do Aprendiz, dos instaladores aos testes.",
       "licenca": "CC-BY-4.0",
@@ -110,7 +110,7 @@
         "linguagem"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.4.0",
+      "criado_com": "2.5.0",
       "dependencias": [
         {
           "id": "aprendiz-preparar-ambiente",
@@ -121,7 +121,7 @@
       "recomendado": {
         "busca": "hibrido",
         "resposta": "trabalhada",
-        "acerto": 0.991
+        "acerto": 0.992
       },
       "conhecimentos": 31,
       "verbetes": 0,
@@ -134,8 +134,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/aprendiz-arquitetura.aprendiz",
-      "tamanho": 15948,
-      "sha256": "d807b9fa0631a62cdd1e584a091b1bc70c976ba21cab468526e63e282a2885cd",
+      "tamanho": 16528,
+      "sha256": "81e0cc8a2e8a1477a1f8a6df0e99d62593dbd8d45e7cad20f92de15fc83fdd16",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {
@@ -148,15 +148,15 @@
         },
         {
           "pergunta": "quais as decisões de projeto do aprendiz",
-          "conteudo": "As escolhas principais e o porquê (estão em `docs/arquitetura.md`):\n- **Servidor web local em vez de Tkinter ou Qt:** HTML/CSS é o jeito mais acessível de fazer uma interface bonita, e quem estuda abre o DevTools e vê…"
+          "conteudo": "As escolhas principais e o porquê (estão em `docs/referencia/arquitetura.md`):\n- **Servidor web local em vez de Tkinter ou Qt:** HTML/CSS é o jeito mais acessível de fazer uma interface bonita, e quem estuda abre o De…"
         },
         {
           "pergunta": "quais são as pastas do projeto aprendiz",
-          "conteudo": "A raiz do repositório:\n- `aprendiz/`: o **pacote Python**, o app em si (núcleo, API, interface);\n- `tests/`: os testes automatizados (pytest);\n- `docs/`: a documentação de estudo (algoritmos, arquitetura, linguagem, a…"
+          "conteudo": "A raiz do repositório (2.5), com só o que quem chega precisa ver:\n- `aprendiz/`: o **pacote Python**, o app em si;\n- `docs/`: a documentação, em três pastas (`estudo/`, `guias/`, `referencia/`) e um índice (`docs/READ…"
         },
         {
           "pergunta": "o que tem dentro da pasta aprendiz",
-          "conteudo": "Dentro do pacote `aprendiz/`:\n- `__init__.py`: a versão (`__version__ = \"0.8.0\"`) e o mapa dos pacotes;\n- `__main__.py`: permite `python -m aprendiz`;\n- `config.py`: nome, porta padrão, endereço da loja oficial e onde…"
+          "conteudo": "Dentro do pacote `aprendiz/` (2.5), cada pasta responde a uma pergunta:\n- `core/`: como uma mensagem vira resposta? O pipeline (`assistente.py`), a teia de porquês, os padrões de frase, a expressão e o Monitor;\n- `lin…"
         },
         {
           "pergunta": "o que faz o arquivo __init__.py do aprendiz",
@@ -167,7 +167,7 @@
     {
       "id": "aprendiz-codigo",
       "nome": "Aprendiz por dentro 3 · O código explicado",
-      "versao": "2.0.1",
+      "versao": "2.0.2",
       "autor": "Jano Projects",
       "descricao": "Módulo por módulo: as classes, funções e comandos de Python que o Aprendiz usa (dataclasses, sqlite3, FastAPI, rapidfuzz, zipfile, re…), com trechos do código real e o porquê de cada escolha.",
       "licenca": "CC-BY-4.0",
@@ -191,7 +191,7 @@
         "linguagem"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.4.0",
+      "criado_com": "2.5.0",
       "dependencias": [
         {
           "id": "aprendiz-arquitetura",
@@ -215,21 +215,21 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/aprendiz-codigo.aprendiz",
-      "tamanho": 18132,
-      "sha256": "d6696b0465e09c9a8e18c2488669e5065721a84e0eb71a1e78cbbd9bc840f3ff",
+      "tamanho": 18143,
+      "sha256": "c8d6501bf062f5874962482ade93236461cf1b116bc1f7b7a5fa0d38043a3277",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "como o aprendiz descobre onde guardar os dados",
-          "conteudo": "Em `aprendiz/config.py`:\n```python\ndef pasta_dados() -> Path:\n    personalizada = os.environ.get(\"APRENDIZ_DADOS\")\n    if personalizada:\n        pasta = Path(personalizada)\n    elif sys.platform.startswith(\"win\"):\n   …"
+          "conteudo": "Em `aprendiz/aplicativo/config.py`:\n```python\ndef pasta_dados() -> Path:\n    personalizada = os.environ.get(\"APRENDIZ_DADOS\")\n    if personalizada:\n        pasta = Path(personalizada)\n    elif sys.platform.startswith(…"
         },
         {
           "pergunta": "como o aprendiz escolhe a porta do servidor",
-          "conteudo": "Em `aprendiz/desktop.py`:\n```python\ndef escolher_porta(preferida: int) -> int:\n    for porta in (preferida, 0):\n        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:\n            if not sys.platform.star…"
+          "conteudo": "Em `aprendiz/aplicativo/desktop.py`:\n```python\ndef escolher_porta(preferida: int) -> int:\n    for porta in (preferida, 0):\n        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:\n            if not sys.pl…"
         },
         {
           "pergunta": "como o aprendiz sobe o servidor numa thread",
-          "conteudo": "Em `aprendiz/desktop.py`:\n```python\ndef iniciar_servidor(porta: int):\n    app = criar_app()\n    cfg = uvicorn.Config(app, host=\"127.0.0.1\", port=porta,\n                         log_level=\"warning\", access_log=False)\n …"
+          "conteudo": "Em `aprendiz/aplicativo/desktop.py`:\n```python\ndef iniciar_servidor(porta: int):\n    app = criar_app()\n    cfg = uvicorn.Config(app, host=\"127.0.0.1\", port=porta,\n                         log_level=\"warning\", access_l…"
         },
         {
           "pergunta": "como o aprendiz sabe que a janela foi fechada",
@@ -248,7 +248,7 @@
     {
       "id": "aprendiz-algoritmos",
       "nome": "Aprendiz por dentro 4 · Como os algoritmos pensam",
-      "versao": "2.2.0",
+      "versao": "2.2.1",
       "autor": "Jano Projects",
       "descricao": "Como o Aprendiz entende e responde: normalização, radicais, intenções com Naive Bayes, BM25, TF-IDF, Fuzzy, Híbrido, Calibrado (pesos aprendidos), resposta Direta e Extrativa, prioridade do dono, dicionários, compreensão, vetores, revisão de texto e recomendação.",
       "licenca": "CC-BY-4.0",
@@ -273,7 +273,7 @@
         "linguagem"
       ],
       "versao_minima_app": "2.1.0",
-      "criado_com": "2.4.0",
+      "criado_com": "2.5.0",
       "dependencias": [
         {
           "id": "aprendiz-codigo",
@@ -297,8 +297,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/aprendiz-algoritmos.aprendiz",
-      "tamanho": 16324,
-      "sha256": "6cca8e7003fb3219618db3fbdb0ce5514a89d74f92bcfa7c11d84e2e715e0b43",
+      "tamanho": 16337,
+      "sha256": "1736b2066acedc47f4582777e4a59e475d17b05d6ef813a16c08b62a4bb96fa6",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {
@@ -330,7 +330,7 @@
     {
       "id": "aprendiz-do-zero",
       "nome": "Aprendiz por dentro 5 · Construir e customizar do zero",
-      "versao": "2.0.0",
+      "versao": "2.0.1",
       "autor": "Jano Projects",
       "descricao": "Construa um mini-Aprendiz do zero, passo a passo (banco SQLite, normalizador, BM25, API e tela de chat), e depois customize o Aprendiz de verdade: novo algoritmo, novo parâmetro, nova rota, novo addon, testes e empacotamento.",
       "licenca": "CC-BY-4.0",
@@ -353,7 +353,7 @@
         "linguagem"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.0.0",
+      "criado_com": "2.5.0",
       "dependencias": [
         {
           "id": "aprendiz-algoritmos",
@@ -364,7 +364,7 @@
       "recomendado": {
         "busca": "hibrido",
         "resposta": "trabalhada",
-        "acerto": 0.957
+        "acerto": 0.968
       },
       "conhecimentos": 24,
       "verbetes": 0,
@@ -377,8 +377,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/aprendiz-do-zero.aprendiz",
-      "tamanho": 14307,
-      "sha256": "6752fc4fdda9eaa0355f21ad49d55a283993d8026ed96e6b0a428e74b6d9a4e4",
+      "tamanho": 14371,
+      "sha256": "71c4210b53b54947603fca4406bfae292e4db64148b43a3e76b3423f8e371c96",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {
@@ -1127,7 +1127,7 @@
     {
       "id": "compreensao-portugues",
       "nome": "Compreensão do português",
-      "versao": "2.0.4",
+      "versao": "2.0.5",
       "autor": "Jano Projects",
       "descricao": "A raiz da conversa do Aprendiz: entende o tipo de pergunta (o que é, como fazer, onde fica…), junta tudo o que você ensinou sobre um assunto (\"o que você sabe sobre o carro?\"), entende expressões e formas irregulares (\"fui\", \"fiz\" → ser, fazer), responde sobre si mesmo e, quando não sabe algo, indica o addon da loja que sabe. Traz um léxico com mais de 300 mil palavras. Lemas derivados de lemmatization-lists, de Michal Měchura (ODbL).",
       "licenca": "ODbL-1.0",
@@ -1151,7 +1151,7 @@
         "compreensao"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.4.0",
+      "criado_com": "2.5.0",
       "dependencias": [],
       "recomendado": null,
       "conhecimentos": 0,
@@ -1170,8 +1170,8 @@
       },
       "norma": null,
       "arquivo": "addons/compreensao-portugues.aprendiz",
-      "tamanho": 858665,
-      "sha256": "c70dbb62516d9ed1228535b0fc89f71de3ccb910e1174f3499eb5cf88593ef46",
+      "tamanho": 858435,
+      "sha256": "b552758aa5339f0d8ea3b7aecf7e255c53eda1df169883cb8b55fdb1d05f1158",
       "atualizado_em": "2026-11-19",
       "amostra": []
     },
@@ -3273,7 +3273,7 @@
     {
       "id": "python-basico",
       "nome": "Python 1 · Básico",
-      "versao": "2.0.0",
+      "versao": "2.0.1",
       "autor": "Jano Projects",
       "descricao": "Python do zero: instalar, rodar, print e input, variáveis, tipos, strings, f-strings, listas, tuplas, dicionários, conjuntos, if, for, while, funções, módulos, erros e arquivos.",
       "licenca": "CC-BY-4.0",
@@ -3294,7 +3294,7 @@
         "linguagem"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.0.0",
+      "criado_com": "2.5.0",
       "dependencias": [
         {
           "id": "prog-logica",
@@ -3305,7 +3305,7 @@
       "recomendado": {
         "busca": "hibrido",
         "resposta": "trabalhada",
-        "acerto": 0.979
+        "acerto": 0.993
       },
       "conhecimentos": 36,
       "verbetes": 0,
@@ -3318,8 +3318,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/python-basico.aprendiz",
-      "tamanho": 13603,
-      "sha256": "f01244c9934280e584c4b5c7888bae3d4fe992d86debc34461b61d42e16a1a62",
+      "tamanho": 13618,
+      "sha256": "95e85eb86285057f66b297d5061938891283acb1940408ec2fd6d07be6af7834",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {
@@ -3351,7 +3351,7 @@
     {
       "id": "python-avancado",
       "nome": "Python 2 · Avançado",
-      "versao": "2.0.1",
+      "versao": "2.0.2",
       "autor": "Jano Projects",
       "descricao": "Compreensões, geradores, decoradores, gerenciadores de contexto, classes e dunder methods, dataclasses, type hints, ambientes virtuais e pip, pacotes, testes com pytest, async, threads e processos, sqlite3, performance e o que o Aprendiz usa.",
       "licenca": "CC-BY-4.0",
@@ -3375,7 +3375,7 @@
         "linguagem"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.4.0",
+      "criado_com": "2.5.0",
       "dependencias": [
         {
           "id": "python-basico",
@@ -3399,8 +3399,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/python-avancado.aprendiz",
-      "tamanho": 17115,
-      "sha256": "fd1decbb64f03459ab6e7b92c5f8637250a43ad46fce10e352aaf56839f2c3f1",
+      "tamanho": 17137,
+      "sha256": "2c451bab1f1f471239c85df242a466f97539526fba9e4dd16c239f7f575119a1",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {

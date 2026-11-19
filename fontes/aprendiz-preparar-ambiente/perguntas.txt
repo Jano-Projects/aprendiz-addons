@@ -149,17 +149,17 @@ R: O que o instalador faz, à mão (na pasta do projeto):
 ```bash
 python3 -m venv .venv
 .venv/bin/python -m pip install --upgrade pip
-.venv/bin/python -m pip install -r requirements-dev.txt
+.venv/bin/python -m pip install -r requirements/dev.txt
 ```
 **Windows (PowerShell):**
 ```
 py -m venv .venv
 .venv\Scripts\python -m pip install --upgrade pip
-.venv\Scripts\python -m pip install -r requirements-dev.txt
+.venv\Scripts\python -m pip install -r requirements/dev.txt
 ```
 - `requirements.txt` tem só o essencial (fastapi, uvicorn, rapidfuzz);
-- `requirements-dev.txt` inclui o essencial (linha `-r requirements.txt`) mais pytest, httpx e PyInstaller;
-- `requirements-janela.txt` é opcional: o pywebview, para a janela nativa.
+- `requirements/dev.txt` inclui o essencial (linha `-r requirements.txt`) mais pytest, httpx e PyInstaller;
+- `requirements/janela.txt` é opcional: o pywebview, para a janela nativa.
 Se preferir **ativar** o ambiente (para digitar só `python`): `source .venv/bin/activate` no Linux, `.venv\Scripts\Activate.ps1` no PowerShell. Se o PowerShell bloquear, rode uma vez `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`.
 
 F: rodar
@@ -176,7 +176,7 @@ R: Com o ambiente pronto, na pasta do projeto:
 .venv\Scripts\python -m aprendiz                # Windows
 bash executar.sh                                # atalho (instala na 1ª vez)
 ```
-`python -m aprendiz` roda o arquivo `aprendiz/__main__.py`, que chama `main()` de `aprendiz/desktop.py`. Ele:
+`python -m aprendiz` roda o arquivo `aprendiz/__main__.py`, que chama `main()` de `aprendiz/aplicativo/desktop.py`. Ele:
 1. escolhe uma porta livre (a 8765, se puder);
 2. sobe o servidor web local numa thread, em `127.0.0.1`;
 3. abre a interface: janela nativa (se o pywebview estiver instalado), ou um Chromium em modo aplicativo, ou uma aba do navegador.
@@ -235,7 +235,7 @@ R: Na pasta do projeto, com as dependências de desenvolvimento instaladas:
 .venv/bin/python -m pytest -x --lf                          # para no 1º erro; só os que falharam
 ```
 São perto de 300 testes, e todos rodam em poucos segundos, cada um com um banco temporário (veja `tests/conftest.py`).
-Se falhar logo de cara: confira se usou o Python do `.venv` (e não o do sistema) e se instalou o `requirements-dev.txt` (faltando o `httpx`, os testes da API não rodam). Depois de mudar qualquer coisa no código, rode os testes de novo: essa é a sua rede de proteção.
+Se falhar logo de cara: confira se usou o Python do `.venv` (e não o do sistema) e se instalou o `requirements/dev.txt` (faltando o `httpx`, os testes da API não rodam). Depois de mudar qualquer coisa no código, rode os testes de novo: essa é a sua rede de proteção.
 **Na 2.0:** depois dos testes, rode também a homologação: `python ferramentas/homologar.py ../aprendiz-addons --busca hibrido`.
 
 F: verificar
@@ -333,7 +333,7 @@ R: Se você clonou com Git:
 ```bash
 git status                  # confira se não há mudanças suas sem commit
 git pull                    # baixa e junta as novidades
-.venv/bin/python -m pip install -r requirements-dev.txt   # se as dependências mudaram
+.venv/bin/python -m pip install -r requirements/dev.txt   # se as dependências mudaram
 .venv/bin/python -m pytest -q
 ```
 Se você fez um **fork**, acrescente o original como `upstream` e traga as novidades dele:
@@ -359,7 +359,7 @@ git switch main                        # volta para a versão limpa
 git switch estudo/meu-algoritmo        # e de novo para o seu experimento
 ```
 Deu tudo errado e quer jogar fora o que não foi commitado? `git restore .` (cuidado: apaga as mudanças).
-Para mandar a sua contribuição: `git push -u origin estudo/meu-algoritmo` (no seu fork) e abra um **pull request** no GitHub. O `CONTRIBUTING.md` explica os padrões do projeto (Conventional Commits em português, testes, CHANGELOG).
+Para mandar a sua contribuição: `git push -u origin estudo/meu-algoritmo` (no seu fork) e abra um **pull request** no GitHub. O `.github/CONTRIBUTING.md` explica os padrões do projeto (Conventional Commits em português, testes, CHANGELOG).
 
 F: externally-managed
 A: erro externally managed environment, pip bloqueado
@@ -375,8 +375,8 @@ R: Os problemas mais comuns e a saída:
 - **Linux sem sudo** (usuário fora do sudoers, comum em VMs Debian): o instalador pede a senha do **root** com `su`; se não souber, peça a quem administra para rodar o comando que ele mostra.
 - **Porta ocupada:** o app escolhe outra sozinho; ou use `--porta 9000`.
 - **ModuleNotFoundError: fastapi**: você rodou com um Python diferente do `.venv`.
-- **Testes de API falhando com "httpx"**: instale o `requirements-dev.txt`.
-O `docs/empacotamento.md` do projeto tem mais casos.
+- **Testes de API falhando com "httpx"**: instale o `requirements/dev.txt`.
+O `docs/guias/empacotamento.md` do projeto tem mais casos.
 
 F: maquina-virtual
 A: máquina virtual, virtualbox

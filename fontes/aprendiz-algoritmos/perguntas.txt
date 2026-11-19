@@ -1,6 +1,6 @@
 # Aprendiz por dentro 4 · Como os algoritmos pensam
 # A teoria por trás de cada etapa, com os números calculados pelo próprio código.
-# Exemplo usado ao longo do addon (o mesmo de docs/algoritmos.md):
+# Exemplo usado ao longo do addon (o mesmo de docs/estudo/algoritmos.md):
 #   1. pergunta "horário da farmácia" → "8h às 20h, de segunda a sábado."
 #   2. pergunta "senha do wifi"      → "A senha do wifi é casa123."
 #   3. nota "A farmácia do bairro entrega remédios em casa."
@@ -202,9 +202,9 @@ R: A busca **Calibrada** (2.4) troca as regras fixas por uma conta com **pesos a
 3. **1ª etapa (ordena):** soma ponderada dos sinais passada pela **sigmoide**, `p = 1 / (1 + e^(−z))`: a chance de cada candidato ser a resposta. É uma **regressão logística**;
 4. **2ª etapa (decide):** pela nota do 1º lugar e pela distância para o 2º, a chance de o 1º estar certo. Essa é a confiança.
 O **limiar 0,25** vem do custo: responder com chance `p` vale `2p − 1`; recusar custa 0,5. Compensa responder quando `p > 0,25`.
-No exemplo ("que horas a farmácia abre?"), o horário da farmácia fica com chance média na 1ª etapa, mas muito à frente do 2º lugar; na 2ª etapa, a chance de estar certo passa de 0,25, e ele responde. As contas, passo a passo, estão em `docs/algoritmos.md`.
+No exemplo ("que horas a farmácia abre?"), o horário da farmácia fica com chance média na 1ª etapa, mas muito à frente do 2º lugar; na 2ª etapa, a chance de estar certo passa de 0,25, e ele responde. As contas, passo a passo, estão em `docs/estudo/algoritmos.md`.
 Os pesos vêm de `ferramentas/treinar_calibrado.py`, que roda com scikit-learn na máquina de quem desenvolve: uma variação de cada fragmento dos addons vira pergunta (e sai do índice), 10% dos fragmentos são removidos para ensinar a recusar, e treino e teste são separados pelo fragmento. O app leva só os números.
-No teste, com perguntas que o modelo não viu, ele acerta mais que o BM25 e o Híbrido, erra e inventa bem menos, e recusa um pouco mais. Os números de cada treino ficam em `docs/algoritmos.md` e no próprio `calibrado_pesos.py`.
+No teste, com perguntas que o modelo não viu, ele acerta mais que o BM25 e o Híbrido, erra e inventa bem menos, e recusa um pouco mais. Os números de cada treino ficam em `docs/estudo/algoritmos.md` e no próprio `calibrado_pesos.py`.
 Bom para: uso geral quando errar custa caro. Limite: roda os três algoritmos e só sabe o que o treino viu.
 
 F: limiar
@@ -221,7 +221,7 @@ Sem nenhum candidato acima do limiar, entra o **modo estrito**: o Aprendiz respo
 O dilema clássico é **precisão × revocação**:
 - limiar alto → inventa menos, mas recusa perguntas que tinha como responder;
 - limiar baixo → responde mais, mas às vezes com o item errado ("qual a senha do **banco**?" pode trazer a senha do wifi, porque metade dos termos bate).
-Use o benchmark (`benchmarks/comparar.py`) para ver o efeito de cada mudança.
+Use o benchmark (`ferramentas/comparar.py`) para ver o efeito de cada mudança.
 
 F: prioridade-dono
 A: prioridade do dono, o que eu ensinei vale mais
@@ -258,7 +258,7 @@ Q: consequencia | na 2.1, a resposta Trabalhada diz também como se fala o mesmo
 P: como funciona o dicionário do aprendiz
 P: como o aprendiz responde o que significa uma gíria
 R: Os **verbetes** dos addons de dicionário só respondem quando a pessoa digita a **palavra sozinha** ou pergunta "o que significa…": numa frase com outras palavras eles são ignorados, para não "sequestrar" perguntas sobre outros assuntos.
-O motor (`core/dicionario.py`) entra **antes** das intenções (senão "como se diz obrigado em Timor?" viraria um agradecimento) e atende os dois sentidos:
+O motor (`capacidades/dicionario.py`) entra **antes** das intenções (senão "como se diz obrigado em Timor?" viraria um agradecimento) e atende os dois sentidos:
 - **direto:** "kota", "o que é kota em Angola?" → o significado;
 - **inverso:** "como se diz dinheiro em Angola?", "aldeia em kriol" → o termo da região, usando as **traduções** (linha `T:`) dos verbetes.
 Ele separa a região do fim da frase (pelos `termos` declarados no manifesto), testa alguns padrões de pergunta e compara o termo por **igualdade de radicais**, nunca por semelhança: o dicionário só responde quando tem certeza. Se dois dicionários têm a mesma palavra ("bué" em Portugal e em Angola), a resposta mostra os dois.
@@ -270,7 +270,7 @@ Q: porque | entender o tipo da pergunta (o que é, por que, como) ajuda a escolh
 Q: consequencia | na 2.0 ela traz também os padrões de frase | -> padroes
 P: como funciona a compreensão do aprendiz
 P: o que fazem os addons de compreensão e vetores
-R: Os addons de **compreensão** e **vetores** não trazem respostas: ensinam o app a **interpretar**. O motor (`core/compreensao.py`) faz:
+R: Os addons de **compreensão** e **vetores** não trazem respostas: ensinam o app a **interpretar**. O motor (`capacidades/compreensao.py`) faz:
 1. **tipo da pergunta e assunto:** "o que é", "como faço", "onde fica"… Deixa o "não sei" mais preciso ("entendi que você quer saber como fazer X");
 2. **autoconhecimento:** "qual a sua versão?", "o que você não sabe fazer?", com respostas calculadas na hora por uma lista fechada de funções;
 3. quando a busca não acha nada:
@@ -284,7 +284,7 @@ A: revisão de texto, revise, ortografia, norma
 Q: porque | com um addon de norma, confere o texto pelo português de cada país
 P: como funciona a revisão de texto do aprendiz
 P: como o aprendiz corrige ortografia
-R: Com um addon de **norma** (o português de um país), o Aprendiz revisa textos (`core/revisao.py`). O que ele aponta, do mais grave ao mais leve:
+R: Com um addon de **norma** (o português de um país), o Aprendiz revisa textos (`capacidades/revisao.py`). O que ele aponta, do mais grave ao mais leve:
 1. **erros comuns** da lista do addon ("excessão" → exceção);
 2. **grafia de outra norma** ("facto" numa norma que escreve "fato"; "acção" onde vale o Acordo de 1990);
 3. **ortografia:** palavra fora do **vocabulário** da norma, com sugestões por acento e por uma edição de letra;
@@ -298,7 +298,7 @@ Q: porque | cada addon é testado com as próprias perguntas para saber qual bus
 Q: regra | na 2.0, responder pergunta fora do assunto desconta da nota e o Híbrido só perde se outro for claramente melhor | -> hibrido
 P: como o aprendiz recomenda o algoritmo de um addon
 P: o que é acerto@1
-R: A recomendação de busca e resposta de cada addon **não é palpite**, é medida (`core/recomendacao.py`):
+R: A recomendação de busca e resposta de cada addon **não é palpite**, é medida (`addons/recomendacao.py`):
 1. monta um Aprendiz temporário, num arquivo descartável, só com os itens do addon;
 2. para cada item, faz perguntas parecidas com as de uma pessoa: a própria pergunta e até três variações; a pergunta com um **erro de digitação** (duas letras trocadas); "o que significa…" nos verbetes; o começo do texto nas notas. Addons grandes usam uma amostra de até 150 itens;
 3. conta, para cada algoritmo, quantas vezes o item certo veio em **primeiro lugar e acima do limiar**: o **acerto@1**;
@@ -311,7 +311,7 @@ F: dados-pessoais
 A: dados pessoais, exportação, senha, telefone
 Q: porque | padrões como senha, telefone e e-mail fazem o item vir desmarcado ao exportar
 P: como o aprendiz detecta dados pessoais na exportação
-R: Ao exportar o que o dono ensinou (`core/exportacao.py`), cada item passa por uma **heurística**: itens com cara de dado pessoal vêm **desmarcados** e com o motivo:
+R: Ao exportar o que o dono ensinou (`addons/exportacao.py`), cada item passa por uma **heurística**: itens com cara de dado pessoal vêm **desmarcados** e com o motivo:
 - palavras que costumam vir perto de dado pessoal (senha, PIN, CPF, CNPJ, RG, cartão, CVV, agência, conta bancária, Pix, token, login, usuário, endereço, placa, nascimento), procuradas por uma expressão regular no texto normalizado;
 - números longos (6 dígitos ou mais);
 - entidades reconhecidas como **e-mail** ou **telefone**.
@@ -324,7 +324,7 @@ Q: porque | o mesmo conjunto de perguntas roda em cada algoritmo e mostra quem a
 Q: consequencia | na 2.0, a homologação faz isso com os addons reais da loja | -> homologacao
 P: como comparar os algoritmos do aprendiz
 P: como usar o benchmark do aprendiz
-R: `python benchmarks/comparar.py --detalhes` roda as mesmas perguntas em todos os algoritmos e mede:
+R: `python ferramentas/comparar.py --detalhes` roda as mesmas perguntas em todos os algoritmos e mede:
 - **acerto@1:** a resposta aceita foi o conhecimento esperado;
 - **recusas indevidas:** disse "não sei" para perguntas que **têm** resposta (ruim);
 - **estrito:** disse "não sei" para perguntas **sem** resposta na base (bom);
@@ -353,7 +353,7 @@ A: exercícios sobre os algoritmos, praticar
 Q: porque | mexer nos limiares e comparar resultados mostra na prática como cada peça age | -> comparar
 P: exercícios sobre os algoritmos do aprendiz
 P: como praticar com os algoritmos do aprendiz
-R: Exercícios propostos pelo próprio projeto (`docs/algoritmos.md` e `docs/linguagem.md`):
+R: Exercícios propostos pelo próprio projeto (`docs/estudo/algoritmos.md` e `docs/estudo/linguagem.md`):
 1. faça a cobertura do BM25 ponderar cada termo pelo **IDF**: um termo inexistente na base ("banco" em "senha do banco") deveria pesar mais. Rode o benchmark antes e depois;
 2. remova o sinônimo "horas → horário" (menu Linguagem) e refaça o exemplo: o que acontece com cada algoritmo?
 3. troque o `WRatio` do Fuzzy por `token_set_ratio` e observe as notas longas;

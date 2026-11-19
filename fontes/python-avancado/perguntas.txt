@@ -33,7 +33,7 @@ P: o que é requirements.txt
 P: o que é pyproject.toml
 R: - **requirements.txt:** a lista de pacotes para o `pip install -r`. Aceita faixas de versão (`fastapi>=0.110`) ou versões fixas (`fastapi==0.115.0`, geradas com `pip freeze`).
 - **pyproject.toml:** o arquivo moderno que descreve o projeto como **pacote**: nome, versão, dependências, comandos e configuração de ferramentas (pytest, ruff…).
-O Aprendiz usa os dois: `requirements.txt` (FastAPI, Uvicorn, RapidFuzz), `requirements-dev.txt` (inclui o anterior com `-r` e acrescenta pytest, httpx e PyInstaller) e um `pyproject.toml` que declara o comando `aprendiz` e configura o pytest.
+O Aprendiz usa os dois: `requirements.txt` (FastAPI, Uvicorn, RapidFuzz), `requirements/dev.txt` (inclui o anterior com `-r` e acrescenta pytest, httpx e PyInstaller) e um `pyproject.toml` que declara o comando `aprendiz` e configura o pytest.
 Outras ferramentas populares: **uv** (muito rápida, cuida de venv, dependências e até da instalação do Python), Poetry e pip-tools.
 
 F: projeto
@@ -362,7 +362,7 @@ PedidoChat(mensagem="oi")          # ok
 PedidoChat(mensagem="")            # ValidationError, com a explicação
 ```
 No Aprendiz, cada rota da API recebe um modelo assim (`api/servidor.py`). Se a interface mandar um JSON inválido, o FastAPI responde **422** com o campo errado, sem a função nem rodar.
-Para dados **não confiáveis** com regras próprias (como os arquivos de addon), o Aprendiz valida campo a campo à mão em `addons.py`, com limites de tamanho e listas fechadas.
+Para dados **não confiáveis** com regras próprias (como os arquivos de addon), o Aprendiz valida campo a campo à mão em `addons/pacote.py`, com limites de tamanho e listas fechadas.
 
 F: testes
 A: testar código python, pytest, unittest, teste unitário
@@ -415,7 +415,7 @@ def test_status(tmp_path):
         assert r.status_code == 200
         assert r.json()["app"] == "Aprendiz"
 ```
-Por isso o `criar_app` do Aprendiz recebe o caminho do banco como parâmetro: cada teste usa um banco descartável. (O `TestClient` precisa do pacote `httpx`, que está no `requirements-dev.txt`.)
+Por isso o `criar_app` do Aprendiz recebe o caminho do banco como parâmetro: cada teste usa um banco descartável. (O `TestClient` precisa do pacote `httpx`, que está no `requirements/dev.txt`.)
 
 F: mock
 A: mock, simular, unittest.mock, dublê de teste
@@ -425,8 +425,8 @@ P: como usar monkeypatch
 R: Às vezes o teste precisa **substituir** algo: uma data, a rede, um limite. O pytest tem o `monkeypatch`, que desfaz tudo no fim do teste:
 ```python
 def test_limite_de_tamanho(monkeypatch):
-    from aprendiz import addons
-    monkeypatch.setattr(addons, "MAX_DESCOMPACTADO", 100)   # limite pequeno só neste teste
+    from aprendiz.addons import pacote
+    monkeypatch.setattr(pacote, "MAX_DESCOMPACTADO", 100)   # limite pequeno só neste teste
     ...
 
 def test_pasta_de_dados(monkeypatch, tmp_path):
@@ -475,7 +475,7 @@ with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED) as z:
     z.writestr("manifesto.json", '{"id": "x"}')
 bytes_do_zip = buffer.getvalue()
 ```
-Um arquivo `.aprendiz` é um ZIP. O `addons.py` do Aprendiz lê **só os nomes conhecidos** de dentro dele e nunca extrai nada para o disco: isso evita ataques com caminhos como `../../`. Ele também soma o tamanho descompactado de tudo antes de ler e, ao ler cada arquivo, nunca lê mais que o limite (contra *zip bombs*, ZIPs pequenos que viram gigabytes).
+Um arquivo `.aprendiz` é um ZIP. O `addons/pacote.py` do Aprendiz lê **só os nomes conhecidos** de dentro dele e nunca extrai nada para o disco: isso evita ataques com caminhos como `../../`. Ele também soma o tamanho descompactado de tudo antes de ler e, ao ler cada arquivo, nunca lê mais que o limite (contra *zip bombs*, ZIPs pequenos que viram gigabytes).
 
 F: hash-arquivo
 A: hash de arquivo, hashlib, sha256, conferir arquivo
@@ -517,7 +517,7 @@ with ThreadPoolExecutor() as ex:              # tarefas de espera
 with ProcessPoolExecutor() as ex:             # tarefas de cálculo
     resultados = list(ex.map(calcular, dados))
 ```
-O Aprendiz roda o servidor Uvicorn numa **thread** (`desktop.py`), enquanto a thread principal cuida da janela. Desde o Python 3.13 existe uma versão experimental **sem GIL** (*free-threaded*).
+O Aprendiz roda o servidor Uvicorn numa **thread** (`aplicativo/desktop.py`), enquanto a thread principal cuida da janela. Desde o Python 3.13 existe uma versão experimental **sem GIL** (*free-threaded*).
 
 F: async
 A: async await, asyncio, assíncrono, corrotina
@@ -749,7 +749,7 @@ def main(argv=None):
 if __name__ == "__main__":
     main()
 ```
-Esse é o `main()` real do Aprendiz (`desktop.py`): `python -m aprendiz --modo servidor --porta 9000`. O argparse gera o `--help` sozinho e valida os tipos e as escolhas. Receber `argv` como parâmetro facilita testar. Alternativas: **click** e **typer**.
+Esse é o `main()` real do Aprendiz (`aplicativo/desktop.py`): `python -m aprendiz --modo servidor --porta 9000`. O argparse gera o `--help` sozinho e valida os tipos e as escolhas. Receber `argv` como parâmetro facilita testar. Alternativas: **click** e **typer**.
 
 F: executavel
 A: executável, pyinstaller, .exe, empacotar programa
@@ -764,11 +764,11 @@ python -m pip install pyinstaller
 pyinstaller --name Aprendiz --add-data "aprendiz/web:aprendiz/web" \
             --collect-submodules uvicorn iniciar.py
 ```
-Pontos de atenção (todos tratados no `empacotar.sh` do Aprendiz):
+Pontos de atenção (todos tratados no `distribuicao/empacotar.sh` do Aprendiz):
 - arquivos que não são Python (HTML, CSS, imagens) precisam de `--add-data` (separador `;` no Windows, `:` no Linux);
 - bibliotecas com imports dinâmicos (o uvicorn) precisam de `--collect-submodules`;
 - `--windowed` no Windows evita a janela preta do console;
-- o PyInstaller não aceita `-m`, por isso existe o `iniciar.py`;
+- o PyInstaller não aceita `-m`, por isso existe o `distribuicao/iniciar.py`;
 - gere em cada sistema de destino: não há compilação cruzada.
 
 F: pep-zen
@@ -803,5 +803,5 @@ R: Projetos que juntam tudo:
 3. um **pacote** publicável com `pyproject.toml`, testes, tipagem conferida pelo mypy e CI no GitHub Actions;
 4. um **mini-buscador**: índice invertido + BM25 em Python puro, comparado com o FTS5 do SQLite;
 5. um **CLI** com argparse que organiza arquivos por data;
-6. um **algoritmo novo** para o Aprendiz (por exemplo, BM25 com cobertura ponderada pelo IDF), seguindo `docs/criar-algoritmo.md`, com teste e benchmark.
+6. um **algoritmo novo** para o Aprendiz (por exemplo, BM25 com cobertura ponderada pelo IDF), seguindo `docs/guias/criar-algoritmo.md`, com teste e benchmark.
 O próximo passo natural é a trilha **Aprendiz por dentro**, que mostra um projeto Python real de ponta a ponta.

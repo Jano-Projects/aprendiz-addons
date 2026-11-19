@@ -530,7 +530,7 @@ def somar(a, b):
 if __name__ == "__main__":
     print(somar(2, 3))     # só roda com "python arquivo.py", não no import
 ```
-O `iniciar.py` do Aprendiz usa esse padrão para chamar a função `main()`.
+O `distribuicao/iniciar.py` do Aprendiz usa esse padrão para chamar a função `main()`.
 
 F: excecoes
 A: tratar erros, try except, exceção, programa não fechar com erro, programa fecha sozinho, programa fechou com erro, evitar que o programa feche

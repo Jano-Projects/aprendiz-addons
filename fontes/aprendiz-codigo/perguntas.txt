@@ -7,7 +7,7 @@ A: onde guardar os dados, pasta do usuário
 Q: porque | cada sistema tem um lugar certo para dados de programas, e o app respeita isso
 P: como o aprendiz descobre onde guardar os dados
 P: explica a função pasta_dados do config.py
-R: Em `aprendiz/config.py`:
+R: Em `aprendiz/aplicativo/config.py`:
 ```python
 def pasta_dados() -> Path:
     personalizada = os.environ.get("APRENDIZ_DADOS")
@@ -35,7 +35,7 @@ A: porta do servidor, porta livre
 Q: porque | pedir a porta 0 ao sistema garante uma porta livre
 P: como o aprendiz escolhe a porta do servidor
 P: explica a função escolher_porta
-R: Em `aprendiz/desktop.py`:
+R: Em `aprendiz/aplicativo/desktop.py`:
 ```python
 def escolher_porta(preferida: int) -> int:
     for porta in (preferida, 0):
@@ -61,7 +61,7 @@ A: servidor numa thread, threading
 Q: porque | o servidor roda em paralelo enquanto a janela ocupa a thread principal | -> python-avancado:threads
 P: como o aprendiz sobe o servidor numa thread
 P: explica a função iniciar_servidor
-R: Em `aprendiz/desktop.py`:
+R: Em `aprendiz/aplicativo/desktop.py`:
 ```python
 def iniciar_servidor(porta: int):
     app = criar_app()
@@ -617,7 +617,7 @@ A: leitura segura de addons, zip, validação
 Q: porque | um addon vem de fora, então tamanho, caminhos e conteúdo são conferidos antes de qualquer coisa | -> aprendiz-arquitetura:addons-py
 P: explica o código de leitura segura dos addons
 P: explica a função ler_pacote
-R: Em `aprendiz/addons.py`:
+R: Em `aprendiz/addons/pacote.py`:
 ```python
 def ler_pacote(dados: bytes) -> Pacote:
     if len(dados) > MAX_ARQUIVO:
@@ -645,7 +645,7 @@ A: configurações com closures, validadores
 Q: porque | cada chave guarda a própria função de validação | -> python-basico:funcao
 P: explica o código das configurações com closures
 P: o que é a função _numero do configuracoes.py
-R: Em `aprendiz/configuracoes.py`, os validadores são **fábricas de funções** (closures):
+R: Em `aprendiz/aplicativo/configuracoes.py`, os validadores são **fábricas de funções** (closures):
 ```python
 def _numero(minimo: float, maximo: float) -> Callable[[Any], float]:
     def validar(valor: Any) -> float:
