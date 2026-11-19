@@ -66,7 +66,7 @@ A `categoria` continua no catálogo e na busca, mas não organiza mais a página
    "nivel": "avancado"
    ```
    Antes de publicar um addon com `linguagem.json`, confira se ele não briga com os outros
-   (com o código do Aprendiz 1.0 ao lado):
+   (com o código do Aprendiz 2.0 ao lado):
    `python ../aprendiz-dev/ferramentas/conferir_addons.py addons/*.aprendiz`.
 4. Todo addon desta loja leva `"origem": "oficial"` e `"editor": "Jano Projects"` no manifesto.
    O gerador do catálogo recusa qualquer outro.
@@ -138,6 +138,16 @@ gatilhos de pedido ("me fala", "quero saber", "me lembra", "quero fazer") e mais
 perguntar o nome do Aprendiz ("você tem nome?", "como te chamam?"). Os gatilhos ficam em
 `fontes/compreensao-portugues/compreensao-base.json`; o comportamento está em
 "Juntar e reinterpretar", em `docs/compreensao.md` do aprendiz-dev.
+
+**Teia de porquês** (Aprendiz 2.0+): os addons de conhecimento convertidos trazem, em cada bloco
+do `perguntas.txt` e antes do `R:`, as linhas `F:` (ref), `A:` (assuntos: os nomes do próprio
+conceito, e não temas vizinhos), `Q:` (porquê: `relação | explicação | -> ref`, ou
+`-> addon:ref` para outro addon) e `N: raiz`. O `dialogo-portugues` traz a seção `expressao`
+(como dizer cada parte da resposta) e o `compreensao-portugues`, a seção `padroes` (estruturas
+de frase). Convertidos até agora: `sql-basico`, `sql-avancado`, `sql-teoria-pratica`,
+`prog-logica`, `prog-vocabulario`, `prog-estruturas-dados`, `prog-banco-dados`, `python-basico`
+e `python-avancado`. Cada leva entra com perguntas próprias na homologação do aprendiz-dev
+(`ferramentas/homologar.py`).
 
 **Diálogo** (Aprendiz 0.9+): `dialogo-portugues` traz só a seção `dialogo` de um
 `compreensao.json` (cumprimentos, palavras de conversa, continuações e atos de fala: pedir
