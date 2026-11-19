@@ -525,5 +525,58 @@
         ]
       }
     ]
+  },
+  "expressao": {
+    "abertura_addon": [
+      "Pelo que tenho em **{x}**:",
+      "Segundo o que sei de **{x}**:",
+      "Vamos lá, pelo que está em **{x}**:"
+    ],
+    "abertura_dono": [
+      "Pelo que você me ensinou:",
+      "Do que você me contou:"
+    ],
+    "porque": [
+      "Isso porque {x}.",
+      "O motivo é que {x}.",
+      "Acontece assim porque {x}."
+    ],
+    "regra": [
+      "A regra é: {x}.",
+      "Vale lembrar a regra: {x}."
+    ],
+    "definicao": [
+      "Em resumo, {x}.",
+      "Na base de tudo: {x}."
+    ],
+    "parte-de": [
+      "Para situar: {x}.",
+      "Isso faz parte de algo maior: {x}."
+    ],
+    "diferente-de": [
+      "Já {x}.",
+      "A diferença é que {x}.",
+      "Não confunda: {x}."
+    ],
+    "consequencia": [
+      "Com isso, {x}.",
+      "Por consequência, {x}.",
+      "E daí vem que {x}."
+    ],
+    "exemplo-de": [
+      "Por exemplo: {x}.",
+      "Um caso comum: {x}."
+    ],
+    "antes-de": [
+      "Antes disso, {x}."
+    ],
+    "depois-de": [
+      "Atenção à ordem: {x}.",
+      "Depois disso, {x}."
+    ],
+    "fechamento": [
+      "Quer que eu aprofunde algum desses pontos?",
+      "Se quiser, explico qualquer parte com mais calma."
+    ]
   }
 }

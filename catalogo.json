@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-18T20:23:59+00:00",
+  "gerado_em": "2026-11-19T01:17:23+00:00",
   "total": 40,
   "addons": [
     {
@@ -1250,7 +1250,7 @@
     {
       "id": "dialogo-portugues",
       "nome": "Diálogo do português",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Conversa de verdade, além de pergunta e resposta: entende o que você FAZ com a frase (cumprimentar e pedir ajuda na mesma mensagem, desabafar, pedir opinião, fazer uma pergunta reflexiva, elogiar ou criticar) e usa o contexto da conversa (\"não entendi\", \"não era isso\", \"sim\", \"e em Portugal?\"). Palavras de conversa como \"consegue\" e \"ajudar\" deixam de disparar buscas sem relação. Complementa a Compreensão do português.",
       "licenca": "CC-BY-4.0",
@@ -1272,8 +1272,8 @@
       "classificacao": [
         "compreensao"
       ],
-      "versao_minima_app": "0.9.0",
-      "criado_com": "0.9.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.0",
       "dependencias": [
         {
           "id": "compreensao-portugues",
@@ -1291,15 +1291,15 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": {
-        "regras": 5,
+        "regras": 17,
         "catalogo": 0,
         "lemas": 0,
         "vetores": 0
       },
       "norma": null,
       "arquivo": "addons/dialogo-portugues.aprendiz",
-      "tamanho": 4792,
-      "sha256": "1605cbde6ae7477b9f1cc7ea5461d21d47b774f70178251b5d55dabc9b15a446",
+      "tamanho": 5176,
+      "sha256": "9105ad19a649bef43580e62d5b5734b590defd52d5d8da5f09b3bf849dec6c2f",
       "atualizado_em": "2026-11-18",
       "amostra": []
     },
@@ -3431,7 +3431,7 @@
     {
       "id": "sql-basico",
       "nome": "SQL 1 · Básico",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "SQL do zero com SQLite: criar tabelas, tipos, INSERT, SELECT, WHERE, ORDER BY, LIMIT, UPDATE, DELETE, funções de agregação, GROUP BY, HAVING e JOIN.",
       "licenca": "CC-BY-4.0",
@@ -3453,8 +3453,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.0",
       "dependencias": [
         {
           "id": "prog-banco-dados",
@@ -3463,9 +3463,9 @@
         }
       ],
       "recomendado": {
-        "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.96
+        "busca": "fuzzy",
+        "resposta": "trabalhada",
+        "acerto": 1.0
       },
       "conhecimentos": 27,
       "verbetes": 0,
@@ -3478,8 +3478,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/sql-basico.aprendiz",
-      "tamanho": 9061,
-      "sha256": "203457392d23b89d7b51d865d28370d4d908fd1a6d41d6dbccf9731fd7280eae",
+      "tamanho": 11917,
+      "sha256": "f4dd8c3be7720c1f1c4842315435a929eb92cbf73bd57dc4a368c36a4ab9d16d",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {

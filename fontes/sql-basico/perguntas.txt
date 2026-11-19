@@ -1,6 +1,10 @@
 # SQL 1 · Básico
 # Todos os exemplos rodam no SQLite e usam o mesmo banco de uma loja (veja "banco de exemplo da loja").
 
+F: comecar-sqlite
+A: sql, sqlite, começar, aprender, praticar
+Q: porque | o SQLite guarda o banco inteiro num arquivo e não precisa de servidor, o jeito mais simples de praticar
+Q: consequencia | todos os exemplos desta trilha usam o mesmo banco, o da loja | -> banco-exemplo
 P: como começar a aprender sql
 P: como praticar sql
 P: como instalar o sqlite
@@ -15,6 +19,10 @@ R: O jeito mais simples é o **SQLite**: um banco inteiro num arquivo, sem servi
 No terminal: `sqlite3 loja.db` abre (ou cria) o banco. Comandos úteis do próprio sqlite3 (começam com ponto): `.tables` lista as tabelas, `.schema clientes` mostra a estrutura, `.mode table` deixa os resultados em tabela, `.quit` sai.
 Depois, rode o script do **banco de exemplo da loja** e acompanhe os exemplos desta trilha.
 
+F: banco-exemplo
+A: banco de exemplo, loja, clientes, pedidos, produtos
+Q: porque | praticar sempre com as mesmas tabelas deixa cada exemplo comparável ao anterior
+Q: parte-de | o banco é feito de tabelas criadas com CREATE TABLE | -> create-table
 P: banco de exemplo da loja
 P: script do banco de exemplo
 P: tabelas de exemplo para praticar sql
@@ -68,6 +76,11 @@ INSERT INTO itens_pedido VALUES
 ```
 Quatro tabelas: clientes fazem pedidos, e cada pedido tem itens de produtos. A Elisa não tem pedidos nem cidade, e o fone de ouvido nunca foi vendido: isso ajuda a mostrar `NULL` e `LEFT JOIN`.
 
+F: create-table
+N: raiz
+A: tabela, create table, colunas, criar tabela
+Q: definicao | uma tabela organiza os dados em linhas (registros) e colunas (campos)
+Q: porque | cada coluna tem um tipo, e o banco usa esse tipo para guardar e comparar os valores | -> tipos-dados
 P: como criar uma tabela em sql
 P: como usar create table
 P: comando create table
@@ -91,6 +104,10 @@ Cada coluna tem nome, tipo e **restrições**:
 - `REFERENCES outra(id)`: chave estrangeira.
 `CREATE TABLE IF NOT EXISTS contatos (...)` não dá erro se ela já existir.
 
+F: tipos-dados
+A: tipos, integer, text, real, tipo de dado
+Q: porque | o tipo define como o valor é guardado e comparado: como número, 10 vem depois de 9; como texto, vem antes
+Q: parte-de | os tipos são declarados ao criar a tabela | -> create-table
 P: quais os tipos de dados no sql
 P: tipos de dados do sqlite
 P: qual tipo usar para dinheiro em sql
@@ -104,6 +121,10 @@ Outros bancos são rígidos e têm mais tipos:
 - `BOOLEAN` (no SQLite, 0 e 1).
 No SQLite, para dinheiro, guarde **centavos em INTEGER** (`12050` = R$ 120,50).
 
+F: insert
+A: insert, inserir, adicionar, registro
+Q: porque | uma tabela recém-criada está vazia, e o INSERT é o que coloca linhas nela | -> create-table
+Q: consequencia | depois de inseridos, os dados são lidos com o SELECT | -> select
 P: como inserir dados em uma tabela
 P: como usar insert into
 P: como inserir várias linhas de uma vez em sql
@@ -124,6 +145,11 @@ SELECT 'Cópia de ' || nome, cidade FROM clientes WHERE id = 1;
 ```
 Sempre liste as colunas: se a tabela ganhar uma coluna nova, o comando continua funcionando. Textos vão entre **aspas simples**; para uma aspa dentro do texto, dobre-a: `'D''Ávila'`.
 
+F: select
+N: raiz
+A: select, consultar, ler dados, buscar dados
+Q: definicao | o SELECT só lê: nunca altera a tabela
+Q: regra | a ordem de escrita é SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY e LIMIT
 P: como consultar dados em sql
 P: como usar select
 P: como selecionar colunas de uma tabela
@@ -140,6 +166,11 @@ SELECT DISTINCT cidade FROM clientes;   -- sem repetir
 ```
 `SELECT *` é ótimo para explorar, mas no código prefira listar as colunas: fica claro o que se usa e não traz dados à toa. SQL não diferencia maiúsculas nas palavras-chave; a convenção é escrevê-las em MAIÚSCULAS.
 
+F: where
+A: where, filtro, filtrar, condição
+Q: porque | sem WHERE o SELECT devolve todas as linhas da tabela | -> select
+Q: diferente-de | o HAVING também filtra, mas filtra grupos, depois do GROUP BY | -> having
+Q: consequencia | o mesmo WHERE decide quais linhas o UPDATE e o DELETE alteram | -> update
 P: como filtrar resultados em sql
 P: como usar where
 P: operadores do where
@@ -156,6 +187,9 @@ SELECT * FROM clientes WHERE uf NOT IN ('SP');
 ```
 Comparações: `=`, `<>` (ou `!=`), `<`, `>`, `<=`, `>=`. Use parênteses ao misturar `AND` e `OR`: o `AND` é avaliado antes.
 
+F: like
+A: like, padrão, texto parecido, curinga
+Q: parte-de | o LIKE é uma condição do WHERE: o = só acha o texto exato, o LIKE aceita partes com % e _ | -> where
 P: como usar like em sql
 P: como buscar parte de um texto em sql
 P: o que é % e _ no like
@@ -170,6 +204,11 @@ SELECT * FROM clientes WHERE uf LIKE 'P_';        -- PE, PR…
 ```
 No SQLite, `LIKE` ignora maiúsculas/minúsculas só nas letras sem acento ('a' = 'A', mas 'é' ≠ 'É'). Um `LIKE '%texto'` não aproveita índice; para busca de texto de verdade, o SQLite tem o FTS5.
 
+F: null
+N: raiz
+A: null, nulo, vazio, sem valor, is null
+Q: definicao | NULL quer dizer valor desconhecido, e não zero nem texto vazio
+Q: consequencia | qualquer comparação com NULL dá NULL, por isso se usa IS NULL no WHERE | -> where
 P: o que é null em sql
 P: como verificar se é nulo em sql
 P: por que = null não funciona
@@ -182,6 +221,11 @@ SELECT nome, COALESCE(cidade, 'não informada') AS cidade FROM clientes;
 ```
 `COALESCE(a, b, …)` devolve o primeiro valor não nulo. Contas com NULL dão NULL (`5 + NULL` é NULL), e as funções de agregação (`SUM`, `AVG`) ignoram os NULL.
 
+F: order-by
+A: order by, ordenar, ordem, crescente, decrescente
+Q: porque | sem ORDER BY o banco devolve as linhas na ordem que for mais rápida para ele, sem garantia nenhuma
+Q: parte-de | o ORDER BY age depois do WHERE, sobre as linhas que sobraram | -> where
+Q: consequencia | junto com o LIMIT, permite pegar os primeiros ou os maiores | -> limit
 P: como ordenar resultados em sql
 P: como usar order by
 P: ordem decrescente em sql
@@ -195,6 +239,10 @@ SELECT nome, preco FROM produtos ORDER BY categoria ASC, preco DESC;
 ```
 Sem `ORDER BY`, a ordem do resultado **não é garantida**, mesmo que pareça sempre igual. No SQLite os NULL vêm primeiro na ordem crescente; dá para escolher com `NULLS LAST`.
 
+F: limit
+A: limit, limitar, primeiros, top, offset
+Q: porque | uma tabela grande pode devolver milhares de linhas, e quase sempre só as primeiras importam
+Q: depois-de | o LIMIT só faz sentido depois de ordenar; sem isso, "as primeiras" são linhas quaisquer | -> order-by
 P: como limitar resultados em sql
 P: como usar limit e offset
 P: como fazer paginação em sql
@@ -208,6 +256,10 @@ Cada banco escreve de um jeito:
 - Oracle (12c ou mais novo) e o padrão SQL: `FETCH FIRST 3 ROWS ONLY`.
 Use sempre com `ORDER BY`, senão "os 3 primeiros" são quaisquer 3. Para páginas muito fundas, `OFFSET` fica lento; a alternativa é continuar de onde parou (`WHERE id > último_id_visto`).
 
+F: update
+A: update, atualizar, alterar dados, set
+Q: porque | o UPDATE muda valores de linhas que já existem, em vez de criar outras | -> insert
+Q: regra | sem WHERE, o UPDATE altera todas as linhas da tabela | -> where
 P: como atualizar dados em sql
 P: como usar update
 P: como alterar um registro
@@ -223,6 +275,10 @@ UPDATE clientes SET cidade = 'Olinda', uf = 'PE' WHERE id = 3;
 2. troque o `SELECT` pelo `UPDATE`;
 3. em produção, faça dentro de uma transação (`BEGIN; ... ; COMMIT;`), e se algo sair errado, `ROLLBACK;`.
 
+F: delete
+A: delete, apagar, remover linhas, excluir
+Q: regra | sem WHERE, o DELETE apaga todas as linhas; vale rodar antes um SELECT com o mesmo WHERE | -> where
+Q: diferente-de | o DELETE apaga linhas; para mudar a estrutura da tabela se usa o ALTER TABLE | -> alter-table
 P: como apagar dados em sql
 P: como usar delete
 P: diferença entre delete drop e truncate
@@ -238,6 +294,10 @@ As três formas de "apagar":
 - `DROP TABLE t`: apaga a **tabela inteira**, estrutura e dados.
 Com `ON DELETE CASCADE` na chave estrangeira (como em `itens_pedido`), apagar um pedido apaga os itens dele junto.
 
+F: alter-table
+A: alter table, estrutura, adicionar coluna, renomear
+Q: porque | as necessidades mudam, e a tabela precisa de colunas novas sem perder os dados que já tem | -> create-table
+Q: diferente-de | o UPDATE muda os dados; o ALTER TABLE muda a forma da tabela | -> update
 P: como alterar a estrutura de uma tabela
 P: como usar alter table
 P: como adicionar uma coluna em uma tabela
@@ -250,6 +310,11 @@ DROP TABLE IF EXISTS agenda;
 ```
 O SQLite tem um `ALTER TABLE` limitado: para mudar o tipo de uma coluna ou uma restrição, o caminho é criar uma tabela nova, copiar os dados e trocar. É o que o Aprendiz faz numa das migrações do banco dele (`aprendiz/memoria/banco.py`).
 
+F: agregacao
+N: raiz
+A: agregação, count, sum, avg, min, max, total, média
+Q: definicao | uma função de agregação resume várias linhas num único valor
+Q: consequencia | para ter um resumo por grupo, como por cliente ou por mês, se usa o GROUP BY | -> group-by
 P: quais são as funções de agregação em sql
 P: como usar count sum avg min max
 P: como contar linhas em sql
@@ -263,6 +328,11 @@ SELECT ROUND(AVG(preco), 2) AS media FROM produtos WHERE categoria = 'Móveis';
 ```
 `COUNT(*)` conta linhas; `COUNT(coluna)` conta os valores **não nulos** daquela coluna.
 
+F: group-by
+A: group by, agrupar, por grupo, totais por grupo
+Q: porque | as funções de agregação resumem a tabela toda, e o GROUP BY faz o resumo separado por grupo | -> agregacao
+Q: regra | toda coluna do SELECT que não está numa agregação precisa estar no GROUP BY
+Q: consequencia | para filtrar os grupos pelo total se usa o HAVING | -> having
 P: como usar group by
 P: como agrupar resultados em sql
 P: como contar por categoria em sql
@@ -280,6 +350,10 @@ Resultado (categoria · qtd · preco_medio):
 - Móveis · 2 · 925.0
 Regra: toda coluna no `SELECT` que **não** está numa agregação precisa estar no `GROUP BY`. (O SQLite tolera, mas devolve um valor qualquer do grupo; PostgreSQL e outros dão erro.)
 
+F: having
+A: having, filtrar grupos, filtro de agregação
+Q: porque | os totais só existem depois do GROUP BY, e o WHERE age antes dele | -> group-by
+Q: diferente-de | o WHERE filtra linhas antes de agrupar; o HAVING filtra grupos depois | -> where
 P: como usar having
 P: diferença entre where e having
 P: qual a diferença entre where e having
@@ -296,6 +370,11 @@ HAVING COUNT(*) > 1;
 ```
 A ordem em que o banco **executa** as partes: `FROM` → `WHERE` → `GROUP BY` → `HAVING` → `SELECT` → `ORDER BY` → `LIMIT`. É por isso que um apelido criado no `SELECT` não pode ser usado no `WHERE`.
 
+F: join
+A: join, juntar tabelas, relacionar tabelas, inner join, chave estrangeira
+Q: porque | os dados ficam em tabelas separadas para não se repetirem, e o JOIN os junta de novo na consulta
+Q: regra | a condição do ON liga a chave estrangeira de uma tabela à chave primária da outra
+Q: consequencia | o JOIN comum descarta quem não tem par; para manter, se usa o LEFT JOIN | -> left-join
 P: o que é join em sql
 P: como juntar duas tabelas em sql
 P: como usar inner join
@@ -323,6 +402,10 @@ JOIN itens_pedido i ON i.pedido_id = p.id
 GROUP BY p.id, c.nome;
 ```
 
+F: left-join
+A: left join, junção à esquerda, sem correspondência
+Q: diferente-de | o JOIN comum só traz linhas com par nas duas tabelas; o LEFT JOIN mantém todas as da esquerda | -> join
+Q: consequencia | onde não há par, as colunas da direita vêm NULL | -> null
 P: o que é left join
 P: diferença entre inner join e left join
 P: como listar clientes sem pedidos
@@ -346,6 +429,9 @@ WHERE p.id IS NULL;
 ```
 Note o `COUNT(p.id)` e não `COUNT(*)`: o `*` contaria a linha com NULL como 1.
 
+F: tipos-join
+A: tipos de join, inner, left, right, full, cross
+Q: parte-de | todos são variações do JOIN e só mudam o que fazer com as linhas sem par | -> join
 P: quais os tipos de join
 P: o que é right join full outer join e cross join
 R: - **INNER JOIN:** só o que casa nos dois lados.
@@ -356,6 +442,10 @@ R: - **INNER JOIN:** só o que casa nos dois lados.
 - **self join:** uma tabela com ela mesma (funcionário e seu chefe na mesma tabela).
 O SQLite tem RIGHT e FULL desde a versão 3.39. A falha mais comum em JOIN é esquecer o `ON` ou errar a condição, o que multiplica linhas sem querer.
 
+F: funcoes-texto
+A: funções de texto, upper, lower, length, substr, trim, concatenar
+Q: porque | os dados chegam escritos de jeitos diferentes, e essas funções padronizam o texto para comparar e exibir
+Q: exemplo-de | um uso comum é comparar sem diferença de maiúsculas, com LOWER dentro do WHERE | -> where
 P: o que são funções de texto em sql
 P: como juntar textos em sql
 P: como deixar texto maiúsculo em sql
@@ -369,6 +459,10 @@ SELECT INSTR(nome, ' ') FROM clientes;                      -- posição do espa
 ```
 Em MySQL e SQL Server, use `CONCAT(a, b)`; PostgreSQL e Oracle aceitam `||`.
 
+F: datas
+A: datas, date, data, hora, strftime
+Q: porque | o SQLite não tem um tipo próprio de data e guarda datas como texto no formato AAAA-MM-DD | -> tipos-dados
+Q: consequencia | nesse formato, a ordem alfabética é a mesma ordem do tempo, então ORDER BY e comparações funcionam | -> order-by
 P: como trabalhar com datas em sql
 P: funções de data no sqlite
 P: como filtrar por mês em sql
@@ -384,6 +478,10 @@ SELECT julianday('2026-03-05') - julianday('2026-01-10');   -- dias entre datas
 ```
 Outros bancos têm tipos de data de verdade e funções como `EXTRACT(MONTH FROM data)` (PostgreSQL), `DATEADD` (SQL Server) e `ADD_MONTHS` (Oracle).
 
+F: case-when
+A: case when, condição, se então, classificar
+Q: porque | às vezes o resultado precisa mudar conforme o valor, como um "se" dentro da consulta
+Q: diferente-de | o WHERE escolhe quais linhas aparecem; o CASE muda o que aparece em cada linha | -> where
 P: como usar case when em sql
 P: if dentro de select
 R: `CASE` é o "se" do SQL, dentro de uma consulta:
@@ -403,6 +501,10 @@ SELECT COUNT(*) AS total,
 FROM pedidos;
 ```
 
+F: importar-csv
+A: csv, importar, exportar, planilha
+Q: porque | é o jeito mais rápido de trazer os dados de uma planilha sem escrever um INSERT por linha | -> insert
+Q: regra | com a tabela já criada, o --skip 1 pula a linha de cabeçalho do arquivo | -> create-table
 P: como importar csv no sqlite
 P: como exportar resultado para csv
 R: No `sqlite3`:
@@ -418,6 +520,10 @@ SELECT * FROM clientes;
 - `.output arquivo` manda os resultados para o arquivo; `.output stdout` volta para a tela.
 O DB Browser for SQLite faz o mesmo pelo menu Arquivo → Importar/Exportar.
 
+F: sql-python
+A: python, sqlite3, programa, script
+Q: porque | o Python já traz o módulo sqlite3, então o mesmo banco funciona num programa sem instalar nada | -> comecar-sqlite
+Q: regra | os valores vão por parâmetros (?) e nunca colados no texto do SQL, o que impede SQL injection
 P: como usar sql no python
 P: como usar sqlite3 no python
 P: como conectar no banco pelo python
@@ -441,6 +547,10 @@ con.close()
 ```
 Os `?` são **parâmetros**: o valor nunca vira parte do comando, o que impede *SQL injection*. Nunca monte o SQL juntando textos com o que o usuário digitou. É exatamente assim que o Aprendiz conversa com o banco dele.
 
+F: boas-praticas
+A: boas práticas, dicas, erros comuns
+Q: porque | consultas claras e previsíveis evitam o erro mais caro: alterar ou apagar o que não devia | -> delete
+Q: regra | listar as colunas no SELECT, em vez de usar *, deixa claro o que a consulta usa | -> select
 P: boas práticas de sql
 P: como escrever sql legível
 R: Hábitos que ajudam:
@@ -453,6 +563,9 @@ R: Hábitos que ajudam:
 - parâmetros (`?`) para valores vindos de fora;
 - comentários com `--` explicando regras de negócio.
 
+F: exercicios
+A: exercícios, praticar, treino
+Q: porque | praticar no banco da loja fixa cada comando no contexto em que ele é usado | -> banco-exemplo
 P: exercícios de sql básico
 P: exercícios de sql para iniciantes
 R: Usando o banco de exemplo da loja:
