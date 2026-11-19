@@ -1,6 +1,11 @@
 # Programação 4 · Bancos de dados (conceitos)
 # A base para a trilha de SQL: como os dados são modelados, sem depender de um banco específico.
 
+F: banco-dados
+N: raiz
+A: banco de dados, guardar dados, armazenar informações, base de dados
+Q: definicao | um banco de dados guarda informações organizadas para serem encontradas, alteradas e protegidas
+Q: porque | arquivos soltos não garantem organização, acesso simultâneo nem segurança dos dados
 P: o que é banco de dados
 P: para que serve um banco de dados
 R: **Banco de dados** é uma coleção organizada de dados, guardada de forma que seja fácil **consultar, inserir, alterar e apagar**, com segurança, mesmo com muitos usuários ao mesmo tempo.
@@ -11,6 +16,10 @@ Por que não guardar tudo em arquivos de texto? Porque o banco resolve sozinho:
 - recuperação depois de uma queda de energia.
 O Aprendiz guarda a memória num banco **SQLite**, um único arquivo `.db`.
 
+F: sgbd
+A: sgbd, sistema gerenciador, mysql, postgresql, sqlite, oracle
+Q: porque | alguém precisa cuidar de guardar, buscar, proteger e recuperar os dados: esse é o papel do SGBD | -> banco-dados
+Q: exemplo-de | o SQLite é um SGBD que cabe num arquivo | -> sqlite
 P: o que é sgbd
 P: o que é sistema gerenciador de banco de dados
 P: quais os bancos de dados mais usados
@@ -23,6 +32,11 @@ Os mais usados:
 - **SQL Server:** da Microsoft, comum em empresas que usam Windows.
 - **MongoDB, Redis:** bancos NoSQL.
 
+F: relacional
+A: banco relacional, relações, tabelas relacionadas, modelo relacional
+Q: porque | os dados ficam em tabelas que se ligam por chaves, sem repetir informação | -> chave-estrangeira
+Q: parte-de | as tabelas são a base do modelo relacional | -> tabela
+Q: diferente-de | os bancos NoSQL guardam documentos, chave-valor ou grafos em vez de tabelas | -> nosql
 P: o que é banco de dados relacional
 P: o que é modelo relacional
 R: No **banco relacional**, os dados ficam em **tabelas** (relações) com linhas e colunas, e as tabelas se ligam por **chaves**. A ideia é de Edgar F. Codd (IBM, 1970).
@@ -32,6 +46,11 @@ Exemplo, uma loja:
 O `cliente_id` de cada pedido aponta para um `id` em `clientes`. Assim o nome do cliente fica num lugar só, e não repetido em cada pedido.
 A linguagem para conversar com bancos relacionais é o **SQL**.
 
+F: tabela
+N: raiz
+A: tabela, linha, coluna, registro, campo
+Q: definicao | cada linha é um registro, uma coisa, e cada coluna é uma característica dessa coisa
+Q: consequencia | cada linha precisa de um jeito único de ser identificada | -> chave-primaria
 P: o que é tabela linha e coluna
 P: o que é registro e campo
 R: - **Tabela:** um conjunto de dados sobre uma coisa (clientes, produtos).
@@ -39,6 +58,12 @@ R: - **Tabela:** um conjunto de dados sobre uma coisa (clientes, produtos).
 - **Linha** (registro, tupla): uma ocorrência (o cliente Ana, de Recife).
 Pense numa planilha, mas com regras: cada coluna tem um tipo fixo e cada linha é identificada por uma chave.
 
+F: chave-primaria
+N: raiz
+A: chave primária, primary key, pk, identificador, id
+Q: porque | sem um identificador único não dá para apontar com certeza para uma linha
+Q: regra | a chave primária não se repete e não pode ser vazia
+Q: consequencia | outras tabelas apontam para ela pela chave estrangeira | -> chave-estrangeira
 P: o que é chave primária
 P: o que é primary key
 P: chave primária
@@ -54,6 +79,11 @@ CREATE TABLE clientes (
 );
 ```
 
+F: chave-estrangeira
+A: chave estrangeira, foreign key, fk, referência, relacionamento, integridade referencial
+Q: porque | ela liga uma linha a outra tabela sem repetir os dados de lá | -> chave-primaria
+Q: regra | o banco recusa uma chave estrangeira que aponta para algo que não existe
+Q: exemplo-de | o JOIN usa essa ligação para juntar as tabelas na consulta | -> sql-basico:join
 P: o que é chave estrangeira
 P: o que é foreign key
 P: o que é integridade referencial
@@ -69,6 +99,10 @@ CREATE TABLE pedidos (
 **Integridade referencial** é a garantia de que toda FK aponta para algo que existe: o banco recusa um pedido para o cliente 99 se ele não existir, e decide o que fazer quando um cliente é apagado (`ON DELETE CASCADE` apaga os pedidos junto; `RESTRICT` impede).
 No SQLite, ative com `PRAGMA foreign_keys = ON;`. O Aprendiz faz isso ao abrir o banco.
 
+F: chave-candidata
+A: chave candidata, unique, único, identificar de outro jeito
+Q: porque | às vezes mais de uma coluna identifica a linha, como o CPF e o e-mail | -> chave-primaria
+Q: diferente-de | só uma das candidatas vira a chave primária; as outras costumam ganhar UNIQUE
 P: o que é chave candidata
 P: o que é chave composta
 P: o que é chave única
@@ -76,6 +110,10 @@ R: - **Chave candidata:** qualquer coluna (ou conjunto) que poderia ser a chave 
 - **Chave composta:** chave formada por mais de uma coluna. Ex.: em `itens_pedido`, o par (`pedido_id`, `produto_id`).
 - **Chave única (UNIQUE):** uma restrição que impede repetição numa coluna que não é a primária. Ex.: `email TEXT UNIQUE`.
 
+F: um-para-um
+A: um para um, 1 para 1, relacionamento simples
+Q: parte-de | é o tipo mais simples de relacionamento entre tabelas | -> chave-estrangeira
+Q: diferente-de | no muitos para muitos, cada lado se liga a vários do outro | -> muitos-para-muitos
 P: o que é relacionamento um para um
 P: o que é relacionamento um para muitos
 P: o que é relacionamento muitos para muitos
@@ -85,6 +123,10 @@ R: **Cardinalidade** diz quantos de um lado se ligam a quantos do outro:
 - **1:N (um para muitos):** um cliente tem muitos pedidos; cada pedido é de um cliente. A FK fica no lado "muitos" (`pedidos.cliente_id`).
 - **N:N (muitos para muitos):** um aluno faz muitas disciplinas e cada disciplina tem muitos alunos. Precisa de uma **tabela associativa** no meio.
 
+F: muitos-para-muitos
+A: muitos para muitos, n para n, tabela associativa, tabela de ligação, vários de cada lado
+Q: porque | uma coluna só guarda um valor, então a ligação vai para uma terceira tabela | -> chave-estrangeira
+Q: regra | a tabela associativa tem duas chaves estrangeiras, uma para cada lado
 P: como fazer relacionamento muitos para muitos
 P: o que é tabela associativa
 P: o que é tabela intermediária
@@ -101,6 +143,10 @@ CREATE TABLE matriculas (
 ```
 A tabela do meio ainda pode guardar dados **da relação** (a nota do aluno naquela disciplina, a data da matrícula).
 
+F: modelo-er
+A: modelo entidade relacionamento, der, diagrama, entidades, atributos
+Q: porque | desenhar entidades e relacionamentos antes de criar as tabelas evita retrabalho
+Q: consequencia | cada entidade costuma virar uma tabela | -> tabela
 P: o que é modelo entidade relacionamento
 P: o que é der
 P: o que é diagrama er
@@ -120,12 +166,20 @@ Passos para modelar:
 6. normalize.
 Ferramentas: dbdiagram.io, draw.io, MySQL Workbench, pgModeler.
 
+F: modelos
+A: modelo conceitual, modelo lógico, modelo físico, etapas do projeto
+Q: porque | o projeto vai da ideia (conceitual) às tabelas (lógico) e ao banco real (físico) | -> modelo-er
 P: o que é modelo conceitual lógico e físico
 R: Três níveis de modelagem:
 - **Conceitual:** as ideias do negócio, sem tecnologia (o diagrama ER). Serve para conversar com quem conhece o negócio.
 - **Lógico:** as tabelas, colunas, chaves e relacionamentos, ainda sem um banco específico.
 - **Físico:** o script SQL para um banco real (SQLite, PostgreSQL), com tipos exatos, índices e restrições.
 
+F: normalizacao
+A: normalização, normalizar, dados repetidos, redundância, formas normais
+Q: porque | dado repetido em vários lugares acaba ficando diferente quando só um deles é atualizado
+Q: regra | cada informação fica num lugar só e as tabelas se ligam por chaves | -> chave-estrangeira
+Q: diferente-de | a desnormalização repete de propósito para ganhar velocidade | -> desnormalizacao
 P: o que é normalização de banco de dados
 P: para que serve normalizar
 P: o que é redundância de dados
@@ -137,6 +191,10 @@ R: **Normalização** é organizar as tabelas para **evitar dados repetidos** e 
 - **exclusão:** apagar o último pedido de um cliente apaga também os dados do cliente.
 A regra de bolso: **cada fato num lugar só**. As formas normais (1FN, 2FN, 3FN) formalizam isso; a trilha "SQL 3 · Teoria e prática" mostra cada uma em detalhe.
 
+F: primeira-forma-normal
+A: primeira forma normal, 1fn, valores atômicos, lista numa coluna
+Q: parte-de | é o primeiro passo da normalização | -> normalizacao
+Q: regra | cada coluna guarda um valor só, sem listas
 P: o que é primeira forma normal
 P: o que é segunda forma normal
 P: o que é terceira forma normal
@@ -149,12 +207,20 @@ R: Resumo das três principais:
 - **3FN:** está na 2FN e nenhuma coluna depende de **outra coluna que não seja chave**. Em `clientes(id, cep, cidade)`, a cidade depende do CEP.
 Frase para lembrar: cada coluna depende "da chave, da chave inteira e de nada além da chave".
 
+F: desnormalizacao
+A: desnormalização, desnormalizar, duplicar de propósito, desempenho
+Q: porque | juntar muitas tabelas em cada consulta pode ficar lento, então se repete um dado para ler mais rápido
+Q: consequencia | o dado repetido precisa ser mantido igual nos dois lugares | -> normalizacao
 P: o que é desnormalização
 P: quando desnormalizar
 R: **Desnormalizar** é repetir dados de propósito para deixar a **leitura** mais rápida, aceitando mais trabalho para manter tudo consistente.
 Exemplos: guardar o `total` no pedido em vez de somar os itens toda vez; tabelas de relatório (data warehouse) com tudo junto.
 Regra: normalize primeiro; desnormalize só onde medir que a leitura é o gargalo, e documente quem atualiza a cópia.
 
+F: indice
+A: índice, index, acelerar busca, consulta lenta, desempenho
+Q: porque | sem índice o banco lê a tabela inteira para achar uma linha; com ele, vai direto como no índice de um livro
+Q: consequencia | cada índice ocupa espaço e deixa INSERT e UPDATE um pouco mais lentos
 P: o que é índice em banco de dados
 P: para que serve um índice
 P: índice deixa o banco mais rápido
@@ -164,6 +230,10 @@ R: **Índice** é uma estrutura extra (quase sempre uma **árvore B**) que deixa
 O custo: ocupa espaço e deixa **INSERT, UPDATE e DELETE** um pouco mais lentos, porque o índice também precisa ser atualizado.
 Crie índices nas colunas usadas em `WHERE`, `JOIN` e `ORDER BY` com frequência. A chave primária já tem índice.
 
+F: transacao
+A: transação, commit, rollback, tudo ou nada, várias alterações de uma vez
+Q: porque | um grupo de alterações precisa acontecer inteiro ou não acontecer, como numa transferência bancária
+Q: regra | as garantias de uma transação são as do ACID | -> acid
 P: o que é transação em banco de dados
 P: o que é commit e rollback
 P: transação
@@ -179,6 +249,10 @@ COMMIT;      -- confirma tudo
 ```
 O Aprendiz instala um addon dentro de uma transação: ou o addon entra inteiro, ou nada muda.
 
+F: acid
+N: raiz
+A: acid, atomicidade, consistência, isolamento, durabilidade
+Q: definicao | atomicidade (tudo ou nada), consistência (regras respeitadas), isolamento (uma não atrapalha a outra) e durabilidade (o que foi confirmado não se perde)
 P: o que é acid
 P: o que significa acid em banco de dados
 R: **ACID** são as quatro garantias de uma transação:
@@ -188,6 +262,10 @@ R: **ACID** são as quatro garantias de uma transação:
 - **Durabilidade:** depois do COMMIT, o dado sobrevive a uma queda de energia (fica gravado em disco).
 SQLite, PostgreSQL, MySQL (InnoDB), Oracle e SQL Server são ACID.
 
+F: nosql
+A: nosql, mongodb, redis, documentos, chave valor, não relacional
+Q: porque | alguns dados não cabem bem em tabelas fixas, como documentos variados ou grandes volumes distribuídos
+Q: diferente-de | o banco relacional exige estrutura fixa e garante as relações por chaves | -> relacional
 P: o que é nosql
 P: diferença entre sql e nosql
 P: quando usar nosql
@@ -200,6 +278,10 @@ R: **NoSQL** ("não só SQL") são bancos que não usam o modelo de tabelas rela
 **Quando NoSQL ajuda:** estrutura muito variável, volumes enormes distribuídos, cache, grafos.
 Um bom padrão é começar relacional; o PostgreSQL ainda guarda JSON quando precisa de flexibilidade.
 
+F: crud
+A: crud, criar ler atualizar apagar, operações básicas
+Q: definicao | são as quatro operações de quase todo sistema: Create, Read, Update e Delete
+Q: exemplo-de | no SQL elas são INSERT, SELECT, UPDATE e DELETE | -> sql-basico:insert
 P: o que é crud
 R: **CRUD** são as quatro operações básicas sobre dados, e o equivalente em SQL e HTTP:
 - **C**reate (criar): `INSERT` · `POST`
@@ -208,6 +290,10 @@ R: **CRUD** são as quatro operações básicas sobre dados, e o equivalente em 
 - **D**elete (apagar): `DELETE` · `DELETE`
 Quase toda tela de cadastro é um CRUD. No Aprendiz, a tela "Base de conhecimento" é o CRUD dos conhecimentos.
 
+F: sql
+A: sql, linguagem de consulta, structured query language
+Q: porque | é a linguagem padrão para pedir e alterar dados num banco relacional | -> relacional
+Q: exemplo-de | a consulta mais básica é o SELECT | -> sql-basico:select
 P: o que é sql
 P: para que serve sql
 P: sql é linguagem de programação
@@ -226,6 +312,9 @@ Ela se divide em grupos:
 - **TCL** (transações): `BEGIN`, `COMMIT`, `ROLLBACK`.
 A trilha de SQL (básico, avançado e teoria e prática) ensina tudo isso com exemplos que rodam no SQLite.
 
+F: sqlite
+A: sqlite, banco em arquivo, sem servidor
+Q: porque | o banco inteiro fica num arquivo, sem servidor para instalar ou configurar | -> sgbd
 P: o que é sqlite
 P: por que o aprendiz usa sqlite
 R: **SQLite** é um banco de dados inteiro numa biblioteca pequena, que guarda tudo num **único arquivo**. Não tem servidor para instalar ou configurar.
@@ -234,6 +323,9 @@ R: **SQLite** é um banco de dados inteiro numa biblioteca pequena, que guarda t
 - limites: uma escrita por vez e não é feito para muitos computadores acessando pela rede.
 Por isso é perfeito para o Aprendiz: um app local, offline, de um dono só, em que a memória inteira é um arquivo que dá para copiar para outro computador.
 
+F: view
+A: view, visão, consulta salva, tabela virtual
+Q: porque | uma consulta usada sempre pode ganhar um nome e ser lida como se fosse uma tabela | -> sql-basico:select
 P: o que é view em banco de dados
 P: o que é visão
 R: **View** (visão) é uma consulta salva com nome, que se usa como se fosse uma tabela:
@@ -245,6 +337,9 @@ SELECT * FROM clientes_recife;
 ```
 Servem para simplificar consultas complicadas, padronizar relatórios e esconder colunas (mostrar a tabela sem o salário, por exemplo). Normalmente não guardam dados; a consulta roda a cada uso.
 
+F: stored-procedure
+A: stored procedure, procedimento armazenado, rotina no banco
+Q: porque | uma sequência de comandos fica guardada no próprio banco e roda com uma chamada só
 P: o que é stored procedure
 P: o que é trigger
 P: o que é gatilho em banco de dados
@@ -252,6 +347,9 @@ R: - **Stored procedure:** um programa guardado **dentro** do banco (PL/SQL no O
 - **Trigger (gatilho):** código que o banco executa **sozinho** quando algo acontece numa tabela (antes ou depois de um INSERT, UPDATE ou DELETE). Ex.: gravar um histórico toda vez que um preço muda.
 Use com moderação: regra de negócio escondida no banco é difícil de achar e de testar.
 
+F: backup
+A: backup, cópia de segurança, guardar uma cópia, restaurar
+Q: porque | disco quebra, alguém apaga sem querer: sem cópia, os dados se perdem de vez | -> banco-dados
 P: o que é backup de banco de dados
 P: como fazer backup do banco
 R: **Backup** é uma cópia para recuperar os dados se algo der errado (disco queimado, exclusão sem querer, ataque).
@@ -260,6 +358,10 @@ R: **Backup** é uma cópia para recuperar os dados se algo der errado (disco qu
 Regras: automatize; guarde em outro lugar (outro disco, a nuvem); e **teste a restauração**: backup que nunca foi restaurado é só uma esperança.
 No Aprendiz, a migração entre dispositivos é exatamente isso: levar o arquivo do banco (ou um addon exportado) para outra máquina.
 
+F: sql-injection
+A: sql injection, injeção de sql, ataque, segurança, parâmetros
+Q: porque | quando o texto digitado é colado no comando SQL, ele pode virar parte do comando
+Q: regra | os valores vão por parâmetros (?), nunca colados no texto do SQL | -> sql-basico:sql-python
 P: o que é sql injection
 P: como evitar sql injection
 P: injeção de sql
@@ -274,6 +376,9 @@ cursor.execute("SELECT * FROM usuarios WHERE nome = ?", (nome,))
 ```
 No Aprendiz, todo valor que vem de fora (o que você digita, o conteúdo de um addon) entra nas consultas com `?`; só nomes fixos do próprio código, como o nome de uma tabela, são montados no texto.
 
+F: orm
+A: orm, mapeamento objeto relacional, sqlalchemy, objetos e tabelas
+Q: porque | o programa trabalha com objetos e o banco com tabelas, e o ORM traduz um no outro | -> tabela
 P: o que é orm
 P: o que é sqlalchemy
 R: **ORM** (Mapeamento Objeto-Relacional) é uma biblioteca que deixa você usar o banco como objetos da linguagem, sem escrever SQL:
@@ -286,6 +391,9 @@ Exemplos: SQLAlchemy e o ORM do Django (Python), Hibernate (Java), Entity Framew
 Vantagens: menos código repetitivo e trocar de banco fica mais fácil. Desvantagens: esconde o SQL e pode gerar consultas lentas sem você perceber.
 O Aprendiz usa o `sqlite3` direto, com SQL escrito à mão, para que quem estuda veja exatamente o que acontece.
 
+F: data-warehouse
+A: data warehouse, armazém de dados, análise, relatórios, bi
+Q: porque | análises pesadas atrapalhariam o banco do dia a dia, então os dados são copiados para um banco feito para relatórios
 P: o que é data warehouse
 P: o que é oltp e olap
 R: - **OLTP** (processamento de transações): o banco do dia a dia do sistema, com muitas operações pequenas (registrar uma venda). Normalizado.

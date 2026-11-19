@@ -79,7 +79,7 @@ Quatro tabelas: clientes fazem pedidos, e cada pedido tem itens de produtos. A E
 F: create-table
 N: raiz
 A: tabela, create table, colunas, criar tabela, nova tabela, montar tabela, estrutura da tabela
-Q: definicao | uma tabela organiza os dados em linhas (registros) e colunas (campos)
+Q: definicao | uma tabela organiza os dados em linhas (registros) e colunas (campos) | -> prog-banco-dados:tabela
 Q: porque | cada coluna tem um tipo, e o banco usa esse tipo para guardar e comparar os valores | -> tipos-dados
 P: como criar uma tabela em sql
 P: como usar create table
@@ -397,7 +397,7 @@ A ordem em que o banco **executa** as partes: `FROM` → `WHERE` → `GROUP BY` 
 F: join
 A: join, juntar tabelas, relacionar tabelas, inner join, chave estrangeira, unir tabelas, combinar tabelas, cruzar tabelas, dados de duas tabelas
 Q: porque | os dados ficam em tabelas separadas para não se repetirem, e o JOIN os junta de novo na consulta
-Q: regra | a condição do ON liga a chave estrangeira de uma tabela à chave primária da outra
+Q: regra | a condição do ON liga a chave estrangeira de uma tabela à chave primária da outra | -> prog-banco-dados:chave-estrangeira
 Q: consequencia | o JOIN comum descarta quem não tem par; para manter, se usa o LEFT JOIN | -> left-join
 P: o que é join em sql
 P: como juntar duas tabelas em sql

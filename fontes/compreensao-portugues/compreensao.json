@@ -1132,7 +1132,8 @@
    "padrao": "filtrar|mostrar|listar|buscar|pegar so|apenas os|as * de|do|da|com|que *",
    "conceitos": [
     "filtrar",
-    "condicao"
+    "filtro",
+    "criterio"
    ]
   },
   {
@@ -1163,6 +1164,28 @@
    "conceitos": [
     "ordenar",
     "ordem"
+   ]
+  },
+  {
+   "padrao": "* tem|faz|possui|participa|pertence varios|varias|muitos|muitas * e * tem|faz|possui|recebe varios|varias|muitos|muitas *",
+   "conceitos": [
+    "muitos para muitos",
+    "tabela associativa",
+    "relacionamento"
+   ]
+  },
+  {
+   "padrao": "de uma vez ou nenhuma|nada",
+   "conceitos": [
+    "tudo ou nada",
+    "transacao"
+   ]
+  },
+  {
+   "padrao": "tudo ou nada",
+   "conceitos": [
+    "tudo ou nada",
+    "transacao"
    ]
   }
  ],

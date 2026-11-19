@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T02:07:19+00:00",
+  "gerado_em": "2026-11-19T02:12:31+00:00",
   "total": 40,
   "addons": [
     {
@@ -1162,15 +1162,15 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": {
-        "regras": 212,
+        "regras": 215,
         "catalogo": 37,
         "lemas": 317331,
         "vetores": 0
       },
       "norma": null,
       "arquivo": "addons/compreensao-portugues.aprendiz",
-      "tamanho": 857779,
-      "sha256": "ac010af89861c8a141a08314b35a5c21dbb336e380c4d693508af22081f70b6e",
+      "tamanho": 857843,
+      "sha256": "0bb2af938a7194d9e519818df2d77cb7314c203d7050fdf35aa4f4e45dbed7df",
       "atualizado_em": "2026-11-18",
       "amostra": []
     },
@@ -3191,7 +3191,7 @@
     {
       "id": "prog-banco-dados",
       "nome": "Programação 4 · Bancos de dados (conceitos)",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Como os dados são guardados: tabela, linha, coluna, chave primária e estrangeira, relacionamentos 1:1, 1:N e N:N, modelo ER, normalização, índices, transações, ACID, SQL e NoSQL. Prepara para a trilha de SQL.",
       "licenca": "CC-BY-4.0",
@@ -3214,8 +3214,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.0",
       "dependencias": [
         {
           "id": "prog-logica",
@@ -3224,9 +3224,9 @@
         }
       ],
       "recomendado": {
-        "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.94
+        "busca": "bm25",
+        "resposta": "trabalhada",
+        "acerto": 0.948
       },
       "conhecimentos": 27,
       "verbetes": 0,
@@ -3239,8 +3239,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/prog-banco-dados.aprendiz",
-      "tamanho": 8188,
-      "sha256": "6c2adc09dd406ea270b436becacd5eb8a55580c2fc8ba589e7b4709018000024",
+      "tamanho": 10732,
+      "sha256": "e1509964ca7b7482fabdae37ccabdccd1f507a68e2b5420ecafbb00b7592b4a8",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -3478,8 +3478,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/sql-basico.aprendiz",
-      "tamanho": 12461,
-      "sha256": "e7ceb4f3ce39bddcaf531336ce20ddc903727d232cc2c2a6d03ba29e2cfa8852",
+      "tamanho": 12485,
+      "sha256": "bcba9f7d29fdabcc5fc1ee24b5b8f96888513e8f1081be7d17e18239043ed72d",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
