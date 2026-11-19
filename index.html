@@ -87,13 +87,21 @@
           <span class="resumo" id="resumo" aria-live="polite"></span>
         </div>
         <div id="lista"></div>
+        <div class="barra-pacote" id="barra-pacote" hidden>
+          <span><b>Pacote:</b> <span id="pacote-resumo"></span></span>
+          <button class="botao-limpar" id="btn-limpar-pacote">Limpar</button>
+          <button class="baixar destaque" id="btn-pacote"><svg class="ic" aria-hidden="true"><use href="#i-baixar"/></svg> Baixar pacote</button>
+        </div>
       </div>
     </section>
 
     <section class="largura secao" id="instalar">
       <h2>Instalar um addon</h2>
       <ol class="passos">
-        <li><b>Baixe</b> o arquivo <code>.aprendiz</code>. Comece pelos <b>essenciais</b>, na ordem indicada.</li>
+        <li><b>Baixe</b> o arquivo <code>.aprendiz</code>. Comece pelos <b>essenciais</b>, na ordem indicada.
+          Para vários de uma vez, marque a caixa ao lado de cada um (ou <b>Marcar todos</b> num grupo) e clique em
+          <b>Baixar pacote</b>: vem um arquivo <code>.aprendiz-pacote</code> só, com as dependências e já na ordem
+          (Aprendiz 2.2 ou mais novo).</li>
         <li>No Aprendiz, abra <b>Addons</b> no menu lateral e clique em <b>Importar addon</b>.</li>
         <li>Confira o resumo (origem, o que ele traz, dependências) e clique em <b>Instalar</b>.</li>
         <li>Se quiser, marque <b>Usar como padrão</b> para ativar a busca e a resposta recomendadas.</li>

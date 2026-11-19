@@ -139,6 +139,10 @@ perguntar o nome do Aprendiz ("você tem nome?", "como te chamam?"). Os gatilhos
 `fontes/compreensao-portugues/compreensao-base.json`; o comportamento está em
 "Juntar e reinterpretar", em `docs/compreensao.md` do aprendiz-dev.
 
+**Pacote** (Aprendiz 2.3+): no site da loja, marque vários addons (ou "Marcar todos" num grupo) e
+clique em **Baixar pacote**. Vem um `.aprendiz-pacote` só, montado no navegador: os addons
+marcados mais as dependências, na ordem de instalação, cada um conferido pelo SHA-256 do catálogo.
+
 **Teia de porquês** (Aprendiz 2.0+): os addons de conhecimento convertidos trazem, em cada bloco
 do `perguntas.txt` e antes do `R:`, as linhas `F:` (ref), `A:` (assuntos: os nomes do próprio
 conceito, e não temas vizinhos), `Q:` (porquê: `relação | explicação | -> ref`, ou

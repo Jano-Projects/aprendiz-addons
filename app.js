@@ -7,6 +7,7 @@
  *   4. Carregar o catálogo e preparar o índice de busca
  *   5. Filtros: grupo, nível, ordem, busca e link compartilhável
  *   6. Lista: grupos, linhas, "mostrar mais" e detalhes sob demanda
+ *   7. Pacote: marcar vários addons e baixar um .aprendiz-pacote só (Aprendiz 2.2+)
  *
  * Pensado para catálogos grandes:
  *   • o texto de busca de cada addon é normalizado UMA vez, ao carregar;
@@ -124,7 +125,8 @@
   const NOMES_RESPOSTA = { direta: "Fiel · Direta", extrativa: "Resumo · Extrativa" };
 
   // ============================================================ 4. CATÁLOGO
-  const estado = { addons: [], porId: {}, grupo: "todos", nivel: "todos", visiveis: {} };
+  const estado = { addons: [], porId: {}, grupo: "todos", nivel: "todos", visiveis: {},
+                   selecionados: new Set(), secoes: {} };
 
   async function carregar() {
     let catalogo;
@@ -237,6 +239,8 @@
         </button>
         ${etiquetaNivel(a)}
         <span class="lado"><span class="tam">${tamanho(a.tamanho)}</span>
+          <label class="marcar" title="Incluir no pacote"><input type="checkbox" data-marcar="${esc(a.id)}"
+            ${estado.selecionados.has(a.id) ? "checked" : ""} aria-label="Incluir ${esc(a.nome)} no pacote"></label>
           <a class="baixar" href="${esc(a.arquivo)}" download>${icone("baixar")} Baixar</a></span>
       </div>
     </article>`;
@@ -311,8 +315,10 @@
     if (id !== "essenciais" && itens.length > limite) {
       corpo += `<button class="mais" data-mais="${id}">Mostrar mais ${Math.min(LOTE, itens.length - limite)} de ${itens.length - limite}</button>`;
     }
+    estado.secoes[id] = itens.map((a) => a.id);
     return `<section class="grupo" id="g-${id}">
-      <header><h2>${esc(g.nome)}</h2><small>${itens.length}</small></header>
+      <header><h2>${esc(g.nome)}</h2><small>${itens.length}</small>
+        <button class="marcar-grupo" data-marcar-grupo="${id}">Marcar todos</button></header>
       <p>${esc(g.texto)}</p>${corpo}</section>`;
   }
 
@@ -356,11 +362,123 @@
       $("#catalogo").scrollIntoView({ block: "start" });
       return;
     }
+    const grupo = ev.target.closest("[data-marcar-grupo]");
+    if (grupo) {
+      const ids = estado.secoes[grupo.dataset.marcarGrupo] || [];
+      const todos = ids.every((id) => estado.selecionados.has(id));
+      ids.forEach((id) => (todos ? estado.selecionados.delete(id) : estado.selecionados.add(id)));
+      renderizar();
+      atualizarBarra();
+      return;
+    }
     const copiar = ev.target.closest("[data-copiar]");
     if (copiar) {
       try { await navigator.clipboard.writeText(copiar.dataset.copiar); avisar("SHA-256 copiado."); }
       catch (e) { avisar("Não foi possível copiar."); }
     }
+  });
+
+  $("#lista").addEventListener("change", (ev) => {
+    const caixa = ev.target.closest("[data-marcar]");
+    if (!caixa) return;
+    if (caixa.checked) estado.selecionados.add(caixa.dataset.marcar);
+    else estado.selecionados.delete(caixa.dataset.marcar);
+    atualizarBarra();
+  });
+
+  // ============================================================ 7. PACOTE
+  /** Os marcados + as dependências deles, na ordem de instalação. */
+  function doPacote() {
+    const ids = new Set();
+    const juntar = (id) => {
+      const a = estado.porId[id];
+      if (!a || ids.has(id)) return;
+      ids.add(id);
+      (a.dependencias || []).forEach((d) => juntar(d.id));
+    };
+    estado.selecionados.forEach(juntar);
+    return ordemDeInstalacao([...ids].map((id) => estado.porId[id]));
+  }
+
+  function atualizarBarra() {
+    const barra = $("#barra-pacote");
+    const lista = doPacote();
+    barra.hidden = !lista.length;
+    if (!lista.length) return;
+    const extras = lista.length - estado.selecionados.size;
+    $("#pacote-resumo").textContent = `${lista.length} ${lista.length === 1 ? "addon" : "addons"}`
+      + (extras > 0 ? ` (${extras} por dependência)` : "") + ` · ${tamanho(lista.reduce((t, a) => t + a.tamanho, 0))}`;
+  }
+
+  const CRC = (() => {
+    const t = new Uint32Array(256);
+    for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; }
+    return (dados) => { let c = 0xffffffff; for (const b of dados) c = t[(c ^ b) & 255] ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; };
+  })();
+
+  /** ZIP sem compressão (os .aprendiz já são compactados): cabeçalhos locais + diretório central. */
+  function zip(arquivos) {
+    const enc = new TextEncoder(), partes = [], central = [];
+    let posicao = 0;
+    for (const { nome, dados } of arquivos) {
+      const n = enc.encode(nome), crc = CRC(dados);
+      const local = new DataView(new ArrayBuffer(30));
+      [[0, 0x04034b50, 4], [4, 20, 2], [14, crc, 4], [18, dados.length, 4], [22, dados.length, 4], [26, n.length, 2]]
+        .forEach(([o, v, t]) => (t === 4 ? local.setUint32(o, v, true) : local.setUint16(o, v, true)));
+      const cd = new DataView(new ArrayBuffer(46));
+      [[0, 0x02014b50, 4], [4, 20, 2], [6, 20, 2], [16, crc, 4], [20, dados.length, 4], [24, dados.length, 4],
+        [28, n.length, 2], [42, posicao, 4]].forEach(([o, v, t]) => (t === 4 ? cd.setUint32(o, v, true) : cd.setUint16(o, v, true)));
+      partes.push(local, n, dados);
+      central.push(cd, n);
+      posicao += 30 + n.length + dados.length;
+    }
+    const tamCentral = central.reduce((t, p) => t + p.byteLength, 0);
+    const fim = new DataView(new ArrayBuffer(22));
+    [[0, 0x06054b50, 4], [8, arquivos.length, 2], [10, arquivos.length, 2], [12, tamCentral, 4], [16, posicao, 4]]
+      .forEach(([o, v, t]) => (t === 4 ? fim.setUint32(o, v, true) : fim.setUint16(o, v, true)));
+    return new Blob([...partes, ...central, fim], { type: "application/zip" });
+  }
+
+  async function sha256(dados) {
+    const h = await crypto.subtle.digest("SHA-256", dados);
+    return [...new Uint8Array(h)].map((b) => b.toString(16).padStart(2, "0")).join("");
+  }
+
+  $("#btn-pacote").addEventListener("click", async () => {
+    const botao = $("#btn-pacote");
+    const lista = doPacote();
+    botao.disabled = true;
+    try {
+      const arquivos = [], indice = [];
+      for (const [i, a] of lista.entries()) {
+        botao.textContent = `Baixando ${i + 1} de ${lista.length}…`;
+        const resposta = await fetch(a.arquivo);
+        if (!resposta.ok) throw new Error(`não consegui baixar ${a.nome}`);
+        const dados = new Uint8Array(await resposta.arrayBuffer());
+        if ((await sha256(dados)) !== a.sha256) throw new Error(`${a.nome} não confere com o SHA-256 do catálogo`);
+        const nome = a.arquivo.split("/").pop();
+        arquivos.push({ nome, dados });
+        indice.push({ arquivo: nome, id: a.id, versao: a.versao, sha256: a.sha256 });
+      }
+      const pacote = { formato: 1, gerado_em: new Date().toISOString(), addons: indice };
+      arquivos.unshift({ nome: "pacote.json", dados: new TextEncoder().encode(JSON.stringify(pacote, null, 2)) });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(zip(arquivos));
+      link.download = `aprendiz-${lista.length}-addons.aprendiz-pacote`;
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(link.href), 60000);
+      avisar("Pacote pronto. No Aprendiz, use Importar addon e escolha o arquivo baixado.");
+    } catch (erro) {
+      avisar("Não foi possível montar o pacote: " + erro.message);
+    } finally {
+      botao.disabled = false;
+      botao.innerHTML = `${icone("baixar")} Baixar pacote`;
+    }
+  });
+  $("#btn-limpar-pacote").addEventListener("click", () => {
+    estado.selecionados.clear();
+    renderizar();
+    atualizarBarra();
   });
 
   $("#grupos").addEventListener("click", (ev) => {
