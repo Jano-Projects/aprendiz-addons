@@ -533,7 +533,7 @@ if __name__ == "__main__":
 O `iniciar.py` do Aprendiz usa esse padrão para chamar a função `main()`.
 
 F: excecoes
-A: tratar erros, try except, exceção, programa não fechar com erro
+A: tratar erros, try except, exceção, programa não fechar com erro, programa fecha sozinho, programa fechou com erro, evitar que o programa feche
 Q: porque | sem tratamento, o erro interrompe o programa; o except decide o que fazer em vez de fechar | -> prog-logica:tipos-erro
 P: como tratar erros em python
 P: como usar try except em python

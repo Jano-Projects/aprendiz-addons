@@ -1,12 +1,12 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T12:18:59+00:00",
+  "gerado_em": "2026-11-19T13:27:15+00:00",
   "total": 40,
   "addons": [
     {
       "id": "aprendiz-preparar-ambiente",
       "nome": "Aprendiz por dentro 1 · Preparar o ambiente",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Passo a passo manual, do zero, no Ubuntu, no Fedora e no Windows: terminal, Python, pip, Git, VS Code, baixar o código do Aprendiz, criar o ambiente virtual, instalar as dependências, rodar o app e os testes.",
       "licenca": "CC-BY-4.0",
@@ -29,8 +29,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.0",
       "dependencias": [
         {
           "id": "python-basico",
@@ -40,8 +40,8 @@
       ],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.92
+        "resposta": "trabalhada",
+        "acerto": 1.0
       },
       "conhecimentos": 22,
       "verbetes": 0,
@@ -54,8 +54,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/aprendiz-preparar-ambiente.aprendiz",
-      "tamanho": 9281,
-      "sha256": "c8e180aa2ab48e508f5b570eee8fb9ebb3b6cff53da401f334f76ced0d9e16bc",
+      "tamanho": 10464,
+      "sha256": "018d6c4074b4f0edd8690c4e90034ae4e6d6418abdd813178c5e5f858ca18406",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -87,7 +87,7 @@
     {
       "id": "aprendiz-arquitetura",
       "nome": "Aprendiz por dentro 2 · Arquitetura e arquivos",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "O mapa do projeto: o caminho de uma pergunta até a resposta, as camadas e o que faz cada pasta e cada arquivo do Aprendiz, dos instaladores aos testes.",
       "licenca": "CC-BY-4.0",
@@ -109,8 +109,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.0",
       "dependencias": [
         {
           "id": "aprendiz-preparar-ambiente",
@@ -120,8 +120,8 @@
       ],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.96
+        "resposta": "trabalhada",
+        "acerto": 0.981
       },
       "conhecimentos": 30,
       "verbetes": 0,
@@ -134,8 +134,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/aprendiz-arquitetura.aprendiz",
-      "tamanho": 12680,
-      "sha256": "76dd453c3f7c1090f3899a1c3cbc0d47787c303ee6570415b0a02d646565eb40",
+      "tamanho": 14973,
+      "sha256": "d5c35ccf9a973c9879dfd6e1a958ac64f602d8fc3355207c80622a52f62edb2f",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -167,7 +167,7 @@
     {
       "id": "aprendiz-codigo",
       "nome": "Aprendiz por dentro 3 · O código explicado",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Módulo por módulo: as classes, funções e comandos de Python que o Aprendiz usa (dataclasses, sqlite3, FastAPI, rapidfuzz, zipfile, re…), com trechos do código real e o porquê de cada escolha.",
       "licenca": "CC-BY-4.0",
@@ -190,8 +190,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.0",
       "dependencias": [
         {
           "id": "aprendiz-arquitetura",
@@ -201,10 +201,10 @@
       ],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
+        "resposta": "trabalhada",
         "acerto": 1.0
       },
-      "conhecimentos": 30,
+      "conhecimentos": 31,
       "verbetes": 0,
       "palavras": [],
       "traducoes": [],
@@ -215,8 +215,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/aprendiz-codigo.aprendiz",
-      "tamanho": 15932,
-      "sha256": "d5673dfaa4abc554fd0ef4cc6d9f548b468499ec278eb24984242615f6807d45",
+      "tamanho": 18084,
+      "sha256": "ee113bfe2e16f750904aa596582faadea35a6b9e2241723bbcb1a4fdc457af53",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -248,7 +248,7 @@
     {
       "id": "aprendiz-algoritmos",
       "nome": "Aprendiz por dentro 4 · Como os algoritmos pensam",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Como o Aprendiz entende e responde: normalização, radicais, intenções com Naive Bayes, BM25, TF-IDF, Fuzzy, Híbrido, resposta Direta e Extrativa, prioridade do dono, dicionários, compreensão, vetores, revisão de texto e recomendação.",
       "licenca": "CC-BY-4.0",
@@ -271,8 +271,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.0",
       "dependencias": [
         {
           "id": "aprendiz-codigo",
@@ -282,10 +282,10 @@
       ],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
+        "resposta": "trabalhada",
         "acerto": 0.99
       },
-      "conhecimentos": 23,
+      "conhecimentos": 30,
       "verbetes": 0,
       "palavras": [],
       "traducoes": [],
@@ -296,8 +296,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/aprendiz-algoritmos.aprendiz",
-      "tamanho": 10492,
-      "sha256": "eb3fda759234c1ca24ad8067a2a022e4028993f9eaa7502488adbbeb6e9f9953",
+      "tamanho": 14999,
+      "sha256": "ea3d26af3ff6f253deac125f867bb2b16f064f41f29b2ba4058387be606dc2cc",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -329,7 +329,7 @@
     {
       "id": "aprendiz-do-zero",
       "nome": "Aprendiz por dentro 5 · Construir e customizar do zero",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Construa um mini-Aprendiz do zero, passo a passo (banco SQLite, normalizador, BM25, API e tela de chat), e depois customize o Aprendiz de verdade: novo algoritmo, novo parâmetro, nova rota, novo addon, testes e empacotamento.",
       "licenca": "CC-BY-4.0",
@@ -351,8 +351,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.0",
       "dependencias": [
         {
           "id": "aprendiz-algoritmos",
@@ -362,10 +362,10 @@
       ],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.82
+        "resposta": "trabalhada",
+        "acerto": 0.957
       },
-      "conhecimentos": 23,
+      "conhecimentos": 24,
       "verbetes": 0,
       "palavras": [],
       "traducoes": [],
@@ -376,8 +376,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/aprendiz-do-zero.aprendiz",
-      "tamanho": 12631,
-      "sha256": "3b33f525015fbd100f52c1dcbff092848e9b5233177df47694f2d08569d36335",
+      "tamanho": 14307,
+      "sha256": "6752fc4fdda9eaa0355f21ad49d55a283993d8026ed96e6b0a428e74b6d9a4e4",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -3317,9 +3317,9 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/python-basico.aprendiz",
-      "tamanho": 13575,
-      "sha256": "da7a865275945e5e7d5d31a3dbb1fe1e92a3d736427b369e1355842e1e9b4957",
-      "atualizado_em": "2026-11-18",
+      "tamanho": 13603,
+      "sha256": "f01244c9934280e584c4b5c7888bae3d4fe992d86debc34461b61d42e16a1a62",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "o que é python",
@@ -3400,7 +3400,7 @@
       "arquivo": "addons/python-avancado.aprendiz",
       "tamanho": 17111,
       "sha256": "de709814fce8714f21835dcb02dbeb4a1f9a35989e5421d7a8e553be8a1326cb",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "o que é ambiente virtual em python",

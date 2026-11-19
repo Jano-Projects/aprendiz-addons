@@ -3,6 +3,9 @@
 # Parte 2: mudanças no Aprendiz de verdade: algoritmo, parâmetro, rota, addon, testes,
 # executável e contribuição. Cada passo foi conferido com a suíte de testes passando.
 
+F: do-zero
+A: criar um assistente do zero, mini aprendiz
+Q: porque | refazer uma versão pequena mostra o que é essencial em cada peça | -> mini-1
 P: como criar um assistente como o aprendiz do zero
 P: como construir um mini aprendiz
 P: passo a passo para criar o aprendiz do zero
@@ -12,6 +15,9 @@ R: Vamos construir um **mini-Aprendiz**: um chat que só sabe o que você ensina
 São sete passos e uma lista de evoluções. Peça cada um pelo número: **"mini aprendiz passo 1"**, depois 2, 3… até 7, e por fim **"mini aprendiz próximos passos"**.
 Ao final, você terá um pacote Python com quatro arquivos (linguagem, memória, API e página) e um arquivo de testes, rodando no navegador.
 
+F: mini-1
+A: mini aprendiz passo 1
+Q: depois-de | o próximo passo acrescenta uma peça | -> mini-2
 P: mini aprendiz passo 1
 P: como começar o projeto do mini aprendiz
 P: criar a pasta e o ambiente virtual do mini aprendiz
@@ -30,6 +36,9 @@ Crie `mini_aprendiz/__init__.py` com uma linha só:
 ```
 O `__init__.py` transforma a pasta num **pacote** Python (dá para fazer `from mini_aprendiz.linguagem import processar`). Crie também um `.gitignore` com `.venv/`, `__pycache__/` e `*.db`.
 
+F: mini-2
+A: mini aprendiz passo 2
+Q: depois-de | o próximo passo acrescenta uma peça | -> mini-3
 P: mini aprendiz passo 2
 P: como fazer o normalizador do mini aprendiz
 P: linguagem.py do mini aprendiz
@@ -71,6 +80,9 @@ def processar(texto: str) -> list[str]:
 Teste no terminal: `python -c "from mini_aprendiz.linguagem import processar; print(processar('Qual o horário da farmácia?'))"` → `['horari', 'farmaci']`.
 É uma versão bem simplificada do que o Aprendiz faz (lá o radicalizador é o RSLP em seis passos, com tamanhos mínimos por regra). O importante: **o mesmo `processar`** vai ser usado ao ensinar e ao perguntar.
 
+F: mini-3
+A: mini aprendiz passo 3
+Q: depois-de | o próximo passo acrescenta uma peça | -> mini-4
 P: mini aprendiz passo 3
 P: como fazer a memória sqlite do mini aprendiz
 P: memoria.py do mini aprendiz
@@ -135,6 +147,9 @@ O que acontece aqui:
 - a **confiança** é a **cobertura** (fração dos termos da pergunta presentes), e abaixo do **limiar** nada é aceito: o **modo estrito**;
 - `with self.trava, self.con:` junta a trava (várias threads do servidor) e a transação.
 
+F: mini-4
+A: mini aprendiz passo 4
+Q: depois-de | o próximo passo acrescenta uma peça | -> mini-5
 P: mini aprendiz passo 4
 P: como fazer a api do mini aprendiz
 P: api.py do mini aprendiz
@@ -189,6 +204,9 @@ app = criar_app()
 - `criar_app` é uma **fábrica**, como no Aprendiz: os testes criam apps com bancos temporários;
 - a variável `app` no fim é o que o Uvicorn procura (`mini_aprendiz.api:app`). Ela cria o `mini.db` na pasta onde você rodar o comando.
 
+F: mini-5
+A: mini aprendiz passo 5
+Q: depois-de | o próximo passo acrescenta uma peça | -> mini-6
 P: mini aprendiz passo 5
 P: como fazer a tela de chat do mini aprendiz
 P: index.html do mini aprendiz
@@ -254,6 +272,9 @@ R: **Passo 5: a interface.** Crie `mini_aprendiz/index.html`:
 - a mesma regex do Aprendiz (`pergunta: … resposta: …`) reconhece o ensino, aqui no navegador;
 - `ev.preventDefault()` impede o formulário de recarregar a página.
 
+F: mini-6
+A: mini aprendiz passo 6
+Q: depois-de | o próximo passo acrescenta uma peça | -> mini-7
 P: mini aprendiz passo 6
 P: como rodar o mini aprendiz
 P: uvicorn do mini aprendiz
@@ -271,6 +292,9 @@ Abra `http://127.0.0.1:8000` e converse:
 - Ctrl+C para.
 Faça um commit: `git add -A && git commit -m "feat: mini-aprendiz funcionando"`.
 
+F: mini-7
+A: mini aprendiz passo 7
+Q: depois-de | depois vêm os próximos passos | -> mini-proximos
 P: mini aprendiz passo 7
 P: como testar o mini aprendiz
 P: pytest do mini aprendiz
@@ -304,6 +328,9 @@ def test_api(tmp_path):
 Rode `python -m pytest -q` na pasta `mini/`: `3 passed`. O `tmp_path` é uma fixture do pytest que dá uma pasta temporária por teste, como o `conftest.py` do Aprendiz faz com o banco.
 (O import de `mini_aprendiz.api` cria um `mini.db` na pasta atual por causa da variável `app` do fim do arquivo; ele já está no `.gitignore`.)
 
+F: mini-proximos
+A: próximos passos do mini aprendiz
+Q: porque | cada passo seguinte aproxima o mini do Aprendiz de verdade | -> customizar
 P: mini aprendiz próximos passos
 P: como evoluir o mini aprendiz
 P: o que acrescentar no mini aprendiz
@@ -318,6 +345,9 @@ R: Para chegar perto do Aprendiz original, um passo de cada vez (com teste para 
 8. **addons:** importar um ZIP com um `manifesto.json` e um `conhecimentos.json`, validando tudo.
 Compare cada passo com o arquivo correspondente do Aprendiz (o addon **Arquitetura e arquivos** diz onde está cada coisa): é o melhor jeito de entender por que o original é do jeito que é.
 
+F: customizar
+A: customizar o aprendiz, personalizar
+Q: porque | quase tudo muda por configuração ou por addon, sem mexer no código
 P: como customizar o aprendiz
 P: o que dá para mudar no aprendiz
 R: Há três níveis, do mais fácil ao mais profundo:
@@ -326,6 +356,9 @@ R: Há três níveis, do mais fácil ao mais profundo:
 - **no código**, numa branch, com os testes passando antes e depois.
 Cada caso tem a sua pergunta neste addon: tema e nome, sinônimos de fábrica, algoritmo novo, parâmetro novo, rota nova, addon, executável e contribuição.
 
+F: cor-nome
+A: mudar cor e nome do assistente
+Q: parte-de | é a personalização mais simples | -> customizar
 P: como mudar a cor e o nome do aprendiz
 P: como criar um tema para o aprendiz
 P: como mudar a cor do aprendiz
@@ -344,6 +377,9 @@ R: **Sem programar:** Configurações → Personalização: nome (até 30 caract
 e gere: `python ferramentas/criar_addon.py meu-tema -o tema-cafe.aprendiz`. Importe em Addons → Importar addon.
 **No código** (o padrão de fábrica): o valor padrão está na `Definicao("personalizacao.cor", ...)` em `aprendiz/configuracoes.py` (`"#4f46e5"`), e os tons do tema ficam nas variáveis `--primaria`, `--primaria-hover` e `--primaria-suave` de `aprendiz/web/estilo.css`, uma vez no tema claro (`:root`) e outra no escuro (`[data-tema="escuro"]`).
 
+F: criar-algoritmo
+A: criar um algoritmo de busca, novo algoritmo
+Q: porque | o registro com decorador põe o algoritmo no seletor sem mexer no resto | -> aprendiz-codigo:registro
 P: como criar um algoritmo de busca no aprendiz
 P: como adicionar o algoritmo jaccard no aprendiz
 P: como criar um algoritmo novo no aprendiz
@@ -391,6 +427,9 @@ pelo número de termos diferentes somando a pergunta e o conhecimento: |A ∩ B|
 **3.** Rode os testes e siga a pergunta "testes que falham ao criar um algoritmo no aprendiz".
 Use `conhecimentos_ativos()` (e não `todos_conhecimentos()`) para respeitar os addons desativados.
 
+F: testes-algoritmo
+A: testes que falham ao criar algoritmo
+Q: porque | os testes parametrizados rodam em todo algoritmo registrado e cobram o contrato | -> criar-algoritmo
 P: testes que falham ao criar um algoritmo no aprendiz
 P: o que fazer depois de criar um algoritmo no aprendiz
 R: Depois de criar o `jaccard.py`, a suíte mostra três falhas, e cada uma ensina algo:
@@ -399,6 +438,9 @@ R: Depois de criar o `jaccard.py`, a suíte mostra três falhas, e cada uma ensi
 - **`test_recomendar_testa_todos_os_algoritmos`** (em `tests/test_recomendacao.py`): ele compara com uma lista fixa de quatro algoritmos; troque `{"bm25", "tfidf", "fuzzy", "hibrido"}` por `set(BUSCAS)` (com `from aprendiz.algoritmos import BUSCAS`), e o teste passa a valer para qualquer algoritmo futuro.
 Depois: `python -m pytest -q` (tudo verde), `python benchmarks/comparar.py` para comparar o Jaccard com os outros, e uma linha no `CHANGELOG.md`, na seção **[Não lançado]**. Os testes parametrizados de `test_algoritmos.py` já rodam sozinhos para o algoritmo novo.
 
+F: parametro-novo
+A: criar parâmetro novo, configuração nova
+Q: porque | toda chave nova entra na lista fechada com o seu validador | -> aprendiz-arquitetura:configuracoes
 P: como criar um parâmetro novo no aprendiz
 P: como adicionar o limiar do jaccard nas configurações
 R: Os parâmetros ficam na lista fechada `DEFINICOES` de `aprendiz/configuracoes.py`. Para o Jaccard ganhar um limiar ajustável em Configurações (e por addons), acrescente-o à lista que gera os limiares:
@@ -411,6 +453,9 @@ R: Os parâmetros ficam na lista fechada `DEFINICOES` de `aprendiz/configuracoes
 Pronto: o padrão vem do atributo `limiar` da classe, a validação aceita de 0,05 a 1, a tela de Configurações mostra o controle sozinha, e o algoritmo recebe o valor por `ctx.limiar("jaccard")`, que o `Assistente` preenche a cada pergunta.
 Para um parâmetro de outro tipo, crie uma `Definicao` com chave, tipo (`parametros` ou `personalizacao`), título, descrição, valor padrão e um validador (`_numero(min, max)`, `_escolha(...)`, `_texto(min, max)`). Lembre: só o que está nessa lista pode ser mudado, inclusive por addons.
 
+F: rota-nova
+A: criar rota nova, endpoint novo
+Q: porque | cada rota da API chama o núcleo e devolve JSON | -> aprendiz-arquitetura:servidor
 P: como criar uma rota nova no aprendiz
 P: como adicionar um endpoint na api do aprendiz
 R: Exemplo: `GET /api/estatisticas`, que conta os conhecimentos ativos por tipo. Em `aprendiz/api/servidor.py`, dentro de `criar_app`, junto das outras rotas:
@@ -441,6 +486,9 @@ def test_estatisticas_conta_por_tipo(tmp_path):
 ```
 Rode `gerar_estrutura.py` e os testes. Para ver na interface, abra o console do DevTools e digite `fetch("/api/estatisticas").then(r => r.json()).then(console.log)`; o passo seguinte é criar um botão em `index.html` e uma função em `app.js` que chame `api("/api/estatisticas")`. Acrescente a rota à lista da docstring do `servidor.py`.
 
+F: sinonimos
+A: sinônimos de fábrica
+Q: porque | sinônimos de fábrica valem para todo usuário desde a instalação | -> aprendiz-algoritmos:normalizacao
 P: como adicionar sinônimos de fábrica no aprendiz
 P: como mudar as sementes do aprendiz
 R: As **sementes** (`aprendiz/memoria/sementes.py`) são gravadas só na **primeira** execução, num banco novo. Então há três caminhos:
@@ -449,6 +497,10 @@ R: As **sementes** (`aprendiz/memoria/sementes.py`) são gravadas só na **prime
 - **para todo mundo, no código:** acrescente a `SINONIMOS` (ou `ABREVIACOES`, `INTENCOES`…) em `sementes.py`, sem acento e em minúsculas. Bancos novos já nascem com eles; para os bancos que **já existem**, é preciso um passo de **migração** em `Banco._migrar()`, como o projeto fez na versão 0.3 com `SINONIMOS_V3` (um `INSERT OR IGNORE` condicionado à `versao_esquema`, que depois é aumentada).
 Mais frases de exemplo para as intenções são, inclusive, uma das "primeiras contribuições" sugeridas no `CONTRIBUTING.md`.
 
+F: criar-addon
+A: criar um addon, addon novo
+Q: porque | um addon empacota conhecimento para outros usarem
+Q: regra | na 2.0, cada bloco pode ter porquês com F:, A:, Q: e N: | -> escrever-porques
 P: como criar um addon para o aprendiz
 P: passo a passo para criar um addon
 P: como criar meu próprio addon
@@ -474,7 +526,11 @@ python ferramentas/criar_addon.py --conferir receitas-da-vo.aprendiz
 A ferramenta testa os algoritmos com o conteúdo e grava a busca e a resposta recomendadas.
 5. Importe em **Addons → Importar addon** e pergunte do seu jeito.
 O guia completo está em `docs/addons.md`.
+**Na 2.0:** cada bloco do `perguntas.txt` pode trazer, antes do `R:`, as linhas `F:` (ref), `A:` (assuntos), `Q:` (porquês) e `N: raiz`. Veja "como escrever os porquês de um addon".
 
+F: codigo-resposta
+A: código dentro das respostas, blocos de código
+Q: porque | blocos com três crases são copiados como estão e aparecem formatados | -> criar-addon
 P: como colocar código dentro das respostas de um addon
 P: bloco de código no perguntas.txt
 R: As respostas aceitam Markdown (negrito, itálico, `código`, listas e blocos de código). Nas versões do `criar_addon.py` posteriores à 0.8.0, um bloco entre linhas com três crases é copiado **como está**: a indentação, as linhas em branco e as linhas com `#` (um `#include` do C ou um comentário do Python) são mantidas. Fora do bloco, continuam valendo as regras de sempre: linha em branco encerra a resposta e linha começando com `#` é comentário.
@@ -492,6 +548,9 @@ Compile com gcc.
 ```
 (Escreva as três crases juntas; aqui elas aparecem separadas para não fecharem este próprio bloco.) Esta trilha inteira foi escrita assim. Um bloco aberto e não fechado é recusado com uma mensagem clara.
 
+F: exportar
+A: exportar o que eu ensinei, gerar addon
+Q: porque | o que o dono ensinou vira um addon, item a item | -> aprendiz-algoritmos:dados-pessoais
 P: como exportar o que eu ensinei como addon
 R: Em **Addons → Exportar meu conhecimento…**:
 1. escolha nome, versão, autor, licença e descrição;
@@ -499,6 +558,9 @@ R: Em **Addons → Exportar meu conhecimento…**:
 3. veja o teste dos algoritmos com os itens marcados (troque a busca e a resposta se quiser) e gere o arquivo.
 Os addons que você tem instalados entram como **dependências** (só nome e versão). Todo addon exportado sai com `"origem": "terceiros"` e é compartilhado diretamente como arquivo: a loja oficial publica só addons da Jano Projects.
 
+F: executavel
+A: gerar o executável do aprendiz
+Q: porque | o empacotador junta o app e o Python num programa só | -> python-avancado:executavel
 P: como gerar o executável do aprendiz
 P: como empacotar o aprendiz com pyinstaller
 R: Com o ambiente do Aprendiz instalado (o script instala o PyInstaller no `.venv` se faltar):
@@ -513,6 +575,9 @@ O resultado fica em `dist/Aprendiz/`. Os scripts já tratam os detalhes do **PyI
 - `iniciar.py` como ponto de entrada, porque o PyInstaller não aceita `-m`.
 Gere em cada sistema de destino (não há compilação cruzada) e confira com `python ferramentas/verificar.py --executavel dist/Aprendiz/Aprendiz`. No GitHub, uma tag `v*` faz o Actions gerar os executáveis sozinho.
 
+F: contribuir
+A: contribuir com o aprendiz
+Q: porque | branch, testes e pull request mantêm o projeto estável | -> prog-vocabulario:branch
 P: como contribuir com o aprendiz
 P: como mandar minha mudança para o projeto aprendiz
 R: O fluxo, do `CONTRIBUTING.md`:
@@ -525,6 +590,9 @@ R: O fluxo, do `CONTRIBUTING.md`:
 7. `git push -u origin feat/algoritmo-jaccard` e abra o **pull request**, preenchendo o checklist do modelo.
 Ideias de primeira contribuição: um algoritmo novo, mais frases de exemplo para as intenções, um addon útil, melhorias de acessibilidade.
 
+F: publicar-addon
+A: publicar addon na loja oficial
+Q: porque | a loja confere cada addon antes de publicar | -> criar-addon
 P: como publicar um addon na loja oficial
 P: como funciona a loja de addons do aprendiz
 R: A loja (**jano-projects.github.io/aprendiz-addons**) é um repositório separado no GitHub, publicado pelo GitHub Pages, e distribui **somente addons oficiais da Jano Projects**:
@@ -534,6 +602,9 @@ R: A loja (**jano-projects.github.io/aprendiz-addons**) é um repositório separ
 4. quando um addon é criado ou muda, também se gera de novo a compreensão (`ferramentas/catalogo_compreensao.py`), porque o addon de compreensão leva uma cópia do catálogo para recomendar addons sem internet.
 Addons de terceiros não entram na loja: quem os cria compartilha o arquivo diretamente.
 
+F: projeto-final
+A: projeto final da trilha
+Q: porque | juntar várias peças num projeto próprio fixa o que foi estudado | -> do-zero
 P: roteiro de projeto final da trilha aprendiz por dentro
 P: desafio final do aprendiz
 R: Para fechar a trilha, um projeto que passa por todas as camadas:
@@ -544,3 +615,23 @@ R: Para fechar a trilha, um projeto que passa por todas as camadas:
 5. **qualidade:** suíte de testes verde, `gerar_estrutura.py`, `CHANGELOG.md` e commits no padrão do projeto;
 6. **entrega:** abra um pull request no seu fork (ou no projeto original) e gere o executável para o seu sistema.
 Se conseguir fazer tudo isso, você entende o Aprendiz de ponta a ponta, do clique no botão Enviar até a linha do SQLite.
+
+F: escrever-porques
+A: escrever porquês, teia de um addon, F A Q N, formato 2.0
+Q: porque | os porquês fazem a resposta Trabalhada explicar em vez de só repetir | -> aprendiz-algoritmos:trabalhada
+Q: regra | A: são os nomes do próprio conceito, e não temas vizinhos; um tema vizinho vira um porquê
+P: como escrever os porquês de um addon
+P: como usar F A Q e N no perguntas.txt
+R: Na 2.0, cada bloco do `perguntas.txt` pode trazer, **antes do `R:`**:
+```
+F: where
+A: where, filtro, filtrar, condição
+Q: porque | sem WHERE o SELECT devolve todas as linhas | -> select
+Q: diferente-de | o HAVING filtra grupos, depois do GROUP BY | -> having
+N: raiz
+```
+- `F:` é o nome curto do fragmento, único no addon;
+- `A:` são **os nomes do próprio conceito**, do jeito que as pessoas o chamam. Um tema vizinho não é assunto: "ponteiro" não vai nos assuntos de "passagem por referência";
+- `Q:` é um porquê: `relação | explicação | -> ref` (ou `-> addon:ref`). Relações: `porque`, `regra`, `definicao`, `parte-de`, `diferente-de`, `consequencia`, `exemplo-de`, `antes-de` e `depois-de`;
+- `N: raiz` marca a base, onde as cadeias terminam.
+Escreva o porquê como uma frase completa, com sujeito. Depois, rode o `criar_addon.py` e a homologação.

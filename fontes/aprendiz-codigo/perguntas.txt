@@ -2,6 +2,9 @@
 # Módulo por módulo, com trechos do código real (versão 0.8) e os comandos de Python e
 # JavaScript que cada um usa. Abra o arquivo citado ao lado e acompanhe.
 
+F: pasta-dados
+A: onde guardar os dados, pasta do usuário
+Q: porque | cada sistema tem um lugar certo para dados de programas, e o app respeita isso
 P: como o aprendiz descobre onde guardar os dados
 P: explica a função pasta_dados do config.py
 R: Em `aprendiz/config.py`:
@@ -27,6 +30,9 @@ O que cada comando faz:
 - `mkdir(parents=True, exist_ok=True)`: cria a pasta e as de cima, sem erro se já existir;
 - `-> Path`: anotação de tipo do retorno.
 
+F: porta
+A: porta do servidor, porta livre
+Q: porque | pedir a porta 0 ao sistema garante uma porta livre
 P: como o aprendiz escolhe a porta do servidor
 P: explica a função escolher_porta
 R: Em `aprendiz/desktop.py`:
@@ -50,6 +56,9 @@ def escolher_porta(preferida: int) -> int:
 - `SO_REUSEADDR` (fora do Windows) evita que conexões recém-fechadas façam a porta parecer ocupada;
 - `for ... in (preferida, 0)` + `continue` + `raise` no fim: tenta a preferida, depois qualquer uma, e só então desiste.
 
+F: thread
+A: servidor numa thread, threading
+Q: porque | o servidor roda em paralelo enquanto a janela ocupa a thread principal | -> python-avancado:threads
 P: como o aprendiz sobe o servidor numa thread
 P: explica a função iniciar_servidor
 R: Em `aprendiz/desktop.py`:
@@ -73,6 +82,9 @@ def iniciar_servidor(porta: int):
 - o `while not servidor.started` espera o servidor ficar pronto, conferindo a cada 50 ms, com um limite de 20 s;
 - devolve uma **tupla** `(servidor, app)`; quem chama desempacota: `servidor, app = iniciar_servidor(porta)`. No fim, `servidor.should_exit = True` pede ao Uvicorn que pare.
 
+F: janela-fechada
+A: janela fechada, encerrar o app
+Q: porque | quando a janela fecha, o app encerra o servidor junto
 P: como o aprendiz sabe que a janela foi fechada
 P: como funciona o sinal de vida do aprendiz
 R: Três pedaços trabalham juntos:
@@ -93,6 +105,9 @@ def sinal():
 **3. O desktop** (`esperar_interface`) confere a cada segundo; passou de 90 s sem sinal, encerra. Se o relógio pular mais de 10 s de uma volta para outra, o computador provavelmente hibernou, e esse tempo não conta.
 `time.monotonic()` é um relógio que **nunca anda para trás** (ao contrário do relógio do sistema, que pode ser ajustado): o certo para medir intervalos. `app.state` é o lugar do FastAPI para guardar dados da aplicação.
 
+F: criar-app
+A: criar_app, fábrica do fastapi
+Q: porque | montar o app numa função deixa os testes criarem um app novo a cada teste | -> python-avancado:fastapi
 P: como funciona a função criar_app
 P: explica o criar_app do servidor
 R: Em `aprendiz/api/servidor.py`:
@@ -127,6 +142,9 @@ Ideias importantes:
 - `HTTPException(400, ...)` vira uma resposta de erro HTTP; `raise ... from erro` preserva a causa original no traceback;
 - `app.mount("/static", StaticFiles(...))` serve os arquivos da pasta `web/`.
 
+F: pydantic
+A: modelos pydantic, validação das requisições
+Q: porque | validam os dados que chegam antes de chegarem ao núcleo | -> python-avancado:pydantic
 P: o que são os modelos pydantic do servidor
 P: explica a classe pedidochat
 R: Cada rota que recebe JSON tem um modelo **Pydantic**:
@@ -142,6 +160,9 @@ class PedidoChat(BaseModel):
 - `str | None = None`: o campo é opcional.
 Se a interface mandar `{"mensagem": ""}`, o FastAPI responde **422** explicando o campo errado, e a função `chat` nem chega a rodar. Isso tira da lógica do app todo o trabalho de conferir o formato do pedido.
 
+F: banco
+A: classe banco, banco por dentro
+Q: porque | concentra todo o SQL num lugar só | -> prog-banco-dados:sqlite
 P: como funciona a classe banco por dentro
 P: explica o __init__ do banco
 R: Em `aprendiz/memoria/banco.py`:
@@ -172,6 +193,9 @@ class Banco:
 - `_migrar()` atualiza bancos antigos; `semear()` grava a linguagem inicial na primeira vez;
 - o `_` no começo de `_con` e `_trava` avisa: "uso interno, não mexa de fora".
 
+F: migracoes
+A: migrações, versão do esquema, banco antigo
+Q: porque | bancos de versões antigas ganham as colunas novas ao abrir o app, como a teia na 2.0 | -> banco
 P: como funcionam as migrações do banco do aprendiz
 P: explica o _migrar
 R: `CREATE TABLE IF NOT EXISTS` não acrescenta colunas novas a uma tabela que já existe. Então, a cada mudança de estrutura, `Banco._migrar()` ganha um passo **idempotente** (rodar de novo não estraga nada):
@@ -188,6 +212,9 @@ c.execute("INSERT OR REPLACE INTO meta VALUES ('versao_esquema', '8')")
 - a versão da estrutura fica gravada em `meta.versao_esquema`.
 Assim, quem atualiza o app de qualquer versão antiga continua com a memória intacta.
 
+F: salvar
+A: salvar conhecimento, gravar
+Q: porque | grava o texto e os radicais para a busca, e na 2.0 também a teia | -> banco
 P: como o banco salva um conhecimento
 P: explica salvar_conhecimento e o índice fts5
 R: ```python
@@ -216,6 +243,9 @@ def salvar_conhecimento(self, conteudo, tipo="nota", pergunta=None, origem="manu
 - o índice **FTS5** é mantido à mão: apaga a linha antiga e insere a nova;
 - `versao_conhecimento += 1` avisa os caches (TF-IDF, Fuzzy, vocabulário) que a base mudou.
 
+F: bm25-banco
+A: busca bm25 no banco, fts5
+Q: porque | o SQLite já traz o BM25 no índice FTS5 | -> aprendiz-algoritmos:bm25
 P: como o banco faz a busca bm25
 P: explica a função buscar_fts
 R: ```python
@@ -233,6 +263,9 @@ def buscar_fts(self, consulta: str, limite: int = 10) -> list[dict[str, Any]]:
 - o `LEFT JOIN addons` + `(c.addon_id IS NULL OR a.ativo = 1)` filtra, dentro do SQL, os conhecimentos de addons **desativados**, para eles nunca "empurrarem" resultados válidos para fora do limite;
 - `_consultar` é o método auxiliar que trava, executa e transforma cada linha em dicionário: `[dict(l) for l in cursor.fetchall()]`.
 
+F: normalizar-codigo
+A: função normalizar, código da normalização
+Q: porque | junta acentos, pontuação, nomes de linguagem e, na 2.0, números e contas | -> aprendiz-algoritmos:numeros
 P: como funciona o normalizar do aprendiz
 P: explica o código do normalizador
 R: Em `aprendiz/linguagem/normalizador.py`:
@@ -256,6 +289,9 @@ def normalizar(texto: str) -> str:
 - `.strip()` tira os espaços das pontas.
 Depois, `Linguagem.processar()` faz o resto: tokens, abreviações, correção de digitação, expressões, sinônimos, lemas, stopwords e radicais, guardando cada etapa num `TextoProcessado` (uma `@dataclass`), que o painel "Por que respondi isso?" mostra.
 
+F: correcao-codigo
+A: código da correção, process.extract
+Q: porque | busca as palavras mais parecidas e desempata pelo par com a vizinha | -> aprendiz-algoritmos:correcao
 P: como funciona a correção de digitação no código
 P: explica o _corrigir do normalizador
 R: ```python
@@ -284,6 +320,9 @@ def _corrigir(self, tokens, registro):
 - `registro[t] = ...` anota a troca, que aparece no painel de explicação;
 - a condição longa é quebrada em várias linhas dentro de parênteses, uma regra por linha.
 
+F: stemmer-codigo
+A: código do stemmer, radical
+Q: porque | corta sufixos por regras do português | -> aprendiz-algoritmos:radicalizador
 P: como funciona o radical no código do stemmer
 P: explica a função radical
 R: Em `aprendiz/linguagem/stemmer.py`:
@@ -313,6 +352,9 @@ def radical(palavra: str) -> str:
 - `@lru_cache(maxsize=50_000)`: guarda os resultados; como as mesmas palavras aparecem o tempo todo, cada uma é calculada uma vez;
 - `palavra[:-1]` corta a última letra; `50_000` é só 50000 com separador de leitura.
 
+F: bayes-codigo
+A: código do naive bayes
+Q: porque | conta palavras por intenção e escolhe a mais provável | -> aprendiz-algoritmos:cumprimentos
 P: como funciona o naive bayes no código
 P: explica o código do classificador de intenções
 R: Em `aprendiz/linguagem/intencoes.py`, o treino conta palavras por intenção e guarda **logaritmos**:
@@ -343,6 +385,9 @@ exps = {i: math.exp(p - maior) for i, p in pontuacoes.items()}
 - subtrair o `maior` antes do `exp` evita estouro numérico (os valores ficam ≤ 0).
 A matemática completa está no addon **Como os algoritmos pensam**.
 
+F: registro
+A: registro de algoritmos, @registrar, decorador
+Q: porque | o decorador põe cada algoritmo na lista do seletor sem mexer em outro arquivo | -> python-avancado:decorador
 P: como funciona o registro de algoritmos no código
 P: explica o decorador registrar
 R: Em `aprendiz/algoritmos/base.py`:
@@ -372,6 +417,9 @@ class BuscaBM25(AlgoritmoBusca):
 - `isinstance` confere de que tipo é; `cls.__name__` é o nome da classe;
 - o pipeline escolhe pelo nome: `BUSCAS[busca].buscar(...)`. É o **padrão Strategy** com um **registro** (*registry*).
 
+F: candidato
+A: candidato, contextobusca, dataclass
+Q: porque | o candidato leva o conhecimento e a confiança; o contexto, o que os algoritmos compartilham, e na 2.0 o caminho da teia | -> python-avancado:dataclass
 P: o que são as classes candidato e contextobusca
 P: explica as dataclasses do base.py
 R: ```python
@@ -402,6 +450,9 @@ class Candidato:
 - `ctx.limiar(nome)` usa o limiar das Configurações ou, se não houver, o padrão da classe;
 - `@property` faz `candidato.id` funcionar como atributo, calculado na hora.
 
+F: codigo-bm25
+A: código da busca bm25
+Q: exemplo-de | um algoritmo de busca completo e pequeno | -> aprendiz-algoritmos:bm25
 P: explica o código da busca bm25 do aprendiz
 P: como o bm25.py monta a busca
 R: ```python
@@ -431,6 +482,9 @@ def buscar(self, consulta, ctx, limite=5):
 - `-linha["score"]` inverte o sinal do BM25 do SQLite (que é negativo);
 - ordena por uma **tupla** `(confiança, pontuação)`: primeiro a cobertura, e o BM25 desempata.
 
+F: codigo-tfidf
+A: código da busca tf-idf
+Q: exemplo-de | vetoriza a base e compara pelo cosseno | -> aprendiz-algoritmos:tfidf
 P: explica o código da busca tf-idf do aprendiz
 R: Em `aprendiz/algoritmos/busca/tfidf.py`, o índice é montado uma vez e guardado em `ctx.cache`:
 ```python
@@ -454,6 +508,9 @@ for doc, vetor_d in zip(indice["docs"], indice["vetores"]):
 - como os dois vetores já estão normalizados (comprimento 1), o cosseno é só a soma dos produtos dos termos em comum;
 - `vetor_d.get(t, 0.0)`: termo ausente no documento vale zero.
 
+F: codigo-hibrido
+A: código da busca híbrida
+Q: exemplo-de | junta as posições de várias buscas | -> aprendiz-algoritmos:hibrido
 P: explica o código da busca híbrida do aprendiz
 R: ```python
 K_RRF = 60
@@ -474,6 +531,9 @@ confianca = min(1.0, 0.5 * relativa[id])
 - `rrf.get(id, 0.0) + ...`: acumula a nota do mesmo documento vindo de listas diferentes;
 - a confiança relativa guarda o **melhor** "confiança ÷ limiar" entre os três: se algum algoritmo está confiante, o híbrido aceita (0,5 × 1 = 0,5 = o limiar do híbrido).
 
+F: pipeline-codigo
+A: pipeline no código, responder, _pipeline
+Q: porque | é a sequência de etapas que transforma a mensagem em resposta | -> aprendiz-arquitetura:caminho-mensagem
 P: explica o pipeline no código do assistente
 P: explica o método _pipeline
 R: `Assistente._pipeline(mensagem, busca, resposta, etapas)` devolve `(texto, tipo, fontes)` e é uma sequência de etapas, cada uma podendo **encerrar cedo** com `return`:
@@ -502,7 +562,11 @@ return nota_sentido + gerada.texto, "conhecimento", fontes
 - cada etapa chama `etapas.marcar(nome, dados)`, que mede o tempo desde a etapa anterior com `time.perf_counter()` e guarda os dados;
 - o `tipo` devolvido (`ensino`, `social`, `conhecimento`, `desconhecido`, `limite`…) diz à interface como mostrar a resposta;
 - `responder()` empacota tudo: grava a mensagem, monta o `meta` com a explicação e devolve o dicionário para a API.
+**Na 2.0:** procure no `_pipeline` as etapas "Padrão de frase" (antes da busca) e "Teia de porquês" (antes da resposta), e no `buscar` as regras do assunto declarado.
 
+F: etapas
+A: classe etapas, explicação, tempos
+Q: porque | cada etapa anota dados e tempo, e isso vira o painel Por que respondi isso
 P: explica a classe etapas do assistente
 P: como o aprendiz mede o tempo de cada etapa
 R: ```python
@@ -528,6 +592,9 @@ class Etapas:
 - `@property total_ms` é calculado na hora em que é lido.
 A `lista` vai inteira para `meta.explicacao.etapas`, e o painel "Por que respondi isso?" mostra cada etapa com os seus milissegundos.
 
+F: regex-ensino
+A: expressões regulares de ensino, aprenda que
+Q: porque | cada jeito de ensinar tem um padrão de texto | -> python-avancado:regex
 P: explica as expressões regulares de ensino do aprendiz
 P: como o aprendiz entende aprenda que
 R: No topo de `core/assistente.py`:
@@ -545,6 +612,9 @@ Lendo o `PADRAO_PAR` pedaço a pedaço:
 - `(?:...)` é um grupo **sem captura** (só agrupa as alternativas com `|`).
 No uso: `m = PADRAO_PAR.match(mensagem)` e depois `m["p"]`, `m["r"]`. As outras duas (`PADRAO_FATO`, "aprenda que X é Y", e `PADRAO_NOTA`, "anote: …") usam a mesma lista de verbos.
 
+F: leitura-segura
+A: leitura segura de addons, zip, validação
+Q: porque | um addon vem de fora, então tamanho, caminhos e conteúdo são conferidos antes de qualquer coisa | -> aprendiz-arquitetura:addons-py
 P: explica o código de leitura segura dos addons
 P: explica a função ler_pacote
 R: Em `aprendiz/addons.py`:
@@ -570,6 +640,9 @@ def ler_pacote(dados: bytes) -> Pacote:
 - `ErroAddon` herda de `ValueError` e carrega uma **mensagem amigável**, que a interface mostra; `from None` esconde a exceção técnica original;
 - cada parte é validada por uma função própria, e no fim a classificação declarada precisa bater com o conteúdo.
 
+F: closures
+A: configurações com closures, validadores
+Q: porque | cada chave guarda a própria função de validação | -> python-basico:funcao
 P: explica o código das configurações com closures
 P: o que é a função _numero do configuracoes.py
 R: Em `aprendiz/configuracoes.py`, os validadores são **fábricas de funções** (closures):
@@ -600,6 +673,9 @@ class Definicao:
 - `Callable[[Any], float]`: o tipo "função que recebe qualquer coisa e devolve float";
 - o dicionário `DEFINICOES = {d.chave: d for d in [...]}` é a **lista fechada**.
 
+F: app-js
+A: app.js, interface em javascript
+Q: porque | conversa com a API e desenha a conversa na tela | -> aprendiz-arquitetura:pasta-web
 P: explica o código do app.js do aprendiz
 P: como o javascript chama a api do aprendiz
 R: O `web/app.js` inteiro fica dentro de uma função que se executa sozinha (IIFE), para não poluir o escopo global:
@@ -632,6 +708,9 @@ R: O `web/app.js` inteiro fica dentro de uma função que se executa sozinha (II
 - `JSON.stringify` transforma o objeto em texto JSON; `resposta.json()` faz o caminho inverso;
 - se o servidor respondeu erro, a mensagem do FastAPI (`detail`) vira um `Error`, que quem chamou trata com `try/catch` e mostra na tela.
 
+F: enviar
+A: função enviar, mandar mensagem
+Q: porque | manda a mensagem para a API e desenha a resposta com o painel de explicação | -> app-js
 P: explica a função enviar do app.js
 R: ```javascript
 async function enviar(texto) {
@@ -669,6 +748,9 @@ async function enviar(texto) {
 - guarda o `conversa_id` devolvido: a próxima mensagem vai para a mesma conversa;
 - `finally` roda com ou sem erro, liberando o envio de novo.
 
+F: markdown
+A: markdown.js, formatar resposta
+Q: porque | transforma o Markdown das respostas em HTML seguro | -> app-js
 P: explica o código do markdown.js
 P: como o aprendiz evita xss
 R: ```javascript
@@ -690,6 +772,9 @@ function emLinha(texto) {          // o texto já chega escapado
 A regra de ouro: **escapar primeiro, formatar depois**. Se alguém ensinar `<script>alert(1)</script>` (ou um addon trouxer isso), o `<` vira `&lt;` e aparece como texto na tela, nunca executa. Só depois o renderizador transforma as marcações seguras (negrito, itálico, código, listas) em HTML que ele mesmo escreve.
 O texto é primeiro dividido pelas cercas de três crases: as partes ímpares são blocos de código (`<pre><code>`), escapadas e sem formatação. As expressões regulares com `/g` trocam **todas** as ocorrências; `$1` é o grupo capturado.
 
+F: tema
+A: tema claro e escuro, cores
+Q: porque | as cores vêm de variáveis CSS trocadas pelo tema | -> aprendiz-arquitetura:pasta-web
 P: como funciona o tema claro e escuro do aprendiz
 P: explica as variáveis css do aprendiz
 R: No `web/estilo.css`, as cores são **variáveis CSS** no `:root`:
@@ -705,6 +790,9 @@ e o tema escuro redefine as mesmas variáveis quando o `<html>` tem o atributo `
 No `app.js`, a função `aplicarTema` decide o tema efetivo ("sistema" segue a preferência do sistema operacional via `matchMedia("(prefers-color-scheme: dark)")`) e faz `document.documentElement.dataset.tema = efetivo`.
 A **cor de destaque** das Configurações (`personalizacao.cor`) funciona igual: a função `aplicarPersonalizacao` muda a variável `--primaria` com `document.documentElement.style.setProperty(...)` e calcula os tons derivados (hover, fundo suave) com o `color-mix()` do CSS. Todos os botões mudam juntos.
 
+F: comandos-python
+A: comandos python do código, recursos de python
+Q: porque | o código usa de propósito os recursos mais comuns, para servir de estudo | -> python-basico:python
 P: comandos python mais usados no código do aprendiz
 P: glossário de python do aprendiz
 R: Recursos de Python que aparecem o tempo todo no código, e onde:
@@ -723,6 +811,9 @@ R: Recursos de Python que aparecem o tempo todo no código, e onde:
 - `sqlite3`, `zipfile`, `hashlib`, `json`, `pathlib`, `threading`, `socket`, `argparse`, `unicodedata`, `math`, `collections`: biblioteca padrão;
 - `fastapi`, `pydantic`, `uvicorn`, `rapidfuzz`: as dependências externas.
 
+F: arquivo-novo
+A: ler um arquivo que nunca vi
+Q: porque | começar pela docstring e pelos testes do arquivo mostra para que ele serve | -> aprendiz-arquitetura:ler-codigo
 P: como ler um arquivo do aprendiz que eu nunca vi
 P: técnica para entender código desconhecido
 R: Um roteiro que funciona para qualquer arquivo do projeto (e de qualquer projeto):
@@ -734,3 +825,13 @@ R: Um roteiro que funciona para qualquer arquivo do projeto (e de qualquer proje
 6. **mude algo pequeno** (uma mensagem, um limiar), rode os testes e veja o que quebra;
 7. **explique em voz alta** ou escreva no caderno o que entendeu, em uma frase por função.
 Faça isso com `core/assistente.py` primeiro. Depois o próximo addon da trilha, **Como os algoritmos pensam**, explica a teoria por trás de cada algoritmo.
+
+F: codigo-teia
+A: código da teia, percorrer, busca em largura, teia.py
+Q: porque | é uma busca em largura com fila, conjunto de visitados e freios | -> prog-estruturas-dados:busca-largura
+P: explica o código da teia do aprendiz
+P: como funciona o teia.py
+R: `aprendiz/core/teia.py` tem duas partes:
+- `Teia._atualizar()` monta um índice `(addon, ref) → conhecimento` com os conhecimentos ativos que têm teia, e só refaz quando `versao_conhecimento` muda;
+- `Teia.percorrer()` faz uma **busca em largura**: uma fila começa no fragmento achado; para cada porquê, resolve a ligação, marca como visto, aplica os freios (profundidade, raiz, assunto, causa x lado) e põe na fila o destino que pode descer.
+O resultado é um `Caminho` com uma lista de `Passo` (nível, relação, texto, destino e o motivo do corte, quando houver), que a resposta Trabalhada transforma em texto.

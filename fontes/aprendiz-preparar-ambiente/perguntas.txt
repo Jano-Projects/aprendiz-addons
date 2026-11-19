@@ -2,6 +2,9 @@
 # Do zero absoluto até o Aprendiz rodando a partir do código, com os testes passando.
 # Tudo feito à mão, passo a passo, no Ubuntu, no Fedora e no Windows.
 
+F: estudar
+A: estudar o código, por onde começar
+Q: porque | com o ambiente pronto, dá para rodar, mudar e testar cada parte | -> instalar-tudo
 P: como estudar o código do aprendiz
 P: por onde começar a trilha aprendiz por dentro
 P: o que é a trilha aprendiz por dentro
@@ -14,6 +17,9 @@ R: A trilha **Aprendiz por dentro** ensina, do zero, como o próprio Aprendiz fu
 5. **Construir e customizar do zero**: um mini-Aprendiz feito à mão e, depois, mudanças no Aprendiz de verdade.
 Pré-requisitos: os addons de Fundamentos e o **Python 1 · Básico** ajudam muito. Reserve um caderno: anote o que fizer, e faça cada passo no seu computador em vez de só ler.
 
+F: instalar-tudo
+A: o que instalar, ferramentas necessárias
+Q: porque | são precisos git, Python e um editor | -> instalar-python
 P: o que eu preciso instalar para estudar o aprendiz
 P: quais ferramentas preciso para programar no aprendiz
 P: lista de ferramentas do ambiente de desenvolvimento
@@ -25,6 +31,9 @@ R: Quatro ferramentas, todas gratuitas:
 Opcional: um navegador Chromium (Chrome, Chromium, Edge ou Brave), para o Aprendiz abrir como janela de aplicativo, e uma conta no **GitHub**, para guardar e compartilhar o seu trabalho.
 O Aprendiz em si só precisa de três bibliotecas Python (FastAPI, Uvicorn e RapidFuzz, cerca de 15 MB), que são instaladas num ambiente virtual dentro da pasta do projeto, sem mexer no sistema.
 
+F: terminal
+A: abrir o terminal
+Q: porque | quase todos os passos são comandos | -> prog-vocabulario:terminal
 P: como abrir o terminal
 P: como abrir o terminal no ubuntu
 P: como abrir o terminal no windows
@@ -40,6 +49,9 @@ Os comandos que você vai usar nesta trilha:
 - **Ctrl+C**: interrompe o programa que está rodando (é assim que se para o Aprendiz no terminal).
 Crie uma pasta para os estudos: `mkdir ~/projetos` e `cd ~/projetos` (no Windows: `mkdir $HOME\projetos` e `cd $HOME\projetos`).
 
+F: git
+A: instalar o git
+Q: porque | o git baixa o código e guarda o histórico | -> prog-vocabulario:git
 P: como instalar o git
 P: como instalar git no ubuntu
 P: como instalar git no fedora
@@ -55,6 +67,9 @@ git config --global init.defaultBranch main
 ```
 Se não quiser que o seu e-mail real apareça em repositórios públicos, use o e-mail "noreply" que o GitHub oferece em Settings → Emails.
 
+F: instalar-python
+A: instalar o python
+Q: porque | o Aprendiz é escrito em Python | -> python-basico:instalar
 P: como instalar o python para o aprendiz
 P: qual versão do python o aprendiz precisa
 P: como saber se o python tem fts5
@@ -70,6 +85,9 @@ python3 -m venv --help > /dev/null && echo "venv ok"
 ```
 Se não quiser instalar nada à mão, o `instalar.sh`/`instalar.bat` do Aprendiz faz essa conferência e instala o Python sozinho quando falta.
 
+F: vscode
+A: instalar o vs code
+Q: porque | um editor com depuração facilita estudar | -> prog-vocabulario:ide
 P: como instalar o vs code
 P: quais extensões do vs code usar no aprendiz
 P: como configurar o vs code para python
@@ -84,6 +102,9 @@ Extensões recomendadas (ícone de blocos na barra lateral, ou Ctrl+Shift+X):
 - opcional: **Ruff** (estilo e erros comuns), **GitLens** (histórico de cada linha), **SQLite Viewer** (abrir o `aprendiz.db`).
 Prefere algo mais leve? O **Geany** ou o **Kate** funcionam; o importante é ter realce de sintaxe e um terminal por perto.
 
+F: baixar
+A: baixar o código, git clone
+Q: porque | o clone traz o projeto inteiro com o histórico | -> prog-vocabulario:clone-push-pull
 P: como baixar o código do aprendiz
 P: como clonar o repositório do aprendiz
 P: onde está o código do aprendiz no github
@@ -97,6 +118,9 @@ git log --oneline | head    # a história do projeto
 Sem Git: no site do GitHub, botão verde **Code → Download ZIP**, e extraia. (Nesse caso os scripts `.sh` podem perder a permissão de execução; use sempre `bash instalar.sh`.)
 Para estudar e mudar o código com histórico, prefira o Git. Melhor ainda: faça um **fork** (botão Fork no GitHub), clone o seu fork e assim você pode publicar as suas mudanças e abrir pull requests para o projeto original.
 
+F: instalar-codigo
+A: instalar pelo código, instalar.sh
+Q: porque | o script cria o ambiente virtual e instala as dependências | -> python-avancado:venv
 P: como instalar o aprendiz pelo código
 P: como usar o instalar.sh
 P: como usar o instalar.bat
@@ -114,6 +138,9 @@ O que ele faz:
 4. instala as dependências; com `--dev`, também pytest, httpx e PyInstaller.
 Não rode o instalador com `sudo`: ele pede a senha só no passo que precisa. Para entender cada etapa, faça uma vez do jeito manual (veja "como instalar o aprendiz manualmente").
 
+F: instalar-manual
+A: instalar manualmente, sem script
+Q: porque | fazer os passos à mão mostra o que o script faz | -> instalar-codigo
 P: como instalar o aprendiz manualmente
 P: como criar o ambiente virtual do aprendiz
 P: instalar as dependências do aprendiz sem o instalador
@@ -135,6 +162,9 @@ py -m venv .venv
 - `requirements-janela.txt` é opcional: o pywebview, para a janela nativa.
 Se preferir **ativar** o ambiente (para digitar só `python`): `source .venv/bin/activate` no Linux, `.venv\Scripts\Activate.ps1` no PowerShell. Se o PowerShell bloquear, rode uma vez `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`.
 
+F: rodar
+A: rodar o aprendiz pelo código, executar.sh
+Q: porque | o script ativa o ambiente e abre o app | -> instalar-codigo
 P: como rodar o aprendiz pelo código
 P: como executar o aprendiz
 P: o que faz python -m aprendiz
@@ -156,6 +186,9 @@ Opções úteis:
 - `--porta 9000`: escolhe a porta.
 Para parar: feche a janela (o servidor encerra sozinho em até 90 s) ou Ctrl+C no terminal.
 
+F: docs-interativa
+A: documentação interativa, /docs, swagger
+Q: porque | o FastAPI gera uma página para testar cada rota | -> aprendiz-arquitetura:servidor
 P: o que é a documentação interativa do aprendiz
 P: como testar a api do aprendiz sem a interface
 P: o que é a rota /docs
@@ -171,6 +204,9 @@ curl -s -X POST http://127.0.0.1:8765/api/chat \
      -d '{"mensagem": "qual a senha do wifi?"}'
 ```
 
+F: requisicoes
+A: ver requisições no navegador, devtools
+Q: porque | a aba Rede mostra o que a interface manda e recebe | -> aprendiz-codigo:enviar
 P: como ver as requisições da interface no navegador
 P: como usar o devtools com o aprendiz
 R: A interface é uma página web, então dá para "espiar" tudo pelo **DevTools** do navegador:
@@ -182,6 +218,10 @@ R: A interface é uma página web, então dá para "espiar" tudo pelo **DevTools
 6. aba **Fontes (Sources)**: abra `app.js`, clique no número de uma linha para pôr um breakpoint e mande uma mensagem.
 Foi por isso que o projeto escolheu uma interface web local: quem estuda vê cada pedido e cada resposta.
 
+F: rodar-testes
+A: rodar os testes, pytest, homologação
+Q: porque | os testes confirmam que nada quebrou depois de uma mudança | -> prog-vocabulario:teste-automatizado
+Q: consequencia | na 2.0, a homologação mede o acerto com os addons reais | -> aprendiz-algoritmos:homologacao
 P: como rodar os testes do aprendiz
 P: como usar pytest no aprendiz
 P: os testes do aprendiz estão falhando
@@ -196,7 +236,11 @@ R: Na pasta do projeto, com as dependências de desenvolvimento instaladas:
 ```
 São perto de 300 testes, e todos rodam em poucos segundos, cada um com um banco temporário (veja `tests/conftest.py`).
 Se falhar logo de cara: confira se usou o Python do `.venv` (e não o do sistema) e se instalou o `requirements-dev.txt` (faltando o `httpx`, os testes da API não rodam). Depois de mudar qualquer coisa no código, rode os testes de novo: essa é a sua rede de proteção.
+**Na 2.0:** depois dos testes, rode também a homologação: `python ferramentas/homologar.py ../aprendiz-addons --busca hibrido`.
 
+F: verificar
+A: verificar a instalação
+Q: porque | um teste rápido mostra se tudo foi instalado | -> rodar-testes
 P: como verificar a instalação do aprendiz
 P: o que faz o verificar.py
 R: O `ferramentas/verificar.py` confere a instalação de ponta a ponta, numa pasta de dados temporária (sem tocar na sua memória):
@@ -206,6 +250,9 @@ R: O `ferramentas/verificar.py` confere a instalação de ponta a ponta, numa pa
 ```
 Ele testa: a versão do Python, o SQLite com FTS5, as dependências e um chat completo (sobe o servidor, ensina, pergunta e confere a resposta). Com `--executavel caminho`, testa o executável gerado pelo PyInstaller. É o mesmo script que o GitHub Actions roda em Windows, Ubuntu, Fedora e Debian a cada push.
 
+F: dados
+A: onde ficam os dados
+Q: porque | os dados ficam fora da pasta do código | -> aprendiz-codigo:pasta-dados
 P: onde ficam os dados do aprendiz
 P: onde fica o arquivo aprendiz.db
 P: como apagar a memória do aprendiz
@@ -222,6 +269,9 @@ APRENDIZ_DADOS=/tmp/aprendiz-teste .venv/bin/python -m aprendiz --modo servidor
 (No PowerShell: `$env:APRENDIZ_DADOS="C:\temp\aprendiz-teste"` antes do comando.)
 Para começar do zero: use **Configurações → Resetar** (faz backup antes) ou apague o `aprendiz.db` com o app fechado. Para abrir o banco e olhar as tabelas: `sqlite3 ~/.local/share/aprendiz/aprendiz.db` e `.tables`, ou o DB Browser for SQLite.
 
+F: abrir-vscode
+A: abrir o projeto no vs code
+Q: porque | abrir a pasta inteira deixa o editor achar o ambiente virtual | -> vscode
 P: como abrir o projeto aprendiz no vs code
 P: como escolher o interpretador python no vs code
 R: 1. No terminal, dentro da pasta do projeto: `code .` (ou **Arquivo → Abrir Pasta**).
@@ -235,6 +285,9 @@ Atalhos que ajudam a ler código:
 - **Ctrl+Shift+F**: buscar um texto em todo o projeto;
 - **passar o mouse** sobre um nome: mostra o tipo e a docstring.
 
+F: depurar
+A: depurar no vs code, breakpoint
+Q: porque | parar o código num ponto mostra o valor de cada variável | -> prog-logica:depurar
 P: como depurar o aprendiz no vs code
 P: como colocar breakpoint no aprendiz
 P: launch.json para o aprendiz
@@ -271,6 +324,9 @@ Depois:
 4. F10 avança uma linha, F11 entra na função, e o painel **Variáveis** mostra `consulta`, `candidatos`… Passe por todo o pipeline assim pelo menos uma vez.
 Acrescente `.dados-estudo/` ao seu `.gitignore` local para não versionar o banco de estudo.
 
+F: atualizar
+A: atualizar o código, git pull
+Q: porque | o pull traz as mudanças publicadas | -> prog-vocabulario:clone-push-pull
 P: como atualizar o código do aprendiz
 P: como baixar a versão nova do aprendiz
 R: Se você clonou com Git:
@@ -288,6 +344,9 @@ git merge upstream/main
 ```
 Leia o `CHANGELOG.md` para saber o que mudou em cada versão. O banco de dados se atualiza sozinho ao abrir o app (as migrações em `memoria/banco.py`).
 
+F: branch
+A: criar branch para estudar
+Q: porque | estudar numa branch deixa a principal intacta | -> prog-vocabulario:branch
 P: como criar uma branch para estudar o aprendiz
 P: fluxo de git para mexer no aprendiz
 R: Nunca experimente direto na `main`. Para cada ideia, uma branch:
@@ -302,6 +361,9 @@ git switch estudo/meu-algoritmo        # e de novo para o seu experimento
 Deu tudo errado e quer jogar fora o que não foi commitado? `git restore .` (cuidado: apaga as mudanças).
 Para mandar a sua contribuição: `git push -u origin estudo/meu-algoritmo` (no seu fork) e abra um **pull request** no GitHub. O `CONTRIBUTING.md` explica os padrões do projeto (Conventional Commits em português, testes, CHANGELOG).
 
+F: externally-managed
+A: erro externally managed environment, pip bloqueado
+Q: porque | o sistema protege o Python dele; a saída é o ambiente virtual | -> python-avancado:venv
 P: erro externally managed environment no aprendiz
 P: erro python não encontrado no windows
 P: problemas comuns ao instalar o aprendiz
@@ -316,6 +378,9 @@ R: Os problemas mais comuns e a saída:
 - **Testes de API falhando com "httpx"**: instale o `requirements-dev.txt`.
 O `docs/empacotamento.md` do projeto tem mais casos.
 
+F: maquina-virtual
+A: máquina virtual, virtualbox
+Q: porque | uma máquina virtual permite testar sem mexer no sistema principal
 P: como usar uma máquina virtual para estudar o aprendiz
 P: como testar o aprendiz numa vm debian
 R: Uma máquina virtual (VirtualBox, GNOME Boxes, Hyper-V) é ótima para testar a instalação do zero sem medo:
@@ -326,6 +391,9 @@ R: Uma máquina virtual (VirtualBox, GNOME Boxes, Hyper-V) é ótima para testar
 5. tire um **snapshot** da VM limpa antes de instalar: assim dá para voltar e testar o instalador de novo.
 Para usar o navegador do computador real com o Aprendiz da VM, rode com `--modo servidor` e configure no VirtualBox um redirecionamento de porta (Rede → Avançado → Redirecionamento de Portas: 8765 → 8765). O servidor só escuta em 127.0.0.1, então o acesso de fora precisa desse redirecionamento.
 
+F: checklist
+A: checklist do ambiente pronto
+Q: porque | conferir cada item evita descobrir um problema no meio do estudo | -> estudar
 P: checklist do ambiente pronto para o aprendiz
 P: como saber se meu ambiente está pronto
 R: Antes de seguir para o próximo addon da trilha, confira:

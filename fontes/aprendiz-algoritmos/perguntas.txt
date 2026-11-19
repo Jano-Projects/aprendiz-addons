@@ -6,6 +6,10 @@
 #   3. nota "A farmácia do bairro entrega remédios em casa."
 #   Pergunta de teste: "que horas a farmácia abre?"
 
+F: como-pensa
+A: como o aprendiz pensa, visão geral, pipeline, como encontra a resposta
+Q: porque | toda resposta passa por preparar o texto, buscar candidatos, descartar os fracos e montar o texto | -> normalizacao
+Q: consequencia | na 2.0, a resposta pode explicar os porquês pela teia | -> teia
 P: como o aprendiz pensa
 P: visão geral dos algoritmos do aprendiz
 P: como o aprendiz encontra a resposta
@@ -22,7 +26,11 @@ pergunta ─► normalização ─► BUSCA ─► candidatos ─► limiar ─�
 - abaixo do limiar, o candidato é descartado; se nenhum sobra, o **modo estrito** diz "ainda não fui ensinado". Nada é inventado;
 - a **resposta** monta o texto final com os candidatos aceitos.
 Antes da busca ainda há atalhos: ensino pelo chat, revisão de texto, dicionário, intenções sociais ("oi", "obrigado") e, com addon, compreensão.
+**Na 2.0:** antes da busca, os **padrões de frase** reconhecem estruturas como "quantos * cada *"; depois dela, a **teia de porquês** monta o caminho a partir do melhor candidato, e a resposta **Trabalhada** explica esse caminho. A busca também passou a exigir que a resposta fale do **assunto** da pergunta.
 
+F: normalizacao
+A: normalização, minúsculas, sem acento, preparar o texto
+Q: porque | a mesma palavra chega escrita de jeitos diferentes, e a busca só compara o que está numa forma só | -> prog-logica:string
 P: como funciona a normalização do aprendiz
 P: quais as etapas da normalização
 R: A mensagem **"Vc sabe qual o HORÁRIO da farmásia?"** passa por:
@@ -37,6 +45,10 @@ R: A mensagem **"Vc sabe qual o HORÁRIO da farmásia?"** passa por:
 Por que tirar acentos? As pessoas digitam sem acento o tempo todo; perder o acento custa pouco e ganha muito. E o mais importante: **o mesmo processamento** é aplicado ao que é ensinado e ao que é perguntado, então os dois lados se encontram.
 Com addon de compreensão entram mais três passos: expressões ("dar um jeito" → resolver), lemas ("fui" → ser) e o léxico, que impede a correção de "corrigir" palavras que existem.
 
+F: correcao
+A: correção de digitação, corretor, erro de digitação, rapidfuzz
+Q: porque | troca uma palavra que não existe na base pela mais parecida que existe | -> normalizacao
+Q: regra | entre correções iguais, vence a que forma um par que existe na base
 P: como funciona a correção de digitação do aprendiz
 P: por que o aprendiz não corrige qualquer palavra
 R: Regra: uma palavra é corrigida só se
@@ -47,6 +59,9 @@ R: Regra: uma palavra é corrigida só se
 Então a RapidFuzz procura a palavra **mais parecida no vocabulário da base**, e a troca é feita se a semelhança for **pelo menos 80** (de 0 a 100).
 O ponto-chave: o corretor só sugere palavras que **o assistente conhece**. Ele não tenta corrigir para o português em geral: "farmasia" vira "farmacia" porque "farmácia" foi ensinada. E palavras curtas ficam de fora porque nelas uma letra de diferença muda tudo ("mal" × "mel").
 
+F: stopwords
+A: stopwords, palavras vazias, artigos e preposições
+Q: porque | palavras como "o" e "de" estão em tudo e não ajudam a distinguir uma resposta | -> normalizacao
 P: o que são stopwords no aprendiz
 P: por que nao não é stopword
 R: **Stopwords** são palavras muito frequentes que quase não dizem do que se trata a pergunta: `o`, `de`, `qual`, `como`, `voce`, `tem`…
@@ -54,6 +69,9 @@ Elas são removidas **da busca** (senão todo conhecimento com "de" pareceria re
 A palavra **`nao` fica fora da lista de propósito**: negação muda o sentido ("o que **não** posso comer" é o oposto de "o que posso comer").
 As stopwords estão em `memoria/sementes.py` e podem ser ampliadas por addons (os dicionários acrescentam "significa", "quer", "dizer" para "o que significa X" virar só "X").
 
+F: radicalizador
+A: radicalizador, stemmer, radical, stemming
+Q: porque | "farmácia" e "farmácias" viram o mesmo radical, então uma acha a outra | -> normalizacao
 P: como funciona o radicalizador do aprendiz
 P: o que é stemming
 P: o que é o rslp
@@ -67,6 +85,10 @@ O Aprendiz usa uma versão simplificada do **RSLP** (Orengo e Huyck, 2001), em p
 6. **vogal final**: carro → carr.
 O tamanho mínimo protege palavras curtas. O radicalizador não precisa ser linguisticamente perfeito; precisa ser **consistente**: a mesma palavra sempre gera o mesmo radical, ao ensinar e ao perguntar. Formas irregulares ("fui" × "foi") ele não junta; para isso existem os lemas do addon de compreensão.
 
+F: cumprimentos
+A: cumprimentos, intenções sociais, naive bayes, oi e obrigado
+Q: porque | um classificador aprende com exemplos a separar conversa de pergunta
+Q: regra | na 2.0, um assunto que a base conhece não vira conversa social
 P: como o aprendiz reconhece cumprimentos
 P: como funciona o naive bayes do aprendiz
 P: o que é classificação de intenções
@@ -81,6 +103,9 @@ P(palavra | intenção) = (vezes da palavra na intenção + 1) / (palavras da in
 - no fim, **softmax** transforma as pontuações em probabilidades que somam 100%.
 Uma resposta social só é dada se a mensagem tiver **até 6 palavras**, a probabilidade for **pelo menos 45%** e for **pelo menos o dobro** da segunda colocada. Mensagens iguais a uma frase de exemplo pulam o classificador ("frase exata").
 
+F: aprende-chat
+A: aprender pelo chat, aprenda que, ensinar, anote
+Q: porque | frases como "aprenda que" são reconhecidas por expressões regulares e viram conhecimento
 P: como o aprendiz aprende pelo chat
 P: quais frases ensinam o aprendiz
 R: Três formatos são reconhecidos por expressões regulares, antes de qualquer busca:
@@ -90,12 +115,18 @@ R: Três formatos são reconhecidos por expressões regulares, antes de qualquer
 E há a **correção**: depois de uma resposta errada, o botão **Corrigir** transforma a resposta certa num ensinamento ligado à pergunta original.
 Se o Naive Bayes achar que a pessoa quer ensinar (probabilidade ≥ 60%) mas o formato não bateu, o Aprendiz explica os formatos aceitos.
 
+F: entidade
+A: entidade, extração de entidades, datas e números na pergunta
+Q: porque | datas, horários e valores são achados por padrões de texto e registrados à parte
 P: o que é entidade no aprendiz
 P: como o aprendiz reconhece datas e telefones
 R: **Entidades** são pedaços com significado estruturado, reconhecidos por **regex** em `linguagem/entidades.py`: e-mail, valor em reais (R$ 10,50), data, horário, telefone e número.
 Um trecho já reconhecido não é pego de novo por um padrão mais genérico (um telefone não vira também "número").
 Para que servem: aparecem no painel "Por que respondi isso?" e ajudam a **exportação** a apontar possíveis dados pessoais (um conhecimento com e-mail ou telefone vem desmarcado, com aviso).
 
+F: bm25
+A: bm25, busca por palavras, okapi
+Q: porque | pontua palavras raras mais alto e não deixa um texto longo ganhar só por repetir palavras | -> limiar
 P: como funciona o bm25 do aprendiz
 P: explica a fórmula do bm25
 R: **BM25** é o algoritmo clássico dos buscadores (foi o padrão do Elasticsearch/Lucene por anos):
@@ -111,6 +142,9 @@ Como a nota BM25 não tem escala fixa (depende do tamanho da base), a **confian�
 No exemplo (`horari farmac abr`): o item 1 tem `horari` e `farmac` → 2/3 = **0,667**, aceito (limiar 0,5); o item 3 tem só `farmac` → 0,333, descartado.
 Limite: palavras diferentes de mesmo sentido ("horas" × "horário") só se encontram se houver o sinônimo.
 
+F: tfidf
+A: tf-idf, tfidf, cosseno, vetor de palavras
+Q: porque | compara a pergunta e o texto como vetores de pesos de palavras, pelo ângulo entre eles | -> limiar
 P: como funciona o tf-idf do aprendiz
 P: explica o tf-idf com exemplo
 P: o que é similaridade do cosseno
@@ -125,6 +159,9 @@ R: **TF-IDF + cosseno**, em Python puro (dá para conferir cada conta):
 - item 3: 0,606 × 0,355 = 0,215 (descartado).
 Repare: `farmac`, que aparece em dois documentos, pesa menos que `horari`. O termo que **diferencia** os documentos decide. Limite: o índice fica na memória e é reconstruído quando a base muda.
 
+F: fuzzy
+A: busca fuzzy, tolerante a erros, rapidfuzz
+Q: porque | compara textos parecidos mesmo com letras trocadas | -> limiar
 P: como funciona a busca fuzzy do aprendiz
 P: o que é wratio
 R: **Fuzzy** compara **letras**, não termos: tolera erros de digitação que escaparam do corretor.
@@ -133,6 +170,10 @@ O comparador é o **WRatio**, que combina várias estratégias (ignora a ordem d
 No exemplo ("horario farmacia abre"): item 1 → 95,0 (confiança 0,95); item 3 → 85,5; item 2 → 37,9. Limiar 0,75: os dois de farmácia passam, e a resposta usa o primeiro.
 Bom para: erros de digitação e perguntas curtas, muito parecidas com as cadastradas. Limite: em notas longas, a pergunta é uma parte pequena do texto e a nota cai.
 
+F: hibrido
+A: busca híbrida, híbrido, rrf, consenso
+Q: porque | junta as posições dos outros algoritmos, e quem aparece bem em vários sobe | -> bm25
+Q: consequencia | na homologação da 2.0, foi a busca que mais acertou | -> homologacao
 P: como funciona a busca híbrida do aprendiz
 P: o que é reciprocal rank fusion
 P: o que é rrf
@@ -146,6 +187,10 @@ O 60 suaviza: a diferença entre 1º e 2º existe, mas não é exagerada.
 **Confiança:** o híbrido aceita um documento se **pelo menos um** algoritmo estiver confiante: `0,5 × max(confiança_i / limiar_i)`, limitada a 1. Ela vale exatamente 0,5 (o limiar do híbrido) quando algum algoritmo atinge o próprio limiar. No item 1, o TF-IDF dá 0,532 / 0,25 = 2,13 → confiança 1,0.
 Bom para: o resultado mais robusto. Limite: roda os três algoritmos, então é o mais lento.
 
+F: limiar
+A: limiar, confiança mínima, corte
+Q: porque | abaixo dele o candidato é descartado, e sem candidato o modo estrito diz que não sabe
+Q: regra | na 2.0, quem bate no assunto declarado ganha folga, menos quando o dono definiu o limiar | -> regra-assunto
 P: o que é limiar no aprendiz
 P: o que é o modo estrito
 P: por que o aprendiz diz que não sabe
@@ -158,12 +203,19 @@ O dilema clássico é **precisão × revocação**:
 - limiar baixo → responde mais, mas às vezes com o item errado ("qual a senha do **banco**?" pode trazer a senha do wifi, porque metade dos termos bate).
 Use o benchmark (`benchmarks/comparar.py`) para ver o efeito de cada mudança.
 
+F: prioridade-dono
+A: prioridade do dono, o que eu ensinei vale mais
+Q: porque | quando o dono e um addon respondem quase igual, vale o que o dono ensinou | -> limiar
 P: o que é a prioridade do dono no aprendiz
 P: por que o que eu ensino vence o addon
 R: Depois da busca, se o primeiro candidato veio de um **addon** e existe algo ensinado pelo **dono** com confiança de pelo menos **90%** da dele, o do dono passa à frente.
 A margem existe porque respostas mais longas pontuam um pouco menos em alguns algoritmos, mesmo respondendo à mesma pergunta. Ela é ajustável em Configurações (`prioridade_dono.margem`, de 0,5 a 1).
 A mesma filosofia vale em todo o app: sinônimos, abreviações, parâmetros e personalização do dono vencem os de addons; e um verbete de dicionário só perde para algo que o dono ensinou com exatamente aquela palavra.
 
+F: resposta-direta
+A: resposta direta, resposta pronta, texto guardado
+Q: porque | devolve o texto do melhor candidato como foi escrito
+Q: diferente-de | a Trabalhada também explica os porquês | -> trabalhada
 P: como funciona a resposta direta
 P: como funciona a resposta extrativa
 P: o que é textrank
@@ -177,7 +229,11 @@ R: **Direta** (`resposta/direta.py`): devolve o conteúdo do melhor candidato ac
    - centralidade (**TextRank**): o PageRank do Google aplicado a frases. Cada frase "vota" nas parecidas com ela, e a conta se repete até estabilizar: `nota(i) = (1 − d) + d · Σ sim(i,j)/Σ sim(j,k) · nota(j)`, com d = 0,85;
 3. devolve as 3 melhores, na ordem original (frases sem nenhum termo da pergunta só entram se não houver outra).
 Exemplo: no texto sobre óleo, filtro e pneus, a pergunta "qual a calibragem dos pneus?" devolve só "A calibragem dos pneus é 35 psi na frente e 33 atrás." (relevância 1,0, nota 0,745).
+**Na 2.0:** há três respostas: **Direta**, **Extrativa** e **Trabalhada**. A Trabalhada dá o mesmo fato da Direta e explica os porquês pela teia.
 
+F: dicionario
+A: dicionário, verbetes, o que significa, gírias
+Q: porque | verbetes respondem nos dois sentidos, do termo para o sentido e do sentido para o termo
 P: como funciona o dicionário do aprendiz
 P: como o aprendiz responde o que significa uma gíria
 R: Os **verbetes** dos addons de dicionário só respondem quando a pessoa digita a **palavra sozinha** ou pergunta "o que significa…": numa frase com outras palavras eles são ignorados, para não "sequestrar" perguntas sobre outros assuntos.
@@ -186,6 +242,10 @@ O motor (`core/dicionario.py`) entra **antes** das intenções (senão "como se 
 - **inverso:** "como se diz dinheiro em Angola?", "aldeia em kriol" → o termo da região, usando as **traduções** (linha `T:`) dos verbetes.
 Ele separa a região do fim da frase (pelos `termos` declarados no manifesto), testa alguns padrões de pergunta e compara o termo por **igualdade de radicais**, nunca por semelhança: o dicionário só responde quando tem certeza. Se dois dicionários têm a mesma palavra ("bué" em Portugal e em Angola), a resposta mostra os dois.
 
+F: compreensao
+A: compreensão, tipo de pergunta, addon de compreensão
+Q: porque | entender o tipo da pergunta (o que é, por que, como) ajuda a escolher a resposta
+Q: consequencia | na 2.0 ela traz também os padrões de frase | -> padroes
 P: como funciona a compreensão do aprendiz
 P: o que fazem os addons de compreensão e vetores
 R: Os addons de **compreensão** e **vetores** não trazem respostas: ensinam o app a **interpretar**. O motor (`core/compreensao.py`) faz:
@@ -197,6 +257,9 @@ R: Os addons de **compreensão** e **vetores** não trazem respostas: ensinam o 
    - **recomendação de addon:** compara a pergunta com as palavras de cada addon da loja (o catálogo vai dentro do addon, sem internet) e sugere instalar ou ativar o certo.
 Os **vetores** são números que representam o sentido de cada palavra; a semelhança é o **cosseno** entre eles (1 = mesmo sentido). Os **lemas** juntam formas irregulares ("fui", "foi", "era" → ser), o que o radicalizador sozinho não consegue.
 
+F: revisao
+A: revisão de texto, revise, ortografia, norma
+Q: porque | com um addon de norma, confere o texto pelo português de cada país
 P: como funciona a revisão de texto do aprendiz
 P: como o aprendiz corrige ortografia
 R: Com um addon de **norma** (o português de um país), o Aprendiz revisa textos (`core/revisao.py`). O que ele aponta, do mais grave ao mais leve:
@@ -207,6 +270,10 @@ R: Com um addon de **norma** (o português de um país), o Aprendiz revisa texto
 5. **palavras de outra variante** ("autocarro" num texto do Brasil).
 O vocabulário tem milhões de formas e é consultado por **busca binária** num bloco de bytes ordenado, sem montar listas na memória. Na conversa: `revise: …`, `o certo é X ou Y?`, `como se escreve X?`; ou a tela **Revisar texto**.
 
+F: recomendacao
+A: recomendação de algoritmo, algoritmo recomendado, usar como padrão
+Q: porque | cada addon é testado com as próprias perguntas para saber qual busca acerta mais com ele
+Q: regra | na 2.0, responder pergunta fora do assunto desconta da nota e o Híbrido só perde se outro for claramente melhor | -> hibrido
 P: como o aprendiz recomenda o algoritmo de um addon
 P: o que é acerto@1
 R: A recomendação de busca e resposta de cada addon **não é palpite**, é medida (`core/recomendacao.py`):
@@ -216,7 +283,11 @@ R: A recomendação de busca e resposta de cada addon **não é palpite**, é me
 4. recomenda o que mais acertou; no empate, o mais leve (BM25, TF-IDF, Híbrido, Fuzzy).
 A resposta recomendada depende do formato: a maior parte do conteúdo em textos longos (mais de 400 caracteres) → **Extrativa**; pares curtos → **Direta**.
 Os addons com a mesma recomendação formam um **grupo**, que pode ser ativado de uma vez ("Usar este grupo").
+**Na 2.0:** a nota é `acerto − 0,5 × falsos` (perguntas fora do assunto respondidas mesmo assim), o Híbrido só perde se outro tiver 5 pontos a mais, e o `criar_addon.py --junto` mede com os addons essenciais de linguagem instalados. Addon com teia recomenda a resposta Trabalhada.
 
+F: dados-pessoais
+A: dados pessoais, exportação, senha, telefone
+Q: porque | padrões como senha, telefone e e-mail fazem o item vir desmarcado ao exportar
 P: como o aprendiz detecta dados pessoais na exportação
 R: Ao exportar o que o dono ensinou (`core/exportacao.py`), cada item passa por uma **heurística**: itens com cara de dado pessoal vêm **desmarcados** e com o motivo:
 - palavras que costumam vir perto de dado pessoal (senha, PIN, CPF, CNPJ, RG, cartão, CVV, agência, conta bancária, Pix, token, login, usuário, endereço, placa, nascimento), procuradas por uma expressão regular no texto normalizado;
@@ -225,6 +296,10 @@ R: Ao exportar o que o dono ensinou (`core/exportacao.py`), cada item passa por 
 É uma ajuda para revisar, não uma garantia: heurísticas erram para os dois lados. O dono sempre vê a lista e decide.
 Além disso, os addons instalados não vão no arquivo: viram **dependências** (só o nome e a versão), o que respeita a licença de cada um.
 
+F: comparar
+A: comparar algoritmos, benchmark, medir acerto
+Q: porque | o mesmo conjunto de perguntas roda em cada algoritmo e mostra quem acerta mais
+Q: consequencia | na 2.0, a homologação faz isso com os addons reais da loja | -> homologacao
 P: como comparar os algoritmos do aprendiz
 P: como usar o benchmark do aprendiz
 R: `python benchmarks/comparar.py --detalhes` roda as mesmas perguntas em todos os algoritmos e mede:
@@ -234,7 +309,11 @@ R: `python benchmarks/comparar.py --detalhes` roda as mesmas perguntas em todos 
 - **tempo** médio por pergunta.
 Com os dados de exemplo (14 conhecimentos, 18 perguntas com resposta e 5 sem): BM25, TF-IDF e Híbrido acertam 100%; o Fuzzy, 83%. No estrito, os três primeiros não inventam em 3 de 5, e o Fuzzy em 4 de 5.
 Para testar com os seus dados, crie um JSON com `"conhecimentos"` e `"testes"` (`{"pergunta": ..., "esperado": id ou null}`) e rode com `--dados arquivo.json`. Mude um limiar, um sinônimo ou uma regra do radicalizador e rode de novo: é o melhor jeito de aprender o efeito de cada técnica.
+**Na 2.0:** `ferramentas/homologar.py` compara as buscas com os **addons reais da loja** e perguntas de gente de verdade, incluindo perguntas inéditas.
 
+F: qual-busca
+A: qual algoritmo usar, qual busca escolher
+Q: porque | cada busca tem um ponto forte, e o Híbrido junta todos | -> hibrido
 P: qual algoritmo de busca usar no aprendiz
 P: diferença entre bm25 tfidf fuzzy e híbrido
 R: Resumo prático:
@@ -243,7 +322,11 @@ R: Resumo prático:
 - **Fuzzy:** tolera erros de digitação e brilha com perguntas curtas e muito parecidas com as cadastradas (como as dos addons, que trazem muitas variações). Sofre com textos longos.
 - **Híbrido:** junta os três por posição (RRF). O mais robusto para perguntas variadas, e o mais lento.
 Na dúvida: comece com o **recomendado** de cada addon e use o seletor do topo para comparar na hora; o painel "Por que respondi isso?" mostra a confiança de cada candidato.
+**Na 2.0:** na homologação, o **Híbrido** acertou mais em todas as levas, por isso é o recomendado na maioria dos addons.
 
+F: exercicios
+A: exercícios sobre os algoritmos, praticar
+Q: porque | mexer nos limiares e comparar resultados mostra na prática como cada peça age | -> comparar
 P: exercícios sobre os algoritmos do aprendiz
 P: como praticar com os algoritmos do aprendiz
 R: Exercícios propostos pelo próprio projeto (`docs/algoritmos.md` e `docs/linguagem.md`):
@@ -256,3 +339,94 @@ R: Exercícios propostos pelo próprio projeto (`docs/algoritmos.md` e `docs/lin
 7. faça o corretor considerar a **frequência** das palavras na base;
 8. crie uma intenção `data` que responda "hoje é …" usando a entidade reconhecida;
 9. crie o seu algoritmo (veja o addon **Construir e customizar do zero**).
+
+F: trabalhada
+A: resposta trabalhada, explicar os porquês, resposta que explica
+Q: porque | dá o fato encontrado e conta cada porquê seguido dos porquês do fragmento ligado | -> teia
+Q: regra | sem teia no conhecimento, responde como a Direta | -> resposta-direta
+Q: parte-de | as frases vêm da expressão dos addons de linguagem | -> expressao
+P: como funciona a resposta trabalhada do aprendiz
+P: o que é a resposta trabalhada
+P: como o aprendiz explica os porquês
+R: A **Trabalhada** (2.0) é a resposta que explica. Ela parte do conhecimento achado pela busca e conta o caminho de porquês que a teia montou:
+1. a abertura ("Pelo que tenho em **SQL 1 · Básico**:");
+2. o fato, com o texto do conhecimento;
+3. cada porquê, seguido dos porquês do fragmento que ele liga, até as raízes;
+4. o fechamento ("Quer que eu aprofunde algum desses pontos?").
+As frases vêm da seção `expressao` dos addons de linguagem, e uma é sorteada a cada vez. Sem teia no conhecimento, ela responde como a Direta. Arquivo: `aprendiz/algoritmos/resposta/trabalhada.py`.
+
+F: teia
+N: raiz
+A: teia de porquês, porquês, fragmentos ligados, ligações entre addons
+Q: definicao | cada fragmento diz por que é assim e a que outros fragmentos se liga, formando uma rede
+Q: regra | só as causas descem até a raiz; comparações e consequências valem no primeiro nível
+Q: consequencia | a resposta Trabalhada conta esse caminho | -> trabalhada
+P: o que é a teia de porquês do aprendiz
+P: como funciona a teia do aprendiz
+P: como o aprendiz liga um assunto a outro
+R: A **teia de porquês** (2.0) liga os fragmentos dos addons pelos porquês escritos no `perguntas.txt`:
+```
+F: having
+Q: porque | os totais só existem depois do GROUP BY | -> group-by
+```
+A partir do conhecimento achado, `core/teia.py` percorre os porquês em largura, com quatro freios:
+- **profundidade** de até 3 níveis;
+- **raiz**: um fragmento `N: raiz` é a base, e não se desce além dele;
+- **assunto**: do nível 2 em diante, só segue para fragmentos com palavra em comum com a pergunta;
+- **causa x lado**: `porque`, `regra`, `definicao` e `parte-de` descem; as outras relações valem só no nível 1.
+A ligação `-> addon:ref` atravessa addons; se o outro addon estiver desativado, o texto do porquê continua valendo. O caminho aparece em "Por que respondi isso?".
+
+F: padroes
+A: padrões de frase, estrutura da frase, sentido da frase, lacunas
+Q: porque | algumas ideias estão na estrutura da frase e não nas palavras, como "quantos pedidos cada cliente fez" ser um pedido de agrupar
+Q: regra | as lacunas são o exemplo e saem da busca; a pergunta só é trocada se a reescrita achar resposta
+P: o que são os padrões de frase do aprendiz
+P: como o aprendiz entende a estrutura da frase
+R: Os **padrões de frase** (2.0) ficam na seção `padroes` do `compreensao.json` e guardam estruturas que dizem um conceito:
+```json
+{"padrao": "quantos|quantas * cada|por *", "conceitos": ["agrupar", "contar", "por grupo"]}
+```
+Peças: a palavra, alternativas `a|b`, a lacuna `*` (o exemplo) e `<n>` (um número). Em "quantos pedidos cada cliente fez", "pedidos" e "cliente" caem nas lacunas e saem da busca, e entram os conceitos. Quando dois padrões casam, vence o mais específico: o que tem palavra fixa onde o outro tem lacuna. Arquivo: `aprendiz/core/padroes.py`.
+
+F: expressao
+A: expressão, jeito de dizer, frases da resposta
+Q: porque | o mesmo porquê pode ser dito de vários jeitos, e variar deixa a resposta mais humana
+Q: parte-de | é usada pela resposta Trabalhada | -> trabalhada
+P: o que é a expressão no aprendiz
+P: de onde vêm as frases da resposta trabalhada
+R: A **expressão** (2.0) fica na seção `expressao` do `compreensao.json` dos addons de linguagem: frases para a abertura, o fechamento e cada relação, com `{x}` no lugar do conteúdo.
+```json
+"porque": ["Isso porque {x}.", "O motivo é que {x}."]
+```
+Os addons ativos somam frases, uma é sorteada a cada resposta e a mesma não se repete duas vezes seguidas. Sem nenhum addon com expressão, vale um conjunto mínimo embutido no app. Arquivo: `aprendiz/core/expressao.py`.
+
+F: numeros
+A: números por extenso, contas, dois mais dois, normalizar números
+Q: porque | "2+2", "dois mais dois" e "2 mais dois" são a mesma pergunta e precisam virar o mesmo texto para a busca | -> normalizacao
+P: como o aprendiz entende números por extenso
+P: por que dois mais dois e 2+2 dão a mesma resposta
+R: Na normalização (2.0), `aprendiz/linguagem/numeros.py` deixa as contas numa forma só: `2+2`, `dois mais dois` e `2 mais dois` viram `2 soma 2`; `vinte e cinco` vira `25`. "Um" só vira 1 perto de outro número (no resto, é artigo), e datas e hexadecimais ficam como estão.
+
+F: regra-assunto
+A: regra do assunto, assunto declarado, resposta fala do assunto, palavra informativa
+Q: porque | sem ela, uma letra solta como o "c" de um apelido de tabela respondia "o que é um ponteiro em C?" com SQL
+Q: regra | a palavra da pergunta precisa estar no assunto declarado do conhecimento ou, se não estiver, todas precisam estar no texto
+P: como o aprendiz sabe se a resposta fala do assunto
+P: o que é o assunto declarado no aprendiz
+R: Depois da busca (2.0), cada candidato passa pelas **regras do assunto**:
+- precisa ter uma **palavra informativa** da pergunta no que ele **declara tratar** (pergunta, variações e assuntos `A:`); sem isso, o texto precisa ter **todas** elas;
+- quem bate no assunto declarado é aceito até 80% do limiar (o melhor de todos, até 60%) e vem antes, a não ser que o dono tenha definido o limiar;
+- a palavra na pergunta do fragmento pesa mais do que nos assuntos, e palavras raras pesam mais do que as comuns.
+É o que faz "o que é um ponteiro em C?" dizer que não sabe, em vez de responder com um texto de SQL.
+
+F: homologacao
+A: homologação, homologar, perguntas reais, perguntas inéditas, medir acerto
+Q: porque | os testes medem cada peça sozinha; a homologação mede se o conjunto acerta perguntas de gente de verdade | -> prog-vocabulario:teste-automatizado
+Q: regra | as perguntas de cada leva são escritas antes de mexer nos addons, para medir sem viciar
+P: o que é a homologação do aprendiz
+P: como medir se o aprendiz está acertando
+R: A **homologação** (2.0) instala os addons reais da loja e faz perguntas do jeito que uma pessoa faz: variações, erros de digitação, porquês, resumos, perguntas fora do assunto, conversa e baterias de perguntas **inéditas**, escritas antes de cada mudança.
+```bash
+python ferramentas/homologar.py ../aprendiz-addons --busca hibrido
+```
+Cada caso diz de onde a resposta deve vir (`q:trecho`), o tipo esperado (`tipo:desconhecido`) ou que é um resumo (`panorama`).

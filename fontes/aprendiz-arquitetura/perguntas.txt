@@ -2,6 +2,9 @@
 # O mapa do projeto: as camadas, o caminho de uma mensagem e o papel de cada pasta e arquivo.
 # Referência: versão 0.8 do Aprendiz (github.com/Jano-Projects/aprendiz-dev).
 
+F: por-dentro
+A: como funciona por dentro, camadas, arquitetura
+Q: porque | interface, API e núcleo conversam por interfaces simples, e cada um pode ser estudado sozinho | -> caminho-mensagem
 P: como o aprendiz funciona por dentro
 P: qual a arquitetura do aprendiz
 P: quais são as camadas do aprendiz
@@ -23,6 +26,10 @@ R: O Aprendiz tem **três camadas** que conversam por interfaces simples:
 E o `desktop.py` amarra tudo: sobe a API numa thread e abre a interface numa janela.
 Cada camada só conhece a de baixo: a interface não sabe nada de SQLite; o banco não sabe nada de linguagem. Por isso cada peça pode ser testada sozinha.
 
+F: caminho-mensagem
+A: caminho de uma mensagem, pipeline, etapas
+Q: porque | cada mensagem passa por etapas em ordem, e cada uma registra o que fez no painel Por que respondi isso
+Q: consequencia | na 2.0 entram os padrões de frase, a teia e a resposta Trabalhada | -> aprendiz-algoritmos:teia
 P: qual o caminho de uma mensagem no aprendiz
 P: o que acontece quando eu mando uma mensagem no aprendiz
 P: o que é o pipeline do aprendiz
@@ -43,7 +50,11 @@ R: Do Enter até a resposta na tela:
    - **resposta** com o algoritmo escolhido (Direta ou Extrativa).
 4. Cada etapa é cronometrada (classe `Etapas`); tudo vira `meta.explicacao`, gravado com a resposta.
 5. A API devolve o JSON; a interface mostra o texto (com o mini-Markdown) e guarda a explicação para o painel **"Por que respondi isso?"**.
+**Na 2.0:** o caminho ganhou três etapas: **padrões de frase** antes da busca, as **regras do assunto** depois dela e a **teia de porquês** antes de montar a resposta. Veja o `docs/arquitetura.md`.
 
+F: decisoes
+A: decisões de projeto, por que offline, por que sqlite
+Q: porque | rodar em máquina fraca, offline e sem dependências pesadas guiou cada escolha
 P: quais as decisões de projeto do aprendiz
 P: por que o aprendiz usa interface web
 P: por que o aprendiz não usa inteligência artificial
@@ -56,6 +67,9 @@ R: As escolhas principais e o porquê (estão em `docs/arquitetura.md`):
 - **Addons só de dados:** nada que um addon traga é executado como código.
 - **Nada da internet na interface:** nem fontes, nem ícones, nem bibliotecas externas.
 
+F: pastas
+A: pastas do projeto, estrutura de pastas
+Q: porque | separar código, testes, documentação e ferramentas deixa claro onde está cada coisa | -> prog-vocabulario:codigo-limpo
 P: quais são as pastas do projeto aprendiz
 P: estrutura de pastas do aprendiz
 P: o que tem em cada pasta do aprendiz
@@ -70,6 +84,9 @@ R: A raiz do repositório:
 - arquivos soltos: instaladores (`instalar.*`), atalhos (`executar.*`), empacotamento (`empacotar.*`, `iniciar.py`), dependências (`requirements*.txt`, `pyproject.toml`) e os documentos do projeto (README, CHANGELOG, CONTRIBUTING, SECURITY, CODE_OF_CONDUCT, LICENSE).
 O mapa completo, arquivo por arquivo, está em `docs/estrutura.md`, gerado automaticamente a partir das docstrings.
 
+F: pasta-aprendiz
+A: pasta aprendiz, pacote principal
+Q: parte-de | é o pacote com todo o código do app | -> pastas
 P: o que tem dentro da pasta aprendiz
 P: quais os subpacotes do aprendiz
 R: Dentro do pacote `aprendiz/`:
@@ -87,12 +104,18 @@ R: Dentro do pacote `aprendiz/`:
 - `api/`: o servidor HTTP (`servidor.py`);
 - `web/`: a interface (`index.html`, `estilo.css`, `app.js`, `markdown.js`, `icone.svg`).
 
+F: init
+A: __init__.py, versão do app
+Q: porque | marca a pasta como pacote Python e guarda a versão do app
 P: o que faz o arquivo __init__.py do aprendiz
 P: o que faz o arquivo __main__.py do aprendiz
 R: - `aprendiz/__init__.py` roda no primeiro `import aprendiz`. Ele guarda a **versão** (`__version__`, usada pela API, pelos addons e pelo `pyproject.toml`) e uma docstring com o mapa dos subpacotes.
 - `aprendiz/__main__.py` existe para o comando `python -m aprendiz` funcionar: o Python procura esse arquivo quando você "executa um pacote". Ele só importa e chama `main()` de `desktop.py`, dentro de `if __name__ == "__main__":`.
 Os `__init__.py` dos subpacotes (`core/`, `memoria/`, `api/`…) reexportam o que importa (por exemplo, `from aprendiz.core import Assistente`) e têm uma docstring que vira a descrição da pasta no `docs/estrutura.md`.
 
+F: config
+A: config.py, pasta de dados, configuração do sistema
+Q: porque | decide onde ficam os dados em cada sistema operacional
 P: o que faz o arquivo config.py do aprendiz
 P: o que faz o config.py
 R: `aprendiz/config.py` guarda valores que mudam pouco:
@@ -103,6 +126,9 @@ R: `aprendiz/config.py` guarda valores que mudam pouco:
 - `caminho_banco()`: `pasta_dados() / "aprendiz.db"`.
 Os dados nunca ficam na pasta do programa: atualizar ou reinstalar não apaga o que foi ensinado.
 
+F: desktop
+A: desktop.py, janela, abrir o app
+Q: porque | sobe a API numa thread e abre a interface numa janela | -> servidor
 P: o que faz o arquivo desktop.py do aprendiz
 P: como o aprendiz abre a janela
 P: pra que serve o desktop.py
@@ -117,6 +143,9 @@ R: `aprendiz/desktop.py` transforma um servidor web num "app de desktop":
 4. encerra sozinho: a página manda um **sinal de vida** a cada 10 s (`POST /api/sinal`); se os sinais param por 90 s (janela fechada), o servidor sai. Isso evita processos esquecidos, principalmente no executável do Windows, que não tem console.
 O `main()` lê as opções com `argparse` (`--modo`, `--porta`).
 
+F: servidor
+A: servidor.py, api, fastapi, rotas
+Q: porque | expõe o núcleo em rotas HTTP só no próprio computador | -> prog-vocabulario:api
 P: o que faz o arquivo servidor.py do aprendiz
 P: quais são as rotas da api do aprendiz
 P: quais rotas a api tem
@@ -134,6 +163,9 @@ R: `aprendiz/api/servidor.py` cria a aplicação **FastAPI** na função `criar_
 - `POST /api/resetar` (exige o texto "RESETAR"; faz backup antes), `POST /api/sinal`, `POST /api/loja-oficial`.
 Cada pedido com corpo tem um modelo **Pydantic** (`PedidoChat`, `PedidoAddon`…), que valida o JSON antes da função rodar. A lista completa está na docstring do arquivo e em `/docs`.
 
+F: assistente
+A: assistente.py, núcleo, responder
+Q: porque | é onde o pipeline acontece, chamando linguagem, busca, teia e resposta | -> caminho-mensagem
 P: o que faz o arquivo assistente.py do aprendiz
 P: o que é a classe assistente
 P: o que faz o assistente.py
@@ -148,6 +180,9 @@ O que ela faz:
 - `revisar_texto()`: a revisão pela norma de um país.
 No começo do arquivo ficam as constantes do pipeline: as expressões regulares do ensino pelo chat (`PADRAO_PAR`, `PADRAO_FATO`, `PADRAO_NOTA`) e os critérios da resposta social (probabilidade mínima 0,45, margem de 2× sobre a segunda intenção, até 6 palavras).
 
+F: pasta-core
+A: pasta core, núcleo do assistente
+Q: parte-de | guarda as peças do raciocínio, e na 2.0 também teia.py, padroes.py e expressao.py | -> assistente
 P: o que tem na pasta core do aprendiz
 P: o que fazem dicionario.py compreensao.py revisao.py
 R: A pasta `aprendiz/core/` tem o pipeline e os "motores" especializados:
@@ -158,7 +193,11 @@ R: A pasta `aprendiz/core/` tem o pipeline e os "motores" especializados:
 - `recomendacao.py`: testa os algoritmos com o conteúdo de um addon e recomenda a melhor busca e resposta;
 - `exportacao.py`: transforma o que o dono ensinou num addon, apontando possíveis dados pessoais.
 Regra importante: os motores ficam no app; os addons só trazem **dados**.
+**Na 2.0:** entraram `teia.py` (o caminho de porquês), `padroes.py` (o sentido pela estrutura da frase) e `expressao.py` (o jeito humano de dizer cada parte).
 
+F: pasta-linguagem
+A: pasta linguagem, normalizador, léxico
+Q: parte-de | prepara o texto, e na 2.0 também normaliza números e contas | -> aprendiz-algoritmos:normalizacao
 P: o que tem na pasta linguagem do aprendiz
 P: o que fazem normalizador.py stemmer.py intencoes.py
 P: o que faz o normalizador.py
@@ -170,7 +209,11 @@ R: A pasta `aprendiz/linguagem/` é o processamento de linguagem natural, sem re
 - `intencoes.py`: o classificador **Naive Bayes** escrito do zero (saudação, despedida, agradecimento, ajuda, pergunta, ensinar);
 - `entidades.py`: extrai e-mail, valor em reais, data, horário, telefone e número com **regex**;
 - `lexico.py`: lemas e vetores de palavras trazidos pelos addons de compreensão, consultados no SQLite com cache.
+**Na 2.0:** entrou `numeros.py`, que deixa "2+2", "dois mais dois" e "2 mais dois" numa forma só.
 
+F: pasta-algoritmos
+A: pasta algoritmos, busca e resposta
+Q: parte-de | cada algoritmo é um arquivo registrado; na 2.0 entrou a resposta Trabalhada | -> aprendiz-algoritmos:trabalhada
 P: o que tem na pasta algoritmos do aprendiz
 P: o que fazem os arquivos de busca e resposta
 P: o que faz o bm25.py
@@ -184,7 +227,11 @@ R: A pasta `aprendiz/algoritmos/` é o **seletor**:
 - `resposta/direta.py`: devolve o conhecimento como foi ensinado;
 - `resposta/extrativa.py`: escolhe as frases mais relevantes de vários conhecimentos (TextRank).
 A **ordem dos imports** nos `__init__.py` de `busca/` e `resposta/` define a ordem no seletor da interface.
+**Na 2.0:** entrou `resposta/trabalhada.py`, a resposta que explica os porquês.
 
+F: pasta-memoria
+A: pasta memoria, banco, sqlite
+Q: porque | toda a memória do app fica num arquivo SQLite | -> prog-banco-dados:sqlite
 P: o que tem na pasta memoria do aprendiz
 P: o que faz o arquivo banco.py
 P: o que faz o arquivo sementes.py
@@ -194,6 +241,9 @@ R: A pasta `aprendiz/memoria/` cuida da persistência:
 - `banco.py`: a classe `Banco`, a **única** que fala SQL. Cria o esquema, faz as **migrações** de bancos antigos, mantém o índice FTS5, guarda conhecimentos, linguagem, addons, configurações e conversas, faz backup (`Connection.backup`) e o reset. Usa uma trava (`RLock`) para as várias threads do servidor não escreverem ao mesmo tempo, e dois contadores (`versao_conhecimento`, `versao_linguagem`) que avisam os caches quando algo mudou;
 - `sementes.py`: os dados iniciais do banco de linguagem, gravados na primeira execução: abreviações (`vc → voce`), sinônimos (`automovel → carro`), stopwords, frases de exemplo de cada intenção e as respostas sociais prontas. Tudo sem acento e em minúsculas, como o normalizador deixa o texto.
 
+F: tabelas
+A: tabelas do banco, esquema, conhecimentos
+Q: porque | cada tipo de dado tem a sua tabela, e na 2.0 os conhecimentos ganharam a coluna teia | -> pasta-memoria
 P: quais as tabelas do banco do aprendiz
 P: como é o banco de dados do aprendiz
 R: O `aprendiz.db` tem estas tabelas (o esquema está no topo de `memoria/banco.py`):
@@ -208,7 +258,11 @@ R: O `aprendiz.db` tem estas tabelas (o esquema está no topo de `memoria/banco.
 - `conversas`, `mensagens`: o histórico; `mensagens.meta` guarda a explicação em JSON;
 - `meta`: versão do esquema, assinatura do índice e outros controles.
 Os IDs são UUIDs aleatórios: dois bancos nunca geram o mesmo id.
+**Na 2.0:** a tabela `conhecimentos` ganhou a coluna `teia` (ref, assuntos, porquês e raiz, em JSON), e o esquema passou a ser o 9.
 
+F: addons-py
+A: addons.py, pacote .aprendiz, validar addon
+Q: porque | lê o pacote com cuidado, valida tudo e só então grava | -> addons-arquitetura
 P: o que faz o arquivo addons.py
 P: como o aprendiz lê um arquivo .aprendiz
 P: o que faz o addons.py
@@ -221,6 +275,9 @@ R: `aprendiz/addons.py` é o **formato `.aprendiz`**: um ZIP com JSON dentro. El
 - `dividir_em_trechos()`: quebra textos longos em pedaços de até 800 caracteres.
 Os tipos `algoritmo` e `aplicacao` (que trariam código) existem no formato mas são **recusados**.
 
+F: configuracoes
+A: configuracoes.py, parâmetros, lista fechada
+Q: porque | só chaves conhecidas são aceitas, e cada uma sabe validar o próprio valor
 P: o que faz o arquivo configuracoes.py
 P: o que faz o configuracoes.py
 R: `aprendiz/configuracoes.py` define a **lista fechada** de ajustes que o dono ou um addon podem mudar, cada um com validador e valor padrão (a classe `Definicao`):
@@ -228,12 +285,18 @@ R: `aprendiz/configuracoes.py` define a **lista fechada** de ajustes que o dono 
 - personalização: `personalizacao.nome`, `personalizacao.cor` (`#RRGGBB`) e `personalizacao.boas_vindas`.
 A classe `Configuracoes` resolve o valor em vigor com a precedência **dono > addon ativo mais recente > padrão** e informa a origem, que a tela de Configurações mostra. Por ser uma lista fechada, um addon nunca consegue mexer em algo fora dela.
 
+F: recursos-normas
+A: recursos.py, normas.py, compreensão e norma
+Q: porque | validam os arquivos dos addons de compreensão e de norma, e na 2.0 as seções expressao e padroes | -> aprendiz-algoritmos:padroes
 P: o que fazem recursos.py e normas.py
 R: São os **validadores** dos arquivos de dois tipos especiais de addon:
 - `aprendiz/recursos.py`: os addons de **compreensão** (`compreensao.json` com tipos de pergunta, expressões, autoconhecimento, limites e o catálogo da loja; `lemas.tsv`) e de **vetores** (`vetores.bin`, validado byte a byte). Não aceita expressões regulares vindas de addon; as respostas "calculadas" vêm de uma lista fechada de funções (`FUNCOES`).
 - `aprendiz/normas.py`: os addons de **norma** (`norma.json` com grafias, equivalências, erros comuns, verbos e regras de gramática; `vocabulario.tsv` com as formas da língua de um país).
 Os motores que **usam** esses dados ficam em `core/compreensao.py`, `linguagem/lexico.py` e `core/revisao.py`.
 
+F: pasta-web
+A: pasta web, interface, html css js
+Q: porque | a interface é HTML, CSS e JavaScript puros, sem framework | -> prog-vocabulario:front-back
 P: o que tem na pasta web do aprendiz
 P: o que fazem index.html estilo.css e app.js
 P: o que tem na pasta web
@@ -246,6 +309,9 @@ R: A interface fica em `aprendiz/web/`, em HTML, CSS e JavaScript **puros** (sem
 - `markdown.js`: um mini-renderizador de Markdown (negrito, itálico, código, listas) que **escapa todo o texto antes** de virar HTML, para nenhum conteúdo virar script (proteção contra XSS);
 - `icone.svg`: o ícone do app.
 
+F: scripts
+A: instalar, executar, empacotar, scripts
+Q: porque | cada sistema ganha um script que prepara o ambiente e roda o app
 P: o que fazem os arquivos instalar executar e empacotar
 P: o que faz o iniciar.py
 R: Os scripts da raiz:
@@ -255,6 +321,9 @@ R: Os scripts da raiz:
 - `empacotar.sh` / `empacotar.bat`: geram o executável com o **PyInstaller**;
 - `iniciar.py`: o ponto de entrada do PyInstaller, que não aceita `python -m`; só chama `aprendiz.desktop.main()`.
 
+F: pyproject
+A: pyproject.toml, requirements, dependências
+Q: porque | listam as bibliotecas e a versão do projeto | -> python-avancado:dependencias
 P: o que fazem pyproject.toml e os requirements do aprendiz
 R: - `requirements.txt`: as dependências essenciais: `fastapi`, `uvicorn`, `rapidfuzz`;
 - `requirements-dev.txt`: `-r requirements.txt` + `pytest`, `httpx` (para o TestClient) e `pyinstaller`;
@@ -262,6 +331,9 @@ R: - `requirements.txt`: as dependências essenciais: `fastapi`, `uvicorn`, `rap
 - `pyproject.toml`: descreve o projeto como pacote Python: nome, versão (0.8.0), licença MIT, Python ≥ 3.10, dependências, o comando `aprendiz` (que chama `aprendiz.desktop:main`), a inclusão da pasta `web/` no pacote e a configuração do pytest (`testpaths = ["tests"]`).
 Leveza é requisito do projeto: o `CONTRIBUTING.md` pede para não acrescentar dependências ao núcleo sem discutir antes.
 
+F: ferramentas
+A: pasta ferramentas, criar_addon, homologar
+Q: porque | ajudam a criar, conferir e medir addons; na 2.0 entrou a homologação | -> aprendiz-algoritmos:homologacao
 P: o que fazem os arquivos da pasta ferramentas
 P: o que faz o criar_addon.py
 P: o que faz o gerar_estrutura.py
@@ -270,7 +342,11 @@ R: Utilitários para quem usa e para quem desenvolve:
 - `verificar.py`: confere a instalação de ponta a ponta numa pasta temporária;
 - `gerar_estrutura.py`: gera o `docs/estrutura.md` a partir das docstrings dos módulos e de um dicionário `DESCRICOES` para os outros arquivos;
 - `instalar-windows.ps1`: a lógica do instalador do Windows (PowerShell).
+**Na 2.0:** entrou `homologar.py` (perguntas reais contra os addons da loja), e o `criar_addon.py` ganhou `--junto` e lê as linhas `F:`, `A:`, `Q:` e `N:`.
 
+F: tests
+A: pasta tests, testes automatizados, pytest
+Q: porque | cada peça tem testes que rodam a cada mudança | -> prog-vocabulario:teste-automatizado
 P: o que tem na pasta tests do aprendiz
 P: quais os arquivos de teste do aprendiz
 R: Os testes (pytest), um arquivo por assunto:
@@ -284,7 +360,11 @@ R: Os testes (pytest), um arquivo por assunto:
 - `test_recomendacao.py`, `test_exportacao.py`: recomendação, grupos e exportação;
 - `test_loja_oficial.py`: o link fixo da loja;
 - `test_documentacao.py`: falha se algum arquivo ficar sem explicação ou se o `docs/estrutura.md` estiver desatualizado.
+**Na 2.0:** entraram `test_numeros.py`, `test_teia.py`, `test_padroes.py` e `test_sentido.py`.
 
+F: docs
+A: pasta docs, documentação
+Q: porque | explica cada parte para quem vai estudar ou mudar o código
 P: o que tem na pasta docs do aprendiz
 R: A documentação de estudo, em Markdown:
 - `algoritmos.md`: cada algoritmo com um exemplo calculado de ponta a ponta (os números saem do próprio código);
@@ -297,12 +377,18 @@ R: A documentação de estudo, em Markdown:
 - `empacotamento.md`: instaladores, executável e problemas comuns;
 - `imagens/`: a captura de tela do README.
 
+F: exemplos-benchmarks
+A: exemplos, benchmarks, .github, integração contínua
+Q: porque | trazem addons de exemplo, medições e os testes automáticos do GitHub | -> prog-vocabulario:ci-cd
 P: o que tem nas pastas exemplos benchmarks e .github do aprendiz
 R: - `exemplos/addons/`: dois addons de exemplo com as fontes: `conversoes-medidas/` (perguntas, um texto `forno.md` dividido em trechos e sinônimos) e `modo-exigente/` (só `parametros.json` com limiares mais altos), além dos `.aprendiz` prontos para importar.
 - `benchmarks/`: `comparar.py` mede, para cada algoritmo de busca, o acerto@1, as recusas indevidas, o modo estrito e o tempo, sobre `dados_exemplo.json` (ou um arquivo seu com `--dados`).
 - `.github/workflows/testes.yml`: a **integração contínua**: a cada push, instala o Aprendiz com os próprios scripts e roda os testes e o verificador em Windows (com e sem Python instalado), Ubuntu LTS, Ubuntu mais recente, Fedora e Debian; em tags `v*`, gera os executáveis.
 - `.github/ISSUE_TEMPLATE/` e `PULL_REQUEST_TEMPLATE.md`: modelos para relatar erros, sugerir ideias e o checklist de PR.
 
+F: readme-changelog
+A: readme, changelog, contributing, security
+Q: porque | contam o que é o projeto, o que mudou em cada versão e como contribuir | -> prog-vocabulario:semver
 P: o que são os arquivos readme changelog contributing security
 P: o que faz o editorconfig gitattributes e gitignore
 R: Os documentos e configurações da raiz:
@@ -316,6 +402,9 @@ R: Os documentos e configurações da raiz:
 - `.gitattributes`: fins de linha corretos por tipo de arquivo (LF nos `.sh` e `.py`, CRLF nos `.bat` e `.ps1`), para os scripts funcionarem nos dois sistemas;
 - `.gitignore`: o que nunca vai para o Git: `.venv/`, `__pycache__/`, os bancos (`*.db`, `*.db-wal`, `*.db-shm`) e o que o PyInstaller gera (`build/`, `dist/`, `*.spec`).
 
+F: caches
+A: caches, versão do conhecimento, reindexar
+Q: porque | contadores de versão dizem quando um cálculo guardado ficou velho, e na 2.0 a teia e os padrões usam os mesmos | -> tabelas
 P: como funcionam os caches do aprendiz
 P: o que é versao_conhecimento e versao_linguagem
 R: Vários pedaços do Aprendiz guardam coisas em memória para não recalcular a cada pergunta: o índice TF-IDF, o índice Fuzzy, o vocabulário do corretor, o classificador de intenções, o índice de verbetes.
@@ -327,7 +416,11 @@ if cache and cache["versao"] == ctx.banco.versao_conhecimento:
 # ... senão, reconstrói e guarda com a versão atual
 ```
 É uma forma barata e simples de **invalidar cache**. Além disso, quando sinônimos, abreviações ou addons de compreensão mudam, os radicais gravados ficam velhos: aí o `Assistente.reindexar()` recalcula o `texto_busca` de toda a base, numa transação só.
+**Na 2.0:** a teia usa `versao_conhecimento`, e os padrões e a expressão usam `versao_linguagem`, do mesmo jeito que os índices.
 
+F: addons-arquitetura
+A: addons na arquitetura, onde ficam os addons
+Q: porque | conhecimentos de addons ficam na mesma tabela, marcados com o addon, e na 2.0 trazem a teia de porquês | -> aprendiz-algoritmos:teia
 P: como os addons se encaixam na arquitetura do aprendiz
 P: onde ficam os conhecimentos dos addons
 R: Um addon não é um "programa à parte": ao instalar, o conteúdo dele vai para as **mesmas tabelas**, marcado com o `addon_id`:
@@ -336,7 +429,11 @@ R: Um addon não é um "programa à parte": ao instalar, o conteúdo dele vai pa
 - parâmetros e personalização → `configuracoes` (com `addon_id`);
 - compreensão, vetores, norma → `addon_recursos` e `addon_lexico`.
 **Desativar** um addon não apaga nada: a busca filtra os desativados (no próprio SQL do BM25, ou ao montar os índices do TF-IDF e do Fuzzy). **Remover** apaga, numa transação, tudo o que ele trouxe, tabela por tabela (`Banco._apagar_addon`). A instalação é **atômica**: ou entra tudo, ou nada muda. E o que o **dono** ensinou ou configurou sempre tem prioridade sobre os addons.
+**Na 2.0:** os conhecimentos de addons podem trazer a **teia de porquês**, que liga fragmentos do mesmo addon ou de outros (`addon:ref`).
 
+F: dependencias-modulos
+A: diagrama de dependências, quem importa quem
+Q: porque | o núcleo depende de linguagem, algoritmos e memória, e nunca o contrário | -> por-dentro
 P: diagrama de dependências entre os módulos do aprendiz
 P: quem importa quem no aprendiz
 R: As dependências apontam sempre "para baixo":
@@ -355,6 +452,9 @@ desktop.py ──► api/servidor.py ──► core/assistente.py
 - a interface só conhece as rotas HTTP.
 Essa direção única evita importações circulares e permite testar cada camada com um banco temporário, sem servidor.
 
+F: ler-codigo
+A: ler o código pela primeira vez, por onde começar
+Q: porque | seguir uma mensagem pelo pipeline mostra cada parte no momento em que ela é usada | -> caminho-mensagem
 P: como ler o código do aprendiz pela primeira vez
 P: em que ordem estudar os arquivos do aprendiz
 R: A ordem sugerida pelo README, do geral para o específico:

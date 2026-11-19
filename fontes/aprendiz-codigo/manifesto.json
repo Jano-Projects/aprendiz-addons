@@ -1,7 +1,7 @@
 {
   "id": "aprendiz-codigo",
   "nome": "Aprendiz por dentro 3 · O código explicado",
-  "versao": "1.0.0",
+  "versao": "2.0.0",
   "autor": "Jano Projects",
   "descricao": "Módulo por módulo: as classes, funções e comandos de Python que o Aprendiz usa (dataclasses, sqlite3, FastAPI, rapidfuzz, zipfile, re…), com trechos do código real e o porquê de cada escolha.",
   "licenca": "CC-BY-4.0",
@@ -17,7 +17,7 @@
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.6.0"
+    "versao_minima": "2.0.0"
   },
   "dependencias": [
     {
@@ -25,10 +25,5 @@
       "versao": "1.0.0",
       "nome": "Aprendiz por dentro 2 · Arquitetura e arquivos"
     }
-  ],
-  "recomendado": {
-    "busca": "hibrido",
-    "resposta": "direta",
-    "acerto": 1.0
-  }
+  ]
 }
