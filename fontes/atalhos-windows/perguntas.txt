@@ -1,24 +1,38 @@
 # Atalhos de teclado do Windows 10 e 11. "Win" é a tecla com o logotipo do Windows.
 # Várias linhas P: no mesmo bloco = jeitos diferentes de perguntar a mesma coisa.
 
+F: explorador
+N: raiz
+A: explorador de arquivos, meus arquivos, windows explorer, win e
+Q: definicao | os atalhos do Windows usam a tecla Windows (Win) com uma letra para abrir as partes do sistema
+Q: porque | o Explorador é onde ficam pastas e arquivos | -> atalhos-terminal-linux:terminal
 P: como abrir o explorador de arquivos no windows
 P: atalho para abrir meus arquivos
 P: como abrir o windows explorer
 P: o que faz win e
 R: Win+E abre o Explorador de Arquivos.
 
+F: desktop
+A: mostrar área de trabalho, minimizar todas as janelas, desktop, win d
+Q: porque | Win+D esconde todas as janelas de uma vez, e repetir traz de volta | -> explorador
 P: como mostrar a área de trabalho no windows
 P: como minimizar todas as janelas
 P: atalho para ir para o desktop
 P: o que faz win d
 R: Win+D mostra a área de trabalho. Aperte de novo para voltar às janelas.
 
+F: bloquear
+A: bloquear computador, travar a tela, win l
+Q: porque | protege o computador quando você sai de perto, sem fechar nada | -> explorador
 P: como bloquear o computador no windows
 P: como travar a tela do computador
 P: atalho para bloquear o pc
 P: o que faz win l
 R: Win+L bloqueia o computador na hora.
 
+F: print-parte
+A: print de parte da tela, captura de tela, tirar print, ferramenta de captura, win shift s
+Q: porque | Win+Shift+S recorta só a parte que você escolher e copia para colar | -> historico-copia
 P: como tirar um print de uma parte da tela no windows
 P: como fazer captura de tela no windows
 P: como tirar print no windows
@@ -26,127 +40,212 @@ P: atalho da ferramenta de captura
 P: o que faz win shift s
 R: Win+Shift+S abre a Ferramenta de Captura para escolher a área. A imagem vai para a área de transferência. A tecla PrtSc (Print Screen) captura a tela inteira.
 
+F: print-inteiro
+A: print da tela inteira, onde ficam os prints, print salvo, print screen
+Q: porque | Win+PrtSc salva a tela inteira como arquivo na pasta Imagens, em Capturas de Tela | -> print-parte
 P: como tirar print da tela inteira e salvar em arquivo no windows
 P: onde ficam salvos os prints do windows
 R: Win+PrtSc captura a tela inteira e salva o arquivo em Imagens > Capturas de Tela.
 
+F: historico-copia
+A: histórico da área de transferência, o que eu copiei antes, win v
+Q: porque | Win+V guarda várias coisas copiadas, não só a última | -> copiar-colar
 P: como ver o histórico da área de transferência no windows
 P: como ver o que eu copiei antes
 P: como recuperar um texto copiado antes
 P: o que faz win v
 R: Win+V. Na primeira vez, o Windows pede para ativar o recurso.
 
+F: alt-tab
+A: alternar janelas, trocar de janela, alt tab
+Q: porque | Alt+Tab troca entre os programas abertos sem usar o mouse
 P: como alternar entre janelas no windows
 P: como trocar de janela pelo teclado
 P: como mudar de programa aberto
 P: o que faz alt tab
 R: Alt+Tab alterna entre as janelas. Win+Tab abre a Visão de Tarefas, com todas as janelas e áreas de trabalho.
 
+F: gerenciador
+A: gerenciador de tarefas, programa travado no windows, computador travou, ctrl shift esc
+Q: porque | mostra o que está rodando e encerra o programa que travou
+Q: diferente-de | no Linux, o mesmo papel é do top e do kill | -> atalhos-terminal-linux:top
 P: como abrir o gerenciador de tarefas no windows
 P: como fechar um programa travado no windows
 P: o computador travou o que fazer
 P: atalho do gerenciador de tarefas
 R: Ctrl+Shift+Esc abre direto o Gerenciador de Tarefas. Lá, selecione o programa e clique em Finalizar tarefa.
 
+F: configuracoes
+A: configurações do windows, win i
+Q: porque | Win+I abre direto onde se muda quase tudo do sistema
 P: como abrir as configurações do windows
 P: atalho para as configurações do pc
 P: o que faz win i
 R: Win+I abre as Configurações.
 
+F: executar
+A: janela executar, win r
+Q: porque | abre programas e ferramentas digitando o nome | -> configuracoes
 P: como abrir a janela executar no windows
 P: o que faz win r
 R: Win+R abre a janela Executar.
 
+F: dividir-tela
+A: janela na metade da tela, dividir tela, lado a lado, win seta
+Q: porque | Win com as setas encaixa a janela na metade ou num canto da tela | -> alt-tab
 P: como encaixar uma janela na metade da tela no windows
 P: como dividir a tela em duas janelas
 P: como colocar duas janelas lado a lado
 P: como maximizar uma janela pelo teclado
 R: Win+seta para a esquerda ou para a direita encaixa a janela na metade da tela. Win+seta para cima maximiza.
 
+F: area-virtual
+A: área de trabalho virtual, várias áreas de trabalho, win ctrl d
+Q: porque | separa grupos de janelas, como trabalho e pessoal, sem fechar nada | -> desktop
 P: como criar uma nova área de trabalho virtual no windows
 P: como usar várias áreas de trabalho no windows
 R: Win+Ctrl+D cria uma área de trabalho virtual. Para alternar entre elas: Win+Ctrl+seta para a esquerda ou para a direita. Win+Ctrl+F4 fecha a atual.
 
+F: emoji
+A: emojis, painel de emojis, win ponto
+Q: porque | Win+. abre o painel de emojis em qualquer campo de texto
 P: como inserir emojis no windows
 P: como colocar emoji no computador
 P: atalho do painel de emojis
 R: Win+. (tecla Windows e ponto) abre o painel de emojis.
 
+F: f2
+A: renomear arquivo, f2
+Q: porque | F2 deixa o nome do arquivo selecionado pronto para editar | -> explorador
 P: como renomear um arquivo rapidamente no windows
 P: atalho para renomear arquivo
 P: o que faz f2
 R: Selecione o arquivo e aperte F2.
 
+F: desfazer
+A: desfazer, voltar o que apaguei sem querer, ctrl z
+Q: porque | quase todo programa guarda as últimas ações, e Ctrl+Z desfaz a mais recente
+Q: diferente-de | Ctrl+Y refaz o que foi desfeito
 P: como desfazer a última ação no windows
 P: como voltar o que eu apaguei sem querer
 P: o que faz ctrl z
 R: Ctrl+Z desfaz. Para refazer: Ctrl+Y.
 
+F: copiar-colar
+N: raiz
+A: copiar e colar, ctrl c, ctrl v, recortar, ctrl x
+Q: porque | copiar guarda na área de transferência; colar põe o que está guardado | -> historico-copia
+Q: diferente-de | no terminal Linux, Ctrl+C cancela o comando | -> atalhos-terminal-linux:copiar-colar
 P: como copiar e colar no windows
 P: atalho de copiar e colar
 P: o que faz ctrl c e ctrl v
 R: Ctrl+C copia, Ctrl+X recorta e Ctrl+V cola.
 
+F: selecionar
+A: selecionar tudo, ctrl a
+Q: porque | Ctrl+A seleciona tudo para copiar, apagar ou formatar de uma vez | -> copiar-colar
 P: como selecionar tudo no windows
 P: o que faz ctrl a
 R: Ctrl+A seleciona tudo (textos, arquivos de uma pasta…).
 
+F: procurar
+A: procurar palavra na página, pesquisar no texto, ctrl f
+Q: porque | Ctrl+F procura dentro da página ou documento aberto
 P: como procurar uma palavra na página ou no documento
 P: como pesquisar dentro de um texto
 P: o que faz ctrl f
 R: Ctrl+F abre a busca em quase todos os programas e navegadores.
 
+F: salvar
+A: salvar pelo teclado, ctrl s
+Q: porque | salvar sempre evita perder trabalho se o programa travar | -> desfazer
 P: como salvar um arquivo pelo teclado
 P: o que faz ctrl s
 R: Ctrl+S salva o arquivo aberto.
 
+F: imprimir
+A: imprimir pelo teclado, ctrl p
+Q: porque | Ctrl+P abre a janela de impressão na maioria dos programas
 P: como imprimir pelo teclado
 P: o que faz ctrl p
 R: Ctrl+P abre a janela de impressão.
 
+F: reabrir-aba
+A: reabrir aba fechada, recuperar aba, ctrl shift t
+Q: porque | o navegador lembra as abas fechadas, e Ctrl+Shift+T reabre a última | -> nova-aba
 P: como reabrir uma aba fechada do navegador no windows
 P: como recuperar uma aba fechada sem querer
 P: abri e fechei a aba sem querer
 R: Ctrl+Shift+T reabre a última aba fechada (funciona no Chrome, no Edge e no Firefox).
 
+F: nova-aba
+A: nova aba, fechar aba, ctrl t, ctrl w
+Q: porque | Ctrl+T abre e Ctrl+W fecha abas no navegador
 P: como abrir uma nova aba no navegador
 P: como fechar a aba do navegador pelo teclado
 R: Ctrl+T abre uma nova aba e Ctrl+W fecha a aba atual.
 
+F: anonima
+A: janela anônima, modo privado, ctrl shift n
+Q: porque | a janela anônima não guarda histórico nem cookies depois de fechada | -> nova-aba
 P: como abrir uma janela anônima no navegador
 P: como navegar em modo privado
 R: Ctrl+Shift+N no Chrome e no Edge; Ctrl+Shift+P no Firefox.
 
+F: zoom
+A: zoom da tela, aumentar letras, diminuir zoom, ctrl mais
+Q: porque | Ctrl com + e - aumenta e diminui, e Ctrl+0 volta ao normal
 P: como aumentar o zoom da tela
 P: como diminuir o zoom
 P: as letras estão muito pequenas
 R: Ctrl e + aumenta o zoom, Ctrl e - diminui, Ctrl+0 volta ao normal. Win e + abre a Lupa do Windows.
 
+F: alt-f4
+A: fechar programa pelo teclado, fechar janela, alt f4
+Q: porque | Alt+F4 fecha a janela da frente; na área de trabalho, abre o desligar | -> gerenciador
 P: como fechar o programa ou a janela pelo teclado
 P: o que faz alt f4
 R: Alt+F4 fecha a janela ativa. Na área de trabalho, abre a opção de desligar.
 
+F: iniciar
+A: menu iniciar, pesquisar programa, tecla windows
+Q: porque | apertar Win e digitar o nome é o jeito mais rápido de abrir um programa
 P: como abrir o menu iniciar pelo teclado
 P: como pesquisar um programa no windows
 R: Aperte a tecla Win e comece a digitar o nome do programa.
 
+F: notificacoes
+A: central de notificações, win n
+Q: porque | junta os avisos e o calendário num painel só
 P: como abrir a central de notificações no windows
 P: o que faz win n
 R: Win+N no Windows 11 (Win+A no Windows 10) abre as notificações.
 
+F: rapidas
+A: configurações rápidas, wifi e som, win a
+Q: porque | abre wifi, som e brilho sem entrar nas Configurações | -> configuracoes
 P: como abrir as configurações rápidas de wifi e som
 P: o que faz win a
 R: Win+A no Windows 11 abre as configurações rápidas: Wi-Fi, Bluetooth, volume e brilho.
 
+F: projetar
+A: projetar tela, outro monitor, projetor, duplicar tela, win p
+Q: porque | Win+P escolhe se a segunda tela duplica, estende ou fica sozinha
 P: como projetar a tela em outro monitor
 P: como duplicar a tela no projetor
 P: o que faz win p
 R: Win+P escolhe o modo de projeção: duplicar, estender ou só a segunda tela.
 
+F: ditado
+A: ditado por voz, digitar falando, win h
+Q: porque | Win+H escreve o que você fala no campo de texto aberto
 P: como abrir o ditado por voz no windows
 P: como digitar falando
 R: Win+H abre a digitação por voz.
 
+F: gravar
+A: gravar a tela, vídeo da tela, win alt r
+Q: porque | a Ferramenta de Captura e a Xbox Game Bar gravam a tela em vídeo | -> print-parte
 P: como gravar a tela no windows
 P: como gravar um vídeo da tela
 R: Win+Alt+R grava a janela do jogo ou programa (Xbox Game Bar). No Windows 11, a Ferramenta de Captura (Win+Shift+S) também grava vídeo.

@@ -1256,6 +1256,30 @@
       "conceitos": [
         "diferença entre"
       ]
+    },
+    {
+      "padrao": "* foi|foram parar onde",
+      "conceitos": [
+        "onde ficam salvos"
+      ]
+    },
+    {
+      "padrao": "onde * foi|foram parar",
+      "conceitos": [
+        "onde ficam salvos"
+      ]
+    },
+    {
+      "padrao": "trocar|mudar|alterar o nome do|da arquivo|pasta|diretorio",
+      "conceitos": [
+        "renomear"
+      ]
+    },
+    {
+      "padrao": "trocar|mudar|alterar o nome de um|uma arquivo|pasta|diretorio",
+      "conceitos": [
+        "renomear"
+      ]
     }
   ],
   "catalogo": []

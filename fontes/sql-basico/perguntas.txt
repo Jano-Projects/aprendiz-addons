@@ -20,7 +20,7 @@ No terminal: `sqlite3 loja.db` abre (ou cria) o banco. Comandos úteis do própr
 Depois, rode o script do **banco de exemplo da loja** e acompanhe os exemplos desta trilha.
 
 F: banco-exemplo
-A: banco de exemplo, loja, clientes, pedidos, produtos
+A: banco de exemplo, banco da loja, tabelas de exemplo
 Q: porque | praticar sempre com as mesmas tabelas deixa cada exemplo comparável ao anterior
 Q: parte-de | o banco é feito de tabelas criadas com CREATE TABLE | -> create-table
 P: banco de exemplo da loja

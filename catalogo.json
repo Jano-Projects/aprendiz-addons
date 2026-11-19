@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T13:43:08+00:00",
+  "gerado_em": "2026-11-19T13:59:19+00:00",
   "total": 40,
   "addons": [
     {
@@ -430,12 +430,12 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.4.0",
-      "criado_com": "0.5.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [],
       "recomendado": {
-        "busca": "fuzzy",
-        "resposta": "direta",
+        "busca": "hibrido",
+        "resposta": "trabalhada",
         "acerto": 0.992
       },
       "conhecimentos": 31,
@@ -449,8 +449,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/atalhos-windows.aprendiz",
-      "tamanho": 2880,
-      "sha256": "8377b69ee740482575e6fad3eff2f5d03aa94b7bf1012b4c979b0569ddb1da2b",
+      "tamanho": 4607,
+      "sha256": "c7c55c39be5ee5e06ed6796d2aa89a8a134244a8afd0d297724c304b40860018",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -1074,13 +1074,13 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.4.0",
-      "criado_com": "0.5.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [],
       "recomendado": {
-        "busca": "fuzzy",
-        "resposta": "direta",
-        "acerto": 1.0
+        "busca": "hibrido",
+        "resposta": "trabalhada",
+        "acerto": 0.985
       },
       "conhecimentos": 34,
       "verbetes": 0,
@@ -1093,8 +1093,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/atalhos-terminal-linux.aprendiz",
-      "tamanho": 3114,
-      "sha256": "5e84dbe7f19bd53888f14fcfb34c835a5cca43e07ebed5318fbbfb5d031e0b72",
+      "tamanho": 5140,
+      "sha256": "04f591d998aadf53338eddf6005106eae56165e6c59dd51916544beadbccf64d",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -1126,7 +1126,7 @@
     {
       "id": "compreensao-portugues",
       "nome": "Compreensão do português",
-      "versao": "2.0.1",
+      "versao": "2.0.2",
       "autor": "Jano Projects",
       "descricao": "A raiz da conversa do Aprendiz: entende o tipo de pergunta (o que é, como fazer, onde fica…), junta tudo o que você ensinou sobre um assunto (\"o que você sabe sobre o carro?\"), entende expressões e formas irregulares (\"fui\", \"fiz\" → ser, fazer), responde sobre si mesmo e, quando não sabe algo, indica o addon da loja que sabe. Traz um léxico com mais de 300 mil palavras. Lemas derivados de lemmatization-lists, de Michal Měchura (ODbL).",
       "licenca": "ODbL-1.0",
@@ -1162,15 +1162,15 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": {
-        "regras": 225,
+        "regras": 229,
         "catalogo": 37,
         "lemas": 317331,
         "vetores": 0
       },
       "norma": null,
       "arquivo": "addons/compreensao-portugues.aprendiz",
-      "tamanho": 858309,
-      "sha256": "04163f4af8e469f6c3d40052238f94fdf379c937aa4af7329e114f00532a0bf3",
+      "tamanho": 858579,
+      "sha256": "42fc191ad751ab59a13a685333961b2509fe5b7c398d31727186193ec6ee6cf1",
       "atualizado_em": "2026-11-19",
       "amostra": []
     },
@@ -1198,13 +1198,13 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.4.0",
-      "criado_com": "0.5.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [],
       "recomendado": {
-        "busca": "fuzzy",
-        "resposta": "direta",
-        "acerto": 1.0
+        "busca": "hibrido",
+        "resposta": "trabalhada",
+        "acerto": 0.974
       },
       "conhecimentos": 36,
       "verbetes": 0,
@@ -1217,8 +1217,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/conversoes-medidas.aprendiz",
-      "tamanho": 2776,
-      "sha256": "3760a347bcbf490d9459a1b029d2a16cc5529f59ee18fcac1ed2bc7f2c1ec549",
+      "tamanho": 4415,
+      "sha256": "c495bebe59282212de01e1194e3d7cceb0c31e700a13fefb8e62ba0bea8d432a",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -3431,7 +3431,7 @@
     {
       "id": "sql-basico",
       "nome": "SQL 1 · Básico",
-      "versao": "2.0.0",
+      "versao": "2.0.1",
       "autor": "Jano Projects",
       "descricao": "SQL do zero com SQLite: criar tabelas, tipos, INSERT, SELECT, WHERE, ORDER BY, LIMIT, UPDATE, DELETE, funções de agregação, GROUP BY, HAVING e JOIN.",
       "licenca": "CC-BY-4.0",
@@ -3454,7 +3454,7 @@
         "linguagem"
       ],
       "versao_minima_app": "2.0.0",
-      "criado_com": "2.0.0",
+      "criado_com": "2.0.1",
       "dependencias": [
         {
           "id": "prog-banco-dados",
@@ -3465,7 +3465,7 @@
       "recomendado": {
         "busca": "hibrido",
         "resposta": "trabalhada",
-        "acerto": 0.982
+        "acerto": 1.0
       },
       "conhecimentos": 27,
       "verbetes": 0,
@@ -3478,8 +3478,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/sql-basico.aprendiz",
-      "tamanho": 12485,
-      "sha256": "d0ff44821a18ac12e16a99658a4e3198a4978a8e13b4e2ceb3a6b43bfd911628",
+      "tamanho": 12475,
+      "sha256": "ebd5a70b025401e7c87a3e0925b20fefeeb071df1b7b609d940a1f4f7eda9573",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {

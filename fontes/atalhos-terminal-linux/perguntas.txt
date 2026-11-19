@@ -1,6 +1,11 @@
 # Comandos do terminal Linux (bash).
 # Várias linhas P: no mesmo bloco = jeitos diferentes de perguntar a mesma coisa.
 
+F: terminal
+N: raiz
+A: listar arquivos, ls, ver o que tem na pasta
+Q: definicao | o terminal é onde se fala com o sistema por comandos escritos; o ls mostra o que há na pasta atual
+Q: porque | quase todo trabalho no terminal começa por saber onde se está e o que há ali | -> pwd
 P: como listar os arquivos de uma pasta no terminal linux
 P: como ver o que tem na pasta
 P: comando para listar arquivos
@@ -8,164 +13,268 @@ P: como ver os arquivos ocultos
 P: o que faz o ls
 R: `ls` lista os arquivos. `ls -la` mostra também os ocultos, com detalhes (permissões, tamanho, data).
 
+F: cd
+A: entrar em pasta, cd, mudar de pasta, voltar pasta
+Q: porque | o terminal trabalha sempre a partir de uma pasta atual, e o cd muda essa pasta | -> pwd
 P: como entrar em uma pasta no terminal linux
 P: como mudar de pasta no terminal
 P: como voltar uma pasta no terminal
 P: o que faz o cd
 R: `cd nome-da-pasta`. Para voltar uma pasta: `cd ..`. Para ir à pasta pessoal: `cd ~`. Para voltar à pasta anterior: `cd -`.
 
+F: pwd
+A: pasta atual, pwd, caminho da pasta
+Q: porque | mostra o caminho completo da pasta atual, que é de onde os comandos partem | -> terminal
 P: como saber em qual pasta eu estou no terminal linux
 P: como ver o caminho da pasta atual
 P: o que faz o pwd
 R: `pwd` mostra o caminho da pasta atual.
 
+F: mkdir
+A: criar pasta, mkdir, criar diretório
+Q: porque | cria pastas para organizar arquivos | -> terminal
 P: como criar uma pasta no terminal linux
 P: comando para criar diretório
 P: o que faz o mkdir
 R: `mkdir nome`. Para criar várias pastas encadeadas de uma vez: `mkdir -p a/b/c`.
 
+F: touch
+A: criar arquivo vazio, touch
+Q: porque | cria o arquivo na hora, sem abrir editor | -> editar
 P: como criar um arquivo vazio no terminal linux
 P: o que faz o touch
 R: `touch arquivo.txt` cria um arquivo vazio (ou atualiza a data de um que já existe).
 
+F: cp
+A: copiar arquivo, cp, copiar pasta
+Q: porque | duplica arquivos; para pastas precisa do -r, que copia tudo dentro | -> mv
 P: como copiar um arquivo no terminal linux
 P: comando para copiar arquivo
 P: como copiar uma pasta inteira no terminal
 P: o que faz o cp
 R: `cp origem destino`. Para copiar uma pasta inteira: `cp -r pasta destino`.
 
+F: mv
+A: mover arquivo, renomear arquivo, renomear pasta, mv, trocar o nome
+Q: porque | renomear é mover para o mesmo lugar com outro nome, por isso um comando só faz as duas coisas
 P: como mover ou renomear um arquivo no terminal linux
 P: como renomear um arquivo no terminal
 P: como mudar o nome de uma pasta no terminal
 P: o que faz o mv
 R: `mv origem destino`. O mesmo comando serve para mover e para renomear.
 
+F: rm
+A: apagar arquivo, apagar pasta, excluir arquivo, rm
+Q: regra | o rm não manda para a lixeira: o que ele apaga some de vez
+Q: porque | por isso vale conferir o caminho antes, principalmente com -r | -> pwd
 P: como apagar um arquivo no terminal linux
 P: como apagar uma pasta no terminal
 P: comando para excluir arquivo
 P: o que faz o rm
 R: `rm arquivo`. Para apagar uma pasta e tudo dentro dela: `rm -r pasta`. Cuidado: não vai para a lixeira.
 
+F: cat
+A: ver conteúdo de arquivo, ler arquivo, cat, less
+Q: porque | o cat despeja o texto todo; o less deixa rolar arquivos grandes | -> head-tail
 P: como ver o conteúdo de um arquivo de texto no terminal linux
 P: como ler um arquivo no terminal
 P: o que faz o cat
 P: o que faz o less
 R: `cat arquivo` mostra tudo de uma vez. Para arquivos longos, `less arquivo` permite rolar; aperte `q` para sair.
 
+F: head-tail
+A: começo do arquivo, fim do arquivo, últimas linhas, tail, head, acompanhar log
+Q: porque | em arquivos grandes, como logs, o que importa costuma estar no fim | -> cat
 P: como ver o começo ou o fim de um arquivo no terminal linux
 P: como acompanhar um log no terminal
 P: o que faz o tail
 R: `head arquivo` mostra as primeiras linhas e `tail arquivo` as últimas. `tail -f arquivo` acompanha o arquivo enquanto ele cresce (bom para logs).
 
+F: editar
+A: editar arquivo de texto, nano, salvar e sair do nano
+Q: porque | o nano mostra os atalhos no rodapé: Ctrl+O salva e Ctrl+X sai
+Q: diferente-de | o vim tem modos e confunde quem não conhece | -> vim
 P: como editar um arquivo de texto no terminal linux
 P: como usar o nano
 P: como salvar e sair do nano
 R: `nano arquivo` abre o editor. Ctrl+O salva, Ctrl+X sai.
 
+F: vim
+A: sair do vim, preso no vim, vim
+Q: porque | o vim começa no modo de comando, então digitar não escreve: Esc e depois :q sai
 P: como sair do vim
 P: estou preso no vim
 R: Aperte Esc, digite `:q` e Enter para sair. `:wq` salva e sai; `:q!` sai sem salvar.
 
+F: grep
+A: procurar texto em arquivos, grep, pesquisar palavra
+Q: porque | procura um texto dentro dos arquivos e mostra as linhas onde ele aparece | -> find
 P: como procurar um texto dentro de arquivos no terminal linux
 P: como pesquisar uma palavra nos arquivos
 P: o que faz o grep
 R: `grep -r "texto" pasta` procura o texto em todos os arquivos da pasta. Use `-i` para ignorar maiúsculas.
 
+F: find
+A: procurar arquivo pelo nome, achar arquivo, find
+Q: diferente-de | o find procura pelo nome do arquivo; o grep, pelo que está escrito dentro | -> grep
 P: como procurar um arquivo pelo nome no terminal linux
 P: como achar um arquivo no linux
 P: o que faz o find
 R: `find . -name "*.txt"` procura, a partir da pasta atual, arquivos terminados em .txt.
 
+F: df
+A: espaço livre no disco, disco cheio, tamanho de pasta, df, du
+Q: porque | o df mostra quanto cada disco tem livre; o du mostra quem está ocupando | -> rm
 P: como ver o espaço livre no disco no terminal linux
 P: como saber se o disco está cheio
 P: como ver o tamanho de uma pasta
 P: o que faz o df
 R: `df -h` mostra o espaço de cada disco. Para o tamanho de uma pasta: `du -sh pasta`.
 
+F: free
+A: uso de memória, memória ram livre, free
+Q: porque | mostra quanto da memória RAM está em uso e quanto está livre | -> top
 P: como ver o uso de memória no terminal linux
 P: quanto de memória ram está livre
 P: o que faz o free
 R: `free -h` mostra a memória total, usada e livre.
 
+F: top
+A: programas em execução, processo, matar processo, programa travado no linux, top, kill
+Q: porque | o top mostra o que está rodando e o kill encerra um processo pelo número dele
+Q: diferente-de | no Windows, o mesmo papel é do Gerenciador de Tarefas | -> atalhos-windows:gerenciador
 P: como ver os programas em execução no terminal linux
 P: como fechar um programa travado no linux
 P: como matar um processo
 P: o que faz o top
 R: `top` (ou `htop`, se estiver instalado) mostra os processos em tempo real; aperte `q` para sair. Para encerrar um processo: `kill número-do-processo`, ou `pkill nome`.
 
+F: chmod
+A: permissão de execução, script executável, permissão negada, permission denied, chmod
+Q: porque | no Linux um arquivo só roda como programa se tiver a permissão de execução
+Q: regra | chmod +x arquivo dá essa permissão
 P: como dar permissão de execução a um arquivo no terminal linux
 P: como tornar um script executável
 P: permissão negada ao rodar script
 P: o que faz o chmod
 R: `chmod +x arquivo`. Depois ele pode ser executado com `./arquivo`.
 
+F: sudo
+A: administrador no linux, sudo, root
+Q: porque | mexer no sistema exige ser administrador, e o sudo dá isso só para aquele comando
 P: como executar um comando como administrador no linux
 P: o que faz o sudo
 P: como virar root
 R: `sudo comando` executa como administrador (pede a sua senha). Se o seu usuário não está no grupo sudo, use `su -` com a senha do root.
 
+F: apt-upgrade
+A: atualizar debian, atualizar ubuntu, apt upgrade
+Q: porque | o apt update baixa a lista de versões novas e o apt upgrade instala | -> sudo
 P: como atualizar o sistema no Debian ou Ubuntu
 P: como atualizar o ubuntu pelo terminal
 P: o que faz apt upgrade
 R: `sudo apt update && sudo apt upgrade`.
 
+F: apt-install
+A: instalar programa no debian, instalar pacote com apt
+Q: porque | o apt baixa o programa e tudo de que ele depende | -> sudo
 P: como instalar um programa no Debian ou Ubuntu
 P: como instalar pacote com apt
 R: `sudo apt install nome-do-pacote`. Para procurar: `apt search nome`.
 
+F: dnf-upgrade
+A: atualizar fedora, dnf upgrade
+Q: diferente-de | o Fedora usa o dnf no lugar do apt | -> apt-upgrade
 P: como atualizar o sistema no Fedora
 P: o que faz dnf upgrade
 R: `sudo dnf upgrade`.
 
+F: dnf-install
+A: instalar programa no fedora, instalar pacote com dnf
+Q: diferente-de | o Fedora usa o dnf no lugar do apt | -> apt-install
 P: como instalar um programa no Fedora
 P: como instalar pacote com dnf
 R: `sudo dnf install nome-do-pacote`. Para procurar: `dnf search nome`.
 
+F: descompactar
+A: descompactar zip, extrair tar gz, abrir arquivo compactado
+Q: porque | o unzip abre .zip e o tar -xzf abre .tar.gz | -> compactar
 P: como descompactar um arquivo zip no terminal linux
 P: como extrair um tar gz
 P: como abrir um arquivo compactado no terminal
 R: `unzip arquivo.zip`. Para arquivos .tar.gz: `tar -xzf arquivo.tar.gz`.
 
+F: compactar
+A: compactar pasta, criar zip
+Q: porque | junta uma pasta inteira em um arquivo menor, bom para enviar | -> descompactar
 P: como compactar uma pasta no terminal linux
 P: como criar um arquivo zip no terminal
 R: `zip -r arquivo.zip pasta` ou, em .tar.gz, `tar -czf arquivo.tar.gz pasta`.
 
+F: baixar
+A: baixar arquivo da internet, wget, curl
+Q: porque | o wget e o curl buscam um endereço e salvam o arquivo | -> ping
 P: como baixar um arquivo da internet pelo terminal
 P: o que faz o wget
 P: o que faz o curl
 R: `wget endereço` ou `curl -O endereço` baixa o arquivo para a pasta atual.
 
+F: ip
+A: endereço ip, meu ip no linux, ip a
+Q: porque | o ip a mostra os endereços de cada placa de rede | -> ping
 P: como ver o endereço IP do computador no terminal linux
 P: qual o meu ip no linux
 P: o que faz ip a
 R: `ip address` (ou só `ip a`) mostra os endereços de cada placa de rede.
 
+F: ping
+A: testar internet, ping
+Q: porque | manda pacotes pequenos e mede se e quando voltam
 P: como testar se a internet está funcionando no terminal
 P: o que faz o ping
 R: `ping -c 4 8.8.8.8` envia 4 pacotes e mostra se houve resposta.
 
+F: ctrl-c
+A: cancelar comando, parar comando travado, ctrl c no terminal
+Q: porque | no terminal, Ctrl+C manda o comando parar, e não copia | -> copiar-colar
 P: como cancelar um comando que está rodando no terminal linux
 P: como parar um comando travado no terminal
 R: Aperte Ctrl+C.
 
+F: clear
+A: limpar a tela do terminal, clear
+Q: porque | só limpa a tela; os comandos anteriores continuam no histórico | -> history
 P: como limpar a tela do terminal linux
 P: o que faz o clear
 R: `clear`, ou o atalho Ctrl+L.
 
+F: history
+A: histórico de comandos, buscar comando já digitado, history, ctrl r
+Q: porque | o terminal guarda o que você digitou, e Ctrl+R procura nesse histórico
 P: como buscar um comando que eu já digitei no terminal linux
 P: como ver o histórico de comandos
 P: o que faz o history
 R: Aperte Ctrl+R e comece a digitar parte do comando. `history` mostra a lista completa.
 
+F: copiar-colar
+A: copiar e colar no terminal, ctrl shift c
+Q: porque | Ctrl+C já é cancelar no terminal, então copiar e colar ganham o Shift | -> ctrl-c
+Q: diferente-de | no Windows e nos outros programas basta Ctrl+C e Ctrl+V | -> atalhos-windows:copiar-colar
 P: como copiar e colar no terminal linux
 P: ctrl c não copia no terminal
 R: Ctrl+Shift+C copia e Ctrl+Shift+V cola (no terminal, Ctrl+C cancela o comando).
 
+F: man
+A: ajuda de um comando, man, o que um comando faz
+Q: porque | quase todo comando traz o próprio manual, que o man abre
 P: como ver a ajuda de um comando no terminal
 P: como saber o que um comando faz
 P: o que faz o man
 R: `man comando` abre o manual (aperte `q` para sair). Muitos comandos também aceitam `comando --help`.
 
+F: desligar
+A: desligar pelo terminal, reiniciar pelo terminal, shutdown, reboot
+Q: porque | desligar o sistema exige ser administrador | -> sudo
 P: como desligar ou reiniciar o computador pelo terminal
 P: comando para reiniciar o linux
 R: `systemctl poweroff` desliga e `systemctl reboot` reinicia.
