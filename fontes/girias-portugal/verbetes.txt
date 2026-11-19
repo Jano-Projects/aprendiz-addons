@@ -284,7 +284,6 @@ T: açougue
 R: **talho** (Portugal): açougue.
 
 F: v-sumo
-Q: equivale | no tétum (Timor-Leste) se diz «suku» | -> expressoes-timor-leste:v-suku
 V: sumo
 T: suco
 R: **sumo** (Portugal): suco.

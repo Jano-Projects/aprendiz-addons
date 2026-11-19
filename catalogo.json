@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T15:00:09+00:00",
+  "gerado_em": "2026-11-19T15:28:37+00:00",
   "total": 40,
   "addons": [
     {
@@ -2073,7 +2073,7 @@
     {
       "id": "girias-portugal",
       "nome": "Português de Portugal",
-      "versao": "2.1.0",
+      "versao": "2.1.1",
       "autor": "Jano Projects",
       "descricao": "Norma europeia de Portugal: vocabulário de mais de 400 mil formas (Acordo Ortográfico de 1990, com a grafia anterior apontada), revisão de texto com regras de gramática, gírias e falares regionais (Norte, Lisboa, Alentejo, Algarve, Açores, Madeira) e respostas sobre gramática. Escreva \"revise: o seu texto\".",
       "licenca": "CC-BY-4.0 AND LGPL-2.1",
@@ -2268,8 +2268,8 @@
         "equivalencias": 87
       },
       "arquivo": "addons/girias-portugal.aprendiz",
-      "tamanho": 1116919,
-      "sha256": "c0f0f5899f0a7ea14eb10ec370f6de903bedd09f8893223e4cfd74db290f70ab",
+      "tamanho": 1116902,
+      "sha256": "db8aa00849a3a4ab79344d95248210c1e7c71ddccab7af8d79b5a35c78336ec6",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {
@@ -2437,7 +2437,7 @@
     {
       "id": "expressoes-timor-leste",
       "nome": "Português de Timor-Leste",
-      "versao": "2.1.0",
+      "versao": "2.1.1",
       "autor": "Jano Projects",
       "descricao": "Norma de Timor-Leste: vocabulário de mais de 400 mil formas (Acordo Ortográfico de 1990), revisão de texto com regras de gramática, palavras e frases em tétum e respostas sobre as línguas timorenses. Escreva \"revise: o seu texto\".",
       "licenca": "CC-BY-4.0 AND LGPL-2.1",
@@ -2627,8 +2627,8 @@
         "equivalencias": 85
       },
       "arquivo": "addons/expressoes-timor-leste.aprendiz",
-      "tamanho": 1113820,
-      "sha256": "f33a893476e3a0264ea474dbeb4e0623b7570af84531a7cdf92727204faa8a97",
+      "tamanho": 1113811,
+      "sha256": "a58f2529d090391b0c22db99a62d25190e3f0b45e146e235a6729fdf85e9a52a",
       "atualizado_em": "2026-11-19",
       "amostra": [
         {

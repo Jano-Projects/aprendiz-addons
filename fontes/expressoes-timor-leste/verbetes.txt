@@ -430,7 +430,6 @@ T: rei, chefe tradicional
 R: **liurai** (Timor-Leste): chefe tradicional, rei de um reino antigo.
 
 F: v-suku
-Q: equivale | em Portugal se diz «sumo» | -> girias-portugal:v-sumo
 Q: equivale | na Guiné-Bissau se diz «tabanka» | -> expressoes-guine-bissau:v-tabanka
 V: suku
 V: suco
