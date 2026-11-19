@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T11:32:33+00:00",
+  "gerado_em": "2026-11-19T12:18:59+00:00",
   "total": 40,
   "addons": [
     {
@@ -3272,7 +3272,7 @@
     {
       "id": "python-basico",
       "nome": "Python 1 · Básico",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Python do zero: instalar, rodar, print e input, variáveis, tipos, strings, f-strings, listas, tuplas, dicionários, conjuntos, if, for, while, funções, módulos, erros e arquivos.",
       "licenca": "CC-BY-4.0",
@@ -3292,8 +3292,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.0",
       "dependencias": [
         {
           "id": "prog-logica",
@@ -3303,8 +3303,8 @@
       ],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.99
+        "resposta": "trabalhada",
+        "acerto": 0.979
       },
       "conhecimentos": 36,
       "verbetes": 0,
@@ -3317,8 +3317,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/python-basico.aprendiz",
-      "tamanho": 11041,
-      "sha256": "0db3329080920815163fbfd12a2e343e6f7e1d89345e77e17abe73c712864119",
+      "tamanho": 13575,
+      "sha256": "da7a865275945e5e7d5d31a3dbb1fe1e92a3d736427b369e1355842e1e9b4957",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -3350,7 +3350,7 @@
     {
       "id": "python-avancado",
       "nome": "Python 2 · Avançado",
-      "versao": "1.0.0",
+      "versao": "2.0.0",
       "autor": "Jano Projects",
       "descricao": "Compreensões, geradores, decoradores, gerenciadores de contexto, classes e dunder methods, dataclasses, type hints, ambientes virtuais e pip, pacotes, testes com pytest, async, threads e processos, sqlite3, performance e o que o Aprendiz usa.",
       "licenca": "CC-BY-4.0",
@@ -3373,8 +3373,8 @@
         "memoria",
         "linguagem"
       ],
-      "versao_minima_app": "0.6.0",
-      "criado_com": "0.8.0",
+      "versao_minima_app": "2.0.0",
+      "criado_com": "2.0.0",
       "dependencias": [
         {
           "id": "python-basico",
@@ -3384,8 +3384,8 @@
       ],
       "recomendado": {
         "busca": "hibrido",
-        "resposta": "direta",
-        "acerto": 0.99
+        "resposta": "trabalhada",
+        "acerto": 0.993
       },
       "conhecimentos": 37,
       "verbetes": 0,
@@ -3398,8 +3398,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/python-avancado.aprendiz",
-      "tamanho": 14550,
-      "sha256": "59bb564d87c9b526053f49e629dc76002971271a70832584207d3c068d52ffc8",
+      "tamanho": 17111,
+      "sha256": "de709814fce8714f21835dcb02dbeb4a1f9a35989e5421d7a8e553be8a1326cb",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
@@ -3561,7 +3561,7 @@
       "arquivo": "addons/sql-avancado.aprendiz",
       "tamanho": 10348,
       "sha256": "36e383fbf047191e6e50edf906f5491352f2ad96595e0cff6dfc15a6e42e22eb",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "o que é subconsulta em sql",
@@ -3642,7 +3642,7 @@
       "arquivo": "addons/sql-teoria-pratica.aprendiz",
       "tamanho": 11952,
       "sha256": "1722202cb4de757141a4cb0ca7b379281d7734e0aa836abe56e052d3acecfbee",
-      "atualizado_em": "2026-11-18",
+      "atualizado_em": "2026-11-19",
       "amostra": [
         {
           "pergunta": "o que é o modelo relacional de codd",

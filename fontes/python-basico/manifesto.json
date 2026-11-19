@@ -1,7 +1,7 @@
 {
   "id": "python-basico",
   "nome": "Python 1 · Básico",
-  "versao": "1.0.0",
+  "versao": "2.0.0",
   "autor": "Jano Projects",
   "descricao": "Python do zero: instalar, rodar, print e input, variáveis, tipos, strings, f-strings, listas, tuplas, dicionários, conjuntos, if, for, while, funções, módulos, erros e arquivos.",
   "licenca": "CC-BY-4.0",
@@ -14,7 +14,7 @@
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "0.6.0"
+    "versao_minima": "2.0.0"
   },
   "dependencias": [
     {
@@ -22,10 +22,5 @@
       "versao": "1.0.0",
       "nome": "Programação 1 · Lógica e algoritmos"
     }
-  ],
-  "recomendado": {
-    "busca": "hibrido",
-    "resposta": "direta",
-    "acerto": 0.99
-  }
+  ]
 }

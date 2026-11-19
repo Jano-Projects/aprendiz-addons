@@ -2,6 +2,11 @@
 # Recursos da linguagem, organização de projetos, testes, concorrência e desempenho.
 # Sempre que possível, com o exemplo de onde o Aprendiz usa cada recurso.
 
+F: venv
+N: raiz
+A: ambiente virtual, venv, isolar bibliotecas, virtualenv
+Q: porque | cada projeto precisa das próprias versões de bibliotecas, sem misturar com os outros
+Q: consequencia | o pip instala dentro do ambiente ativo | -> python-basico:pip
 P: o que é ambiente virtual em python
 P: como criar um venv
 P: como ativar o ambiente virtual
@@ -20,6 +25,9 @@ deactivate                               # sai
 Sem ativar, dá para chamar direto: `.venv/bin/python` (Linux) ou `.venv\Scripts\python` (Windows). É assim que o `executar.sh` do Aprendiz abre o app.
 O erro **externally-managed-environment** (Ubuntu, Debian e Fedora recentes) é o sistema protegendo o Python dele: a solução é justamente criar um venv. No Debian/Ubuntu, instale antes o `python3-venv`.
 
+F: dependencias
+A: dependências, requirements.txt, pyproject, versões das bibliotecas
+Q: porque | anotar as bibliotecas e versões deixa qualquer pessoa recriar o mesmo ambiente | -> venv
 P: como gerenciar dependências em python
 P: o que é requirements.txt
 P: o que é pyproject.toml
@@ -28,6 +36,9 @@ R: - **requirements.txt:** a lista de pacotes para o `pip install -r`. Aceita fa
 O Aprendiz usa os dois: `requirements.txt` (FastAPI, Uvicorn, RapidFuzz), `requirements-dev.txt` (inclui o anterior com `-r` e acrescenta pytest, httpx e PyInstaller) e um `pyproject.toml` que declara o comando `aprendiz` e configura o pytest.
 Outras ferramentas populares: **uv** (muito rápida, cuida de venv, dependências e até da instalação do Python), Poetry e pip-tools.
 
+F: projeto
+A: organizar projeto python, estrutura de pastas, pacotes
+Q: porque | separar código, testes e configuração deixa o projeto fácil de crescer | -> prog-vocabulario:codigo-limpo
 P: como organizar um projeto python
 P: o que é um pacote python
 P: para que serve o __init__.py
@@ -51,6 +62,9 @@ projeto/
 - **relativos** (`from .banco import Banco`) só dentro do pacote;
 - o `__main__.py` faz o pacote rodar com `python -m nome`.
 
+F: comprehension
+A: list comprehension, criar lista numa linha, compreensão de lista
+Q: porque | monta uma lista nova a partir de outra numa linha, com filtro opcional | -> python-basico:lista
 P: o que é list comprehension
 P: como usar compreensão de lista em python
 P: o que é dict comprehension
@@ -69,6 +83,9 @@ achatada = [x for linha in matriz for x in linha]  # dois for
 No Aprendiz há várias, como `[t for t in tokens if t not in self.stopwords]` no normalizador.
 Use enquanto ficar legível; com muitos `if` e `for`, um laço comum é melhor. Cuidado: `[[0] * 3] * 3` cria três referências à **mesma** lista.
 
+F: gerador
+A: gerador, generator, yield, sob demanda
+Q: porque | produz um valor de cada vez, com yield, sem guardar tudo na memória | -> iterador
 P: o que é gerador em python
 P: o que é yield
 P: diferença entre lista e gerador
@@ -87,6 +104,9 @@ total = sum(x * x for x in range(10_000_000))   # expressão geradora: quase sem
 ```
 Use para dados grandes ou infinitos: ler um arquivo enorme linha por linha, processar resultados de banco aos poucos. Um gerador só pode ser percorrido **uma vez**.
 
+F: iterador
+A: iterador, iter, next, percorrer
+Q: porque | é o que o for usa por dentro para pedir o próximo item | -> python-basico:for
 P: o que é iterador em python
 P: o que é iterável
 P: como usar itertools
@@ -104,6 +124,9 @@ for chave, grupo in groupby(sorted(palavras, key=len), key=len):
 ```
 `enumerate`, `zip`, `map`, `filter`, `reversed` e `sorted` também trabalham com iteráveis.
 
+F: decorador
+A: decorador, decorator, arroba, @, envolver função
+Q: porque | envolve uma função com outra para acrescentar comportamento sem mudar o código dela | -> python-basico:funcao
 P: o que é decorador em python
 P: como criar um decorador
 P: o que significa @ em cima da função
@@ -130,6 +153,9 @@ def lento():
 ```
 No Aprendiz: `@registrar` (em `algoritmos/base.py`) coloca cada classe de algoritmo no seletor; `@dataclass` gera métodos das classes de dados; `@lru_cache` guarda os radicais já calculados no stemmer; e no FastAPI `@app.post("/api/chat")` liga uma função a uma rota.
 
+F: lru-cache
+A: lru_cache, cache, memoização em python
+Q: porque | guarda o resultado de chamadas já feitas e devolve sem recalcular | -> prog-estruturas-dados:programacao-dinamica
 P: o que é lru_cache
 P: como fazer cache de função em python
 R: `functools.lru_cache` guarda os resultados de uma função: chamou de novo com os mesmos argumentos, devolve o valor guardado na hora.
@@ -143,6 +169,9 @@ def radical(palavra: str) -> str:
 É exatamente o que o `stemmer.py` do Aprendiz faz: palavras se repetem muito, então cada uma é radicalizada uma vez só. `maxsize` limita a memória (os menos usados recentemente saem primeiro; *LRU*); `radical.cache_info()` mostra acertos e erros.
 Só serve para funções **puras** (mesma entrada, mesma saída) com argumentos imutáveis. Para métodos de classe, cuidado: o cache segura uma referência ao `self`.
 
+F: contexto
+A: gerenciador de contexto, with, fechar sozinho, context manager
+Q: porque | o with garante a limpeza no fim, como fechar um arquivo, mesmo quando dá erro | -> python-basico:excecoes
 P: o que é gerenciador de contexto
 P: como funciona o with em python
 P: como criar um context manager
@@ -171,6 +200,9 @@ def na_pasta(caminho):
 ```
 Ou uma classe com `__enter__` e `__exit__`. O `Banco` do Aprendiz usa `with self._trava:` em todo acesso, para várias threads do servidor não escreverem ao mesmo tempo.
 
+F: classes
+A: classes em python, class, self, objeto, __init__
+Q: porque | self é o próprio objeto, e o __init__ prepara os dados de cada um | -> prog-vocabulario:classe-objeto
 P: como criar classes em python
 P: o que é self e __init__
 P: orientação a objetos em python
@@ -206,6 +238,9 @@ class Conta:
 ```
 `self` é o próprio objeto (escrito explicitamente em Python). `__init__` inicializa; não é o construtor de memória. Python não tem `private`: o `_` avisa "não mexa", e `__nome` embaralha o nome para evitar conflitos em herança.
 
+F: heranca
+A: herança em python, super, subclasse
+Q: parte-de | é um dos pilares da orientação a objetos | -> prog-vocabulario:pilares-poo
 P: o que é herança em python
 P: o que é super em python
 P: o que é classe abstrata em python
@@ -235,6 +270,9 @@ class ContaEspecial(Conta):
 ```
 Python tem herança múltipla; a ordem de busca dos métodos é a MRO (`Classe.__mro__`). Prefira composição a hierarquias profundas.
 
+F: metodos-magicos
+A: métodos mágicos, dunder, __str__, __len__, __eq__
+Q: porque | deixam os seus objetos funcionarem com print, len, + e == | -> classes
 P: o que são métodos mágicos em python
 P: o que é dunder method
 P: o que é __str__ e __repr__
@@ -259,6 +297,9 @@ class Vetor:
 ```
 Outros úteis: `__lt__` (ordenar), `__hash__` (usar como chave), `__getitem__` (`obj[i]`), `__contains__` (`in`), `__call__` (chamar o objeto como função), `__enter__`/`__exit__` (`with`).
 
+F: dataclass
+A: dataclass, classe de dados, @dataclass
+Q: porque | gera o __init__ e o __repr__ sozinho para classes que só guardam dados | -> classes
 P: o que é dataclass em python
 P: como usar @dataclass
 P: dataclass
@@ -279,6 +320,9 @@ print(c)   # Candidato(conhecimento={'id': '1'}, pontuacao=2.5, confianca=0.8, d
 Esse é o `Candidato` real do Aprendiz (`algoritmos/base.py`), junto com `ContextoBusca`, `RespostaGerada` e `TextoProcessado`.
 Opções úteis: `@dataclass(frozen=True)` (imutável, pode ser chave de dicionário), `order=True` (comparações), `slots=True` (menos memória). Para validar dados vindos de fora, o **Pydantic** (usado pelo FastAPI) vai além.
 
+F: type-hints
+A: type hints, anotação de tipo, tipagem em python, mypy
+Q: porque | anotar tipos deixa o editor avisar erros antes de rodar, sem mudar como o Python executa | -> prog-logica:tipagem
 P: o que são type hints em python
 P: o que é tipagem em python
 P: o que é mypy
@@ -300,6 +344,9 @@ Regra = tuple[str, int, str]                  # apelido de tipo
 `from __future__ import annotations` (presente em todos os módulos do Aprendiz) faz as anotações não serem avaliadas na hora, o que permite usar `list[str]` e `X | None` em versões mais antigas do Python 3 e referências a classes definidas mais abaixo.
 O **FastAPI** e o **Pydantic** usam as anotações **de verdade**, ao rodar: é pelo `pedido: PedidoChat` que o FastAPI sabe validar o JSON recebido.
 
+F: pydantic
+A: pydantic, validar dados, modelo de dados
+Q: porque | usa os type hints para validar e converter dados que chegam de fora | -> type-hints
 P: o que é pydantic
 P: como validar dados em python
 R: **Pydantic** valida e converte dados a partir das anotações de tipo:
@@ -317,6 +364,9 @@ PedidoChat(mensagem="")            # ValidationError, com a explicação
 No Aprendiz, cada rota da API recebe um modelo assim (`api/servidor.py`). Se a interface mandar um JSON inválido, o FastAPI responde **422** com o campo errado, sem a função nem rodar.
 Para dados **não confiáveis** com regras próprias (como os arquivos de addon), o Aprendiz valida campo a campo à mão em `addons.py`, com limites de tamanho e listas fechadas.
 
+F: testes
+A: testar código python, pytest, unittest, teste unitário
+Q: porque | o pytest roda funções de teste e mostra exatamente o que falhou | -> prog-vocabulario:teste-automatizado
 P: como testar código python
 P: como usar pytest
 P: o que é fixture no pytest
@@ -349,6 +399,9 @@ def banco(tmp_path):
 ```
 Rodar: `python -m pytest -q` (todos), `-k nome` (filtra), `-x` (para no primeiro erro), `--lf` (só os que falharam da última vez).
 
+F: testar-api
+A: testar api fastapi, testclient
+Q: porque | o TestClient chama a API sem subir servidor | -> testes
 P: como testar uma api fastapi
 P: o que é testclient
 R: O FastAPI tem um cliente que chama as rotas **sem subir servidor**:
@@ -364,6 +417,9 @@ def test_status(tmp_path):
 ```
 Por isso o `criar_app` do Aprendiz recebe o caminho do banco como parâmetro: cada teste usa um banco descartável. (O `TestClient` precisa do pacote `httpx`, que está no `requirements-dev.txt`.)
 
+F: mock
+A: mock, simular, unittest.mock, dublê de teste
+Q: porque | substitui uma parte lenta ou externa, como a internet, por uma imitação controlada | -> testes
 P: o que é mock em testes python
 P: como usar monkeypatch
 R: Às vezes o teste precisa **substituir** algo: uma data, a rede, um limite. O pytest tem o `monkeypatch`, que desfaz tudo no fim do teste:
@@ -379,6 +435,9 @@ def test_pasta_de_dados(monkeypatch, tmp_path):
 ```
 O módulo `unittest.mock` faz o mesmo com `patch` e `MagicMock`, e ainda registra como o objeto falso foi chamado. Os testes de addons do Aprendiz usam `monkeypatch` para simular *zip bombs* sem criar arquivos gigantes.
 
+F: regex
+A: expressões regulares, regex, re, padrão de texto
+Q: porque | descreve padrões de texto, como um e-mail ou um telefone, para achar e validar
 P: o que são expressões regulares em python
 P: como usar regex em python
 P: como usar o módulo re
@@ -397,6 +456,9 @@ m["p"], m["r"]                                                   # ('senha do wi
 Esse último é o padrão real do Aprendiz para ensinar pelo chat (`core/assistente.py`). Peças: `\d` dígito, `\w` letra/dígito/_, `\s` espaço, `+` um ou mais, `*` zero ou mais, `?` opcional (e "preguiçoso" depois de `+`/`*`), `^`/`$` início/fim, `(?P<nome>...)` grupo com nome.
 Use `r"..."` (string crua) e `re.compile` para padrões usados muitas vezes. E nunca rode uma regex vinda de fora (de um addon, por exemplo): uma regex maliciosa pode travar o programa; por isso o Aprendiz não aceita regex em addons.
 
+F: zip
+A: arquivos zip, zipfile, compactar
+Q: porque | o zipfile lê e cria arquivos .zip sem programa externo | -> python-basico:arquivo
 P: como trabalhar com arquivos zip em python
 P: como ler um zip sem extrair
 R: O módulo `zipfile` lê e cria ZIPs:
@@ -415,6 +477,9 @@ bytes_do_zip = buffer.getvalue()
 ```
 Um arquivo `.aprendiz` é um ZIP. O `addons.py` do Aprendiz lê **só os nomes conhecidos** de dentro dele e nunca extrai nada para o disco: isso evita ataques com caminhos como `../../`. Ele também soma o tamanho descompactado de tudo antes de ler e, ao ler cada arquivo, nunca lê mais que o limite (contra *zip bombs*, ZIPs pequenos que viram gigabytes).
 
+F: hash-arquivo
+A: hash de arquivo, hashlib, sha256, conferir arquivo
+Q: porque | o hash identifica o conteúdo: se um byte muda, o hash muda | -> prog-estruturas-dados:funcao-hash
 P: como fazer hash de arquivo em python
 P: como usar hashlib
 R: ```python
@@ -431,6 +496,10 @@ def sha256_do_arquivo(caminho):
 ```
 O Aprendiz calcula o SHA-256 de cada addon; a loja publica o mesmo valor, para quem quiser conferir que o arquivo não foi alterado. Para senhas, não use SHA-256 puro: use `hashlib.scrypt` ou bibliotecas como `argon2-cffi`.
 
+F: threads
+A: threads, threading, várias coisas ao mesmo tempo, concorrência, paralelo
+Q: porque | deixam o programa esperar várias coisas ao mesmo tempo, como downloads
+Q: diferente-de | o async faz o mesmo numa thread só, trocando de tarefa enquanto espera | -> async
 P: como usar threads em python
 P: o que é gil
 P: diferença entre thread e processo em python
@@ -450,6 +519,9 @@ with ProcessPoolExecutor() as ex:             # tarefas de cálculo
 ```
 O Aprendiz roda o servidor Uvicorn numa **thread** (`desktop.py`), enquanto a thread principal cuida da janela. Desde o Python 3.13 existe uma versão experimental **sem GIL** (*free-threaded*).
 
+F: async
+A: async await, asyncio, assíncrono, corrotina
+Q: porque | enquanto uma tarefa espera rede ou disco, outra roda, sem criar threads | -> threads
 P: o que é async await em python
 P: o que é asyncio
 P: o que é programação assíncrona
@@ -472,6 +544,9 @@ asyncio.run(principal())
 ```
 Só ajuda com espera; para cálculo pesado, use processos. O FastAPI aceita rotas `async def` e `def` comuns: as comuns (como as do Aprendiz) rodam num pool de threads, o que é o mais simples quando o trabalho é rápido e usa o SQLite (que não é assíncrono).
 
+F: sqlite3
+A: sqlite3 python, banco no python, conexão sqlite
+Q: porque | o Python já traz o sqlite3, e os valores vão sempre por parâmetros | -> sql-basico:sql-python
 P: como usar sqlite3 em python de forma profissional
 P: boas práticas com sqlite3 no python
 R: O que o `banco.py` do Aprendiz faz, e por quê:
@@ -490,6 +565,9 @@ con.executemany("INSERT INTO t VALUES (?, ?)", muitas_linhas)   # carga em lote,
 ```
 Mais: crie o esquema com `CREATE TABLE IF NOT EXISTS` e mantenha **migrações** idempotentes para bancos antigos; para cópias de segurança use `con.backup(destino)`, nunca a cópia do arquivo com o banco aberto.
 
+F: fastapi
+A: fastapi, api em python, criar api, uvicorn
+Q: porque | cria APIs com validação automática a partir dos type hints | -> prog-vocabulario:api
 P: como criar uma api com fastapi
 P: o que é fastapi
 P: o que é uvicorn
@@ -515,6 +593,9 @@ def eco(pedido: Pedido):                      # JSON do corpo, já validado
 ```
 Rode com `uvicorn arquivo:app --reload` e abra `http://127.0.0.1:8000/docs`: a documentação interativa é gerada sozinha (o Aprendiz também tem a sua em `/docs`).
 
+F: medir
+A: medir desempenho, timeit, profiler, cprofile
+Q: porque | antes de otimizar, é preciso medir onde o tempo é gasto de verdade | -> prog-estruturas-dados:complexidade
 P: como medir desempenho em python
 P: como achar o que está lento em python
 P: como usar cprofile
@@ -532,6 +613,9 @@ print(f"{(time.perf_counter() - inicio) * 1000:.1f} ms")
 O Aprendiz faz exatamente isso em cada etapa do pipeline (classe `Etapas` em `core/assistente.py`), e o painel "Por que respondi isso?" mostra os milissegundos de cada uma.
 Ferramentas visuais: **snakeviz** (para a saída do cProfile), **py-spy** (observa um programa rodando, sem alterar) e **scalene** (tempo e memória por linha).
 
+F: rapido
+A: python mais rápido, otimizar python, python lento, desempenho
+Q: porque | o ganho grande quase sempre vem de um algoritmo ou estrutura melhor, e não de truques | -> medir
 P: como deixar python mais rápido
 P: dicas de otimização em python
 R: Por ordem de impacto:
@@ -542,6 +626,9 @@ R: Por ordem de impacto:
 5. só então: processos para vários núcleos, Cython/Numba, ou reescrever o trecho crítico em C/C++/Rust.
 O Aprendiz é um bom exemplo do item 3: o BM25 não é calculado em Python, e sim pelo **SQLite** (FTS5), em C. Por isso é o algoritmo mais leve.
 
+F: walrus
+A: walrus operator, :=, operador morsa
+Q: porque | atribui e usa o valor na mesma expressão, como dentro de um while
 P: o que é walrus operator
 P: o que é o operador morsa do python
 R: O **operador morsa** `:=` (Python 3.8+) atribui **e** devolve o valor numa expressão só:
@@ -556,6 +643,9 @@ dados = [y for x in valores if (y := transformar(x)) is not None]
 ```
 Evita chamar a mesma coisa duas vezes ou criar a variável numa linha à parte. Use com moderação: em excesso, o código fica difícil de ler.
 
+F: unpacking
+A: unpacking, desempacotar, *args, **kwargs
+Q: porque | separa os itens de uma coleção em variáveis numa linha só | -> python-basico:tupla
 P: o que é unpacking em python
 P: o que é * e ** em chamadas de função
 R: **Desempacotar** distribui os itens de uma coleção:
@@ -575,6 +665,9 @@ mesclado = {**padrao, **personalizado}   # o da direita vence
 ```
 O `criar_pacote` do Aprendiz monta o manifesto assim: `{"origem": "terceiros", "dependencias": [], **manifesto}`. Os padrões vêm primeiro e o que está no arquivo, por vir depois, vence.
 
+F: collections
+A: collections, deque, defaultdict, namedtuple
+Q: porque | traz estruturas prontas e otimizadas além de lista e dicionário | -> prog-estruturas-dados:estrutura-dados
 P: o que é collections em python
 P: como usar counter defaultdict e deque
 R: O módulo `collections` tem estruturas prontas e rápidas:
@@ -595,6 +688,9 @@ p = Ponto(1, 2); p.x
 ```
 No Aprendiz: o Naive Bayes conta palavras por intenção com `defaultdict(Counter)`, e o TF-IDF usa `Counter` para as frequências dos termos.
 
+F: enum
+A: enum, enumeração, constantes com nome
+Q: porque | dá nome a um conjunto fixo de valores, evitando textos soltos espalhados | -> prog-logica:constante
 P: como usar enum em python
 R: `Enum` cria um conjunto fechado de valores com nome:
 ```python
@@ -611,6 +707,9 @@ Status.ABERTO == "aberto"   # False: compare com o membro, não com o texto
 ```
 Use `StrEnum` (3.11+) quando quiser que o membro **seja** também uma string. Evita "textos mágicos" espalhados pelo código e erros de digitação que só aparecem rodando.
 
+F: logging
+A: logging, log, registrar eventos
+Q: porque | registra o que o programa fez, com níveis e horário, melhor que espalhar print
 P: como fazer logging em python
 P: como usar o módulo logging
 R: Em vez de `print` para diagnóstico, use `logging`, que tem níveis e pode ir para arquivo:
@@ -631,6 +730,9 @@ except Exception:
 ```
 Níveis: DEBUG < INFO < WARNING < ERROR < CRITICAL. Em bibliotecas, crie o logger com `getLogger(__name__)` e deixe a configuração para o programa principal.
 
+F: cli
+A: programa de linha de comando, argparse, argumentos do terminal
+Q: porque | o argparse lê os argumentos do terminal e gera a ajuda sozinho | -> prog-vocabulario:terminal
 P: como criar um programa de linha de comando em python
 P: como usar argparse
 R: ```python
@@ -649,6 +751,9 @@ if __name__ == "__main__":
 ```
 Esse é o `main()` real do Aprendiz (`desktop.py`): `python -m aprendiz --modo servidor --porta 9000`. O argparse gera o `--help` sozinho e valida os tipos e as escolhas. Receber `argv` como parâmetro facilita testar. Alternativas: **click** e **typer**.
 
+F: executavel
+A: executável, pyinstaller, .exe, empacotar programa
+Q: porque | junta o programa e o Python num arquivo que roda sem instalar nada | -> prog-vocabulario:deploy
 P: como empacotar um programa python em executável
 P: o que é pyinstaller
 P: como criar um executável do meu programa python
@@ -666,11 +771,17 @@ Pontos de atenção (todos tratados no `empacotar.sh` do Aprendiz):
 - o PyInstaller não aceita `-m`, por isso existe o `iniciar.py`;
 - gere em cada sistema de destino: não há compilação cruzada.
 
+F: pep-zen
+A: pep, pep 8, zen do python, import this
+Q: porque | as PEPs registram as decisões da linguagem; a PEP 8 é o guia de estilo | -> prog-vocabulario:codigo-limpo
 P: o que é pep e zen do python
 P: o que é import this
 R: **PEP** (*Python Enhancement Proposal*) é o documento que propõe e descreve mudanças e convenções da linguagem. As mais citadas: **PEP 8** (estilo), **PEP 20** (o Zen), **PEP 257** (docstrings), **PEP 484** (type hints).
 Digite `import this` no Python para ler o **Zen do Python**, 19 aforismos de Tim Peters que resumem a filosofia da linguagem: o explícito é melhor que o implícito, o simples é melhor que o complexo, legibilidade conta, deve haver um jeito óbvio de fazer as coisas…
 
+F: novidades
+A: novidades python, versões novas, python 3.10, python 3.14
+Q: porque | cada versão traz recursos novos, como o match case na 3.10 | -> python-basico:match
 P: quais recursos novos do python 3.10 ao 3.14
 P: novidades do python
 R: Os destaques das versões recentes:
@@ -681,6 +792,9 @@ R: Os destaques das versões recentes:
 - **3.14:** *template strings* (`t"..."`); anotações avaliadas só quando usadas; o modo sem GIL passa a ser oficialmente suportado.
 O Aprendiz exige o **3.10** ou mais novo e é testado no 3.10 e no 3.14.
 
+F: projetos
+A: projetos avançados em python, ideias de projeto
+Q: porque | um projeto real junta vários recursos e mostra o que ainda falta aprender
 P: projetos avançados em python
 P: o que construir para dominar python
 R: Projetos que juntam tudo:

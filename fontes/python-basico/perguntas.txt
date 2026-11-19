@@ -1,6 +1,11 @@
 # Python 1 · Básico
 # Python do zero. Os exemplos rodam no Python 3.10 ou mais novo.
 
+F: python
+N: raiz
+A: python, linguagem python, py
+Q: definicao | Python é uma linguagem interpretada, de sintaxe enxuta, usada de scripts a ciência de dados
+Q: porque | a indentação faz parte da sintaxe e quase tudo vem pronto na biblioteca padrão | -> prog-logica:compilada-interpretada
 P: o que é python
 P: para que serve python
 P: por que aprender python
@@ -10,6 +15,9 @@ Pontos fortes: sintaxe limpa, uma biblioteca padrão enorme ("pilhas incluídas"
 Ponto fraco: é mais lenta que C e C++ em cálculos pesados (por isso muitas bibliotecas Python têm o núcleo em C).
 O Aprendiz é escrito em Python, de propósito, para servir de material de estudo.
 
+F: instalar
+A: instalar python, baixar python, python.org
+Q: porque | o computador precisa do interpretador para rodar programas Python | -> python
 P: como instalar python
 P: como instalar python no windows
 P: como instalar python no linux
@@ -22,6 +30,9 @@ R: - **Windows:** baixe em python.org/downloads e, na primeira tela do instalado
 - **macOS:** `brew install python` ou o instalador do python.org.
 Confira a versão: `python --version` (no Linux, `python3 --version`). Use uma versão 3 recente; o Python 2 morreu em 2020.
 
+F: rodar
+A: rodar programa python, executar script, python arquivo.py
+Q: porque | o interpretador lê o arquivo .py e executa linha por linha | -> python
 P: como rodar um programa python
 P: como executar um arquivo .py
 P: o que é o modo interativo do python
@@ -37,6 +48,9 @@ R: Duas formas:
 ```
 No VS Code, instale a extensão "Python" e use o botão ▶ no canto superior direito.
 
+F: hello-world
+A: hello world, primeiro programa, print
+Q: porque | o menor programa possível testa se a instalação e o editor estão funcionando | -> rodar
 P: hello world em python
 P: primeiro programa em python
 P: como usar print em python
@@ -52,6 +66,10 @@ print("sem pular linha", end="")
 print()                         # só pula uma linha
 ```
 
+F: input
+A: ler dados do teclado, input, pedir valor ao usuário, perguntar ao usuário
+Q: porque | o input sempre devolve texto, então se converte com int() ou float() para fazer contas | -> tipos
+Q: parte-de | é a entrada do esquema entrada, processamento e saída | -> prog-logica:entrada-saida
 P: como ler dados do teclado em python
 P: como usar input em python
 P: como converter input para número
@@ -73,6 +91,9 @@ except ValueError:
     print("Digite só números.")
 ```
 
+F: variaveis
+A: variáveis em python, atribuição, criar variável
+Q: porque | em Python a variável não declara tipo: o tipo vem do valor guardado | -> prog-logica:variavel
 P: como criar variáveis em python
 P: variáveis em python
 P: como declarar variavel em python
@@ -89,6 +110,9 @@ x = y = 0           # o mesmo valor para duas
 ```
 A variável é uma **etiqueta** presa a um objeto; o tipo é do objeto, não da variável (`type(idade)` mostra `int`). Nomes em `snake_case`, sem acento por convenção (embora Python aceite), e sem começar com número.
 
+F: tipos
+A: tipos de dados python, int, float, str, bool, type
+Q: parte-de | são os tipos básicos de valor em Python | -> prog-logica:tipos-dados
 P: quais os tipos de dados em python
 P: o que é int float str bool em python
 R: Os tipos básicos:
@@ -101,6 +125,9 @@ E as coleções: `list` `[1, 2]`, `tuple` `(1, 2)`, `dict` `{"a": 1}`, `set` `{1
 Conversões: `int("42")`, `float("3.5")`, `str(42)`, `bool(0)` (False), `list("abc")` (`['a', 'b', 'c']`).
 Valores "falsos": `0`, `0.0`, `""`, `[]`, `{}`, `set()` e `None`. Todo o resto é verdadeiro, por isso `if lista:` significa "se a lista não estiver vazia".
 
+F: operadores
+A: operadores python, divisão inteira, potência, módulo
+Q: porque | além das contas comuns, // dá a divisão inteira e ** a potência | -> prog-logica:aritmeticos
 P: operadores em python
 P: o que é divisão inteira e potência em python
 P: como fazer potência em python
@@ -119,6 +146,9 @@ Lógicos: `and`, `or`, `not` (por extenso).
 Atribuição composta: `x += 1`, `x *= 2`. Não existe `x++` em Python.
 `is` compara se é **o mesmo objeto** (use só com `None`: `if x is None`); `==` compara o **valor**.
 
+F: strings
+A: strings python, texto em python, métodos de string
+Q: porque | o texto é imutável e vem com métodos prontos como upper, split e replace | -> prog-logica:string
 P: como usar strings em python
 P: métodos de string em python
 P: como manipular texto em python
@@ -138,6 +168,9 @@ len("ação")            # 4
 ```
 Strings são **imutáveis**: os métodos devolvem uma string nova, sem alterar a original. Por isso se escreve `s = s.strip()`.
 
+F: f-string
+A: f-string, formatar texto, variável dentro do texto, interpolação
+Q: porque | o f antes das aspas deixa pôr variáveis entre chaves dentro do texto | -> strings
 P: o que é f-string em python
 P: como formatar texto em python
 P: como mostrar duas casas decimais em python
@@ -158,6 +191,9 @@ f"{x=}"                 # 'x=10': ótimo para depurar
 ```
 Para o formato brasileiro (1.234,56), troque os separadores: `f"{v:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")`.
 
+F: fatiar
+A: fatiar string, slicing, pedaço da string, primeiros caracteres, índice negativo
+Q: porque | [início:fim] pega um pedaço; o fim não entra e índices negativos contam do final | -> prog-logica:indice-zero
 P: como fatiar string em python
 P: o que é slicing em python
 P: como inverter uma string em python
@@ -174,6 +210,9 @@ s[::-1]   # 'nohtyP' (invertida)
 ```
 Funciona igual em listas e tuplas. Fatiar nunca dá erro de índice: `s[10:20]` devolve `''`.
 
+F: if
+A: if python, elif, else, condição em python
+Q: porque | o bloco que roda depende da condição, e a indentação marca o bloco | -> prog-logica:condicional
 P: como usar if em python
 P: como fazer if elif else em python
 P: if em python
@@ -194,6 +233,9 @@ else:
 Forma curta (expressão condicional): `situacao = "maior" if idade >= 18 else "menor"`.
 Para comparar um valor com muitos casos, o Python 3.10 tem o `match`.
 
+F: match
+A: match case, switch em python, casamento de padrões
+Q: porque | compara um valor com vários casos, como o escolha-caso | -> prog-logica:escolha-caso
 P: como usar match case em python
 R: O `match` (Python 3.10+) compara um valor com padrões:
 ```python
@@ -210,6 +252,9 @@ match comando:
 ```
 Ele vai além do `switch` de outras linguagens: desmonta listas, tuplas e dicionários e captura partes em variáveis (`nome`, `*numeros`). O `_` pega qualquer coisa.
 
+F: for
+A: for python, range, percorrer lista, repetir em python
+Q: porque | o for do Python percorre os itens de qualquer coleção, sem contador manual | -> prog-logica:while-for
 P: como usar for em python
 P: como usar range em python
 P: como percorrer uma lista em python
@@ -238,6 +283,9 @@ for nome, nota in zip(["Ana", "Bia"], [8, 9]):          # duas listas juntas
 ```
 Evite `for i in range(len(lista))` só para pegar `lista[i]`: use o item direto ou `enumerate`.
 
+F: while
+A: while python, repetir enquanto, break
+Q: porque | repete enquanto a condição for verdadeira | -> prog-logica:repeticao
 P: como usar while em python
 P: como usar break e continue em python
 P: while em python
@@ -256,6 +304,9 @@ else:
 - o `else` de um laço (raro em outras linguagens) roda quando não houve `break`;
 - laço infinito proposital: `while True:` com um `break` lá dentro.
 
+F: lista
+A: lista python, list, append, colchetes
+Q: porque | guarda vários valores em ordem e pode crescer, diminuir e mudar | -> prog-estruturas-dados:vetor-ed
 P: como criar uma lista em python
 P: métodos de lista em python
 P: como adicionar e remover itens de uma lista
@@ -279,6 +330,9 @@ notas.index(8)           # posição do 8
 ```
 Cuidado: `b = a` não copia a lista; as duas variáveis apontam para a mesma. Para copiar: `b = a.copy()` ou `b = a[:]`.
 
+F: tupla
+A: tupla, tuple, lista que não muda, parênteses
+Q: diferente-de | a tupla não pode ser alterada depois de criada, ao contrário da lista | -> lista
 P: o que é tupla em python
 P: diferença entre lista e tupla
 R: A **tupla** é como uma lista, mas **imutável**: depois de criada, não muda.
@@ -290,6 +344,9 @@ um_item = (5,)            # a vírgula é que faz a tupla
 ```
 Quando usar: dados fixos que andam juntos (coordenadas, uma linha de banco, retornar vários valores de uma função). Por serem imutáveis, tuplas podem ser **chave de dicionário**; listas não.
 
+F: dicionario
+A: dicionário python, dict, chave e valor, mapa
+Q: porque | acha o valor pela chave, e não pela posição, usando uma tabela hash por dentro | -> prog-estruturas-dados:tabela-hash
 P: o que é dicionário em python
 P: como usar dict em python
 P: como percorrer um dicionário
@@ -311,6 +368,9 @@ for chave, valor in aluno.items():
 ```
 As chaves precisam ser imutáveis (str, int, tupla) e não se repetem. Desde o Python 3.7, o dicionário mantém a **ordem de inserção**.
 
+F: contar
+A: contar ocorrências, counter, frequência
+Q: porque | o Counter monta um dicionário de quantas vezes cada item aparece | -> dicionario
 P: como contar ocorrências em python
 P: como contar palavras em um texto em python
 R: Com dicionário:
@@ -327,6 +387,9 @@ contagem = Counter(texto.split())
 contagem.most_common(2)     # [('o', 2), ('rato', 2)]
 ```
 
+F: set
+A: set python, conjunto, valores únicos, tirar repetidos
+Q: porque | não guarda repetidos e testa se algo está nele muito rápido | -> prog-estruturas-dados:conjunto
 P: o que é set em python
 P: como remover duplicados de uma lista em python
 P: o que é um set
@@ -348,6 +411,9 @@ unicos_em_ordem = list(dict.fromkeys([3, 1, 3, 2]))   # [3, 1, 2]
 ```
 Conjunto vazio é `set()`; `{}` cria um dicionário vazio.
 
+F: funcao
+A: função python, def, return, criar função
+Q: porque | def dá nome a um bloco de código que recebe parâmetros e devolve um resultado com return | -> prog-logica:funcao
 P: como criar uma função em python
 P: como usar def em python
 P: o que é return em python
@@ -366,6 +432,10 @@ print(f"{resultado:.1f}")
 - dá para devolver vários valores (vira uma tupla): `return minimo, maximo`;
 - a **docstring** documenta a função e aparece em `help(imc)`.
 
+F: parametro-padrao
+A: parâmetro com valor padrão, argumento opcional, parâmetro nomeado
+Q: porque | o parâmetro pode ter um valor usado quando não é passado nada | -> prog-logica:parametro-argumento
+Q: regra | nunca use lista ou dicionário como valor padrão: ele é compartilhado entre as chamadas
 P: o que são parâmetros com valor padrão em python
 P: o que é argumento nomeado em python
 P: o que é args e kwargs
@@ -387,6 +457,9 @@ ficha(nome="Ana", idade=30)
 ```
 Armadilha clássica: **nunca** use lista ou dicionário como valor padrão (`def f(itens=[])`): a mesma lista é reaproveitada entre as chamadas. Use `def f(itens=None):` e, dentro, `itens = itens or []`.
 
+F: escopo
+A: escopo python, global, local, nonlocal
+Q: porque | a variável criada dentro da função só existe nela | -> prog-logica:escopo
 P: o que é escopo em python
 P: o que é global em python
 R: Variáveis criadas dentro de uma função são **locais**. A função **lê** variáveis de fora, mas, ao **atribuir**, cria uma local nova:
@@ -405,6 +478,9 @@ contador = incrementar(contador)
 ```
 A ordem de busca de um nome é **LEGB**: Local, Enclosing (função de fora), Global, Built-in.
 
+F: lambda
+A: lambda, função anônima, função sem nome, função de uma linha
+Q: porque | cria uma função pequena, sem nome, numa expressão só, útil como argumento de sorted e map | -> funcao
 P: o que é lambda em python
 P: o que é lambda no python
 P: lambda python
@@ -418,6 +494,9 @@ pessoas.sort(key=lambda p: p[1])    # ordena pela idade
 ```
 O uso típico é como argumento (`key=` do `sort`, `sorted`, `max`, `min`). Se precisar de mais de uma linha ou de um nome, use `def`.
 
+F: import
+A: importar módulos, import, from import, módulo
+Q: porque | reaproveita código de outros arquivos e da biblioteca padrão | -> prog-vocabulario:biblioteca
 P: como importar módulos em python
 P: o que é import em python
 P: o que é módulo em python
@@ -438,6 +517,9 @@ dt.date.today()
 Seu próprio arquivo também é um módulo: com `util.py` na mesma pasta, faça `import util` ou `from util import formatar`.
 Módulos da biblioteca padrão muito usados: `math`, `random`, `datetime`, `os`, `pathlib`, `json`, `csv`, `re`, `sqlite3`, `collections`, `itertools`.
 
+F: main
+A: if __name__ == __main__, rodar só quando executado, ponto de entrada
+Q: porque | o código dentro dele só roda quando o arquivo é executado, e não quando é importado | -> import
 P: o que é if __name__ == "__main__"
 P: para que serve __main__ em python
 R: Cada módulo tem a variável `__name__`. Ela vale `"__main__"` quando o arquivo é **executado direto**, e o nome do módulo quando é **importado**. Assim, o mesmo arquivo serve de programa e de biblioteca:
@@ -450,6 +532,9 @@ if __name__ == "__main__":
 ```
 O `iniciar.py` do Aprendiz usa esse padrão para chamar a função `main()`.
 
+F: excecoes
+A: tratar erros, try except, exceção, programa não fechar com erro
+Q: porque | sem tratamento, o erro interrompe o programa; o except decide o que fazer em vez de fechar | -> prog-logica:tipos-erro
 P: como tratar erros em python
 P: como usar try except em python
 P: quais as exceções mais comuns em python
@@ -479,6 +564,9 @@ As exceções mais comuns:
 - `ZeroDivisionError`, `NameError` (variável não definida).
 Capture só os erros que sabe tratar; um `except:` sozinho esconde bugs. Para lançar: `raise ValueError("idade negativa")`.
 
+F: arquivo
+A: ler arquivo, escrever arquivo, open, with open
+Q: porque | o with abre e fecha o arquivo sozinho, mesmo se der erro | -> python-avancado:contexto
 P: como ler um arquivo em python
 P: como escrever em arquivo em python
 P: como usar open em python
@@ -506,6 +594,9 @@ with open("notas.txt", encoding="utf-8") as f:
 ```
 Sempre informe `encoding="utf-8"`: sem isso, no Windows, acentos podem virar lixo.
 
+F: caminhos
+A: caminhos de arquivo, pathlib, path, pasta
+Q: porque | o pathlib monta caminhos certos em qualquer sistema, com barra ou contrabarra | -> arquivo
 P: como trabalhar com caminhos de arquivo em python
 P: o que é pathlib
 R: O `pathlib` trata caminhos do mesmo jeito no Windows e no Linux:
@@ -525,6 +616,9 @@ for p in pasta.glob("*.txt"):
 ```
 O Aprendiz usa `pathlib` em todo o código (por exemplo, para achar a pasta `web/` relativa ao próprio arquivo, com `Path(__file__).parent`).
 
+F: json
+A: json em python, json.load, json.dump
+Q: porque | o módulo json converte dicionários e listas em texto JSON e de volta | -> prog-vocabulario:json
 P: como ler e escrever json em python
 R: ```python
 import json
@@ -542,6 +636,9 @@ de_volta = json.loads(texto)     # de texto
 ```
 `ensure_ascii=False` grava os acentos como são (em vez de `ç`). Os manifestos dos addons do Aprendiz são lidos e gravados exatamente assim.
 
+F: datas
+A: datas em python, datetime, data e hora
+Q: porque | o datetime faz contas com datas, como somar dias, sem errar mês nem ano bissexto
 P: como trabalhar com datas em python
 P: como usar datetime em python
 R: ```python
@@ -558,6 +655,9 @@ hoje.isoformat()                               # '2026-11-18' (bom para bancos e
 ```
 Para fusos horários, use `zoneinfo`: `datetime.now(ZoneInfo("America/Sao_Paulo"))`.
 
+F: aleatorio
+A: números aleatórios, random, sortear
+Q: porque | o random sorteia números e itens, útil em jogos e testes
 P: como gerar números aleatórios em python
 P: como usar random em python
 R: ```python
@@ -573,6 +673,10 @@ random.seed(42)                      # sequência repetível (para testes)
 ```
 Para senhas e tokens, use `secrets` (`secrets.token_hex(16)`), que é seguro para criptografia; `random` não é.
 
+F: pip
+A: instalar bibliotecas, pip install, pacotes python, pypi
+Q: porque | o pip baixa bibliotecas de terceiros do PyPI | -> prog-vocabulario:biblioteca
+Q: regra | instale dentro de um ambiente virtual, separado por projeto | -> python-avancado:venv
 P: como instalar bibliotecas em python
 P: como usar pip
 P: o que é pip install
@@ -586,6 +690,9 @@ python -m pip uninstall requests
 Use `python -m pip` (em vez de só `pip`) para garantir que é o pip do Python certo.
 **Sempre use um ambiente virtual** para cada projeto (veja "o que é ambiente virtual" no addon Python 2): no Ubuntu/Debian e no Fedora recentes, o pip até se recusa a instalar no Python do sistema (erro "externally-managed-environment").
 
+F: erros-iniciante
+A: erros comuns python, indentationerror, typeerror, nameerror
+Q: porque | a maioria vem de indentação, de tipo misturado ou de nome escrito errado | -> prog-vocabulario:indentacao
 P: erros comuns em python para iniciantes
 P: o que é indentationerror
 R: Os mais comuns:
@@ -600,6 +707,9 @@ R: Os mais comuns:
 - dar a um arquivo seu o nome de um módulo (`random.py`, `json.py`): o `import` pega o seu arquivo no lugar do módulo de verdade.
 Leia o **traceback** de baixo para cima: a última linha diz o erro, as de cima mostram o caminho.
 
+F: programa-completo
+A: exemplo de programa completo, programa de exemplo
+Q: exemplo-de | junta entrada, decisões, laços e funções num programa só | -> funcao
 P: exemplo de programa completo em python
 P: jogo de adivinhação em python
 R: Um jogo de adivinhar o número, com o básico todo:
@@ -630,6 +740,9 @@ if __name__ == "__main__":
 ```
 Exercício: limitar a 7 tentativas e guardar o recorde num arquivo.
 
+F: exercicios
+A: exercícios de python, praticar python
+Q: porque | Python se aprende escrevendo programa, do simples ao composto | -> prog-logica:exercicios
 P: exercícios de python para iniciantes
 P: o que praticar em python
 R: Para praticar, do mais simples ao mais desafiador:
