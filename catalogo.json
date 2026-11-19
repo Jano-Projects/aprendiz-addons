@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T01:17:23+00:00",
+  "gerado_em": "2026-11-19T01:39:37+00:00",
   "total": 40,
   "addons": [
     {
@@ -1126,7 +1126,7 @@
     {
       "id": "compreensao-portugues",
       "nome": "Compreensão do português",
-      "versao": "1.4.0",
+      "versao": "1.5.0",
       "autor": "Jano Projects",
       "descricao": "A raiz da conversa do Aprendiz: entende o tipo de pergunta (o que é, como fazer, onde fica…), junta tudo o que você ensinou sobre um assunto (\"o que você sabe sobre o carro?\"), entende expressões e formas irregulares (\"fui\", \"fiz\" → ser, fazer), responde sobre si mesmo e, quando não sabe algo, indica o addon da loja que sabe. Traz um léxico com mais de 300 mil palavras. Lemas derivados de lemmatization-lists, de Michal Měchura (ODbL).",
       "licenca": "ODbL-1.0",
@@ -1150,7 +1150,7 @@
         "compreensao"
       ],
       "versao_minima_app": "1.0.0",
-      "criado_com": "1.0.0",
+      "criado_com": "2.0.0",
       "dependencias": [],
       "recomendado": null,
       "conhecimentos": 0,
@@ -1169,8 +1169,8 @@
       },
       "norma": null,
       "arquivo": "addons/compreensao-portugues.aprendiz",
-      "tamanho": 857014,
-      "sha256": "ef817b30d48bb7384209e386c04012004b071e5c1afd8e1bb7eec7bc9db2bbf3",
+      "tamanho": 857171,
+      "sha256": "d34a53faf54c899bddeecbec20de410c4b36aa3b0d983ba84e45cf3486db9334",
       "atualizado_em": "2026-11-18",
       "amostra": []
     },

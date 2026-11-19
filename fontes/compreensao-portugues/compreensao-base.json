@@ -153,7 +153,13 @@
       "o que preciso fazer com", "o que eu preciso fazer com", "o que ficou combinado sobre",
       "o que eu anotei sobre", "o que anotei sobre", "minhas anotacoes sobre",
       "o que eu te ensinei sobre", "o que te ensinei sobre", "o que voce lembra sobre",
-      "o que voce lembra de"]}
+      "o que voce lembra de",
+      "me fala de", "me fale de", "fala de", "me conta de",
+      "me conte de", "me fala um pouco de", "me fala um pouco sobre", "me explica sobre",
+      "me explique sobre", "resumo de", "resumo sobre", "um resumo de",
+      "me de um resumo de", "me mostre um resumo de", "me mostre tudo sobre", "mostre tudo sobre",
+      "tudo relacionado a", "tudo relacionado ao", "tudo relacionado com", "tudo que tem a ver com",
+      "o que tem de"]}
   ],
 
   "autoconhecimento": [
