@@ -1,5 +1,12 @@
 {
   "expressoes": {
+    "jogar fora": "descartar", "joga fora": "descartar", "botar fora": "descartar",
+    "dar um jeito de apagar": "apagar", "por em ordem": "ordenar", "colocar em ordem": "ordenar",
+    "do maior para o menor": "decrescente", "do maior pro menor": "decrescente",
+    "do menor para o maior": "crescente", "do menor pro maior": "crescente",
+    "mais caro para o mais barato": "decrescente", "mais caro pro mais barato": "decrescente",
+    "mais barato para o mais caro": "crescente", "mais barato pro mais caro": "crescente",
+    "em branco": "vazio", "sem nada": "vazio", 
     "o que e que": "o que",
     "como e que": "como",
     "onde e que": "onde",

@@ -78,7 +78,7 @@ Quatro tabelas: clientes fazem pedidos, e cada pedido tem itens de produtos. A E
 
 F: create-table
 N: raiz
-A: tabela, create table, colunas, criar tabela
+A: tabela, create table, colunas, criar tabela, nova tabela, montar tabela, estrutura da tabela
 Q: definicao | uma tabela organiza os dados em linhas (registros) e colunas (campos)
 Q: porque | cada coluna tem um tipo, e o banco usa esse tipo para guardar e comparar os valores | -> tipos-dados
 P: como criar uma tabela em sql
@@ -122,7 +122,7 @@ Outros bancos são rígidos e têm mais tipos:
 No SQLite, para dinheiro, guarde **centavos em INTEGER** (`12050` = R$ 120,50).
 
 F: insert
-A: insert, inserir, adicionar, registro
+A: insert, inserir, adicionar, registro, cadastrar, incluir, novo registro, nova linha
 Q: porque | uma tabela recém-criada está vazia, e o INSERT é o que coloca linhas nela | -> create-table
 Q: consequencia | depois de inseridos, os dados são lidos com o SELECT | -> select
 P: como inserir dados em uma tabela
@@ -167,7 +167,7 @@ SELECT DISTINCT cidade FROM clientes;   -- sem repetir
 `SELECT *` é ótimo para explorar, mas no código prefira listar as colunas: fica claro o que se usa e não traz dados à toa. SQL não diferencia maiúsculas nas palavras-chave; a convenção é escrevê-las em MAIÚSCULAS.
 
 F: where
-A: where, filtro, filtrar, condição
+A: where, filtro, filtrar, condição, só os, apenas os, critério, buscar por
 Q: porque | sem WHERE o SELECT devolve todas as linhas da tabela | -> select
 Q: diferente-de | o HAVING também filtra, mas filtra grupos, depois do GROUP BY | -> having
 Q: consequencia | o mesmo WHERE decide quais linhas o UPDATE e o DELETE alteram | -> update
@@ -206,7 +206,7 @@ No SQLite, `LIKE` ignora maiúsculas/minúsculas só nas letras sem acento ('a' 
 
 F: null
 N: raiz
-A: null, nulo, vazio, sem valor, is null
+A: null, nulo, vazio, sem valor, is null, em branco, valor ausente, campo vazio, não preenchido
 Q: definicao | NULL quer dizer valor desconhecido, e não zero nem texto vazio
 Q: consequencia | qualquer comparação com NULL dá NULL, por isso se usa IS NULL no WHERE | -> where
 P: o que é null em sql
@@ -222,7 +222,7 @@ SELECT nome, COALESCE(cidade, 'não informada') AS cidade FROM clientes;
 `COALESCE(a, b, …)` devolve o primeiro valor não nulo. Contas com NULL dão NULL (`5 + NULL` é NULL), e as funções de agregação (`SUM`, `AVG`) ignoram os NULL.
 
 F: order-by
-A: order by, ordenar, ordem, crescente, decrescente
+A: order by, ordenar, ordem, crescente, decrescente, ordem de, mais caro, mais barato, maior para o menor, menor para o maior, ordem alfabética, classificar
 Q: porque | sem ORDER BY o banco devolve as linhas na ordem que for mais rápida para ele, sem garantia nenhuma
 Q: parte-de | o ORDER BY age depois do WHERE, sobre as linhas que sobraram | -> where
 Q: consequencia | junto com o LIMIT, permite pegar os primeiros ou os maiores | -> limit
@@ -243,7 +243,7 @@ SELECT nome, preco FROM produtos ORDER BY categoria ASC, preco DESC;
 Sem `ORDER BY`, a ordem do resultado **não é garantida**, mesmo que pareça sempre igual. No SQLite os NULL vêm primeiro na ordem crescente; dá para escolher com `NULLS LAST`.
 
 F: limit
-A: limit, limitar, primeiros, top, offset
+A: limit, limitar, primeiros, top, offset, primeiras, só alguns, os mais, quantidade máxima, paginação
 Q: porque | uma tabela grande pode devolver milhares de linhas, e quase sempre só as primeiras importam
 Q: depois-de | o LIMIT só faz sentido depois de ordenar; sem isso, "as primeiras" são linhas quaisquer | -> order-by
 P: como limitar resultados em sql
@@ -265,7 +265,7 @@ Cada banco escreve de um jeito:
 Use sempre com `ORDER BY`, senão "os 3 primeiros" são quaisquer 3. Para páginas muito fundas, `OFFSET` fica lento; a alternativa é continuar de onde parou (`WHERE id > último_id_visto`).
 
 F: update
-A: update, atualizar, alterar dados, set
+A: update, atualizar, alterar dados, set, mudar, trocar, modificar, editar, corrigir valor, atualizar registro
 Q: porque | o UPDATE muda valores de linhas que já existem, em vez de criar outras | -> insert
 Q: regra | sem WHERE, o UPDATE altera todas as linhas da tabela | -> where
 P: como atualizar dados em sql
@@ -287,7 +287,7 @@ UPDATE clientes SET cidade = 'Olinda', uf = 'PE' WHERE id = 3;
 3. em produção, faça dentro de uma transação (`BEGIN; ... ; COMMIT;`), e se algo sair errado, `ROLLBACK;`.
 
 F: delete
-A: delete, apagar, remover linhas, excluir
+A: delete, apagar, remover linhas, excluir, remover, eliminar, descartar, tirar, deletar, excluir registro
 Q: regra | sem WHERE, o DELETE apaga todas as linhas; vale rodar antes um SELECT com o mesmo WHERE | -> where
 Q: diferente-de | o DELETE apaga linhas; para mudar a estrutura da tabela se usa o ALTER TABLE | -> alter-table
 P: como apagar dados em sql
@@ -326,7 +326,7 @@ O SQLite tem um `ALTER TABLE` limitado: para mudar o tipo de uma coluna ou uma r
 
 F: agregacao
 N: raiz
-A: agregação, count, sum, avg, min, max, total, média
+A: agregação, count, sum, avg, min, max, total, média, somar, soma, quantos, quantidade, contar, maior valor, menor valor
 Q: definicao | uma função de agregação resume várias linhas num único valor
 Q: consequencia | para ter um resumo por grupo, como por cliente ou por mês, se usa o GROUP BY | -> group-by
 P: quais são as funções de agregação em sql
@@ -346,7 +346,7 @@ SELECT ROUND(AVG(preco), 2) AS media FROM produtos WHERE categoria = 'Móveis';
 `COUNT(*)` conta linhas; `COUNT(coluna)` conta os valores **não nulos** daquela coluna.
 
 F: group-by
-A: group by, agrupar, por grupo, totais por grupo
+A: group by, agrupar, por grupo, totais por grupo, por mês, por cliente, por categoria, cada, total por, subtotal
 Q: porque | as funções de agregação resumem a tabela toda, e o GROUP BY faz o resumo separado por grupo | -> agregacao
 Q: regra | toda coluna do SELECT que não está numa agregação precisa estar no GROUP BY
 Q: consequencia | para filtrar os grupos pelo total se usa o HAVING | -> having
@@ -395,7 +395,7 @@ HAVING COUNT(*) > 1;
 A ordem em que o banco **executa** as partes: `FROM` → `WHERE` → `GROUP BY` → `HAVING` → `SELECT` → `ORDER BY` → `LIMIT`. É por isso que um apelido criado no `SELECT` não pode ser usado no `WHERE`.
 
 F: join
-A: join, juntar tabelas, relacionar tabelas, inner join, chave estrangeira
+A: join, juntar tabelas, relacionar tabelas, inner join, chave estrangeira, unir tabelas, combinar tabelas, cruzar tabelas, dados de duas tabelas
 Q: porque | os dados ficam em tabelas separadas para não se repetirem, e o JOIN os junta de novo na consulta
 Q: regra | a condição do ON liga a chave estrangeira de uma tabela à chave primária da outra
 Q: consequencia | o JOIN comum descarta quem não tem par; para manter, se usa o LEFT JOIN | -> left-join

@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T01:45:43+00:00",
+  "gerado_em": "2026-11-19T01:54:04+00:00",
   "total": 40,
   "addons": [
     {
@@ -1162,15 +1162,15 @@
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": {
-        "regras": 181,
+        "regras": 195,
         "catalogo": 37,
         "lemas": 317331,
         "vetores": 0
       },
       "norma": null,
       "arquivo": "addons/compreensao-portugues.aprendiz",
-      "tamanho": 857301,
-      "sha256": "91c343f0547412f236ab80315996034ab4747cce9cda99a7dec7adb7306ddf84",
+      "tamanho": 857271,
+      "sha256": "b08b104cdb442d83bd921672c28a46019c58fb9adb9425842300f6208797aa36",
       "atualizado_em": "2026-11-18",
       "amostra": []
     },
@@ -3478,8 +3478,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/sql-basico.aprendiz",
-      "tamanho": 12163,
-      "sha256": "20946070d8aa7f93db93ef7c3a7ed91ee63da2a2804c0c31ad2a180e4cfcfced",
+      "tamanho": 12459,
+      "sha256": "6172ef1a6179cfd0a8cc162f58b20eb8ae90848471de2452d4ad9f5e65920972",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
