@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T02:00:24+00:00",
+  "gerado_em": "2026-11-19T02:07:19+00:00",
   "total": 40,
   "addons": [
     {
@@ -3463,9 +3463,9 @@
         }
       ],
       "recomendado": {
-        "busca": "fuzzy",
+        "busca": "bm25",
         "resposta": "trabalhada",
-        "acerto": 1.0
+        "acerto": 0.965
       },
       "conhecimentos": 27,
       "verbetes": 0,
@@ -3478,8 +3478,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/sql-basico.aprendiz",
-      "tamanho": 12459,
-      "sha256": "6172ef1a6179cfd0a8cc162f58b20eb8ae90848471de2452d4ad9f5e65920972",
+      "tamanho": 12461,
+      "sha256": "e7ceb4f3ce39bddcaf531336ce20ddc903727d232cc2c2a6d03ba29e2cfa8852",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {
