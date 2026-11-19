@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T01:39:37+00:00",
+  "gerado_em": "2026-11-19T01:45:43+00:00",
   "total": 40,
   "addons": [
     {
@@ -1169,8 +1169,8 @@
       },
       "norma": null,
       "arquivo": "addons/compreensao-portugues.aprendiz",
-      "tamanho": 857171,
-      "sha256": "d34a53faf54c899bddeecbec20de410c4b36aa3b0d983ba84e45cf3486db9334",
+      "tamanho": 857301,
+      "sha256": "91c343f0547412f236ab80315996034ab4747cce9cda99a7dec7adb7306ddf84",
       "atualizado_em": "2026-11-18",
       "amostra": []
     },
@@ -3478,8 +3478,8 @@
       "compreensao": null,
       "norma": null,
       "arquivo": "addons/sql-basico.aprendiz",
-      "tamanho": 11917,
-      "sha256": "f4dd8c3be7720c1f1c4842315435a929eb92cbf73bd57dc4a368c36a4ab9d16d",
+      "tamanho": 12163,
+      "sha256": "20946070d8aa7f93db93ef7c3a7ed91ee63da2a2804c0c31ad2a180e4cfcfced",
       "atualizado_em": "2026-11-18",
       "amostra": [
         {

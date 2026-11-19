@@ -231,6 +231,9 @@ P: como usar order by
 P: ordem decrescente em sql
 P: como ordenar resultado de consulta
 P: order by
+P: como ordenar do maior para o menor
+P: como ordenar do menor para o maior
+P: como ordenar em ordem alfabética
 R: ```sql
 SELECT nome, preco FROM produtos ORDER BY preco;           -- crescente (ASC)
 SELECT nome, preco FROM produtos ORDER BY preco DESC;      -- decrescente
@@ -246,6 +249,11 @@ Q: depois-de | o LIMIT só faz sentido depois de ordenar; sem isso, "as primeira
 P: como limitar resultados em sql
 P: como usar limit e offset
 P: como fazer paginação em sql
+P: como pegar só os primeiros resultados
+P: como trazer só os 10 primeiros
+P: como mostrar só algumas linhas
+P: top 10 em sql
+P: como paginar resultados
 R: ```sql
 SELECT nome, preco FROM produtos ORDER BY preco DESC LIMIT 3;          -- os 3 mais caros
 SELECT nome FROM produtos ORDER BY id LIMIT 2 OFFSET 2;                -- página 2, de 2 em 2
@@ -265,6 +273,9 @@ P: como usar update
 P: como alterar um registro
 P: update
 P: update em sql
+P: como mudar um valor que já está na tabela
+P: como editar dados de uma tabela
+P: como corrigir um valor errado na tabela
 R: ```sql
 UPDATE produtos SET preco = 130.0 WHERE id = 1;
 UPDATE produtos SET preco = preco * 1.10 WHERE categoria = 'Móveis';   -- +10%
@@ -284,6 +295,9 @@ P: como usar delete
 P: diferença entre delete drop e truncate
 P: delete
 P: delete em sql
+P: como apagar registros de uma tabela
+P: como remover linhas de uma tabela
+P: como excluir um registro
 R: ```sql
 DELETE FROM pedidos WHERE status = 'cancelado';
 ```
@@ -318,6 +332,9 @@ Q: consequencia | para ter um resumo por grupo, como por cliente ou por mês, se
 P: quais são as funções de agregação em sql
 P: como usar count sum avg min max
 P: como contar linhas em sql
+P: como contar quantas linhas tem
+P: como somar uma coluna
+P: como calcular a média em sql
 R: Elas resumem várias linhas num valor:
 ```sql
 SELECT COUNT(*) FROM clientes;                  -- 5 linhas
@@ -338,6 +355,9 @@ P: como agrupar resultados em sql
 P: como contar por categoria em sql
 P: group by
 P: agrupar em sql
+P: como agrupar resultados
+P: como fazer total por categoria
+P: como contar por grupo
 R: `GROUP BY` junta as linhas com o mesmo valor e aplica a agregação **em cada grupo**:
 ```sql
 SELECT categoria, COUNT(*) AS qtd, AVG(preco) AS preco_medio
@@ -358,6 +378,10 @@ P: como usar having
 P: diferença entre where e having
 P: qual a diferença entre where e having
 P: having
+P: por que o where não funciona com count
+P: como filtrar pelo resultado do count
+P: como filtrar por total ou soma
+P: where com count dá erro
 R: - `WHERE` filtra **linhas**, antes de agrupar;
 - `HAVING` filtra **grupos**, depois de agrupar (por isso pode usar `COUNT`, `SUM`…).
 ```sql
@@ -383,6 +407,8 @@ P: join
 P: inner join
 P: como juntar tabelas
 P: como relacionar duas tabelas numa consulta
+P: como juntar duas tabelas
+P: como combinar dados de duas tabelas
 R: `JOIN` combina linhas de tabelas relacionadas. O `INNER JOIN` traz só as combinações que **casam** nos dois lados:
 ```sql
 SELECT p.id AS pedido, p.data, c.nome AS cliente
