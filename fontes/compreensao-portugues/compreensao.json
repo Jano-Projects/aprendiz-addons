@@ -1041,6 +1041,131 @@
    ]
   }
  ],
+ "padroes": [
+  {
+   "padrao": "quantos|quantas * cada|por *",
+   "conceitos": [
+    "agrupar",
+    "contar",
+    "por grupo"
+   ]
+  },
+  {
+   "padrao": "total|soma|somar|media * por *",
+   "conceitos": [
+    "agrupar",
+    "por grupo",
+    "total por"
+   ]
+  },
+  {
+   "padrao": "quanto|quantos|quantas * por mes|dia|ano|cliente|categoria",
+   "conceitos": [
+    "agrupar",
+    "total por"
+   ]
+  },
+  {
+   "padrao": "os|as <n> * mais *",
+   "conceitos": [
+    "limitar",
+    "primeiros",
+    "ordenar"
+   ]
+  },
+  {
+   "padrao": "so|apenas os|as <n> *",
+   "conceitos": [
+    "limitar",
+    "primeiros"
+   ]
+  },
+  {
+   "padrao": "<n> primeiros|primeiras|ultimos|ultimas",
+   "conceitos": [
+    "limitar",
+    "primeiros"
+   ]
+  },
+  {
+   "padrao": "adicionar|incluir|cadastrar|colocar|inserir um|uma * novo|nova",
+   "conceitos": [
+    "inserir",
+    "novo registro"
+   ]
+  },
+  {
+   "padrao": "adicionar|incluir|cadastrar|colocar um|uma|o|a * na|no|em *",
+   "conceitos": [
+    "inserir",
+    "adicionar"
+   ]
+  },
+  {
+   "padrao": "tirar|remover|excluir|apagar|deletar|eliminar um|uma|o|a|os|as * do|da|dos|das|de *",
+   "conceitos": [
+    "apagar",
+    "remover"
+   ]
+  },
+  {
+   "padrao": "jogar|botar fora os|as|o|a *",
+   "conceitos": [
+    "apagar",
+    "remover"
+   ]
+  },
+  {
+   "padrao": "unir|juntar|combinar|cruzar|relacionar a|as|o|os tabela|tabelas * com *",
+   "conceitos": [
+    "juntar tabelas",
+    "relacionar tabelas"
+   ]
+  },
+  {
+   "padrao": "unir|juntar|combinar|cruzar * com|e a|o tabela|tabelas *",
+   "conceitos": [
+    "juntar tabelas"
+   ]
+  },
+  {
+   "padrao": "filtrar|mostrar|listar|buscar|pegar so|apenas os|as * de|do|da|com|que *",
+   "conceitos": [
+    "filtrar",
+    "condicao"
+   ]
+  },
+  {
+   "padrao": "* sem valor *",
+   "conceitos": [
+    "sem valor",
+    "vazio",
+    "nulo"
+   ]
+  },
+  {
+   "padrao": "* vazio|vazia|vazios|vazias",
+   "conceitos": [
+    "vazio",
+    "sem valor",
+    "nulo"
+   ]
+  },
+  {
+   "padrao": "do|da mais * pro|para|ao|a mais *",
+   "conceitos": [
+    "ordenar",
+    "ordem"
+   ]
+  },
+  {
+   "padrao": "em ordem de *",
+   "conceitos": [
+    "ordenar",
+    "ordem"
+   ]
+  }
+ ],
  "catalogo": [
   {
    "id": "aprendiz-algoritmos",
