@@ -1,7 +1,7 @@
 {
   "id": "python-basico",
   "nome": "Python 1 · Básico",
-  "versao": "2.0.0",
+  "versao": "2.0.1",
   "autor": "Jano Projects",
   "descricao": "Python do zero: instalar, rodar, print e input, variáveis, tipos, strings, f-strings, listas, tuplas, dicionários, conjuntos, if, for, while, funções, módulos, erros e arquivos.",
   "licenca": "CC-BY-4.0",
