@@ -454,7 +454,20 @@
           "o que voce quis dizer",
           "como e que e",
           "hein",
-          "oi como assim"
+          "oi como assim",
+          "pode repetir",
+          "repete",
+          "repete por favor",
+          "fala de novo",
+          "explica de novo",
+          "explica de outro jeito",
+          "explica de um jeito mais simples",
+          "ficou confuso",
+          "nao captei",
+          "nao peguei",
+          "boiei",
+          "perdi o fio",
+          "nao saquei"
         ],
         "respostas": [
           "Desculpe, não ficou claro. Me diga qual parte você não entendeu, ou pergunte de outro jeito, que eu procuro de novo."
@@ -474,7 +487,17 @@
           "nao perguntei isso",
           "nada a ver",
           "nao tem nada a ver",
-          "nao foi isso"
+          "nao foi isso",
+          "nao e bem isso",
+          "nao e disso que estou falando",
+          "nao e disso que eu falo",
+          "voce nao entendeu",
+          "entendeu errado",
+          "nao foi bem isso",
+          "nao e esse",
+          "nao e essa",
+          "quero outra coisa",
+          "era outra coisa"
         ],
         "respostas": [
           "Desculpe! Me diga de outro jeito o que você procura, que eu tento de novo."
@@ -498,7 +521,19 @@
           "bora",
           "s",
           "sim por favor",
-          "com certeza"
+          "com certeza",
+          "isso ai",
+          "exatamente",
+          "pode ser",
+          "manda",
+          "manda ver",
+          "uhum",
+          "aham",
+          "sim sim",
+          "beleza",
+          "ok",
+          "pode mandar",
+          "quero sim"
         ],
         "respostas": [
           "Certo! O que mais você quer saber?",
@@ -518,7 +553,16 @@
           "agora nao",
           "nao obrigado",
           "nao obrigada",
-          "n"
+          "n",
+          "nem precisa",
+          "melhor nao",
+          "dispenso",
+          "to de boa",
+          "estou de boa",
+          "nao valeu",
+          "nao precisa nao",
+          "esquece",
+          "deixa quieto"
         ],
         "respostas": [
           "Tudo bem! Se precisar, é só perguntar."

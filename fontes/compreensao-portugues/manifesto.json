@@ -1,7 +1,7 @@
 {
   "id": "compreensao-portugues",
   "nome": "Compreensão do português",
-  "versao": "2.0.5",
+  "versao": "2.1.0",
   "descricao": "A raiz da conversa do Aprendiz: entende o tipo de pergunta (o que é, como fazer, onde fica…), junta tudo o que você ensinou sobre um assunto (\"o que você sabe sobre o carro?\"), entende expressões e formas irregulares (\"fui\", \"fiz\" → ser, fazer), responde sobre si mesmo e, quando não sabe algo, indica o addon da loja que sabe. Traz um léxico com mais de 300 mil palavras. Lemas derivados de lemmatization-lists, de Michal Měchura (ODbL).",
   "categoria": "Compreensão",
   "etiquetas": [
@@ -18,7 +18,7 @@
   "origem": "oficial",
   "editor": "Jano Projects",
   "app": {
-    "versao_minima": "2.0.0"
+    "versao_minima": "2.6.0"
   },
   "complementa": [
     "girias-brasil",
