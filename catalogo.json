@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-19T20:34:03+00:00",
+  "gerado_em": "2026-11-23T14:21:37+00:00",
   "total": 40,
   "addons": [
     {
@@ -1127,7 +1127,7 @@
     {
       "id": "compreensao-portugues",
       "nome": "Compreensão do português",
-      "versao": "2.0.5",
+      "versao": "2.1.0",
       "autor": "Jano Projects",
       "descricao": "A raiz da conversa do Aprendiz: entende o tipo de pergunta (o que é, como fazer, onde fica…), junta tudo o que você ensinou sobre um assunto (\"o que você sabe sobre o carro?\"), entende expressões e formas irregulares (\"fui\", \"fiz\" → ser, fazer), responde sobre si mesmo e, quando não sabe algo, indica o addon da loja que sabe. Traz um léxico com mais de 300 mil palavras. Lemas derivados de lemmatization-lists, de Michal Měchura (ODbL).",
       "licenca": "ODbL-1.0",
@@ -1150,8 +1150,8 @@
         "linguagem",
         "compreensao"
       ],
-      "versao_minima_app": "2.0.0",
-      "criado_com": "2.5.0",
+      "versao_minima_app": "2.6.0",
+      "criado_com": "2.6.0",
       "dependencias": [],
       "recomendado": null,
       "conhecimentos": 0,
@@ -1159,20 +1159,20 @@
       "palavras": [],
       "traducoes": [],
       "regiao": null,
-      "termos_linguagem": 28,
+      "termos_linguagem": 104,
       "ajustes": [],
       "configuracoes": 0,
       "compreensao": {
-        "regras": 229,
+        "regras": 266,
         "catalogo": 37,
         "lemas": 317331,
         "vetores": 0
       },
       "norma": null,
       "arquivo": "addons/compreensao-portugues.aprendiz",
-      "tamanho": 858435,
-      "sha256": "b552758aa5339f0d8ea3b7aecf7e255c53eda1df169883cb8b55fdb1d05f1158",
-      "atualizado_em": "2026-11-19",
+      "tamanho": 859699,
+      "sha256": "ee99d16297ba608923037461ad590ebccd82080907ab938ad75086fb1af0130c",
+      "atualizado_em": "2026-11-23",
       "amostra": []
     },
     {
@@ -1251,7 +1251,7 @@
     {
       "id": "dialogo-portugues",
       "nome": "Diálogo do português",
-      "versao": "2.1.0",
+      "versao": "2.2.0",
       "autor": "Jano Projects",
       "descricao": "Conversa de verdade, além de pergunta e resposta: entende o que você FAZ com a frase (cumprimentar e pedir ajuda na mesma mensagem, desabafar, pedir opinião, fazer uma pergunta reflexiva, elogiar ou criticar) e usa o contexto da conversa (\"não entendi\", \"não era isso\", \"sim\", \"e em Portugal?\"). Palavras de conversa como \"consegue\" e \"ajudar\" deixam de disparar buscas sem relação. Complementa a Compreensão do português.",
       "licenca": "CC-BY-4.0",
@@ -1274,7 +1274,7 @@
         "compreensao"
       ],
       "versao_minima_app": "2.1.0",
-      "criado_com": "2.1.0",
+      "criado_com": "2.6.0",
       "dependencias": [
         {
           "id": "compreensao-portugues",
@@ -1299,9 +1299,9 @@
       },
       "norma": null,
       "arquivo": "addons/dialogo-portugues.aprendiz",
-      "tamanho": 5209,
-      "sha256": "85201713127629ecbaa07420d469d7dbc5cc7fe420d5c79632ce004c39c0858f",
-      "atualizado_em": "2026-11-19",
+      "tamanho": 5448,
+      "sha256": "994e48d97633ee2eb1b48eb95a139d3011a2e9f6fd1316072b4638d314239d1e",
+      "atualizado_em": "2026-11-23",
       "amostra": []
     },
     {

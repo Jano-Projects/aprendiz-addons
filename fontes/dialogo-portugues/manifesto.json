@@ -2,7 +2,7 @@
   "formato": 2,
   "id": "dialogo-portugues",
   "nome": "Diálogo do português",
-  "versao": "2.1.0",
+  "versao": "2.2.0",
   "descricao": "Conversa de verdade, além de pergunta e resposta: entende o que você FAZ com a frase (cumprimentar e pedir ajuda na mesma mensagem, desabafar, pedir opinião, fazer uma pergunta reflexiva, elogiar ou criticar) e usa o contexto da conversa (\"não entendi\", \"não era isso\", \"sim\", \"e em Portugal?\"). Palavras de conversa como \"consegue\" e \"ajudar\" deixam de disparar buscas sem relação. Complementa a Compreensão do português.",
   "categoria": "Compreensão",
   "etiquetas": [
