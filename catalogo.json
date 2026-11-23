@@ -1,6 +1,6 @@
 {
   "formato": 2,
-  "gerado_em": "2026-11-23T12:22:11+00:00",
+  "gerado_em": "2026-11-23T14:21:37+00:00",
   "total": 40,
   "addons": [
     {
@@ -1170,9 +1170,9 @@
       },
       "norma": null,
       "arquivo": "addons/compreensao-portugues.aprendiz",
-      "tamanho": 859432,
-      "sha256": "bb6b50abac30072447766b94a89c42772e508d9eef7526768da37dcb7b5390ac",
-      "atualizado_em": "2026-11-19",
+      "tamanho": 859699,
+      "sha256": "ee99d16297ba608923037461ad590ebccd82080907ab938ad75086fb1af0130c",
+      "atualizado_em": "2026-11-23",
       "amostra": []
     },
     {
@@ -1301,7 +1301,7 @@
       "arquivo": "addons/dialogo-portugues.aprendiz",
       "tamanho": 5448,
       "sha256": "994e48d97633ee2eb1b48eb95a139d3011a2e9f6fd1316072b4638d314239d1e",
-      "atualizado_em": "2026-11-19",
+      "atualizado_em": "2026-11-23",
       "amostra": []
     },
     {
