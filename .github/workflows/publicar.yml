@@ -44,7 +44,7 @@ jobs:
           cp index.html estilo.css app.js icone.svg catalogo.json _site/
           cp -r addons _site/
           touch _site/.nojekyll
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
