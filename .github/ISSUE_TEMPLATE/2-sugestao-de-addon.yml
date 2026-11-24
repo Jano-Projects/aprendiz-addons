@@ -1,0 +1,16 @@
+name: Sugestão de addon
+description: Um assunto ou um addon que falta na loja
+labels: ["sugestão"]
+body:
+  - type: textarea
+    id: ideia
+    attributes:
+      label: O que você gostaria de encontrar
+      description: O assunto e para quem ele serve (iniciante, avançado, dia a dia…).
+    validations:
+      required: true
+  - type: textarea
+    id: perguntas
+    attributes:
+      label: Perguntas que esse addon deveria responder
+      description: Três ou quatro exemplos, escritos do jeito que você perguntaria.

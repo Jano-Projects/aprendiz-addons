@@ -1,0 +1,41 @@
+name: Addon com problema
+description: Resposta errada, informação desatualizada, erro de português ou addon que não instala
+labels: ["addon"]
+body:
+  - type: markdown
+    attributes:
+      value: Não cole dados pessoais (senhas, telefones, endereços) nas perguntas de exemplo.
+  - type: input
+    id: addon
+    attributes:
+      label: Addon e versão
+      placeholder: "Ex.: SQL básico 2.0.1"
+    validations:
+      required: true
+  - type: input
+    id: app
+    attributes:
+      label: Versão do Aprendiz
+      description: Aparece em Configurações → Sobre esta instalação.
+      placeholder: "Ex.: 2.7.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: O que aconteceu
+      options:
+        - Resposta errada ou incompleta
+        - Informação desatualizada
+        - Erro de português
+        - O addon não instala
+        - Outro
+    validations:
+      required: true
+  - type: textarea
+    id: detalhe
+    attributes:
+      label: Pergunta, resposta e o que você esperava
+      description: Se puder, cole o que o painel "Por que respondi isso?" mostra.
+    validations:
+      required: true

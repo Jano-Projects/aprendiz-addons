@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Falha de segurança
+    url: https://github.com/Jano-Projects/aprendiz-addons/security/advisories/new
+    about: Avise em sigilo, sem abrir uma issue pública.
+  - name: Problema no app Aprendiz (não em um addon)
+    url: https://github.com/Jano-Projects/aprendiz-dev/issues/new/choose
+    about: Instalação, tela, busca e respostas que não dependem de um addon.
